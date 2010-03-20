@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "gooey-cms-sites", "gooey-cms\gooey-cms-sites.ccproj", "{D562FBCB-C937-415C-B372-DE7B88D01F28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.webrole.sites", "gooey-cms-webapp\gooeycms.webrole.sites.csproj", "{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.data", "gooeycms.data\gooeycms.data.csproj", "{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.constants", "gooeycms.constants\gooeycms.constants.csproj", "{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}"
@@ -21,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.webrole.website", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.business", "gooeycms.business\gooeycms.business.csproj", "{A3D01157-7412-47B1-A123-2F3071D86B6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.webrole.sites", "gooeycms.site.webrole\gooeycms.webrole.sites.csproj", "{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +31,6 @@ Global
 		{D562FBCB-C937-415C-B372-DE7B88D01F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D562FBCB-C937-415C-B372-DE7B88D01F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D562FBCB-C937-415C-B372-DE7B88D01F28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -67,6 +63,10 @@ Global
 		{A3D01157-7412-47B1-A123-2F3071D86B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3D01157-7412-47B1-A123-2F3071D86B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3D01157-7412-47B1-A123-2F3071D86B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37D8DC1-6CC7-4B6B-8A27-A7058DDF48F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,7 +35,7 @@
     <ServiceConfiguration Include="ServiceConfiguration.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gooey-cms-webapp\gooeycms.webrole.sites.csproj">
+    <ProjectReference Include="..\gooeycms.site.webrole\gooeycms.webrole.sites.csproj">
       <Name>gooeycms.webrole.sites</Name>
       <Project>{c37d8dc1-6cc7-4b6b-8a27-a7058ddf48f9}</Project>
       <Private>True</Private>
