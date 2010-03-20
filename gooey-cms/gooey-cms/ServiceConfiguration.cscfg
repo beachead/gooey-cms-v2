@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ServiceConfiguration serviceName="gooey_cms" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration">
+  <Role name="gooeycms.webrole.sites">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="DiagnosticsConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="AccountName" value="devstoreaccount1" />
+      <Setting name="AccountSharedKey" value="Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="BlobStorageEndpoint" value="http://127.0.0.1:10000" />
+      <Setting name="TableStorageEndpoint" value="http://127.0.0.1:10002" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
