@@ -1,0 +1,288 @@
+/*
+	(1) html elements
+	(2) structures
+	(3) formatting for structures
+	(4) general purpose 
+	(5) hacks
+		made in washington */
+
+/************************************************
+	(1) html elements 
+*************************************************/
+body {
+	background: #fff url(../images/bg_body.png) 0 0 repeat-x;
+	margin: 0;
+	padding: 0;
+	color: #555544;
+	font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 62.5%;
+	line-height: 1.5;
+	text-decoration: none;
+}
+
+h1 {
+	color: #00152d;
+	font-size:180%;
+	margin: 0;
+	padding: 0;
+}
+
+h2 {
+	font-family: "Lucida Grande","Lucida Sans Unicode",sans-serif;
+	color: #042545;
+	font-size: 260%;
+	margin: 0;
+	padding: 0;
+}
+
+h3 {
+	font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Verdana,Arial,Helvetica,sans-serif;
+	color: #777777;
+	font-size:240%;
+	font-weight:normal;
+	letter-spacing:-0.08em;
+	line-height:1em;
+	margin:0 0 10px;
+}
+
+h4 {
+	font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Verdana,Arial,Helvetica,sans-serif;
+	color: #05213c;
+	font-size:240%;
+	font-weight:normal;
+	letter-spacing:-0.08em;
+	line-height:1em;
+	margin:0 0 10px;
+}
+
+
+
+/**************************************
+	(2) structures
+***************************************/
+
+#masthead {
+	margin: 0 auto;
+	height: 140px;
+	width: 900px;
+	position: relative;
+}
+
+
+
+#mastheadlogo {
+	background: transparent url(../images/gooey_masthead.png)no-repeat;
+	height: 105px;
+}
+
+#nav {
+	position: absolute;
+	left: 20%;
+	padding-left:190px;
+	top: 75px;
+	font-size: 110%;
+
+}
+
+#content-wrapper {
+	overflow: auto;
+	width: 95%;
+	margin: 0 auto;
+	padding-top: 20px;
+	font-size: 120%;
+	line-height: 1.5;
+}
+
+#page-content {
+	overflow: auto;
+	float: left;
+	margin: 0 50px;
+	width: 500px;
+}
+
+#resources {
+	float: left;
+	width: 299px;
+	border-bottom: 1px solid #CCDDEE;
+	border-right: 1px solid #CCDDEE;
+}
+
+#features {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 1px solid #878787;
+	padding: 20px;
+	background-color: #ffffce;
+	width: 400px;
+	display: none;
+}
+
+
+.footer {
+	background: transparent url(../images/bg_footer.png) repeat-x scroll 0 0;
+	padding: 40px 0 10px;
+	margin-top: 50px;
+	text-align: center;
+	font-size: 100%;
+	text-transform: uppercase;
+	color: #7799AA;
+
+
+}
+
+.footer a {
+	text-decoration: none;
+	color: #7799AA;
+
+}
+
+
+
+/**************************************
+	(3) formatting for structures
+***************************************/
+	
+/* nav */
+#nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#nav li {
+	margin: 0 1px 0 0;
+	padding: 0;
+	background: transparent url(../images/bg_nav_li.png) 0 0 no-repeat;
+	float: left;
+}
+
+#nav li:hover,
+#nav li.active {
+	background-image: url(../images/bg_nav_li_active.png);
+}
+
+
+#nav a {
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #fff;
+	background: transparent url(../images/bg_nav_a.png) 100% 0 no-repeat ;
+	display: block;
+	float: left;
+	padding: 0.65em 1.2em;
+}
+
+
+
+#nav li:hover a,
+#nav li.active a {
+	color:#225566;
+	background-image: url(../images/bg_nav_a_active.png);
+}
+
+
+
+/* intro */
+.intro {
+
+}
+
+.intro p {
+	color: #225566;
+	font-size: 150%;
+	line-height: 1.467;
+	position: relative;
+}
+
+
+
+/* resources */
+#resources .feature {
+	padding: 20px 30px 20px 29px;	
+}
+
+
+
+/* features */
+#features ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#features li {
+	margin: 0 0 5px 0;
+	padding: 0;
+}
+
+
+/**************************************
+	(4) general purpose
+***************************************/
+
+.button {
+	float: left;
+	color: white;
+	padding: 5px 15px;
+	background-color: #0c3;
+	border: 2px solid #04a32c;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+
+.button a {
+	display: block;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	font-family: "Segoe UI";
+	font-size: 16px;
+	text-decoration: none;
+	text-shadow: #04a32c 2px 0;
+}
+
+.button a:focus{
+	outline: none;
+}
+
+
+.button .expanded-content {
+	display: none;
+}
+
+
+.u-bottom {
+	border-bottom: 1px solid #CCDDEE;
+	margin-bottom: 15px;
+}
+
+.u-top {
+	border-top: 1px solid #CCDDEE;
+	padding-top: 10px;
+	margin-top: 20px;
+}
+
+.more {
+	position: relative;
+	text-align: right;
+}
+
+.more a {
+	border-left: 1px solid #CCDDEE;
+	color: #7799AA;
+	padding-bottom: 0.1em;
+	padding-left: 0.5em;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 80%;
+}
+
+/**************************************
+	(5) hacks
+***************************************/
+
+* html #content {
+	margin-left: 25px;
+}
+

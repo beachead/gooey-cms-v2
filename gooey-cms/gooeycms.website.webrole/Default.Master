@@ -1,20 +1,33 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="gooeycms.webrole.website.Default" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Gooey CMS</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <!--[if gte IE 7]>
+<link rel="stylesheet" type="text/css" href="css/IE.css"/>
+<![endif]-->
 
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head runat="server">
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
+
+    <script type="text/javascript" src="js/global.js"></script>
+
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
+    <!-- START: main -->
+    <div id="main">
+        <form id="form1" runat="server">
         <asp:ContentPlaceHolder ID="BodyPlaceholder" runat="server">
-        
         </asp:ContentPlaceHolder>
+        </form>
     </div>
-    </form>
+    <!-- END: main -->
+    <!-- START: footer -->
+    <div class="footer">
+        &copy; 2009 <a href="http://www.beachead.com">Beachead Technologies Inc.</a>
+    </div>
+    <!-- END: footer -->
 </body>
 </html>
