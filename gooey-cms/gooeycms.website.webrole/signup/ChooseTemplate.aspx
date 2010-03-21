@@ -1,6 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="ChooseTemplate.aspx.cs" Inherits="gooeycms.webrole.website.signup.ChooseTemplate" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyPlaceholder" runat="server">
     <div id="progress">
         <em>1. CREATE ACCOUNT</em>&nbsp;&gt;&nbsp; <em>2. ACCOUNT INFO</em>&nbsp;&gt;&nbsp;

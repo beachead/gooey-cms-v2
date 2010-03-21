@@ -78,3 +78,11 @@ CREATE TABLE [User_Subscriptions] (
 [subscription_id] INT NOT NULL REFERENCES Subscriptions(id)
 PRIMARY KEY CLUSTERED ([user_id],[subscription_id])
 );
+
+/* Run from master db */
+CREATE LOGIN gooeycms
+    WITH PASSWORD = '12qwas#$ERDF';
+
+/* run from gooeycms and aspnetdb */
+CREATE USER gooeycms FOR LOGIN gooeycms;
+EXEC sp_addrolemember N'db_owner', N'gooeycms'
