@@ -62,9 +62,6 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Cleanup.aspx.cs">
       <DependentUpon>Cleanup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -72,34 +69,27 @@
     <Compile Include="Cleanup.aspx.designer.cs">
       <DependentUpon>Cleanup.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="ContentPage.Master.cs">
+      <DependentUpon>ContentPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.Master.cs">
-      <DependentUpon>Default.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.Master.designer.cs">
-      <DependentUpon>Default.Master</DependentUpon>
-    </Compile>
-    <Compile Include="PaypalProcess.aspx.cs">
-      <DependentUpon>PaypalProcess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PaypalProcess.aspx.designer.cs">
-      <DependentUpon>PaypalProcess.aspx</DependentUpon>
+    <Compile Include="ContentPage.Master.designer.cs">
+      <DependentUpon>ContentPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Subscribe.aspx.cs">
-      <DependentUpon>Subscribe.aspx</DependentUpon>
+    <Compile Include="Signup-Review.aspx.cs">
+      <DependentUpon>Signup-Review.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Subscribe.aspx.designer.cs">
-      <DependentUpon>Subscribe.aspx</DependentUpon>
+    <Compile Include="Signup-Review.aspx.designer.cs">
+      <DependentUpon>Signup-Review.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Signup.aspx.cs">
+      <DependentUpon>Signup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Signup.aspx.designer.cs">
+      <DependentUpon>Signup.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
@@ -333,10 +323,16 @@
       <Link>js\store.js</Link>
     </Content>
     <Content Include="Cleanup.aspx" />
-    <Content Include="Default.aspx" />
-    <Content Include="Default.Master" />
-    <Content Include="PaypalProcess.aspx" />
-    <Content Include="Subscribe.aspx" />
+    <Content Include="images\home\bg_features.png" />
+    <Content Include="images\home\h2_built_for_speed.png" />
+    <Content Include="images\home\h2_over_200_features.png" />
+    <Content Include="images\home\h2_over_200_sites.png" />
+    <Content Include="images\home\screenshot.png" />
+    <Content Include="images\home\txt_fastest_way.gif" />
+    <Content Include="images\home\txt_fastest_way.png" />
+    <Content Include="images\home\txt_learn_more.png" />
+    <Content Include="images\home\txt_starting_at_50.gif" />
+    <Content Include="images\home\txt_starting_at_50.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
@@ -357,6 +353,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ContentPage.Master" />
+    <Content Include="Signup-Review.aspx" />
+    <Content Include="Signup.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

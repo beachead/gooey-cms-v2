@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Themes.CmsTheme,gooeycms.data" table="Themes_Site">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="site_guid" name="SubscriptionGuid" type="String" />
+    <property column="guid" name="ThemeGuid" type="String" />
+    <property column="name" name="Name" type="String" />
+    <property column="description" name="Description" type="String" />
+    <property column="is_enabled" name="IsEnabled" type="Boolean" />
+    <property column="is_developer" name="IsDeveloper" type="String" />
+    <property column="header" name="Header" type="String" />
+    <property column="footer" name="Footer" type="String" />
+  </class>
+</hibernate-mapping>

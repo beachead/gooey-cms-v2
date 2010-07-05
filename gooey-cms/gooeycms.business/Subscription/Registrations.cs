@@ -76,7 +76,7 @@ namespace Gooeycms.Business.Subscription
         /// accessible to the cms system and control panel.
         /// </summary>
         /// <param name="registration"></param>
-        public static void ConvertToAccount(Registration registration)
+        public static void ConvertToAccount(Registration registration, String subscriberId)
         {
             MembershipUtil.CreateFromRegistration(registration);
             Subscriptions.CreateFromRegistration(registration);

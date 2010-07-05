@@ -25,6 +25,7 @@ namespace Gooeycms.Data.Model.Subscription
                 {
                     result = (Registration)bf.Deserialize(stream);
                 }
+                result.Id = dto.Id;
             }
 
             return result;
@@ -40,12 +41,14 @@ namespace Gooeycms.Data.Model.Subscription
                 byte[] data = stream.ToArray();
 
                 RegistrationDto dto = new RegistrationDto();
+                dto.Id = item.Id;
                 dto.Guid = item.Guid;
                 dto.Email = item.Email;
                 dto.Created = item.Created;
                 dto.IsComplete = item.IsComplete;
                 dto.Data = data;
 
+                dto = (RegistrationDto)base.Session.Merge(dto);
                 SaveObject(dto);
             }
             finally

@@ -48,13 +48,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GooeyConfigManager.cs" />
+    <Compile Include="Handler\BaseHttpHandler.cs" />
+    <Compile Include="Handler\SubscriptionHandler.cs" />
+    <Compile Include="Logging.cs" />
     <Compile Include="Membership\MembershipProfile.cs" />
     <Compile Include="Membership\MembershipUserWrapper.cs" />
     <Compile Include="Membership\MembershipUtil.cs" />
+    <Compile Include="Subscription\Paypal\DebugSubscriptionProcessor.cs" />
+    <Compile Include="Subscription\ISubscriptionProcessor.cs" />
+    <Compile Include="Subscription\Paypal\PaypalSubscriptionProcessor.cs" />
     <Compile Include="Subscription\Registrations.cs" />
     <Compile Include="Crypto\TextEncryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscription\SubscriptionProcessorFactory.cs" />
     <Compile Include="Subscription\Subscriptions.cs" />
+    <Compile Include="Subscription\SubscriptionSecurityConstraint.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">

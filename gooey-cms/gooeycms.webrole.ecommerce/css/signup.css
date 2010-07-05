@@ -1,0 +1,53 @@
+#callout{
+	top: 100px;
+	left: 410px;;
+}
+
+#signup-steps {
+	list-style: none;
+	padding-top: 15px;
+}
+
+#signup-steps li {
+	padding-left: 35px;
+	padding-bottom: 30px;
+}
+
+#signup-steps li h2 {
+	margin-left: -35px;
+	margin-bottom: 5px;
+}
+
+#signup-steps td.label {
+	width: 112px;
+}
+
+input.cms-address {
+	width: 150px;
+	border-style: dashed;
+	border-color: #666;
+	margin: 0 3px;
+
+}
+
+#lbl-salesforce-integration {
+	color: #4395f1;
+	font-size: 1.4em;
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+#salesforce-disclaimer {
+	margin-left: 20px;
+}
+
+#plan {
+	border: 1px solid #000;
+	width: 150px;
+	height: 20px;
+}
+
+#disclaimer {
+	font-size: .8em;
+}
+

@@ -28,6 +28,15 @@ namespace Gooeycms.Business
             return result;
         }
 
+        public static Boolean GetAsBoolean(String key, Boolean defaultValue)
+        {
+            Boolean result = defaultValue;
+            String temp = GetAsString(key);
+            Boolean.TryParse(temp, out result);
+
+            return result;
+        }
+
         public static String GetAsString(String key)
         {
             ConfigurationDao dao = new ConfigurationDao();
@@ -63,6 +72,30 @@ namespace Gooeycms.Business
                     throw new ApplicationException("The deafult domain must start with a period. The current value is " + result + ", but should be '." + result + "')");
 
                 return result;
+            }
+        }
+
+        public static Type SubscriptionProcessorClassType
+        {
+            get
+            {
+                String result = GooeyConfigManager.GetAsString(ConfigConstants.SubscriptionProcessor);
+                if (String.IsNullOrEmpty(result))
+                    throw new ApplicationException("The configuration processor has not been configured in the configuration table (key=" + ConfigConstants.SubscriptionProcessor + "). This is a required field for the application to function properly.");
+
+                Type type = Type.GetType(result);
+                if (type == null)
+                    throw new ApplicationException("Could not determine the class type for the subscription processor, " + result + ". Please check the value in the configuration table and verify that it is correct.");
+
+                return type;
+            }
+        }
+
+        public static Boolean IsLoggingEnabled
+        {
+            get
+            {
+                return GooeyConfigManager.GetAsBoolean(ConfigConstants.IsLogginedEnabled, false);
             }
         }
     }

@@ -65,13 +65,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentPage.Master.cs">
-      <DependentUpon>ContentPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ContentPage.Master.designer.cs">
-      <DependentUpon>ContentPage.Master</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -80,20 +73,6 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Signup-Review.aspx.cs">
-      <DependentUpon>Signup-Review.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Signup-Review.aspx.designer.cs">
-      <DependentUpon>Signup-Review.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Signup.aspx.cs">
-      <DependentUpon>Signup.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Signup.aspx.designer.cs">
-      <DependentUpon>Signup.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,9 +249,6 @@
     <None Include="assets\fonts\DINNEUGL.PFB" />
     <None Include="assets\fonts\DINNEUGL.pfm" />
     <None Include="assets\gooey-final5.psd" />
-    <Content Include="ContentPage.Master" />
-    <Content Include="Signup-Review.aspx" />
-    <Content Include="Signup.aspx" />
     <None Include="misc_files\highslide-custom-example.htm.bak" />
     <None Include="misc_files\highslide\highslide.css.bak" />
     <None Include="misc_files\index.html.bak" />

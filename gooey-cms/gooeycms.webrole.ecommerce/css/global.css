@@ -1,0 +1,279 @@
+/*
+	(1) html elements:
+	(2) layout components
+	(3) formatting: layout components
+	(4) general purpose
+	(5) hacks
+		made in washington */
+
+/************************************************
+	(1) html elements
+*************************************************/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+h2 {
+	margin-bottom: 15px;
+}
+
+a {
+	color: #4395f1;
+}
+
+a:hover {
+	color: #0c2847;
+}
+
+
+img {
+	border: none;
+}
+
+body {
+	background: #000 url(../images/bg_body.jpg) 0 0 repeat-x;
+	font-size: 90%;
+	font-family: "Segoe UI", arial, helvetica, sans-serif;
+	color: #0c2847;
+}
+
+
+/************************************************
+	(2) layout components
+*************************************************/
+
+#main {
+	position: relative;
+	width: 909px;
+	margin: 0 auto;
+	padding-left: 2px;
+	background: transparent url(../images/bg_side-shadow.png) 0 375px no-repeat;
+}
+
+#content {
+	background: #fff url(../images/bg_content_bottom.png) bottom left repeat-x;
+	width: 726px;
+	margin: 0 auto;
+	min-height: 800px;
+	padding: 15px 63px 60px 68px;
+	position: relative;
+	clear: both;
+}
+
+#login {
+	position: absolute;
+	top: 0;
+	right: 61px;
+}
+
+#masthead {
+	background: #fff url(../images/bg_masthead.png) bottom left no-repeat;
+	height: 147px;
+	width: 857px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#logo {
+	float: left;
+	clear: both;
+	padding-top: 17px;
+	margin-left: 30px;
+}
+
+#nav {
+	float: right;
+	padding-top: 45px;
+	margin-right: 56px;
+	position: relative;
+}
+
+#footer {
+	color: #a9a9a9;
+	padding-bottom: 15px;
+	font-size: .9em;
+}
+
+
+/************************************************
+	(3) formatting: layout components
+*************************************************/
+
+/* nav */
+#nav #signup {
+	margin-left: 20px;
+}
+
+
+/* content */
+#content p {
+	margin-bottom: 15px;
+}
+
+
+/* footer */
+#footer ul {
+	overflow: auto;
+	width: 320px;
+	margin: 0 auto 10px auto;
+	text-align: center;
+}
+
+#footer p {
+	text-align: center;
+}
+
+#footer li {
+	background: transparent url(../images/sep_nav_item.gif) 100% 50% no-repeat;
+	padding: 0 13px 0 10px;
+}
+
+#footer li.last {
+	background: none;
+	padding-right: 0;
+}
+
+#footer a {
+	text-decoration: none;
+	color: #a9a9a9;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+}
+
+
+/************************************************
+	(4) general purpose
+*************************************************/
+
+.callout {
+	background: transparent url(../images/bg_callout.png) 0 0 no-repeat;
+	min-height: 120px;
+	width: 362px;
+	padding: 60px;
+	color: #fff;
+	font-size: 1.3em;
+	text-align: center;
+	text-shadow: #000 0 -0.01em 0.3em;
+}
+
+.callout a {
+	color: #fff;
+}
+
+
+#callout {
+	position: absolute;
+}
+
+
+/* LISTS */
+
+/* ul.adjacent */
+ul.adjacent {
+	list-style: none;
+}
+
+ul.adjacent li {
+	float: left;
+}
+
+
+
+/* gradient-box */
+.gradient-box {
+	width: 316px;
+}
+
+.gradient-box .top {
+	background: transparent url(../images/bg_gradient-box_top.png) 0 0 no-repeat;
+	height: 28px;
+}
+
+.gradient-box .body {
+	background: transparent url(../images/bg_gradient-box_bottom.png) bottom left no-repeat;
+	padding: 0 50px 25px 35px;
+	color: #0c2847;
+}
+
+.gradient-box h2 {
+	color: #4395f1;
+}
+
+
+
+/* TABLES */
+
+/* table.form */
+table.form {}
+
+table.form td {
+	padding: 5px;
+}
+
+table.form td.label {
+	padding-right: 10px;
+	text-align: right;
+}
+
+input.std, 
+table.form input[type="password"], table.form input[type="text"] {
+-moz-border-radius-bottomleft:5px;
+-moz-border-radius-bottomright:5px;
+-moz-border-radius-topleft:5px;
+-moz-border-radius-topright:5px;
+height:17px;
+padding:5px;
+}
+
+
+
+.clear-on-focus {
+	color: #999;
+}
+
+.clear-on-focus.focused {
+	color: #000;
+}
+
+/* UTILITIES */
+
+/* margins */
+
+.m-left-5 			{ margin-left: 5px; }
+.m-left-10 			{ margin-left: 10px; }
+.m-left-15 			{ margin-left: 15px; }
+
+.m-right-5 			{ margin-right: 5px; }
+.m-right-10			{ margin-right: 10px; }
+.m-right-15			{ margin-right: 15px; }
+
+.m-bottom-5 	  	{ margin-bottom: 5px; }
+.m-bottom-10		{ margin-bottom: 10px; }
+.m-bottom-15	  	{ margin-bottom: 15px; }
+
+.m-bottom-5 		{ margin-left: 5px; }
+.m-left-10			{ margin-left: 10px; }
+.m-left-15			{ margin-left: 15px; }
+
+/* font size */
+.x1					{ font-size: 1.1em; }
+.x2					{ font-size: 1.2em; }
+.x3					{ font-size: 1.3em; }
+
+.x-1				{ font-size: .9em; }
+.x-2				{ font-size: .8em; }
+.x-3				{ font-size: .7em; }
+
+
+/************************************************
+	(5) hacks
+*************************************************/
+
