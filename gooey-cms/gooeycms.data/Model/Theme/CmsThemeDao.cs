@@ -5,7 +5,12 @@ using System.Text;
 
 namespace Gooeycms.Data.Model.Theme
 {
-    class CmsThemeDao
+    public class CmsThemeDao : BaseDao
     {
+        public IList<CmsTheme> FindAllThemes(String guid)
+        {
+            String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :guid";
+            return base.NewHqlQuery(hql).SetString("guid", guid).List<CmsTheme>();
+        }
     }
 }

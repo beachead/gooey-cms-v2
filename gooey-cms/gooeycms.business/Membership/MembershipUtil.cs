@@ -6,6 +6,10 @@ using Gooeycms.Data.Model.Subscription;
 using System.Web.Security;
 using gooeycms.business.Crypto;
 using Beachead.Persistence.Hibernate;
+using gooeycms.constants;
+using Gooeycms.Business.Subscription;
+using System.Web;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Membership
 {
@@ -43,6 +47,7 @@ namespace Gooeycms.Business.Membership
             try
             {
                 user = System.Web.Security.Membership.CreateUser(registration.Email, password, registration.Email);
+                System.Web.Security.Roles.AddUserToRole(registration.Email, SecurityConstants.DOMAIN_ADMIN);
             }
             catch (MembershipCreateUserException e)
             {
@@ -87,6 +92,14 @@ namespace Gooeycms.Business.Membership
             wrapper.UserInfo = info;
 
             return wrapper;
+        }
+
+        public static void ProcessLogin(string username)
+        {
+            MembershipUserWrapper wrapper = FindByUsername(username);
+            IList<CmsSubscription> subscriptions = Subscriptions.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
+
+            CookieHelper.SetActiveSite(subscriptions);
         }
     }
 }

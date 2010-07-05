@@ -63,6 +63,8 @@
     <Compile Include="Subscription\SubscriptionProcessorFactory.cs" />
     <Compile Include="Subscription\Subscriptions.cs" />
     <Compile Include="Subscription\SubscriptionSecurityConstraint.cs" />
+    <Compile Include="Themes\ThemeManager.cs" />
+    <Compile Include="Util\CookieHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">

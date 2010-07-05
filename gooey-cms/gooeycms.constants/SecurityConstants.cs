@@ -7,6 +7,7 @@ namespace gooeycms.constants
 {
     public static class SecurityConstants
     {
-        public const String GLOBALADMIN = "global-administrator";
+        public const String GLOBAL_ADMIN = "global-administrator";
+        public const String DOMAIN_ADMIN = "domain-administrator";
     }
 }

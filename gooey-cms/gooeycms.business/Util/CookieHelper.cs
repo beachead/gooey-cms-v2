@@ -22,5 +22,11 @@ namespace Gooeycms.Business.Util
             //If there's only one site, set that site cookie now
             HttpContext.Current.Response.Cookies["selected-site"].Value = guid;
         }
+
+        public static String GetActiveSiteGuid()
+        {
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["selected-site"];
+            return (cookie != null) ? (cookie.Value) : "";
+        }
     }
 }

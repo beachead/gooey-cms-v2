@@ -65,10 +65,13 @@
     <Compile Include="Model\Subscription\RegistrationDto.cs" />
     <Compile Include="Model\Subscription\UserInfo.cs" />
     <Compile Include="Model\Subscription\UserInfoDao.cs" />
+    <Compile Include="Model\Theme\CmsTheme.cs" />
+    <Compile Include="Model\Theme\CmsThemeDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="create-tables.sql" />
+    <None Include="create-cms-tables.sql" />
+    <None Include="create-registration-tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Registration.hbm.xml" />
@@ -91,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Configurations.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\CmsThemes.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

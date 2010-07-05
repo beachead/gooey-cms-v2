@@ -115,5 +115,12 @@ namespace Gooeycms.Business.Subscription
 
             return total;
         }
+
+        public static IList<CmsSubscription> GetSubscriptionsByUserId(int userId)
+        {
+
+            CmsSubscriptionDao dao = new CmsSubscriptionDao();
+            return dao.FindByUserId(userId);
+        }
     }
 }

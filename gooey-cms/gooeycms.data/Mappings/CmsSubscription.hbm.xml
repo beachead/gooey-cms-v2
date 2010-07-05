@@ -27,4 +27,15 @@
     <property column="salesforce_addon" name="IsSalesforceEnabled" type="Boolean" />
     <property column="generic_addon" name="IsGenericOptionsEnabled" type="Boolean" />
   </class>
+
+
+  <sql-query name="CmsSubscriptionByUserId">
+    <return alias="subscription"
+            class="Gooeycms.Data.Model.Subscription.CmsSubscription,gooeycms.data"/>
+    <![CDATA[  
+    SELECT {subscription.*} FROM Subscriptions {subscription} JOIN User_Subscriptions us 
+    ON {subscription}.Id = us.subscription_id
+    WHERE us.user_id = :userId
+    ]]>
+  </sql-query>
 </hibernate-mapping>

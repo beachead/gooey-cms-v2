@@ -28,5 +28,13 @@ namespace Gooeycms.Data.Model.Subscription
                 return (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), SubscriptionTypeId.ToString());
             }
         }
+
+        public virtual String DefaultDisplayName
+        {
+            get
+            {
+                return (String.IsNullOrEmpty(Domain)) ? Subdomain : Domain;
+            }
+        }
     }
 }

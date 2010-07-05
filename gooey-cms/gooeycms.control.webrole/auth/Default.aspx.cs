@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using gooeycms.webrole.control.App_Code;
 
 namespace gooeycms.webrole.control.auth
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : ValidatedPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs e)
         {
             Master.SetNavigationOn(Secure.NavigationType.Site);
         }

@@ -27,5 +27,10 @@ namespace Gooeycms.Data.Model.Subscription
 
             return result;
         }
+
+        public IList<CmsSubscription> FindByUserId(int userId)
+        {
+            return base.Session.GetNamedQuery("CmsSubscriptionByUserId").SetParameter("userId", userId).List<CmsSubscription>();
+        }
     }
 }

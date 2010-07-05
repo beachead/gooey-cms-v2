@@ -8,7 +8,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gooeycms.webrole.control</RootNamespace>
+    <RootNamespace>Gooeycms.Webrole.Control</RootNamespace>
     <AssemblyName>gooeycms.webrole.control</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -65,12 +65,37 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
+    <Compile Include="App_Code\ValidatedPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\themes\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\themes\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Secure.Master.cs">
       <DependentUpon>Secure.Master</DependentUpon>
@@ -80,11 +105,20 @@
       <DependentUpon>Secure.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setup.aspx.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup.aspx.designer.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="auth\Default.aspx" />
+    <Content Include="auth\themes\Default.aspx" />
     <Content Include="css\admin-theme.css" />
+    <Content Include="Login.aspx" />
     <Content Include="scripts\analytics.js" />
     <Content Include="scripts\contenteditor.js" />
     <Content Include="scripts\functions.js" />
@@ -95,6 +129,29 @@
     <Content Include="images\bg_subnav_left.png" />
     <Content Include="images\bg_subnav_right.png" />
     <Content Include="images\body.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
+      <Project>{A3D01157-7412-47B1-A123-2F3071D86B6E}</Project>
+      <Name>gooeycms.business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">
+      <Project>{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}</Project>
+      <Name>gooeycms.constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.data\gooeycms.data.csproj">
+      <Project>{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}</Project>
+      <Name>gooeycms.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.persistence\gooeycms.persistence.csproj">
+      <Project>{F80B0AF1-6D4F-4AE2-84D2-45D19C456E22}</Project>
+      <Name>gooeycms.persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="auth\Dashboard.aspx" />
+    <Content Include="auth\Web.config" />
+    <Content Include="Setup.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,7 +16,7 @@
    
     <div>
         <div id="header-region">
-
+            
             <ul class="menu">
                 <li class="<% Response.Write(NavigationOn[1]); %>"><a id="A1" href="./content/default.aspx" runat="server">Manage Content</a></li>
                 <li class="<% Response.Write(NavigationOn[2]); %>"><a id="A2" href="./pages/default.aspx" runat="server">Manage Pages</a></li>
