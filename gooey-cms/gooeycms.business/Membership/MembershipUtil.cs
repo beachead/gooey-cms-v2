@@ -21,6 +21,7 @@ namespace Gooeycms.Business.Membership
             info.Email = registration.Email;
             info.Firstname = registration.Firstname;
             info.Lastname = registration.Lastname;
+            info.Company = registration.Company;
             info.Address1 = registration.Address1;
             info.Address2 = registration.Address2;
             info.City = registration.City;
@@ -51,6 +52,7 @@ namespace Gooeycms.Business.Membership
                     dao.DeleteObject(info);
                     tx.Commit();
                 }
+                throw e;
             }
 
             MembershipUserWrapper wrapper = new MembershipUserWrapper();

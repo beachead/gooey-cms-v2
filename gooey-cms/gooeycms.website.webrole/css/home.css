@@ -1,0 +1,107 @@
+h2 {
+	margin-bottom: 0;
+}
+
+
+#main {
+	width: 843px;
+	min-height: 670px;
+	margin: 0 auto;
+	padding: 0 63px 0 98px;
+	background: transparent url(../images/bg_main.jpg) 0 0 no-repeat;
+	position: relative;
+}
+
+#masthead {
+	background: none;
+	width: 826px;
+}
+
+
+#logo {
+	padding-top: 17px;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+#login {
+	right: 108px;
+}
+
+#nav {
+	padding-right: 0px;
+	margin-right: 57px;
+}
+
+#content {
+	height: 390px;
+	clear: both;
+
+	background: none !important;
+	width: 100% !important;
+	margin: auto !important;
+	min-height: 0px !important;
+	padding: 0 0 0 40px !important;
+}
+
+#features {
+	background: transparent url(../images/home/bg_features.png) 0 0 no-repeat;
+	width: 840px;
+	height: 202px;
+	padding: 5px 0 0 20px;
+	margin-left: -30px;
+	overflow: hidden;
+}
+
+
+/* content */
+#content p {
+	margin-bottom: 20px;
+}
+
+#content #feature-tour {
+	margin-left: 54px;
+}
+
+#content #handy {
+	margin-left: 97px;
+}
+
+#content #handy p {
+	margin-bottom: 8px;
+}
+
+/* #features */
+
+#features div.column {
+	float: left;
+	padding: 20px;
+	position: relative;
+	height: 130px;
+	font-size: 1.05em;
+	line-height: 1.05em;
+}
+
+#features div.column .learn-more {
+	position: absolute;
+	bottom: 5px;
+	right: 15px;
+}
+
+
+#features #col-speed { width: 218px; }
+#features #col-speed p { padding-left: 29px; }
+
+#features #col-features { width: 238px; }
+#features #col-features p { padding-left: 36px; }
+
+#features #col-sites { width: 240px; }
+#features #col-sites p { padding-left: 42px; }
+
+/************************************************
+	(5) hacks
+*************************************************/
+
+*:first-child+html #content {
+	clear: none !important;
+}

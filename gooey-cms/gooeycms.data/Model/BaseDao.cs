@@ -54,7 +54,7 @@ namespace Gooeycms.Data.Model
         /// Saves the specified entity object
         /// </summary>
         /// <param name="entity"></param>
-        public void Save<T>(T entity)
+        public virtual void Save<T>(T entity)
         {
             SaveObject(entity);
         }

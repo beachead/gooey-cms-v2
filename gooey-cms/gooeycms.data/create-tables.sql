@@ -10,6 +10,10 @@ IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Subscr
 BEGIN
 DROP TABLE [Subscriptions];
 END
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Subscription_Plans]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Subscription_Plans];
+END
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
 BEGIN
 DROP TABLE [Users];
@@ -21,27 +25,26 @@ CREATE TABLE [Registrations] (
 [guid] VARCHAR(36) NOT NULL,
 [created] DATETIME NOT NULL,
 [email] NVARCHAR(128) NOT NULL,
-[firstname] NVARCHAR(128),
-[lastname] NVARCHAR(128),
-[company] NVARCHAR(128),
-[address1] NVARCHAR(128),
-[address2] NVARCHAR(128),
-[city] NVARCHAR(128),
-[state] NVARCHAR(128),
-[zipcode] NVARCHAR(128),
-[password] NVARCHAR(32),
-[sitename] NVARCHAR(128),
-[domain] NVARCHAR(256),
-[staging] NVARCHAR(256),
-[template_id] INT,
 [is_complete] BIT DEFAULT(0),
+[data] VARBINARY(MAX) NOT NULL,
 PRIMARY KEY CLUSTERED([id]),
 );
 CREATE UNIQUE INDEX uq_registration_guid ON [Registrations](guid);
 
+CREATE TABLE [Subscription_Plans] (
+[id] INT IDENTITY(1,1) NOT NULL,
+[sku] VARCHAR(25),
+[name] VARCHAR(128) NOT NULL,
+[price] DECIMAL NOT NULL,
+[available] BIT DEFAULT(0),
+PRIMARY KEY CLUSTERED([id]),
+);
+
 CREATE TABLE [Subscriptions] (
 [id] INT IDENTITY(1,1) NOT NULL,
 [subscription_type] INT NOT NULL,
+[subscription_plan] INT NOT NULL,
+[guid] VARCHAR(36) NOT NULL,
 [primary_user_guid] VARCHAR(36) NOT NULL,
 [subdomain] VARCHAR(256),
 [custom_domain] VARCHAR(256),
@@ -49,9 +52,14 @@ CREATE TABLE [Subscriptions] (
 [signup_date] DATETIME DEFAULT(GETDATE()),
 [expires] DATETIME,
 [disabled] BIT DEFAULT(0),
+[salesforce_addon] BIT DEFAULT(0),
+[generic_addon] BIT DEFAULT(0),
 PRIMARY KEY CLUSTERED([id]),
 );
+CREATE UNIQUE INDEX uq_subscriptions_guid ON [Subscriptions](guid);
 CREATE UNIQUE INDEX uq_subscriptions_subdomain ON [Subscriptions](subdomain);
+CREATE UNIQUE INDEX uq_subscriptions_customdomain ON [Subscriptions](custom_domain);
+CREATE UNIQUE INDEX uq_subscriptions_stagingdomain ON [Subscriptions](staging_domain);
 
 CREATE TABLE [Users] (
 [id] INT IDENTITY(1,1) NOT NULL,
@@ -78,6 +86,14 @@ CREATE TABLE [User_Subscriptions] (
 [subscription_id] INT NOT NULL REFERENCES Subscriptions(id)
 PRIMARY KEY CLUSTERED ([user_id],[subscription_id])
 );
+
+CREATE TABLE [Configurations] (
+[id] INT IDENTITY(1,1) NOT NULL,
+[name] VARCHAR(256) NOT NULL,
+[value] NTEXT NOT NULL
+PRIMARY KEY CLUSTERED ([id])
+);
+CREATE INDEX idx_configurations_key ON [Configurations](key);
 
 /* Run from master db */
 CREATE LOGIN gooeycms

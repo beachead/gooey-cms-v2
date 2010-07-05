@@ -1,0 +1,389 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{31E363CC-0075-46FE-B458-FE010917ECD1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gooeycms.webrole.ecommerce</RootNamespace>
+    <AssemblyName>gooeycms.webrole.ecommerce</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cleanup.aspx.cs">
+      <DependentUpon>Cleanup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cleanup.aspx.designer.cs">
+      <DependentUpon>Cleanup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.Master.cs">
+      <DependentUpon>Default.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.Master.designer.cs">
+      <DependentUpon>Default.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PaypalProcess.aspx.cs">
+      <DependentUpon>PaypalProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaypalProcess.aspx.designer.cs">
+      <DependentUpon>PaypalProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscribe.aspx.cs">
+      <DependentUpon>Subscribe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subscribe.aspx.designer.cs">
+      <DependentUpon>Subscribe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebRole.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\gooeycms.website.webrole\css\global.css">
+      <Link>css\global.css</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\css\home.css">
+      <Link>css\home.css</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\css\pricing.css">
+      <Link>css\pricing.css</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\css\signup.css">
+      <Link>css\signup.css</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\css\store.css">
+      <Link>css\store.css</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_body.jpg">
+      <Link>images\bg_body.jpg</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_callout.png">
+      <Link>images\bg_callout.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_callout_bottom.png">
+      <Link>images\bg_callout_bottom.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_callout_top.png">
+      <Link>images\bg_callout_top.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_content_bottom.png">
+      <Link>images\bg_content_bottom.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_features.png">
+      <Link>images\bg_features.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_filter_list_bottom.png">
+      <Link>images\bg_filter_list_bottom.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_filter_list_item.png">
+      <Link>images\bg_filter_list_item.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_filter_list_top.png">
+      <Link>images\bg_filter_list_top.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_gradient-box_bottom.png">
+      <Link>images\bg_gradient-box_bottom.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_gradient-box_top.png">
+      <Link>images\bg_gradient-box_top.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_main.jpg">
+      <Link>images\bg_main.jpg</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_main.png">
+      <Link>images\bg_main.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_masthead.png">
+      <Link>images\bg_masthead.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_masthead_no-line.png">
+      <Link>images\bg_masthead_no-line.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_pricing_panels.png">
+      <Link>images\bg_pricing_panels.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_side-shadow.png">
+      <Link>images\bg_side-shadow.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_store-options.png">
+      <Link>images\bg_store-options.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bg_theme_panel.png">
+      <Link>images\bg_theme_panel.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_contact-us.png">
+      <Link>images\btn_contact-us.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_create_acct.png">
+      <Link>images\btn_create_acct.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_feature_tour.png">
+      <Link>images\btn_feature_tour.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_login.png">
+      <Link>images\btn_login.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_next.png">
+      <Link>images\btn_next.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_prev.png">
+      <Link>images\btn_prev.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_purchase.gif">
+      <Link>images\btn_purchase.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_purchase.png">
+      <Link>images\btn_purchase.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_sign-up.png">
+      <Link>images\btn_sign-up.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_some_themes.png">
+      <Link>images\btn_some_themes.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\btn_this_price.png">
+      <Link>images\btn_this_price.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\bullet_features.gif">
+      <Link>images\bullet_features.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h1[a]_developer_site.png">
+      <Link>images\h1[a]_developer_site.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h1_are_you_a_designer.png">
+      <Link>images\h1_are_you_a_designer.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h1_finally_enterprise_cms.png">
+      <Link>images\h1_finally_enterprise_cms.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h1_minute_away.png">
+      <Link>images\h1_minute_away.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h1_minute_away2.png">
+      <Link>images\h1_minute_away2.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h2_choose_options.png">
+      <Link>images\h2_choose_options.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h2_close_deal.png">
+      <Link>images\h2_close_deal.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h2_create_gooey_acct.png">
+      <Link>images\h2_create_gooey_acct.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h2_create_gooey_address.png">
+      <Link>images\h2_create_gooey_address.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h2_create_password.png">
+      <Link>images\h2_create_password.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\h2_enter_email.png">
+      <Link>images\h2_enter_email.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\icon_available.png">
+      <Link>images\icon_available.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\logo_gooey.png">
+      <Link>images\logo_gooey.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\logo_gooey_internal.png">
+      <Link>images\logo_gooey_internal.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_help.gif">
+      <Link>images\nav_help.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_help_on.gif">
+      <Link>images\nav_help_on.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_home.gif">
+      <Link>images\nav_home.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_home_on.gif">
+      <Link>images\nav_home_on.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_pricing.gif">
+      <Link>images\nav_pricing.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_pricing_on.gif">
+      <Link>images\nav_pricing_on.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_signup.gif">
+      <Link>images\nav_signup.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_signup_on.gif">
+      <Link>images\nav_signup_on.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_store.gif">
+      <Link>images\nav_store.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_store_on.gif">
+      <Link>images\nav_store_on.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_tour.gif">
+      <Link>images\nav_tour.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\nav_tour_on.gif">
+      <Link>images\nav_tour_on.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\sep_nav_item.gif">
+      <Link>images\sep_nav_item.gif</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\txt_for.png">
+      <Link>images\txt_for.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\txt_hey_designers.png">
+      <Link>images\txt_hey_designers.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\txt_increasing_revenue.png">
+      <Link>images\txt_increasing_revenue.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\txt_show_me.png">
+      <Link>images\txt_show_me.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\___placeholder_logo.png">
+      <Link>images\___placeholder_logo.png</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\___site_001.jpg">
+      <Link>images\___site_001.jpg</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\___site_002.jpg">
+      <Link>images\___site_002.jpg</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\___site_003.jpg">
+      <Link>images\___site_003.jpg</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\images\___site_004.jpg">
+      <Link>images\___site_004.jpg</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\js\global.js">
+      <Link>js\global.js</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\js\jquery-1.4.2.min.js">
+      <Link>js\jquery-1.4.2.min.js</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\js\jquery.cycle.all.min.js">
+      <Link>js\jquery.cycle.all.min.js</Link>
+    </Content>
+    <Content Include="..\gooeycms.website.webrole\js\store.js">
+      <Link>js\store.js</Link>
+    </Content>
+    <Content Include="Cleanup.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Default.Master" />
+    <Content Include="PaypalProcess.aspx" />
+    <Content Include="Subscribe.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
+      <Project>{A3D01157-7412-47B1-A123-2F3071D86B6E}</Project>
+      <Name>gooeycms.business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">
+      <Project>{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}</Project>
+      <Name>gooeycms.constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.data\gooeycms.data.csproj">
+      <Project>{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}</Project>
+      <Name>gooeycms.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.persistence\gooeycms.persistence.csproj">
+      <Project>{F80B0AF1-6D4F-4AE2-84D2-45D19C456E22}</Project>
+      <Name>gooeycms.persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61386</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/gooeycms.webrole.ecommerce</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -19,5 +19,13 @@ namespace Gooeycms.Data.Model.Subscription
                 .SetParameter("subscriptionId", subscriptionId)
                 .ExecuteUpdate();
         }
+
+        public CmsSubscription FindBySubdomain(string subdomain)
+        {
+            String hql = "select subscription from CmsSubscription subscription where subscription.Subdomain = :domain";
+            CmsSubscription result = base.NewHqlQuery(hql).SetString("domain", subdomain).UniqueResult<CmsSubscription>();
+
+            return result;
+        }
     }
 }

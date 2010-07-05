@@ -55,10 +55,14 @@
   <ItemGroup>
     <Compile Include="Model\BaseDao.cs" />
     <Compile Include="Model\BasePersistedItem.cs" />
+    <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionDao.cs" />
+    <Compile Include="Model\Subscription\CmsSubscriptionPlan.cs" />
+    <Compile Include="Model\Subscription\CmsSubscriptionPlanDao.cs" />
     <Compile Include="Model\Subscription\Registration.cs" />
     <Compile Include="Model\Subscription\RegistrationDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscription.cs" />
+    <Compile Include="Model\Subscription\RegistrationDto.cs" />
     <Compile Include="Model\Subscription\UserInfo.cs" />
     <Compile Include="Model\Subscription\UserInfoDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\CmsSubscription.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Configurations.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

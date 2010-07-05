@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ContentPage.master.cs" Inherits="gooeycms.webrole.website.ContentPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ 
+<head>
+	<title>gooey cms</title>
+	<link rel="stylesheet" type="text/css" href="css/global.css" />
+	<link rel="stylesheet" type="text/css" href="css/signup.css" />
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/global.js"></script>
+</head>
+ 
+<body>
+    <form id="form1" runat="server">
+<!-- START: main -->
+<div id="main">
+ 
+	<!-- START: masthead -->
+	<div id="masthead">
+		<div id="login"><a href="login.html"><img src="images/btn_login.png" width="104" height="28" alt="" /></a></div>
+		<div id="logo"><a href="index.html"><img src="images/logo_gooey_internal.png" width="225" height="75" alt="" /></a></div>
+		<div id="nav">
+			<ul class="adjacent rollover">
+				<li><a href="index.html"><img src="images/nav_home.gif" width="56" height="22" alt="Home" /></a></li>
+				<li><a href="tour.html"><img src="images/nav_tour.gif" width="53" height="22" alt="Feature Tour" /></a></li>
+				<li><a href="store.html"><img src="images/nav_store.gif" width="61" height="22" alt="Store" /></a></li>
+				<li><a href="pricing.html"><img src="images/nav_pricing.gif" width="72" height="22" alt="Pricing" /></a></li>
+				<li><a href="help.html"><img src="images/nav_help.gif" width="43" height="22" alt="Help" /></a></li>
+				<li id="signup"><a href="signup.html"><img src="images/nav_signup_on.gif" width="50" height="30" alt="Signup" class="active" /></a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- END: masthead -->
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>	
+ 
+	<!-- START: footer -->
+	<div id="footer">
+		<ul class="adjacent">
+			<li><a href="">About</a></li>
+			<li><a href="">Contact Us</a></li>
+			<li><a href="">Terms &amp; Conditions</a></li>
+			<li class="last"><a href="">Help</a></li>
+		</ul>
+		<p>&copy; 2010 Beachead Technologies Inc.</p>
+	</div>
+	<!-- END: footer -->
+</div>
+<!-- END: main -->      
+    </form>
+</body>
+</html>

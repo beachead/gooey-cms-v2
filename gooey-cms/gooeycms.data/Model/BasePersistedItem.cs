@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gooeycms.Data.Model
 {
+    [Serializable]
     public abstract class BasePersistedItem
     {
         public virtual int Id { get; set; }

@@ -65,6 +65,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentPage.Master.cs">
+      <DependentUpon>ContentPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContentPage.Master.designer.cs">
+      <DependentUpon>ContentPage.Master</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -72,48 +79,20 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.Master.cs">
-      <DependentUpon>Default.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.Master.designer.cs">
-      <DependentUpon>Default.Master</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="signup\AccountInfo.aspx.cs">
-      <DependentUpon>AccountInfo.aspx</DependentUpon>
+    <Compile Include="Signup-Review.aspx.cs">
+      <DependentUpon>Signup-Review.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="signup\AccountInfo.aspx.designer.cs">
-      <DependentUpon>AccountInfo.aspx</DependentUpon>
+    <Compile Include="Signup-Review.aspx.designer.cs">
+      <DependentUpon>Signup-Review.aspx</DependentUpon>
     </Compile>
-    <Compile Include="signup\ChooseTemplate.aspx.cs">
-      <DependentUpon>ChooseTemplate.aspx</DependentUpon>
+    <Compile Include="Signup.aspx.cs">
+      <DependentUpon>Signup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="signup\ChooseTemplate.aspx.designer.cs">
-      <DependentUpon>ChooseTemplate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="signup\CmsInfo.aspx.cs">
-      <DependentUpon>CmsInfo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="signup\CmsInfo.aspx.designer.cs">
-      <DependentUpon>CmsInfo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="signup\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="signup\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="signup\Payment.aspx.cs">
-      <DependentUpon>Payment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="signup\Payment.aspx.designer.cs">
-      <DependentUpon>Payment.aspx</DependentUpon>
+    <Compile Include="Signup.aspx.designer.cs">
+      <DependentUpon>Signup.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
@@ -122,36 +101,93 @@
     <Content Include="assets\designs\gooey4.jpg" />
     <Content Include="assets\designs\gooey5.png" />
     <Content Include="assets\homepage_schematic.png" />
-    <Content Include="css\global - Copy.css" />
     <Content Include="css\global.css" />
-    <Content Include="css\globalok.css" />
-    <Content Include="css\IE.css" />
+    <Content Include="css\home.css" />
+    <Content Include="css\pricing.css" />
+    <Content Include="css\signup.css" />
+    <Content Include="css\store.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Default.Master" />
-    <Content Include="images\best_way.png" />
-    <Content Include="images\bg_body.png" />
-    <Content Include="images\bg_expander_left.png" />
-    <Content Include="images\bg_expander_right.png" />
-    <Content Include="images\bg_footer.png" />
-    <Content Include="images\bg_nav_a - Copy.png" />
-    <Content Include="images\bg_nav_a.png" />
-    <Content Include="images\bg_nav_a_active - Copy.png" />
-    <Content Include="images\bg_nav_a_active.png" />
-    <Content Include="images\bg_nav_li - Copy.png" />
-    <Content Include="images\bg_nav_li.png" />
-    <Content Include="images\bg_nav_li_active - Copy.png" />
-    <Content Include="images\bg_nav_li_active.png" />
-    <Content Include="images\corner_bl.png" />
-    <Content Include="images\corner_br.png" />
-    <Content Include="images\corner_tl.png" />
-    <Content Include="images\corner_tr.png" />
-    <Content Include="images\gooey_logo.png" />
-    <Content Include="images\gooey_masthead.png" />
-    <Content Include="images\screenshot_placeholder.png" />
-    <Content Include="images\sprite_corners.png" />
-    <Content Include="images\tour.png" />
+    <Content Include="images\bg_body.jpg" />
+    <Content Include="images\bg_callout.png" />
+    <Content Include="images\bg_callout_bottom.png" />
+    <Content Include="images\bg_callout_top.png" />
+    <Content Include="images\bg_content_bottom.png" />
+    <Content Include="images\bg_features.png" />
+    <Content Include="images\bg_filter_list_bottom.png" />
+    <Content Include="images\bg_filter_list_item.png" />
+    <Content Include="images\bg_filter_list_top.png" />
+    <Content Include="images\bg_gradient-box_bottom.png" />
+    <Content Include="images\bg_gradient-box_top.png" />
+    <Content Include="images\bg_main.jpg" />
+    <Content Include="images\bg_main.png" />
+    <Content Include="images\bg_masthead.png" />
+    <Content Include="images\bg_masthead_no-line.png" />
+    <Content Include="images\bg_pricing_panels.png" />
+    <Content Include="images\bg_side-shadow.png" />
+    <Content Include="images\bg_store-options.png" />
+    <Content Include="images\bg_theme_panel.png" />
+    <Content Include="images\btn_contact-us.png" />
+    <Content Include="images\btn_create_acct.png" />
+    <Content Include="images\btn_feature_tour.png" />
+    <Content Include="images\btn_login.png" />
+    <Content Include="images\btn_next.png" />
+    <Content Include="images\btn_prev.png" />
+    <Content Include="images\btn_purchase.gif" />
+    <Content Include="images\btn_purchase.png" />
+    <Content Include="images\btn_sign-up.png" />
+    <Content Include="images\btn_some_themes.png" />
+    <Content Include="images\btn_this_price.png" />
+    <Content Include="images\bullet_features.gif" />
+    <Content Include="images\h1[a]_developer_site.png" />
+    <Content Include="images\h1_are_you_a_designer.png" />
+    <Content Include="images\h1_finally_enterprise_cms.png" />
+    <Content Include="images\h1_minute_away.png" />
+    <Content Include="images\h1_minute_away2.png" />
+    <Content Include="images\h2_choose_options.png" />
+    <Content Include="images\h2_close_deal.png" />
+    <Content Include="images\h2_create_gooey_acct.png" />
+    <Content Include="images\h2_create_gooey_address.png" />
+    <Content Include="images\h2_create_password.png" />
+    <Content Include="images\h2_enter_email.png" />
+    <Content Include="images\home\bg_features.png" />
+    <Content Include="images\home\h2_built_for_speed.png" />
+    <Content Include="images\home\h2_over_200_features.png" />
+    <Content Include="images\home\h2_over_200_sites.png" />
+    <Content Include="images\home\screenshot.png" />
+    <Content Include="images\home\txt_fastest_way.gif" />
+    <Content Include="images\home\txt_fastest_way.png" />
+    <Content Include="images\home\txt_learn_more.png" />
+    <Content Include="images\home\txt_starting_at_50.gif" />
+    <Content Include="images\home\txt_starting_at_50.png" />
+    <Content Include="images\icon_available.png" />
+    <Content Include="images\logo_gooey.png" />
+    <Content Include="images\logo_gooey_internal.png" />
+    <Content Include="images\nav_help.gif" />
+    <Content Include="images\nav_help_on.gif" />
+    <Content Include="images\nav_home.gif" />
+    <Content Include="images\nav_home_on.gif" />
+    <Content Include="images\nav_pricing.gif" />
+    <Content Include="images\nav_pricing_on.gif" />
+    <Content Include="images\nav_signup.gif" />
+    <Content Include="images\nav_signup_on.gif" />
+    <Content Include="images\nav_store.gif" />
+    <Content Include="images\nav_store_on.gif" />
+    <Content Include="images\nav_tour.gif" />
+    <Content Include="images\nav_tour_on.gif" />
+    <Content Include="images\sep_nav_item.gif" />
+    <Content Include="images\txt_for.png" />
+    <Content Include="images\txt_hey_designers.png" />
+    <Content Include="images\txt_increasing_revenue.png" />
+    <Content Include="images\txt_show_me.png" />
+    <Content Include="images\___placeholder_logo.png" />
+    <Content Include="images\___site_001.jpg" />
+    <Content Include="images\___site_002.jpg" />
+    <Content Include="images\___site_003.jpg" />
+    <Content Include="images\___site_004.jpg" />
     <Content Include="js\global.js" />
-    <Content Include="js\jquery-1.4.1.min.js" />
+    <Content Include="js\jquery-1.4.2.min.js" />
+    <Content Include="js\jquery.cycle.all.min.js" />
+    <Content Include="js\store.js" />
     <Content Include="misc_files\highslide-custom-example.htm" />
     <Content Include="misc_files\highslide\easing_equations.js" />
     <Content Include="misc_files\highslide\editor-config.txt" />
@@ -201,11 +237,6 @@
     <Content Include="misc_files\highslide\sample-includes\include-short.htm" />
     <Content Include="misc_files\index - Copy.html" />
     <Content Include="misc_files\indexold.html" />
-    <Content Include="signup\AccountInfo.aspx" />
-    <Content Include="signup\ChooseTemplate.aspx" />
-    <Content Include="signup\CmsInfo.aspx" />
-    <Content Include="signup\Default.aspx" />
-    <Content Include="signup\Payment.aspx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
@@ -228,13 +259,27 @@
   <ItemGroup>
     <None Include="assets\designs\gooey-final.psd" />
     <None Include="assets\designs\gooey-final2.psd" />
-    <None Include="css\global.css.bak" />
+    <None Include="assets\fonts\DIN17__.PFB" />
+    <None Include="assets\fonts\DIN17__.pfm" />
+    <None Include="assets\fonts\DINENGSC.PFB" />
+    <None Include="assets\fonts\DINENGSC.pfm" />
+    <None Include="assets\fonts\DINMITTE.PFB" />
+    <None Include="assets\fonts\DINMITTE.pfm" />
+    <None Include="assets\fonts\DINNEGBC.PFB" />
+    <None Include="assets\fonts\DINNEGBC.pfm" />
+    <None Include="assets\fonts\DINNEUGL.PFB" />
+    <None Include="assets\fonts\DINNEUGL.pfm" />
+    <None Include="assets\gooey-final5.psd" />
+    <Content Include="ContentPage.Master" />
+    <Content Include="Signup-Review.aspx" />
+    <Content Include="Signup.aspx" />
     <None Include="misc_files\highslide-custom-example.htm.bak" />
     <None Include="misc_files\highslide\highslide.css.bak" />
     <None Include="misc_files\index.html.bak" />
     <None Include="misc_files\README" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

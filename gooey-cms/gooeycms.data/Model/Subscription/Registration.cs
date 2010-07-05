@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gooeycms.Data.Model.Subscription
 {
+    [Serializable]
     public class Registration : BasePersistedItem
     {
         public virtual String Guid { get; set; }
@@ -23,6 +24,9 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual String Domain { get; set; }
         public virtual String Staging { get; set; }
         public virtual Int32 TemplateId { get; set; }
+        public virtual Int32 SubscriptionPlanId { get; set; }
         public virtual Boolean IsComplete { get; set; }
+        public virtual Boolean IsSalesforceEnabled { get; set; }
+        public virtual Boolean IsGenericOptionEnabled { get; set; }
     }
 }

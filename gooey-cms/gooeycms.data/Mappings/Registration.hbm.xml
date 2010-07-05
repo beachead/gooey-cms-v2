@@ -1,25 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="Gooeycms.Data.Model.Subscription.Registration,gooeycms.data" table="Registrations">
+  <class name="Gooeycms.Data.Model.Subscription.RegistrationDto,gooeycms.data" table="Registrations">
     <id name="Id" column="id" type="Int32" unsaved-value="0">
       <generator class="native" />
     </id>
     <property column="guid" name="Guid" type="String" />
     <property column="created" name="Created" type="DateTime" />
     <property column="email" name="Email" type="String" />
-    <property column="firstname" name="Firstname" type="String" />
-    <property column="lastname" name="Lastname" type="String" />
-    <property column="password" name="EncryptedPassword" type="String" />
-    <property column="sitename" name="Sitename" type="String" />
-    <property column="domain" name="Domain" type="String" />
-    <property column="staging" name="Staging" type="String" />
-    <property column="template_id" name="TemplateId" type="Int32" />
-    <property column="company" name="Company" type="String" />
-    <property column="address1" name="Address1" type="String" />
-    <property column="address2" name="Address2" type="String" />
-    <property column="city" name="City" type="String" />
-    <property column="state" name="State" type="String" />
-    <property column="zipcode" name="Zipcode" type="String" />
-    <property column="is_complete" name="IsComplete" type="Boolean" />
+    <property column="is_complete" name="IsComplete" type="Boolean" />    
+    <property column="data" name="Data" type="BinaryBlob" />
   </class>
 </hibernate-mapping>

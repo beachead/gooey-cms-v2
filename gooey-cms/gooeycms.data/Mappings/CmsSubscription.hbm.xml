@@ -1,10 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Subscription.CmsSubscriptionPlan,gooeycms.data" table="Subscription_Plans">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="sku" name="SKU" type="String" />
+    <property column="name" name="Name" type="String" />
+    <property column="price" name="Price" type="Decimal" />
+    <property column="available" name="IsAvailable" type="Boolean" />
+  </class>
+
   <class name="Gooeycms.Data.Model.Subscription.CmsSubscription,gooeycms.data" table="Subscriptions">
     <id name="Id" column="id" type="Int32" unsaved-value="0">
       <generator class="native" />
     </id>
     <property column="subscription_type" name="SubscriptionTypeId" type="Int32" />
+    <property column="subscription_plan" name="SubscriptionPlanId" type="Int32" />
+    <property column="guid" name="Guid" type="String" />    
     <property column="signup_date" name="Created" type="DateTime" />
     <property column="primary_user_guid" name="PrimaryUserGuid" type="String" />
     <property column="subdomain" name="Subdomain" type="String" />
@@ -12,5 +24,7 @@
     <property column="staging_domain" name="StagingDomain" type="String" />
     <property column="expires" name="Expires" type="DateTime" />
     <property column="disabled" name="IsDisabled" type="Boolean" />
+    <property column="salesforce_addon" name="IsSalesforceEnabled" type="Boolean" />
+    <property column="generic_addon" name="IsGenericOptionsEnabled" type="Boolean" />
   </class>
 </hibernate-mapping>

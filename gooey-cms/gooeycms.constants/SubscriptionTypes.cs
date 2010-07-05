@@ -5,10 +5,11 @@ using System.Text;
 
 namespace gooeycms.constants
 {
-    public enum SubscriptionTypes
+    public enum SubscriptionPlans
     {
-        Standard = 0,
-        Developer = 1,
-        Partner = 2,
+        Free = 0,
+        Business = 1,
+        Developer = 10,
+        Demo = 5,
     }
 }

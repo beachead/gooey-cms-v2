@@ -94,5 +94,11 @@ namespace Gooeycms.Business.Subscription
                 tx.Commit();
             }
         }
+
+        public static Registration Load(string guid)
+        {
+            RegistrationDao dao = new RegistrationDao();
+            return dao.FindByGuid(guid);
+        }
     }
 }
