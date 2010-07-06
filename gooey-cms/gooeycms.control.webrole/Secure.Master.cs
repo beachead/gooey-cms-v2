@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace gooeycms.webrole.control
+namespace Gooeycms.Webrole.Control
 {
     public partial class Secure : System.Web.UI.MasterPage
     {

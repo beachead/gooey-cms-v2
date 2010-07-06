@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using gooeycms.webrole.control.App_Code;
+using Gooeycms.Webrole.Control;
+using Gooeycms.Webrole.Control.App_Code;
 
-namespace gooeycms.webrole.control.auth
+namespace Gooeycms.Webrole.Control.Auth
 {
     public partial class Default : ValidatedPage
     {

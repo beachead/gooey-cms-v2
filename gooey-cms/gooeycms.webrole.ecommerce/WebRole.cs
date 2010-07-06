@@ -3,7 +3,7 @@ using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using System;
 
-namespace gooeycms.webrole.ecommerce
+namespace Gooeycms.webrole.ecommerce
 {
     public class WebRole : RoleEntryPoint
     {

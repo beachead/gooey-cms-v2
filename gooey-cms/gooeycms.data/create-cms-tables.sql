@@ -36,7 +36,7 @@ CREATE TABLE Themes_Global_Template_Types (
 CREATE TABLE Themes_Site_Templates (
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[theme_id] INT REFERENCES Themes_Site([id]),
-	[template_type_id] INT REFERENCES Themes_Global_Template_Types([id]),
+	[template_name] VARCHAR(36),
 	[site_guid] VARCHAR(36) NOT NULL,	
 	[is_global] BIT DEFAULT(1),
 	[template] NTEXT NOT NULL,
@@ -44,7 +44,8 @@ CREATE TABLE Themes_Site_Templates (
 	PRIMARY KEY CLUSTERED([id]),
 );
 CREATE INDEX idx_site_template_guid ON Themes_Site_Templates([site_guid]);
-CREATE INDEX idx_site_template_guid_typid ON Themes_Site_Templates([site_guid],[template_type_id]);
+CREATE INDEX idx_site_template_guid_typid ON Themes_Site_Templates([site_guid],[template_name]);
+CREATE INDEX idx_site_template_theme_name ON Themes_Site_Templates([site_guid],[theme_id],[template_name]);
 
 insert into themes_global_template_types values ('homepage-template');
 insert into themes_global_template_types values ('content-template');

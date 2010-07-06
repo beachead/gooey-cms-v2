@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Gooeycms.Data.Model.Subscription;
 using Beachead.Persistence.Hibernate;
-using gooeycms.business.Crypto;
+using Gooeycms.Business.Crypto;
 using System.Web.Security;
 using Gooeycms.Business.Membership;
 

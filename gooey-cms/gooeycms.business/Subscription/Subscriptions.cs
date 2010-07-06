@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Membership;
-using gooeycms.constants;
+using Gooeycms.Constants;
 using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Business.Subscription

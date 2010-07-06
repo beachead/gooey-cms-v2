@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace gooeycms.webrole.website {
+namespace Gooeycms.webrole.website {
     
     
     public partial class SignupReview {

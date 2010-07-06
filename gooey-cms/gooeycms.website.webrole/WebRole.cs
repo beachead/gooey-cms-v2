@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
-namespace gooeycms.webrole.website
+namespace Gooeycms.webrole.website
 {
     public class WebRole : RoleEntryPoint
     {

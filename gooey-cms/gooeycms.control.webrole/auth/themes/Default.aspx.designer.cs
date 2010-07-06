@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace gooeycms.webrole.control.auth.themes {
+namespace Gooeycms.Webrole.Control.Auth.Themes {
     
     
     public partial class Default {
@@ -39,5 +39,14 @@ namespace gooeycms.webrole.control.auth.themes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource ThemesDataSource;
+        
+        /// <summary>
+        /// BtnSaveThemes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnSaveThemes;
     }
 }

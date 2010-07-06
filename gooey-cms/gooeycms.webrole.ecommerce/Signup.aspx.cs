@@ -6,10 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Data.Model.Subscription;
-using gooeycms.constants;
+using Gooeycms.Constants;
 using Gooeycms.Business;
 
-namespace gooeycms.webrole.website
+namespace Gooeycms.webrole.website
 {
     public partial class Signup : System.Web.UI.Page
     {

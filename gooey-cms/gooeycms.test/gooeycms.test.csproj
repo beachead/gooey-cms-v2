@@ -8,7 +8,7 @@
     <ProjectGuid>{E5513070-EAD6-4052-948E-D7D60795F736}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gooeycms.test</RootNamespace>
+    <RootNamespace>Gooeycms.test</RootNamespace>
     <AssemblyName>gooeycms.test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

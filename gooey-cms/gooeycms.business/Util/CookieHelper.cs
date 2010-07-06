@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Data.Model.Subscription;
 using System.Web;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Business.Util
 {
@@ -19,14 +20,28 @@ namespace Gooeycms.Business.Util
 
         public static void SetActiveSite(String guid)
         {
-            //If there's only one site, set that site cookie now
-            HttpContext.Current.Response.Cookies["selected-site"].Value = guid;
+            if (String.IsNullOrEmpty(guid))
+                throw new ArgumentException("A site guid must be specified when setting the active site.");
+
+            String encrypted = new TextEncryption().Encrypt(guid);
+            HttpContext.Current.Response.Cookies["selected-site"].Value = encrypted;
         }
 
         public static String GetActiveSiteGuid()
         {
+            return GetActiveSiteGuid(false);
+        }
+
+        public static String GetActiveSiteGuid(Boolean isRequired)
+        {
             HttpCookie cookie = HttpContext.Current.Request.Cookies["selected-site"];
-            return (cookie != null) ? (cookie.Value) : "";
+            String guid = (cookie != null) ? (cookie.Value) : "";
+
+            if ((isRequired) && (String.IsNullOrEmpty(guid)))
+                throw new ArgumentException("No site has been selected to manage themes for or cookies are disabled.");
+
+            guid = new TextEncryption().Decrypt(guid);
+            return guid;
         }
     }
 }

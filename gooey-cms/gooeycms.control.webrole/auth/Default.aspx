@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="gooeycms.webrole.control.auth.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.Auth.Default" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

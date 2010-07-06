@@ -65,6 +65,9 @@
     <Compile Include="Model\Subscription\RegistrationDto.cs" />
     <Compile Include="Model\Subscription\UserInfo.cs" />
     <Compile Include="Model\Subscription\UserInfoDao.cs" />
+    <Compile Include="Model\Theme\CmsGlobalTemplateType.cs" />
+    <Compile Include="Model\Theme\CmsTemplate.cs" />
+    <Compile Include="Model\Theme\CmsTemplateDao.cs" />
     <Compile Include="Model\Theme\CmsTheme.cs" />
     <Compile Include="Model\Theme\CmsThemeDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

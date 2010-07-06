@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace gooeycms.webrole.control.auth {
+namespace Gooeycms.Webrole.Control.Auth {
     
     
     public partial class Default {
@@ -19,9 +19,9 @@ namespace gooeycms.webrole.control.auth {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new gooeycms.webrole.control.Secure Master {
+        public new Gooeycms.Webrole.Control.Secure Master {
             get {
-                return ((gooeycms.webrole.control.Secure)(base.Master));
+                return ((Gooeycms.Webrole.Control.Secure)(base.Master));
             }
         }
     }

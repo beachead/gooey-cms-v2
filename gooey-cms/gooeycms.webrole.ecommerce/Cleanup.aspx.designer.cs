@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace gooeycms.webrole.ecommerce
+namespace Gooeycms.webrole.ecommerce
 {
 
 

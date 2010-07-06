@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="gooeycms.webrole.control.auth.themes.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.Auth.Themes.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
             <li class="on">Manage Themes:</li>
-            <li class=""><a href="./AddNewTheme.aspx">Add Theme</a></li>
+            <li class=""><a href="~/auth/Themes/Add.aspx" runat="server">Add Theme</a></li>
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
@@ -21,7 +21,7 @@
                 <asp:TemplateField HeaderText="Id">
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemTemplate>
-                        <asp:HiddenField ID="HiddenId" Value='<%# Eval("Theme.Id") %>' runat="server" />
+                        <asp:HiddenField ID="HiddenId" Value='<%# Eval("Theme.ThemeGuid") %>' runat="server" />
                         <asp:Label ID="Id" Text='<%# Eval("Theme.Id") %>' runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
@@ -47,7 +47,7 @@
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemTemplate>
                         <asp:HyperLink ID="EditTemplates" Text="Templates" runat="server" 
-                            NavigateUrl='' />&nbsp;
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Templates.aspx?tid={0}") %>' />&nbsp;
                         <asp:HyperLink ID="EditHeaderFooter" Text="Header/Footer" runat="server"
                             NavigateUrl='' />&nbsp;
                         <asp:HyperLink ID="EditCss" Text="CSS" runat="server"
@@ -66,10 +66,12 @@
         </asp:GridView>    
         <asp:ObjectDataSource ID="ThemesDataSource" runat="server" 
             SelectMethod="GetThemesBySite" 
-            TypeName="Gooeycms.Webrole.Control.App_Code.Adapters.ThemeAdapter">
+            TypeName="Gooeycms.Webrole.Control.App_Code.Adapters.ThemeAdapter" 
+            onselecting="ThemesDataSource_Selecting">
             <SelectParameters>
-                <asp:CookieParameter CookieName="selected-site" Name="guid" Type="String" />
+                <asp:Parameter Name="guid" Type="String" />
             </SelectParameters>
-        </asp:ObjectDataSource>        
+        </asp:ObjectDataSource>  
+        <asp:Button ID="BtnSaveThemes" OnClick="OnSaveThemes_Click" Text="Save" runat="server" />              
     </div>
 </asp:Content>

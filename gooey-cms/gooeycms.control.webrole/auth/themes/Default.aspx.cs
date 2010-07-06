@@ -4,15 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using gooeycms.webrole.control.App_Code;
+using Gooeycms.Webrole.Control.App_Code;
+using Gooeycms.Data.Model.Theme;
+using Gooeycms.Business.Themes;
+using Gooeycms.Business.Util;
 
-namespace gooeycms.webrole.control.auth.themes
+namespace Gooeycms.Webrole.Control.Auth.Themes
 {
     public partial class Default : ValidatedPage
     {
         protected override void OnLoad(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -36,6 +38,27 @@ namespace gooeycms.webrole.control.auth.themes
             ((RadioButton)row.FindControl("Enabled")).Checked = true;
         }
 
+        /// <summary>
+        /// Updates the theme that is being used within the site.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void OnSaveThemes_Click(object sender, EventArgs e)
+        {
+            foreach (GridViewRow oldrow in GridView1.Rows)
+            {
+                HiddenField guid = ((HiddenField)oldrow.FindControl("HiddenId"));
+                RadioButton enabled = ((RadioButton)oldrow.FindControl("Enabled"));
+
+                CmsTheme theme = ThemeManager.Instance.GetByGuid((guid.Value));
+                if (theme != null)
+                {
+                    theme.IsEnabled = enabled.Checked;
+                    ThemeManager.Instance.Save(theme);
+                }
+            }
+        }
+
         protected void OnDelete_Click(object sender, EventArgs e)
         {
             /*
@@ -54,6 +77,11 @@ namespace gooeycms.webrole.control.auth.themes
             }
             this.StatusLabel.Visible = true;
             */
+        }
+
+        protected void ThemesDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            e.InputParameters["guid"] = CookieHelper.GetActiveSiteGuid();
         }
     }
 }

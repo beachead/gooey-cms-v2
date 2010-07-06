@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Anthem, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Anthem.dll</HintPath>
+    </Reference>
+    <Reference Include="FredCK.FCKeditorV2, Version=2.6.3.22451, Culture=neutral, PublicKeyToken=4f86767c9b519a06, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\FredCK.FCKeditorV2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -66,6 +74,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
+    <Compile Include="auth\Themes\Templates.aspx.cs">
+      <DependentUpon>Templates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Themes\Templates.aspx.designer.cs">
+      <DependentUpon>Templates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContentEditor\MarkupEditor.ascx.cs">
+      <DependentUpon>MarkupEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ContentEditor\MarkupEditor.ascx.designer.cs">
+      <DependentUpon>MarkupEditor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContentEditor\ResizableTextBox\ResizableTextBox.ascx.cs">
+      <DependentUpon>ResizableTextBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ContentEditor\ResizableTextBox\ResizableTextBox.ascx.designer.cs">
+      <DependentUpon>ResizableTextBox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusPanel.ascx.cs">
+      <DependentUpon>StatusPanel.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\StatusPanel.ascx.designer.cs">
+      <DependentUpon>StatusPanel.ascx</DependentUpon>
+    </Compile>
     <Compile Include="App_Code\ValidatedPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -83,11 +119,18 @@
     <Compile Include="auth\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="auth\themes\Default.aspx.cs">
+    <Compile Include="auth\Themes\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Themes\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Themes\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="auth\themes\Default.aspx.designer.cs">
+    <Compile Include="auth\Themes\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
@@ -116,7 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="auth\Default.aspx" />
-    <Content Include="auth\themes\Default.aspx" />
+    <Content Include="auth\Themes\Default.aspx" />
     <Content Include="css\admin-theme.css" />
     <Content Include="Login.aspx" />
     <Content Include="scripts\analytics.js" />
@@ -149,7 +192,63 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="auth\Themes\Templates.aspx" />
+    <Content Include="Controls\ContentEditor\contenteditor.css" />
+    <Content Include="Controls\ContentEditor\Images\Anchor.png" />
+    <Content Include="Controls\ContentEditor\Images\Attachment.png" />
+    <Content Include="Controls\ContentEditor\Images\Background.gif" />
+    <Content Include="Controls\ContentEditor\Images\Bold.png" />
+    <Content Include="Controls\ContentEditor\Images\Box.png" />
+    <Content Include="Controls\ContentEditor\Images\BR.png" />
+    <Content Include="Controls\ContentEditor\Images\Code.png" />
+    <Content Include="Controls\ContentEditor\Images\Comment.png" />
+    <Content Include="Controls\ContentEditor\Images\Dir.png" />
+    <Content Include="Controls\ContentEditor\Images\Escape.png" />
+    <Content Include="Controls\ContentEditor\Images\ExternalLink.gif" />
+    <Content Include="Controls\ContentEditor\Images\File.png" />
+    <Content Include="Controls\ContentEditor\Images\folder_go.png" />
+    <Content Include="Controls\ContentEditor\Images\Forms.png" />
+    <Content Include="Controls\ContentEditor\Images\H1.png" />
+    <Content Include="Controls\ContentEditor\Images\H2.png" />
+    <Content Include="Controls\ContentEditor\Images\H3.png" />
+    <Content Include="Controls\ContentEditor\Images\H4.png" />
+    <Content Include="Controls\ContentEditor\Images\Icon.png" />
+    <Content Include="Controls\ContentEditor\Images\Image.png" />
+    <Content Include="Controls\ContentEditor\Images\image_add.png" />
+    <Content Include="Controls\ContentEditor\Images\Italic.png" />
+    <Content Include="Controls\ContentEditor\Images\Link.png" />
+    <Content Include="Controls\ContentEditor\Images\Lock.png" />
+    <Content Include="Controls\ContentEditor\Images\MessageDelete.png" />
+    <Content Include="Controls\ContentEditor\Images\MessageEdit.png" />
+    <Content Include="Controls\ContentEditor\Images\MessageReply.png" />
+    <Content Include="Controls\ContentEditor\Images\NoMarkup.png" />
+    <Content Include="Controls\ContentEditor\Images\NoWiki.png" />
+    <Content Include="Controls\ContentEditor\Images\PageLink.png" />
+    <Content Include="Controls\ContentEditor\Images\Pre.png" />
+    <Content Include="Controls\ContentEditor\Images\Print.png" />
+    <Content Include="Controls\ContentEditor\Images\Public.png" />
+    <Content Include="Controls\ContentEditor\Images\RSS.png" />
+    <Content Include="Controls\ContentEditor\Images\Search.png" />
+    <Content Include="Controls\ContentEditor\Images\Snippet.png" />
+    <Content Include="Controls\ContentEditor\Images\SpecialTags.png" />
+    <Content Include="Controls\ContentEditor\Images\Strike.png" />
+    <Content Include="Controls\ContentEditor\Images\Sub.png" />
+    <Content Include="Controls\ContentEditor\Images\Sup.png" />
+    <Content Include="Controls\ContentEditor\Images\TabAdd.png" />
+    <Content Include="Controls\ContentEditor\Images\TabRemove.png" />
+    <Content Include="Controls\ContentEditor\Images\Template.png" />
+    <Content Include="Controls\ContentEditor\Images\UL.png" />
+    <Content Include="Controls\ContentEditor\Images\Underline.png" />
+    <Content Include="Controls\ContentEditor\MarkupEditor.ascx" />
+    <Content Include="Controls\ContentEditor\ResizableTextBox\horz_repeater.gif" />
+    <Content Include="Controls\ContentEditor\ResizableTextBox\javascript.js" />
+    <Content Include="Controls\ContentEditor\ResizableTextBox\non_repeaters.gif" />
+    <Content Include="Controls\ContentEditor\ResizableTextBox\ResizableTextBox.ascx" />
+    <Content Include="Controls\ContentEditor\ResizableTextBox\style.css" />
+    <Content Include="Controls\ContentEditor\ResizableTextBox\vert_repeater.gif" />
+    <Content Include="Controls\StatusPanel.ascx" />
     <Content Include="auth\Dashboard.aspx" />
+    <Content Include="auth\Themes\Add.aspx" />
     <Content Include="auth\Web.config" />
     <Content Include="Setup.aspx" />
   </ItemGroup>

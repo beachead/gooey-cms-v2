@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace gooeycms.webrole.website
+namespace Gooeycms.webrole.website
 {
     public partial class ContentPage : System.Web.UI.MasterPage
     {

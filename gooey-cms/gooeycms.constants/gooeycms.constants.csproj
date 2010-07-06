@@ -8,7 +8,7 @@
     <ProjectGuid>{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gooeycms.constants</RootNamespace>
+    <RootNamespace>Gooeycms.Constants</RootNamespace>
     <AssemblyName>gooeycms.constants</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

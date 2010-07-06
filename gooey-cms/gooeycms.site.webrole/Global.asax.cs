@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
-using gooeycms.constants;
+using Gooeycms.Constants;
 
-namespace gooeycms.webrole.sites
+namespace Gooeycms.webrole.sites
 {
     public class Global : System.Web.HttpApplication
     {
@@ -35,10 +35,6 @@ namespace gooeycms.webrole.sites
                     {
                         return;
                     }
-
-                    //Check if the roles have been created
-                    if (!Roles.RoleExists(SecurityConstants.GLOBALADMIN)) 
-                        Roles.CreateRole(SecurityConstants.GLOBALADMIN);
 
                     isInitializedAlready = true;
                 }

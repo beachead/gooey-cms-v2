@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Business.Subscription;
 
-namespace gooeycms.test
+namespace Gooeycms.test
 {
     class Program
     {
         static void Main(string[] args)
         {
-            ISubscriptionProcessor processor = SubscriptionProcessorFactory.Instance.GetSubscriptionProcessor(null);
+           // ISubscriptionProcessor processor = SubscriptionProcessorFactory.Instance.GetSubscriptionProcessor(null);
         }
     }
 }

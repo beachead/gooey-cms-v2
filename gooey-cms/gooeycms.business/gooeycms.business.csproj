@@ -54,6 +54,7 @@
     <Compile Include="Membership\MembershipProfile.cs" />
     <Compile Include="Membership\MembershipUserWrapper.cs" />
     <Compile Include="Membership\MembershipUtil.cs" />
+    <Compile Include="Pages\IPreviewable.cs" />
     <Compile Include="Subscription\Paypal\DebugSubscriptionProcessor.cs" />
     <Compile Include="Subscription\ISubscriptionProcessor.cs" />
     <Compile Include="Subscription\Paypal\PaypalSubscriptionProcessor.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Subscription\SubscriptionProcessorFactory.cs" />
     <Compile Include="Subscription\Subscriptions.cs" />
     <Compile Include="Subscription\SubscriptionSecurityConstraint.cs" />
+    <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Util\CookieHelper.cs" />
   </ItemGroup>

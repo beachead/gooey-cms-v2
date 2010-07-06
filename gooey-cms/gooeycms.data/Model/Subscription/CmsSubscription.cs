@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using gooeycms.constants;
+using Gooeycms.Constants;
 
 namespace Gooeycms.Data.Model.Subscription
 {

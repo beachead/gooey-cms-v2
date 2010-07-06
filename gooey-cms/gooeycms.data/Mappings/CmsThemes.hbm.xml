@@ -9,8 +9,27 @@
     <property column="name" name="Name" type="String" />
     <property column="description" name="Description" type="String" />
     <property column="is_enabled" name="IsEnabled" type="Boolean" />
-    <property column="is_developer" name="IsDeveloper" type="String" />
+    <property column="is_developer" name="IsDeveloper" type="Boolean" />
     <property column="header" name="Header" type="String" />
     <property column="footer" name="Footer" type="String" />
+  </class>
+
+  <class name="Gooeycms.Data.Model.Theme.CmsGlobalTemplateType,gooeycms.data" table="Themes_Global_Template_Types">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="name" name="Name" type="String" />
+  </class>
+
+  <class name="Gooeycms.Data.Model.Theme.CmsTemplate,gooeycms.data" table="Themes_Site_Templates">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <many-to-one column="theme_id" name="Theme" class="Gooeycms.Data.Model.Theme.CmsTheme,gooeycms.data" />
+    <property column="template_name" name="Name" type="String" />
+    <property column="site_guid" name="SubscriptionGuid" type="String" />
+    <property column="is_global" name="IsGlobalTemplateType" type="Boolean" />
+    <property column="last_saved" name="LastSaved" type="DateTime" />    
+    <property column="template" name="Content" type="String" />
   </class>
 </hibernate-mapping>

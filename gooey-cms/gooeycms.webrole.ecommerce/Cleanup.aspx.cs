@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 
-namespace gooeycms.webrole.ecommerce
+namespace Gooeycms.webrole.ecommerce
 {
     public partial class Cleanup : System.Web.UI.Page
     {

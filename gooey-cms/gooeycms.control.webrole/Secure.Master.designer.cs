@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace gooeycms.webrole.control {
+namespace Gooeycms.Webrole.Control {
     
     
     public partial class Secure {

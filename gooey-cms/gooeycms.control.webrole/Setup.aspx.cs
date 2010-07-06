@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-using gooeycms.constants;
+using Gooeycms.Constants;
 
 namespace Gooeycms.Webrole.Control
 {

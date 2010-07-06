@@ -5,7 +5,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace gooeycms.business.Crypto
+namespace Gooeycms.Business.Crypto
 {
     /// <summary>
     /// Encryption object which will also base-64 encode the data to allow it to be 

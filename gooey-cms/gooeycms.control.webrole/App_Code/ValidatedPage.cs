@@ -4,22 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Gooeycms.Business.Util;
 
-namespace gooeycms.webrole.control.App_Code
+namespace Gooeycms.Webrole.Control.App_Code
 {
     public abstract class ValidatedPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.Cookies["selected-site"] == null)
+            if (String.IsNullOrEmpty(CookieHelper.GetActiveSiteGuid()))
                 Response.Redirect(Resolve("~/auth/Dashboard.aspx"), true);
+
+            this.OnLoad(sender, e);
         }
 
         protected abstract void OnLoad(object sender, EventArgs e);
 
         protected String Resolve(String path)
         {
-            Control resolver = new Control();
+            System.Web.UI.Control resolver = new System.Web.UI.Control();
             return resolver.ResolveUrl(path);
         }
     }
