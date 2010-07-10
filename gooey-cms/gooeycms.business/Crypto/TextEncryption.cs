@@ -21,6 +21,31 @@ namespace Gooeycms.Business.Crypto
         private const int keySize = 128;
 
         private String salt = "!@34ghbn  ak''][3ga";
+
+        public static String Encode(String text)
+        {
+            String result = null;
+            if (text != null)
+                result = new TextEncryption().Encrypt(text);
+
+            return result;
+        }
+
+        public static String Decode(String encrypted)
+        {
+            String result = null;
+            if (encrypted != null)
+            {
+                try
+                {
+                    result = new TextEncryption().Decrypt(encrypted);
+                }
+                catch (Exception){}
+            }
+
+            return result;
+        }
+
         public TextEncryption()
         {
         }

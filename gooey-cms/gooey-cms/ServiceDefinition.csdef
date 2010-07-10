@@ -10,6 +10,7 @@
       <Setting name="AccountSharedKey" />
       <Setting name="BlobStorageEndpoint" />
       <Setting name="TableStorageEndpoint" />
+      <Setting name="BlobConnectionString" />
     </ConfigurationSettings>
     <LocalResources>
     </LocalResources>

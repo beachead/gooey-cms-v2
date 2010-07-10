@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gooeycms.Data.Model.Theme;
+using Beachead.Persistence.Hibernate;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Business.Themes
 {
@@ -51,6 +53,26 @@ namespace Gooeycms.Business.Themes
             IEnumerable<String> available = temp2.Except<String>(temp1);
 
             return new List<String>(available);
+        }
+
+        public void Save(CmsTemplate template)
+        {
+            using (Transaction tx = new Transaction())
+            {
+                CmsTemplateDao dao = new CmsTemplateDao();
+                dao.Save<CmsTemplate>(template);
+
+                tx.Commit();
+            }
+        }
+
+        public CmsTemplate GetTemplate(String encryptedId)
+        {
+            int id = 0;
+            Int32.TryParse(TextEncryption.Decode(encryptedId), out id);
+
+            CmsTemplateDao dao = new CmsTemplateDao();
+            return dao.FindByPrimaryKey<CmsTemplate>(id);
         }
     }
 }
