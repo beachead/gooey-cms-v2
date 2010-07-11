@@ -74,6 +74,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
+    <Compile Include="auth\Pages\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Pages\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\Themes\Templates.aspx.cs">
       <DependentUpon>Templates.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,6 +206,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="auth\Pages\Default.aspx" />
+    <Content Include="auth\Pages\Edit.aspx" />
     <Content Include="auth\Themes\Templates.aspx" />
     <Content Include="Controls\ContentEditor\contenteditor.css" />
     <Content Include="Controls\ContentEditor\Images\Anchor.png" />

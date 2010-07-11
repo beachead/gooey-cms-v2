@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using System.IO;
+using Microsoft.WindowsAzure.StorageClient;
 
 namespace Gooeycms.Business.Storage
 {
@@ -12,7 +13,6 @@ namespace Gooeycms.Business.Storage
     {
         public override void Save(String directory, string filename, byte[] data)
         {
-
         }
 
         public override void Delete(String directory, string filename)

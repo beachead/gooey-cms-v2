@@ -56,6 +56,7 @@
     <Compile Include="Model\BaseDao.cs" />
     <Compile Include="Model\BasePersistedItem.cs" />
     <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\Page\CmsPage.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlan.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlanDao.cs" />

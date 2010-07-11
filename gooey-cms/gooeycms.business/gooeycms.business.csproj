@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAzure.CloudDrive, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -55,6 +58,13 @@
     <Compile Include="Membership\MembershipUserWrapper.cs" />
     <Compile Include="Membership\MembershipUtil.cs" />
     <Compile Include="Pages\IPreviewable.cs" />
+    <Compile Include="Pages\PageManager.cs" />
+    <Compile Include="Pages\PageRequestHandler.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Storage\BaseStorageClient.cs" />
+    <Compile Include="Storage\IStorageClient.cs" />
+    <Compile Include="Storage\AzureBlobStorageClient.cs" />
     <Compile Include="Subscription\Paypal\DebugSubscriptionProcessor.cs" />
     <Compile Include="Subscription\ISubscriptionProcessor.cs" />
     <Compile Include="Subscription\Paypal\PaypalSubscriptionProcessor.cs" />
@@ -67,6 +77,7 @@
     <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Util\CookieHelper.cs" />
+    <Compile Include="Util\CurrentSite.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">
