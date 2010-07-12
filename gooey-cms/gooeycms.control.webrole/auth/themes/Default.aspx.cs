@@ -13,7 +13,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
 {
     public partial class Default : ValidatedPage
     {
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
         }
 
@@ -81,7 +81,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
 
         protected void ThemesDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
         {
-            e.InputParameters["guid"] = CookieHelper.GetActiveSiteGuid();
+            e.InputParameters["guid"] = SiteHelper.GetActiveSiteGuid();
         }
     }
 }

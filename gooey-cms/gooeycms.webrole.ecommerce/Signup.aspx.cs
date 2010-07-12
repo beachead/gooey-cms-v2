@@ -27,7 +27,7 @@ namespace Gooeycms.webrole.website
         {
             this.SelectedPlan.Items.Clear();
 
-            IList<CmsSubscriptionPlan> plans = Subscriptions.GetSubscriptionPlans();
+            IList<CmsSubscriptionPlan> plans = SubscriptionManager.GetSubscriptionPlans();
             foreach (CmsSubscriptionPlan plan in plans)
             {
                 ListItem item = new ListItem(plan.Name + " - $" + plan.Price, plan.SKU);
@@ -45,7 +45,7 @@ namespace Gooeycms.webrole.website
 
         protected void SelectedPlan_Changed(Object Sender, EventArgs e)
         {
-            CmsSubscriptionPlan plan = Subscriptions.GetSubscriptionPlan(this.SelectedPlan.SelectedValue);
+            CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(this.SelectedPlan.SelectedValue);
             if (plan.Price > 0)
                 this.OptionsPanel.Visible = true;
             else
@@ -54,7 +54,7 @@ namespace Gooeycms.webrole.website
 
         protected void Subdomain_TextChanged(Object sender, EventArgs e)
         {
-            bool isAvailable = Subscriptions.IsSubdomainAvailable(this.Subdomain.Text);
+            bool isAvailable = SubscriptionManager.IsSubdomainAvailable(this.Subdomain.Text);
             this.IsAvailableImage.ImageUrl = (isAvailable) ? "images/icon_available.png" : "missingimage.jpg";
             this.IsAvailableImage.Visible = true;
         }

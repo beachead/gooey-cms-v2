@@ -66,24 +66,17 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="debug-createuser.aspx.cs">
-      <DependentUpon>debug-createuser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="debug-createuser.aspx.designer.cs">
-      <DependentUpon>debug-createuser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
+      <Project>{A3D01157-7412-47B1-A123-2F3071D86B6E}</Project>
+      <Name>gooeycms.business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">
       <Project>{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}</Project>
       <Name>gooeycms.constants</Name>
@@ -96,9 +89,6 @@
       <Project>{F80B0AF1-6D4F-4AE2-84D2-45D19C456E22}</Project>
       <Name>gooeycms.persistence</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="debug-createuser.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

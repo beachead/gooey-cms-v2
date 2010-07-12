@@ -14,7 +14,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
     public partial class Add : ValidatedPage
     {
         protected String PageAction = "Add";
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             Master.SetNavigationOn(Secure.NavigationType.Site);
             if (!Page.IsPostBack)

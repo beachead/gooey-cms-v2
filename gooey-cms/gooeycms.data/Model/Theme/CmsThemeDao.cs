@@ -24,5 +24,11 @@ namespace Gooeycms.Data.Model.Theme
             String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :siteGuid and themes.ThemeGuid = :themeGuid";
             return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid).SetString("themeGuid", themeGuid).UniqueResult<CmsTheme>();
         }
+
+        public CmsTheme FindEnabledBySite(string siteGuid)
+        {
+            String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :siteGuid and themes.IsEnabled = 1";
+            return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid).UniqueResult<CmsTheme>();
+        }
     }
 }

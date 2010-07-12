@@ -15,7 +15,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
     public partial class Templates : ValidatedPage
     {
         private CmsTheme theme;
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             Master.SetNavigationOn(Secure.NavigationType.Site);
 
@@ -114,7 +114,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
                     template.Name = this.TemplateType.SelectedValue;
                 else
                     template.Name = this.CustomTemplateType.Text;
-                template.SubscriptionGuid = CookieHelper.GetActiveSiteGuid(true);
+                template.SubscriptionGuid = SiteHelper.GetActiveSiteGuid(true);
                 template.Theme = theme;
             }
 

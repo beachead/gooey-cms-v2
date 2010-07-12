@@ -25,19 +25,19 @@ namespace Gooeycms.webrole.website
             Guid = Request.QueryString["g"];
 
             Registration registration = Registrations.Load(this.Guid);
-            CmsSubscriptionPlan plan = Subscriptions.GetSubscriptionPlan(registration);
+            CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(registration);
 
             this.Firstname.Text = registration.Firstname;
             this.Lastname.Text = registration.Lastname;
             this.Email.Text = registration.Email;
             this.Company.Text = registration.Company;
             this.Subdomain.Text = registration.Sitename + GooeyConfigManager.DefaultCmsDomain;
-            this.SubscriptionPlan.Text = Subscriptions.GetDescription(registration);
+            this.SubscriptionPlan.Text = SubscriptionManager.GetDescription(registration);
 
             if (plan.Price > 0)
             {
-                PaypalDescription = Subscriptions.GetShortDescription("Gooey CMS -", registration);
-                PaypalCost = Subscriptions.CalculateCost(registration);
+                PaypalDescription = SubscriptionManager.GetShortDescription("Gooey CMS -", registration);
+                PaypalCost = SubscriptionManager.CalculateCost(registration);
                 this.PaypayPanel.Visible = true;
                 this.FreePanel.Visible = false;
             }

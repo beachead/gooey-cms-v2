@@ -57,6 +57,9 @@
     <Compile Include="Model\BasePersistedItem.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />
+    <Compile Include="Model\Page\CmsPageDao.cs" />
+    <Compile Include="Model\Site\CmsSitePath.cs" />
+    <Compile Include="Model\Site\CmsSitePathDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlan.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlanDao.cs" />
@@ -74,8 +77,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="create-cms-tables.sql" />
-    <None Include="create-registration-tables.sql" />
+    <None Include="sql-scripts\create-theme-tables.sql" />
+    <None Include="sql-scripts\create-registration-tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Registration.hbm.xml" />
@@ -101,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\CmsThemes.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\CmsPages.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sql-scripts\create-page-tables.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

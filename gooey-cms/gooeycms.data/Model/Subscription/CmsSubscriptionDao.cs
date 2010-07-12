@@ -32,5 +32,11 @@ namespace Gooeycms.Data.Model.Subscription
         {
             return base.Session.GetNamedQuery("CmsSubscriptionByUserId").SetParameter("userId", userId).List<CmsSubscription>();
         }
+
+        public CmsSubscription FindByGuid(String guid)
+        {
+            String hql = "select subscription from CmsSubscription subscription where subscription.Guid = :guid";
+            return base.NewHqlQuery(hql).SetString("guid", guid).UniqueResult<CmsSubscription>();
+        }
     }
 }
