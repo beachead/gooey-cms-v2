@@ -9,7 +9,7 @@ using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Business.Subscription
 {
-    public static class Subscriptions
+    public static class SubscriptionManager
     {
         public static bool IsSubdomainAvailable(String subdomain)
         {
@@ -26,7 +26,7 @@ namespace Gooeycms.Business.Subscription
         public static CmsSubscriptionPlan GetSubscriptionPlan(Registration registration)
         {
             SubscriptionPlans temp = (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), registration.SubscriptionPlanId.ToString(), true);
-            CmsSubscriptionPlan plan = Subscriptions.GetSubscriptionPlan(temp.ToString());
+            CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(temp.ToString());
             return plan;
         }
 
@@ -40,9 +40,6 @@ namespace Gooeycms.Business.Subscription
 
         public static CmsSubscriptionPlan GetSubscriptionPlan(SubscriptionPlans plan)
         {
-            if (plan == null)
-                throw new ApplicationException("Could not find a matching CMS Subscription plan for plan type: " + plan.ToString() + ". The plan type does not match any sku in the database table, subscritpion_plans. This is a fatal configuration issue and needs to be fixed before this plan can be used.");
-
             return GetSubscriptionPlan(plan.ToString());
         }
 
@@ -121,6 +118,12 @@ namespace Gooeycms.Business.Subscription
 
             CmsSubscriptionDao dao = new CmsSubscriptionDao();
             return dao.FindByUserId(userId);
+        }
+
+        public static CmsSubscription GetSubscription(String siteGuid)
+        {
+            CmsSubscriptionDao dao = new CmsSubscriptionDao();
+            return dao.FindByGuid(siteGuid);
         }
     }
 }

@@ -97,9 +97,9 @@ namespace Gooeycms.Business.Membership
         public static void ProcessLogin(string username)
         {
             MembershipUserWrapper wrapper = FindByUsername(username);
-            IList<CmsSubscription> subscriptions = Subscriptions.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
+            IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
 
-            CookieHelper.SetActiveSite(subscriptions);
+            SiteHelper.SetActiveSiteCookie(subscriptions);
         }
     }
 }

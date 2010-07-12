@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Data.Model;
 using Gooeycms.Constants;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Gooeycms.Business
 {
@@ -95,7 +96,31 @@ namespace Gooeycms.Business
         {
             get
             {
-                return GooeyConfigManager.GetAsBoolean(ConfigConstants.IsLogginedEnabled, false);
+                return (RoleEnvironment.IsAvailable);
+            }
+        }
+
+        public static String DefaultPageName
+        {
+            get
+            {
+                String result = GetAsString(ConfigConstants.DefaultPageName);
+                if (String.IsNullOrEmpty(result))
+                    result = "default.aspx";
+
+                return result;
+            }
+        }
+
+        public static String DefaultStagingPrefix
+        {
+            get
+            {
+                String result = GetAsString(ConfigConstants.DefaultStagingPrefix);
+                if (String.IsNullOrEmpty(result))
+                    result = "staging-";
+
+                return result;
             }
         }
     }

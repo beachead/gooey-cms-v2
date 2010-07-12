@@ -79,7 +79,7 @@ namespace Gooeycms.Business.Subscription
         public static void ConvertToAccount(Registration registration, String subscriberId)
         {
             MembershipUtil.CreateFromRegistration(registration);
-            Subscriptions.CreateFromRegistration(registration);
+            SubscriptionManager.CreateFromRegistration(registration);
 
             registration.IsComplete = true;
             Save(registration);

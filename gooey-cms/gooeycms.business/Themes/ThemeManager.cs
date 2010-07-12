@@ -19,7 +19,7 @@ namespace Gooeycms.Business.Themes
 
         public CmsTheme GetByGuid(String themeGuid)
         {
-            String guid = CookieHelper.GetActiveSiteGuid(true);
+            String guid = SiteHelper.GetActiveSiteGuid(true);
             return GetByGuid(guid, themeGuid);
         }
 
@@ -35,7 +35,7 @@ namespace Gooeycms.Business.Themes
         /// <returns></returns>
         public CmsTheme GetByName(String name)
         {
-            String guid = CookieHelper.GetActiveSiteGuid(true);
+            String guid = SiteHelper.GetActiveSiteGuid(true);
             return GetByName(guid, name);
         }
 
@@ -64,7 +64,7 @@ namespace Gooeycms.Business.Themes
         /// <returns></returns>
         public IList<CmsTheme> GetAllBySite()
         {
-            String guid = CookieHelper.GetActiveSiteGuid(true);
+            String guid = SiteHelper.GetActiveSiteGuid(true);
             return GetAllBySite(guid);
         }
 
@@ -76,7 +76,7 @@ namespace Gooeycms.Business.Themes
         /// <returns></returns>
         public CmsTheme Add(string name, string description)
         {
-            String guid = CookieHelper.GetActiveSiteGuid(true);
+            String guid = SiteHelper.GetActiveSiteGuid(true);
             return Add(guid,name, description);
         }
 
@@ -119,6 +119,12 @@ namespace Gooeycms.Business.Themes
                 dao.Save(theme);
                 tx.Commit();
             }
+        }
+
+        internal CmsTheme GetDefaultBySite(string siteGuid)
+        {
+            CmsThemeDao dao = new CmsThemeDao();
+            return dao.FindEnabledBySite(siteGuid);
         }
     }
 }
