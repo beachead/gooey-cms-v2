@@ -9,7 +9,7 @@ using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Constants;
 using Gooeycms.Business;
 
-namespace Gooeycms.webrole.website
+namespace Gooeycms.Webrole.Ecommerce
 {
     public partial class Signup : System.Web.UI.Page
     {

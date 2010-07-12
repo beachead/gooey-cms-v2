@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ContentPage.Master" AutoEventWireup="true" CodeBehind="Signup-Review.aspx.cs" Inherits="gooeycms.webrole.website.SignupReview" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ContentPage.Master" AutoEventWireup="true" CodeBehind="Signup-Review.aspx.cs" Inherits="Gooeycms.Webrole.Ecommerce.SignupReview" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 <div id="content">
     <ol id="signup-steps">

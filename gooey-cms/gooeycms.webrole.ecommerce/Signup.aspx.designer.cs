@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.webrole.website {
+namespace Gooeycms.Webrole.Ecommerce {
     
     
     public partial class Signup {

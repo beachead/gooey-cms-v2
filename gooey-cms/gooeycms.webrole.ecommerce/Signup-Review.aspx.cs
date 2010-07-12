@@ -10,7 +10,7 @@ using Gooeycms.Constants;
 using Gooeycms.Business;
 using System.Text;
 
-namespace Gooeycms.webrole.website
+namespace Gooeycms.Webrole.Ecommerce
 {
     public partial class SignupReview : System.Web.UI.Page
     {
