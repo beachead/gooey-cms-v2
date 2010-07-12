@@ -107,5 +107,26 @@ namespace Gooeycms.Business.Pages
             CmsUrl uri = CmsUrl.Parse(path);
             return GetLatestPage(CurrentSite.Guid, uri);
         }
+
+        /// <summary>
+        /// Adds a new page to the CMS system.
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="pageName"></param>
+        /// <param name="page"></param>
+        public void AddNewPage(string parent, string pageName, CmsPage page)
+        {
+            CmsPageDao dao = new CmsPageDao();
+
+            try
+            {
+                //CmsSiteMap.Instance.AddPath(
+            }
+            catch (Exception ex)
+            {
+                Logging.Error("There was an unexpected exception adding the page", ex);
+                //TODO Perform rollback
+            }
+        }
     }
 }

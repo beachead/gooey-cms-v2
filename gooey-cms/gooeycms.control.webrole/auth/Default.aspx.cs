@@ -11,7 +11,7 @@ namespace Gooeycms.Webrole.Control.Auth
 {
     public partial class Default : ValidatedPage
     {
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             Master.SetNavigationOn(Secure.NavigationType.Site);
         }

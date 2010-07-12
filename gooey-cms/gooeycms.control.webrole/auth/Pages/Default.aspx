@@ -6,4 +6,5 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+    <a href="Edit.aspx?action=new">Add New Page</a>
 </asp:Content>

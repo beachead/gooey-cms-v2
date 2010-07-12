@@ -19,7 +19,7 @@ namespace Gooeycms.Webrole.Control.auth
             if (!Page.IsPostBack)
             {
                 MembershipUserWrapper wrapper = MembershipUtil.FindByUsername(Membership.GetUser().UserName);
-                IList<CmsSubscription> subscriptions = Subscriptions.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
+                IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
                 foreach (CmsSubscription subscription in subscriptions)
                 {
                     ListItem item = new ListItem(subscription.DefaultDisplayName, subscription.Guid);
@@ -30,7 +30,7 @@ namespace Gooeycms.Webrole.Control.auth
 
         protected void BtnManageSite_Click(Object sender, EventArgs e)
         {
-            CookieHelper.SetActiveSite(this.AvailableSites.SelectedValue);
+            SiteHelper.SetActiveSiteCookie(this.AvailableSites.SelectedValue);
             Response.Redirect("~/auth/Default.aspx");
         }
     }

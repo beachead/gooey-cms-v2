@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto\Hash.cs" />
+    <Compile Include="Membership\LoggedInUser.cs" />
+    <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
     <Compile Include="Handler\BaseHttpHandler.cs" />
     <Compile Include="Handler\SubscriptionHandler.cs" />
@@ -62,6 +65,7 @@
     <Compile Include="Pages\PageRequestHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Site\CmsUrl.cs" />
     <Compile Include="Storage\BaseStorageClient.cs" />
     <Compile Include="Storage\IStorageClient.cs" />
     <Compile Include="Storage\AzureBlobStorageClient.cs" />
@@ -76,7 +80,7 @@
     <Compile Include="Subscription\SubscriptionSecurityConstraint.cs" />
     <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
-    <Compile Include="Util\CookieHelper.cs" />
+    <Compile Include="Util\SiteHelper.cs" />
     <Compile Include="Util\CurrentSite.cs" />
   </ItemGroup>
   <ItemGroup>
