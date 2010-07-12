@@ -73,8 +73,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\App_Code\Adapters\ThemeAdapter.cs" />
-    <Compile Include="Properties\App_Code\HelpPage.cs">
+    <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
+    <Compile Include="App_Code\HelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\Pages\Default.aspx.cs">
@@ -119,7 +119,7 @@
     <Compile Include="Controls\StatusPanel.ascx.designer.cs">
       <DependentUpon>StatusPanel.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\App_Code\ValidatedPage.cs">
+    <Compile Include="App_Code\ValidatedPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\Dashboard.aspx.cs">
