@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "gooey-cms-sites", "gooey-cms\gooey-cms-sites.ccproj", "{D562FBCB-C937-415C-B372-DE7B88D01F28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.data", "gooeycms.data\gooeycms.data.csproj", "{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}"
