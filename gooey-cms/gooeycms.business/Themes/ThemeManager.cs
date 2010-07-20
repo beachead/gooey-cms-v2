@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Gooeycms.Data.Model.Theme;
-using Gooeycms.Business.Util;
 using Beachead.Persistence.Hibernate;
+using Gooeycms.Business.Util;
+using Gooeycms.Data.Model.Theme;
 
 namespace Gooeycms.Business.Themes
 {
@@ -17,13 +15,13 @@ namespace Gooeycms.Business.Themes
             get { return ThemeManager.instance; }
         }
 
-        public CmsTheme GetByGuid(String themeGuid)
+        public CmsTheme GetByGuid(Data.Guid themeGuid)
         {
-            String guid = SiteHelper.GetActiveSiteGuid(true);
+            Data.Guid guid = SiteHelper.GetActiveSiteGuid(true);
             return GetByGuid(guid, themeGuid);
         }
 
-        public CmsTheme GetByGuid(String siteGuid, String themeGuid)
+        public CmsTheme GetByGuid(Data.Guid siteGuid, Data.Guid themeGuid)
         {
             CmsThemeDao dao = new CmsThemeDao();
             return dao.FindBySiteAndGuid(siteGuid, themeGuid);
@@ -35,7 +33,7 @@ namespace Gooeycms.Business.Themes
         /// <returns></returns>
         public CmsTheme GetByName(String name)
         {
-            String guid = SiteHelper.GetActiveSiteGuid(true);
+            Data.Guid guid = SiteHelper.GetActiveSiteGuid(true);
             return GetByName(guid, name);
         }
 
@@ -45,13 +43,13 @@ namespace Gooeycms.Business.Themes
         /// <param name="siteGuid"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public CmsTheme GetByName(String siteGuid, String name)
+        public CmsTheme GetByName(Data.Guid siteGuid, String name)
         {
             CmsThemeDao dao = new CmsThemeDao();
             return dao.FindBySiteAndName(siteGuid, name);
         }
 
-        public IList<CmsTheme> GetAllBySite(String guid)
+        public IList<CmsTheme> GetAllBySite(Data.Guid guid)
         {
             CmsThemeDao dao = new CmsThemeDao();
             return dao.FindAllThemes(guid);
@@ -64,7 +62,7 @@ namespace Gooeycms.Business.Themes
         /// <returns></returns>
         public IList<CmsTheme> GetAllBySite()
         {
-            String guid = SiteHelper.GetActiveSiteGuid(true);
+            Data.Guid guid = SiteHelper.GetActiveSiteGuid(true);
             return GetAllBySite(guid);
         }
 
@@ -76,7 +74,7 @@ namespace Gooeycms.Business.Themes
         /// <returns></returns>
         public CmsTheme Add(string name, string description)
         {
-            String guid = SiteHelper.GetActiveSiteGuid(true);
+            Data.Guid guid = SiteHelper.GetActiveSiteGuid(true);
             return Add(guid,name, description);
         }
 
@@ -87,7 +85,7 @@ namespace Gooeycms.Business.Themes
         /// <param name="name">Theme name</param>
         /// <param name="description">Theme description</param>
         /// <returns></returns>
-        public CmsTheme Add(String guid, String name, String description)
+        public CmsTheme Add(Data.Guid guid, String name, String description)
         {
             //Make sure this theme doesn't exist
             CmsTheme theme = this.GetByName(name);
@@ -97,7 +95,7 @@ namespace Gooeycms.Business.Themes
             theme = new CmsTheme();
 
             theme.Name = name;
-            theme.SubscriptionGuid = guid;
+            theme.SubscriptionGuid = guid.Value;
             theme.ThemeGuid = System.Guid.NewGuid().ToString();
             theme.Description = description;
 
@@ -121,7 +119,7 @@ namespace Gooeycms.Business.Themes
             }
         }
 
-        internal CmsTheme GetDefaultBySite(string siteGuid)
+        internal CmsTheme GetDefaultBySite(Data.Guid siteGuid)
         {
             CmsThemeDao dao = new CmsThemeDao();
             return dao.FindEnabledBySite(siteGuid);

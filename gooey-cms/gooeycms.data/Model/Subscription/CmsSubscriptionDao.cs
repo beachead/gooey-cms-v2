@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Gooeycms.Data.Model.Subscription
 {
@@ -33,10 +31,10 @@ namespace Gooeycms.Data.Model.Subscription
             return base.Session.GetNamedQuery("CmsSubscriptionByUserId").SetParameter("userId", userId).List<CmsSubscription>();
         }
 
-        public CmsSubscription FindByGuid(String guid)
+        public CmsSubscription FindByGuid(Guid guid)
         {
             String hql = "select subscription from CmsSubscription subscription where subscription.Guid = :guid";
-            return base.NewHqlQuery(hql).SetString("guid", guid).UniqueResult<CmsSubscription>();
+            return base.NewHqlQuery(hql).SetString("guid", guid.Value).UniqueResult<CmsSubscription>();
         }
     }
 }

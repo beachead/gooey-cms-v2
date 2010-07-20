@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Gooeycms.Data.Model;
 using Gooeycms.Constants;
+using Gooeycms.Data.Model;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Gooeycms.Business

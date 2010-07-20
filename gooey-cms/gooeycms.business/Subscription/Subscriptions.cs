@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Gooeycms.Data.Model.Subscription;
+using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Membership;
 using Gooeycms.Constants;
-using Beachead.Persistence.Hibernate;
+using Gooeycms.Data.Model.Subscription;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -120,7 +119,7 @@ namespace Gooeycms.Business.Subscription
             return dao.FindByUserId(userId);
         }
 
-        public static CmsSubscription GetSubscription(String siteGuid)
+        public static CmsSubscription GetSubscription(Data.Guid siteGuid)
         {
             CmsSubscriptionDao dao = new CmsSubscriptionDao();
             return dao.FindByGuid(siteGuid);

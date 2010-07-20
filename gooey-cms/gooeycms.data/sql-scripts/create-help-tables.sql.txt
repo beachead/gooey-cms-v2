@@ -1,0 +1,15 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Help]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Help];
+END
+
+
+
+CREATE TABLE [dbo].[Help](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[path] VARCHAR(512),
+	[hash] VARCHAR(64),
+	[text] NTEXT
+	PRIMARY KEY CLUSTERED([id]),
+)
+CREATE INDEX unq_hash ON [Help]([hash]);

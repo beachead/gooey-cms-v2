@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Gooeycms.Data.Model.Subscription;
 using System.Web;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Subscription;
+using Gooeycms.Business.Web;
+using Gooeycms.Data.Model.Site;
+using Gooeycms.Data.Model.Subscription;
 
 namespace Gooeycms.Business.Util
 {
@@ -28,7 +28,7 @@ namespace Gooeycms.Business.Util
             HttpContext.Current.Response.Cookies["selected-site"].Value = encrypted;
         }
 
-        public static String GetActiveSiteGuid()
+        public static Data.Guid GetActiveSiteGuid()
         {
             return GetActiveSiteGuid(false);
         }
@@ -40,7 +40,7 @@ namespace Gooeycms.Business.Util
         /// </summary>
         /// <param name="isRequired"></param>
         /// <returns></returns>
-        public static String GetActiveSiteGuid(Boolean isRequired)
+        public static Data.Guid GetActiveSiteGuid(Boolean isRequired)
         {
             if (HttpContext.Current == null)
                 throw new ApplicationException("The request context was not availabe. To rerieve the active site you must be running from within IIS or Azure");
@@ -52,7 +52,7 @@ namespace Gooeycms.Business.Util
                 throw new ArgumentException("No site has been selected to manage themes for or cookies are disabled.");
 
             guid = new TextEncryption().Decrypt(guid);
-            return guid;
+            return Data.Guid.New(guid);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Gooeycms.Business.Util
         /// </summary>
         /// <param name="siteGuid"></param>
         /// <returns></returns>
-        public static String GetProductionDomain(String siteGuid)
+        public static String GetProductionDomain(Data.Guid siteGuid)
         {
             CmsSubscription subscription = SubscriptionManager.GetSubscription(siteGuid);
             if (subscription == null)
@@ -75,7 +75,7 @@ namespace Gooeycms.Business.Util
             return result;
         }
 
-        public static String GetStagingDomain(String siteGuid)
+        public static String GetStagingDomain(Data.Guid siteGuid)
         {
             CmsSubscription subscription = SubscriptionManager.GetSubscription(siteGuid);
             if (subscription == null)
@@ -88,6 +88,18 @@ namespace Gooeycms.Business.Util
                 result = subscription.StagingDomain;
 
             return result;
+        }
+
+        /// <summary>
+        /// Verifies that the site is configured correctly and if not
+        /// performs any necessary setup steps.
+        /// </summary>
+        /// <param name="siteGuid"></param>
+        public static void Configure(Data.Guid siteGuid)
+        {
+            CmsSitePath path = CmsSiteMap.Instance.GetRootPath(siteGuid);
+            if (path == null)
+                path = CmsSiteMap.Instance.AddRootDirectory(siteGuid);
         }
     }
 }

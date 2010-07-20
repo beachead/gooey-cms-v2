@@ -5,6 +5,7 @@
       <generator class="native" />
     </id>
     <property column="guid" name="Guid" type="String" />
+    <property column="site_guid" name="SubscriptionId" type="String" />    
     <property column="date_saved" name="DateSaved" type="DateTime" />
     <property column="author" name="Author" type="String" />
     <property column="is_approved" name="IsApproved" type="Boolean" />
@@ -15,5 +16,7 @@
     <property column="description" name="Description" type="String" />
     <property column="keywords" name="Keywords" type="String" />
     <property column="template" name="Template" type="String" />
+    <property column="url" name="Url" type="String" />
+    <property column="url_hash" name="UrlHash" type="String" />    
   </class>
 </hibernate-mapping>

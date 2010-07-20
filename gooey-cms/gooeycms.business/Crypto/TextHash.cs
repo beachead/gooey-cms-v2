@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 using System.Security.Cryptography;
-
+using System.Text;
+using Gooeycms.Data;
 namespace Gooeycms.Business.Crypto
 {
-    public static class Hash
+    public static class TextHash
     {
         /// <summary>
         /// Generates a MD5 hash of the given string.
@@ -16,8 +14,11 @@ namespace Gooeycms.Business.Crypto
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        static public string MD5(string str)
-        {    
+        static public Hash MD5(string str)
+        {
+            if (str != null)
+                str = str.ToLower();
+
             // First we need to convert the string into bytes, which    
             // means using a text encoder.    
             Encoder enc = System.Text.Encoding.Unicode.GetEncoder();   
@@ -39,7 +40,7 @@ namespace Gooeycms.Business.Crypto
             }   
  
             // And return it    
-            return sb.ToString();
+            return Hash.New(sb.ToString());
         }
     }
 }

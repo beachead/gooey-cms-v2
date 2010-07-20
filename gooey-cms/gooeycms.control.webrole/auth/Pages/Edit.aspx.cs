@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Gooeycms.Webrole.Control.App_Code;
-using Gooeycms.Business.Pages;
-using Gooeycms.Business.Site;
-using Gooeycms.Data.Model.Theme;
-using Gooeycms.Business.Themes;
-using Gooeycms.Business.Util;
-using Gooeycms.Data.Model.Site;
-using Gooeycms.Data.Model.Page;
 using Gooeycms.Business.Membership;
-using Gooeycms.Business;
+using Gooeycms.Business.Pages;
+using Gooeycms.Business.Util;
+using Gooeycms.Business.Web;
+using Gooeycms.Data.Model.Page;
+using Gooeycms.Data.Model.Site;
+using Gooeycms.Data.Model.Theme;
+using Gooeycms.Webrole.Control.App_Code;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
@@ -31,10 +27,10 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                     this.PageTemplate.Items.Add(item);
                 }
 
-                IList<String> paths = CmsSiteMap.Instance.GetParentPaths();
-                foreach (String path in paths)
+                IList<CmsSitePath> paths = CmsSiteMap.Instance.GetParentPaths();
+                foreach (CmsSitePath path in paths)
                 {
-                    ListItem item = new ListItem(path, path);
+                    ListItem item = new ListItem(path.Url, path.Url);
                     this.ParentDirectories.Items.Add(item);
                 }
             }
@@ -56,6 +52,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 }
 
                 CmsPage page = new CmsPage();
+                page.SubscriptionId = CurrentSite.Guid.Value;
                 page.DateSaved = DateTime.Now;
                 page.IsApproved = false;
                 page.Author = LoggedInUser.Username;

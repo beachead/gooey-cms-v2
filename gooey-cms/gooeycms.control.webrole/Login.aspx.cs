@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Gooeycms.Business.Membership;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -17,6 +13,9 @@ namespace Gooeycms.Webrole.Control
         protected void LoginControl_LoggedIn(object sender, EventArgs e)
         {
             MembershipUtil.ProcessLogin(this.LoginControl.UserName);
+
+            Data.Guid guid = SiteHelper.GetActiveSiteGuid();
+            SiteHelper.Configure(guid);
         }
     }
 }

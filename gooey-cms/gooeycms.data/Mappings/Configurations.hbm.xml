@@ -7,4 +7,13 @@
     <property column="name" name="Name" type="String" />
     <property column="value" name="Value" type="String" />
   </class>
+
+  <class name="Gooeycms.Data.Model.SiteConfiguration,gooeycms.data" table="SiteConfiguration">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="site_guid" name="SubscriptionGuid" type="String" />
+    <property column="name" name="Name" type="String" />
+    <property column="value" name="Value" type="String" />
+  </class>
 </hibernate-mapping>

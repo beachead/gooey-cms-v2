@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Remoting.Messaging;
-using System.Configuration;
-using System.IO;
-using System.Reflection;
+﻿using System.Runtime.Remoting.Messaging;
 
 namespace Beachead.Persistence.Hibernate
 {
@@ -66,7 +59,6 @@ namespace Beachead.Persistence.Hibernate
             //expect the hibernate.cfg.xml file to be in the application folder
             NHibernate.Cfg.Configuration temp = new NHibernate.Cfg.Configuration();
 
-            //TODO Remove hard-coded configuration string
             cfg = temp.Configure();
             cfg.AddAssembly("gooeycms.data");
 

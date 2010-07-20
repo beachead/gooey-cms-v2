@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Gooeycms.Webrole.Control.App_Code;
-using Gooeycms.Data.Model.Theme;
 using Gooeycms.Business.Themes;
 using Gooeycms.Business.Util;
+using Gooeycms.Data.Model.Theme;
+using Gooeycms.Webrole.Control.App_Code;
 
 namespace Gooeycms.Webrole.Control.Auth.Themes
 {
@@ -50,7 +46,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
                 HiddenField guid = ((HiddenField)oldrow.FindControl("HiddenId"));
                 RadioButton enabled = ((RadioButton)oldrow.FindControl("Enabled"));
 
-                CmsTheme theme = ThemeManager.Instance.GetByGuid((guid.Value));
+                CmsTheme theme = ThemeManager.Instance.GetByGuid((Data.Guid.New(guid.Value)));
                 if (theme != null)
                 {
                     theme.IsEnabled = enabled.Checked;

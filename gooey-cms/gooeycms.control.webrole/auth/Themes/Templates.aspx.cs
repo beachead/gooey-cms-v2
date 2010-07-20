@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Gooeycms.Webrole.Control.App_Code;
-using Gooeycms.Data.Model.Theme;
+using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Themes;
 using Gooeycms.Business.Util;
-using Gooeycms.Business.Crypto;
+using Gooeycms.Data.Model.Theme;
+using Gooeycms.Webrole.Control.App_Code;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
@@ -19,7 +17,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         {
             Master.SetNavigationOn(Secure.NavigationType.Site);
 
-            this.theme = ThemeManager.Instance.GetByGuid(Request.QueryString["tid"]);
+            this.theme = ThemeManager.Instance.GetByGuid(Data.Guid.New(Request.QueryString["tid"]));
             if (!Page.IsPostBack)
             {
                 this.ThemeName.Text = theme.Name;
@@ -83,7 +81,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
         protected void BtnEditTemplate_Click(object sender, EventArgs e)
         {
-            CmsTemplate template = TemplateManager.Instance.GetTemplate(this.LstExistingTemplates.SelectedValue);
+            CmsTemplate template = TemplateManager.Instance.GetTemplate(Data.EncryptedValue.New(this.LstExistingTemplates.SelectedValue));
             this.TemplateContent.Text = template.Content;
             this.ExistingTemplateName.Text = template.Name;
             this.ExistingTemplateId.Value = this.LstExistingTemplates.SelectedValue;
@@ -105,7 +103,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         protected void OnSave_Click(object sender, EventArgs e)
         {
             String id = this.ExistingTemplateId.Value;
-            CmsTemplate template = TemplateManager.Instance.GetTemplate(id);
+            CmsTemplate template = TemplateManager.Instance.GetTemplate(Data.EncryptedValue.New(id));
             if (template == null)
             {
                 template = new CmsTemplate();
@@ -114,7 +112,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
                     template.Name = this.TemplateType.SelectedValue;
                 else
                     template.Name = this.CustomTemplateType.Text;
-                template.SubscriptionGuid = SiteHelper.GetActiveSiteGuid(true);
+                template.SubscriptionGuid = SiteHelper.GetActiveSiteGuid(true).Value;
                 template.Theme = theme;
             }
 

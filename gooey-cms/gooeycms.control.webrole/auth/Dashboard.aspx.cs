@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Membership;
-using System.Web.Security;
 using Gooeycms.Business.Subscription;
-using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Util;
+using Gooeycms.Data.Model.Subscription;
 
 namespace Gooeycms.Webrole.Control.auth
 {
@@ -31,6 +29,8 @@ namespace Gooeycms.Webrole.Control.auth
         protected void BtnManageSite_Click(Object sender, EventArgs e)
         {
             SiteHelper.SetActiveSiteCookie(this.AvailableSites.SelectedValue);
+            SiteHelper.Configure(Data.Guid.New(this.AvailableSites.SelectedValue));
+
             Response.Redirect("~/auth/Default.aspx");
         }
     }

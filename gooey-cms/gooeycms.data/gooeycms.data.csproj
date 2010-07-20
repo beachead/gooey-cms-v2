@@ -57,9 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncryptedValue.cs" />
+    <Compile Include="Guid.cs" />
     <Compile Include="Model\BaseDao.cs" />
     <Compile Include="Model\BasePersistedItem.cs" />
     <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\Help\HelpPage.cs" />
+    <Compile Include="Model\Help\HelpPageDao.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />
     <Compile Include="Model\Page\CmsPageDao.cs" />
     <Compile Include="Model\Site\CmsSitePath.cs" />
@@ -79,10 +83,14 @@
     <Compile Include="Model\Theme\CmsTheme.cs" />
     <Compile Include="Model\Theme\CmsThemeDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Hash.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="sql-scripts\create-theme-tables.sql" />
-    <None Include="sql-scripts\create-registration-tables.sql" />
+    <EmbeddedResource Include="Mappings\Help.hbm.xml" />
+    <Content Include="sql-scripts\create-help-tables.sql.txt" />
+    <Content Include="sql-scripts\create-site-tables.sql.txt" />
+    <Content Include="sql-scripts\create-theme-tables.sql.txt" />
+    <Content Include="sql-scripts\create-registration-tables.sql.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Registration.hbm.xml" />
@@ -113,7 +121,10 @@
     <EmbeddedResource Include="Mappings\CmsPages.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="sql-scripts\create-page-tables.sql" />
+    <Content Include="sql-scripts\create-page-tables.sql.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\SiteMap.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

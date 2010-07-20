@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : App_Code.HelpPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
-
         }
     }
 }

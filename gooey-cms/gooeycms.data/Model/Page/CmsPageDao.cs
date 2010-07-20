@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Gooeycms.Data.Model.Page
 {
@@ -13,16 +10,16 @@ namespace Gooeycms.Data.Model.Page
         /// <param name="guid"></param>
         /// <param name="path"></param>
         /// <param name="approvedOnly"></param>
-        public CmsPage FindLatesBySiteAndPath(string guid, string path, bool approvedOnly)
+        public CmsPage FindLatesBySiteAndHash(Data.Guid guid, Data.Hash hash, bool approvedOnly)
         {
-            //TODO Code this portion
-            return null;
+            String hql = "select page from CmsPage page where page.SubscriptionId = :guid and page.UrlHash = :hash order by page.Id desc";
+            return base.NewHqlQuery(hql).SetString("guid", guid.Value).SetString("hash", hash.Value).SetMaxResults(1).UniqueResult<CmsPage>();
         }
 
-        public CmsPage FindBySiteAndGuid(string siteGuid, string pageGuid)
+        public CmsPage FindByPageGuid(Data.Guid pageGuid)
         {
-            //TODO Code this portion
-            return null;
+            String hql = "select page from CmsPage page where page.Guid = :pageGuid";
+            return base.NewHqlQuery(hql).SetString("pageGuid", pageGuid.Value).UniqueResult<CmsPage>();
         }
     }
 }

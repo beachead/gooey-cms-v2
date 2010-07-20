@@ -1,27 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Gooeycms.Data.Model.Theme;
 using Gooeycms.Business.Themes;
+using Gooeycms.Data.Model.Theme;
 
 namespace Gooeycms.Business.Util
 {
     public static class CurrentSite
     {
         private const String PageDirectoryKey = "{0}-cmspages";
+        private const String JavascriptDirectoryKey = "{0}-javascripts";
+        private const String StylesheetDirectoryKey = "{0}-stylesheets";
 
-        public static String GetStorageKey(String type)
+        private static String GetStorageKey(String type)
         {
             return String.Format(type, SiteHelper.GetActiveSiteGuid(true));
         }
 
-        public static String PageStorageKey
+        public static String PageStorageDirectory
         {
             get { return GetStorageKey(PageDirectoryKey); }
         }
 
-        public static String Guid
+        public static String JavascriptStorageDirectory
+        {
+            get { return GetStorageKey(JavascriptDirectoryKey); }
+        }
+
+        public static String StylesheetStorageDirectory
+        {
+            get { return GetStorageKey(StylesheetDirectoryKey); }
+        }
+
+        public static Data.Guid Guid
         {
             get { return SiteHelper.GetActiveSiteGuid(true); }
         }

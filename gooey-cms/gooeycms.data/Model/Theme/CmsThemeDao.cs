@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Gooeycms.Data.Model.Theme
 {
     public class CmsThemeDao : BaseDao
     {
-        public IList<CmsTheme> FindAllThemes(String guid)
+        public IList<CmsTheme> FindAllThemes(Data.Guid guid)
         {
             String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :guid";
-            return base.NewHqlQuery(hql).SetString("guid", guid).List<CmsTheme>();
+            return base.NewHqlQuery(hql).SetString("guid", guid.Value).List<CmsTheme>();
         }
 
-        public CmsTheme FindBySiteAndName(String guid, String name)
+        public CmsTheme FindBySiteAndName(Data.Guid guid, String name)
         {
             String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :guid and themes.Name = :name";
-            return base.NewHqlQuery(hql).SetString("guid", guid).SetString("name",name).UniqueResult<CmsTheme>();
+            return base.NewHqlQuery(hql).SetString("guid", guid.Value).SetString("name",name).UniqueResult<CmsTheme>();
         }
 
-        public CmsTheme FindBySiteAndGuid(string siteGuid, string themeGuid)
+        public CmsTheme FindBySiteAndGuid(Data.Guid siteGuid, Data.Guid themeGuid)
         {
             String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :siteGuid and themes.ThemeGuid = :themeGuid";
-            return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid).SetString("themeGuid", themeGuid).UniqueResult<CmsTheme>();
+            return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid.Value).SetString("themeGuid", themeGuid.Value).UniqueResult<CmsTheme>();
         }
 
-        public CmsTheme FindEnabledBySite(string siteGuid)
+        public CmsTheme FindEnabledBySite(Data.Guid siteGuid)
         {
             String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :siteGuid and themes.IsEnabled = 1";
-            return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid).UniqueResult<CmsTheme>();
+            return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid.Value).UniqueResult<CmsTheme>();
         }
     }
 }

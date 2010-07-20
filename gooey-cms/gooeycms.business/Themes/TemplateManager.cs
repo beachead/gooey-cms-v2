@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Gooeycms.Data.Model.Theme;
 using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Data.Model.Theme;
 
 namespace Gooeycms.Business.Themes
 {
@@ -66,10 +65,10 @@ namespace Gooeycms.Business.Themes
             }
         }
 
-        public CmsTemplate GetTemplate(String encryptedId)
+        public CmsTemplate GetTemplate(Data.EncryptedValue encryptedId)
         {
             int id = 0;
-            Int32.TryParse(TextEncryption.Decode(encryptedId), out id);
+            Int32.TryParse(TextEncryption.Decode(encryptedId.Value), out id);
 
             CmsTemplateDao dao = new CmsTemplateDao();
             return dao.FindByPrimaryKey<CmsTemplate>(id);

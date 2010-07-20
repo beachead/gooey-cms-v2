@@ -6,6 +6,12 @@
     </InputEndpoints>
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
+      <Setting name="ActiveStorageConnectionString" />
+      <Setting name="ProductionStorageAccount" />
+      <Setting name="DevelopmentStorageAccount" />
     </ConfigurationSettings>
+    <LocalResources>
+      <LocalStorage name="LocalStorage" cleanOnRoleRecycle="true" />
+    </LocalResources>
   </WebRole>
 </ServiceDefinition>

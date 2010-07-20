@@ -1,0 +1,15 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SiteConfiguration]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Pages];
+END
+
+
+
+CREATE TABLE [dbo].[SiteConfiguration](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[name] VARCHAR(32),
+	[value] NVARCHAR(4000)
+	PRIMARY KEY CLUSTERED([id]),
+)
+CREATE INDEX unq_siteconfig_guid_id ON [SiteConfiguration]([site_guid],[name]);

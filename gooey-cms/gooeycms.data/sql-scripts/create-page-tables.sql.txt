@@ -26,20 +26,11 @@ CREATE TABLE [dbo].[SiteMap](
 	[is_page] [bit] NULL,
 	[is_redirect] [bit] NULL,
 	[is_visible] [bit] NULL,
+	[labels] NVARCHAR(4096) NULL,
 	PRIMARY KEY CLUSTERED([id]),
 )
-CREATE UNIQUE INDEX ON [SiteMap]([site_guid],[url_hash]);
-
-CREATE TABLE [dbo].[SiteMap_Labels](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[guid] VARCHAR(36) NOT NULL,
-	[sitemap_id] [int] NULL,
-	[culture] [varchar](10) NULL,
-	[label] [varchar](128) NULL,
-	PRIMARY KEY CLUSTERED([id]),
-);
-CREATE UNIQUE INDEX idx_guid ON [SiteMap_Labels]([guid]);
-CREATE UNIQUE INDEX idx_sitemaplable_id_culture ON [SiteMap_Labels]([sitemap_id],[culture]);
+CREATE INDEX idx_sitemap_guid ON [SiteMap]([site_guid]);
+CREATE UNIQUE unq_sitemap_guid_url INDEX ON [SiteMap]([site_guid],[url_hash]);
 
 CREATE TABLE Pages (
 	[id] INT IDENTITY(1,1) NOT NULL,
@@ -55,10 +46,11 @@ CREATE TABLE Pages (
 	[keywords] [nvarchar](1024) NULL,
 	[bodyload] [varchar](1000) NULL,
 	[template] VARCHAR(36),
-	[path] VARCHAR(4096),
-	[path_hash] VARCHAR(64),
+	[url] VARCHAR(4096),
+	[url_hash] VARCHAR(64),
 	PRIMARY KEY CLUSTERED([id]),
 );
-CREATE INDEX idx_page_path ON Pages([site_guid],[path_hash]);
-CREATE UNIQUE INDEX idx_page_path_culture ON Pages([site_guid],[path_hash],[culture]);
+CREATE INDEX idx_page_siteguid ON Pages([site_guid]);
+CREATE INDEX idx_page_path ON Pages([site_guid],[url_hash]);
+CREATE UNIQUE INDEX idx_page_path_culture ON Pages([site_guid],[url_hash],[culture]);
 CREATE INDEX idx_page_guid ON Pages([guid]);

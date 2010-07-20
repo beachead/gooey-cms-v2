@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Gooeycms.Business.Themes;
 using Gooeycms.Data.Model.Theme;
 
@@ -24,7 +22,7 @@ namespace Gooeycms.Webrole.Control.App_Code.Adapters
         {
             IList<ThemeAdapter> results = new List<ThemeAdapter>();
 
-            foreach (CmsTheme theme in ThemeManager.Instance.GetAllBySite(guid))
+            foreach (CmsTheme theme in ThemeManager.Instance.GetAllBySite(Data.Guid.New(guid)))
                 results.Add(new ThemeAdapter(theme));
 
             return results;
