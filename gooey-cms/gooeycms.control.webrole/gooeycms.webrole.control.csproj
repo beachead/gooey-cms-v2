@@ -74,6 +74,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Adapters\PageAdapter.cs" />
     <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
     <Compile Include="App_Code\HelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>

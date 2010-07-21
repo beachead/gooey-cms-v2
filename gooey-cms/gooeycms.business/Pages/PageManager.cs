@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Storage;
@@ -33,6 +34,8 @@ namespace Gooeycms.Business.Pages
 
             CmsPageDao dao = new CmsPageDao();
             result = dao.FindByPrimaryKey<CmsPage>(id);
+            LoadPageData(result);
+
             if (CurrentSite.IsProductionHost)
             {
                 if (!result.IsApproved)
@@ -46,12 +49,14 @@ namespace Gooeycms.Business.Pages
         }
 
 
-        public CmsPage GetLatestPage(Data.Guid pageGuid)
+        public CmsPage GetPage(Data.Guid pageGuid)
         {
             CmsPageDao dao = new CmsPageDao();
             Boolean approvedOnly = !(CurrentSite.IsStagingHost);
 
             CmsPage result = dao.FindByPageGuid(pageGuid);
+            LoadPageData(result);
+
             if (CurrentSite.IsProductionHost)
             {
                 if (!result.IsApproved)
@@ -101,12 +106,20 @@ namespace Gooeycms.Business.Pages
             }
 
             //Load the page contents
-            IStorageClient client = GetStorageClient();
-            result.Content = client.OpenAsString(CurrentSite.PageStorageDirectory, result.Guid);
-            result.Javascript = client.OpenAsString(CurrentSite.JavascriptStorageDirectory, result.Guid);
-            result.Stylesheet = client.OpenAsString(CurrentSite.StylesheetStorageDirectory, result.Guid);
+            LoadPageData(result);
 
             return result;
+        }
+
+        private static void LoadPageData(CmsPage result)
+        {
+            if (result != null)
+            {
+                IStorageClient client = GetStorageClient();
+                result.Content = client.OpenAsString(CurrentSite.PageStorageDirectory, result.Guid);
+                result.Javascript = client.OpenAsString(CurrentSite.JavascriptStorageDirectory, result.Guid);
+                result.Stylesheet = client.OpenAsString(CurrentSite.StylesheetStorageDirectory, result.Guid);
+            }
         }
 
         /// <summary>
@@ -152,6 +165,28 @@ namespace Gooeycms.Business.Pages
             }
         }
 
+        public void Remove(CmsPage page)
+        {
+            CmsPageDao dao = new CmsPageDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Delete<CmsPage>(page);
+                tx.Commit();
+            }
+        }
+
+        public System.Collections.Generic.IList<CmsPage> Filter(string filter)
+        {
+            return Filter(CurrentSite.Guid, filter);
+        }
+
+        public System.Collections.Generic.IList<CmsPage> Filter(Data.Guid siteGuid, string filter)
+        {
+            CmsPageDao dao = new CmsPageDao();
+            filter = filter.Replace("*", "%");
+            return dao.SearchByUrl(siteGuid,filter);
+        }
+
         /// <summary>
         /// Cleans up the storage client to prevent any potential issues
         /// </summary>
@@ -170,12 +205,40 @@ namespace Gooeycms.Business.Pages
             return client;
         }
 
-        public void Remove(CmsPage page)
+        public void RemoveObsoletePages(CmsPage page)
         {
             CmsPageDao dao = new CmsPageDao();
+
+            IList<CmsPage> unapproved = dao.FindUnapprovedPages(CurrentSite.Guid,Data.Hash.New(page.UrlHash));
+            IList<CmsPage> approved = dao.FindApprovedPages(CurrentSite.Guid,Data.Hash.New(page.UrlHash));
+
+            IStorageClient client = GetStorageClient();
+
+            //Loop through all of the unapproved pages and remove any old versions.
+            //Start at the first one, since we always want to leave the latest unapproved version
             using (Transaction tx = new Transaction())
             {
-                dao.Delete<CmsPage>(page);
+                for (int i = 1; i < unapproved.Count; i++)
+                {
+                    client.Delete(CurrentSite.PageStorageDirectory, unapproved[i].Guid);
+                    client.Delete(CurrentSite.JavascriptStorageDirectory, unapproved[i].Guid);
+                    client.Delete(CurrentSite.StylesheetStorageDirectory, unapproved[i].Guid);      
+                    dao.Delete<CmsPage>(unapproved[i]);
+                }
+                tx.Commit();
+            }
+
+            //Loop through all of the approved pages and remove any old versions.
+            //Start at the first one, since we always want to leave the latest approved version
+            using (Transaction tx = new Transaction())
+            {
+                for (int i = 1; i < approved.Count; i++)
+                {
+                    client.Delete(CurrentSite.PageStorageDirectory, unapproved[i].Guid);
+                    client.Delete(CurrentSite.JavascriptStorageDirectory, unapproved[i].Guid);
+                    client.Delete(CurrentSite.StylesheetStorageDirectory, unapproved[i].Guid);   
+                    dao.Delete<CmsPage>(approved[i]);
+                }
                 tx.Commit();
             }
         }

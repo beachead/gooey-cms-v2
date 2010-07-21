@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Site\SiteConfiguration.cs" />
     <Compile Include="Storage\BaseStorageClient.cs" />
+    <Compile Include="Storage\BlobExtensions.cs" />
     <Compile Include="Storage\IStorageClient.cs" />
     <Compile Include="Storage\AzureBlobStorageClient.cs" />
     <Compile Include="Subscription\Paypal\DebugSubscriptionProcessor.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Util\SiteHelper.cs" />
     <Compile Include="Util\CurrentSite.cs" />
+    <Compile Include="Util\StringExtensions.cs" />
     <Compile Include="Web\CmsUrl.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
   </ItemGroup>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gooeycms.Business.Membership;
 using Gooeycms.Business.Themes;
+using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Theme;
 
 namespace Gooeycms.Business.Util
@@ -13,7 +15,7 @@ namespace Gooeycms.Business.Util
 
         private static String GetStorageKey(String type)
         {
-            return String.Format(type, SiteHelper.GetActiveSiteGuid(true));
+            return String.Format(type, SiteHelper.GetActiveSiteGuid(true).Value);
         }
 
         public static String PageStorageDirectory
@@ -55,8 +57,21 @@ namespace Gooeycms.Business.Util
         {
             get
             {
-                //TODO return actual data
-                return false;
+                WebRequestContext context = new WebRequestContext();
+                String domain = context.Request.Url.Host;
+
+                Boolean result = false;
+                //check if we're on the staging site
+                if (StringExtensions.EqualsCaseInsensitive(StagingDomain, domain))
+                    result = true;
+                else if (StringExtensions.EqualsCaseInsensitive(ProductionDomain, domain))
+                    result = false;
+                else if (LoggedInUser.IsLoggedIn)
+                {
+                    result = true; //logged into the admin system
+                }
+
+                return result;
             }
         }
 

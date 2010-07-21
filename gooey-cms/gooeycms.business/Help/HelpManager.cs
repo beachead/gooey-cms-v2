@@ -39,14 +39,16 @@ namespace Gooeycms.Business.Help
             HelpPageDao dao = new HelpPageDao();
             HelpPage result = dao.FindByPageHash(hash);
 
-            String separator = "?";
-            String path = context.Request.Url.PathAndQuery;
-            if (path.Contains("?")) 
-                separator = "&";
+            if (result != null)
+            {
+                String separator = "?";
+                String path = context.Request.Url.PathAndQuery;
+                if (path.Contains("?"))
+                    separator = "&";
 
-            path = path + separator + "hide=1";
-            result.Text = result.Text.Replace("{action}", path);
-
+                path = path + separator + "hide=1";
+                result.Text = result.Text.Replace("{action}", path);
+            }
             return result;
         }
 

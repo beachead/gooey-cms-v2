@@ -18,6 +18,9 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         protected String PageAction = "Add";
         protected override void OnPageLoad(object sender, EventArgs e)
         {
+            SetPageAction();
+            Page.Header.Title = String.Format("{0} Page", PageAction);
+
             if (!Page.IsPostBack)
             {
                 IList<CmsTemplate> templates = CurrentSite.GetTemplates();
@@ -33,7 +36,39 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                     ListItem item = new ListItem(path.Url, path.Url);
                     this.ParentDirectories.Items.Add(item);
                 }
+
+                if (Request.QueryString["pid"] != null)
+                    LoadExisting();
             }
+        }
+
+        protected void LoadExisting()
+        {
+            String guid = Request.QueryString["pid"];
+            CmsPage page = PageManager.Instance.GetPage(Data.Guid.New(guid));
+            CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
+
+            this.ParentDirectories.SelectedValue = path.Parent;
+            this.PageName.Text = path.Name;
+            this.PageTitle.Text = page.Title;
+            this.PageDescription.Text = page.Description;
+            this.PageKeywords.Text = page.Keywords;
+            this.PageMarkupText.Text = page.Content;
+            this.PageTemplate.SelectedValue = page.Template.ToString();
+            this.BodyLoadOptions.Text = page.OnBodyLoad;
+
+            this.ParentDirectories.Enabled = false;
+            this.PageName.Enabled = false;
+
+            this.CssManagePanel.Visible = true;
+            this.CssNotAvailablePanel.Visible = false;
+        }
+
+        protected void SetPageAction()
+        {
+            String action = Request.QueryString["a"];
+            if ("edit".EqualsCaseInsensitive(action))
+                PageAction = "Edit";
         }
 
         protected void OnSave_Click(Object sender, EventArgs e)
@@ -72,6 +107,17 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 }
 
                 PageManager.Instance.AddNewPage(this.ParentDirectories.SelectedValue, this.PageName.Text, page);
+                
+                /*
+                 * This is how we detect the difference between a "preview" and a "save"
+                 * When the preview button is set, the 'sender' object is a string and this block of code
+                 * isn't executed. When a save is called, the 'sender' is an object and this block is executed
+                 */
+                if (!(sender is String))
+                {
+                    PageManager.Instance.RemoveObsoletePages(page);
+                    Response.Redirect("~/auth/pages/edit.aspx?a=edit&pid=" + page.Guid  + "&s=1", true);
+                }
             }
             catch (Exception ex)
             {

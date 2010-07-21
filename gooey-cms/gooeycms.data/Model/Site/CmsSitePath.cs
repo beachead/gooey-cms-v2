@@ -18,6 +18,15 @@ namespace Gooeycms.Data.Model.Site
         public virtual Boolean IsPage { get; set; }
         public virtual String _Labels { get; set; }
 
+        public virtual String Name
+        {
+            get
+            {
+                int pos = this.Url.LastIndexOf("/") + 1;
+                return this.Url.Substring(pos);
+            }
+        }
+
         public virtual IDictionary<String, String> Labels
         {
             get

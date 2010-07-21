@@ -52,5 +52,5 @@ CREATE TABLE Pages (
 );
 CREATE INDEX idx_page_siteguid ON Pages([site_guid]);
 CREATE INDEX idx_page_path ON Pages([site_guid],[url_hash]);
-CREATE UNIQUE INDEX idx_page_path_culture ON Pages([site_guid],[url_hash],[culture]);
+CREATE INDEX idx_page_path_culture ON Pages([site_guid],[url_hash],[culture]);
 CREATE INDEX idx_page_guid ON Pages([guid]);

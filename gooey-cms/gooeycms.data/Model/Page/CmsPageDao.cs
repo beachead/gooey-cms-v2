@@ -21,5 +21,27 @@ namespace Gooeycms.Data.Model.Page
             String hql = "select page from CmsPage page where page.Guid = :pageGuid";
             return base.NewHqlQuery(hql).SetString("pageGuid", pageGuid.Value).UniqueResult<CmsPage>();
         }
+
+        public System.Collections.Generic.IList<CmsPage> SearchByUrl(Data.Guid siteGuid, string filter)
+        {
+            String hql = "select page from CmsPage page where page.Id in " +
+                         "(select max(page.Id) from CmsPage page where page.SubscriptionId = :siteGuid and (" +
+                         "(page.Url like '%' + :filter) or (page.Url like :filter + '%') or " +
+                         "(page.Url like '%' + :filter + '%')) group by page.Url) " +
+                         "order by page.Url asc";
+            return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid.Value).SetString("filter", filter).List<CmsPage>();
+        }
+
+        public System.Collections.Generic.IList<CmsPage> FindUnapprovedPages(Guid siteGuid, Hash hash)
+        {
+            String hql = "select page from CmsPage page where page.IsApproved = 0 and page.SubscriptionId = :guid and page.UrlHash = :hash order by page.DateSaved desc";
+            return base.NewHqlQuery(hql).SetString("guid",siteGuid.Value).SetString("hash", hash.Value).List<CmsPage>();
+        }
+
+        public System.Collections.Generic.IList<CmsPage> FindApprovedPages(Guid siteGuid, Hash hash)
+        {
+            String hql = "select page from CmsPage page where page.IsApproved = 1 and page.SubscriptionId = :guid and page.UrlHash = :hash order by page.DateSaved desc";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("hash", hash.Value).List<CmsPage>();
+        }
     }
 }

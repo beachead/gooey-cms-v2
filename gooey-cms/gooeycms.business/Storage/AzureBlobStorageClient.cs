@@ -66,7 +66,11 @@ namespace Gooeycms.Business.Storage
             CloudBlobContainer container = GetBlobContainer(directory);
             CloudBlob blob = container.GetBlobReference(filename);
 
-            return blob.DownloadByteArray();
+            byte[] result = new byte [] {};
+            if (blob.Exists())
+                result = blob.DownloadByteArray();
+
+            return result;
         }
     }
 }
