@@ -89,5 +89,10 @@ namespace Gooeycms.Business.Util
             CmsTheme theme = GetCurrentTheme();
             return TemplateManager.Instance.GetTemplates(theme);
         }
+
+        public static string Culture 
+        {
+            get { return "en-us"; } 
+        }
     }
 }

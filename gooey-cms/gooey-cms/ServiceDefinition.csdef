@@ -6,11 +6,9 @@
     </InputEndpoints>
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
-      <Setting name="AccountName" />
-      <Setting name="AccountSharedKey" />
-      <Setting name="BlobStorageEndpoint" />
-      <Setting name="TableStorageEndpoint" />
-      <Setting name="BlobConnectionString" />
+      <Setting name="ActiveStorageConnectionString" />
+      <Setting name="ProductionStorageAccount" />
+      <Setting name="DevelopmentStorageAccount" />      
     </ConfigurationSettings>
     <LocalResources>
     </LocalResources>

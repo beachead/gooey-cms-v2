@@ -124,5 +124,12 @@ namespace Gooeycms.Business.Subscription
             CmsSubscriptionDao dao = new CmsSubscriptionDao();
             return dao.FindByGuid(siteGuid);
         }
+
+        internal static CmsSubscription GetSubscriptionForDomain(string host)
+        {
+            String subdomain = host.ToLower().Replace(GooeyConfigManager.DefaultCmsDomain,"");
+            CmsSubscriptionDao dao = new CmsSubscriptionDao();
+            return dao.FindByDomains(subdomain, host);
+        }
     }
 }

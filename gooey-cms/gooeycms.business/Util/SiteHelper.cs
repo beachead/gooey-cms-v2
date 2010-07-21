@@ -45,13 +45,24 @@ namespace Gooeycms.Business.Util
             if (HttpContext.Current == null)
                 throw new ApplicationException("The request context was not availabe. To rerieve the active site you must be running from within IIS or Azure");
 
-            HttpCookie cookie = HttpContext.Current.Request.Cookies["selected-site"];
-            String guid = (cookie != null) ? (cookie.Value) : "";
+            String guid = null;
+            //Check if we're running outside the admin... if so, base the active site upon the domain
+            String host = HttpContext.Current.Request.Url.Host;
+            CmsSubscription subscription = SubscriptionManager.GetSubscriptionForDomain(host);
+            if (subscription != null)
+            {
+                guid = subscription.Guid;
+            }
+            else //check the cookies to see if a site is active
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["selected-site"];
+                guid = (cookie != null) ? (cookie.Value) : "";
 
-            if ((isRequired) && (String.IsNullOrEmpty(guid)))
-                throw new ArgumentException("No site has been selected to manage themes for or cookies are disabled.");
+                if ((isRequired) && (String.IsNullOrEmpty(guid)))
+                    throw new ArgumentException("No site has been selected to manage themes for or cookies are disabled.");
 
-            guid = new TextEncryption().Decrypt(guid);
+                guid = new TextEncryption().Decrypt(guid);
+            }
             return Data.Guid.New(guid);
         }
 

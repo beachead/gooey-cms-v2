@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>{head.title}</title>
+    <meta name="description" content="{head.meta.description}" />
+    <meta name="keywords" content="{head.meta.keywords}" />    
+    {head.meta.custom}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    {head.scripts.include}
+    {head.css.include}
+    <style type="text/css">
+        {head.css.inline}    
+    </style>
+    <script language="javascript" type="text/javascript">
+        { head.javascript.inline }
+    </script>
+</head>
+<body{body.options}>
+    {page.html}
+    {analytics.tracking}
+    
+    <script type="text/javascript" language="javascript">
+        function downloadFile(id) {
+            document.location = 'content.handler?d=' + id;
+        }
+        { download - link }
+
+        function filledIn(el) {
+            var isValid = false;
+            if (el.type == "select-one") {
+                isValid = (el.selectedIndex > 0);
+            }
+            else {
+                if (el.value) {
+                    if (el.type == "checkbox") {
+                        isValid = el.checked;
+                    }
+                    else if (el.type == "select-one") {
+                        isValid = (el.selectedIndex > 0)
+                    } else if (el.value != "") {
+                        isValid = true;
+                    }
+                }
+            }
+            return isValid;
+        }
+
+        function getNext(el) {
+            var els = el.parent(".formerror");
+            var nextEl = null;
+            if (els.length > 0) {
+                nextEl = els[0];
+            }
+            return nextEl;
+        }
+
+        function showErrorMessage(el) {
+            $("#form_error").css("color", "red");
+            $("#form_error").text("Required * fields must be filled in");
+        }
+
+        function validate(guid) {
+            var isValid = true;
+            $(".required").each(function (i) {
+                if (this.id.match(guid) != null) {
+                    if (!filledIn(this)) {
+                        showErrorMessage(this);
+                        isValid = false;
+                    } else {
+                        //removeErrorMessage(el);
+                    }
+                }
+            });
+
+            return isValid;
+        }
+
+        function submitForm(guid) {
+            return validate(guid);
+        }
+    </script>
+</body>
+</html>

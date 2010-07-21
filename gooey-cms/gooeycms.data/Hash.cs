@@ -16,5 +16,10 @@ namespace Gooeycms.Data
         {
             return new Hash(hash);
         }
+
+        public override String ToString()
+        {
+            return this.Value;
+        }
     }
 }

@@ -170,6 +170,7 @@ namespace Gooeycms.Business.Pages
             CmsPageDao dao = new CmsPageDao();
             using (Transaction tx = new Transaction())
             {
+                Cleanup(page.Guid);
                 dao.Delete<CmsPage>(page);
                 tx.Commit();
             }
@@ -241,6 +242,12 @@ namespace Gooeycms.Business.Pages
                 }
                 tx.Commit();
             }
+        }
+
+        public void Remove(Data.Guid guid)
+        {
+            CmsPage page = this.GetPage(guid);
+            this.Remove(page);
         }
     }
 }

@@ -77,7 +77,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
 
         protected void ThemesDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
         {
-            e.InputParameters["guid"] = SiteHelper.GetActiveSiteGuid();
+            e.InputParameters["guid"] = SiteHelper.GetActiveSiteGuid().Value;
         }
     }
 }

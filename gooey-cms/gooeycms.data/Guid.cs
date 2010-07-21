@@ -29,5 +29,10 @@ namespace Gooeycms.Data
         {
             return new Guid(guid);
         }
+
+        public override String ToString()
+        {
+            return this.Value;
+        }
     }
 }

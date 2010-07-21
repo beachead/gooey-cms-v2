@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Gooeycms.Data.Model.Theme
 {
@@ -17,6 +15,12 @@ namespace Gooeycms.Data.Model.Theme
         {
             String hql = "select types from CmsGlobalTemplateType types order by types.Name asc";
             return base.NewHqlQuery(hql).List<CmsGlobalTemplateType>();
+        }
+
+        public CmsTemplate FindBySiteAndName(Guid siteGuid, string templateName)
+        {
+            String hql = "select template from CmsTemplate template where template.SubscriptionGuid = :guid and template.Name = :name";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("name", templateName).UniqueResult<CmsTemplate>();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 
 namespace Gooeycms.Business.Themes
@@ -65,13 +66,28 @@ namespace Gooeycms.Business.Themes
             }
         }
 
+        public CmsTemplate GetTemplate(String templateName)
+        {
+            return GetTemplate(CurrentSite.Guid, templateName);
+        }
+
+        public CmsTemplate GetTemplate(Data.Guid siteGuid, String templateName)
+        {
+            CmsTemplateDao dao = new CmsTemplateDao();
+            return dao.FindBySiteAndName(siteGuid, templateName);
+        }
+
+        public CmsTemplate GetTemplate(int primaryKey)
+        {
+            CmsTemplateDao dao = new CmsTemplateDao();
+            return dao.FindByPrimaryKey<CmsTemplate>(primaryKey);
+        }
+
         public CmsTemplate GetTemplate(Data.EncryptedValue encryptedId)
         {
             int id = 0;
             Int32.TryParse(TextEncryption.Decode(encryptedId.Value), out id);
-
-            CmsTemplateDao dao = new CmsTemplateDao();
-            return dao.FindByPrimaryKey<CmsTemplate>(id);
+            return GetTemplate(id);
         }
     }
 }
