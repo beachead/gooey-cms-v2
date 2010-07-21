@@ -1,0 +1,244 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Registrations]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Registrations];
+END
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[User_Subscriptions]') AND type in (N'U'))
+BEGIN
+DROP TABLE [User_Subscriptions];
+END
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Subscriptions]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Subscriptions];
+END
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Subscription_Plans]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Subscription_Plans];
+END
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Users];
+END
+
+
+CREATE TABLE [Registrations] (
+[id] INT IDENTITY(1,1) NOT NULL,
+[guid] VARCHAR(36) NOT NULL,
+[created] DATETIME NOT NULL,
+[email] NVARCHAR(128) NOT NULL,
+[is_complete] BIT DEFAULT(0),
+[data] VARBINARY(MAX) NOT NULL,
+PRIMARY KEY CLUSTERED([id]),
+);
+CREATE UNIQUE INDEX uq_registration_guid ON [Registrations](guid);
+
+CREATE TABLE [Subscription_Plans] (
+[id] INT IDENTITY(1,1) NOT NULL,
+[sku] VARCHAR(25),
+[name] VARCHAR(128) NOT NULL,
+[price] DECIMAL NOT NULL,
+[available] BIT DEFAULT(0),
+PRIMARY KEY CLUSTERED([id]),
+);
+
+CREATE TABLE [Subscriptions] (
+[id] INT IDENTITY(1,1) NOT NULL,
+[subscription_type] INT NOT NULL,
+[subscription_plan] INT NOT NULL,
+[guid] VARCHAR(36) NOT NULL,
+[primary_user_guid] VARCHAR(36) NOT NULL,
+[subdomain] VARCHAR(256),
+[custom_domain] VARCHAR(256),
+[staging_domain] VARCHAR(256),
+[signup_date] DATETIME DEFAULT(GETDATE()),
+[expires] DATETIME,
+[disabled] BIT DEFAULT(0),
+[salesforce_addon] BIT DEFAULT(0),
+[generic_addon] BIT DEFAULT(0),
+PRIMARY KEY CLUSTERED([id]),
+);
+CREATE UNIQUE INDEX uq_subscriptions_guid ON [Subscriptions](guid);
+CREATE UNIQUE INDEX uq_subscriptions_subdomain ON [Subscriptions](subdomain);
+CREATE UNIQUE INDEX uq_subscriptions_customdomain ON [Subscriptions](custom_domain);
+CREATE UNIQUE INDEX uq_subscriptions_stagingdomain ON [Subscriptions](staging_domain);
+
+CREATE TABLE [Users] (
+[id] INT IDENTITY(1,1) NOT NULL,
+[created] DATETIME NOT NULL,	
+[guid] VARCHAR(36) NOT NULL,
+[username] NVARCHAR(64),
+[email] NVARCHAR(128),
+[firstname] NVARCHAR(128),
+[lastname] NVARCHAR(128),
+[company] NVARCHAR(128),
+[address1] NVARCHAR(128),
+[address2] NVARCHAR(128),
+[city] NVARCHAR(128),
+[state] NVARCHAR(10),
+[zipcode] NVARCHAR(10),
+[country] NVARCHAR(10)
+PRIMARY KEY CLUSTERED ([id])
+);
+CREATE INDEX idx_users_guid ON [Users](guid);
+CREATE INDEX idx_users_username ON [Users](username);
+
+CREATE TABLE [User_Subscriptions] (
+[user_id] INT NOT NULL REFERENCES Users(id),
+[subscription_id] INT NOT NULL REFERENCES Subscriptions(id)
+PRIMARY KEY CLUSTERED ([user_id],[subscription_id])
+);
+
+CREATE TABLE [Configurations] (
+[id] INT IDENTITY(1,1) NOT NULL,
+[name] VARCHAR(256) NOT NULL,
+[value] NTEXT NOT NULL
+PRIMARY KEY CLUSTERED ([id])
+);
+CREATE INDEX idx_configurations_key ON [Configurations](key);
+
+/* setup the default configuration values */
+insert into configurations values ('salesforce-price','50');
+insert into configurations values ('default-cms-domain','.gooeycms.net');
+insert into configurations values ('logging-enabled','false');
+insert into configurations values ('subscription-processor','Gooeycms.Business.Subscription.Debug.DebugSubscriptionProcessor');
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Themes_Site_Templates]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Themes_Site_Templates];
+END
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Themes_Site]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Themes_Site];
+END
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Themes_Global_Template_Types]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Themes_Global_Template_Types];
+END
+
+
+CREATE TABLE Themes_Site (
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[site_guid] VARCHAR(36) REFERENCES Subscriptions([guid]),
+	[guid] VARCHAR(36) NOT NULL,
+	[name] VARCHAR(100) NOT NULL,
+	[description] VARCHAR(255),
+	[is_enabled] BIT,
+	[is_developer] BIT,
+	[header] NTEXT,
+	[footer] NTEXT,
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE INDEX idx_themes_site_guid ON Themes_Site ([site_guid]);
+CREATE INDEX idx_themes_site_guid_enabled ON Themes_Site ([site_guid],[is_enabled]);
+
+CREATE TABLE Themes_Global_Template_Types (
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[name] VARCHAR(36) UNIQUE,	
+	PRIMARY KEY CLUSTERED([id]),
+);
+
+CREATE TABLE Themes_Site_Templates (
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[theme_id] INT REFERENCES Themes_Site([id]),
+	[template_name] VARCHAR(36),
+	[site_guid] VARCHAR(36) NOT NULL,	
+	[is_global] BIT DEFAULT(1),
+	[template] NTEXT NOT NULL,
+	[last_saved] DATETIME DEFAULT(GETDATE()),
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE INDEX idx_site_template_guid ON Themes_Site_Templates([site_guid]);
+CREATE INDEX idx_site_template_guid_typid ON Themes_Site_Templates([site_guid],[template_name]);
+CREATE INDEX idx_site_template_theme_name ON Themes_Site_Templates([site_guid],[theme_id],[template_name]);
+
+insert into themes_global_template_types values ('homepage-template');
+insert into themes_global_template_types values ('content-template');
+insert into themes_global_template_types values ('news-template');
+insert into themes_global_template_types values ('events-template');
+insert into themes_global_template_types values ('resources-templates');
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SiteConfiguration]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Pages];
+END
+
+
+
+CREATE TABLE [dbo].[SiteConfiguration](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[name] VARCHAR(32),
+	[value] NVARCHAR(4000)
+	PRIMARY KEY CLUSTERED([id]),
+)
+CREATE INDEX unq_siteconfig_guid_id ON [SiteConfiguration]([site_guid],[name]);
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pages]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Pages];
+END
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SiteMap_Labels]') AND type in (N'U'))
+BEGIN
+DROP TABLE [SiteMap_Labels];
+END
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SiteMap]') AND type in (N'U'))
+BEGIN
+DROP TABLE [SiteMap];
+END
+
+CREATE TABLE [dbo].[SiteMap](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[url_hash] VARCHAR(64) NOT NULL,
+	[url] [varchar](4096) NOT NULL,
+	[parent] [varchar](255) NULL,
+	[depth] [int] NULL DEFAULT ((0)),
+	[position] [int] NULL DEFAULT ((0)),
+	[redirect_to] [varchar](4096) NULL,
+	[is_directory] [bit] NULL,
+	[is_page] [bit] NULL,
+	[is_redirect] [bit] NULL,
+	[is_visible] [bit] NULL,
+	[labels] NVARCHAR(4096) NULL,
+	PRIMARY KEY CLUSTERED([id]),
+)
+CREATE INDEX idx_sitemap_guid ON [SiteMap]([site_guid]);
+CREATE UNIQUE unq_sitemap_guid_url INDEX ON [SiteMap]([site_guid],[url_hash]);
+
+CREATE TABLE Pages (
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36) NOT NULL,
+	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[culture] [varchar](10) NULL,
+	[date_saved] [datetime] NULL,
+	[author] [varchar](128) NULL,
+	[is_approved] [bit] NULL,
+	[approved_by] [varchar](128) NULL,
+	[title] [nvarchar](255) NOT NULL,
+	[description] [nvarchar](1024) NULL,
+	[keywords] [nvarchar](1024) NULL,
+	[bodyload] [varchar](1000) NULL,
+	[template] VARCHAR(36),
+	[url] VARCHAR(4096),
+	[url_hash] VARCHAR(64),
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE INDEX idx_page_siteguid ON Pages([site_guid]);
+CREATE INDEX idx_page_path ON Pages([site_guid],[url_hash]);
+CREATE INDEX idx_page_path_culture ON Pages([site_guid],[url_hash],[culture]);
+CREATE INDEX idx_page_guid ON Pages([guid]);
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Help]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Help];
+END
+
+CREATE TABLE [dbo].[Help](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[path] VARCHAR(512),
+	[hash] VARCHAR(64),
+	[text] NTEXT
+	PRIMARY KEY CLUSTERED([id]),
+)
+CREATE INDEX unq_hash ON [Help]([hash]);

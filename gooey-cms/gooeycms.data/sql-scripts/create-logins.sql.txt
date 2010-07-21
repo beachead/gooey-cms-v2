@@ -1,0 +1,8 @@
+﻿
+/* Run from master db */
+CREATE LOGIN gooeycms
+    WITH PASSWORD = '12qwas#$ERDF';
+
+/* run from gooeycms and aspnetdb */
+CREATE USER gooeycms FOR LOGIN gooeycms;
+EXEC sp_addrolemember N'db_owner', N'gooeycms'
