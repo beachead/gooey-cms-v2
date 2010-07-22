@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Gooeycms.Business.Storage
@@ -13,6 +11,8 @@ namespace Gooeycms.Business.Storage
 
         public void Save(String directory, String filename, String contents)
         {
+            if (contents == null)
+                contents = "";
             this.Save(directory, filename, Encoding.UTF8.GetBytes(contents));
         }
 
