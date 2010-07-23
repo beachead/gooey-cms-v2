@@ -76,7 +76,7 @@
   <ItemGroup>
     <Compile Include="App_Code\Adapters\PageAdapter.cs" />
     <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
-    <Compile Include="App_Code\HelpPage.cs">
+    <Compile Include="App_Code\ValidatedHelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\global-admin\Help\Default.aspx.cs">

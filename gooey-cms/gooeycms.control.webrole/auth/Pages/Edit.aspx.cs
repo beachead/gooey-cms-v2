@@ -13,7 +13,7 @@ using Gooeycms.Webrole.Control.App_Code;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
-    public partial class Edit : HelpPage, IPreviewable
+    public partial class Edit : ValidatedHelpPage, IPreviewable
     {
         protected String PageAction = "Add";
         protected override void OnPageLoad(object sender, EventArgs e)

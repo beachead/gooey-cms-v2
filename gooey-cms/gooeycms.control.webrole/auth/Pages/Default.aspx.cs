@@ -2,7 +2,7 @@
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
-    public partial class Default : App_Code.HelpPage
+    public partial class Default : App_Code.ValidatedHelpPage
     {
         protected override void OnPageLoad(object sender, EventArgs e)
         {

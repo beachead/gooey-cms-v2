@@ -112,5 +112,17 @@ namespace Gooeycms.Business.Help
                 tx.Commit();
             }
         }
+
+        public IList<HelpPage> GetAll()
+        {
+            HelpPageDao dao = new HelpPageDao();
+            return dao.FindAll<HelpPage>();
+        }
+
+        public HelpPage Get(int id)
+        {
+            HelpPageDao dao = new HelpPageDao();
+            return dao.FindByPrimaryKey<HelpPage>(id);
+        }
     }
 }

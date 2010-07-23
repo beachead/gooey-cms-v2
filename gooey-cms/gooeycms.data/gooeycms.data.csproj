@@ -87,7 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Help.hbm.xml" />
+    <Content Include="sql-scripts\aspnet-membership.sql.txt" />
+    <Content Include="sql-scripts\create-all-sql.txt" />
     <Content Include="sql-scripts\create-help-tables.sql.txt" />
+    <Content Include="sql-scripts\create-logins.sql.txt" />
     <Content Include="sql-scripts\create-site-tables.sql.txt" />
     <Content Include="sql-scripts\create-theme-tables.sql.txt" />
     <Content Include="sql-scripts\create-registration-tables.sql.txt" />

@@ -1,10 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Help;
-
 namespace Gooeycms.Webrole.Control.App_Code
 {
-    public abstract class HelpPage : ValidatedPage
+    public abstract class ValidatedHelpPage : ValidatedPage
     {
         protected override void OnPreRender(EventArgs e)
         {

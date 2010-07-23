@@ -26,11 +26,11 @@ CREATE TABLE [dbo].[SiteMap](
 	[is_page] [bit] NULL,
 	[is_redirect] [bit] NULL,
 	[is_visible] [bit] NULL,
-	[labels] NVARCHAR(4096) NULL,
+	[labels] NVARCHAR(4000) NULL,
 	PRIMARY KEY CLUSTERED([id]),
 )
 CREATE INDEX idx_sitemap_guid ON [SiteMap]([site_guid]);
-CREATE UNIQUE unq_sitemap_guid_url INDEX ON [SiteMap]([site_guid],[url_hash]);
+CREATE UNIQUE INDEX unq_sitemap_guid_url ON [SiteMap]([site_guid],[url_hash]);
 
 CREATE TABLE Pages (
 	[id] INT IDENTITY(1,1) NOT NULL,

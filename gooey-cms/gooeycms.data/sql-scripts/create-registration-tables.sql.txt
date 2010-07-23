@@ -90,10 +90,10 @@ PRIMARY KEY CLUSTERED ([user_id],[subscription_id])
 CREATE TABLE [Configurations] (
 [id] INT IDENTITY(1,1) NOT NULL,
 [name] VARCHAR(256) NOT NULL,
-[value] NTEXT NOT NULL
+[value] NTEXT NOT NULL.
 PRIMARY KEY CLUSTERED ([id])
 );
-CREATE INDEX idx_configurations_key ON [Configurations](key);
+CREATE INDEX idx_configurations_key ON [Configurations](name);
 
 /* Run from master db */
 CREATE LOGIN gooeycms
