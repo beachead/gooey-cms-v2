@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="auth\global-admin\Help\Default.aspx" />
+    <Content Include="Controls\AzureFileExplorer.ascx" />
+    <Content Include="scripts\csspopup.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +108,13 @@
     </Compile>
     <Compile Include="auth\Themes\Templates.aspx.designer.cs">
       <DependentUpon>Templates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AzureFileExplorer.ascx.cs">
+      <DependentUpon>AzureFileExplorer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AzureFileExplorer.ascx.designer.cs">
+      <DependentUpon>AzureFileExplorer.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentEditor\MarkupEditor.ascx.cs">
       <DependentUpon>MarkupEditor.ascx</DependentUpon>

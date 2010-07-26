@@ -13,6 +13,32 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+    <style type="text/css">
+        #blanket {
+        background-color:#111;
+        opacity: 0.65;
+        filter:alpha(opacity=65);
+        position:absolute;
+        z-index: 9001;
+        top:0px;
+        left:0px;
+        width:100%;
+        }
+        #popUpDiv {
+        position:absolute;
+        background-color:#eeeeee;
+        width:300px;
+        height:300px;
+        z-index: 9002;    
+    </style>
+    <script src="../../scripts/csspopup.js" type="text/javascript" language="javascript"></script>
+
+                
+                <div id="blanket" style="display:none;"></div>
+                <div id="popUpDiv" style="display:none;width:450px;">
+                    <beachead:ImageBrowser runat="server" />
+                </div>
+
     <b><%=PageAction %> Page:</b><br /><br />
     <asp:Label ID="Status" runat="server" />
     <table style="width:100%;" cellpadding="0" cellspacing="0">
@@ -100,9 +126,9 @@
                     <b>Template:</b><br />
                     <asp:DropDownList ID="PageTemplate" runat="server" />
                 </div>
-                
+
                 <div class="page-group">
-                <b>Body:</b><br />
+                <b>Body:</b><a href="#" onclick="popup('popUpDiv'); return false;">Image Library</a><br />
                 <beachead:Editor ID="PageMarkupText" TabIndex="5" runat="server" />
                 </div>
                 <div>
