@@ -82,19 +82,22 @@ namespace Gooeycms.Business.Storage
 
         public override IList<StorageFile> List(String directory)
         {
-            CloudBlobContainer container = GetBlobContainer(directory);
-            var items = container.ListBlobs();
-
             IList<StorageFile> results = new List<StorageFile>();
-            foreach (IListBlobItem item in items)
+
+            CloudBlobContainer container = GetBlobContainer(directory);
+            if (container.Exists())
             {
-                CloudBlob blob = container.GetBlobReference(item.Uri.ToString());
-                blob.FetchAttributes();
-                results.Add(new StorageFile()
+                var items = container.ListBlobs();
+                foreach (IListBlobItem item in items)
                 {
-                    Filename = GetBlobFilename(blob),
-                    Uri = blob.Uri
-                });
+                    CloudBlob blob = container.GetBlobReference(item.Uri.ToString());
+                    blob.FetchAttributes();
+                    results.Add(new StorageFile()
+                    {
+                        Filename = GetBlobFilename(blob),
+                        Uri = blob.Uri
+                    });
+                }
             }
 
             return results;
