@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using Gooeycms.Business.Compression;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
+using Kaliko.ImageLibrary;
 
 namespace Gooeycms.Business.Images
 {
@@ -42,11 +45,40 @@ namespace Gooeycms.Business.Images
                 images.Add(file);
             }
 
+            //Generate thumbnails
+            IList<StorageFile> results = new List<StorageFile>(images);
+            foreach(StorageFile file in images) {
+                GenerateThumbnail(file, results);
+            }
+            images = null;
+
             IStorageClient client = StorageHelper.GetStorageClient();
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
-            foreach (StorageFile file in images)
+            foreach (StorageFile file in results)
             {
                 client.Save(imageDirectory, file.Filename, file.Data, Permissions.Public);
+            }
+        }
+
+        private void GenerateThumbnail(StorageFile file, IList<StorageFile> results)
+        {
+            using (MemoryStream stream = new MemoryStream(file.Data))
+            {
+                using (MemoryStream output = new MemoryStream())
+                {
+                    KalikoImage image = new KalikoImage(stream);
+                    image.BackgroundColor = Color.White;
+                    KalikoImage thumb = image.GetThumbnailImage(128, 128, ThumbnailMethod.Pad);
+                    thumb.SaveJpg(output, 75);
+
+                    FileInfo info = new FileInfo(file.Filename);
+
+                    StorageFile thumbnail = new StorageFile();
+                    thumbnail.Filename = info.Name.Replace(info.Extension,"") + "-thumb.jpg";
+                    thumbnail.Data = output.ToArray();
+
+                    results.Add(thumbnail);
+                }
             }
         }
 
@@ -68,7 +100,18 @@ namespace Gooeycms.Business.Images
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            return client.List(imageDirectory);
+            IList<StorageFile> allimages = client.List(imageDirectory);
+
+            IList<StorageFile> results = new List<StorageFile>();
+
+            //Filter out the thumbnails
+            foreach (StorageFile temp in allimages)
+            {
+                if (!temp.Filename.Contains("-thumb.jpg"))
+                    results.Add(temp);
+            }
+
+            return results;
         }
     }
 }

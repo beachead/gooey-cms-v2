@@ -56,8 +56,9 @@
                                     <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                     <ItemStyle BackColor="#F7F6F3" ForeColor="#333333" />
                                     <ItemTemplate>
-                                        <img src="<%# DataBinder.Eval(Container,"DataItem.Url") %>" style="width:60px;height:60px;" />
-                                        <br /><a href="#" onclick="window.open('<%# DataBinder.Eval(Container,"DataItem.Url") %>','','width=300,height=300');">View</a>
+                                        <img src="<%# DataBinder.Eval(Container,"DataItem.ThumbnailUrl") %>" style="width:60px;height:60px;" />
+                                        <br />
+                                        <a href="#" onclick="window.open('<%# DataBinder.Eval(Container,"DataItem.Url") %>','','width=300,height=300');">View</a>
                                         <a href="#" onclick="javascript:_imageclick('<%# DataBinder.Eval(Container,"DataItem.Filename") %>'); return false;">Select</a>
                                     </ItemTemplate>
                                     <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
