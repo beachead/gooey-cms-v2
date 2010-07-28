@@ -27,7 +27,7 @@
     var parent = null;
 
     function onimage_selected(imageName) {
-        __Insert('[image:~/' + imageName + ']{BR}','<%=PageMarkupText.TextboxId %>');
+        __Insert('[[image:~/' + imageName + ']]{BR}','<%=PageMarkupText.TextboxId %>');
     }
 
     function OpenPreviewWindow() {
