@@ -11,6 +11,11 @@ namespace Gooeycms.Business.Util
 {
     public static class SiteHelper
     {
+        public const String PageDirectoryKey = "{0}-cmspages";
+        public const String JavascriptDirectoryKey = "{0}-javascripts";
+        public const String StylesheetDirectoryKey = "{0}-stylesheets";
+        public const String ImagesDirectoryKey = "{0}-images";
+
         public static void SetActiveSiteCookie(IList<CmsSubscription> items)
         {
             if (items.Count == 1)
@@ -111,6 +116,11 @@ namespace Gooeycms.Business.Util
             CmsSitePath path = CmsSiteMap.Instance.GetRootPath(siteGuid);
             if (path == null)
                 path = CmsSiteMap.Instance.AddRootDirectory(siteGuid);
+        }
+
+        public static String GetStorageKey(String type, String guid)
+        {
+            return String.Format(type, guid);
         }
     }
 }

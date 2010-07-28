@@ -9,10 +9,6 @@ namespace Gooeycms.Business.Util
 {
     public static class CurrentSite
     {
-        private const String PageDirectoryKey = "{0}-cmspages";
-        private const String JavascriptDirectoryKey = "{0}-javascripts";
-        private const String StylesheetDirectoryKey = "{0}-stylesheets";
-
         private static String GetStorageKey(String type)
         {
             return String.Format(type, SiteHelper.GetActiveSiteGuid(true).Value);
@@ -20,17 +16,22 @@ namespace Gooeycms.Business.Util
 
         public static String PageStorageDirectory
         {
-            get { return GetStorageKey(PageDirectoryKey); }
+            get { return GetStorageKey(SiteHelper.PageDirectoryKey); }
         }
 
         public static String JavascriptStorageDirectory
         {
-            get { return GetStorageKey(JavascriptDirectoryKey); }
+            get { return GetStorageKey(SiteHelper.JavascriptDirectoryKey); }
         }
 
         public static String StylesheetStorageDirectory
         {
-            get { return GetStorageKey(StylesheetDirectoryKey); }
+            get { return GetStorageKey(SiteHelper.StylesheetDirectoryKey); }
+        }
+
+        public static String ImageStorageDirectory
+        {
+            get { return GetStorageKey(SiteHelper.ImagesDirectoryKey); }
         }
 
         public static Data.Guid Guid

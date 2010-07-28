@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
@@ -32,7 +33,7 @@ namespace Gooeycms.Business.Storage
             return container;
         }
 
-        public override void Save(String directory, string filename, byte[] data)
+        public override void Save(String directory, string filename, byte[] data, Permissions permissions)
         {
             if ((data != null) && (data.Length > 0))
             {
@@ -41,15 +42,21 @@ namespace Gooeycms.Business.Storage
                 if (created)
                 {
                     BlobContainerPermissions perms = new BlobContainerPermissions();
-                    perms.PublicAccess = BlobContainerPublicAccessType.Off;
+                    if (permissions == Permissions.Private)
+                        perms.PublicAccess = BlobContainerPublicAccessType.Off;
+                    else if (permissions == Permissions.Public)
+                        perms.PublicAccess = BlobContainerPublicAccessType.Blob;
+
                     container.SetPermissions(perms);
                 }
 
                 CloudBlob blob = container.GetBlobReference(filename);
                 blob.UploadByteArray(data);
 
+                blob.Metadata["filename"] = filename;
                 blob.Metadata["created"] = DateTime.Now.ToString();
                 blob.Metadata["size"] = data.Length.ToString();
+                blob.SetMetadata();
                 blob.SetProperties();
             }
         }
@@ -71,6 +78,26 @@ namespace Gooeycms.Business.Storage
                 result = blob.DownloadByteArray();
 
             return result;
+        }
+
+        public override IList<StorageFile> List(String directory)
+        {
+            CloudBlobContainer container = GetBlobContainer(directory);
+            var items = container.ListBlobs();
+
+            IList<StorageFile> results = new List<StorageFile>();
+            foreach (IListBlobItem item in items)
+            {
+                CloudBlob blob = container.GetBlobReference(item.Uri.ToString());
+                blob.FetchAttributes();
+                results.Add(new StorageFile()
+                {
+                    Filename = blob.Uri.ToString().Substring(blob.Uri.ToString().LastIndexOf("/") + 1),
+                    Uri = blob.Uri
+                });
+            }
+
+            return results;
         }
     }
 }

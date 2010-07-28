@@ -31,14 +31,6 @@
         height:300px;
         z-index: 9002;    
     </style>
-    <script src="../../scripts/csspopup.js" type="text/javascript" language="javascript"></script>
-
-                
-                <div id="blanket" style="display:none;"></div>
-                <div id="popUpDiv" style="display:none;width:450px;">
-                    <beachead:ImageBrowser runat="server" />
-                </div>
-
     <b><%=PageAction %> Page:</b><br /><br />
     <asp:Label ID="Status" runat="server" />
     <table style="width:100%;" cellpadding="0" cellspacing="0">
@@ -128,7 +120,7 @@
                 </div>
 
                 <div class="page-group">
-                <b>Body:</b><a href="#" onclick="popup('popUpDiv'); return false;">Image Library</a><br />
+                <b>Body:</b><br />
                 <beachead:Editor ID="PageMarkupText" TabIndex="5" runat="server" />
                 </div>
                 <div>

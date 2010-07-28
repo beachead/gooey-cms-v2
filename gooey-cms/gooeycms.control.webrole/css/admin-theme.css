@@ -1,4 +1,10 @@
-﻿body {
+﻿.hidden 
+{
+    visibility: hidden;
+    display: none;
+}
+
+body {
 	color:#333;
 	font-family:Verdana,sans-serif;
 	font-size:11px;

@@ -71,8 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="auth\global-admin\Help\Default.aspx" />
-    <Content Include="Controls\AzureFileExplorer.ascx" />
-    <Content Include="scripts\csspopup.js" />
+    <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -102,19 +101,19 @@
     <Compile Include="auth\Pages\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auth\Pages\ImageBrowser.aspx.cs">
+      <DependentUpon>ImageBrowser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\ImageBrowser.aspx.designer.cs">
+      <DependentUpon>ImageBrowser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\Themes\Templates.aspx.cs">
       <DependentUpon>Templates.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\Themes\Templates.aspx.designer.cs">
       <DependentUpon>Templates.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AzureFileExplorer.ascx.cs">
-      <DependentUpon>AzureFileExplorer.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\AzureFileExplorer.ascx.designer.cs">
-      <DependentUpon>AzureFileExplorer.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentEditor\MarkupEditor.ascx.cs">
       <DependentUpon>MarkupEditor.ascx</DependentUpon>

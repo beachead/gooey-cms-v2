@@ -38,6 +38,9 @@
     <Reference Include="AntiXssLibrary">
       <HintPath>..\..\lib\AntiXssLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\lib\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.CloudDrive, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -57,8 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression\ZipHandler.cs" />
     <Compile Include="Crypto\TextHash.cs" />
     <Compile Include="Help\HelpManager.cs" />
+    <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Markup\BaseFormatter.cs" />
     <Compile Include="Markup\Engine\DefaultMarkupEngine.cs" />
     <Compile Include="Markup\Engine\MarkupEngineFactory.cs" />
@@ -113,6 +118,8 @@
     <Compile Include="Storage\BlobExtensions.cs" />
     <Compile Include="Storage\IStorageClient.cs" />
     <Compile Include="Storage\AzureBlobStorageClient.cs" />
+    <Compile Include="Storage\StorageFile.cs" />
+    <Compile Include="Storage\StorageHelper.cs" />
     <Compile Include="Subscription\Paypal\DebugSubscriptionProcessor.cs" />
     <Compile Include="Subscription\ISubscriptionProcessor.cs" />
     <Compile Include="Subscription\Paypal\PaypalSubscriptionProcessor.cs" />

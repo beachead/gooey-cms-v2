@@ -7,11 +7,19 @@
     <link href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
     <script src="<%=Root %>scripts/functions.js" type="text/javascript" language="javascript"></script> 
     <script src="<%=Root %>scripts/mootools-core.js" type="text/javascript" language="javascript"></script>    
-    <script src="admin.js" type="text/javascript" language="javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        dojo.require("dojo.parser");
+        dojo.require("dijit.dijit");
+        dojo.require("dijit.Dialog");
+        dojo.require("dijit.layout.TabContainer");
+        dojo.require("dijit.layout.ContentPane");
+    </script>
 </head>
-<body>
+<body class="claro">
     <form id="form1" runat="server">
    
     <div>

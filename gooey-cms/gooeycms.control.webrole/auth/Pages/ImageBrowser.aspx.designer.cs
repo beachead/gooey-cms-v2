@@ -7,36 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Beachead.Web.CMS.controls {
+namespace Gooeycms.Webrole.Control.auth.Pages {
     
     
-    public partial class MarkupEditor {
+    public partial class ImageBrowser {
         
         /// <summary>
-        /// HiddenFileUpload control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload HiddenFileUpload;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// PreviewLink control.
+        /// FileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.LinkButton PreviewLink;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
         
         /// <summary>
-        /// PageMarkupText control.
+        /// BtnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Beachead.Web.CMS.controls.ResizableTextBox.ResizableTextBox PageMarkupText;
+        protected global::Anthem.Button BtnUpload;
+        
+        /// <summary>
+        /// PanelImages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Anthem.Panel PanelImages;
+        
+        /// <summary>
+        /// AvailableImages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList AvailableImages;
     }
 }

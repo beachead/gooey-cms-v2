@@ -115,7 +115,7 @@ namespace Gooeycms.Business.Pages
         {
             if (result != null)
             {
-                IStorageClient client = GetStorageClient();
+                IStorageClient client = StorageHelper.GetStorageClient();
                 result.Content = client.OpenAsString(CurrentSite.PageStorageDirectory, result.Guid);
                 result.Javascript = client.OpenAsString(CurrentSite.JavascriptStorageDirectory, result.Guid);
                 result.Stylesheet = client.OpenAsString(CurrentSite.StylesheetStorageDirectory, result.Guid);
@@ -137,7 +137,7 @@ namespace Gooeycms.Business.Pages
 
             CmsPageDao dao = new CmsPageDao();
             CmsSitePath path =  null;
-            IStorageClient client = GetStorageClient();
+            IStorageClient client = StorageHelper.GetStorageClient();
             try
             {
                 path = CmsSiteMap.Instance.AddNewPage(parent, pageName);
@@ -149,9 +149,9 @@ namespace Gooeycms.Business.Pages
                 }
 
                 Cleanup(page.Guid);
-                client.Save(CurrentSite.PageStorageDirectory, page.Guid, page.Content);
-                client.Save(CurrentSite.JavascriptStorageDirectory, page.Guid, page.Javascript);
-                client.Save(CurrentSite.StylesheetStorageDirectory, page.Guid, page.Stylesheet);
+                client.Save(CurrentSite.PageStorageDirectory, page.Guid, page.Content, Permissions.Private);
+                client.Save(CurrentSite.JavascriptStorageDirectory, page.Guid, page.Javascript, Permissions.Public);
+                client.Save(CurrentSite.StylesheetStorageDirectory, page.Guid, page.Stylesheet, Permissions.Public);
             }
             catch (Exception ex)
             {
@@ -194,17 +194,12 @@ namespace Gooeycms.Business.Pages
         /// <param name="p"></param>
         private void Cleanup(string guid)
         {
-            IStorageClient client = GetStorageClient();
+            IStorageClient client = StorageHelper.GetStorageClient();
             client.Delete(CurrentSite.PageStorageDirectory, guid);
             client.Delete(CurrentSite.JavascriptStorageDirectory, guid);
             client.Delete(CurrentSite.StylesheetStorageDirectory, guid);
         }
 
-        internal static IStorageClient GetStorageClient()
-        {
-            IStorageClient client = new AzureBlobStorageClient();
-            return client;
-        }
 
         public void RemoveObsoletePages(CmsPage page)
         {
@@ -213,7 +208,7 @@ namespace Gooeycms.Business.Pages
             IList<CmsPage> unapproved = dao.FindUnapprovedPages(CurrentSite.Guid,Data.Hash.New(page.UrlHash));
             IList<CmsPage> approved = dao.FindApprovedPages(CurrentSite.Guid,Data.Hash.New(page.UrlHash));
 
-            IStorageClient client = GetStorageClient();
+            IStorageClient client = StorageHelper.GetStorageClient();
 
             //Loop through all of the unapproved pages and remove any old versions.
             //Start at the first one, since we always want to leave the latest unapproved version
@@ -221,9 +216,7 @@ namespace Gooeycms.Business.Pages
             {
                 for (int i = 1; i < unapproved.Count; i++)
                 {
-                    client.Delete(CurrentSite.PageStorageDirectory, unapproved[i].Guid);
-                    client.Delete(CurrentSite.JavascriptStorageDirectory, unapproved[i].Guid);
-                    client.Delete(CurrentSite.StylesheetStorageDirectory, unapproved[i].Guid);      
+                    Cleanup(unapproved[i].Guid);    
                     dao.Delete<CmsPage>(unapproved[i]);
                 }
                 tx.Commit();
@@ -235,9 +228,7 @@ namespace Gooeycms.Business.Pages
             {
                 for (int i = 1; i < approved.Count; i++)
                 {
-                    client.Delete(CurrentSite.PageStorageDirectory, unapproved[i].Guid);
-                    client.Delete(CurrentSite.JavascriptStorageDirectory, unapproved[i].Guid);
-                    client.Delete(CurrentSite.StylesheetStorageDirectory, unapproved[i].Guid);   
+                    Cleanup(approved[i].Guid);
                     dao.Delete<CmsPage>(approved[i]);
                 }
                 tx.Commit();

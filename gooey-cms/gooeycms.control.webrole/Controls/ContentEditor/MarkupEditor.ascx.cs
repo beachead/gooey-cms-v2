@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
 using Gooeycms.Business.Pages;
 
 namespace Beachead.Web.CMS.controls
@@ -18,6 +8,7 @@ namespace Beachead.Web.CMS.controls
     {
         protected static String EditorScriptPath;
         protected static String EditorCssPath;
+        protected static String RootUrl;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,6 +16,7 @@ namespace Beachead.Web.CMS.controls
             {
                 EditorScriptPath = Page.ResolveUrl("~/scripts/contenteditor.js");
                 EditorCssPath = Page.ResolveUrl("~/controls/ContentEditor/contenteditor.css");
+                RootUrl = Page.ResolveUrl("~");
             }
         }
 
