@@ -14,13 +14,26 @@ namespace Gooeycms.Business.Cache
             get { return CacheManager.instance; }
         }
 
-        internal CacheInstance GetCache(Data.Guid guid)
+        public void ClearAll()
+        {
+            lock (caches)
+            {
+                caches.Clear();
+            }
+        }
+        public CacheInstance GetCache(Data.Guid guid)
         {
             CacheInstance table = caches.GetValue(guid);
             if (table == null)
             {
-                table = new CacheInstance();
-                caches.Add(guid, table);
+                lock (caches)
+                {
+                    if (table == null)
+                    {
+                        table = new CacheInstance();
+                        caches.Add(guid, table);
+                    }
+                }
             }
 
             return table;

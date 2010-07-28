@@ -70,6 +70,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="Web.config" />
@@ -79,6 +80,13 @@
     <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
     <Compile Include="App_Code\ValidatedHelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Controls\Cache.aspx.cs">
+      <DependentUpon>Cache.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Controls\Cache.aspx.designer.cs">
+      <DependentUpon>Cache.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Help\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
