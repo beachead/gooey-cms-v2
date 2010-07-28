@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gooeycms.Business.Cache;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Themes;
@@ -10,6 +11,14 @@ namespace Gooeycms.Business.Util
 {
     public static class CurrentSite
     {
+        public static CacheInstance Cache
+        {
+            get
+            {
+                return CacheManager.Instance.GetCache(CurrentSite.Guid);
+            }
+        }
+
         private static String GetStorageKey(String type)
         {
             return String.Format(type, SiteHelper.GetActiveSiteGuid(true).Value);
@@ -42,17 +51,41 @@ namespace Gooeycms.Business.Util
 
         public static String ProductionDomain
         {
-            get { return SiteHelper.GetProductionDomain(CurrentSite.Guid); }
+            get 
+            {
+                String result = CurrentSite.Cache.Get<String>("productiondomain");
+                if (result == null)
+                {
+                    result = SiteHelper.GetProductionDomain(CurrentSite.Guid); 
+                    CurrentSite.Cache.Add("productiondomain",result);
+                }
+                return result;
+            }
         }
 
         public static String StagingDomain
         {
-            get { return SiteHelper.GetStagingDomain(CurrentSite.Guid); }
+            get 
+            {
+                String result = CurrentSite.Cache.Get<String>("stagingdomain");
+                if (result == null)
+                {
+                    result = SiteHelper.GetStagingDomain(CurrentSite.Guid); 
+                    CurrentSite.Cache.Add("stagingdomain", result);
+                }
+                return result;
+            }
         }
 
         public static CmsTheme GetCurrentTheme()
         {
-            return ThemeManager.Instance.GetDefaultBySite(Guid);
+            CmsTheme result = CurrentSite.Cache.Get<CmsTheme>("currenttheme");
+            if (result == null)
+            {
+                result = ThemeManager.Instance.GetDefaultBySite(Guid);
+                CurrentSite.Cache.Add("currenttheme", result);
+            }
+            return result;
         }
 
         public static Boolean IsStagingHost
@@ -64,9 +97,9 @@ namespace Gooeycms.Business.Util
 
                 Boolean result = false;
                 //check if we're on the staging site
-                if (StringExtensions.EqualsCaseInsensitive(StagingDomain, domain))
+                if (Extensions.EqualsCaseInsensitive(StagingDomain, domain))
                     result = true;
-                else if (StringExtensions.EqualsCaseInsensitive(ProductionDomain, domain))
+                else if (Extensions.EqualsCaseInsensitive(ProductionDomain, domain))
                     result = false;
                 else if (LoggedInUser.IsLoggedIn)
                 {
@@ -88,8 +121,14 @@ namespace Gooeycms.Business.Util
         /// <returns></returns>
         public static IList<CmsTemplate> GetTemplates()
         {
-            CmsTheme theme = GetCurrentTheme();
-            return TemplateManager.Instance.GetTemplates(theme);
+            IList<CmsTemplate> result = CurrentSite.Cache.Get<IList<CmsTemplate>>("currenttemplates");
+            if (result == null)
+            {
+                CmsTheme theme = GetCurrentTheme();
+                result = TemplateManager.Instance.GetTemplates(theme);
+                CurrentSite.Cache.Add("currenttemplates", result);
+            }
+            return result;
         }
 
         public static String GetContainerUrl(String container)

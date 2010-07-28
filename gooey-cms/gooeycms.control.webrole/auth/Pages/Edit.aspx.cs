@@ -73,6 +73,9 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         protected void OnSave_Click(Object sender, EventArgs e)
         {
+            CurrentSite.Cache.Clear();
+
+            CmsPage page = new CmsPage();
             try
             {
                 String existingPageGuid = Request.QueryString["pid"];
@@ -86,7 +89,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                         throw new ApplicationException("This page name already exists and may not be used again.");
                 }
 
-                CmsPage page = new CmsPage();
                 page.SubscriptionId = CurrentSite.Guid.Value;
                 page.DateSaved = DateTime.Now;
                 page.IsApproved = false;
@@ -107,17 +109,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 }
 
                 PageManager.Instance.AddNewPage(this.ParentDirectories.SelectedValue, this.PageName.Text, page);
-                
-                /*
-                 * This is how we detect the difference between a "preview" and a "save"
-                 * When the preview button is set, the 'sender' object is a string and this block of code
-                 * isn't executed. When a save is called, the 'sender' is an object and this block is executed
-                 */
-                if (!(sender is String))
-                {
-                    PageManager.Instance.RemoveObsoletePages(page);
-                    Response.Redirect("~/auth/pages/edit.aspx?a=edit&pid=" + page.Guid  + "&s=1", true);
-                }
             }
             catch (Exception ex)
             {
@@ -125,6 +116,22 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                 this.Status.Text = ex.Message;
                 this.Status.ForeColor = System.Drawing.Color.Red;
+            }
+
+            /*
+             * This is how we detect the difference between a "preview" and a "save"
+             * When the preview button is set, the 'sender' object is a string and this block of code
+             * isn't executed. When a save is called, the 'sender' is an object and this block is executed
+             */
+            if (!(sender is String))
+            {
+                try
+                {
+                    PageManager.Instance.RemoveObsoletePages(page);
+                }
+                catch (Exception) { }
+
+                Response.Redirect("~/auth/pages/edit.aspx?a=edit&pid=" + page.Guid + "&s=1", true);
             }
         }
 

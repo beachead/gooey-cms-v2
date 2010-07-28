@@ -102,6 +102,8 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
         protected void OnSave_Click(object sender, EventArgs e)
         {
+            CurrentSite.Cache.Clear();
+
             String id = this.ExistingTemplateId.Value;
             CmsTemplate template = TemplateManager.Instance.GetTemplate(Data.EncryptedValue.New(id));
             if (template == null)

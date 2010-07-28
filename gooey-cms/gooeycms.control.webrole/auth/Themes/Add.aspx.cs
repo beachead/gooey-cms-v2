@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using Gooeycms.Webrole.Control.App_Code;
 using Gooeycms.Business.Themes;
+using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Webrole.Control.App_Code;
 using Gooeycms.Webrole.Controls;
 
 namespace Gooeycms.Webrole.Control.Auth.Themes
@@ -31,6 +28,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
 
         protected void SaveTheme_Click(object sender, EventArgs e)
         {
+            CurrentSite.Cache.Clear();
             try
             {
                 ThemeManager manager = ThemeManager.Instance;

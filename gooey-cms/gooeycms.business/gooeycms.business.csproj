@@ -64,6 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheInstance.cs" />
+    <Compile Include="Cache\CacheManager.cs" />
     <Compile Include="Compression\ZipHandler.cs" />
     <Compile Include="Crypto\TextHash.cs" />
     <Compile Include="Help\HelpManager.cs" />
@@ -139,7 +141,7 @@
     <Compile Include="Util\EmbeddedResource.cs" />
     <Compile Include="Util\SiteHelper.cs" />
     <Compile Include="Util\CurrentSite.cs" />
-    <Compile Include="Util\StringExtensions.cs" />
+    <Compile Include="Util\Extensions.cs" />
     <Compile Include="Web\CmsUrl.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
   </ItemGroup>
