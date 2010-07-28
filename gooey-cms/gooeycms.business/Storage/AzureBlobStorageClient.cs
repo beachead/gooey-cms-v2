@@ -92,12 +92,35 @@ namespace Gooeycms.Business.Storage
                 blob.FetchAttributes();
                 results.Add(new StorageFile()
                 {
-                    Filename = blob.Uri.ToString().Substring(blob.Uri.ToString().LastIndexOf("/") + 1),
+                    Filename = GetBlobFilename(blob),
                     Uri = blob.Uri
                 });
             }
 
             return results;
+        }
+
+        private static string GetBlobFilename(CloudBlob blob)
+        {
+            return blob.Uri.ToString().Substring(blob.Uri.ToString().LastIndexOf("/") + 1);
+        }
+
+        public override StorageFile GetInfo(string directory, string filename)
+        {
+            CloudBlobContainer container = GetBlobContainer(directory);
+            CloudBlob blob = container.GetBlobReference(filename);
+
+            return new StorageFile()
+            {
+                Filename = GetBlobFilename(blob),
+                Uri = blob.Uri
+            };
+        }
+
+        public override StorageContainer GetContainerInfo(String name)
+        {
+            CloudBlobContainer container = GetBlobContainer(name);
+            return new StorageContainer() { Uri = container.Uri };
         }
     }
 }

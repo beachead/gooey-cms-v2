@@ -10,6 +10,8 @@ namespace Gooeycms.Business.Storage
         public abstract void Delete(String directory, String filename);
         public abstract byte[] Open(String directory, String filename);
         public abstract IList<StorageFile> List(String directory);
+        public abstract StorageFile GetInfo(String directory, String filename);
+        public abstract StorageContainer GetContainerInfo(String directory);
 
         public void Save(String directory, String filename, String contents, Permissions permissions)
         {

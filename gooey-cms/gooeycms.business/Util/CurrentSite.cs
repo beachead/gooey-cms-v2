@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gooeycms.Business.Membership;
+using Gooeycms.Business.Storage;
 using Gooeycms.Business.Themes;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Theme;
@@ -89,6 +90,18 @@ namespace Gooeycms.Business.Util
         {
             CmsTheme theme = GetCurrentTheme();
             return TemplateManager.Instance.GetTemplates(theme);
+        }
+
+        public static String GetContainerUrl(String container)
+        {
+            String fullname = SiteHelper.GetStorageKey(container, CurrentSite.Guid.Value);
+            return StorageHelper.GetStorageClient().GetContainerInfo(fullname).Uri.ToString();
+        }
+
+        public static String GetImageUrl(String imagename)
+        {
+            StorageFile file = StorageHelper.GetStorageClient().GetInfo(CurrentSite.ImageStorageDirectory, imagename);
+            return file.Url;
         }
 
         public static string Culture 

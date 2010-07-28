@@ -118,6 +118,7 @@
     <Compile Include="Storage\BlobExtensions.cs" />
     <Compile Include="Storage\IStorageClient.cs" />
     <Compile Include="Storage\AzureBlobStorageClient.cs" />
+    <Compile Include="Storage\StorageContainer.cs" />
     <Compile Include="Storage\StorageFile.cs" />
     <Compile Include="Storage\StorageHelper.cs" />
     <Compile Include="Subscription\Paypal\DebugSubscriptionProcessor.cs" />

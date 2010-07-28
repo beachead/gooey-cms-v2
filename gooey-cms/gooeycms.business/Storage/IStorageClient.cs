@@ -20,5 +20,9 @@ namespace Gooeycms.Business.Storage
         String OpenAsString(String directory, String filename);
 
         IList<StorageFile> List(String directory);
+
+        StorageFile GetInfo(String directory, String filename);
+
+        StorageContainer GetContainerInfo(String container);
     }
 }
