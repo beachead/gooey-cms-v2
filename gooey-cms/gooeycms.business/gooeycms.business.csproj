@@ -68,6 +68,7 @@
     <Compile Include="Cache\CacheManager.cs" />
     <Compile Include="Compression\ZipHandler.cs" />
     <Compile Include="Crypto\TextHash.cs" />
+    <Compile Include="Css\CssFile.cs" />
     <Compile Include="Help\HelpManager.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Javascript\JavascriptFile.cs" />
@@ -100,7 +101,7 @@
     <Compile Include="Markup\Validator\FreeMarkupValidator.cs" />
     <Compile Include="Markup\Validator\IMarkupValidator.cs" />
     <Compile Include="Membership\LoggedInUser.cs" />
-    <Compile Include="Pages\CssManager.cs" />
+    <Compile Include="Css\CssManager.cs" />
     <Compile Include="Pages\DynamicContentFormatter.cs" />
     <Compile Include="Javascript\JavascriptManager.cs" />
     <Compile Include="Pages\NavigationControl.cs" />

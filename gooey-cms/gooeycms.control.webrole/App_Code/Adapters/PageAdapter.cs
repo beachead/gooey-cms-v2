@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gooeycms.Business.Javascript;
+using Gooeycms.Business.Pages;
 using Gooeycms.Data.Model.Page;
 
 namespace Gooeycms.Webrole.Control.App_Code.Adapters

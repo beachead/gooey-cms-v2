@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using Gooeycms.Business.Javascript;
+using Gooeycms.Business.Pages;
 
 namespace Beachead.Web.CMS.controls
 {

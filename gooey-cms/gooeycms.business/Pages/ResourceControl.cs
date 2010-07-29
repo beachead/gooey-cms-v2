@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Gooeycms.Business.Javascript
+namespace Gooeycms.Business.Pages
 {
     class ResourceControl
     {

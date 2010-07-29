@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gooeycms.Business.Javascript
+namespace Gooeycms.Business.Pages
 {
     public class NavigationControl
     {

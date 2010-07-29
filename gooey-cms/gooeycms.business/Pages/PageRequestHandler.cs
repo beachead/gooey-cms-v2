@@ -3,6 +3,8 @@ using System.Text;
 using System.Web.UI;
 using Beachead.Core.Markup;
 using Beachead.Core.Markup.Engine;
+using Gooeycms.Business.Css;
+using Gooeycms.Business.Javascript;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business.Themes;
 using Gooeycms.Business.Util;
@@ -10,7 +12,7 @@ using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Theme;
 
-namespace Gooeycms.Business.Javascript
+namespace Gooeycms.Business.Pages
 {
     public class PageRequestHandler : Page
     {
