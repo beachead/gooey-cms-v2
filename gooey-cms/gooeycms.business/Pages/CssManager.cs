@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gooeycms.Business.Pages
+namespace Gooeycms.Business.Javascript
 {
     class CssManager
     {

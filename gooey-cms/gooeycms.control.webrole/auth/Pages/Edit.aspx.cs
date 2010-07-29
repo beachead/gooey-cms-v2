@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Membership;
-using Gooeycms.Business.Pages;
+using Gooeycms.Business.Javascript;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;

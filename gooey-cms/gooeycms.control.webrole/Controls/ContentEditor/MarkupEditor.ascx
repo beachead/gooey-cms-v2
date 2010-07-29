@@ -2,8 +2,9 @@
 <%@ Register src="~/controls/ContentEditor/ResizableTextBox/ResizableTextBox.ascx" tagname="ResizableTextBox" tagprefix="uc" %>
 <link rel="stylesheet" type="text/css" href="<% Response.Write(EditorCssPath); %>" />
 <script type="text/javascript" src="<% Response.Write(EditorScriptPath); %>"></script>      
-    <asp:FileUpload ID="HiddenFileUpload" CssClass="hidden" runat="server" />
+    
     <div>
+        <asp:Panel ID="ToolbarPanel" runat="server">
         <div style="width:900px;height:25px;">    
         <ul id="FormatUl">
         <li><a href="#" onclick="javascript:return __Wrap('<b>', '</b>','<%=PageMarkupText.TextboxId %>');" title="Bold" class="formatlink" id="BoldLink"></a></li>
@@ -19,6 +20,7 @@
         <li><anthem:LinkButton ID="PreviewLink" runat="server" OnClick="Preview_Click" ToolTip="Preview Window" OnClientClick="OpenPreviewWindow();" CssClass="formatlink PreviewLink" /></li>                     
         </ul>
         </div>
+        </asp:Panel>
         <div style="width:950px;"> 
             <uc:ResizableTextBox ID="PageMarkupText" runat="server" />
         </div>

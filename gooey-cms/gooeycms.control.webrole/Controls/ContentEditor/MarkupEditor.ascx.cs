@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using Gooeycms.Business.Pages;
+using Gooeycms.Business.Javascript;
 
 namespace Beachead.Web.CMS.controls
 {
@@ -9,6 +9,7 @@ namespace Beachead.Web.CMS.controls
         protected static String EditorScriptPath;
         protected static String EditorCssPath;
         protected static String RootUrl;
+        private Boolean isShowToolbar = true;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,6 +19,14 @@ namespace Beachead.Web.CMS.controls
                 EditorCssPath = Page.ResolveUrl("~/controls/ContentEditor/contenteditor.css");
                 RootUrl = Page.ResolveUrl("~");
             }
+
+            this.ToolbarPanel.Visible = ShowToolbar;
+        }
+
+        public Boolean ShowToolbar
+        {
+            get { return this.isShowToolbar; }
+            set { this.isShowToolbar = value; }
         }
 
         public short TabIndex

@@ -13,13 +13,13 @@ namespace Beachead.Web.CMS.controls {
     public partial class MarkupEditor {
         
         /// <summary>
-        /// HiddenFileUpload control.
+        /// ToolbarPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload HiddenFileUpload;
+        protected global::System.Web.UI.WebControls.Panel ToolbarPanel;
         
         /// <summary>
         /// PreviewLink control.

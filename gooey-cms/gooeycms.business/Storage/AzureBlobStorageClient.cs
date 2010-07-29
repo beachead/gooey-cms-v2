@@ -9,6 +9,8 @@ namespace Gooeycms.Business.Storage
 {
     public class AzureBlobStorageClient : BaseStorageClient
     {
+        private IDictionary<String, String> metadata = new Dictionary<String, String>();
+
         static AzureBlobStorageClient()
         {
             CloudStorageAccount.SetConfigurationSettingPublisher((configName, configSetter) =>
@@ -26,6 +28,7 @@ namespace Gooeycms.Business.Storage
 
         private CloudBlobContainer GetBlobContainer(String name)
         {
+            name = name.Replace(" ", "");
             CloudStorageAccount account = CloudStorageAccount.FromConfigurationSetting("ActiveStorageConnectionString");
             CloudBlobClient client = account.CreateCloudBlobClient();
 
@@ -35,6 +38,7 @@ namespace Gooeycms.Business.Storage
 
         public override void Save(String directory, string filename, byte[] data, Permissions permissions)
         {
+            filename = filename.Replace(" ", "");
             if ((data != null) && (data.Length > 0))
             {
                 CloudBlobContainer container = GetBlobContainer(directory);
@@ -56,6 +60,12 @@ namespace Gooeycms.Business.Storage
                 blob.Metadata["filename"] = filename;
                 blob.Metadata["created"] = DateTime.Now.ToString();
                 blob.Metadata["size"] = data.Length.ToString();
+
+                foreach(String key in this.metadata.Keys)
+                {
+                    blob.Metadata[key] = this.metadata[key];
+                }
+
                 blob.SetMetadata();
                 blob.SetProperties();
             }
@@ -63,6 +73,7 @@ namespace Gooeycms.Business.Storage
 
         public override void Delete(String directory, string filename)
         {
+            filename = filename.Replace(" ", "");
             CloudBlobContainer container = GetBlobContainer(directory);
             CloudBlob blob = container.GetBlobReference(filename);
             blob.DeleteIfExists();
@@ -70,12 +81,34 @@ namespace Gooeycms.Business.Storage
 
         public override byte[] Open(String directory, string filename)
         {
+            filename = filename.Replace(" ","");
             CloudBlobContainer container = GetBlobContainer(directory);
             CloudBlob blob = container.GetBlobReference(filename);
 
             byte[] result = new byte [] {};
             if (blob.Exists())
                 result = blob.DownloadByteArray();
+
+            return result;
+        }
+
+        public override StorageFile GetFile(string directory, string filename)
+        {
+            filename = filename.Replace(" ", "");
+
+            StorageFile result = new StorageFile();
+            CloudBlobContainer container = GetBlobContainer(directory);
+            if (container.Exists())
+            {
+                CloudBlob blob = container.GetBlobReference(filename);
+                if (blob.Exists())
+                {
+                    result.Uri = blob.Uri;
+                    result.Filename = GetBlobFilename(blob);
+                    result.Metadata = blob.Metadata;
+                    result.Data = blob.DownloadByteArray();
+                }
+            }
 
             return result;
         }
@@ -91,12 +124,16 @@ namespace Gooeycms.Business.Storage
                 foreach (IListBlobItem item in items)
                 {
                     CloudBlob blob = container.GetBlobReference(item.Uri.ToString());
-                    blob.FetchAttributes();
-                    results.Add(new StorageFile()
+                    if (blob.Exists())
                     {
-                        Filename = GetBlobFilename(blob),
-                        Uri = blob.Uri
-                    });
+                        blob.FetchAttributes();
+                        results.Add(new StorageFile()
+                        {
+                            Filename = GetBlobFilename(blob),
+                            Uri = blob.Uri,
+                            Metadata = blob.Metadata
+                        });
+                    }
                 }
             }
 
@@ -110,20 +147,43 @@ namespace Gooeycms.Business.Storage
 
         public override StorageFile GetInfo(string directory, string filename)
         {
+            filename = filename.Replace(" ", "");
             CloudBlobContainer container = GetBlobContainer(directory);
             CloudBlob blob = container.GetBlobReference(filename);
 
-            return new StorageFile()
+            StorageFile file = new StorageFile();
+            if (blob.Exists())
             {
-                Filename = GetBlobFilename(blob),
-                Uri = blob.Uri
-            };
+                file.Filename = GetBlobFilename(blob);
+                file.Uri = blob.Uri;
+                file.Metadata = blob.Metadata;
+            }
+
+            return file;
         }
 
         public override StorageContainer GetContainerInfo(String name)
         {
             CloudBlobContainer container = GetBlobContainer(name);
             return new StorageContainer() { Uri = container.Uri };
+        }
+
+        public override void AddMetadata(String key, String value)
+        {
+            this.metadata.Add(key, value);
+        }
+
+        public override void SetMetadata(string directory, string filename)
+        {
+            CloudBlobContainer container = GetBlobContainer(directory);
+            CloudBlob blob = container.GetBlobReference(filename);
+            if (blob.Exists())
+            {
+                foreach (String key in metadata.Keys)
+                    blob.Metadata[key] = metadata[key];
+
+                blob.SetMetadata();
+            }
         }
     }
 }

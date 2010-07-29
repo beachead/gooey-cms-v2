@@ -8,7 +8,7 @@ using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Site;
 
-namespace Gooeycms.Business.Pages
+namespace Gooeycms.Business.Javascript
 {
     public class PageManager
     {

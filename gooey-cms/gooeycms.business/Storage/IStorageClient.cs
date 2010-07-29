@@ -18,11 +18,15 @@ namespace Gooeycms.Business.Storage
 
         byte [] Open(String directory, String filename);
         String OpenAsString(String directory, String filename);
+        StorageFile GetFile(string directory, string actualfilename);
 
         IList<StorageFile> List(String directory);
 
         StorageFile GetInfo(String directory, String filename);
 
         StorageContainer GetContainerInfo(String container);
+
+        void AddMetadata(String key, String value);
+        void SetMetadata(string directory, string actualFilename);
     }
 }

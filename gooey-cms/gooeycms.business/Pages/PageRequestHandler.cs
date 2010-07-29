@@ -10,7 +10,7 @@ using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Theme;
 
-namespace Gooeycms.Business.Pages
+namespace Gooeycms.Business.Javascript
 {
     public class PageRequestHandler : Page
     {
@@ -116,7 +116,7 @@ namespace Gooeycms.Business.Pages
             //Include all of the javascript files
             JavascriptManager js = new JavascriptManager(this.page);
             CssManager css = new CssManager(this.page);
-            output = output.Replace("{head.scripts.include}", js.GetJavascriptIncludes());
+            output = output.Replace("{head.scripts.include}", js.GetJavascriptIncludes()); //TODO Fix the deprecation
             output = output.Replace("{head.css.include}", css.GetCssIncludes());
             output = output.Replace("{head.css.inline}", this.page.Stylesheet);
 

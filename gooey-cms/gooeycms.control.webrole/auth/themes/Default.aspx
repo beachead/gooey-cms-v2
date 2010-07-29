@@ -53,7 +53,7 @@
                         <asp:HyperLink ID="EditCss" Text="CSS" runat="server"
                             NavigateUrl='' />&nbsp;
                         <asp:HyperLink ID="EditJavascript" Text="Javascript" runat="server"
-                            NavigateUrl='' />&nbsp;
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />&nbsp;
                         <asp:LinkButton ID="DeleteTemplate" Text="[delete]" OnClientClick="return confirm('Are you sure you want to delete this theme?\r\n\r\nWARNING: This will also delete ALL javascript, css and image files associated with this theme.')" OnClick="OnDelete_Click" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>

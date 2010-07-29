@@ -70,6 +70,7 @@
     <Compile Include="Crypto\TextHash.cs" />
     <Compile Include="Help\HelpManager.cs" />
     <Compile Include="Images\ImageManager.cs" />
+    <Compile Include="Javascript\JavascriptFile.cs" />
     <Compile Include="Markup\BaseFormatter.cs" />
     <Compile Include="Markup\Engine\DefaultMarkupEngine.cs" />
     <Compile Include="Markup\Engine\MarkupEngineFactory.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Membership\LoggedInUser.cs" />
     <Compile Include="Pages\CssManager.cs" />
     <Compile Include="Pages\DynamicContentFormatter.cs" />
-    <Compile Include="Pages\JavascriptManager.cs" />
+    <Compile Include="Javascript\JavascriptManager.cs" />
     <Compile Include="Pages\NavigationControl.cs" />
     <Compile Include="Pages\PageNotFoundException.cs" />
     <Compile Include="Pages\ResourceControl.cs" />

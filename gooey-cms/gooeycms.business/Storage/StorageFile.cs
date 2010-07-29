@@ -7,6 +7,10 @@ namespace Gooeycms.Business.Storage
     {
         public Uri Uri { get; set; }
         public String Filename { get; set; }
+        public System.Collections.Specialized.NameValueCollection Metadata { get; set; }
+        public String ContentType { get; set; }
+        public byte[] Data { get; set; }
+
         public String Name
         {
             get
@@ -15,9 +19,6 @@ namespace Gooeycms.Business.Storage
                 return Filename.Replace(info.Extension, "");
             }
         }
-
-        public String ContentType { get; set; }
-        public byte[] Data { get; set; }
 
         public String Url
         {
@@ -30,6 +31,11 @@ namespace Gooeycms.Business.Storage
             {
                 return Url.Replace(Filename, Name + "-thumb.jpg");
             }
+        }
+
+        public bool Exists()
+        {
+            return (!String.IsNullOrEmpty(this.Filename));
         }
     }
 }

@@ -22,7 +22,10 @@ This page allows you to add a new theme to the site or modify an existing theme.
     <table>
         <tr>
             <td>Theme Name:</td>    
-            <td><asp:TextBox ID="ThemeName" Width="250px" runat="server" /></td>
+            <td>
+                <asp:TextBox ID="ThemeName" Width="250px" runat="server" />
+                <asp:RegularExpressionValidator ID="NameValidator" ControlToValidate="ThemeName" ValidationExpression="[\w\d]+" ErrorMessage="* The theme name may only contain letters and/or numbers. No spaces or special characters." runat="server" />
+            </td>
         </tr>   
         <tr>
             <td>Theme Description (one-line):</td>    
