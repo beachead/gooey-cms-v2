@@ -40,6 +40,8 @@ namespace Gooeycms.Business.Pages
         /// <param name="e"></param>
         protected void Page_Init(object sender, EventArgs e)
         {
+            ValidateSite();
+
             String preview = Request.QueryString["pvw"];
             String idToDelete = Request.QueryString["pvw_id"];
 
@@ -105,6 +107,12 @@ namespace Gooeycms.Business.Pages
 #endregion
         }
 
+        private void ValidateSite()
+        {
+            if (CurrentSite.GetCurrentTheme() == null)
+                throw new ApplicationException("This site could not be displayed. Reason: The site has not been properly configured with a default theme.");
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             output = new StringBuilder(HtmlShell);
@@ -118,7 +126,7 @@ namespace Gooeycms.Business.Pages
             //Include all of the javascript files
             JavascriptManager js = new JavascriptManager(this.page);
             CssManager css = new CssManager(this.page);
-            output = output.Replace("{head.scripts.include}", js.GetJavascriptIncludes()); //TODO Fix the deprecation
+            output = output.Replace("{head.scripts.include}", js.GetJavascriptIncludes());
             output = output.Replace("{head.css.include}", css.GetCssIncludes());
             output = output.Replace("{head.css.inline}", this.page.Stylesheet);
 

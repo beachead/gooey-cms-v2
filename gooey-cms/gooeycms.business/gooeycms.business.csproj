@@ -72,6 +72,7 @@
     <Compile Include="Help\HelpManager.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Javascript\JavascriptFile.cs" />
+    <Compile Include="Javascript\JavascriptHandler.cs" />
     <Compile Include="Markup\BaseFormatter.cs" />
     <Compile Include="Markup\Engine\DefaultMarkupEngine.cs" />
     <Compile Include="Markup\Engine\MarkupEngineFactory.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
     <Compile Include="Handler\BaseHttpHandler.cs" />
-    <Compile Include="Handler\SubscriptionHandler.cs" />
+    <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Membership\MembershipProfile.cs" />
     <Compile Include="Membership\MembershipUserWrapper.cs" />

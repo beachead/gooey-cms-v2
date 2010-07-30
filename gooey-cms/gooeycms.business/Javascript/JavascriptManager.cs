@@ -6,6 +6,7 @@ using Gooeycms.Business.Pages;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
+using Microsoft.Security.Application;
 
 namespace Gooeycms.Business.Javascript
 {
@@ -22,12 +23,17 @@ namespace Gooeycms.Business.Javascript
             this.cmsPage = cmsPage;
         }
 
-
-        [Obsolete("The system now supports multiple javascript includes")]
         public String GetJavascriptIncludes()
         {
-            //TODO: Implement include code
-            return "";
+            StringBuilder includes = new StringBuilder();
+            IList<JavascriptFile> scripts = List(CurrentSite.GetCurrentTheme());
+            foreach (JavascriptFile script in scripts)
+            {
+                if (script.IsEnabled)
+                    includes.AppendLine("<script src=\"~/scripts/javascript.handler?file=" + AntiXss.UrlEncode(script.FullName) + "\" type=\"text/javascript\" language=\"javascript\"></script>");
+            }
+
+            return includes.ToString();
         }
 
         /// <summary>
