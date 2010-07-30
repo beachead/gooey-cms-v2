@@ -73,8 +73,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
         protected void BtnEdit_Click(object sender, EventArgs e)
         {
-            LoadTabData();
-
             String name = this.LstExistingFile.SelectedValue;
             CssFile file = CssManager.Instance.Get(this.GetSelectedTheme(), name);
 

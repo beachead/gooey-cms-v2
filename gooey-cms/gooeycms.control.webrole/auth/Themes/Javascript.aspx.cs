@@ -72,8 +72,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
         protected void BtnEdit_Click(object sender, EventArgs e)
         {
-            LoadTabData();
-
             String name = this.LstExistingFile.SelectedValue;
             JavascriptFile file = JavascriptManager.Instance.Get(this.GetSelectedTheme(), name);
 
