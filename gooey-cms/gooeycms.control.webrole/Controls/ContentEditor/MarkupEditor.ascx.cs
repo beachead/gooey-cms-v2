@@ -10,6 +10,7 @@ namespace Beachead.Web.CMS.controls
         protected static String EditorCssPath;
         protected static String RootUrl;
         private Boolean isShowToolbar = true;
+        private bool useStandardImageTags = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,6 +22,12 @@ namespace Beachead.Web.CMS.controls
             }
 
             this.ToolbarPanel.Visible = ShowToolbar;
+        }
+
+        public Boolean UseStandardImageTags
+        {
+            get { return this.useStandardImageTags; }
+            set { this.useStandardImageTags = value; }
         }
 
         public Boolean ShowToolbar

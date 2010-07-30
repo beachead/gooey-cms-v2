@@ -29,7 +29,11 @@
     var parent = null;
 
     function onimage_selected(imageName) {
+    <% if (UseStandardImageTags) { %>
+        __Insert('../images/' + imageName,'<%=PageMarkupText.TextboxId %>');
+    <% } else { %>
         __Insert('[[image:~/' + imageName + ']]{BR}','<%=PageMarkupText.TextboxId %>');
+    <% } %>
     }
 
     function OpenPreviewWindow() {

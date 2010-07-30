@@ -7,6 +7,7 @@
             <li><a id="A2" href="~/auth/Themes/Default.aspx" runat="server">Manage Themes</a>:</li>
             <li><a id="A1" href="~/auth/Themes/Add.aspx" runat="server">Add Theme</a></li>
             <li>Manage Javascript</li>
+            <li><a href="#" onclick="window.open('/auth/Pages/ImageBrowser.aspx','','width=500,height=400,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;">Image Library</a></li>
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
@@ -82,7 +83,7 @@ This page allows you to associate javascript files from your global library to y
 
                     <br /><hr />
                     Edit:<br />
-                    <beachead:Editor ID="Editor" ShowToolbar="false" runat="server" />
+                    <beachead:Editor ID="Editor" ShowToolbar="false" UseStandardImageTags="true" runat="server" />
 
                     <br />
                     <asp:Button ID="BtnSaveEdit" Text="Save" runat="server" />
