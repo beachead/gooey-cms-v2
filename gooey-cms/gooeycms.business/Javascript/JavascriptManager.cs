@@ -30,7 +30,7 @@ namespace Gooeycms.Business.Javascript
             foreach (JavascriptFile script in scripts)
             {
                 if (script.IsEnabled)
-                    includes.AppendLine("<script src=\"~/scripts/javascript.handler?file=" + AntiXss.UrlEncode(script.FullName) + "\" type=\"text/javascript\" language=\"javascript\"></script>");
+                    includes.AppendLine("<script src=\"~/gooeyscripts/" + AntiXss.UrlEncode(script.FullName) + "\" type=\"text/javascript\" language=\"javascript\"></script>");
             }
 
             return includes.ToString();

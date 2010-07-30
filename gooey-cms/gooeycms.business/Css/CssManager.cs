@@ -5,6 +5,7 @@ using Gooeycms.Business.Pages;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
+using Microsoft.Security.Application;
 
 namespace Gooeycms.Business.Css
 {
@@ -21,11 +22,17 @@ namespace Gooeycms.Business.Css
             this.cmsPage = cmsPage;
         }
 
-        [Obsolete("This method is no longer safe to use, because multiple css files may be returned.")]
         internal String GetCssIncludes()
         {
-            //TODO: Implement this portion
-            return "";
+            StringBuilder includes = new StringBuilder();
+            IList<CssFile> scripts = List(CurrentSite.GetCurrentTheme());
+            foreach (CssFile script in scripts)
+            {
+                if (script.IsEnabled)
+                    includes.AppendLine("<script src=\"~/gooeycss/" + AntiXss.UrlEncode(script.FullName) + "\" type=\"text/javascript\" language=\"javascript\"></script>");
+            }
+
+            return includes.ToString();
         }
 
         /// <summary>

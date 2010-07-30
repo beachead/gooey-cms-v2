@@ -69,6 +69,7 @@
     <Compile Include="Compression\ZipHandler.cs" />
     <Compile Include="Crypto\TextHash.cs" />
     <Compile Include="Css\CssFile.cs" />
+    <Compile Include="Css\CssHandler.cs" />
     <Compile Include="Help\HelpManager.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Javascript\JavascriptFile.cs" />
