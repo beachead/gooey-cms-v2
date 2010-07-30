@@ -70,12 +70,20 @@ namespace Gooeycms.Business.Css
             }
 
             String directory = CurrentSite.StylesheetStorageDirectory;
-            String actualFilename = GetRelativeFilename(theme, filename);
+            filename = GetRelativeFilename(theme, filename);
+
+            String enabled = Boolean.FalseString;
+            try
+            {
+                CssFile exists = Get(theme, filename);
+                enabled = (exists.IsEnabled) ? Boolean.TrueString : Boolean.FalseString;
+            }
+            catch (PageNotFoundException) { }
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.AddMetadata(GetEnabledKey(theme), "false");
+            client.AddMetadata(GetEnabledKey(theme), enabled);
 
-            client.Save(directory, actualFilename, data, Permissions.Private);
+            client.Save(directory, filename, data, Permissions.Private);
         }
 
         /// <summary>

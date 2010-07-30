@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Web.UI;
+using System.Threading;
 using Beachead.Core.Markup;
 using Beachead.Core.Markup.Engine;
 using Gooeycms.Business.Css;
@@ -11,6 +12,9 @@ using Gooeycms.Business.Util;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Business.Crypto;
+using System.Threading.Tasks;
+using System.ServiceModel.Activation;
 
 namespace Gooeycms.Business.Pages
 {
@@ -44,28 +48,29 @@ namespace Gooeycms.Business.Pages
 
             String preview = Request.QueryString["pvw"];
             String idToDelete = Request.QueryString["pvw_id"];
+            String token = Request.QueryString["token"];
 
             CmsUrl url = CmsUrl.Parse(Request.RawUrl);
             String culture = CurrentSite.Culture;
 
-            this.page = PageManager.Instance.GetLatestPage(url);
+            if (String.IsNullOrEmpty(preview))
+                this.page = PageManager.Instance.GetLatestPage(url);
+            else
+            {
+                //Make sure there's an authenticated user making this request
+                if (!TokenManager.IsValid(idToDelete, token))
+                    throw new ApplicationException("The specified security token is not valid for this preview request.");
+                this.page = PageManager.Instance.GetPage(Data.Guid.New(idToDelete));
+            }
+
             if (this.page != null)
                 this.theme = ThemeManager.Instance.GetDefaultBySite(Data.Guid.New(this.page.SubscriptionId));
             else
                 throw new PageNotFoundException(url.Path);
 
+            //Make sure there's an authenticated user making this request
             if (!String.IsNullOrEmpty(preview))
-            {
-                //Make sure there's an authenticated user making this request
-                if (LoggedInUser.IsLoggedIn)
-                {
-                    int id = 0;
-                    Int32.TryParse(idToDelete, out id);
-
-                    //Delete the page because the user didn't actually save it, but instead was previewing it
-                    PageManager.Instance.Remove(Data.Guid.New(idToDelete));
-                }
-            }
+                PageManager.Instance.Remove(this.page);
 
             #region old code
             /*

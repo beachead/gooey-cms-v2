@@ -67,15 +67,23 @@ namespace Gooeycms.Business.Javascript
             if (!filename.EndsWith(JavascriptFile.Extension))
             {
                 filename = filename + JavascriptFile.Extension;
-            }
+            }  
 
             String directory = CurrentSite.JavascriptStorageDirectory;
-            String actualFilename = GetRelativeFilename(theme, filename);
+            filename = GetRelativeFilename(theme, filename);
+
+            String enabled = "false";
+            try
+            {
+                JavascriptFile exists = Get(theme, filename);
+                enabled = (exists.IsEnabled) ? Boolean.TrueString : Boolean.FalseString;
+            }
+            catch (PageNotFoundException) { }
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.AddMetadata(GetEnabledKey(theme), "false");
+            client.AddMetadata(GetEnabledKey(theme), enabled);
 
-            client.Save(directory, actualFilename, data, Permissions.Private);
+            client.Save(directory, filename, data, Permissions.Private);
         }
 
         /// <summary>

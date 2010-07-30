@@ -13,6 +13,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
         dojo.require("dojo.parser");
+        dojo.require("dijit.TitlePane");
         dojo.require("dijit.dijit");
         dojo.require("dijit.Dialog");
         dojo.require("dijit.layout.TabContainer");

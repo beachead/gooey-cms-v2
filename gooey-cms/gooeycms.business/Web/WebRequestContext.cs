@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-
 namespace Gooeycms.Business.Web
 {
     public class WebRequestContext

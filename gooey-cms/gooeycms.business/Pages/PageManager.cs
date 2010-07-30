@@ -7,6 +7,7 @@ using Gooeycms.Business.Util;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Site;
+using System.Threading.Tasks;
 
 namespace Gooeycms.Business.Pages
 {
@@ -48,14 +49,19 @@ namespace Gooeycms.Business.Pages
             return result;
         }
 
-
         public CmsPage GetPage(Data.Guid pageGuid)
+        {
+            return GetPage(pageGuid, true);
+        }
+
+        public CmsPage GetPage(Data.Guid pageGuid, Boolean loadData)
         {
             CmsPageDao dao = new CmsPageDao();
             Boolean approvedOnly = !(CurrentSite.IsStagingHost);
 
             CmsPage result = dao.FindByPageGuid(pageGuid);
-            LoadPageData(result);
+            if (loadData)
+                LoadPageData(result);
 
             if (CurrentSite.IsProductionHost)
             {
@@ -147,8 +153,6 @@ namespace Gooeycms.Business.Pages
                     dao.Save<CmsPage>(page);
                     tx.Commit();
                 }
-
-                Cleanup(page.Guid);
                 client.Save(CurrentSite.PageStorageDirectory, page.Guid, page.Content, Permissions.Private);
                 client.Save(CurrentSite.JavascriptStorageDirectory, page.Guid, page.Javascript, Permissions.Public);
                 client.Save(CurrentSite.StylesheetStorageDirectory, page.Guid, page.Stylesheet, Permissions.Public);
@@ -167,12 +171,15 @@ namespace Gooeycms.Business.Pages
 
         public void Remove(CmsPage page)
         {
-            CmsPageDao dao = new CmsPageDao();
-            using (Transaction tx = new Transaction())
+            if (page != null)
             {
-                Cleanup(page.Guid);
-                dao.Delete<CmsPage>(page);
-                tx.Commit();
+                CmsPageDao dao = new CmsPageDao();
+                using (Transaction tx = new Transaction())
+                {
+                    Cleanup(page.Guid);
+                    dao.Delete<CmsPage>(page);
+                    tx.Commit();
+                }
             }
         }
 
@@ -237,7 +244,7 @@ namespace Gooeycms.Business.Pages
 
         public void Remove(Data.Guid guid)
         {
-            CmsPage page = this.GetPage(guid);
+            CmsPage page = this.GetPage(guid, false);
             this.Remove(page);
         }
     }

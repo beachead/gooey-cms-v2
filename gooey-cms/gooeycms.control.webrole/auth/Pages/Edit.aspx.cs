@@ -10,11 +10,13 @@ using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Site;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
     public partial class Edit : ValidatedHelpPage, IPreviewable
     {
+        private String savedPageId = null;
         protected String PageAction = "Add";
         protected override void OnPageLoad(object sender, EventArgs e)
         {
@@ -133,6 +135,10 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                 Response.Redirect("~/auth/pages/edit.aspx?a=edit&pid=" + page.Guid + "&s=1", true);
             }
+            else
+            {
+                savedPageId = page.Guid;
+            }
         }
 
         protected void OnDelete_Click(Object sender, EventArgs e)
@@ -141,15 +147,14 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         public string Save()
         {
-            //TODO Implement the preview functionality
-            /*
             if (Request.QueryString["a"] != null)
             {
                 OnSave_Click("preview", null);
-                String url = this.ParentDirectories.SelectedItem.Text + "/" + this.PageName.Text;
-                return Page.ResolveUrl("~" + url + "?pvw=preview&pvw_id=" + this.savedPageId.ToString());
+                String url = this.ParentDirectories.SelectedItem.Text + this.PageName.Text;
+                String token = Server.UrlEncode(TokenManager.Issue(this.savedPageId, TimeSpan.FromMinutes(5)));
+                return Page.ResolveUrl(CurrentSite.Protocol + CurrentSite.StagingDomain + url + "?pvw=preview&pvw_id=" + this.savedPageId.ToString() + "&token=" + token);
             }
-            else */
+            else 
                 return "::ALERT::You must save the page once before using the preview capability.";
         }
 

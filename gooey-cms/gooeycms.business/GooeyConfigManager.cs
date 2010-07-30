@@ -120,5 +120,17 @@ namespace Gooeycms.Business
                 return result;
             }
         }
+
+        public static String TokenEncyrptionKey
+        {
+            get
+            {
+                String result = GetAsString(ConfigConstants.TokenEncyrptionKey);
+                if (String.IsNullOrEmpty(result))
+                    result = "token135adfjasdfk#GAGDJ a asfl;jasdf$%WT%WEGJKAFD";
+
+                return result;
+            }
+        }
     }
 }

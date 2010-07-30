@@ -147,5 +147,10 @@ namespace Gooeycms.Business.Util
         {
             get { return "en-us"; } 
         }
+
+        public static string Protocol
+        {
+            get { return "http://"; }
+        }
     }
 }

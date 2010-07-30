@@ -193,7 +193,7 @@ li a:hover
 
 td .page-group
 {
-	border:1px solid #E6E7F2;	
+	border:0px solid #E6E7F2;	
 	background-color:#ffffff;
 	vertical-align:top;	
 }
@@ -201,7 +201,7 @@ td .page-group
 .page-group 
 {
 	width:97%;
-	margin-bottom:10px;
+	margin-bottom:5px;
 	padding:5px;
 	padding-bottom:10px;	
 	min-height: 10px;

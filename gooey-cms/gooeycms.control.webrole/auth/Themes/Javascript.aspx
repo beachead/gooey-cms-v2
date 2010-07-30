@@ -86,7 +86,7 @@ This page allows you to associate javascript files from your global library to y
                     <beachead:Editor ID="Editor" ShowToolbar="false" UseStandardImageTags="true" runat="server" />
 
                     <br />
-                    <asp:Button ID="BtnSaveEdit" Text="Save" runat="server" />
+                    <asp:Button ID="BtnSaveEdit" Text="Save" OnClick="BtnSaveEdit_Click" runat="server" />
                 </div>
             </div>
         </div>

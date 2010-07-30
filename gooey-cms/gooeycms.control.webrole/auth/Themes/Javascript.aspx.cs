@@ -81,6 +81,21 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             SelectedPanel = "editpanel";
         }
 
+        protected void BtnSaveEdit_Click(object sender, EventArgs e)
+        {
+            //TODO Keep the enabled state consistent
+            String filename = this.LstExistingFile.SelectedValue;
+            byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
+
+            CmsTheme theme = GetSelectedTheme();
+            JavascriptManager.Instance.Save(theme, filename, data);
+
+            OutsideSelectedPanel = "mylibrarypanel";
+            SelectedPanel = "editpanel";
+
+            LoadTabData();
+        }
+
         protected void BtnDelete_Click(Object sender, EventArgs e)
         {
             String name = this.LstExistingFile.SelectedValue;

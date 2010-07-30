@@ -13,5 +13,6 @@ namespace Gooeycms.Constants
         public const String SubscriptionProcessor = "subscription-processor";
         public const String IsLogginedEnabled = "logging-enabled";
         public const String DefaultPageName = "default-pagename";
+        public static string TokenEncyrptionKey = "token-encryption-key";
     }
 }
