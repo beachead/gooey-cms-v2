@@ -43,12 +43,13 @@ namespace Gooeycms.Business.Css
             }
             else if (file != null)
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(file.Content);
+                String content = CssManager.Resolve(file.Content);
+                byte[] bytes = Encoding.UTF8.GetBytes(content);
                 context.Response.BufferOutput = true;
                 context.Response.Clear();
                 context.Response.ClearHeaders();
                 context.Response.ClearContent();
-                context.Response.ContentType = "text/stylesheet";
+                context.Response.ContentType = "text/css";
                 context.Response.Expires = (int)TimeSpan.FromDays(1).TotalMinutes;
                 context.Response.Cache.SetCacheability(HttpCacheability.Public);
                 context.Response.Cache.SetMaxAge(TimeSpan.FromDays(1));

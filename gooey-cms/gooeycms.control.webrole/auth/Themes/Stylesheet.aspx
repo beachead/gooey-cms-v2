@@ -73,7 +73,7 @@ This page allows you to associate css files from your global library to your the
                     <beachead:Editor ID="Editor" ShowToolbar="false" runat="server" />
 
                     <br />
-                    <asp:Button ID="BtnSaveEdit" Text="Save" runat="server" />
+                    <asp:Button ID="BtnSaveEdit" Text="Save" OnClick="BtnSaveEdit_Click" runat="server" />
                 </div>
             </div>
         </div>

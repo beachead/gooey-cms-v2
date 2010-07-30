@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using Gooeycms.Business.Pages;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
@@ -29,7 +30,7 @@ namespace Gooeycms.Business.Css
             foreach (CssFile script in scripts)
             {
                 if (script.IsEnabled)
-                    includes.AppendLine("<script src=\"~/gooeycss/" + AntiXss.UrlEncode(script.FullName) + "\" type=\"text/javascript\" language=\"javascript\"></script>");
+                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/" + AntiXss.UrlEncode(script.FullName) + "\" />");
             }
 
             return includes.ToString();
@@ -150,6 +151,13 @@ namespace Gooeycms.Business.Css
         private static string GetEnabledKey(CmsTheme theme)
         {
             return "enabled_" + theme.ThemeGuid.Replace("-", "_");
+        }
+
+        internal static string Resolve(string content)
+        {
+            String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesDirectoryKey);
+            Regex pattern = new Regex("(\\.+/)+images/(.*)");
+            return pattern.Replace(content, container + "/$2");
         }
     }
 }
