@@ -7,6 +7,7 @@ using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Microsoft.Security.Application;
+using Gooeycms.Business.Cache;
 
 namespace Gooeycms.Business.Css
 {
@@ -44,16 +45,23 @@ namespace Gooeycms.Business.Css
         /// <returns></returns>
         public IList<CssFile> List(CmsTheme theme)
         {
-            String directory = CurrentSite.StylesheetStorageDirectory;
-            IStorageClient client = StorageHelper.GetStorageClient();
+            CacheInstance cache = CurrentSite.Cache;
 
-            IList<StorageFile> files = client.List(directory);
-            IList<CssFile> results = new List<CssFile>();
-            foreach (StorageFile file in files)
+            IList<CssFile> results = cache.Get<IList<CssFile>>("css-files");
+            if (results == null)
             {
-                results.Add(Convert(theme, file));
-            }
+                results = new List<CssFile>();
+                
+                String directory = CurrentSite.StylesheetStorageDirectory;
+                IStorageClient client = StorageHelper.GetStorageClient();
 
+                IList<StorageFile> files = client.List(directory);
+                foreach (StorageFile file in files)
+                {
+                    results.Add(Convert(theme, file));
+                }
+                cache.Add("css-files", results);
+            }
             return results;
         }
 
@@ -64,6 +72,8 @@ namespace Gooeycms.Business.Css
         /// <param name="data"></param>
         public void Save(CmsTheme theme, string filename, byte[] data)
         {
+            CurrentSite.Cache.Clear("css-files");
+
             if (!filename.EndsWith(CssFile.Extension))
             {
                 filename = filename + CssFile.Extension;
@@ -93,6 +103,8 @@ namespace Gooeycms.Business.Css
         /// <param name="filename"></param>
         public void Enable(CmsTheme theme, string filename)
         {
+            CurrentSite.Cache.Clear("css-files");
+
             String directory = CurrentSite.StylesheetStorageDirectory;
             String actualFilename = GetRelativeFilename(theme, filename);
 
@@ -103,6 +115,8 @@ namespace Gooeycms.Business.Css
 
         public void Disable(CmsTheme theme, String filename)
         {
+            CurrentSite.Cache.Clear("css-files");
+
             String directory = CurrentSite.StylesheetStorageDirectory;
             String actualFilename = GetRelativeFilename(theme, filename);
 

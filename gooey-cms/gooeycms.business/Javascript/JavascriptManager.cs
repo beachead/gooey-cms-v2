@@ -7,6 +7,7 @@ using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Microsoft.Security.Application;
+using Gooeycms.Business.Cache;
 
 namespace Gooeycms.Business.Javascript
 {
@@ -44,16 +45,22 @@ namespace Gooeycms.Business.Javascript
         /// <returns></returns>
         public IList<JavascriptFile> List(CmsTheme theme)
         {
-            String directory = CurrentSite.JavascriptStorageDirectory;
-            IStorageClient client = StorageHelper.GetStorageClient();
+            CacheInstance cache = CurrentSite.Cache;
 
-            IList<StorageFile> files = client.List(directory);
-            IList<JavascriptFile> results = new List<JavascriptFile>();
-            foreach (StorageFile file in files)
+            IList<JavascriptFile> results = cache.Get <IList<JavascriptFile>>("javascript-files");
+            if (results == null)
             {
-                results.Add(Convert(theme,file));
-            }
+                results = new List<JavascriptFile>();
+                String directory = CurrentSite.JavascriptStorageDirectory;
+                IStorageClient client = StorageHelper.GetStorageClient();
 
+                IList<StorageFile> files = client.List(directory);
+                foreach (StorageFile file in files)
+                {
+                    results.Add(Convert(theme, file));
+                }
+                cache.Add("javascript-files", results);
+            }
             return results;
         }
 
@@ -64,6 +71,7 @@ namespace Gooeycms.Business.Javascript
         /// <param name="data"></param>
         public void Save(CmsTheme theme, string filename, byte[] data)
         {
+            CurrentSite.Cache.Clear("javascript-files");
             if (!filename.EndsWith(JavascriptFile.Extension))
             {
                 filename = filename + JavascriptFile.Extension;
@@ -93,6 +101,8 @@ namespace Gooeycms.Business.Javascript
         /// <param name="filename"></param>
         public void Enable(CmsTheme theme, string filename)
         {
+            CurrentSite.Cache.Clear("javascript-files");
+
             String directory = CurrentSite.JavascriptStorageDirectory;
             String actualFilename = GetRelativeFilename(theme, filename);
             
@@ -103,6 +113,8 @@ namespace Gooeycms.Business.Javascript
 
         public void Disable(CmsTheme theme, String filename)
         {
+            CurrentSite.Cache.Clear("javascript-files");
+
             String directory = CurrentSite.JavascriptStorageDirectory;
             String actualFilename = GetRelativeFilename(theme, filename);
 

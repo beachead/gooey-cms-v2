@@ -112,11 +112,13 @@
     <Compile Include="Javascript\JavascriptManager.cs" />
     <Compile Include="Pages\NavigationControl.cs" />
     <Compile Include="Pages\PageNotFoundException.cs" />
+    <Compile Include="Pages\PreviewDto.cs" />
     <Compile Include="Pages\ResourceControl.cs" />
     <Compile Include="Pages\VariableControl.cs" />
     <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
     <Compile Include="Handler\BaseHttpHandler.cs" />
+    <Compile Include="Storage\QueueManager.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Membership\MembershipProfile.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Util\EmbeddedResource.cs" />
+    <Compile Include="Util\Serializer.cs" />
     <Compile Include="Util\SiteHelper.cs" />
     <Compile Include="Util\CurrentSite.cs" />
     <Compile Include="Util\Extensions.cs" />

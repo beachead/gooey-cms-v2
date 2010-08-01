@@ -26,5 +26,10 @@ namespace Gooeycms.Business.Cache
         {
             table.Clear();
         }
+
+        internal void Clear(string key)
+        {
+            table[key] = null;
+        }
     }
 }

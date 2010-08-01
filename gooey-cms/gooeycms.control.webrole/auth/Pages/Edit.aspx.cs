@@ -11,13 +11,16 @@ using Gooeycms.Data.Model.Site;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Business.Storage;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
     public partial class Edit : ValidatedHelpPage, IPreviewable
     {
         private String savedPageId = null;
+        private CmsPage existingPage;
         protected String PageAction = "Add";
+
         protected override void OnPageLoad(object sender, EventArgs e)
         {
             SetPageAction();
@@ -64,6 +67,8 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             this.CssManagePanel.Visible = true;
             this.CssNotAvailablePanel.Visible = false;
+
+            this.existingPage = page;
         }
 
         protected void SetPageAction()
@@ -149,10 +154,20 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         {
             if (Request.QueryString["a"] != null)
             {
-                OnSave_Click("preview", null);
+                //OnSave_Click("preview", null);
+                
+                PreviewDto dto = new PreviewDto();
+                dto.Content = PageMarkupText.Text;
+                dto.Title = this.PageTitle.Text;
+
+                QueueManager manager = new QueueManager(QueueManager.GetPreviewQueueName(CurrentSite.Guid));
+                manager.ClearQueue();
+                manager.Put<PreviewDto>(dto);
+
+                String guid = Request.QueryString["pid"];
                 String url = this.ParentDirectories.SelectedItem.Text + this.PageName.Text;
-                String token = Server.UrlEncode(TokenManager.Issue(this.savedPageId, TimeSpan.FromMinutes(5)));
-                return Page.ResolveUrl(CurrentSite.Protocol + CurrentSite.StagingDomain + url + "?pvw=preview&pvw_id=" + this.savedPageId.ToString() + "&token=" + token);
+                String token = Server.UrlEncode(TokenManager.Issue(guid, TimeSpan.FromMinutes(5)));
+                return Page.ResolveUrl(CurrentSite.Protocol + CurrentSite.StagingDomain + url + "?pvw=preview&pvw_id=" + guid + "&token=" + token);
             }
             else 
                 return "::ALERT::You must save the page once before using the preview capability.";

@@ -34,7 +34,7 @@
     <b><%=PageAction %> Page:</b><br /><br />
     <asp:Label ID="Status" runat="server" />
 
-    <div dojoType="dijit.TitlePane" title="Path Options" open="false">
+    <div dojoType="dijit.TitlePane" title="Path Options">
         <table>
             <tr>
                 <td>Parent Directory</td>

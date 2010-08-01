@@ -15,6 +15,7 @@ using Gooeycms.Data.Model.Theme;
 using Gooeycms.Business.Crypto;
 using System.Threading.Tasks;
 using System.ServiceModel.Activation;
+using Gooeycms.Business.Storage;
 
 namespace Gooeycms.Business.Pages
 {
@@ -44,8 +45,6 @@ namespace Gooeycms.Business.Pages
         /// <param name="e"></param>
         protected void Page_Init(object sender, EventArgs e)
         {
-            ValidateSite();
-
             String preview = Request.QueryString["pvw"];
             String idToDelete = Request.QueryString["pvw_id"];
             String token = Request.QueryString["token"];
@@ -54,23 +53,34 @@ namespace Gooeycms.Business.Pages
             String culture = CurrentSite.Culture;
 
             if (String.IsNullOrEmpty(preview))
+            {
+                ValidateSite();
                 this.page = PageManager.Instance.GetLatestPage(url);
+            }
             else
             {
                 //Make sure there's an authenticated user making this request
                 if (!TokenManager.IsValid(idToDelete, token))
                     throw new ApplicationException("The specified security token is not valid for this preview request.");
-                this.page = PageManager.Instance.GetPage(Data.Guid.New(idToDelete));
+
+                this.page = (CmsPage)Cache.Get(idToDelete);
+                if (this.page == null)
+                {
+                    this.page = PageManager.Instance.GetPage(Data.Guid.New(idToDelete));
+                    Cache.Insert(idToDelete, this.page, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(15));
+                }
+
+                QueueManager queue = new QueueManager(QueueManager.GetPreviewQueueName(CurrentSite.Guid));
+                PreviewDto dto = queue.GetFirst<PreviewDto>();
+
+                this.page.Content = dto.Content;
+                this.page.Title = dto.Title;
             }
 
             if (this.page != null)
                 this.theme = ThemeManager.Instance.GetDefaultBySite(Data.Guid.New(this.page.SubscriptionId));
             else
                 throw new PageNotFoundException(url.Path);
-
-            //Make sure there's an authenticated user making this request
-            if (!String.IsNullOrEmpty(preview))
-                PageManager.Instance.Remove(this.page);
 
             #region old code
             /*
