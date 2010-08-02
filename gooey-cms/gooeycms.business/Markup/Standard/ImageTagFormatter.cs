@@ -28,7 +28,7 @@ namespace Beachead.Core.Markup.Standard
                     filename = origurl.Substring(pos + 1);
                 String imagetag = fullimagetag.Replace(origurl, container + "/" + filename);
 
-                markup = new StringBuilder(ImageHtml.Replace(markup.ToString(), imagetag, 1));
+                markup = new StringBuilder(markup.ToString().Replace(fullimagetag,imagetag));
                 match = match.NextMatch();
             }
 
