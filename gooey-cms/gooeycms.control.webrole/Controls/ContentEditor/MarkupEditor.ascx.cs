@@ -21,6 +21,8 @@ namespace Beachead.Web.CMS.controls
                 RootUrl = Page.ResolveUrl("~");
             }
 
+            Anthem.Manager.Register(this);
+
             this.ToolbarPanel.Visible = ShowToolbar;
         }
 
@@ -48,12 +50,14 @@ namespace Beachead.Web.CMS.controls
             set { this.PageMarkupText.Text = value; }
         }
 
-        public void Preview_Click(object sender, EventArgs e)
+        [Anthem.Method]
+        public String Preview_Click()
         {
             IPreviewable preview = (IPreviewable)this.Page;
             String url = preview.Save();
 
-            Anthem.Manager.AddScriptForClientSideEval("DisplayPreview('" + url + "');");
+            return url;
+            //Anthem.Manager.AddScriptForClientSideEval("DisplayPreview('" + url + "');");
         }
     }
 }

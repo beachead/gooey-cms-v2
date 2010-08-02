@@ -82,6 +82,7 @@
         }
 
         function keypressHandler(obj) {
+            if (window.mytimeout) window.clearTimeout(window.mytimeout);
             var lbl = document.getElementById("refreshing");
             lbl.innerHTML = "Refreshing...";
             document.getElementById('<%=Filter.ClientID %>').value = obj.value;

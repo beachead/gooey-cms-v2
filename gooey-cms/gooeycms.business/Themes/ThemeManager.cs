@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Business.Cache;
 
 namespace Gooeycms.Business.Themes
 {
@@ -111,6 +112,7 @@ namespace Gooeycms.Business.Themes
 
         public void Save(CmsTheme theme)
         {
+            CurrentSite.Cache.Clear("default-theme");
             CmsThemeDao dao = new CmsThemeDao();
             using (Transaction tx = new Transaction())
             {
@@ -121,8 +123,16 @@ namespace Gooeycms.Business.Themes
 
         internal CmsTheme GetDefaultBySite(Data.Guid siteGuid)
         {
-            CmsThemeDao dao = new CmsThemeDao();
-            return dao.FindEnabledBySite(siteGuid);
+            CacheInstance cache = CurrentSite.Cache;
+            CmsTheme theme = cache.Get<CmsTheme>("default-theme");
+            if (theme == null)
+            {
+                CmsThemeDao dao = new CmsThemeDao();
+                theme = dao.FindEnabledBySite(siteGuid);
+                cache.Add("default-theme", theme);
+            }
+
+            return theme;
         }
     }
 }

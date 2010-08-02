@@ -35,7 +35,7 @@
         <li><a href="#" onclick="javascript:return __Wrap('<nomarkup>', '</nomarkup>','<%=PageMarkupText.TextboxId %>');" title="No Markup" class="formatlink" id="NoMarkup"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('<esc>', '</esc>','<%=PageMarkupText.TextboxId %>');" title="Escape HTML" class="formatlink" id="EscapeLink"></a></li>             
         <li><a href="#" onclick="javascript:window.open('ImageBrowser.aspx','','width=500,height=400,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;" title="Image Browser" class="formatlink" id="ImageLink"></a></li>             
-        <li><anthem:LinkButton ID="PreviewLink" runat="server" OnClick="Preview_Click" OnClientClick="startPreview();" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li>                     
+        <li><anthem:LinkButton ID="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li>                     
         </ul>
         </div>
         </asp:Panel>
@@ -54,16 +54,26 @@
     <% } %>
     }
 
+    function keypressHandler(obj) {
+        if (window.mytimeout) window.clearTimeout(window.mytimeout);
+        startPreview();
+        Anthem_InvokeControlMethod('<%=this.ClientID %>','Preview_Click', [],
+            function (result) {
+                DisplayPreview(result.value);
+            }
+        );
+    }
+
     function startPreview() {
         var pane = dijit.byId("preview-panel");
         if (!pane.open) 
             pane.toggle();
 
-        dijit.byId('waitDialog').show();
+        //dijit.byId('waitDialog').show();
     }
 
     function endPreview() {
-        dijit.byId('waitDialog').hide();
+        //dijit.byId('waitDialog').hide();
     }
 
     function DisplayPreview(url) {
