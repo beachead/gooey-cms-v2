@@ -69,11 +69,11 @@
         if (!pane.open) 
             pane.toggle();
 
-        //dijit.byId('waitDialog').show();
+        dijit.byId('waitDialog').show();
     }
 
     function endPreview() {
-        //dijit.byId('waitDialog').hide();
+        dijit.byId('waitDialog').hide();
     }
 
     function DisplayPreview(url) {

@@ -4,7 +4,7 @@
 
 <div id="<%=ResizableTextArea.ClientID %>_rtContainer" style="width:100%;height:100%;border:0px;">   
 </div>
-<asp:TextBox ID="ResizableTextArea" TextMode="MultiLine"  onkeypress="return performAction(this);" Wrap="false" runat="server" /> 
+<asp:TextBox ID="ResizableTextArea" TextMode="MultiLine"  Wrap="false" runat="server" /> 
 
 <script language="javascript" type="text/javascript">
     var rt = new ResizeableTextbox('<%=ResizableTextArea.ClientID %>');

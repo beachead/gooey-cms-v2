@@ -7,14 +7,14 @@ namespace Beachead.Core.Markup.Standard
 {
     public class ImageTagFormatter : BaseFormatter
     {
-        private static Regex Image = new Regex(@"\[\[image:\s*~(.*?)(\|(.*?))?\]\]", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        private static Regex Image = new Regex(@"\[\[image:\s*~(.*?)(\|(.*?))? (class=(.*?))?\]\]", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
         #region IMarkupFormatter Members
 
         public override StringBuilder Convert(StringBuilder markup)
         {
             String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesDirectoryKey);
-            markup = new StringBuilder(Image.Replace(markup.ToString(),@"<img src=""" + container + @"$1"" alt=""$3"" />"));
+            markup = new StringBuilder(Image.Replace(markup.ToString(),@"<img src=""" + container + @"$1"" alt=""$3"" class=""$5"" />"));
 
             return markup;
         }
