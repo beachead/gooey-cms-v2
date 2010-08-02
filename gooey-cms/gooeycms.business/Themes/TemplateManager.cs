@@ -57,6 +57,7 @@ namespace Gooeycms.Business.Themes
 
         public void Save(CmsTemplate template)
         {
+            CurrentSite.Cache.Clear();
             using (Transaction tx = new Transaction())
             {
                 CmsTemplateDao dao = new CmsTemplateDao();
@@ -68,7 +69,13 @@ namespace Gooeycms.Business.Themes
 
         public CmsTemplate GetTemplate(String templateName)
         {
-            return GetTemplate(CurrentSite.Guid, templateName);
+            CmsTemplate result = CurrentSite.Cache.Get<CmsTemplate>("templates-" + templateName);
+            if (result == null)
+            {
+                result = GetTemplate(CurrentSite.Guid, templateName);
+                CurrentSite.Cache.Add("templates-" + templateName,result);
+            }
+            return result;
         }
 
         public CmsTemplate GetTemplate(Data.Guid siteGuid, String templateName)
