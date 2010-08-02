@@ -83,7 +83,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
         protected void BtnSaveEdit_Click(object sender, EventArgs e)
         {
-            //TODO Keep the enabled state consistent
             String filename = this.LstExistingFile.SelectedValue;
             byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
 

@@ -175,7 +175,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         private String GetSelectedCulture()
         {
-            //TODO Actually allow the culture to be selected
             return "en-us";
         }
     }

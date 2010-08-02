@@ -20,7 +20,6 @@ namespace Gooeycms.Business.Css
 
         public CssManager(Data.Model.Page.CmsPage cmsPage)
         {
-            // TODO: Complete member initialization
             this.cmsPage = cmsPage;
         }
 

@@ -10,7 +10,6 @@ namespace Gooeycms.Business.Javascript
 {
     public class JavascriptHandler : BaseHttpHandler
     {
-        //TODO Implement server-side caching
         //TODO Implement client-side caching (if-modified-since)
         protected override void Process(System.Web.HttpContext context)
         {
