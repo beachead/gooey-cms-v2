@@ -18,25 +18,30 @@ namespace Gooeycms.Business.Crypto
 
         public static Boolean IsValid(String expectedData, String encryptedData)
         {
-            TextEncryption crypto = new TextEncryption(GooeyConfigManager.TokenEncyrptionKey);
-            String data = crypto.Decrypt(encryptedData);
-
             Boolean result = false;
-            String[] fields = data.Split(',');
-            if (fields.Length == 3)
-            {
-                String original = fields[1];
-                String timestamp = fields[2];
 
-                if (expectedData.EqualsCaseInsensitive(original))
+            try
+            {
+                TextEncryption crypto = new TextEncryption(GooeyConfigManager.TokenEncyrptionKey);
+                String data = crypto.Decrypt(encryptedData);
+
+                String[] fields = data.Split(',');
+                if (fields.Length == 3)
                 {
-                    DateTime dt = DateTime.Parse(timestamp);
-                    if (dt > DateTime.Now)
+                    String original = fields[1];
+                    String timestamp = fields[2];
+
+                    if (expectedData.EqualsCaseInsensitive(original))
                     {
-                        result = true;
+                        DateTime dt = DateTime.Parse(timestamp);
+                        if (dt > DateTime.Now)
+                        {
+                            result = true;
+                        }
                     }
                 }
             }
+            catch (Exception) { }
 
             return result;
         }

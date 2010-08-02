@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Cache\CacheInstance.cs" />
     <Compile Include="Cache\CacheManager.cs" />
+    <Compile Include="Cache\CacheRefreshHandler.cs" />
     <Compile Include="Compression\ZipHandler.cs" />
     <Compile Include="Crypto\TextHash.cs" />
     <Compile Include="Crypto\TokenManager.cs" />
