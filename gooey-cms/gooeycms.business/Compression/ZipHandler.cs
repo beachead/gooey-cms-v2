@@ -32,10 +32,17 @@ namespace Gooeycms.Business.Compression
 
             using (file)
             {
+                file.FlattenFoldersOnExtract = true;
                 foreach (ZipEntry entry in file)
                 {
                     StorageFile result = new StorageFile();
-                    result.Filename = entry.FileName;
+                    
+                    //flatten all directories, since we don't currently support directories
+                    int pos = entry.FileName.LastIndexOf("/");
+                    if (pos >= 0)
+                        result.Filename = entry.FileName.Substring(pos + 1);
+                    else
+                        result.Filename = entry.FileName;
 
                     using (MemoryStream ms = new MemoryStream())
                     {

@@ -28,8 +28,9 @@
             <span id="lblErrorMessage"></span>
         </div>
 
-         <div dojoType="dijit.layout.TabContainer" style="width:475px;height:295px;overflow:auto;">
+         <div dojoType="dijit.layout.TabContainer" style="width:675px;height:395px;overflow:auto;">
             <div dojoType="dijit.layout.ContentPane" title="Image Upload">
+                <anthem:Label ID="LblUploadStatus" AutoUpdateAfterCallBack="true" runat="server" />
                 <table style="width:100%;">
                     <tr>
                         <td colspan="2"><asp:FileUpload ID="FileUpload" runat="server" /><br /><hr /></td>
@@ -38,6 +39,7 @@
                         <td><anthem:Button ID="BtnUpload" OnClick="BtnUpload_Click" Text="Upload" runat="server" /></td>
                     </tr>
                 </table>
+                <anthem:Label ID="LblUploadedFiles" AutoUpdateAfterCallBack="true" runat="server" />
             </div>
 
              <div dojoType="dijit.layout.ContentPane" title="Image Library">
@@ -48,18 +50,19 @@
                     <tr>
                         <td colspan="2">
                             <anthem:Panel ID="PanelImages" AutoUpdateAfterCallBack="true" runat="server">
-                                <asp:DataList ID="AvailableImages" RepeatDirection="Horizontal" 
-                                    RepeatColumns="5" runat="server" CellPadding="6" CellSpacing="6" 
-                                    ForeColor="#333333">
-                                    <AlternatingItemStyle BackColor="White" ForeColor="#284775" />
-                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <ItemStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                <asp:DataList ID="AvailableImages" RepeatDirection="Horizontal" BackColor="#F7F6F3" 
+                                    RepeatColumns="4" runat="server" CellPadding="6" CellSpacing="6">
                                     <ItemTemplate>
-                                        <img src="<%# DataBinder.Eval(Container,"DataItem.ThumbnailUrl") %>" style="width:60px;height:60px;" />
+                                        <div style="min-height:80px;width:125px;padding-bottom:5px;text-align:center;">
+                                        <a href="#" onclick="window.open('<%# DataBinder.Eval(Container,"DataItem.Url") %>','','width=300,height=300');">
+                                            <img src="<%# DataBinder.Eval(Container,"DataItem.ThumbnailUrl") %>" alt="<%# DataBinder.Eval(Container,"DataItem.Filename") %>" style="border:0px;" />
+                                        </a>
                                         <br />
-                                        <a href="#" onclick="window.open('<%# DataBinder.Eval(Container,"DataItem.Url") %>','','width=300,height=300');">View</a>
+                                        <span style="font-size:8px;"><%# DataBinder.Eval(Container,"DataItem.Filename") %></span>
+                                        <br />
                                         <a href="#" onclick="javascript:_imageclick('<%# DataBinder.Eval(Container,"DataItem.Filename") %>'); return false;">Select</a>
+                                        <a href="#" onclick="javascript:_imagedelete('<%# DataBinder.Eval(Container,"DataItem.Filename") %>'); return false;">Delete</a>
+                                        </div>
                                     </ItemTemplate>
                                     <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
                                 </asp:DataList>
@@ -70,6 +73,11 @@
                     <script language="javascript" type="text/javascript">
                         function _imageclick(name) {
                             window.opener.onimage_selected(name);
+                        }
+                        function _imagedelete(name) {
+                            if (confirm('Are you sure you want to delete this image?')) {
+                                alert('TODO: Implement delete functionality. Deleting ' + name);
+                            }
                         }
                     </script>
                 </table>

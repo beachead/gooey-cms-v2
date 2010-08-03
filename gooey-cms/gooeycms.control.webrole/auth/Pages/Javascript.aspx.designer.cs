@@ -10,7 +10,7 @@
 namespace Gooeycms.Webrole.Control.auth.Pages {
     
     
-    public partial class ImageBrowser {
+    public partial class Javascript {
         
         /// <summary>
         /// form1 control.
@@ -20,15 +20,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// LblUploadStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Anthem.Label LblUploadStatus;
         
         /// <summary>
         /// FileUpload control.
@@ -47,32 +38,5 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Anthem.Button BtnUpload;
-        
-        /// <summary>
-        /// LblUploadedFiles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Anthem.Label LblUploadedFiles;
-        
-        /// <summary>
-        /// PanelImages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Anthem.Panel PanelImages;
-        
-        /// <summary>
-        /// AvailableImages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList AvailableImages;
     }
 }

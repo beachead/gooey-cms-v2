@@ -18,9 +18,9 @@ namespace Gooeycms.Business.Images
             get { return ImageManager.instance; } 
         }
 
-        public void AddImage(String filename, String contentType, byte [] contents)
+        public IList<StorageFile> AddImage(String filename, String contentType, byte[] contents)
         {
-            AddImage(CurrentSite.Guid, filename, contentType, contents);
+            return AddImage(CurrentSite.Guid, filename, contentType, contents);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Gooeycms.Business.Images
         /// </summary>
         /// <param name="siteGuid"></param>
         /// <param name="contents"></param>
-        public void AddImage(Data.Guid siteGuid, String filename, String contentType, byte [] contents)
+        public IList<StorageFile> AddImage(Data.Guid siteGuid, String filename, String contentType, byte[] contents)
         {
             IList<StorageFile> images = new List<StorageFile>();
             if (filename.ToLower().EndsWith("zip"))
@@ -58,6 +58,8 @@ namespace Gooeycms.Business.Images
             {
                 client.Save(imageDirectory, file.Filename, file.Data, Permissions.Public);
             }
+
+            return results;
         }
 
         private void GenerateThumbnail(StorageFile file, IList<StorageFile> results)
@@ -66,18 +68,28 @@ namespace Gooeycms.Business.Images
             {
                 using (MemoryStream output = new MemoryStream())
                 {
-                    KalikoImage image = new KalikoImage(stream);
-                    image.BackgroundColor = Color.White;
-                    KalikoImage thumb = image.GetThumbnailImage(128, 128, ThumbnailMethod.Pad);
-                    thumb.SaveJpg(output, 75);
+                    try
+                    {
+                        KalikoImage image = new KalikoImage(stream);
+                        int width = 60;
+                        int height = 60;
 
-                    FileInfo info = new FileInfo(file.Filename);
+                        image.BackgroundColor = Color.White;
+                        KalikoImage thumb = image.GetThumbnailImage(width, height, ThumbnailMethod.Pad);
+                        thumb.SaveJpg(output, 75);
 
-                    StorageFile thumbnail = new StorageFile();
-                    thumbnail.Filename = info.Name.Replace(info.Extension,"") + "-thumb.jpg";
-                    thumbnail.Data = output.ToArray();
+                        FileInfo info = new FileInfo(file.Filename);
 
-                    results.Add(thumbnail);
+                        StorageFile thumbnail = new StorageFile();
+                        thumbnail.Filename = info.Name.Replace(info.Extension, "") + "-thumb.jpg";
+                        thumbnail.Data = output.ToArray();
+
+                        results.Add(thumbnail);
+                    }
+                    catch (Exception)
+                    {
+                        throw new ArgumentException("The uploaded content is not supported. Must be a valid image type (png,jpeg or gif)");
+                    }
                 }
             }
         }

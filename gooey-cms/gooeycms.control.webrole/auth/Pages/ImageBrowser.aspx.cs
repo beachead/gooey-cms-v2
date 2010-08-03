@@ -25,9 +25,28 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         public void BtnUpload_Click(Object sender, EventArgs e)
         {
             String errorMessage = "";
+            String files = "";
             if (this.FileUpload.HasFile)
             {
-                ImageManager.Instance.AddImage(this.FileUpload.FileName, this.FileUpload.PostedFile.ContentType, this.FileUpload.FileBytes);
+                try
+                {
+                    IList<StorageFile> results = ImageManager.Instance.AddImage(this.FileUpload.FileName, this.FileUpload.PostedFile.ContentType, this.FileUpload.FileBytes);
+                    String status = "Successfully uploaded " + results.Count + " images.<br /><br />";
+                    files = "Uploaded Files:<br />";
+                    foreach (StorageFile file in results)
+                    {
+                        if (!file.Name.Contains("-thumb"))
+                            files = files + Server.HtmlEncode(file.Filename) + "<br />";
+                    }
+
+                    LblUploadStatus.Text = status;
+                    LblUploadedFiles.Text = files;
+                    LoadExistingImages();
+                }
+                catch (ArgumentException ex)
+                {
+                    errorMessage = ex.Message;
+                }
             }
             else
             {
