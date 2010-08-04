@@ -5,6 +5,9 @@ using Gooeycms.Business.Web;
 using Gooeycms.Business.Crypto;
 using System.Net;
 using Microsoft.Security.Application;
+using System.Threading;
+using System.Threading.Tasks;
+using Gooeycms.Business.Azure;
 
 namespace Gooeycms.Business.Cache
 {
@@ -55,12 +58,27 @@ namespace Gooeycms.Business.Cache
 
         private void RefreshStaging(String key)
         {
+            CacheRefreshRequest message = new CacheRefreshRequest();
+            message.SiteGuid = CurrentSite.Guid.Value;
+            message.RefreshKey = key;
+            message.RefreshAll = (key == null);
+
+            Communication.Broadcast<CacheRefreshRequest>(typeof(CacheRefreshProcessor), message);
+            /*
             String url = CurrentSite.Protocol + CurrentSite.StagingDomain +"/cacherefresh.handler?token=" + AntiXss.UrlEncode(TokenManager.Issue(CACHE_REFRESH_KEY, TimeSpan.FromSeconds(30)));
             if (key != null)
                 url = url + "&key=" + AntiXss.UrlEncode(key);
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.GetResponse();
+            Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+                        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                        request.GetResponse();
+                    }
+                    catch(Exception) {}
+                });
+             */
         }
-    }
+   } 
 }

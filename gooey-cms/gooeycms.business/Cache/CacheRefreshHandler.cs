@@ -5,6 +5,7 @@ using System.Text;
 using Gooeycms.Business.Handler;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Util;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Gooeycms.Business.Cache
 {

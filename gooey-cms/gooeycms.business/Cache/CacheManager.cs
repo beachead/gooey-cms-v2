@@ -21,6 +21,7 @@ namespace Gooeycms.Business.Cache
                 caches.Clear();
             }
         }
+
         public CacheInstance GetCache(Data.Guid guid)
         {
             CacheInstance table = caches.GetValue(guid);
