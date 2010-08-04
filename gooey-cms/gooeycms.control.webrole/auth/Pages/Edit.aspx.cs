@@ -17,7 +17,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 {
     public partial class Edit : ValidatedHelpPage, IPreviewable
     {
-        private String savedPageId = null;
         private CmsPage existingPage;
         protected String PageAction = "Add";
 
@@ -53,24 +52,31 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             //always display the latest version
             CmsPage page = PageManager.Instance.GetLatestPage(url);
-            CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
+            if (page != null)
+            {
+                CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
 
-            this.ParentDirectories.SelectedValue = path.Parent;
-            this.PageName.Text = path.Name;
-            this.PageTitle.Text = page.Title;
-            this.PageDescription.Text = page.Description;
-            this.PageKeywords.Text = page.Keywords;
-            this.PageMarkupText.Text = page.Content;
-            this.PageTemplate.SelectedValue = page.Template.ToString();
-            this.BodyLoadOptions.Text = page.OnBodyLoad;
+                this.ParentDirectories.SelectedValue = path.Parent;
+                this.PageName.Text = path.Name;
+                this.PageTitle.Text = page.Title;
+                this.PageDescription.Text = page.Description;
+                this.PageKeywords.Text = page.Keywords;
+                this.PageMarkupText.Text = page.Content;
+                this.PageTemplate.SelectedValue = page.Template.ToString();
+                this.BodyLoadOptions.Text = page.OnBodyLoad;
 
-            this.ParentDirectories.Enabled = false;
-            this.PageName.Enabled = false;
+                this.ParentDirectories.Enabled = false;
+                this.PageName.Enabled = false;
 
-            this.CssManagePanel.Visible = true;
-            this.CssNotAvailablePanel.Visible = false;
+                this.CssManagePanel.Visible = true;
+                this.CssNotAvailablePanel.Visible = false;
 
-            this.existingPage = page;
+                this.existingPage = page;
+            }
+            else
+            {
+                throw new ApplicationException("The page " + url + " is not currently available. If you recently created this page it may take a few moments for the page to become available.");
+            }
         }
 
         protected void SetPageAction()
@@ -116,8 +122,17 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                 PageManager.PublishToWorker(page,PageTaskMessage.Actions.Save);
 
-                this.Status.Text = "The page has been successfully saved.";
-                this.Status.ForeColor = System.Drawing.Color.Green;
+                String msg = "The page has been successfully saved.";
+                if (Request.QueryString["a"] == null)
+                {
+                    System.Threading.Thread.Sleep(5000);
+                    Response.Redirect("Edit.aspx?a=edit&pid=" + Server.UrlEncode(page.Url) + "&msg=" + Server.UrlEncode(msg), true);
+                }
+                else
+                {
+                    this.Status.Text = msg;
+                    this.Status.ForeColor = System.Drawing.Color.Green;
+                }
             }
             catch (Exception ex)
             {

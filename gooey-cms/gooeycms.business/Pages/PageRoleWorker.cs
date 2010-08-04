@@ -39,7 +39,14 @@ namespace Gooeycms.Business.Pages
 
         private void SavePage(CmsPage page)
         {
-            CmsSitePath path = CmsSiteMap.Instance.GetPath(Data.Guid.New(page.SubscriptionId),page.Url);
+            Data.Guid guid = Data.Guid.New(page.SubscriptionId);
+            CmsSitePath path = CmsSiteMap.Instance.GetPath(guid,page.Url);
+            if (path == null)
+            {
+                CmsSiteMap.Instance.AddNewPage(guid, page.Url);
+                path = CmsSiteMap.Instance.GetPath(guid, page.Url);
+            }
+
             PageManager.Instance.AddNewPage(path.Parent,path.Name,page);
             PageManager.Instance.RemoveObsoletePages(page);
         }

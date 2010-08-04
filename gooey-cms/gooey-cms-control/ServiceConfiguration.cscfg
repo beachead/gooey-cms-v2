@@ -3,17 +3,15 @@
   <Role name="gooeycms.webrole.control">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DiagnosticsConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="ActiveStorageConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="ProductionStorageAccount" value="DefaultEndpointsProtocol=https;AccountName=gooeycmsdevstorage;AccountKey=uGsrBnwh4zgNP8HE5GS51kFLNyDY7xBthv+ty6noPPvZrXuck6krgMRt583VeNS15/hvnJ3hlpdBPnpybeXfgA==" />
-      <Setting name="DevelopmentStorageAccount" value="UseDevelopmentStorage=true" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmsdevlogs;AccountKey=SVw/cG9nLJ3Jcx8sWZdFK2opPRbSh/WEkV8Q4emQzjZ/dCpaawsceG0mvf/CKftPcTr5VRCRsr7+fDaMQYZxLg==" />
+      <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmsdevstorage;AccountKey=uGsrBnwh4zgNP8HE5GS51kFLNyDY7xBthv+ty6noPPvZrXuck6krgMRt583VeNS15/hvnJ3hlpdBPnpybeXfgA==" />
     </ConfigurationSettings>
   </Role>
   <Role name="gooeycms.worker.control">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DiagnosticsConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="ActiveStorageConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmsdevlogs;AccountKey=SVw/cG9nLJ3Jcx8sWZdFK2opPRbSh/WEkV8Q4emQzjZ/dCpaawsceG0mvf/CKftPcTr5VRCRsr7+fDaMQYZxLg==" />
+      <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmsdevstorage;AccountKey=uGsrBnwh4zgNP8HE5GS51kFLNyDY7xBthv+ty6noPPvZrXuck6krgMRt583VeNS15/hvnJ3hlpdBPnpybeXfgA==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

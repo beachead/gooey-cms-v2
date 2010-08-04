@@ -172,6 +172,15 @@ namespace Gooeycms.Business.Web
             return path;
         }
 
+        internal void AddNewPage(Data.Guid guid, string fullUrl)
+        {
+            int pos = fullUrl.LastIndexOf("/");
+            String parent = fullUrl.Substring(0, pos + 1);
+            String page = fullUrl.Substring(pos + 1);
+
+            AddNewPage(guid,parent,page);
+        }
+
         public CmsSitePath AddNewPage(string parentPath, string path)
         {
             return AddNewPage(CurrentSite.Guid, parentPath, path);

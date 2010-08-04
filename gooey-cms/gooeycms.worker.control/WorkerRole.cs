@@ -9,11 +9,10 @@ using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
 using Gooeycms.Business.Storage;
-using Gooeycms.Worker.Control;
 using System.Threading.Tasks;
 using Gooeycms.Business.Pages;
 
-namespace gooeycms.worker.control
+namespace Goopeycms.Worker.Control
 {
     public class WorkerRole : RoleEntryPoint
     {
