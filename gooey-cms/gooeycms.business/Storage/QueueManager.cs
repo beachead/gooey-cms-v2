@@ -17,6 +17,7 @@ namespace Gooeycms.Business.Storage
 
     public class QueueManager
     {
+        private const long MaxMessageSize = 6144 - 50; //some overhead for the wrapper;
         private CloudQueue queue;
 
         public static String GetPreviewQueueName(Data.Guid guid)
@@ -47,7 +48,7 @@ namespace Gooeycms.Business.Storage
             QueueMessageWrapper wrapper = new QueueMessageWrapper();
             wrapper.IsExternal = false;
             wrapper.BinaryData = data;
-            if (data.Length >= (CloudQueueMessage.MaxMessageSize - 50))
+            if (data.Length >= (MaxMessageSize))
             {
                 wrapper.IsExternal = true;
                 wrapper.ExternalGuid = System.Guid.NewGuid().ToString();

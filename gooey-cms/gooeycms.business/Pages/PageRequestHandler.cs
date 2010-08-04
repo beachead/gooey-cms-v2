@@ -81,45 +81,6 @@ namespace Gooeycms.Business.Pages
                 this.theme = ThemeManager.Instance.GetDefaultBySite(Data.Guid.New(this.page.SubscriptionId));
             else
                 throw new PageNotFoundException(url.Path);
-
-            #region old code
-            /*
-            PathDao dao = new PathDao();
-            Path path = dao.FindPathByUrl(url.RelativePath);
-            if (path != null)
-            {
-                PageManager manager = new PageManager();
-                this.page = manager.GetLatestPage(path.Id, PageManager.IdType.PathId);
-                if (this.page != null)
-                {
-                    ThemeManager.Instance.PopulateTemplate(page);
-                    this.theme = ThemeManager.Instance.GetDefaultTheme();
-
-                    CampaignManager campaignManager = new CampaignManager();
-                    if (campaignManager.GetCampaignEngine().IsEnabled())
-                    {
-                        this.analytics = campaignManager.GetCampaignEngine().GetTrackingScript();
-                        campaignManager.TrackInternalCampaigns();
-                    }
-                }
-                else
-                    throw new PageNotFoundException(url.Path);
-
-                if (!String.IsNullOrEmpty(preview))
-                {
-                    //Make sure there's an authenticated user making this request
-                    if (Authentication.CurrentUser != null)
-                    {
-                        int id = 0;
-                        Int32.TryParse(idToDelete, out id);
-
-                        //Delete the page because the user didn't actually save it, but instead was previewing it
-                        manager.Delete(id);
-                    }
-                }
-            }
-            */
-#endregion
         }
 
         private void ValidateSite()
