@@ -4,33 +4,32 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
-using Gooeycms.Business.Cache;
-using Gooeycms.Business.Azure;
+using Microsoft.WindowsAzure.ServiceRuntime;
+using Gooeycms.Business.Pages;
 using System.Threading;
 
-namespace Gooeycms.webrole.sites
+namespace Gooeycms.Webrole.Control
 {
     public class Global : System.Web.HttpApplication
     {
-        private static System.Threading.Timer intraProcessCommunicationTimer = null;
+        private static System.Threading.Timer pageProcessThread = null;
         private static Semaphore semaphore = new Semaphore(1, 1);
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            if (intraProcessCommunicationTimer == null)
+            if (!RoleEnvironment.IsAvailable)
             {
-                intraProcessCommunicationTimer = new System.Threading.Timer(new System.Threading.TimerCallback((object context) =>
+                if (pageProcessThread == null)
+                {
+                    pageProcessThread = new System.Threading.Timer(new System.Threading.TimerCallback((object context) =>
                     {
                         bool acquired = semaphore.WaitOne(TimeSpan.FromSeconds(0));
                         if (acquired)
                         {
                             try
                             {
-                                IList<WebroleMessage> messages = InstanceCommunication.ReceiveAllUnread();
-                                if (messages.Count > 0)
-                                {
-                                    InstanceCommunication.ProcessMessages(messages);
-                                }
+                                PageRoleWorker worker = new PageRoleWorker();
+                                worker.ProcessMessages();
                             }
                             catch (Exception) { }
                             finally
@@ -39,6 +38,7 @@ namespace Gooeycms.webrole.sites
                             }
                         }
                     }), HttpContext.Current, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
+                }
             }
         }
 

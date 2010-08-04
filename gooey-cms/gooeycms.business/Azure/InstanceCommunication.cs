@@ -6,7 +6,7 @@ using Gooeycms.Business.Storage;
 
 namespace Gooeycms.Business.Azure
 {
-    public class Communication
+    public class InstanceCommunication
     {
         public const String QUEUE_NAME = "interprocess-queue";
         private static IDictionary<String, Boolean> readMessages = new Dictionary<String, Boolean>();

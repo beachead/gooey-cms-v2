@@ -42,7 +42,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Actions">
                 <ItemTemplate>
-                    <a href="./Edit.aspx?a=edit&pid=<%#Eval("Page.Guid") %>">Add/Edit</a>
+                    <a href="./Edit.aspx?a=edit&pid=<%# Server.UrlEncode(Eval("Page.Url").ToString()) %>">Add/Edit</a>
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:TemplateField>        
@@ -55,7 +55,7 @@
     </anthem:GridView>
     <asp:ObjectDataSource ID="PageListDataSource" runat="server" 
         SelectMethod="GetFilteredPages" 
-        TypeName="Gooeycms.Webrole.Control.App_Code.Adapters.PageAdapter">
+        TypeName="Gooeycms.Business.Adapters.PageAdapter">
         <SelectParameters>
             <asp:ControlParameter ControlID="Filter" DefaultValue="*" Name="filter" 
                 PropertyName="Value" Type="String" />

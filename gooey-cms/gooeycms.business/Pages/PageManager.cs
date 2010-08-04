@@ -136,26 +136,21 @@ namespace Gooeycms.Business.Pages
         /// <param name="page"></param>
         public void AddNewPage(string parent, string pageName, CmsPage page)
         {
-            String fullurl = CmsSiteMap.PathCombine(parent, pageName);
-            page.Guid = System.Guid.NewGuid().ToString();
-            page.Url = fullurl;
-            page.UrlHash = TextHash.MD5(page.Url).Value;
-
             CmsPageDao dao = new CmsPageDao();
             CmsSitePath path =  null;
             IStorageClient client = StorageHelper.GetStorageClient();
             try
             {
-                path = CmsSiteMap.Instance.AddNewPage(parent, pageName);
+                path = CmsSiteMap.Instance.AddNewPage(Data.Guid.New(page.SubscriptionId),parent, pageName);
 
                 using (Transaction tx = new Transaction())
                 {
                     dao.Save<CmsPage>(page);
                     tx.Commit();
                 }
-                client.Save(CurrentSite.PageStorageDirectory, page.Guid, page.Content, Permissions.Private);
-                client.Save(CurrentSite.JavascriptStorageDirectory, page.Guid, page.Javascript, Permissions.Public);
-                client.Save(CurrentSite.StylesheetStorageDirectory, page.Guid, page.Stylesheet, Permissions.Public);
+                client.Save(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey,page.SubscriptionId), page.Guid, page.Content, Permissions.Private);
+                client.Save(SiteHelper.GetStorageKey(SiteHelper.JavascriptDirectoryKey,page.SubscriptionId), page.Guid, page.Javascript, Permissions.Public);
+                client.Save(SiteHelper.GetStorageKey(SiteHelper.StylesheetDirectoryKey,page.SubscriptionId), page.Guid, page.Stylesheet, Permissions.Public);
             }
             catch (Exception ex)
             {
@@ -163,9 +158,6 @@ namespace Gooeycms.Business.Pages
                 
                 CmsSiteMap.Instance.Remove(path);
                 this.Remove(page);
-                client.Delete(CurrentSite.PageStorageDirectory, page.Guid);
-
-                throw;
             }
         }
 
@@ -176,7 +168,7 @@ namespace Gooeycms.Business.Pages
                 CmsPageDao dao = new CmsPageDao();
                 using (Transaction tx = new Transaction())
                 {
-                    Cleanup(page.Guid);
+                    Cleanup(page);
                     dao.Delete<CmsPage>(page);
                     tx.Commit();
                 }
@@ -199,12 +191,12 @@ namespace Gooeycms.Business.Pages
         /// Cleans up the storage client to prevent any potential issues
         /// </summary>
         /// <param name="p"></param>
-        private void Cleanup(string guid)
+        private void Cleanup(CmsPage page)
         {
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.Delete(CurrentSite.PageStorageDirectory, guid);
-            client.Delete(CurrentSite.JavascriptStorageDirectory, guid);
-            client.Delete(CurrentSite.StylesheetStorageDirectory, guid);
+            client.Delete(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId), page.Guid);
+            client.Delete(SiteHelper.GetStorageKey(SiteHelper.JavascriptDirectoryKey, page.SubscriptionId), page.Guid);
+            client.Delete(SiteHelper.GetStorageKey(SiteHelper.StylesheetDirectoryKey, page.SubscriptionId), page.Guid);
         }
 
 
@@ -212,8 +204,8 @@ namespace Gooeycms.Business.Pages
         {
             CmsPageDao dao = new CmsPageDao();
 
-            IList<CmsPage> unapproved = dao.FindUnapprovedPages(CurrentSite.Guid,Data.Hash.New(page.UrlHash));
-            IList<CmsPage> approved = dao.FindApprovedPages(CurrentSite.Guid,Data.Hash.New(page.UrlHash));
+            IList<CmsPage> unapproved = dao.FindUnapprovedPages(Data.Guid.New(page.SubscriptionId),Data.Hash.New(page.UrlHash));
+            IList<CmsPage> approved = dao.FindApprovedPages(Data.Guid.New(page.SubscriptionId), Data.Hash.New(page.UrlHash));
 
             IStorageClient client = StorageHelper.GetStorageClient();
 
@@ -223,7 +215,7 @@ namespace Gooeycms.Business.Pages
             {
                 for (int i = 1; i < unapproved.Count; i++)
                 {
-                    Cleanup(unapproved[i].Guid);    
+                    Cleanup(unapproved[i]);    
                     dao.Delete<CmsPage>(unapproved[i]);
                 }
                 tx.Commit();
@@ -235,7 +227,7 @@ namespace Gooeycms.Business.Pages
             {
                 for (int i = 1; i < approved.Count; i++)
                 {
-                    Cleanup(approved[i].Guid);
+                    Cleanup(approved[i]);
                     dao.Delete<CmsPage>(approved[i]);
                 }
                 tx.Commit();
@@ -246,6 +238,20 @@ namespace Gooeycms.Business.Pages
         {
             CmsPage page = this.GetPage(guid, false);
             this.Remove(page);
+        }
+
+        public static void ValidateMarkup(string p)
+        {
+        }
+
+        public static void PublishToWorker(CmsPage page,Gooeycms.Business.Pages.PageTaskMessage.Actions action)
+        {
+            PageTaskMessage message = new PageTaskMessage();
+            message.Action = action;
+            message.Page = page;
+
+            QueueManager queue = new QueueManager(QueueNames.PageActionQueue);
+            queue.Put<PageTaskMessage>(message, TimeSpan.FromMinutes(60));
         }
     }
 }

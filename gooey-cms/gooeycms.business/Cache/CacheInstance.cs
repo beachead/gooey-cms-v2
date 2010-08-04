@@ -63,7 +63,7 @@ namespace Gooeycms.Business.Cache
             message.RefreshKey = key;
             message.RefreshAll = (key == null);
 
-            Communication.Broadcast<CacheRefreshRequest>(typeof(CacheRefreshProcessor), message);
+            InstanceCommunication.Broadcast<CacheRefreshRequest>(typeof(CacheRefreshProcessor), message);
             /*
             String url = CurrentSite.Protocol + CurrentSite.StagingDomain +"/cacherefresh.handler?token=" + AntiXss.UrlEncode(TokenManager.Issue(CACHE_REFRESH_KEY, TimeSpan.FromSeconds(30)));
             if (key != null)

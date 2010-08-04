@@ -14,4 +14,10 @@
       <LocalStorage name="LocalStorage" cleanOnRoleRecycle="true" />
     </LocalResources>
   </WebRole>
+  <WorkerRole name="gooeycms.worker.control">
+    <ConfigurationSettings>
+      <Setting name="DiagnosticsConnectionString" />
+      <Setting name="ActiveStorageConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
 </ServiceDefinition>

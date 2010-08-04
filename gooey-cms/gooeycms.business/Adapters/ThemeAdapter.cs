@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Gooeycms.Business.Themes;
 using Gooeycms.Data.Model.Theme;
 
-namespace Gooeycms.Webrole.Control.App_Code.Adapters
+namespace Gooeycms.Business.Adapters
 {
     public class ThemeAdapter
     {

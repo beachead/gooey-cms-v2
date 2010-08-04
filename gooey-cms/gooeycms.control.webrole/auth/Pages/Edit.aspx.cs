@@ -49,8 +49,10 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         protected void LoadExisting()
         {
-            String guid = Request.QueryString["pid"];
-            CmsPage page = PageManager.Instance.GetPage(Data.Guid.New(guid));
+            String url = Request.QueryString["pid"];
+
+            //always display the latest version
+            CmsPage page = PageManager.Instance.GetLatestPage(url);
             CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
 
             this.ParentDirectories.SelectedValue = path.Parent;
@@ -80,8 +82,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         protected void OnSave_Click(Object sender, EventArgs e)
         {
-            CurrentSite.Cache.Clear();
-
             CmsPage page = new CmsPage();
             try
             {
@@ -96,6 +96,12 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                         throw new ApplicationException("This page name already exists and may not be used again.");
                 }
 
+                PageManager.ValidateMarkup(this.PageMarkupText.Text);
+
+                String fullurl = CmsSiteMap.PathCombine(this.ParentDirectories.SelectedValue, this.PageName.Text);
+                page.Guid = System.Guid.NewGuid().ToString();
+                page.Url = fullurl;
+                page.UrlHash = TextHash.MD5(page.Url).Value;
                 page.SubscriptionId = CurrentSite.Guid.Value;
                 page.DateSaved = DateTime.Now;
                 page.IsApproved = false;
@@ -108,14 +114,10 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 page.Template = this.PageTemplate.SelectedValue;
                 page.OnBodyLoad = this.BodyLoadOptions.Text;
 
-                CmsPage existingPage = PageManager.Instance.GetLatestPage(path);
-                if (existingPage != null)
-                {
-                    page.Javascript = existingPage.Javascript;
-                    page.Stylesheet = existingPage.Stylesheet;
-                }
+                PageManager.PublishToWorker(page,PageTaskMessage.Actions.Save);
 
-                PageManager.Instance.AddNewPage(this.ParentDirectories.SelectedValue, this.PageName.Text, page);
+                this.Status.Text = "The page has been successfully saved.";
+                this.Status.ForeColor = System.Drawing.Color.Green;
             }
             catch (Exception ex)
             {
@@ -123,26 +125,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                 this.Status.Text = ex.Message;
                 this.Status.ForeColor = System.Drawing.Color.Red;
-            }
-
-            /*
-             * This is how we detect the difference between a "preview" and a "save"
-             * When the preview button is set, the 'sender' object is a string and this block of code
-             * isn't executed. When a save is called, the 'sender' is an object and this block is executed
-             */
-            if (!(sender is String))
-            {
-                try
-                {
-                    PageManager.Instance.RemoveObsoletePages(page);
-                }
-                catch (Exception) { }
-
-                Response.Redirect("~/auth/pages/edit.aspx?a=edit&pid=" + page.Guid + "&s=1", true);
-            }
-            else
-            {
-                savedPageId = page.Guid;
             }
         }
 
@@ -154,8 +136,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         {
             if (Request.QueryString["a"] != null)
             {
-                //OnSave_Click("preview", null);
-                
                 PreviewDto dto = new PreviewDto();
                 dto.Content = PageMarkupText.Text;
                 dto.Title = this.PageTitle.Text;

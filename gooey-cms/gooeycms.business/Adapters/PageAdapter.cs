@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Gooeycms.Business.Pages;
 using Gooeycms.Data.Model.Page;
 
-namespace Gooeycms.Webrole.Control.App_Code.Adapters
+namespace Gooeycms.Business.Adapters
 {
     public class PageAdapter
     {

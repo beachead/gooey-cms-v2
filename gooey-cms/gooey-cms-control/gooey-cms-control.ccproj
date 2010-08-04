@@ -42,6 +42,13 @@
       <RoleType>Web</RoleType>
       <RoleName>gooeycms.webrole.control</RoleName>
     </ProjectReference>
+    <ProjectReference Include="..\gooeycms.worker.control\gooeycms.worker.control.csproj">
+      <Name>gooeycms.worker.control</Name>
+      <Project>{be246258-9b8e-4ee4-8d1c-20867e3feb9b}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>gooeycms.worker.control</RoleName>
+    </ProjectReference>
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

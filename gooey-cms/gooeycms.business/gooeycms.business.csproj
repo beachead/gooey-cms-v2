@@ -67,7 +67,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Azure\Communication.cs" />
+    <Compile Include="Adapters\PageAdapter.cs" />
+    <Compile Include="Adapters\ThemeAdapter.cs" />
+    <Compile Include="Azure\InstanceCommunication.cs" />
     <Compile Include="Azure\WebroleMessage.cs" />
     <Compile Include="Cache\CacheInstance.cs" />
     <Compile Include="Cache\CacheManager.cs" />
@@ -117,6 +119,8 @@
     <Compile Include="Javascript\JavascriptManager.cs" />
     <Compile Include="Pages\NavigationControl.cs" />
     <Compile Include="Pages\PageNotFoundException.cs" />
+    <Compile Include="Pages\PageRoleWorker.cs" />
+    <Compile Include="Pages\PageTaskMessage.cs" />
     <Compile Include="Pages\PreviewDto.cs" />
     <Compile Include="Pages\ResourceControl.cs" />
     <Compile Include="Pages\VariableControl.cs" />
@@ -126,6 +130,7 @@
     <Compile Include="Storage\IQueueMessage.cs" />
     <Compile Include="Storage\IQueueMessageProcessor.cs" />
     <Compile Include="Storage\QueueManager.cs" />
+    <Compile Include="Storage\QueueMessageWrapper.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Membership\MembershipProfile.cs" />

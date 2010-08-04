@@ -141,7 +141,7 @@ namespace Gooeycms.Business.Web
 
         public CmsSitePath AddNewPage(Data.Guid siteGuid, String parentPath, String newPage)
         {
-            CmsSitePath parent = GetPath(CurrentSite.Guid, parentPath);
+            CmsSitePath parent = GetPath(siteGuid, parentPath);
             if (parent == null)
                 throw new ArgumentException(parentPath + " does not exist and can not be used as a parent for " + newPage);
 

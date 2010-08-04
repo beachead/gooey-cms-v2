@@ -76,11 +76,10 @@
     <Content Include="auth\Pages\Javascript.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\Adapters\PageAdapter.cs" />
-    <Compile Include="App_Code\Adapters\ThemeAdapter.cs" />
     <Compile Include="App_Code\ValidatedHelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -198,6 +197,9 @@
     </Compile>
     <Compile Include="auth\Themes\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

@@ -2,6 +2,7 @@
 
 namespace Gooeycms.Data.Model.Page
 {
+    [Serializable]
     public class CmsPage : BasePersistedItem
     {
         public virtual String Guid { get; set; }

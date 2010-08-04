@@ -66,7 +66,7 @@
         </asp:GridView>    
         <asp:ObjectDataSource ID="ThemesDataSource" runat="server" 
             SelectMethod="GetThemesBySite" 
-            TypeName="Gooeycms.Webrole.Control.App_Code.Adapters.ThemeAdapter" 
+            TypeName="Gooeycms.Business.Adapters.ThemeAdapter" 
             onselecting="ThemesDataSource_Selecting">
             <SelectParameters>
                 <asp:Parameter Name="guid" Type="String" />
