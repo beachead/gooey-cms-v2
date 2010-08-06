@@ -8,6 +8,7 @@ using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Microsoft.Security.Application;
 using Gooeycms.Business.Cache;
+using Gooeycms.Data.Model.Page;
 
 namespace Gooeycms.Business.Css
 {
@@ -23,17 +24,52 @@ namespace Gooeycms.Business.Css
             this.cmsPage = cmsPage;
         }
 
-        internal String GetCssIncludes()
+        internal String GetCssIncludes(CmsPage page)
         {
+            CmsTheme theme = CurrentSite.GetCurrentTheme();
             StringBuilder includes = new StringBuilder();
-            IList<CssFile> scripts = List(CurrentSite.GetCurrentTheme());
+            IList<CssFile> scripts = List(theme);
+            IList<CssFile> pageScripts = List(page);
+
             foreach (CssFile script in scripts)
             {
                 if (script.IsEnabled)
-                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/" + AntiXss.UrlEncode(script.FullName) + "\" />");
+                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/" + AntiXss.UrlEncode(theme.ThemeGuid) + "/" + AntiXss.UrlEncode(script.FullName) + "\" />");
+            }
+
+            foreach (CssFile script in pageScripts)
+            {
+                if (script.IsEnabled)
+                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/" + AntiXss.UrlEncode(page.UrlHash) + "/" + AntiXss.UrlEncode(script.FullName) + "\" />");
             }
 
             return includes.ToString();
+        }
+
+        private IList<CssFile> List(String key)
+        {
+            CacheInstance cache = CurrentSite.Cache;
+
+            IList<CssFile> results = cache.Get<IList<CssFile>>("css-files-" + key);
+            if (results == null)
+            {
+                results = new List<CssFile>();
+                String directory = CurrentSite.StylesheetStorageContainer;
+                IStorageClient client = StorageHelper.GetStorageClient();
+
+                IList<StorageFile> files = client.List(directory, key);
+                foreach (StorageFile file in files)
+                {
+                    results.Add(Convert(key, file));
+                }
+                cache.Add("javascript-files-" + key, results);
+            }
+            return results;
+        }
+
+        public IList<CssFile> List(CmsPage cmsPage)
+        {
+            return List(cmsPage.UrlHash);
         }
 
         /// <summary>
@@ -44,97 +80,95 @@ namespace Gooeycms.Business.Css
         /// <returns></returns>
         public IList<CssFile> List(CmsTheme theme)
         {
-            CacheInstance cache = CurrentSite.Cache;
-
-            IList<CssFile> results = cache.Get<IList<CssFile>>("css-files");
-            if (results == null)
-            {
-                results = new List<CssFile>();
-                
-                String container = CurrentSite.StylesheetStorageContainer;
-                IStorageClient client = StorageHelper.GetStorageClient();
-
-                IList<StorageFile> files = client.List(container, theme.ThemeGuid);
-                foreach (StorageFile file in files)
-                {
-                    results.Add(Convert(theme, file));
-                }
-                cache.Add("css-files", results);
-            }
-            return results;
+            return List(theme.ThemeGuid);
         }
 
-        /// <summary>
-        /// Associates a new file with the specified theme
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="data"></param>
-        public void Save(CmsTheme theme, string filename, byte[] data)
+        private void Save(String key, string filename, byte[] data, Boolean enabledByDefault)
         {
-            CurrentSite.Cache.Clear("css-files");
-
+            CurrentSite.Cache.Clear("css-files-" + key);
             if (!filename.EndsWith(CssFile.Extension))
             {
                 filename = filename + CssFile.Extension;
             }
 
-            String enabled = Boolean.FalseString;
+            String enabled = enabledByDefault.StringValue();
             try
             {
-                CssFile exists = Get(theme, filename);
+                CssFile exists = Get(key, filename);
                 enabled = (exists.IsEnabled) ? Boolean.TrueString : Boolean.FalseString;
             }
             catch (PageNotFoundException) { }
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.AddMetadata(GetEnabledKey(theme), enabled);
+            client.AddMetadata(GetEnabledKey(key), enabled);
 
             String directory = CurrentSite.StylesheetStorageContainer;
-            client.Save(directory, theme.ThemeGuid, filename, data, Permissions.Private);
+            client.Save(directory, key, filename, data, Permissions.Private);
         }
 
-        /// <summary>
-        /// Enables the specified javascript file to run on the theme
-        /// </summary>
-        /// <param name="theme"></param>
-        /// <param name="filename"></param>
-        public void Enable(CmsTheme theme, string filename)
+        public void Save(CmsPage page, string filename, byte[] data)
         {
-            CurrentSite.Cache.Clear("css-files");
+            Save(page.UrlHash, filename, data, true);
+        }
 
+        public void Save(CmsTheme theme, string filename, byte[] data)
+        {
+            Save(theme.ThemeGuid, filename, data, false);
+        }
 
+        private void EnableDisable(String key, String filename, Boolean enabled)
+        {
+            CurrentSite.Cache.Clear("css-files-" + key);
 
+            String enabledString = (enabled) ? Boolean.TrueString.ToLower() : Boolean.FalseString.ToLower();
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.AddMetadata(GetEnabledKey(theme), "true");
+            client.AddMetadata(GetEnabledKey(key), enabledString);
 
             String directory = CurrentSite.StylesheetStorageContainer;
-            client.SetMetadata(directory, theme.ThemeGuid, filename);
+            client.SetMetadata(directory, key, filename);
+        }
+
+        public void Enable(CmsPage page, string filename)
+        {
+            EnableDisable(page.UrlHash, filename, true);
+        }
+
+        public void Disable(CmsPage page, String filename)
+        {
+            EnableDisable(page.UrlHash, filename, false);
+        }
+
+        public void Enable(CmsTheme theme, string filename)
+        {
+            EnableDisable(theme.ThemeGuid, filename, true);
         }
 
         public void Disable(CmsTheme theme, String filename)
         {
-            CurrentSite.Cache.Clear("css-files");
-
-            IStorageClient client = StorageHelper.GetStorageClient();
-            client.AddMetadata(GetEnabledKey(theme), "false");
-
-            String directory = CurrentSite.StylesheetStorageContainer;
-            client.SetMetadata(directory, theme.ThemeGuid, filename);
+            EnableDisable(theme.ThemeGuid, filename, false);
         }
 
-        public CssFile Get(CmsTheme theme, string name)
+        public CssFile Get(String key, String name)
         {
             String directory = CurrentSite.StylesheetStorageContainer;
-
             IStorageClient client = StorageHelper.GetStorageClient();
-            StorageFile file = client.GetFile(directory, theme.ThemeGuid, name);
+            StorageFile file = client.GetFile(directory, key, name);
 
             if (!file.Exists())
                 throw new PageNotFoundException("The requested resource could not be found. " + name);
 
-            return Convert(theme, file);
+            return Convert(key, file);
         }
 
+        public CssFile Get(CmsTheme theme, string name)
+        {
+            return Get(theme.ThemeGuid, name);
+        }
+
+        public CssFile Get(CmsPage page, string name)
+        {
+            return Get(page.UrlHash, name);
+        }
 
         public void Delete(CmsTheme theme, string name)
         {
@@ -145,12 +179,12 @@ namespace Gooeycms.Business.Css
         }
 
 
-        private static CssFile Convert(CmsTheme theme, StorageFile file)
+        private static CssFile Convert(String enabledKey, StorageFile file)
         {
             CssFile temp = new CssFile();
 
             Boolean isEnabled = true;
-            String enabled = file.Metadata[GetEnabledKey(theme)];
+            String enabled = file.Metadata[GetEnabledKey(enabledKey)];
             Boolean.TryParse(enabled, out isEnabled);
 
             temp.IsEnabled = isEnabled;
@@ -162,9 +196,10 @@ namespace Gooeycms.Business.Css
             return temp;
         }
 
-        private static string GetEnabledKey(CmsTheme theme)
+
+        private static string GetEnabledKey(String key)
         {
-            return "enabled_" + theme.ThemeGuid.Replace("-", "_");
+            return "enabled_" + key.Replace("-", "_");
         }
 
         internal static string Resolve(string content)

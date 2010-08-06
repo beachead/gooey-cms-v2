@@ -74,6 +74,7 @@
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
+    <Content Include="auth\Pages\Stylesheet.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
     <Content Include="Global.asax" />
@@ -124,6 +125,13 @@
     </Compile>
     <Compile Include="auth\Pages\Javascript.aspx.designer.cs">
       <DependentUpon>Javascript.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Pages\Stylesheet.aspx.cs">
+      <DependentUpon>Stylesheet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Stylesheet.aspx.designer.cs">
+      <DependentUpon>Stylesheet.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Themes\Javascript.aspx.cs">
       <DependentUpon>Javascript.aspx</DependentUpon>
