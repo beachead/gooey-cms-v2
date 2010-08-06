@@ -24,17 +24,17 @@ namespace Gooeycms.Business.Util
             return String.Format(type, SiteHelper.GetActiveSiteGuid(true).Value);
         }
 
-        public static String PageStorageDirectory
+        public static String PageStorageContainer
         {
             get { return GetStorageKey(SiteHelper.PageDirectoryKey); }
         }
 
-        public static String JavascriptStorageDirectory
+        public static String JavascriptStorageContainer
         {
             get { return GetStorageKey(SiteHelper.JavascriptDirectoryKey); }
         }
 
-        public static String StylesheetStorageDirectory
+        public static String StylesheetStorageContainer
         {
             get { return GetStorageKey(SiteHelper.StylesheetDirectoryKey); }
         }
@@ -139,7 +139,7 @@ namespace Gooeycms.Business.Util
 
         public static String GetImageUrl(String imagename)
         {
-            StorageFile file = StorageHelper.GetStorageClient().GetInfo(CurrentSite.ImageStorageDirectory, imagename);
+            StorageFile file = StorageHelper.GetStorageClient().GetInfo(CurrentSite.ImageStorageDirectory, StorageClientConst.RootFolder, imagename);
             return file.Url;
         }
 

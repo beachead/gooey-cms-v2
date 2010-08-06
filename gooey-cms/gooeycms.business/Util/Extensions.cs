@@ -5,6 +5,11 @@ namespace Gooeycms.Business.Util
 {
     public static class Extensions
     {
+        public static String StringValue(this Boolean item)
+        {
+            return (item) ? Boolean.TrueString.ToLower() : Boolean.FalseString.ToLower();
+        }
+
         public static bool EqualsCaseInsensitive(this String item, String param)
         {
             return String.Equals(item, param, StringComparison.CurrentCultureIgnoreCase);

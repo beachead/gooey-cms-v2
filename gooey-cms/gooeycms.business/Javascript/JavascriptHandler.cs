@@ -17,14 +17,14 @@ namespace Gooeycms.Business.Javascript
             HttpResponse response = context.Response;
             Exception ex = null;
 
-            if (context.Request.QueryString["file"] != null)
+            HttpRequest request = context.Request;
+            String key = request.QueryString["key"];
+            String filename = request.QueryString["file"];
+            if (filename != null)
             {
-                String filename = context.Request.QueryString["file"];
-                CmsTheme theme = CurrentSite.GetCurrentTheme();
-
                 try
                 {
-                    file = JavascriptManager.Instance.Get(theme, filename);
+                    file = JavascriptManager.Instance.Get(key, filename);
                 }
                 catch (PageNotFoundException) { }
                 catch (Exception e)

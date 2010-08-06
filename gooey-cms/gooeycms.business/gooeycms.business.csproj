@@ -142,7 +142,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site\SiteConfiguration.cs" />
-    <Compile Include="Storage\BaseStorageClient.cs" />
     <Compile Include="Storage\BlobExtensions.cs" />
     <Compile Include="Storage\IStorageClient.cs" />
     <Compile Include="Storage\AzureBlobStorageClient.cs" />

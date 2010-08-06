@@ -81,7 +81,17 @@ namespace Gooeycms.Business.Pages
         /// <param name="path"></param>
         public CmsPage GetLatestPage(CmsUrl uri)
         {
-            return GetLatestPage(CurrentSite.Guid, uri);
+            return GetLatestPage(CurrentSite.Guid, uri, true);
+        }
+
+        public CmsPage GetLatestPage(Data.Guid siteGuid, CmsUrl uri)
+        {
+            return GetLatestPage(siteGuid, uri, true);
+        }
+
+        public CmsPage GetLatestPage(CmsUrl uri, bool loadData)
+        {
+            return GetLatestPage(CurrentSite.Guid, uri, loadData);
         }
 
         /// <summary>
@@ -90,7 +100,7 @@ namespace Gooeycms.Business.Pages
         /// <param name="siteGuid">The site guid</param>
         /// <param name="path">The page path</param>
         /// <returns></returns>
-        public CmsPage GetLatestPage(Data.Guid siteGuid, CmsUrl uri)
+        public CmsPage GetLatestPage(Data.Guid siteGuid, CmsUrl uri, bool loadData)
         {
             String path = uri.Path;
             Data.Hash pathHash = TextHash.MD5(path);
@@ -112,7 +122,8 @@ namespace Gooeycms.Business.Pages
             }
 
             //Load the page contents
-            LoadPageData(result);
+            if (loadData)
+                LoadPageData(result);
 
             return result;
         }
@@ -122,9 +133,7 @@ namespace Gooeycms.Business.Pages
             if (result != null)
             {
                 IStorageClient client = StorageHelper.GetStorageClient();
-                result.Content = client.OpenAsString(CurrentSite.PageStorageDirectory, result.Guid);
-                result.Javascript = client.OpenAsString(CurrentSite.JavascriptStorageDirectory, result.Guid);
-                result.Stylesheet = client.OpenAsString(CurrentSite.StylesheetStorageDirectory, result.Guid);
+                result.Content = client.OpenAsString(CurrentSite.PageStorageContainer, StorageClientConst.RootFolder, result.Guid);
             }
         }
 
@@ -148,9 +157,7 @@ namespace Gooeycms.Business.Pages
                     dao.Save<CmsPage>(page);
                     tx.Commit();
                 }
-                client.Save(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey,page.SubscriptionId), page.Guid, page.Content, Permissions.Private);
-                client.Save(SiteHelper.GetStorageKey(SiteHelper.JavascriptDirectoryKey,page.SubscriptionId), page.Guid, page.Javascript, Permissions.Public);
-                client.Save(SiteHelper.GetStorageKey(SiteHelper.StylesheetDirectoryKey,page.SubscriptionId), page.Guid, page.Stylesheet, Permissions.Public);
+                client.Save(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey,page.SubscriptionId), StorageClientConst.RootFolder, page.Guid, page.Content, Permissions.Private);
             }
             catch (Exception ex)
             {
@@ -165,10 +172,13 @@ namespace Gooeycms.Business.Pages
         {
             if (page != null)
             {
+                String container = SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId);
+
+                IStorageClient client = StorageHelper.GetStorageClient();
                 CmsPageDao dao = new CmsPageDao();
                 using (Transaction tx = new Transaction())
                 {
-                    Cleanup(page);
+                    client.Delete(container, StorageClientConst.RootFolder, page.Guid);
                     dao.Delete<CmsPage>(page);
                     tx.Commit();
                 }
@@ -187,19 +197,6 @@ namespace Gooeycms.Business.Pages
             return dao.SearchByUrl(siteGuid,filter);
         }
 
-        /// <summary>
-        /// Cleans up the storage client to prevent any potential issues
-        /// </summary>
-        /// <param name="p"></param>
-        private void Cleanup(CmsPage page)
-        {
-            IStorageClient client = StorageHelper.GetStorageClient();
-            client.Delete(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId), page.Guid);
-            client.Delete(SiteHelper.GetStorageKey(SiteHelper.JavascriptDirectoryKey, page.SubscriptionId), page.Guid);
-            client.Delete(SiteHelper.GetStorageKey(SiteHelper.StylesheetDirectoryKey, page.SubscriptionId), page.Guid);
-        }
-
-
         public void RemoveObsoletePages(CmsPage page)
         {
             CmsPageDao dao = new CmsPageDao();
@@ -208,6 +205,7 @@ namespace Gooeycms.Business.Pages
             IList<CmsPage> approved = dao.FindApprovedPages(Data.Guid.New(page.SubscriptionId), Data.Hash.New(page.UrlHash));
 
             IStorageClient client = StorageHelper.GetStorageClient();
+            String container = SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId);
 
             //Loop through all of the unapproved pages and remove any old versions.
             //Start at the first one, since we always want to leave the latest unapproved version
@@ -215,7 +213,7 @@ namespace Gooeycms.Business.Pages
             {
                 for (int i = 1; i < unapproved.Count; i++)
                 {
-                    Cleanup(unapproved[i]);    
+                    client.Delete(container, StorageClientConst.RootFolder, unapproved[i].Guid);   
                     dao.Delete<CmsPage>(unapproved[i]);
                 }
                 tx.Commit();
@@ -227,7 +225,7 @@ namespace Gooeycms.Business.Pages
             {
                 for (int i = 1; i < approved.Count; i++)
                 {
-                    Cleanup(approved[i]);
+                    client.Delete(container, StorageClientConst.RootFolder, approved[i].Guid);
                     dao.Delete<CmsPage>(approved[i]);
                 }
                 tx.Commit();

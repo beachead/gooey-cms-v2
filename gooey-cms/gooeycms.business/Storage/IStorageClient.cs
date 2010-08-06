@@ -9,24 +9,28 @@ namespace Gooeycms.Business.Storage
         Public
     }
 
+    public static class StorageClientConst
+    {
+        public const String RootFolder = null;
+    }
+
     public interface IStorageClient
     {
-        void Save(String directory, String filename, byte[] data, Permissions permissions);
-        void Save(String directory, String filename, String contents, Permissions permissions);
+        void Save(String containerName, String directoryName, String filename, byte[] data, Permissions permissions);
+        void Save(String containerName, String directoryName, String filename, String contents, Permissions permissions);
 
-        void Delete(String directory, String filename);
+        void Delete(String containerName, String directoryName, String filename);
 
-        byte [] Open(String directory, String filename);
-        String OpenAsString(String directory, String filename);
-        StorageFile GetFile(string directory, string actualfilename);
+        byte[] Open(String containerName, String directoryName, String filename);
+        String OpenAsString(String containerName, String directoryName, String filename);
 
-        IList<StorageFile> List(String directory);
-
-        StorageFile GetInfo(String directory, String filename);
-
+        StorageFile GetFile(String containerName, String directoryName, String filename);
+        StorageFile GetInfo(String containerName, String directoryName, String filename);
         StorageContainer GetContainerInfo(String container);
 
+        IList<StorageFile> List(String containerName, String directoryName);
+
         void AddMetadata(String key, String value);
-        void SetMetadata(string directory, string actualFilename);
+        void SetMetadata(String containerName, String directoryName, String filename);
     }
 }

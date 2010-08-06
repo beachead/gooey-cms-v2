@@ -154,15 +154,17 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 PreviewDto dto = new PreviewDto();
                 dto.Content = PageMarkupText.Text;
                 dto.Title = this.PageTitle.Text;
+                dto.TemplateName = this.PageTemplate.SelectedValue;
 
                 QueueManager manager = new QueueManager(QueueManager.GetPreviewQueueName(CurrentSite.Guid));
                 manager.ClearQueue();
                 manager.Put<PreviewDto>(dto);
 
-                String guid = Request.QueryString["pid"];
+                String cacheKey = TextHash.MD5(Request.QueryString["pid"]).Value;
+
                 String url = this.ParentDirectories.SelectedItem.Text + this.PageName.Text;
-                String token = Server.UrlEncode(TokenManager.Issue(guid, TimeSpan.FromMinutes(5)));
-                return Page.ResolveUrl(CurrentSite.Protocol + CurrentSite.StagingDomain + url + "?pvw=preview&pvw_id=" + guid + "&token=" + token);
+                String token = Server.UrlEncode(TokenManager.Issue(cacheKey, TimeSpan.FromMinutes(5)));
+                return Page.ResolveUrl(CurrentSite.Protocol + CurrentSite.StagingDomain + url + "?pvw=preview&pvw_id=" + cacheKey + "&token=" + token);
             }
             else 
                 return "::ALERT::You must save the page once before using the preview capability.";

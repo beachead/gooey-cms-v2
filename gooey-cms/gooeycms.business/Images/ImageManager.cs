@@ -56,7 +56,7 @@ namespace Gooeycms.Business.Images
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
             foreach (StorageFile file in results)
             {
-                client.Save(imageDirectory, file.Filename, file.Data, Permissions.Public);
+                client.Save(imageDirectory, StorageClientConst.RootFolder,file.Filename, file.Data, Permissions.Public);
             }
 
             return results;
@@ -112,7 +112,7 @@ namespace Gooeycms.Business.Images
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            IList<StorageFile> allimages = client.List(imageDirectory);
+            IList<StorageFile> allimages = client.List(imageDirectory, StorageClientConst.RootFolder);
 
             IList<StorageFile> results = new List<StorageFile>();
 

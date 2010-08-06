@@ -51,10 +51,10 @@ namespace Gooeycms.Business.Css
             {
                 results = new List<CssFile>();
                 
-                String directory = CurrentSite.StylesheetStorageDirectory;
+                String container = CurrentSite.StylesheetStorageContainer;
                 IStorageClient client = StorageHelper.GetStorageClient();
 
-                IList<StorageFile> files = client.List(directory);
+                IList<StorageFile> files = client.List(container, theme.ThemeGuid);
                 foreach (StorageFile file in files)
                 {
                     results.Add(Convert(theme, file));
@@ -78,9 +78,6 @@ namespace Gooeycms.Business.Css
                 filename = filename + CssFile.Extension;
             }
 
-            String directory = CurrentSite.StylesheetStorageDirectory;
-            filename = GetRelativeFilename(theme, filename);
-
             String enabled = Boolean.FalseString;
             try
             {
@@ -92,7 +89,8 @@ namespace Gooeycms.Business.Css
             IStorageClient client = StorageHelper.GetStorageClient();
             client.AddMetadata(GetEnabledKey(theme), enabled);
 
-            client.Save(directory, filename, data, Permissions.Private);
+            String directory = CurrentSite.StylesheetStorageContainer;
+            client.Save(directory, theme.ThemeGuid, filename, data, Permissions.Private);
         }
 
         /// <summary>
@@ -104,37 +102,32 @@ namespace Gooeycms.Business.Css
         {
             CurrentSite.Cache.Clear("css-files");
 
-            String directory = CurrentSite.StylesheetStorageDirectory;
-            String actualFilename = GetRelativeFilename(theme, filename);
+
 
             IStorageClient client = StorageHelper.GetStorageClient();
             client.AddMetadata(GetEnabledKey(theme), "true");
-            client.SetMetadata(directory, actualFilename);
+
+            String directory = CurrentSite.StylesheetStorageContainer;
+            client.SetMetadata(directory, theme.ThemeGuid, filename);
         }
 
         public void Disable(CmsTheme theme, String filename)
         {
             CurrentSite.Cache.Clear("css-files");
 
-            String directory = CurrentSite.StylesheetStorageDirectory;
-            String actualFilename = GetRelativeFilename(theme, filename);
-
             IStorageClient client = StorageHelper.GetStorageClient();
             client.AddMetadata(GetEnabledKey(theme), "false");
-            client.SetMetadata(directory, actualFilename);
-        }
 
-        public static String GetRelativeFilename(CmsTheme theme, String filename)
-        {
-            return filename;
+            String directory = CurrentSite.StylesheetStorageContainer;
+            client.SetMetadata(directory, theme.ThemeGuid, filename);
         }
 
         public CssFile Get(CmsTheme theme, string name)
         {
-            String directory = CurrentSite.StylesheetStorageDirectory;
+            String directory = CurrentSite.StylesheetStorageContainer;
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            StorageFile file = client.GetFile(directory, name);
+            StorageFile file = client.GetFile(directory, theme.ThemeGuid, name);
 
             if (!file.Exists())
                 throw new PageNotFoundException("The requested resource could not be found. " + name);
@@ -143,12 +136,12 @@ namespace Gooeycms.Business.Css
         }
 
 
-        public void Delete(CmsTheme cmsTheme, string name)
+        public void Delete(CmsTheme theme, string name)
         {
-            String directory = CurrentSite.StylesheetStorageDirectory;
+            String directory = CurrentSite.StylesheetStorageContainer;
             IStorageClient client = StorageHelper.GetStorageClient();
 
-            client.Delete(directory, name);
+            client.Delete(directory, theme.ThemeGuid, name);
         }
 
 

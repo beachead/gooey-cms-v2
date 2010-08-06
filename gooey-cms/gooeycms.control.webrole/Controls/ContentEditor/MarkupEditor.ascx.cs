@@ -11,6 +11,7 @@ namespace Beachead.Web.CMS.controls
         protected static String RootUrl;
         private Boolean isShowToolbar = true;
         private bool useStandardImageTags = false;
+        private bool showPreviewWindow = true;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,6 +37,12 @@ namespace Beachead.Web.CMS.controls
         {
             get { return this.isShowToolbar; }
             set { this.isShowToolbar = value; }
+        }
+
+        public Boolean ShowPreviewWindow
+        {
+            get { return this.showPreviewWindow; }
+            set { this.showPreviewWindow = value; }
         }
 
         public short TabIndex

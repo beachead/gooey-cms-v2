@@ -46,7 +46,7 @@ namespace Gooeycms.Business.Pages
         protected void Page_Init(object sender, EventArgs e)
         {
             String preview = Request.QueryString["pvw"];
-            String idToDelete = Request.QueryString["pvw_id"];
+            String cacheKey = Request.QueryString["pvw_id"];
             String token = Request.QueryString["token"];
 
             CmsUrl url = CmsUrl.Parse(Request.RawUrl);
@@ -60,14 +60,14 @@ namespace Gooeycms.Business.Pages
             else
             {
                 //Make sure there's an authenticated user making this request
-                if (!TokenManager.IsValid(idToDelete, token))
+                if (!TokenManager.IsValid(cacheKey, token))
                     throw new ApplicationException("The specified security token is not valid for this preview request.");
 
-                this.page = (CmsPage)Cache.Get(idToDelete);
+                this.page = (CmsPage)Cache.Get(cacheKey);
                 if (this.page == null)
                 {
-                    this.page = PageManager.Instance.GetPage(Data.Guid.New(idToDelete));
-                    Cache.Insert(idToDelete, this.page, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(15));
+                    this.page = PageManager.Instance.GetLatestPage(url, false); ;
+                    Cache.Insert(cacheKey, this.page, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(15));
                 }
 
                 QueueManager queue = new QueueManager(QueueManager.GetPreviewQueueName(CurrentSite.Guid));
@@ -75,6 +75,7 @@ namespace Gooeycms.Business.Pages
 
                 this.page.Content = dto.Content;
                 this.page.Title = dto.Title;
+                this.page.Template = dto.TemplateName;
             }
 
             if (this.page != null)
@@ -102,21 +103,8 @@ namespace Gooeycms.Business.Pages
             //Include all of the javascript files
             JavascriptManager js = new JavascriptManager(this.page);
             CssManager css = new CssManager(this.page);
-            output = output.Replace("{head.scripts.include}", js.GetJavascriptIncludes());
+            output = output.Replace("{head.scripts.include}", js.GetJavascriptIncludes(this.page));
             output = output.Replace("{head.css.include}", css.GetCssIncludes());
-            output = output.Replace("{head.css.inline}", this.page.Stylesheet);
-
-            //pass the javascript through the scripting engine
-            DynamicContentFormatter engine = new DynamicContentFormatter();
-            if (!String.IsNullOrEmpty(this.page.Javascript))
-            {
-                StringBuilder inlineJs = engine.Convert(new StringBuilder(this.page.Javascript));
-                output = output.Replace("{head.javascript.inline}", inlineJs.ToString());
-            }
-            else
-            {
-                output = output.Replace("{head.javascript.inline}", "");
-            }
 
             //Include any custom body options
             if (!String.IsNullOrEmpty(this.page.OnBodyLoad))
@@ -130,6 +118,8 @@ namespace Gooeycms.Business.Pages
 
             //Insert the page template
             CmsTemplate cmsTemplate = TemplateManager.Instance.GetTemplate(this.page.Template);
+
+            DynamicContentFormatter engine = new DynamicContentFormatter();
             StringBuilder template = engine.Convert(new StringBuilder(cmsTemplate.Content));
 
             //Add any campaign elements into the template

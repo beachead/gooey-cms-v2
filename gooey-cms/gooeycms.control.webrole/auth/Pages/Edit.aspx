@@ -82,8 +82,8 @@
             <asp:Panel ID="CssManagePanel" Visible="false" runat="server">
             <tr>
                 <td colspan="2">
-                    <a href="#" onclick="window.open('Css.aspx?pid=<%= Request.QueryString["pid"] %>','csswindow','width=800,height=600,scrollbars=yes'); return false;">Manage CSS</a>&nbsp;
-                    <a href="#" onclick="window.open('Javascript.aspx?pid=<%= Request.QueryString["pid"] %>','jswindow','width=800,height=600,scrollbars=yes'); return false;">Manage Javascript</a>
+                    <a href="#" onclick="window.open('Css.aspx?pid=<%= Request.QueryString["pid"] %>','csswindow','width=890,height=580,scrollbars=yes'); return false;">Manage CSS</a>&nbsp;
+                    <a href="#" onclick="window.open('Javascript.aspx?pid=<%= Request.QueryString["pid"] %>','jswindow','width=900,height=590,scrollbars=yes'); return false;">Manage Javascript</a>
                 </td>
             </tr>
             </asp:Panel>

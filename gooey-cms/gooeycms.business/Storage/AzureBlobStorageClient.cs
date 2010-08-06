@@ -4,10 +4,11 @@ using System.Configuration;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
+using System.Text;
 
 namespace Gooeycms.Business.Storage
 {
-    public class AzureBlobStorageClient : BaseStorageClient
+    public class AzureBlobStorageClient : IStorageClient
     {
         private IDictionary<String, String> metadata = new Dictionary<String, String>();
 
@@ -36,12 +37,19 @@ namespace Gooeycms.Business.Storage
             return container;
         }
 
-        public override void Save(String directory, string filename, byte[] data, Permissions permissions)
+        public void Save(String containerName, String directoryName, String filename, String contents, Permissions permissions)
+        {
+            if (contents == null)
+                contents = "";
+            this.Save(containerName, directoryName, filename, Encoding.UTF8.GetBytes(contents), permissions);
+        }
+
+        public void Save(String containerName, String directoryName, String filename, byte[] data, Permissions permissions)
         {
             filename = filename.Replace(" ", "");
             if ((data != null) && (data.Length > 0))
             {
-                CloudBlobContainer container = GetBlobContainer(directory);
+                CloudBlobContainer container = GetBlobContainer(containerName);
                 bool created = container.CreateIfNotExist();
                 if (created)
                 {
@@ -54,7 +62,9 @@ namespace Gooeycms.Business.Storage
                     container.SetPermissions(perms);
                 }
 
-                CloudBlob blob = container.GetBlobReference(filename);
+                String blobfilename = GetRelativeFilename(directoryName, filename);
+
+                CloudBlob blob = container.GetBlobReference(blobfilename);
                 blob.UploadByteArray(data);
 
                 blob.Metadata["filename"] = filename;
@@ -71,36 +81,57 @@ namespace Gooeycms.Business.Storage
             }
         }
 
-        public override void Delete(String directory, string filename)
+        private static String GetRelativeFilename(String directoryName, String filename)
         {
-            filename = filename.Replace(" ", "");
-            CloudBlobContainer container = GetBlobContainer(directory);
-            CloudBlob blob = container.GetBlobReference(filename);
-            blob.DeleteIfExists();
+            if (directoryName != StorageClientConst.RootFolder)
+            {
+                filename = directoryName + "/" + filename;
+            }
+            return filename;
         }
 
-        public override byte[] Open(String directory, string filename)
+        public void Delete(String containerName, String directoryName, string filename)
+        {
+            filename = filename.Replace(" ", "");
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            if (container.Exists())
+            {
+                filename = GetRelativeFilename(directoryName, filename);
+                CloudBlob blob = container.GetBlobReference(filename);
+                blob.DeleteIfExists();
+            }
+        }
+
+        public byte[] Open(String containerName, String directoryName, string filename)
         {
             filename = filename.Replace(" ","");
-            CloudBlobContainer container = GetBlobContainer(directory);
-            CloudBlob blob = container.GetBlobReference(filename);
+            byte[] result = new byte[] { };
 
-            byte[] result = new byte [] {};
-            if (blob.Exists())
-                result = blob.DownloadByteArray();
-
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            if (container.Exists())
+            {
+                CloudBlob blob = GetCloudBlob(container,directoryName, filename);
+                if (blob.Exists())
+                    result = blob.DownloadByteArray();
+            }
             return result;
         }
 
-        public override StorageFile GetFile(string directory, string filename)
+        public String OpenAsString(String containerName, String directoryName, String filename)
+        {
+            byte[] data = this.Open(containerName,directoryName, filename);
+            return Encoding.UTF8.GetString(data);
+        }
+
+        public StorageFile GetFile(String containerName, String directoryName, String filename)
         {
             filename = filename.Replace(" ", "");
 
             StorageFile result = new StorageFile();
-            CloudBlobContainer container = GetBlobContainer(directory);
+            CloudBlobContainer container = GetBlobContainer(containerName);
             if (container.Exists())
             {
-                CloudBlob blob = container.GetBlobReference(filename);
+                CloudBlob blob = GetCloudBlob(container, directoryName, filename);
                 if (blob.Exists())
                 {
                     result.Uri = blob.Uri;
@@ -113,26 +144,48 @@ namespace Gooeycms.Business.Storage
             return result;
         }
 
-        public override IList<StorageFile> List(String directory)
+        public IList<StorageFile> List(String containerFolder)
+        {
+            return List(containerFolder, StorageClientConst.RootFolder);
+        }
+
+        public IList<StorageFile> List(String containerFolder, String directoryName)
         {
             IList<StorageFile> results = new List<StorageFile>();
 
-            CloudBlobContainer container = GetBlobContainer(directory);
+            CloudBlobContainer container = GetBlobContainer(containerFolder);
             if (container.Exists())
             {
-                var items = container.ListBlobs();
-                foreach (IListBlobItem item in items)
+                IEnumerable<IListBlobItem> items = null; ;
+                if (directoryName != null)
                 {
-                    CloudBlob blob = container.GetBlobReference(item.Uri.ToString());
-                    if (blob.Exists())
+                    try
                     {
-                        blob.FetchAttributes();
-                        results.Add(new StorageFile()
+                        CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
+                        items = directory.ListBlobs();
+                    }
+                    catch (Exception) { }
+                }
+                else
+                {
+                    items = container.ListBlobs();
+                }
+
+                if (items != null)
+                {
+                    foreach (IListBlobItem item in items)
+                    {
+                        CloudBlob blob = container.GetBlobReference(item.Uri.ToString());
+                        if (blob.Exists())
                         {
-                            Filename = GetBlobFilename(blob),
-                            Uri = blob.Uri,
-                            Metadata = blob.Metadata
-                        });
+                            blob.FetchAttributes();
+                            results.Add(new StorageFile()
+                            {
+                                Filename = GetBlobFilename(blob),
+                                Uri = blob.Uri,
+                                Metadata = blob.Metadata
+                            });
+                        }
                     }
                 }
             }
@@ -145,11 +198,11 @@ namespace Gooeycms.Business.Storage
             return blob.Uri.ToString().Substring(blob.Uri.ToString().LastIndexOf("/") + 1);
         }
 
-        public override StorageFile GetInfo(string directory, string filename)
+        public StorageFile GetInfo(String containerName, String directoryName, String filename)
         {
             filename = filename.Replace(" ", "");
-            CloudBlobContainer container = GetBlobContainer(directory);
-            CloudBlob blob = container.GetBlobReference(filename);
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            CloudBlob blob = GetCloudBlob(container, directoryName, filename);
 
             StorageFile file = new StorageFile();
             if (blob.Exists())
@@ -162,28 +215,48 @@ namespace Gooeycms.Business.Storage
             return file;
         }
 
-        public override StorageContainer GetContainerInfo(String name)
+        public StorageContainer GetContainerInfo(String name)
         {
             CloudBlobContainer container = GetBlobContainer(name);
             return new StorageContainer() { Uri = container.Uri };
         }
 
-        public override void AddMetadata(String key, String value)
+        public void AddMetadata(String key, String value)
         {
             this.metadata.Add(key, value);
         }
 
-        public override void SetMetadata(string directory, string filename)
+        public void SetMetadata(String containerName, String directoryName, string filename)
         {
-            CloudBlobContainer container = GetBlobContainer(directory);
-            CloudBlob blob = container.GetBlobReference(filename);
-            if (blob.Exists())
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            if (container.Exists())
             {
-                foreach (String key in metadata.Keys)
-                    blob.Metadata[key] = metadata[key];
+                filename = GetRelativeFilename(directoryName, filename);
+                CloudBlob blob = container.GetBlobReference(filename);
+                if (blob.Exists())
+                {
+                    foreach (String key in metadata.Keys)
+                        blob.Metadata[key] = metadata[key];
 
-                blob.SetMetadata();
+                    blob.SetMetadata();
+                }
             }
+        }
+
+        private static CloudBlob GetCloudBlob(CloudBlobContainer container, String directoryName, string filename)
+        {
+            CloudBlob blob;
+            if (directoryName != StorageClientConst.RootFolder)
+            {
+                CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
+                blob = directory.GetBlobReference(filename);
+            }
+            else
+            {
+                blob = container.GetBlobReference(filename);
+            }
+
+            return blob;
         }
     }
 }

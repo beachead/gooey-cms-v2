@@ -17,8 +17,6 @@ namespace Gooeycms.Data.Model.Page
         public virtual String Keywords { get; set; }
         public virtual String OnBodyLoad { get; set; }
         public virtual String Template { get; set; }
-        public virtual String Javascript { get; set; }
-        public virtual String Stylesheet { get; set; }
         public virtual String Content { get; set; }
         public virtual String Url { get; set; }
         public virtual String UrlHash { get; set; }

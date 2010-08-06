@@ -14,6 +14,7 @@
         dojo.require("dijit.Dialog");
         dojo.require("dijit.layout.TabContainer");
         dojo.require("dijit.layout.ContentPane");
+        dojo.require("dojox.image.Lightbox");
     </script>
 </head>
 <body class="claro">
@@ -53,8 +54,8 @@
                                 <asp:DataList ID="AvailableImages" RepeatDirection="Horizontal" BackColor="#F7F6F3" 
                                     RepeatColumns="4" runat="server" CellPadding="6" CellSpacing="6">
                                     <ItemTemplate>
-                                        <div style="min-height:80px;width:125px;padding-bottom:5px;text-align:center;">
-                                        <a href="#" onclick="window.open('<%# DataBinder.Eval(Container,"DataItem.Url") %>','','width=300,height=300');">
+                                        <div style="width:125px;padding-bottom:5px;text-align:center;">
+                                        <a href="<%# DataBinder.Eval(Container,"DataItem.Url") %>" dojoType="dojox.image.Lightbox">
                                             <img src="<%# DataBinder.Eval(Container,"DataItem.ThumbnailUrl") %>" alt="<%# DataBinder.Eval(Container,"DataItem.Filename") %>" style="border:0px;" />
                                         </a>
                                         <br />

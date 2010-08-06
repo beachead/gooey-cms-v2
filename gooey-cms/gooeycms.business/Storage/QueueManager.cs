@@ -155,7 +155,7 @@ namespace Gooeycms.Business.Storage
         private void SaveExternally(String guid, byte[] data)
         {
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.Save("queue-tempstorage", guid, data, Permissions.Private);
+            client.Save("queue-tempstorage", StorageClientConst.RootFolder, guid, data, Permissions.Private);
         }
 
         private byte[] ReadExternally(String guid)
@@ -163,13 +163,13 @@ namespace Gooeycms.Business.Storage
             IStorageClient client = StorageHelper.GetStorageClient();
             try
             {
-                return client.Open("queue-tempstorage", guid);
+                return client.Open("queue-tempstorage", StorageClientConst.RootFolder, guid);
             }
             finally
             {
                 try
                 {
-                    client.Delete("queue-tempstorage", guid);
+                    client.Delete("queue-tempstorage", StorageClientConst.RootFolder, guid);
                 }
                 catch (Exception) { }
             }

@@ -16,14 +16,16 @@
         Please wait while your preview is generated.
     </div>    
 
+    <% if (ShowPreviewWindow) { %>
     <div dojoType="dijit.TitlePane" id="preview-panel" title="Preview Window" open="false">
         <div style="height:350px;overflow:auto;">
             <iframe id="preview-frame" src="" width="90%" height="95%"></iframe>
         </div>
     </div>
     <div dojoType="dijit.TitlePane" title="Markup Editor">
+    <% } %>
         <asp:Panel ID="ToolbarPanel" runat="server">
-        <div style="width:900px;height:25px;">    
+        <div style="width:900px;height:25px;">
         <ul id="FormatUl">
         <li><a href="#" onclick="javascript:return __Wrap('<b>', '</b>','<%=PageMarkupText.TextboxId %>');" title="Bold" class="formatlink" id="BoldLink"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('<i>', '</i>','<%=PageMarkupText.TextboxId %>');" title="Italics" class="formatlink" id="ItalicLink"></a></li>
@@ -35,14 +37,16 @@
         <li><a href="#" onclick="javascript:return __Wrap('<nomarkup>', '</nomarkup>','<%=PageMarkupText.TextboxId %>');" title="No Markup" class="formatlink" id="NoMarkup"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('<esc>', '</esc>','<%=PageMarkupText.TextboxId %>');" title="Escape HTML" class="formatlink" id="EscapeLink"></a></li>             
         <li><a href="#" onclick="javascript:window.open('ImageBrowser.aspx','','width=700,height=500,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;" title="Image Browser" class="formatlink" id="ImageLink"></a></li>             
-        <li><anthem:LinkButton ID="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li>                     
+        <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li><% } %>
         </ul>
         </div>
         </asp:Panel>
-        <div style="width:950px;"> 
+        <div> 
             <uc:ResizableTextBox ID="PageMarkupText" runat="server" />
         </div>
+    <% if (ShowPreviewWindow) { %>
     </div>
+    <% } %>
 <script language="javascript" type="text/javascript">
     var parent = null;
 
