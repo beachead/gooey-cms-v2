@@ -51,7 +51,7 @@ namespace Gooeycms.Business.Javascript
         {
             CacheInstance cache = CurrentSite.Cache;
 
-            IList<JavascriptFile> results = cache.Get<IList<JavascriptFile>>("javascript-files");
+            IList<JavascriptFile> results = cache.Get<IList<JavascriptFile>>("javascript-files-" + key);
             if (results == null)
             {
                 results = new List<JavascriptFile>();
@@ -63,7 +63,7 @@ namespace Gooeycms.Business.Javascript
                 {
                     results.Add(Convert(key, file));
                 }
-                cache.Add("javascript-files", results);
+                cache.Add("javascript-files-" + key, results);
             }
             return results;
         }
@@ -87,7 +87,7 @@ namespace Gooeycms.Business.Javascript
 
         private void Save(String key, string filename, byte[] data, Boolean enabledByDefault)
         {
-            CurrentSite.Cache.Clear("javascript-files");
+            CurrentSite.Cache.Clear("javascript-files-" + key);
             if (!filename.EndsWith(JavascriptFile.Extension))
             {
                 filename = filename + JavascriptFile.Extension;
@@ -120,7 +120,7 @@ namespace Gooeycms.Business.Javascript
 
         private void EnableDisable(String key, String filename, Boolean enabled)
         {
-            CurrentSite.Cache.Clear("javascript-files");
+            CurrentSite.Cache.Clear("javascript-files-" + key);
 
             String enabledString = (enabled) ? Boolean.TrueString.ToLower() : Boolean.FalseString.ToLower();
             IStorageClient client = StorageHelper.GetStorageClient();
