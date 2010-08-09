@@ -168,6 +168,36 @@ namespace Gooeycms.Business.Pages
             }
         }
 
+        /// <summary>
+        /// Removes all versions of the page
+        /// </summary>
+        /// <param name="page"></param>
+        public void DeleteAll(CmsPage page)
+        {
+            if (page != null)
+            {
+                String container = SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId);
+
+                IStorageClient client = StorageHelper.GetStorageClient();
+                CmsPageDao dao = new CmsPageDao();
+
+                IList<CmsPage> pages = dao.FindAllPages(Data.Guid.New(page.SubscriptionId), Data.Hash.New(page.UrlHash));
+                using (Transaction tx = new Transaction())
+                {
+                    foreach (CmsPage temp in pages)
+                    {
+                        client.Delete(container, StorageClientConst.RootFolder, temp.Guid);
+                        dao.Delete<CmsPage>(temp);
+                    }
+                    tx.Commit();
+                }
+
+                CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
+                if (page != null)
+                    CmsSiteMap.Instance.Remove(path);
+            }
+        }
+
         public void Remove(CmsPage page)
         {
             if (page != null)

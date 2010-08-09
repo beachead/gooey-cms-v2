@@ -145,6 +145,11 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         protected void OnDelete_Click(Object sender, EventArgs e)
         {
+            String url = Request.QueryString["pid"];
+            CmsPage page = PageManager.Instance.GetLatestPage(url);
+
+            PageManager.Instance.DeleteAll(page);
+            Response.Redirect("Default.aspx?msg=Page+successfully+deleted", true);
         }
 
         public string Save()
