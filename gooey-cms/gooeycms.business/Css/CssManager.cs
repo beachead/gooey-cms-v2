@@ -62,7 +62,7 @@ namespace Gooeycms.Business.Css
                 {
                     results.Add(Convert(key, file));
                 }
-                cache.Add("javascript-files-" + key, results);
+                cache.Add("css-files-" + key, results);
             }
             return results;
         }
@@ -73,7 +73,7 @@ namespace Gooeycms.Business.Css
         }
 
         /// <summary>
-        /// Returns a list of the current javascript files
+        /// Returns a list of the current css files
         /// currently associated with this theme
         /// </summary>
         /// <param name="theme"></param>
