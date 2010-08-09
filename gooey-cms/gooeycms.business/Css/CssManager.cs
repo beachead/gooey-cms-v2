@@ -34,13 +34,13 @@ namespace Gooeycms.Business.Css
             foreach (CssFile script in scripts)
             {
                 if (script.IsEnabled)
-                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/" + AntiXss.UrlEncode(theme.ThemeGuid) + "/" + AntiXss.UrlEncode(script.FullName) + "\" />");
+                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/themes/" + AntiXss.UrlEncode(theme.ThemeGuid) + "/" + AntiXss.UrlEncode(script.FullName) + "\" />");
             }
 
             foreach (CssFile script in pageScripts)
             {
                 if (script.IsEnabled)
-                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/" + AntiXss.UrlEncode(page.UrlHash) + "/" + AntiXss.UrlEncode(script.FullName) + "\" />");
+                    includes.AppendLine("<link rel=\"stylesheet\" href=\"~/gooeycss/local/" + AntiXss.UrlEncode(page.UrlHash) + "/" + AntiXss.UrlEncode(script.FullName) + "\" />");
             }
 
             return includes.ToString();
