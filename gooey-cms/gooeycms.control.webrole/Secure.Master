@@ -27,12 +27,12 @@
         <div id="header-region">
             
             <ul class="menu">
-                <li class="<% Response.Write(NavigationOn[1]); %>"><a id="A1" href="./content/default.aspx" runat="server">Manage Content</a></li>
-                <li class="<% Response.Write(NavigationOn[2]); %>"><a id="A2" href="./pages/default.aspx" runat="server">Manage Pages</a></li>
-                <li class="<% Response.Write(NavigationOn[3]); %>"><a id="A3" href="./campaigns/default.aspx" runat="server">Manage Campaigns</a></li>                
-                <li class="<% Response.Write(NavigationOn[6]); %>"><a id="A4" href="./promotion/default.aspx" runat="server">Promotion</a></li>                                
-                <li class="<% Response.Write(NavigationOn[4]); %>"><a id="A5" href="./site/default.aspx" runat="server">Manage Site</a></li>
-                <li class="<% Response.Write(NavigationOn[5]); %>"><a id="A6" href="./users/default.aspx" runat="server">User Management</a></li>
+                <li class="<% Response.Write(NavigationOn[1]); %>"><a id="A1" href="/auth/content/default.aspx" runat="server">Manage Content</a></li>
+                <li class="<% Response.Write(NavigationOn[2]); %>"><a id="A2" href="/auth/pages/default.aspx" runat="server">Manage Pages</a></li>
+                <li class="<% Response.Write(NavigationOn[3]); %>"><a id="A3" href="/auth/campaigns/default.aspx" runat="server">Manage Campaigns</a></li>                
+                <li class="<% Response.Write(NavigationOn[6]); %>"><a id="A4" href="/auth/promotion/default.aspx" runat="server">Promotion</a></li>                                
+                <li class="<% Response.Write(NavigationOn[4]); %>"><a id="A5" href="/auth/site/default.aspx" runat="server">Manage Site</a></li>
+                <li class="<% Response.Write(NavigationOn[5]); %>"><a id="A6" href="/auth/users/default.aspx" runat="server">User Management</a></li>
                 <li><a id="A7" href="~/" runat="server">Staging Server</a></li>                
             </ul>
         </div>
