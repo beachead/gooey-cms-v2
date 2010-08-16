@@ -206,7 +206,7 @@ namespace Gooeycms.Business.Css
         {
             String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesDirectoryKey);
             Regex pattern = new Regex("url\\([^http](?:(?:.*?)/(\\w*?\\.(?:png|gif|jpg|jpeg)))");
-            return pattern.Replace(content, container + "/$1");
+            return pattern.Replace(content, "url(" + container + "/$1");
         }
     }
 }
