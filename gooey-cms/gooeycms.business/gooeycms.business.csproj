@@ -172,7 +172,7 @@
     <Compile Include="Crypto\TextEncryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subscription\SubscriptionProcessorFactory.cs" />
-    <Compile Include="Subscription\Subscriptions.cs" />
+    <Compile Include="Subscription\SubscriptionManager.cs" />
     <Compile Include="Subscription\SubscriptionSecurityConstraint.cs" />
     <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />

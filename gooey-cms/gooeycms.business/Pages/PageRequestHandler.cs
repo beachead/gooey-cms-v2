@@ -54,7 +54,9 @@ namespace Gooeycms.Business.Pages
             CmsUrl url = CmsUrl.Parse(Request.RawUrl);
             String culture = CurrentSite.Culture;
 
-            this.isInCache = SitePageCache.Instance.GetIfExists(url, output);
+            if (Request.QueryString["nocache"] == null)
+                this.isInCache = SitePageCache.Instance.GetIfExists(url, output);
+
             if (String.IsNullOrEmpty(preview))
             {
                 //If the page is in the cache, return immediately
@@ -163,8 +165,8 @@ namespace Gooeycms.Business.Pages
             {
                 IMarkupEngine engine = MarkupEngineFactory.Instance.GetDefaultEngine();
 
-                String header = engine.Convert(this.theme.Header);
-                String footer = engine.Convert(this.theme.Footer);
+                String header = engine.Convert(this.theme.Header, true);
+                String footer = engine.Convert(this.theme.Footer, true);
                 String content = engine.Convert(this.page.Content);
 
                 this.output = output.Replace("{header}", header);

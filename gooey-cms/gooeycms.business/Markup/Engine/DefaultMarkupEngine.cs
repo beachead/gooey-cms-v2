@@ -2,6 +2,7 @@
 using System.Text;
 using Beachead.Core.Markup.Forms;
 using Beachead.Core.Markup.Standard;
+using System;
 
 namespace Beachead.Core.Markup.Engine
 {
@@ -26,12 +27,13 @@ namespace Beachead.Core.Markup.Engine
             return formatters;
         }
 
-        public override string ConvertToHtml(IList<IMarkupFormatter> formatters, string markup)
+        public override string ConvertToHtml(IList<IMarkupFormatter> formatters, string markup, Boolean isPartOfTheme)
         {
             StringBuilder builder = new StringBuilder(markup);
             foreach (IMarkupFormatter formatter in formatters)
             {
                 formatter.FormatEngine = this;
+                formatter.IsPartOfTheme = isPartOfTheme;
                 builder = formatter.Convert(builder);
             }
 

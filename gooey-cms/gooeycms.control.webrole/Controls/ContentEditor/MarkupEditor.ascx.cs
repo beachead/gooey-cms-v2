@@ -9,6 +9,8 @@ namespace Beachead.Web.CMS.controls
         protected static String EditorScriptPath;
         protected static String EditorCssPath;
         protected static String RootUrl;
+
+        private String imageBrowserQuerystring = "";
         private Boolean isShowToolbar = true;
         private bool useStandardImageTags = false;
         private bool showPreviewWindow = true;
@@ -25,6 +27,12 @@ namespace Beachead.Web.CMS.controls
             Anthem.Manager.Register(this);
 
             this.ToolbarPanel.Visible = ShowToolbar;
+        }
+
+        public String ImageBrowserQuerystring
+        {
+            get { return this.imageBrowserQuerystring; }
+            set { this.imageBrowserQuerystring = value; }
         }
 
         public Boolean UseStandardImageTags

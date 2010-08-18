@@ -14,6 +14,11 @@ namespace Beachead.Core.Markup.Standard
         public override StringBuilder Convert(StringBuilder markup)
         {
             String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesDirectoryKey);
+            if (base.IsPartOfTheme)
+            {
+                String guid = CurrentSite.GetCurrentTheme().ThemeGuid;
+                container = container + "/" + guid;
+            }
 
             //rewrite all <img> urls to the container
             Match match = ImageHtml.Match(markup.ToString());

@@ -4,6 +4,7 @@ using System.Web;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Site;
 using Gooeycms.Data.Model.Subscription;
 
@@ -11,6 +12,8 @@ namespace Gooeycms.Business.Util
 {
     public static class SiteHelper
     {
+        private static Dictionary<String, Data.Guid> siteGuidCache = new Dictionary<string, Data.Guid>();
+
         public const String PageDirectoryKey = "{0}-cmspages";
         public const String JavascriptDirectoryKey = "{0}-javascripts";
         public const String StylesheetDirectoryKey = "{0}-stylesheets";
@@ -50,25 +53,37 @@ namespace Gooeycms.Business.Util
             if (HttpContext.Current == null)
                 throw new ApplicationException("The request context was not availabe. To rerieve the active site you must be running from within IIS or Azure");
 
-            String guid = null;
+            Data.Guid result;
+
             //Check if we're running outside the admin... if so, base the active site upon the domain
             String host = HttpContext.Current.Request.Url.Host;
-            CmsSubscription subscription = SubscriptionManager.GetSubscriptionForDomain(host);
-            if (subscription != null)
-            {
-                guid = subscription.Guid;
-            }
-            else //check the cookies to see if a site is active
+            if (GooeyConfigManager.AdminSiteHost.EqualsCaseInsensitive(host))
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["selected-site"];
-                guid = (cookie != null) ? (cookie.Value) : "";
+                String guid = (cookie != null) ? (cookie.Value) : "";
 
                 if ((isRequired) && (String.IsNullOrEmpty(guid)))
                     throw new ArgumentException("No site has been selected to manage themes for or cookies are disabled.");
 
                 guid = new TextEncryption().Decrypt(guid);
+                result = Data.Guid.New(guid);
             }
-            return Data.Guid.New(guid);
+            else
+            {
+                String cacheKey = host.ToLower();
+                result = siteGuidCache.GetValue<String, Data.Guid>(cacheKey);
+                if (result.IsEmpty())
+                {
+                    CmsSubscription subscription = SubscriptionManager.GetSubscriptionForDomain(host);
+                    if (subscription != null)
+                    {
+                        result = Data.Guid.New(subscription.Guid);
+                        siteGuidCache.Add(cacheKey, result);
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

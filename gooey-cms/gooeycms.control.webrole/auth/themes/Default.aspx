@@ -48,8 +48,10 @@
                     <ItemTemplate>
                         <asp:HyperLink ID="EditTemplates" Text="Templates" runat="server" 
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Templates.aspx?tid={0}") %>' />&nbsp;
-                        <asp:HyperLink ID="EditHeaderFooter" Text="Header/Footer" runat="server"
-                            NavigateUrl='<%# Eval("Theme.ThemeGuid","HeaderFooter.aspx?tid={0}") %>' />&nbsp;
+                        <asp:HyperLink ID="EditHeaderFooter" Text="Header" runat="server"
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Header.aspx?tid={0}") %>' /> /
+                        <asp:HyperLink ID="HyperLink1" Text="Footer" runat="server"
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Footer.aspx?tid={0}") %>' />&nbsp;
                         <asp:HyperLink ID="EditCss" Text="CSS" runat="server"
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Stylesheet.aspx?tid={0}") %>'  />&nbsp;
                         <asp:HyperLink ID="EditJavascript" Text="Javascript" runat="server"

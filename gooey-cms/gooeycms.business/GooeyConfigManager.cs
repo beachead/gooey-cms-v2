@@ -2,11 +2,16 @@
 using Gooeycms.Constants;
 using Gooeycms.Data.Model;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using System.Collections.Generic;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business
 {
     public static class GooeyConfigManager
     {
+        private static Dictionary<String, object> cache = new Dictionary<string, object>();
+
+
         public static Nullable<Double> GetAsDouble(String key)
         {
             String temp = GetAsString(key);
@@ -63,13 +68,26 @@ namespace Gooeycms.Business
         {
             get
             {
-                String result = GooeyConfigManager.GetAsString(ConfigConstants.DefaultCmsDomain);
-                if (String.IsNullOrEmpty(result))
-                    throw new ApplicationException("The default cms domain has not been configured in the configuration table (key=" + ConfigConstants.DefaultCmsDomain + "). This is a required field for the application to function properly.");
-                if (!result.StartsWith(".")) 
-                    throw new ApplicationException("The deafult domain must start with a period. The current value is " + result + ", but should be '." + result + "')");
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.DefaultCmsDomain);
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.DefaultCmsDomain);
+                    if (String.IsNullOrEmpty(result))
+                        throw new ApplicationException("The default cms domain has not been configured in the configuration table (key=" + ConfigConstants.DefaultCmsDomain + "). This is a required field for the application to function properly.");
+                    if (!result.StartsWith("."))
+                        throw new ApplicationException("The deafult domain must start with a period. The current value is " + result + ", but should be '." + result + "')");
 
+                    cache.Add(ConfigConstants.DefaultCmsDomain, result);
+                }
                 return result;
+            }
+        }
+
+        public static String AdminSiteHost
+        {
+            get
+            {
+                return "control.gooeycms.net";
             }
         }
 

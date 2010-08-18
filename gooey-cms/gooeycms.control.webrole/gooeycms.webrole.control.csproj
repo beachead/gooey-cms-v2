@@ -83,7 +83,9 @@
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
     <Content Include="auth\Pages\Stylesheet.aspx" />
-    <Content Include="auth\Themes\HeaderFooter.aspx" />
+    <Content Include="auth\Themes\Footer.aspx" />
+    <Content Include="auth\Themes\Header.aspx" />
+    <Content Include="auth\Themes\ImageBrowser.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
     <Content Include="Global.asax" />
@@ -177,12 +179,26 @@
     <Compile Include="auth\Pages\Stylesheet.aspx.designer.cs">
       <DependentUpon>Stylesheet.aspx</DependentUpon>
     </Compile>
-    <Compile Include="auth\Themes\HeaderFooter.aspx.cs">
-      <DependentUpon>HeaderFooter.aspx</DependentUpon>
+    <Compile Include="auth\Themes\Footer.aspx.cs">
+      <DependentUpon>Footer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="auth\Themes\HeaderFooter.aspx.designer.cs">
-      <DependentUpon>HeaderFooter.aspx</DependentUpon>
+    <Compile Include="auth\Themes\Footer.aspx.designer.cs">
+      <DependentUpon>Footer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Themes\Header.aspx.cs">
+      <DependentUpon>Header.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Themes\Header.aspx.designer.cs">
+      <DependentUpon>Header.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Themes\ImageBrowser.aspx.cs">
+      <DependentUpon>ImageBrowser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Themes\ImageBrowser.aspx.designer.cs">
+      <DependentUpon>ImageBrowser.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Themes\Javascript.aspx.cs">
       <DependentUpon>Javascript.aspx</DependentUpon>

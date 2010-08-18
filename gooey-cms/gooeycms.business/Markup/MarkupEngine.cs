@@ -9,7 +9,7 @@ namespace Beachead.Core.Markup
     public abstract class MarkupEngine : IMarkupEngine
     {
         public abstract IList<IMarkupFormatter> GetFormatters();
-        public abstract String ConvertToHtml(IList<IMarkupFormatter> formatters, String markup);
+        public abstract String ConvertToHtml(IList<IMarkupFormatter> formatters, String markup, Boolean isPartOfTheme);
 
         /// <summary>
         /// Abstract class which implements the Convert method and then calls the 
@@ -19,8 +19,13 @@ namespace Beachead.Core.Markup
         /// <returns></returns>
         public String Convert(String markup)
         {
-            IList<IMarkupFormatter> formatters = this.GetFormatters();            
-            return this.ConvertToHtml(formatters, markup);
+            return Convert(markup, false);
+        }
+
+        public String Convert(String markup, Boolean isPartOfTheme)
+        {
+            IList<IMarkupFormatter> formatters = this.GetFormatters();
+            return this.ConvertToHtml(formatters, markup, isPartOfTheme);
         }
 
         public IMarkupFormatter GetHeaderFormatter()

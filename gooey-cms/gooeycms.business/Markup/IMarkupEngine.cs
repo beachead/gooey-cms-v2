@@ -13,6 +13,7 @@ namespace Beachead.Core.Markup
         /// <param name="markup"></param>
         /// <returns></returns>
         String Convert(String markup);
+        String Convert(String markup, Boolean isPartofTheme);
 
         /// <summary>
         /// Retrieves the header formatter used by the theme

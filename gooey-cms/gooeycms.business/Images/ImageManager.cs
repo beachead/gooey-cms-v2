@@ -6,6 +6,8 @@ using Gooeycms.Business.Compression;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
 using Kaliko.ImageLibrary;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Gooeycms.Business.Images
 {
@@ -18,9 +20,9 @@ namespace Gooeycms.Business.Images
             get { return ImageManager.instance; } 
         }
 
-        public IList<StorageFile> AddImage(String filename, String contentType, byte[] contents)
+        public IList<StorageFile> AddImage(String folder, String filename, String contentType, byte[] contents)
         {
-            return AddImage(CurrentSite.Guid, filename, contentType, contents);
+            return AddImage(CurrentSite.Guid, folder, filename, contentType, contents);
         }
 
         /// <summary>
@@ -28,7 +30,7 @@ namespace Gooeycms.Business.Images
         /// </summary>
         /// <param name="siteGuid"></param>
         /// <param name="contents"></param>
-        public IList<StorageFile> AddImage(Data.Guid siteGuid, String filename, String contentType, byte[] contents)
+        public IList<StorageFile> AddImage(Data.Guid siteGuid, String folder, String filename, String contentType, byte[] contents)
         {
             IList<StorageFile> images = new List<StorageFile>();
             if (filename.ToLower().EndsWith("zip"))
@@ -56,7 +58,7 @@ namespace Gooeycms.Business.Images
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
             foreach (StorageFile file in results)
             {
-                client.Save(imageDirectory, StorageClientConst.RootFolder,file.Filename, file.Data, Permissions.Public);
+                client.Save(imageDirectory, folder,file.Filename, file.Data, Permissions.Public);
             }
 
             return results;
@@ -98,21 +100,21 @@ namespace Gooeycms.Business.Images
         /// Retrieves the full paths to the images
         /// </summary>
         /// <returns></returns>
-        public IList<StorageFile> GetAllImagePaths()
+        public IList<StorageFile> GetAllImagePaths(String folder)
         {
-            return GetAllImagePaths(CurrentSite.Guid);
+            return GetAllImagePaths(CurrentSite.Guid, folder);
         }
 
         /// <summary>
         /// Retrieves the full paths to the images
         /// </summary>
         /// <returns></returns>
-        public IList<StorageFile> GetAllImagePaths(Data.Guid siteGuid)
+        public IList<StorageFile> GetAllImagePaths(Data.Guid siteGuid, String folder)
         {
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            IList<StorageFile> allimages = client.List(imageDirectory, StorageClientConst.RootFolder);
+            IList<StorageFile> allimages = client.List(imageDirectory, folder);
 
             IList<StorageFile> results = new List<StorageFile>();
 

@@ -17,6 +17,7 @@ namespace Gooeycms.Business.Css
             Exception ex = null;
 
             HttpRequest request = context.Request;
+            String type = request.QueryString["type"];
             String key = request.QueryString["key"];
             String filename = request.QueryString["file"];
             if (filename != null)
@@ -43,7 +44,11 @@ namespace Gooeycms.Business.Css
             }
             else if (file != null)
             {
-                String content = CssManager.Resolve(file.Content);
+                String directory = null;
+                if ("theme".EqualsCaseInsensitive(type))
+                    directory = key;
+
+                String content = CssManager.Resolve(file.Content, key);
                 byte[] bytes = Encoding.UTF8.GetBytes(content);
                 context.Response.BufferOutput = true;
                 context.Response.Clear();

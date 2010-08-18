@@ -24,6 +24,7 @@ namespace Beachead.Core.Markup
             set { this.formatter = value; }
         }
 
+        public Boolean IsPartOfTheme { get; set; }
         public abstract StringBuilder Convert(StringBuilder markup);
 
         #endregion

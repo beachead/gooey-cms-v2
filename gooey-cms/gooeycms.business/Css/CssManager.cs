@@ -202,9 +202,12 @@ namespace Gooeycms.Business.Css
             return "enabled_" + key.Replace("-", "_");
         }
 
-        internal static string Resolve(string content)
+        internal static string Resolve(string content, String key)
         {
             String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesDirectoryKey);
+            if (key != null)
+                container = container + "/" + key;
+
             Regex pattern = new Regex("url\\([^http](?:(?:.*?)/(\\w*?\\.(?:png|gif|jpg|jpeg)))");
             return pattern.Replace(content, "url(" + container + "/$1");
         }

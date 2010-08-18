@@ -18,6 +18,7 @@ namespace Gooeycms.Business.Javascript
             Exception ex = null;
 
             HttpRequest request = context.Request;
+            String type = request.QueryString["type"];
             String key = request.QueryString["key"];
             String filename = request.QueryString["file"];
             if (filename != null)

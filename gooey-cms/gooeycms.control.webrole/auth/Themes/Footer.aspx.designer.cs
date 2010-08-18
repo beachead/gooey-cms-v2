@@ -10,7 +10,7 @@
 namespace Gooeycms.Webrole.Control.auth.Themes {
     
     
-    public partial class HeaderFooter {
+    public partial class Footer {
         
         /// <summary>
         /// LblStatus control.
@@ -31,22 +31,13 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         protected global::System.Web.UI.WebControls.Button BtnSave2;
         
         /// <summary>
-        /// TxtHeader control.
+        /// TxtFooter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Beachead.Web.CMS.controls.MarkupEditor TxtHeader;
-        
-        /// <summary>
-        /// TxtFooer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Beachead.Web.CMS.controls.MarkupEditor TxtFooer;
+        protected global::Beachead.Web.CMS.controls.MarkupEditor TxtFooter;
         
         /// <summary>
         /// BtnSave control.

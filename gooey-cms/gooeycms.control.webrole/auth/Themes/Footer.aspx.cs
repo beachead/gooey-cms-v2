@@ -9,26 +9,25 @@ using Gooeycms.Business.Themes;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
-    public partial class HeaderFooter : System.Web.UI.Page
+    public partial class Footer : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.TxtFooter.ImageBrowserQuerystring = "tid=" + Request.QueryString["tid"];
             if (!Page.IsPostBack)
             {
                 CmsTheme theme = GetSelectedTheme();
-                this.TxtHeader.Text = theme.Header;
-                this.TxtFooer.Text = theme.Footer;
+                this.TxtFooter.Text = theme.Footer;
             }
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             CmsTheme theme = this.GetSelectedTheme();
-            theme.Header = this.TxtHeader.Text;
-            theme.Footer = this.TxtFooer.Text;
+            theme.Footer = this.TxtFooter.Text;
 
             ThemeManager.Instance.Save(theme);
-            this.LblStatus.Text = "Successfully saved header and footer.";
+            this.LblStatus.Text = "Successfully saved footer.";
             this.LblStatus.ForeColor = System.Drawing.Color.Green;
         }
 
