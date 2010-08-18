@@ -7,6 +7,7 @@ using Gooeycms.Business.Pages;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Site;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Cache;
 
 namespace Gooeycms.Business.Pages
 {
@@ -49,6 +50,7 @@ namespace Gooeycms.Business.Pages
 
             PageManager.Instance.AddNewPage(path.Parent,path.Name,page);
             PageManager.Instance.RemoveObsoletePages(page);
+            SitePageCacheRefreshInvoker.InvokeRefresh(page.SubscriptionId, page.Url, SitePageRefreshRequest.PageRefreshType.Staging);
         }
     }
 }

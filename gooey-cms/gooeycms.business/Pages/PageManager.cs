@@ -13,6 +13,11 @@ namespace Gooeycms.Business.Pages
 {
     public class PageManager
     {
+        public static class Filters
+        {
+            public const String AllPages = null;
+        }
+
         private static PageManager instance = new PageManager();
         private PageManager() { }
         public static PageManager Instance 
@@ -222,6 +227,9 @@ namespace Gooeycms.Business.Pages
 
         public System.Collections.Generic.IList<CmsPage> Filter(Data.Guid siteGuid, string filter)
         {
+            if (String.IsNullOrWhiteSpace(filter))
+                filter = "*";
+
             CmsPageDao dao = new CmsPageDao();
             filter = filter.Replace("*", "%");
             return dao.SearchByUrl(siteGuid,filter);

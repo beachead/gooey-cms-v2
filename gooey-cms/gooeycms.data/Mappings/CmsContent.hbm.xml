@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Content.CmsContentType, gooeycms.data" table="Content_Types">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="guid" name="Guid" type="String" />
+    <property column="site_guid" name="SubscriptionId" type="String" />
+    <property column="is_global" name="IsGlobalType" type="Boolean" />
+    <property column="name" name="Name" type="String" />
+    <property column="description" name="Description" type="String" />
+    <property column="is_file" name="IsFileType" type="Boolean" />
+    <property column="show_editor" name="IsEditorVisible" type="Boolean" />
+  </class>
+
+  <class name="Gooeycms.Data.Model.Content.CmsContentTypeField, gooeycms.data" table="ContentType_Fields">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <many-to-one column="contenttype_id" name="Parent" class="Gooeycms.Data.Model.Content.CmsContentType, gooeycms.data" />
+    <property column="position" name="Position" type="Int32" />
+    <property column="is_required" name="IsRequired" type="Boolean" />
+    <property column="field_name" name="SystemName" type="String" />
+    <property column="field_shortname" name="Name" type="String" />
+    <property column="field_description" name="Description" type="String" />
+    <property column="field_type" name="FieldType" type="String" />
+    <property column="object_type" name="ObjectType" type="String" />
+    <property column="options" name="_SelectOptions" type="String" />
+    <property column="field_cols" name="Columns" type="Int32" />
+    <property column="field_rows" name="Rows" type="Int32" />
+  </class>
+
+  <class name="Gooeycms.Data.Model.Content.CmsContent, gooeycms.data" table="Content">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <many-to-one column="content_type_id" name="ContentType" class="Gooeycms.Data.Model.Content.CmsContentType, gooeycms.data" />
+    <property column="site_guid" name="SubscriptionId" type="String" />    
+    <property column="culture" name="Culture" type="String" />
+    <property column="guid" name="Guid" type="String" />
+    <property column="author" name="Author" type="String" />
+    <property column="date_saved" name="LastSaved" type="DateTime" />
+    <property column="publish_date" name="PublishDate" type="DateTime" />
+    <property column="expire_date" name="ExpireDate" type="DateTime" />
+    <property column="approved" name="IsApproved" type="Boolean" />
+    <property column="require_registration" name="RequiresRegistration" type="Boolean" />
+    <property column="registration_page" name="RegistrationPage" type="String" />
+    <property column="content" name="Content" type="String" />
+
+    <bag name="_Fields" table="Content_Fields" lazy="false" cascade="all-delete-orphan" inverse="true">
+      <key column="content_id" />
+      <one-to-many class="Gooeycms.Data.Model.Content.CmsContentField,gooeycms.data" />
+    </bag>
+  </class>
+
+  <class name="Gooeycms.Data.Model.Content.CmsContentField, gooeycms.data" table="Content_Fields">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <many-to-one column="content_id" name="Parent" class="Gooeycms.Data.Model.Content.CmsContent,gooeycms.data" />    
+    <property column="object_type" name="ObjectType" type="String" />
+    <property column="field_name" name="Name" type="String" />
+    <property column="field_value" name="Value" type="String" />
+  </class>
+  </hibernate-mapping>

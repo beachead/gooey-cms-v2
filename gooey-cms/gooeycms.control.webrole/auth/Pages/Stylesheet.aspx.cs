@@ -103,6 +103,10 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             this.Editor.Text = text;
         }
 
+        protected void BtnSave_Click(object sender, EventArgs e)
+        {
+        }
+
         protected void BtnEdit_Click(object sender, EventArgs e)
         {
             String name = this.LstExisting.SelectedValue;

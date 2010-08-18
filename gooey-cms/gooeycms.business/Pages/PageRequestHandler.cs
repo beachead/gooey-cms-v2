@@ -16,6 +16,7 @@ using Gooeycms.Business.Crypto;
 using System.Threading.Tasks;
 using System.ServiceModel.Activation;
 using Gooeycms.Business.Storage;
+using Gooeycms.Business.Cache;
 
 namespace Gooeycms.Business.Pages
 {
@@ -27,6 +28,7 @@ namespace Gooeycms.Business.Pages
         private CmsTheme theme = null;
         private StringBuilder output = new StringBuilder();
         private String analytics = "";
+        private Boolean isInCache = false;
 
         /// <summary>
         /// Load any static data which should be loaded only once
@@ -52,8 +54,13 @@ namespace Gooeycms.Business.Pages
             CmsUrl url = CmsUrl.Parse(Request.RawUrl);
             String culture = CurrentSite.Culture;
 
+            this.isInCache = SitePageCache.Instance.GetIfExists(url, output);
             if (String.IsNullOrEmpty(preview))
             {
+                //If the page is in the cache, return immediately
+                if (isInCache)
+                    return;
+
                 ValidateSite();
                 this.page = PageManager.Instance.GetLatestPage(url);
             }
@@ -84,14 +91,12 @@ namespace Gooeycms.Business.Pages
                 throw new PageNotFoundException(url.Path);
         }
 
-        private void ValidateSite()
-        {
-            if (CurrentSite.GetCurrentTheme() == null)
-                throw new ApplicationException("This site could not be displayed. Reason: The site has not been properly configured with a default theme.");
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            //if the page is in the cache return immediately
+            if (isInCache)
+                return;
+
             output = new StringBuilder(HtmlShell);
 
             //Set all of the header and meta tag information
@@ -154,37 +159,49 @@ namespace Gooeycms.Business.Pages
 
         protected override void Render(HtmlTextWriter writer)
         {
-            IMarkupEngine engine = MarkupEngineFactory.Instance.GetDefaultEngine();
+            if (!isInCache)
+            {
+                IMarkupEngine engine = MarkupEngineFactory.Instance.GetDefaultEngine();
 
-            String header = engine.Convert(this.theme.Header);
-            String footer = engine.Convert(this.theme.Footer);
-            String content = engine.Convert(this.page.Content);
+                String header = engine.Convert(this.theme.Header);
+                String footer = engine.Convert(this.theme.Footer);
+                String content = engine.Convert(this.page.Content);
 
-            this.output = output.Replace("{header}", header);
-            this.output = output.Replace("{footer}", footer);
-            this.output = output.Replace("{content}", content);
-            this.output = engine.GetHeaderFormatter().Convert(output);
-            this.output = engine.GetHeaderTextFormatter().Convert(output);
+                this.output = output.Replace("{header}", header);
+                this.output = output.Replace("{footer}", footer);
+                this.output = output.Replace("{content}", content);
+                this.output = engine.GetHeaderFormatter().Convert(output);
+                this.output = engine.GetHeaderTextFormatter().Convert(output);
 
-            NavigationControl navigation = new NavigationControl();
-            output = output.Replace("{navigation}", navigation.ToHtml());
+                NavigationControl navigation = new NavigationControl();
+                output = output.Replace("{navigation}", navigation.ToHtml());
 
-            ResourceControl resources = new ResourceControl();
-            output = resources.Replace(output);
+                ResourceControl resources = new ResourceControl();
+                output = resources.Replace(output);
 
-            VariableControl variables = new VariableControl();
-            output = variables.Replace(output);
+                VariableControl variables = new VariableControl();
+                output = variables.Replace(output);
 
-            Control resolver = new Control();
-            String path = resolver.ResolveUrl("~/");
+                Control resolver = new Control();
+                String path = resolver.ResolveUrl("~/");
 
-            output = output.Replace("~/", path);
+                output = output.Replace("~/", path);
 
-            //HACK to fix IIS 6.0 root directory issue where it doesn't resolve correctly
-            output = output.Replace("~/", "/");
+                //HACK to fix IIS 6.0 root directory issue where it doesn't resolve correctly
+                output = output.Replace("~/", "/");
 
+                CmsUrl url = CmsUrl.Parse(Request.RawUrl);
+                SitePageCache.Instance.AddToCache(url, output);
+            }
             writer.Write(output.ToString());
             base.Render(writer);
+        }
+
+
+        private void ValidateSite()
+        {
+            if (CurrentSite.GetCurrentTheme() == null)
+                throw new ApplicationException("This site could not be displayed. Reason: The site has not been properly configured with a default theme.");
         }
     }
 }

@@ -1,0 +1,89 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Content_Tags]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Content_Tags];
+END
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Content_Fields]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Content_Fields];
+END
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Content]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Content];
+END
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ContentType_Fields]') AND type in (N'U'))
+BEGIN
+DROP TABLE [ContentType_Fields];
+END
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Content_Types]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Content_Types];
+END
+
+CREATE TABLE [dbo].[Content_Types](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[guid] [varchar](36) NOT NULL,
+	[is_global] [bit] NOT NULL DEFAULT(0),
+	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[name] [varchar](50) NOT NULL,
+	[description] [varchar](256) NULL,
+	[is_file] [bit] NULL,
+	[show_editor] [bit] NULL,
+	PRIMARY KEY CLUSTERED([id]),
+);
+
+CREATE TABLE [dbo].[ContentType_Fields](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[contenttype_id] [int] NULL,
+	[position] [int] NOT NULL DEFAULT ((0)),
+	[is_required] [bit] NOT NULL DEFAULT (0),
+	[field_name] [varchar](64) NOT NULL,
+	[field_shortname] [varchar](64) NOT NULL,
+	[field_description] [varchar](64) NOT NULL,
+	[field_type] [varchar](10) NOT NULL,
+	[object_type] [varchar](128) NOT NULL,
+	[options] [varchar](256) NULL,
+	[field_cols] [int] NULL,
+	[field_rows] [int] NULL,
+	PRIMARY KEY CLUSTERED([id])
+);
+
+CREATE TABLE [dbo].[Content](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[site_guid] [varchar](36) REFERENCES Subscriptions(guid),
+	[guid] [varchar](36) NOT NULL,
+	[content_type_id] [int] NULL,
+	[culture] [varchar](10) NULL,
+	[author] [varchar](128) NULL,
+	[date_saved] [datetime] NULL,
+	[publish_date] [datetime] NULL,
+	[expire_date] [datetime] NULL,
+	[approved] [bit] NULL,
+	[require_registration] [bit] NULL,
+	[registration_page] [varchar](255) NULL,
+	[content] [ntext] NULL,
+	PRIMARY KEY CLUSTERED([id])
+);
+CREATE UNIQUE INDEX unq_content_guid ON [Content]([guid]);
+
+CREATE TABLE [dbo].[Content_Fields](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[content_id] [int] NULL,
+	[object_type] [varchar](128) NULL,
+	[field_name] [varchar](128) NULL,
+	[field_value] [nvarchar](max) NULL,
+	PRIMARY KEY CLUSTERED([id])
+);
+CREATE INDEX idx_content_fields_content_id ON [Content_Fields]([content_id]);
+
+CREATE TABLE [dbo].[Content_Tags](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[content_id] [int] REFERENCES [Content]([id]),
+	[tag] [nvarchar](64),
+	PRIMARY KEY CLUSTERED([id])
+);
+CREATE UNIQUE INDEX unq_content_tag ON [Content_Tags]([content_id],[tag]);

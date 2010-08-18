@@ -40,6 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Anthem.dll</HintPath>
     </Reference>
+    <Reference Include="BasicFrame.WebControls.BasicDatePicker">
+      <HintPath>..\..\lib\BasicFrame.WebControls.BasicDatePicker.dll</HintPath>
+    </Reference>
     <Reference Include="FredCK.FCKeditorV2, Version=2.6.3.22451, Culture=neutral, PublicKeyToken=4f86767c9b519a06, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FredCK.FCKeditorV2.dll</HintPath>
@@ -70,11 +73,17 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="auth\Content\Add.aspx" />
+    <Content Include="auth\Content\ContentTypeFields.aspx" />
+    <Content Include="auth\Content\ContentTypes.aspx" />
+    <Content Include="auth\Content\Default.aspx" />
+    <Content Include="auth\Content\Edit.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
     <Content Include="auth\Pages\Stylesheet.aspx" />
+    <Content Include="auth\Themes\HeaderFooter.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
     <Content Include="Global.asax" />
@@ -83,6 +92,41 @@
   <ItemGroup>
     <Compile Include="App_Code\ValidatedHelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Content\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Content\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Content\ContentTypeFields.aspx.cs">
+      <DependentUpon>ContentTypeFields.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Content\ContentTypeFields.aspx.designer.cs">
+      <DependentUpon>ContentTypeFields.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Content\ContentTypes.aspx.cs">
+      <DependentUpon>ContentTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Content\ContentTypes.aspx.designer.cs">
+      <DependentUpon>ContentTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Content\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Content\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Content\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Content\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Controls\Cache.aspx.cs">
       <DependentUpon>Cache.aspx</DependentUpon>
@@ -132,6 +176,13 @@
     </Compile>
     <Compile Include="auth\Pages\Stylesheet.aspx.designer.cs">
       <DependentUpon>Stylesheet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Themes\HeaderFooter.aspx.cs">
+      <DependentUpon>HeaderFooter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Themes\HeaderFooter.aspx.designer.cs">
+      <DependentUpon>HeaderFooter.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Themes\Javascript.aspx.cs">
       <DependentUpon>Javascript.aspx</DependentUpon>

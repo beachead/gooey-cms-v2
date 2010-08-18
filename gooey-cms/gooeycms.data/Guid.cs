@@ -25,6 +25,11 @@ namespace Gooeycms.Data
             return temp;
         }
 
+        public static Guid Empty
+        {
+            get { return new Guid(null); } 
+        }
+
         public static Guid New(String guid)
         {
             return new Guid(guid);
@@ -33,6 +38,11 @@ namespace Gooeycms.Data
         public override String ToString()
         {
             return this.Value;
+        }
+
+        public static implicit operator Guid(string guid)
+        {
+            return new Guid(guid);
         }
     }
 }
