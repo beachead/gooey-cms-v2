@@ -56,8 +56,7 @@
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Stylesheet.aspx?tid={0}") %>'  />&nbsp;
                         <asp:HyperLink ID="EditJavascript" Text="Javascript" runat="server"
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />&nbsp;
-                        <asp:HyperLink ID="ImageBrowser" Text="Images" runat="server"
-                            NavigateUrl='<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>' />&nbsp;
+                        <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=600,height=500,left=150');">Images</a>&nbsp;
                         <asp:LinkButton ID="DeleteTemplate" Text="[delete]" OnClientClick="return confirm('Are you sure you want to delete this theme?\r\n\r\nWARNING: This will also delete ALL javascript, css and image files associated with this theme.')" OnClick="OnDelete_Click" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
