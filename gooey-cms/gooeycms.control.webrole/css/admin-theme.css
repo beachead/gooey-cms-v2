@@ -66,10 +66,17 @@ select
 
 #logo 
 {
-	margin:10px;
+	background: transparent url(../images/logo_gooey_internal.png) 0 0 no-repeat;
+	margin:10px 0 0 25px;
 	float: right;
-	color:#666666;
 	font-weight:bold;
+	color:black;
+	display:block;
+	font-family:Helvetica,sans-serif;
+	font-size:20px;
+	line-height:20px;
+	text-decoration:none;
+	padding-top: 92px;
 }
 
 #main 
@@ -94,6 +101,7 @@ td.right-column
 	width:15%;
 	vertical-align:top;
 	background-color:#EEEEF5;	
+	text-align: right;
 }
 
 td.center-column {

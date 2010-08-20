@@ -130,13 +130,13 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Editor;
         
         /// <summary>
-        /// A8 control.
+        /// change_password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A8;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor change_password;
         
         /// <summary>
         /// LoginStatus control.
