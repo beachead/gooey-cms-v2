@@ -208,7 +208,7 @@ namespace Gooeycms.Business.Css
             if (key != null)
                 container = container + "/" + key;
 
-            Regex pattern = new Regex("url\\('?[^http](?:(?:.*?)/([0-9A-Za-z_ \\-]+\\.(?:png|gif|jpg|jpeg)))'?");
+            Regex pattern = new Regex("url\\('?[^http](?:(?:.*?)/([0-9A-Za-z_ \\-]+\\.(?:png|gif|jpg|jpeg)))'?",RegexOptions.IgnoreCase);
             return pattern.Replace(content, "url('" + container + "/$1'");
         }
     }
