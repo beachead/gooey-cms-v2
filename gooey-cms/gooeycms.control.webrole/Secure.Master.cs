@@ -9,7 +9,7 @@ namespace Gooeycms.Webrole.Control
 {
     public partial class Secure : System.Web.UI.MasterPage
     {
-        protected String[] NavigationOn = new String[7] { "", "", "", "", "", "", "" };
+        protected String[] NavigationOn = new String[8] { "", "", "", "", "", "", "", "" };
         protected static String Root = null;
         public enum NavigationType
         {
@@ -17,7 +17,8 @@ namespace Gooeycms.Webrole.Control
             Site,
             Content,
             Campaigns,
-            Promotion
+            Promotion,
+            Themes
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,7 +28,7 @@ namespace Gooeycms.Webrole.Control
 
         protected void OnLogout_Click(Object sender, EventArgs e)
         {
-            Response.Redirect("~/default.aspx");
+            Response.Redirect("~/login.aspx");
         }
 
         public void SetNavigationOn(NavigationType type)
@@ -48,6 +49,9 @@ namespace Gooeycms.Webrole.Control
                     break;
                 case NavigationType.Promotion:
                     this.NavigationOn[6] = "on";
+                    break;
+                 case NavigationType.Themes:
+                    this.NavigationOn[5] = "on";
                     break;
                 default:
                     break;

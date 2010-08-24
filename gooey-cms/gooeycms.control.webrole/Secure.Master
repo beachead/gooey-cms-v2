@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
-    <title>Administer | {0}</title>
+    <title>Gooey CMS Management | {0}</title>
     <link href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -31,9 +31,10 @@
                 <li class="<% Response.Write(NavigationOn[1]); %>"><a id="A1" href="/auth/content/default.aspx" runat="server">Manage Content</a></li>
                 <li class="<% Response.Write(NavigationOn[2]); %>"><a id="A2" href="/auth/pages/default.aspx" runat="server">Manage Pages</a></li>
                 <li class="<% Response.Write(NavigationOn[3]); %>"><a id="A3" href="/auth/campaigns/default.aspx" runat="server">Manage Campaigns</a></li>                
-                <li class="<% Response.Write(NavigationOn[6]); %>"><a id="A4" href="/auth/promotion/default.aspx" runat="server">Promotion</a></li>                                
-                <li class="<% Response.Write(NavigationOn[4]); %>"><a id="A5" href="/auth/site/default.aspx" runat="server">Manage Site</a></li>
-                <li class="<% Response.Write(NavigationOn[5]); %>"><a id="A6" href="/auth/users/default.aspx" runat="server">User Management</a></li>
+                <li class="<% Response.Write(NavigationOn[4]); %>"><a id="A4" href="/auth/promotion/default.aspx" runat="server">Promotion</a></li>                                
+                <li class="<% Response.Write(NavigationOn[5]); %>"><a id="A5" href="/auth/site/default.aspx" runat="server">Manage Site</a></li>
+                <li class="<% Response.Write(NavigationOn[6]); %>"><a id="A8" href="/auth/themes/default.aspx" runat="server">Manage Themes</a></li>
+                <li class="<% Response.Write(NavigationOn[7]); %>"><a id="A6" href="/auth/users/default.aspx" runat="server">User Management</a></li>
                 <li><a id="A7" href="~/" runat="server">Staging Server</a></li>                
             </ul>
         </div>

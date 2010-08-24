@@ -3,9 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
-            <li><a href="./Default.aspx">SITE CONTENT</a></li>
+            <li><a href="./Default.aspx">MANAGE CONTENT</a></li>
             <li><a href="">PROMOTION</a></li> 
-            <li class="on"><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
+            <li class="on">MANAGE CONTENT TYPES</li>       
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
@@ -18,7 +18,7 @@
             DataSourceID="ContentTypeDataSource"
             GridLines="None" OnRowCommand="OnRowCommand" Width="90%">
         <EmptyDataTemplate>
-            There are not currently any custom content types defined. You can create a new 
+            There are no custom content types defined. You can create a new 
             custom content type below.
         </EmptyDataTemplate>
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

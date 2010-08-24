@@ -4,23 +4,24 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
-            <li><a href="./Edit.aspx">NEW PAGE</a></li>
+            <li class="on">MANAGE PAGES</li>
+            <li><a href="./Edit.aspx">ADD NEW PAGE</a></li>
             <li><a href="./Promotion.aspx">PROMOTION</a></li> 
             <li><a href="./Redirects.aspx">MANAGE REDIRECTS</a></li>       
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-    Pages on the site can be edited and managed from this area.<br />
-    Use the below filtering tools to quickly locate and edit your existing pages.
+    Pages on your site can be added, edited and managed from this area.<br />
+    Use the below filter to quickly find your existing pages.
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+<br />
+    <a href="./Edit.aspx">Add New Page</a><br /><br />
     Filter: <input id="filter_searchbox" type="text" value="*" onkeypress="return performFilter(this);" title="Use * for wildcard character"/>&nbsp;
     <a href="#" onclick="filter_clear(); return false;">clear</a>&nbsp;
-    <a href="#" onclick="filter_search('*'); return false;">all</a><br />
-    <a href="./Edit.aspx">Add New Page</a><br />
-    <br />
-
-    <b>Pages:</b><asp:Label ID="Status" runat="server" /><br />
+    <a href="#" onclick="filter_search('*'); return false;">all</a>
+ 
+    <asp:Label ID="Status" runat="server" /><br />
     <anthem:HiddenField ID="Filter" runat="server" />        
     <span id="refreshing"><br /></span>
     <anthem:GridView ID="PageListing" AutoUpdateAfterCallBack="True" 
@@ -34,7 +35,7 @@
         <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-            <asp:TemplateField HeaderText="Page">
+            <asp:TemplateField HeaderText="Pages">
                 <ItemTemplate>
                     <asp:Label ID="Path" Text='<%# Eval("Page.Url") %>' runat="server" />
                 </ItemTemplate>
@@ -42,7 +43,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Actions">
                 <ItemTemplate>
-                    <a href="./Edit.aspx?a=edit&pid=<%# Server.UrlEncode(Eval("Page.Url").ToString()) %>">Add/Edit</a>
+                    <a href="./Edit.aspx?a=edit&pid=<%# Server.UrlEncode(Eval("Page.Url").ToString()) %>">Edit</a>
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:TemplateField>        
@@ -66,7 +67,7 @@
             Anthem_InvokePageMethod('LoadPageData', [document.getElementById('<%=Filter.ClientID %>').value],
                 function (result) {
                     var lbl = document.getElementById("refreshing");
-                    lbl.innerHTML = "";
+                    lbl.innerHTML = "<br />";
                 }
             );
         }

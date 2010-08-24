@@ -3,15 +3,17 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
-            <li><a href="">SITE CONTENT</a></li>
+            <li class="on">MANAGE CONTENT</li>
             <li><a href="">PROMOTION</a></li> 
             <li><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
+    Content Types such as news and events can be edited and managed from this area.<br />
+    To add new content types, click Manage Content Types above.<br /><br />
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <a href="./Add.aspx">Create New Content</a>
+   <a href="./Add.aspx">Add New Content</a>
    <br /><br />
 
    <b>Filter</b>: Content Type&nbsp;<asp:DropDownList ID="LstContentTypes" runat="server" />&nbsp;<asp:Button ID="BtnFilter" Text="Filter" runat="server" />

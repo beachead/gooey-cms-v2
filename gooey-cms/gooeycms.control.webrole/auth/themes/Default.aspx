@@ -3,12 +3,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
-            <li class="on">Manage Themes:</li>
-            <li class=""><a href="~/auth/Themes/Add.aspx" runat="server">Add Theme</a></li>
+            <li class="on">MANAGE THEMES</li>
+            <li><a href="~/auth/Themes/Add.aspx" runat="server">ADD THEME</a></li>
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-    Modify which themes are available on your site, upload new themes or edit existing themes. 
+    Modify which themes are available on your site, <a href="http://corp.gooeycms.net/store">purchase new themes</a> or edit existing themes. 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <div style="padding-top:15px;">

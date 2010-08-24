@@ -5,9 +5,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
-            <li class=""><a href="./Default.aspx">Page Listing</a></li>        
-            <li class="on"><%=PageAction %> Page</li>
-            <li><a href="../promotion/PagePromotion.aspx">Promotion</a></li>        
+            <li class=""><a href="./Default.aspx">MANAGE PAGES</a></li>        
+            <li class="on"><%=PageAction %> PAGE</li>
+            <li><a href="../promotion/PagePromotion.aspx">PROMOTION</a></li>        
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

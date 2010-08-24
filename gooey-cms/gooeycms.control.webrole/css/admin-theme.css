@@ -8,7 +8,6 @@ body {
 	color:#333;
 	font-family:Verdana,sans-serif;
 	font-size:11px;
-	font-size-adjust: none;
 	font-style:normal;
 	font-variant:normal;
 	font-weight:normal;	
@@ -165,18 +164,20 @@ ul.menu {
 
 ul.menu li {
 	background:transparent none repeat scroll 0 0;
+	font-size: 11px;
 	margin:0 1em;
 	padding:0;	
 	display: inline;	
 	list-style-image:none;
 	list-style-type:none;
-	
 	color:#FFFFFF;
 }
 
 li.on {
-	font-weight: bold;
+	color: #0085cf;
 	text-decoration: none;
+	font-size: 10px;
+
 }
 
 li a:link, li a:visited {
@@ -236,3 +237,10 @@ ul.image-list
 	list-style-image:none;
 	list-style-type:none;	
 }
+
+
+.remember
+{
+	padding-left:80px;
+}
+
