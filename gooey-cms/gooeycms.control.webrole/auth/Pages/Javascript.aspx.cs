@@ -113,6 +113,18 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             SelectedPanel = "managepanel";
         }
 
+        protected void BtnSave_Click(object sender, EventArgs e)
+        {
+            String filename = this.LstExisting.SelectedValue;
+            byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
+
+            CmsPage page = GetSelectedPage();
+            JavascriptManager.Instance.Save(page, filename, data);
+
+            SelectedPanel = "managepanel";
+            LoadTabData();
+        }
+
         private CmsPage GetSelectedPage()
         {
             String path = Request.QueryString["pid"];

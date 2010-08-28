@@ -55,7 +55,7 @@ namespace Gooeycms.Business.Pages
             String culture = CurrentSite.Culture;
 
             if (Request.QueryString["nocache"] == null)
-                this.isInCache = SitePageCache.Instance.GetIfExists(url, output);
+                this.isInCache = SitePageCache.Instance.GetIfExists(url, ref output);
 
             if (String.IsNullOrEmpty(preview))
             {

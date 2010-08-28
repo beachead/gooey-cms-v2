@@ -93,6 +93,7 @@
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\logo_gooey-login.png" />
     <Content Include="images\logo_gooey_internal.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

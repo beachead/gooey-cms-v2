@@ -23,42 +23,61 @@ namespace Gooeycms.Business.Cache
             get { return SitePageCache.instance; }
         }
 
-        private String GetCacheKey(String subkey)
+        private String GetSiteKey(String guid, String stagingOrProduction)
+        {
+            return guid + "-" + stagingOrProduction;
+        }
+
+        private Dictionary<String, T> GetLocalSiteCache<T>()
         {
             String stagingOrProduction = (CurrentSite.IsStagingHost) ? SitePageRefreshRequest.PageRefreshType.Staging.ToString() : SitePageRefreshRequest.PageRefreshType.Production.ToString();
-            return GetCacheKey(CurrentSite.Guid.Value, stagingOrProduction, subkey);
+
+            String guid = CurrentSite.Guid.Value;
+            String siteKey = GetSiteKey(guid, stagingOrProduction);
+            if (!cacheManager.Contains(siteKey))
+                cacheManager.Add(siteKey, new Dictionary<String, T>(), CacheItemPriority.Normal, null, new SlidingTime(TimeSpan.FromMinutes(20)));
+
+            Dictionary<String, T> sitecache = (Dictionary<String, T>)cacheManager.GetData(siteKey);
+
+            return sitecache;
         }
 
-        private String GetCacheKey(String guid, String type, String url)
+        public void AddToCache<T>(Web.CmsUrl url, T value)
         {
-            return guid.ToLower() + "-" + type.ToLower() + "-" + url.ToLower();
+            Dictionary<String, T> sitecache = GetLocalSiteCache<T>();
+
+            String key = url.ToString();
+            sitecache[key] = value;
         }
 
-        public void AddToCache(Web.CmsUrl url, StringBuilder output)
+        public Boolean GetIfExists<T>(Web.CmsUrl url, ref T item)
         {
-            String key = GetCacheKey(url.ToString());
-            cacheManager.Add(key, output, CacheItemPriority.Normal, null, new SlidingTime(TimeSpan.FromMinutes(20)));
-        }
-
-        public Boolean GetIfExists(Web.CmsUrl url, StringBuilder output)
-        {
-            String key = GetCacheKey(url.ToString());
+            String key = url.ToString();
+            Dictionary<String, T> sitecache = GetLocalSiteCache<T>();
             Boolean result = false;
-            if (cacheManager.Contains(key))
+            if (sitecache.ContainsKey(key))
             {
-                StringBuilder temp = (StringBuilder)cacheManager.GetData(key);
-                output.Clear();
-                output.Append(temp.ToString());
-
+                item = sitecache[key];
                 result = true;
             }
             return result;
         }
 
-        internal void Flush(string siteGuid, string url, SitePageRefreshRequest.PageRefreshType pageRefreshType)
+        public void Flush(string siteGuid, SitePageRefreshRequest.PageRefreshType pageRefreshType)
         {
-            String key = GetCacheKey(siteGuid, pageRefreshType.ToString(), url);
-            cacheManager.Remove(key);
+            if (pageRefreshType == SitePageRefreshRequest.PageRefreshType.All)
+            {
+                String key = GetSiteKey(siteGuid, SitePageRefreshRequest.PageRefreshType.Staging.ToString());
+                cacheManager.Remove(key);
+
+                key = GetSiteKey(siteGuid, SitePageRefreshRequest.PageRefreshType.Production.ToString());
+                cacheManager.Remove(key);
+            }
+            else
+            {
+                String key = GetSiteKey(siteGuid, pageRefreshType.ToString());
+                cacheManager.Remove(key);
+            }
         }
     }
 }

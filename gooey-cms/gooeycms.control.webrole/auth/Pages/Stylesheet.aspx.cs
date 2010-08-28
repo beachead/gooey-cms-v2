@@ -105,6 +105,14 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
+            String filename = this.LstExisting.SelectedValue;
+            byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
+
+            CmsPage page = GetSelectedPage();
+            CssManager.Instance.Save(page, filename, data);
+
+            SelectedPanel = "managepanel";
+            LoadTabData();
         }
 
         protected void BtnEdit_Click(object sender, EventArgs e)

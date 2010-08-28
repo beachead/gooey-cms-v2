@@ -16,7 +16,6 @@ namespace Gooeycms.Business.Cache
         }
 
         public String SiteGuid { get; set; }
-        public String PageUrl { get; set; }
         public PageRefreshType RefreshType { get; set; }
     }
 }

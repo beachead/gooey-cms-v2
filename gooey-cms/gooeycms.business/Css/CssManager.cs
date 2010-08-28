@@ -104,6 +104,9 @@ namespace Gooeycms.Business.Css
 
             String directory = CurrentSite.StylesheetStorageContainer;
             client.Save(directory, key, filename, data, Permissions.Private);
+
+            if (enabledByDefault)
+                SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
         }
 
         public void Save(CmsPage page, string filename, byte[] data)
@@ -126,6 +129,8 @@ namespace Gooeycms.Business.Css
 
             String directory = CurrentSite.StylesheetStorageContainer;
             client.SetMetadata(directory, key, filename);
+
+            SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value,SitePageRefreshRequest.PageRefreshType.Staging);
         }
 
         public void Enable(CmsPage page, string filename)
@@ -176,6 +181,7 @@ namespace Gooeycms.Business.Css
             IStorageClient client = StorageHelper.GetStorageClient();
 
             client.Delete(directory, theme.ThemeGuid, name);
+            SitePageCacheRefreshInvoker.InvokeRefresh(theme.SubscriptionGuid, SitePageRefreshRequest.PageRefreshType.Staging);
         }
 
 

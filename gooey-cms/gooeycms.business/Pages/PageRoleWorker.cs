@@ -50,7 +50,7 @@ namespace Gooeycms.Business.Pages
 
             PageManager.Instance.AddNewPage(path.Parent,path.Name,page);
             PageManager.Instance.RemoveObsoletePages(page);
-            SitePageCacheRefreshInvoker.InvokeRefresh(page.SubscriptionId, page.Url, SitePageRefreshRequest.PageRefreshType.Staging);
+            SitePageCacheRefreshInvoker.InvokeRefresh(page.SubscriptionId, SitePageRefreshRequest.PageRefreshType.Staging);
         }
     }
 }

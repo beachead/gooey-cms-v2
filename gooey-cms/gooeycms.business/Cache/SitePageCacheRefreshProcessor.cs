@@ -13,7 +13,7 @@ namespace Gooeycms.Business.Cache
             if (item is SitePageRefreshRequest)
             {
                 SitePageRefreshRequest request = (SitePageRefreshRequest)item;
-                SitePageCache.Instance.Flush(request.SiteGuid,request.PageUrl,request.RefreshType);
+                SitePageCache.Instance.Flush(request.SiteGuid,request.RefreshType);
             }
         }
     }
