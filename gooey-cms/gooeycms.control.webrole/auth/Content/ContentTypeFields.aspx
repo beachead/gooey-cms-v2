@@ -88,7 +88,12 @@
             <td><asp:TextBox ID="Description" dojoType="dijit.form.ValidationTextBox" required="false" Width="250px" runat="server" /></td>
         </tr>
         <tr>
-            <td colspan="2"><asp:CheckBox ID="ChkRequiredField" Text="Required Field" runat="server" /></td>
+            <td colspan="2">
+            <asp:CheckBox ID="ChkRequiredField" Text="Required Field" runat="server" />
+            <div dojoType="dijit.Tooltip" connectId="<%= ChkRequiredField.ClientID %>" position="after">
+                This is your <b>arbitrary</b> HTML here
+            </div>
+            </td>
         </tr>
         <asp:Panel ID="TextAreaFields" Visible="false" runat="server">
         <tr>
