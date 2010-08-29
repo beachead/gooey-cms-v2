@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -24,6 +25,8 @@ namespace Gooeycms.Webrole.Control
         {
             if (Root == null)
                 Root = Page.ResolveUrl("~/");
+
+            this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
         }
 
         protected void OnLogout_Click(Object sender, EventArgs e)

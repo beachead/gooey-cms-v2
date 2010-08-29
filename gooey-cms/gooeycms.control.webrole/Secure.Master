@@ -56,12 +56,15 @@
                         </div>
                     </td>
                     <td class="right-column">
-                                <div id="logo">
-                Welcome, [USERNAME] &nbsp;
-                <a id="change_password" href="~/secure/ChangePassword.aspx" style="color:#666666; font-size:10px;" runat="server">Change Password</a>                
-                <asp:LoginStatus ID="LoginStatus" runat="server" style="color:#666666; font-size:10px;"
-                    LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;
-            </div>
+                         <div id="logo" style="padding-top:3px;padding-right:15px;">
+                            <img src="~/images/logo_gooey_internal.png" runat="server" />
+                            <div style="padding-top:12px;">
+                            Welcome, <asp:Label ID="LoggedInUsername" runat="server" /> &nbsp;<br />
+                            <a id="change_password" href="~/secure/ChangePassword.aspx" style="color:#666666; font-size:10px;" runat="server">Change Password</a>                
+                            <asp:LoginStatus ID="LoginStatus" runat="server" style="color:#666666; font-size:10px;"
+                                LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;
+                            </div>
+                         </div>
                     </td>
                 </tr>
             </table>

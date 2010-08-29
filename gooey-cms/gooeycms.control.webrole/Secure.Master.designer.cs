@@ -139,6 +139,15 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Editor;
         
         /// <summary>
+        /// LoggedInUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LoggedInUsername;
+        
+        /// <summary>
         /// change_password control.
         /// </summary>
         /// <remarks>
