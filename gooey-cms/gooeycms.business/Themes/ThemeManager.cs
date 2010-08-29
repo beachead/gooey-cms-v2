@@ -119,6 +119,8 @@ namespace Gooeycms.Business.Themes
                 dao.Save(theme);
                 tx.Commit();
             }
+
+            SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
         }
 
         internal CmsTheme GetDefaultBySite(Data.Guid siteGuid)
