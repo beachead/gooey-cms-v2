@@ -54,6 +54,7 @@ namespace Beachead.Core.Markup.Forms
             if (file == null)
                 file = "";
 
+            html.Append(String.Format(@"<input type=""text"" id=""{0}_{1}"" name=""{0}_{1}"" value="""" style=""display:none;"" />",this.id,"gooeykeycheck"));
             html.Append(HiddenField("culture", culture)).AppendLine();
             html.Append(HiddenField("redirect", CmsUrl.ResolveUrl(redirectTo))).AppendLine();
             html.Append(HiddenField("submit-email", emailResultsTo)).AppendLine();
@@ -70,7 +71,7 @@ namespace Beachead.Core.Markup.Forms
         private String GetCurrentResource()
         {
             WebRequestContext context = new WebRequestContext();
-            return new CmsUrl(context.Request.Path).RelativePath;
+            return new CmsUrl(context.Request.RawUrl).RelativePath;
         }
 
         private String HiddenField(String key, String value)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Gooeycms.Business.Web;
 
 namespace Beachead.Core.Markup.Forms
 {
@@ -28,8 +29,11 @@ namespace Beachead.Core.Markup.Forms
                 FormMetaInfoParser metainfo = new FormMetaInfoParser(id);
                 FormFieldParser fields = new FormFieldParser(id,base.FormatEngine);
 
+                WebRequestContext context = new WebRequestContext();
+                CmsUrl url = new CmsUrl(context.Request.RawUrl);
+
                 html.Append(@"<div class=""webscript-form"">").AppendLine();
-                html.Append(@"<form action=""form.handler"" method=""post"">").AppendLine();
+                html.Append(@"<form action=""" + url.PathWithoutExtension + "-form-post.aspx" + @""" method=""post"">").AppendLine();
                 html = metainfo.Convert(html, content);
                 html = fields.Convert(html, content);
                 html.AppendFormat(SubmitFormat, id, "submit", metainfo.SubmitButtonText).AppendLine();
