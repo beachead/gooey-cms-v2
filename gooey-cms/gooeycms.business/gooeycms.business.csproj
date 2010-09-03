@@ -102,6 +102,7 @@
     <Compile Include="Crypto\TokenManager.cs" />
     <Compile Include="Css\CssFile.cs" />
     <Compile Include="Css\CssHandler.cs" />
+    <Compile Include="Forms\FormProcessingHandler.cs" />
     <Compile Include="Help\HelpManager.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Javascript\JavascriptFile.cs" />

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Crypto;
+using Microsoft.Security.Application;
 
 namespace Beachead.Core.Markup.Forms
 {
@@ -14,7 +16,7 @@ namespace Beachead.Core.Markup.Forms
     {
         private static Regex Form = new Regex(@"\[form\](.*?)\[/form\]", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
-        private const String SubmitFormat = @"<input class=""submit"" id=""{0}_{1}"" name=""{0}_{1}"" type=""submit"" value=""{2}"" onclick=""return submitForm('{0}');"" />";
+        private const String SubmitFormat = @"<input class=""submit"" id=""{0}_{1}"" name=""{0}_{1}"" type=""submit"" value=""{2}""  />";
 
         public override StringBuilder Convert(StringBuilder markup)
         {
@@ -32,8 +34,11 @@ namespace Beachead.Core.Markup.Forms
                 WebRequestContext context = new WebRequestContext();
                 CmsUrl url = new CmsUrl(context.Request.RawUrl);
 
+                String pagename = url.PathWithoutExtension;
+                String token = AntiXss.UrlEncode(TokenManager.Issue(pagename, TimeSpan.FromMinutes(2)));
+
                 html.Append(@"<div class=""webscript-form"">").AppendLine();
-                html.Append(@"<form action=""" + url.PathWithoutExtension + "-form-post.aspx" + @""" method=""post"">").AppendLine();
+                html.Append(@"<form action=""/gooeyforms/formprocess.handler?token=" + token + @"&pagename=" + AntiXss.UrlEncode(pagename) + @""" method=""post"">").AppendLine();
                 html = metainfo.Convert(html, content);
                 html = fields.Convert(html, content);
                 html.AppendFormat(SubmitFormat, id, "submit", metainfo.SubmitButtonText).AppendLine();
