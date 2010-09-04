@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Crypto;
 
 namespace Beachead.Core.Markup.Forms
 {
@@ -45,9 +46,9 @@ namespace Beachead.Core.Markup.Forms
             //CampaignManager campaignManager = new CampaignManager();
             String culture = "en-us"; //TODO CultureManager.NewInstance().CurrentCulture;
 
-            String redirectTo = GetMetaValue(Redirect).Trim();
+            String redirectTo = TextEncryption.Encode(GetMetaValue(Redirect).Trim());
             String submitButtonText = GetMetaValue(ButtonText).Trim();
-            String emailResultsTo = GetMetaValue(EmailResults).Trim();
+            String emailResultsTo =  TextEncryption.Encode(GetMetaValue(EmailResults).Trim());
             String currentResource = GetCurrentResource();
             String campaigns = ""; //TODO campaignManager.GetInternalCampaignTrail("|");
             String file = context.CurrentHttpContext.Request.QueryString["fget"];

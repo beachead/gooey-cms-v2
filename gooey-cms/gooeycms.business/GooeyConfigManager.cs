@@ -150,5 +150,17 @@ namespace Gooeycms.Business
                 return result;
             }
         }
+
+        public static String DefaultSystemFormFields
+        {
+            get
+            {
+                String result = GetAsString(ConfigConstants.DefaultSystemFormFields);
+                if (String.IsNullOrEmpty(result))
+                    result = "submit-email,downloadfile";
+
+                return result;
+            }
+        }
     }
 }

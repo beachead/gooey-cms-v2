@@ -102,7 +102,14 @@
     <Compile Include="Crypto\TokenManager.cs" />
     <Compile Include="Css\CssFile.cs" />
     <Compile Include="Css\CssHandler.cs" />
+    <Compile Include="Forms\FormManager.cs" />
+    <Compile Include="Forms\FormPluginFactory.cs" />
     <Compile Include="Forms\FormProcessingHandler.cs" />
+    <Compile Include="Forms\Plugins\DatabaseStorePlugin.cs" />
+    <Compile Include="Forms\Plugins\FormPlugin.cs" />
+    <Compile Include="Forms\Plugins\IFormPlugin.cs" />
+    <Compile Include="Forms\Plugins\LeadEmailPlugin.cs" />
+    <Compile Include="Forms\Plugins\SalesForcePlugin.cs" />
     <Compile Include="Help\HelpManager.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Javascript\JavascriptFile.cs" />

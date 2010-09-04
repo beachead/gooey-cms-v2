@@ -14,5 +14,6 @@ namespace Gooeycms.Constants
         public const String IsLogginedEnabled = "logging-enabled";
         public const String DefaultPageName = "default-pagename";
         public static string TokenEncyrptionKey = "token-encryption-key";
+        public const String DefaultSystemFormFields = "default-form-fields";
     }
 }

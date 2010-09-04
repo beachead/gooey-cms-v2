@@ -27,5 +27,14 @@ namespace Gooeycms.Business.Web
         {
             get { return GetSiteConfiguration("markup-headerimage", "", false); }
         }
+
+        public static Boolean IsLeadEmailEnabled
+        {
+            get
+            {
+                String value = GetSiteConfiguration("lead-email-enabled", "false", false);
+                return Boolean.Parse(value);
+            }
+        }
     }
 }

@@ -99,6 +99,7 @@
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\create-content-tables.sql.txt" />
     <Content Include="sql-scripts\create-all-sql.txt" />
+    <Content Include="sql-scripts\create-forms.sql.txt" />
     <Content Include="sql-scripts\create-help-tables.sql.txt" />
     <Content Include="sql-scripts\create-logins.sql.txt" />
     <Content Include="sql-scripts\create-site-tables.sql.txt" />

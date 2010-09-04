@@ -110,6 +110,15 @@ namespace Gooeycms.Business.Util
             }
         }
 
+        public static Boolean IsSalesForceEnabled
+        {
+            get
+            {
+                //TODO Implement the code to determine if sales-force is available
+                return false;
+            }
+        }
+
         public static Boolean IsProductionHost
         {
             get { return !IsStagingHost; }
