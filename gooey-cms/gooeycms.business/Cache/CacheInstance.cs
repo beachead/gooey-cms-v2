@@ -64,21 +64,7 @@ namespace Gooeycms.Business.Cache
             message.RefreshAll = (key == null);
 
             InstanceCommunication.Broadcast<CacheRefreshRequest>(typeof(CacheRefreshProcessor), message);
-            /*
-            String url = CurrentSite.Protocol + CurrentSite.StagingDomain +"/cacherefresh.handler?token=" + AntiXss.UrlEncode(TokenManager.Issue(CACHE_REFRESH_KEY, TimeSpan.FromSeconds(30)));
-            if (key != null)
-                url = url + "&key=" + AntiXss.UrlEncode(key);
-
-            Task.Factory.StartNew(() =>
-                {
-                    try
-                    {
-                        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                        request.GetResponse();
-                    }
-                    catch(Exception) {}
-                });
-             */
+            SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
         }
    } 
 }

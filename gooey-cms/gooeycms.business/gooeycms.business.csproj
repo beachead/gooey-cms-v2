@@ -116,6 +116,7 @@
     <Compile Include="Javascript\JavascriptHandler.cs" />
     <Compile Include="Markup\BaseFormatter.cs" />
     <Compile Include="Markup\Engine\DefaultMarkupEngine.cs" />
+    <Compile Include="Markup\Engine\MarkdownMarkupEngine.cs" />
     <Compile Include="Markup\Engine\MarkupEngineFactory.cs" />
     <Compile Include="Markup\Forms\Fields\BaseFormField.cs" />
     <Compile Include="Markup\Forms\Fields\Checkbox.cs" />
@@ -131,6 +132,8 @@
     <Compile Include="Markup\Forms\FormMetaInfoParser.cs" />
     <Compile Include="Markup\IMarkupEngine.cs" />
     <Compile Include="Markup\IMarkupFormatter.cs" />
+    <Compile Include="Markup\Markdown\Markdown.cs" />
+    <Compile Include="Markup\Markdown\MarkdownFormatter.cs" />
     <Compile Include="Markup\MarkupEngine.cs" />
     <Compile Include="Markup\Standard\HeaderImageFormatter.cs" />
     <Compile Include="Markup\Standard\HeaderTextFormatter.cs" />

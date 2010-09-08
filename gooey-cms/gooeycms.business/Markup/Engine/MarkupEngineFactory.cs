@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gooeycms.Business.Util;
+using Gooeycms.Business.Markup.Engine;
 
 namespace Beachead.Core.Markup.Engine
 {
@@ -21,7 +23,24 @@ namespace Beachead.Core.Markup.Engine
         /// <returns></returns>
         public IMarkupEngine GetDefaultEngine()
         {
-            return new DefaultMarkupEngine();
+            IMarkupEngine result;
+
+            String name = CurrentSite.Configuration.MarkupEngineName;
+            if (name == null)
+                result = new MarkdownMarkupEngine();
+            else
+            {
+                try
+                {
+                    result = (IMarkupEngine)Activator.CreateInstance(Type.GetType(name));
+                }
+                catch (Exception e)
+                {
+                    throw new ApplicationException("The specified markup engine:" + name + " is not valid.", e);
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -66,6 +66,15 @@ namespace Gooeycms.Business.Util
                     return Boolean.Parse(value);
                 }
             }
+
+            public static String MarkupEngineName
+            {
+                get
+                {
+                    String result = GetSiteConfiguration("markup-engine-name", null, false);
+                    return result;
+                }
+            }
         }
 
         private static String GetStorageKey(String type)
