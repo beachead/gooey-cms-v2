@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Form.CmsForm, gooeycms.data" table="Form">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="guid" name="Guid" type="String" />
+    <property column="site_guid" name="SubscriptionId" type="String" />
+    <property column="inserted" name="Inserted" type="DateTime" />
+    <property column="form_url" name="FormUrl" type="String" />
+    <property column="ipaddress" name="IpAddress" type="String" />
+    <property column="email" name="Email" type="String" />
+    <property column="campaigns" name="RawCampaigns" type="String" />
+    <property column="form_keys" name="_FormKeys" type="String" />
+    <property column="form_values" name="_FormValues" type="String" />
+  </class>
+  </hibernate-mapping>

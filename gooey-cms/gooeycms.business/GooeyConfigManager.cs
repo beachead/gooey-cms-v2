@@ -157,7 +157,7 @@ namespace Gooeycms.Business
             {
                 String result = GetAsString(ConfigConstants.DefaultSystemFormFields);
                 if (String.IsNullOrEmpty(result))
-                    result = "submit-email,downloadfile";
+                    result = "submit-email,downloadfile,gooeykeycheck,submit,campaign";
 
                 return result;
             }

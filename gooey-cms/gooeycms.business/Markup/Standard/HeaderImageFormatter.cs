@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Util;
 
 namespace Beachead.Core.Markup.Standard
 {
@@ -15,7 +16,7 @@ namespace Beachead.Core.Markup.Standard
     public class HeaderImageFormatter : BaseFormatter
     {
         private static Regex MarkupRegex = new Regex(@"{header-image:(?<path>.*?)\|(?<title>.*?)\|(?<caption>.*?)\|(?<color>.*?)}\r?\n?", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        private String HtmlTag = SiteConfiguration.HeaderImageTemplate;
+        private String HtmlTag = CurrentSite.Configuration.HeaderImageTemplate;
         public override StringBuilder Convert(StringBuilder markup)
         {
             Match match = MarkupRegex.Match(markup.ToString());

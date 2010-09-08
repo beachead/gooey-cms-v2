@@ -6,6 +6,7 @@ using Gooeycms.Business.Storage;
 using Gooeycms.Business.Themes;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Data.Model;
 
 namespace Gooeycms.Business.Util
 {
@@ -16,6 +17,54 @@ namespace Gooeycms.Business.Util
             get
             {
                 return CacheManager.Instance.GetCache(CurrentSite.Guid);
+            }
+        }
+
+        public static class Configuration
+        {
+            private static String GetSiteConfiguration(String key, String def, Boolean required)
+            {
+                String value = Cache.Get<String>(key);
+                if (value == null)
+                {
+                    Data.Guid guid = CurrentSite.Guid;
+                    SiteConfigurationDao dao = new SiteConfigurationDao();
+
+                    Gooeycms.Data.Model.SiteConfiguration result = dao.FindByKey(guid, key);
+                    value = def;
+                    if (result != null)
+                        value = result.Value;
+
+                    if ((required) && (String.IsNullOrEmpty(value)))
+                        throw new ArgumentNullException("The configuration value for the site:" + guid + " and key " + key + " has not been set. This value is required for the site to function properly.");
+
+                    Cache.Add(key, value);
+                }
+                return value;
+
+            }
+
+            public static String HeaderImageTemplate
+            {
+                get { return GetSiteConfiguration("markup-headerimage", "", false); }
+            }
+
+            public static Boolean IsLeadEmailEnabled
+            {
+                get
+                {
+                    String value = GetSiteConfiguration("lead-email-enabled", "false", false);
+                    return Boolean.Parse(value);
+                }
+            }
+
+            public static Boolean IsLeadDbEnabled
+            {
+                get
+                {
+                    String value = GetSiteConfiguration("lead-db-enabled", "true", false);
+                    return Boolean.Parse(value);
+                }
             }
         }
 

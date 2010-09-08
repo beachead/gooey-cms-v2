@@ -70,6 +70,8 @@
     <Compile Include="Model\Content\CmsContentType.cs" />
     <Compile Include="Model\Content\CmsContentTypeDao.cs" />
     <Compile Include="Model\Content\CmsContentTypeField.cs" />
+    <Compile Include="Model\Form\CmsForm.cs" />
+    <Compile Include="Model\Form\CmsFormDao.cs" />
     <Compile Include="Model\Help\HelpPage.cs" />
     <Compile Include="Model\Help\HelpPageDao.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />
@@ -96,6 +98,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Help.hbm.xml" />
     <EmbeddedResource Include="Mappings\CmsContent.hbm.xml" />
+    <EmbeddedResource Include="Mappings\CmsForms.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\create-content-tables.sql.txt" />
     <Content Include="sql-scripts\create-all-sql.txt" />

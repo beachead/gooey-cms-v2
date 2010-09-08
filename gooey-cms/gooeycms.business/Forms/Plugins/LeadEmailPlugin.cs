@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Forms.Plugins
 {
@@ -10,7 +11,7 @@ namespace Gooeycms.Business.Forms.Plugins
     {
         public override bool IsEnabled()
         {
-            return SiteConfiguration.IsLeadEmailEnabled; 
+            return CurrentSite.Configuration.IsLeadEmailEnabled; 
         }
 
         public override void Process()

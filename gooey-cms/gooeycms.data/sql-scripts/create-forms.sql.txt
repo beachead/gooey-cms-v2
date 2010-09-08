@@ -3,28 +3,20 @@ BEGIN
 DROP TABLE [Form];
 END
 
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Form_Responses]') AND type in (N'U'))
-BEGIN
-DROP TABLE [Form_Responses];
-END
-
 CREATE TABLE [dbo].[Form](
 	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36),
 	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
-	[culture] VARCHAR(12),
 	[inserted] DATETIME,
 	[form_url] VARCHAR(1024),
 	[ipaddress] VARCHAR(255),
 	[email] NVARCHAR(255),
 	[campaigns] VARCHAR(256),
-);
-CREATE INDEX idx_site_guid ON [Form](site_guid);
-CREATE INDEX idx_site_guid_inserted ON [Form](site_guid,inserted);
-
-CREATE TABLE [dbo].[Form_Responses] (
-	[id] INT IDENTITY(1,1) NOT NULL,
-	[form_id] INT,
 	[form_keys] NVARCHAR(2048),
-	[form_values] NTEXT
+	[form_values] NTEXT,
+	PRIMARY KEY CLUSTERED([id]),
 );
-CREATE INDEX idx_form_id ON [Form_Responses]([form_id]);
+CREATE INDEX idx_form_guid ON [Form](guid);
+CREATE INDEX idx_form_siteguid ON [Form](site_guid);
+CREATE INDEX idx_form_guid_site ON [Form](guid,site_guid);
+CREATE INDEX idx_form_guid_inserted ON [Form](guid,inserted);
