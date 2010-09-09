@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Beachead.Core.Markup;
 using Gooeycms.Business.Markup.Markdown;
+using Gooeycms.Business.Markup.Forms_v2;
+using Beachead.Core.Markup.Standard;
 
 namespace Gooeycms.Business.Markup.Engine
 {
@@ -12,6 +14,8 @@ namespace Gooeycms.Business.Markup.Engine
         public override IList<IMarkupFormatter> GetFormatters()
         {
             IList<IMarkupFormatter> formatters = new List<IMarkupFormatter>();
+            formatters.Add(new TableTagFormatter());
+            formatters.Add(new FormMarkupFormatter());
             formatters.Add(new MarkdownFormatter());
 
             return formatters;

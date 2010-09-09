@@ -23,8 +23,8 @@ namespace Beachead.Core.Markup.Standard
             }
         }
 
-        private static Regex Table = new Regex(@"\[table\](.*?)\[/table\]", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static Regex TableRowPattern = new Regex(@"----+\r?\n(.*?)\r?\n----+\r?\n", RegexOptions.Singleline | RegexOptions.Compiled);
+        private static Regex Table = new Regex(@"<table>(.*?)</table>", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex TableRowPattern = new Regex(@"(?:\s|\n)*----+\r?\n(.*?)\r?\n(?:\s|\n)*----+\r?\n", RegexOptions.Singleline | RegexOptions.Compiled);
         private static String DefaultAttributes = @"class=""webscript-table"" cellspacing=""0"" cellpadding=""0""";
 
         private String attributes = DefaultAttributes; 
@@ -32,14 +32,23 @@ namespace Beachead.Core.Markup.Standard
         #region IMarkupFormatter Members
         public override StringBuilder Convert(StringBuilder markup)
         {
+            String html = Table.Replace(markup.ToString(), new MatchEvaluator(TableReferenceEvaluator));
+            return new StringBuilder(html);
+        }
+        #endregion
 
-            Match match = Table.Match(markup.ToString());
-            while (match.Success)
+        public String TableReferenceEvaluator(Match match)
+        {
+            String innerContent = match.Groups[1].Value;
+            IList<TableRow> rows = Parse(innerContent);
+
+            StringBuilder html = new StringBuilder();
+            if (rows.Count == 0)
             {
-                String table = match.Groups[1].Value;
-                IList<TableRow> rows = Parse(table);
-
-                StringBuilder html = new StringBuilder();
+                html.Append(match.Groups[0].Value);
+            }
+            else
+            {
                 html.Append("<table>").AppendLine();
                 foreach (TableRow row in rows)
                 {
@@ -47,21 +56,17 @@ namespace Beachead.Core.Markup.Standard
                     foreach (TableCell cell in row.TableCells)
                     {
                         String formatted = base.FormatEngine.Convert(cell.Value);
-                        html.AppendFormat("<td colspan={0}>",cell.Colspan);
+                        html.AppendFormat("<td colspan={0}>", cell.Colspan);
                         html.Append(formatted);
                         html.Append("</td>");
                     }
                     html.Append("</tr>").AppendLine();
                 }
                 html.Append("</table>").AppendLine();
-
-                markup = new StringBuilder(Table.Replace(markup.ToString(), html.ToString(), 1));
-                match = match.NextMatch();
             }
 
-            return markup;
+            return html.ToString();
         }
-        #endregion
 
         /// <summary>
         /// Parses the table markup into rows and columns

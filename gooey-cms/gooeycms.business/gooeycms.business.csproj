@@ -118,6 +118,7 @@
     <Compile Include="Markup\Engine\DefaultMarkupEngine.cs" />
     <Compile Include="Markup\Engine\MarkdownMarkupEngine.cs" />
     <Compile Include="Markup\Engine\MarkupEngineFactory.cs" />
+    <Compile Include="Markup\Forms-v2\FormMarkupFormatter.cs" />
     <Compile Include="Markup\Forms\Fields\BaseFormField.cs" />
     <Compile Include="Markup\Forms\Fields\Checkbox.cs" />
     <Compile Include="Markup\Forms\Fields\Dropdown.cs" />

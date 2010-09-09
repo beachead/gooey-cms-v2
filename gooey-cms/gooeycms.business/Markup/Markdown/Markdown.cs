@@ -439,7 +439,7 @@ namespace MarkdownSharp
                 else
                 {
                     // do span level processing inside the block, then wrap result in <p> tags
-                    grafs[i] = _leadingWhitespace.Replace(RunSpanGamut(grafs[i]), "<div class=\"para\">\r\n") + "\r\n</div>";
+                    grafs[i] = _leadingWhitespace.Replace(RunSpanGamut(grafs[i]), ""); //"<div class=\"para\">\r\n") + "\r\n</div>";
                 }
             }
 
@@ -689,7 +689,7 @@ namespace MarkdownSharp
                   )
             )";
 
-            pattern = pattern.Replace("$less_than_tab", (_tabWidth - 1).ToString());
+            pattern = pattern.Replace("$less_than_tab", "200"); // (_tabWidth - 1).ToString());
             pattern = pattern.Replace("$block_tags_b_re", blockTagsB);
             pattern = pattern.Replace("$block_tags_a_re", blockTagsA);
             pattern = pattern.Replace("$attr", attr);
@@ -1257,7 +1257,7 @@ namespace MarkdownSharp
         /// </summary>
         private string DoCodeBlocks(string text)
         {
-            text = _codeBlock.Replace(text, new MatchEvaluator(CodeBlockEvaluator));
+            //text = _codeBlock.Replace(text, new MatchEvaluator(CodeBlockEvaluator));
             return text;
         }
 

@@ -14,7 +14,7 @@ namespace Beachead.Core.Markup.Forms
     /// </summary>
     public class FormMarkupFormatter : BaseFormatter
     {
-        private static Regex Form = new Regex(@"\[form\](.*?)\[/form\]", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        private static Regex Form = new Regex(@"<form>(.*?)</form>", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
         private const String SubmitFormat = @"<input class=""submit"" id=""{0}_{1}"" name=""{0}_{1}"" type=""submit"" value=""{2}""  />";
 
