@@ -16,12 +16,12 @@
         Please wait while your preview is generated.
     </div>    
 
-    <div dojoType="dijit.Dialog" id="fulleditor" style="width:955px; height:630px;" closeable="true" draggable="true">
-        <div style="padding-bottom:3px;">
-        <button onclick="savePopup();return false;">Save</button>&nbsp;
+    <div dojoType="dijit.Dialog" id="fulleditor" style="height:600px;" closeable="true" draggable="true" title="Pop-up Markup Editor">
+        <div style="padding-bottom:7px;">
+        <button onclick="savePopup();return false;">Stage &amp; Close</button>&nbsp;
         <input type="checkbox" id="chkwrap" name="chkwrap" onclick="popup_wrap();" /> wrap text 
         </div>
-        <textarea id="popupeditor" style="width: 940px; height:555px;  background: none repeat scroll 0% 0% rgb(248, 248, 248); border: 1px solid rgb(2, 2, 2);" wrap="off"></textarea>
+        <textarea id="popupeditor" style="height:517px; background: none repeat scroll 0% 0% rgb(248, 248, 248); border: 1px solid rgb(2, 2, 2);" wrap="off"></textarea>
     </div>
 
     <% if (ShowPreviewWindow) { %>
@@ -90,9 +90,12 @@
         var inline = dojo.byId('<%=PageMarkupText.TextboxId %>');
         var popup = dojo.byId('popupeditor');
 
+        var container = dijit.byId('fulleditor');
+        container.style.width = (screen.width - 20) + "px";
+        popup.style.width = (screen.width - 200) + "px";
         popup.value = inline.value;
 
-        dijit.byId('fulleditor').show();
+        container.show();
     }
 
     function savePopup() {
