@@ -50,7 +50,8 @@ namespace Gooeycms.Business.Images
             //Generate thumbnails
             IList<StorageFile> results = new List<StorageFile>(images);
             foreach(StorageFile file in images) {
-                GenerateThumbnail(file, results);
+                if ((file.Filename.Length > 0) && (file.Data.Length > 0))
+                    GenerateThumbnail(file, results);
             }
             images = null;
 
@@ -58,39 +59,46 @@ namespace Gooeycms.Business.Images
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
             foreach (StorageFile file in results)
             {
-                client.Save(imageDirectory, folder,file.Filename, file.Data, Permissions.Public);
+                if ((file.Filename.Length > 0) && (file.Data.Length > 0))
+                {
+                    client.Save(imageDirectory, folder, file.Filename, file.Data, Permissions.Public);
+                }
             }
 
-            return results;
+
+            return GetAllImagePaths(siteGuid,folder);
         }
 
         private void GenerateThumbnail(StorageFile file, IList<StorageFile> results)
         {
-            using (MemoryStream stream = new MemoryStream(file.Data))
+            if (file.Data.Length > 0)
             {
-                using (MemoryStream output = new MemoryStream())
+                using (MemoryStream stream = new MemoryStream(file.Data))
                 {
-                    try
+                    using (MemoryStream output = new MemoryStream())
                     {
-                        KalikoImage image = new KalikoImage(stream);
-                        int width = 60;
-                        int height = 60;
+                        try
+                        {
+                            KalikoImage image = new KalikoImage(stream);
+                            int width = 60;
+                            int height = 60;
 
-                        image.BackgroundColor = Color.White;
-                        KalikoImage thumb = image.GetThumbnailImage(width, height, ThumbnailMethod.Pad);
-                        thumb.SaveJpg(output, 75);
+                            image.BackgroundColor = Color.White;
+                            KalikoImage thumb = image.GetThumbnailImage(width, height, ThumbnailMethod.Pad);
+                            thumb.SaveJpg(output, 75);
 
-                        FileInfo info = new FileInfo(file.Filename);
+                            FileInfo info = new FileInfo(file.Filename);
 
-                        StorageFile thumbnail = new StorageFile();
-                        thumbnail.Filename = info.Name.Replace(info.Extension, "") + "-thumb.jpg";
-                        thumbnail.Data = output.ToArray();
+                            StorageFile thumbnail = new StorageFile();
+                            thumbnail.Filename = info.Name.Replace(info.Extension, "") + "-thumb.jpg";
+                            thumbnail.Data = output.ToArray();
 
-                        results.Add(thumbnail);
-                    }
-                    catch (Exception)
-                    {
-                        throw new ArgumentException("The uploaded content is not supported. Must be a valid image type (png,jpeg or gif)");
+                            results.Add(thumbnail);
+                        }
+                        catch (Exception)
+                        {
+                            throw new ArgumentException("The uploaded content is not supported. Must be a valid image type (png,jpeg or gif)");
+                        }
                     }
                 }
             }
