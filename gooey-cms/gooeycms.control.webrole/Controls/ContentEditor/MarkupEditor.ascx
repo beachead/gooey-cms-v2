@@ -11,24 +11,22 @@
         #waitDialog .dijitDialogTitleBar .dijitDialogCloseIcon {
             display:none;
         }
-    </style>  
+    </style>
     <div dojoType="dijit.Dialog" id="waitDialog" closable="false" draggable="false">
         Please wait while your preview is generated.
     </div>    
 
-    <div dojoType="dijit.Dialog" id="fulleditor" style="height:600px;" closeable="true" draggable="true" title="Pop-up Markup Editor">
+    <div dojoType="dijit.Dialog" id="fulleditor" closeable="true" draggable="true" title="Pop-up Markup Editor">
         <div style="padding-bottom:7px;">
-        <button onclick="savePopup();return false;">Stage &amp; Close</button>&nbsp;
+        <button onclick="savePopup();return false;">Save &amp; Close</button>&nbsp;
         <input type="checkbox" id="chkwrap" name="chkwrap" onclick="popup_wrap();" /> wrap text 
         </div>
-        <textarea id="popupeditor" style="height:517px; background: none repeat scroll 0% 0% rgb(248, 248, 248); border: 1px solid rgb(2, 2, 2);" wrap="off"></textarea>
+        <textarea id="popupeditor" style="background: none repeat scroll 0% 0% rgb(248, 248, 248); border: 1px solid rgb(2, 2, 2);" wrap="off"></textarea>
     </div>
 
     <% if (ShowPreviewWindow) { %>
-    <div dojoType="dijit.TitlePane" id="preview-panel" title="Preview Window" open="false">
-        <div style="height:350px;overflow:auto;">
-            <iframe id="preview-frame" src="" width="90%" height="95%"></iframe>
-        </div>
+    <div dojoType="dijit.Dialog" id="preview-panel"  title="Preview Window" closeable="true">
+            <iframe id="preview-frame" src=""></iframe>
     </div>
     <div dojoType="dijit.TitlePane" title="Markup Editor">
     <% } %>
@@ -43,16 +41,15 @@
         <li><a href="#" onclick="javascript:return __Wrap('---StartList---\r\n* Item 1\r\n* Item 2 ', '\r\n---EndList---','<%=PageMarkupText.TextboxId %>');" title="Unordered List" class="formatlink" id="UnorderedList"></a></li>
         <li><a href="#" onclick="javascript:return __Insert('{BR}','<%=PageMarkupText.TextboxId %>');" title="Linebreak" class="formatlink" id="BrLink"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('<nomarkup>', '</nomarkup>','<%=PageMarkupText.TextboxId %>');" title="No Markup" class="formatlink" id="NoMarkup"></a></li>
-        <li><a href="#" onclick="javascript:return __Wrap('<esc>', '</esc>','<%=PageMarkupText.TextboxId %>');" title="Escape HTML" class="formatlink" id="EscapeLink"></a></li>             
+        <li><a href="#" onclick="javascript:return __Wrap('<esc>', '</esc>','<%=PageMarkupText.TextboxId %>');" title="Escape HTML" class="formatlink" id="EscapeLink"></a></li>                  
         <li><a href="#" onclick="javascript:window.open('ImageBrowser.aspx?<%=ImageBrowserQuerystring %>','','width=700,height=500,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;" title="Image Browser" class="formatlink" id="ImageLink"></a></li>             
         <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li><% } %>
+        <li><a href="#" onclick="javascript:showEditor(); return false;" title="Popup Editor" class="formatlink" id="PopupEditor"></a></li>        
         </ul>
         </div>
         </asp:Panel>
         <div> 
             <uc:ResizableTextBox ID="PageMarkupText" runat="server" />
-            <br />
-            <a href="#" onclick="showEditor(); return false;">Full Screen</a>
         </div>
     <% if (ShowPreviewWindow) { %>
     </div>
@@ -91,8 +88,10 @@
         var popup = dojo.byId('popupeditor');
 
         var container = dijit.byId('fulleditor');
-        container.style.width = (screen.width - 20) + "px";
+
         popup.style.width = (screen.width - 200) + "px";
+        popup.style.height = (screen.height - 300) + "px";
+
         popup.value = inline.value;
 
         container.show();
@@ -127,9 +126,12 @@
     }
 
     function startPreview() {
+        var preview = dojo.byId("preview-frame");
+
+        preview.style.width = (screen.width - 200) + "px";
+        preview.style.height = (screen.height - 300) + "px";
         var pane = dijit.byId("preview-panel");
-        if (!pane.open) 
-            pane.toggle();
+        pane.show();
 
         dijit.byId('waitDialog').show();
     }

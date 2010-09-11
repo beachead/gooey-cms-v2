@@ -20,6 +20,9 @@
 #ItalicLink {
 	background-image: url(Images/Italic.png);
 }
+#PopupEditor {
+	background-image: url(Images/ExternalLink.gif);
+}
 #UnderlineLink {
 	background-image: url(Images/Underline.png);
 }
