@@ -15,8 +15,8 @@ namespace Gooeycms.Business.Markup.Engine
         {
             IList<IMarkupFormatter> formatters = new List<IMarkupFormatter>();
             formatters.Add(new TableTagFormatter());
-            formatters.Add(new FormMarkupFormatter());
             formatters.Add(new MarkdownFormatter());
+            formatters.Add(new FormMarkupFormatter());
 
             return formatters;
         }

@@ -575,8 +575,8 @@ namespace MarkdownSharp
             //    inline later.
             // *  List "b" is made of tags which are always block-level;
             //
-            string blockTagsA = "ins|del";
-            string blockTagsB = "p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|address|script|noscript|form|fieldset|iframe|math";
+            string blockTagsA = "ins|del|input|select";
+            string blockTagsB = "input|select|p|nomarkup|h[1-6]|blockquote|pre|table|dl|ol|ul|address|script|noscript|fieldset|iframe|math";
 
             // Regular expression for the content of a block tag.
             string attr = @"
