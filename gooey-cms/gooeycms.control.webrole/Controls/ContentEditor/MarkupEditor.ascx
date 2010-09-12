@@ -18,7 +18,7 @@
 
     <div dojoType="dijit.Dialog" id="fulleditor" style="width:90%;height:90%;" closeable="true" draggable="true" title="Pop-up Markup Editor">
         <div style="padding-bottom:7px;">
-        <button onclick="savePopup();return false;">Apply &amp; Close</button>&nbsp;
+        <button onclick="savePopup();return false;">Save &amp; Close</button>&nbsp;
         <input type="checkbox" id="chkwrap" name="chkwrap" onclick="popup_wrap();" /> wrap text 
         </div>
         <textarea id="popupeditor" style="background: none repeat scroll 0% 0% rgb(248, 248, 248); border: 1px solid rgb(2, 2, 2);" wrap="off"></textarea>
@@ -104,7 +104,10 @@
         inline.value = popup.value;
 
         dijit.byId('fulleditor').hide();
-        return false;
+        
+        var form = dojo.byId("aspnetform");
+        if (typeof(onPopupSave) == 'function')
+            onPopupSave();
     }
 
     function onimage_selected(imageName) {

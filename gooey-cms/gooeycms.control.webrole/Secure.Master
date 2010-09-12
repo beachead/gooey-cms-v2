@@ -23,7 +23,7 @@
     </script>
 </head>
 <body class="claro">
-    <form id="form1" runat="server">
+    <form id="aspnetform" clientidmode="Static" runat="server">
    
     <div>
         <div id="header-region">

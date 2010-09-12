@@ -110,4 +110,11 @@
             <asp:Button ID="BtnDelete" OnClick="OnDelete_Click" OnClientClick="return confirm('Are you sure you want to delete this page?')" Text="Delete" runat="server" />
         </div>
     </div>
+
+    <script language="javascript" type="text/javascript">
+        function onPopupSave() {
+            var btnSave = dojo.byId('<% Response.Write(BtnSave.ClientID); %>');
+            btnSave.click();
+        }
+    </script>
 </asp:Content>
