@@ -90,7 +90,7 @@
         var container = dijit.byId('fulleditor');
 
         popup.style.width = (screen.width - 200) + "px";
-        popup.style.height = (screen.height - 300) + "px";
+        popup.style.height = (screen.height - 360) + "px";
 
         popup.value = inline.value;
 

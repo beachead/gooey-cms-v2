@@ -15,11 +15,11 @@ namespace Gooeycms.Business.Markup.Forms_v2
     {
         private static Regex Form = new Regex(@"<form\s*(.*?)>(.*?)</form>", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
         private static Regex FormTextField = new Regex(@"<textbox\s+(\w+)\s*/?>([*])?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static Regex FormTextBoxField = new Regex(@"<textarea\s+(\w+)\s*(\d+,\d+)?\s*/?>([*])?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex FormTextBoxField = new Regex(@"<textarea\s+(\w+)\s*(\d+\s*,\s*\d+)?\s*/?>([*])?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex FormSelectField = new Regex(@"\<select\s*(\w+)\s*>([*])?\s*(\#.*?)\<\s*/select\s*>", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex FormRadioField = new Regex(@"\<select\s*(\w+)\s*>([*])?\s*(\*.*?)\<\s*/select\s*>", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex FormCheckField = new Regex(@"<checkbox\s+(\w+)\s*/?>([*])?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static Regex SubmitButtonField = new Regex(@"<submit\s+(\w+)\s*(.*?)\s*/?>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex SubmitButtonField = new Regex(@"<submit\s+([\w|\s]+)\s*(onclick=.*?)?\s*/?>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private static Regex RedirectTo = new Regex(@"redirectto=""?(.*?)""?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex EmailTo = new Regex(@"emailto=""?(.*?)""?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -96,7 +96,7 @@ namespace Gooeycms.Business.Markup.Forms_v2
             String value = AntiXss.HtmlEncode(match.Groups[1].Value);
             String args = match.Groups[2].Value;
 
-            String textbox = String.Format(@"<input type=""submit"" id=""{0}"" name=""{0}"" {2} value=""{1}"" />", id, value, args);
+            String textbox = String.Format(@"<input type=""submit"" id=""{0}"" name=""{0}"" {2} value=""{1}"" />", id, value.Trim(), args.Trim());
 
             return textbox;
         }
