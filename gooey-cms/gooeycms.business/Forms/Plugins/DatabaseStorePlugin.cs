@@ -9,6 +9,8 @@ namespace Gooeycms.Business.Forms.Plugins
 {
     public class DatabaseStorePlugin : FormPlugin
     {
+        public const String FIELD_SEPARATOR = "\u001F";
+
         public override bool IsEnabled()
         {
             return true;
@@ -30,8 +32,8 @@ namespace Gooeycms.Business.Forms.Plugins
             {
                 if (base.IsValidField(key))
                 {
-                    keys.Append(key).Append("||");
-                    values.Append(base.GetField(key)).Append("||");
+                    keys.Append(key).Append(FIELD_SEPARATOR);
+                    values.Append(base.GetField(key)).Append(FIELD_SEPARATOR);
                 }
             }
 
