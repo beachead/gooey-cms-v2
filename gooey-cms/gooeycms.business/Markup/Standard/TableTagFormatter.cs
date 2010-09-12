@@ -23,7 +23,7 @@ namespace Beachead.Core.Markup.Standard
             }
         }
 
-        private static Regex Table = new Regex(@"<table (.*?)>(.*?)</table>", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex Table = new Regex(@"<table\s*(.*?)>(.*?)</table>", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex TableRowPattern = new Regex(@"(?:\s|\n)*----+\r?\n(.*?)\r?\n(?:\s|\n)*----+\r?\n", RegexOptions.Singleline | RegexOptions.Compiled);
         private static String DefaultAttributes = @"class=""webscript-table"" cellspacing=""0"" cellpadding=""0""";
 
@@ -50,7 +50,10 @@ namespace Beachead.Core.Markup.Standard
             }
             else
             {
-                html.AppendFormat("<table {0}>",args).AppendLine();
+                if (String.IsNullOrWhiteSpace(args))
+                    html.AppendLine("<table>");
+                else
+                    html.AppendFormat("<table {0}>",args).AppendLine();
                 foreach (TableRow row in rows)
                 {
                     html.Append("<tr>").AppendLine();
