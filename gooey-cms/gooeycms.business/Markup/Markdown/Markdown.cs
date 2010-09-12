@@ -710,10 +710,15 @@ namespace MarkdownSharp
         private string HtmlEvaluator(Match match)
         {
             string text = match.Groups[1].Value;
-            string key = GetHashKey(text);
-            _htmlBlocks[key] = text;
+            if (!text.Contains("div"))
+            {
+                string key = GetHashKey(text);
+                _htmlBlocks[key] = text;
 
-            return string.Concat("\n\n", key, "\n\n");
+                return string.Concat("\n\n", key, "\n\n");
+            }
+            else
+                return text;
         }
 
         private static string GetHashKey(string s)

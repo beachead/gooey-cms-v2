@@ -16,7 +16,7 @@
         Please wait while your preview is generated.
     </div>    
 
-    <div dojoType="dijit.Dialog" id="fulleditor" closeable="true" draggable="true" title="Pop-up Markup Editor">
+    <div dojoType="dijit.Dialog" id="fulleditor" style="width:90%;height:90%;" closeable="true" draggable="true" title="Pop-up Markup Editor">
         <div style="padding-bottom:7px;">
         <button onclick="savePopup();return false;">Apply &amp; Close</button>&nbsp;
         <input type="checkbox" id="chkwrap" name="chkwrap" onclick="popup_wrap();" /> wrap text 
@@ -25,7 +25,7 @@
     </div>
 
     <% if (ShowPreviewWindow) { %>
-    <div dojoType="dijit.Dialog" id="preview-panel"  title="Preview Window" closeable="true">
+    <div dojoType="dijit.Dialog" id="preview-panel" style="width:90%;height:90%;border:0px;"  title="Preview Window" closeable="true">
             <iframe id="preview-frame" src=""></iframe>
     </div>
     <div dojoType="dijit.TitlePane" title="Markup Editor">
