@@ -9,6 +9,14 @@ namespace Gooeycms.test
     {
         static void Main(string[] args)
         {
+            String test = "\u001FTESTING\u001FTESTING1\u001FTESTING2";
+            Console.WriteLine(test);
+
+            String[] items = test.Split('\u001F');
+            foreach (String item in items)
+                Console.WriteLine(item);
+            Console.ReadLine();
+            /*
             string test =
 @"
 #H1 Header  
@@ -77,6 +85,8 @@ This is a test{BR}
 
             File.WriteAllText("c:\\markup.txt",test + "\r\n----------------\r\n" + result);
             File.WriteAllText("c:\\markup.html", "<html><head></head><body>" + result + "</body></html>");
+        }
+        */
         }
     }
 }
