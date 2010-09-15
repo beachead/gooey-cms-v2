@@ -14,7 +14,6 @@
     <id name="Id" column="id" type="Int32" unsaved-value="0">
       <generator class="native" />
     </id>
-    <property column="subscription_type" name="SubscriptionTypeId" type="Int32" />
     <property column="subscription_plan" name="SubscriptionPlanId" type="Int32" />
     <property column="guid" name="Guid" type="String" />    
     <property column="signup_date" name="Created" type="DateTime" />

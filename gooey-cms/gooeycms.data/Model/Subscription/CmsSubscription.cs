@@ -8,7 +8,6 @@ namespace Gooeycms.Data.Model.Subscription
 {
     public class CmsSubscription : BasePersistedItem
     {
-        public virtual Int32 SubscriptionTypeId { get; set; }
         public virtual Int32 SubscriptionPlanId { get; set; }
         public virtual String Guid { get; set; }
         public virtual String PrimaryUserGuid { get; set; }
@@ -21,11 +20,11 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual Boolean IsSalesforceEnabled { get; set; }
         public virtual Boolean IsGenericOptionsEnabled { get; set; }
 
-        public virtual SubscriptionPlans SubscriptionType
+        public virtual SubscriptionPlans SubscriptionPlan
         {
             get 
             {
-                return (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), SubscriptionTypeId.ToString());
+                return (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), SubscriptionPlanId.ToString());
             }
         }
 
