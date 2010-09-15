@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.SecurityToken,gooeycms.data" table="Tokens">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="token" name="Token" type="String" />
+    <property column="issued" name="Issued" type="DateTime" />
+    <property column="expires" name="Expires" type="DateTime" />
+    <property column="uses" name="Uses" type="Int32" />
+    <property column="max_uses" name="MaxUses" type="Int32" />    
+  </class>
+</hibernate-mapping>

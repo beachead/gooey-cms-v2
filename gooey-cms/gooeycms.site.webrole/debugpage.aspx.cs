@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Gooeycms.Data.Model.Form;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Forms;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.webrole.sites
 {
@@ -14,23 +15,17 @@ namespace Gooeycms.webrole.sites
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Request.QueryString["t"] != null)
+            {
+                string token = Request.QueryString["t"];
+                if (!TokenManager.IsValid("cadams@prayer-warrior.net", token))
+                    throw new ApplicationException("The specified token: " + token + " is not valid/");
+            }
         }
 
         protected void BtnTest_Click(object sender, EventArgs e)
         {
-            CmsForm form = new CmsForm();
-            form.Guid = System.Guid.NewGuid().ToString();
-            form.SubscriptionId = CurrentSite.Guid.Value;
-            form.Email = "test@test.com";
-            form.IpAddress = "192.168.1.1";
-            form.RawCampaigns = "";
-            form.FormUrl = "/test.aspx";
-            form.Inserted = DateTime.Now;
-            form._FormKeys = "test||test1||";
-            form._FormValues = "test||test1||";
-
-            FormManager.Instance.Save(form);
+            this.Token.Text = Server.UrlEncode(TokenManager.Issue("cadams@prayer-warrior.net", TimeSpan.FromMinutes(2)));
         }
     }
 }

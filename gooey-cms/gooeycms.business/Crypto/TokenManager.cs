@@ -3,17 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gooeycms.Business.Util;
+using Gooeycms.Data.Model;
+using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Business.Crypto
 {
     public class TokenManager
     {
         private const String Salt = "thisismysaltforgooeycmstokens";
+        private const Int32 DefaultMaxUses = 1;
+
+        public static String Issue(String data, TimeSpan validFor, Int32 maxUses)
+        {
+            if (data.Length > 90)
+                throw new ArgumentException("The data for the token cannot be longer than 90 characters");
+
+            DateTime issued = DateTime.Now;
+            DateTime expires = issued.Add(validFor);
+
+            data = Guid.NewGuid().ToString() + "," + data + "," + expires.ToLongTimeString();
+            
+            TextEncryption crypto = new TextEncryption(GooeyConfigManager.TokenEncyrptionKey);
+            String result = crypto.Encrypt(data);
+
+            SecurityToken token = new SecurityToken();
+            token.Token = result;
+            token.Issued = issued;
+            token.Expires = expires;
+            token.Uses = 0;
+            token.MaxUses = maxUses;
+
+            SaveToDatabase(token);
+
+            return result;
+        }
+
         public static String Issue(String data, TimeSpan validFor)
         {
-            data = Salt + "," + data + "," + DateTime.Now.Add(validFor).ToLongTimeString();
-            TextEncryption crypto = new TextEncryption(GooeyConfigManager.TokenEncyrptionKey);
-            return crypto.Encrypt(data);
+            return Issue(data, validFor, DefaultMaxUses);
         }
 
         public static Boolean IsValid(String expectedData, String encryptedData)
@@ -36,7 +63,20 @@ namespace Gooeycms.Business.Crypto
                         DateTime dt = DateTime.Parse(timestamp);
                         if (dt > DateTime.Now)
                         {
-                            result = true;
+                            //check the database to make sure this token hasn't been used
+                            SecurityToken temp = GetFromDatabase(encryptedData);
+                            if (temp != null)
+                            {
+                                int uses = temp.Uses + 1;
+                                if (uses <= temp.MaxUses)
+                                {
+                                    //Update the use count in the database
+                                    temp.Uses = uses;
+                                    SaveToDatabase(temp);
+
+                                    result = true;
+                                }
+                            }
                         }
                     }
                 }
@@ -44,6 +84,22 @@ namespace Gooeycms.Business.Crypto
             catch (Exception) { }
 
             return result;
+        }
+
+        private static SecurityToken GetFromDatabase(String token)
+        {
+            SecurityTokenDao dao = new SecurityTokenDao();
+            return dao.FindByToken(token);
+        }
+
+        private static void SaveToDatabase(SecurityToken token)
+        {
+            SecurityTokenDao dao = new SecurityTokenDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<SecurityToken>(token);
+                tx.Commit();
+            }
         }
     }
 }
