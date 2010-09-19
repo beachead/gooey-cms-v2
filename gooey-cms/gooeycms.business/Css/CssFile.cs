@@ -2,6 +2,7 @@
 
 namespace Gooeycms.Business.Css
 {
+    [Serializable]
     public class CssFile 
     {
         public const String Separator = "-";

@@ -79,6 +79,8 @@
     <Compile Include="Model\SecurityToken.cs" />
     <Compile Include="Model\Site\CmsSitePath.cs" />
     <Compile Include="Model\Site\CmsSitePathDao.cs" />
+    <Compile Include="Model\Store\Package.cs" />
+    <Compile Include="Model\Store\PackageDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlan.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlanDao.cs" />
@@ -101,7 +103,9 @@
     <EmbeddedResource Include="Mappings\CmsContent.hbm.xml" />
     <EmbeddedResource Include="Mappings\CmsForms.hbm.xml" />
     <EmbeddedResource Include="Mappings\SecurityToken.hbm.xml" />
+    <EmbeddedResource Include="Mappings\StorePackage.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
+    <Content Include="sql-scripts\create-store-tables.sql.txt" />
     <Content Include="sql-scripts\create-token-table.sql.txt" />
     <Content Include="sql-scripts\create-content-tables.sql.txt" />
     <Content Include="sql-scripts\create-all-sql.txt" />

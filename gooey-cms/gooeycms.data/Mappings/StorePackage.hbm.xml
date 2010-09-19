@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Store.Package,gooeycms.data" table="Store_Packages">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="owner_subscription_id" name="OwnerSubscriptionId" type="String" />
+    <property column="package_type" name="PackageTypeString" type="String" />
+    <property column="package_guid" name="Guid" type="String" />
+    <property column="title" name="Title" type="String" />
+    <property column="features" name="Features" type="String" />
+    <property column="page_count" name="PageCount" type="Int32" />
+    <property column="category" name="Category" type="String" />
+    <property column="price" name="Price" type="Double" />
+    <property column="approved" name="IsApproved" type="Boolean" />
+    <property column="date_saved" name="Created" type="DateTime" />
+    <property column="date_approved" name="Approved" type="DateTime" />
+  </class>
+</hibernate-mapping>

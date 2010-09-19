@@ -3,7 +3,8 @@ using System.IO;
 
 namespace Gooeycms.Business.Storage
 {
-    public struct StorageFile
+    [Serializable]
+    public class StorageFile
     {
         public Uri Uri { get; set; }
         public String Filename { get; set; }

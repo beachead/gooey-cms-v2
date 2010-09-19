@@ -2,6 +2,7 @@
 using System.IO;
 using Gooeycms.Business.Storage;
 using Ionic.Zip;
+using System;
 
 namespace Gooeycms.Business.Compression
 {
@@ -9,6 +10,7 @@ namespace Gooeycms.Business.Compression
     {
         private byte[] compressedFile;
         private Stream zipstream = null;
+        private ZipFile zipfile = null;
 
         public ZipHandler(Stream zipstream)
         {

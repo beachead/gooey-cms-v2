@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gooeycms.Data.Model.Theme
 {
+    [Serializable]
     public class CmsTheme : BasePersistedItem
     {
         public virtual String SubscriptionGuid { get; set; }

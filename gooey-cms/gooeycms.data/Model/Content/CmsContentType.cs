@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gooeycms.Data.Model.Content
 {
+    [Serializable]
     public class CmsContentType : BasePersistedItem
     {
         public virtual String Guid { get; set; }

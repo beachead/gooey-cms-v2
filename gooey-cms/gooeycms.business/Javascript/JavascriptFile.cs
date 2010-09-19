@@ -2,6 +2,7 @@
 
 namespace Gooeycms.Business.Javascript
 {
+    [Serializable]
     public class JavascriptFile
     {
         public const String Separator = "-";

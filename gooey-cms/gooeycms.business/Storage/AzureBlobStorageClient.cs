@@ -193,6 +193,22 @@ namespace Gooeycms.Business.Storage
             return results;
         }
 
+        public void CopyDirectory(String sourceContainer, String sourceDirectory, String destinationContainer, String destinationDirectory)
+        {
+            CloudBlobContainer sourceBlobContainer = GetBlobContainer(sourceContainer);
+            CloudBlobContainer destinationBlobContainer = GetBlobContainer(destinationContainer);
+            
+            destinationBlobContainer.CreateIfNotExist();
+
+            IList<StorageFile> files = List(sourceContainer, sourceDirectory);
+            foreach (StorageFile file in files)
+            {
+                CloudBlob destination = GetCloudBlob(destinationBlobContainer, destinationDirectory, file.Filename);
+                CloudBlob source = GetCloudBlob(sourceBlobContainer, sourceDirectory, file.Filename);
+                destination.CopyFromBlob(source);
+            }
+        }
+
         private static string GetBlobFilename(CloudBlob blob)
         {
             return blob.Uri.ToString().Substring(blob.Uri.ToString().LastIndexOf("/") + 1);

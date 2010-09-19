@@ -164,6 +164,9 @@
     <Compile Include="Storage\IQueueMessageProcessor.cs" />
     <Compile Include="Storage\QueueManager.cs" />
     <Compile Include="Storage\QueueMessageWrapper.cs" />
+    <Compile Include="Store\ContentTypeField.cs" />
+    <Compile Include="Store\SitePackage.cs" />
+    <Compile Include="Store\SitePackageManager.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Membership\MembershipProfile.cs" />

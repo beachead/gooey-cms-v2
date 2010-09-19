@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gooeycms.Data.Model.Theme
 {
+    [Serializable]
     public class CmsTemplate : BasePersistedItem
     {
         public virtual CmsTheme Theme { get; set; }

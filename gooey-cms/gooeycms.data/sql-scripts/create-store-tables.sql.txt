@@ -1,0 +1,22 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Store_Packages]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Store_Packages];
+END
+
+CREATE TABLE [dbo].[Store_Packages](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[owner_subscription_id] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[package_type] VARCHAR(64),
+	[package_guid] VARCHAR(36),
+	[title] NVARCHAR(256),
+	[features] NTEXT,
+	[page_count] INT,
+	[category] VARCHAR(128),
+	[price] SMALLMONEY,
+	[approved] BIT,
+	[date_saved] DATETIME,
+	[date_approved] DATETIME
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE UNIQUE INDEX unq_package_guid ON [Store_Packages](package_guid);
+CREATE INDEX idx_package_type ON [Store_Packages](package_type);

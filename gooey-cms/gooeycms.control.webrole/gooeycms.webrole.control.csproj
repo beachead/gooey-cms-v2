@@ -82,6 +82,8 @@
     <Content Include="auth\Content\ContentTypes.aspx" />
     <Content Include="auth\Content\Default.aspx" />
     <Content Include="auth\Content\Edit.aspx" />
+    <Content Include="auth\Developer\Default.aspx" />
+    <Content Include="auth\Developer\Site.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
@@ -137,6 +139,20 @@
     </Compile>
     <Compile Include="auth\Content\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Developer\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Developer\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Developer\Site.aspx.cs">
+      <DependentUpon>Site.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Developer\Site.aspx.designer.cs">
+      <DependentUpon>Site.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Controls\Cache.aspx.cs">
       <DependentUpon>Cache.aspx</DependentUpon>

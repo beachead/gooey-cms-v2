@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gooeycms.Data.Model.Content
 {
+    [Serializable]
     public class CmsContentTypeField : BasePersistedItem
     {
         public const String Textbox = "textbox";

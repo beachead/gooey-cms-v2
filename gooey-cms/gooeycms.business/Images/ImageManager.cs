@@ -135,5 +135,32 @@ namespace Gooeycms.Business.Images
 
             return results;
         }
+
+        /// <summary>
+        /// Retrieves the full paths to the images
+        /// </summary>
+        /// <returns></returns>
+        public IList<StorageFile> GetImagesWithData(Data.Guid siteGuid, String folder)
+        {
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
+
+            IStorageClient client = StorageHelper.GetStorageClient();
+            IList<StorageFile> allimages = client.List(imageDirectory, folder);
+
+            IList<StorageFile> results = new List<StorageFile>();
+
+            //Filter out the thumbnails
+            foreach (StorageFile temp in allimages)
+            {
+                if (!temp.Filename.Contains("-thumb.jpg"))
+                {
+                    temp.Data = client.Open(imageDirectory, folder, temp.Filename);
+                    results.Add(temp);
+                }
+            }
+
+
+            return results;
+        }
     }
 }

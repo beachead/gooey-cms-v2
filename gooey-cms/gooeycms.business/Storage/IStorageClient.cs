@@ -18,6 +18,8 @@ namespace Gooeycms.Business.Storage
     {
         void Save(String containerName, String directoryName, String filename, byte[] data, Permissions permissions);
         void Save(String containerName, String directoryName, String filename, String contents, Permissions permissions);
+        
+        void CopyDirectory(String sourceContainer, String sourceDirectory, String destinationContainer, String destinationDirectory);
 
         void Delete(String containerName, String directoryName, String filename);
 
