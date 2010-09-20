@@ -15,8 +15,12 @@ CREATE TABLE [dbo].[Store_Packages](
 	[price] SMALLMONEY,
 	[approved] BIT,
 	[date_saved] DATETIME,
-	[date_approved] DATETIME
+	[date_approved] DATETIME,
+	[screenshots] NVARCHAR(4000),
 	PRIMARY KEY CLUSTERED([id]),
 );
 CREATE UNIQUE INDEX unq_package_guid ON [Store_Packages](package_guid);
 CREATE INDEX idx_package_type ON [Store_Packages](package_type);
+
+DELETE FROM Configurations where name = 'package.categories';
+INSERT INTO Configurations (name,value) VALUES ('package.categories','commercial');

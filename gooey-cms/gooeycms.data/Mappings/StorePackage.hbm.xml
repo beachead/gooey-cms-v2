@@ -15,5 +15,18 @@
     <property column="approved" name="IsApproved" type="Boolean" />
     <property column="date_saved" name="Created" type="DateTime" />
     <property column="date_approved" name="Approved" type="DateTime" />
+    <property column="screenshots" name="Screenshots" type="String" />
   </class>
+
+  <sql-query name="CmsPackageByUserId">
+    <return alias="package"
+            class="Gooeycms.Data.Model.Store.Package,gooeycms.data"/>
+    <![CDATA[  
+    select {package.*} from store_packages {package} where {package}.owner_subscription_id
+    in
+    (select s.guid from subscriptions s
+    join user_subscriptions us
+    on us.subscription_id = s.id where us.user_id = :userId);
+    ]]>
+  </sql-query>
 </hibernate-mapping>

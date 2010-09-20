@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gooeycms.Business.Util;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business.Cache
 {

@@ -9,6 +9,7 @@ using Gooeycms.Data.Model.Theme;
 using Microsoft.Security.Application;
 using Gooeycms.Business.Cache;
 using Gooeycms.Data.Model.Page;
+using Gooeycms.Extensions;
 using System.IO;
 
 namespace Gooeycms.Business.Javascript

@@ -12,6 +12,7 @@ using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Storage;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {

@@ -18,11 +18,6 @@ Input a title for this site: <br />
 </div>
 
 <div>
-Input how many pages does this site include by default: <br />
-<asp:TextBox ID="TxtPageCount" runat="server" />
-</div>
-
-<div>
 Input the price you would like to sell this site for: <br />
 <asp:TextBox ID="TxtPrice" runat="server" />
 </div>

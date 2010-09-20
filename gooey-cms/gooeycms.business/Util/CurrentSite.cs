@@ -7,6 +7,7 @@ using Gooeycms.Business.Themes;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Data.Model;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business.Util
 {
@@ -155,9 +156,9 @@ namespace Gooeycms.Business.Util
 
                 Boolean result = false;
                 //check if we're on the staging site
-                if (Extensions.EqualsCaseInsensitive(StagingDomain, domain))
+                if (Extensions.Extensions.EqualsCaseInsensitive(StagingDomain, domain))
                     result = true;
-                else if (Extensions.EqualsCaseInsensitive(ProductionDomain, domain))
+                else if (Extensions.Extensions.EqualsCaseInsensitive(ProductionDomain, domain))
                     result = false;
                 else if (LoggedInUser.IsLoggedIn)
                 {

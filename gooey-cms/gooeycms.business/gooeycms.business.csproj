@@ -198,7 +198,6 @@
     <Compile Include="Util\Serializer.cs" />
     <Compile Include="Util\SiteHelper.cs" />
     <Compile Include="Util\CurrentSite.cs" />
-    <Compile Include="Util\Extensions.cs" />
     <Compile Include="Web\CmsUrl.cs" />
     <Compile Include="Web\ControlHelper.cs" />
     <Compile Include="Web\Microsoft\GridViewHelper.cs" />

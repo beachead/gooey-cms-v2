@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Form;
+using Gooeycms.Constants;
 
 namespace Gooeycms.Business.Forms.Plugins
 {
     public class DatabaseStorePlugin : FormPlugin
     {
-        public const String FIELD_SEPARATOR = "\u001F";
+        public const char FIELD_SEPARATOR = TextConstants.DefaultSeparator;
 
         public override bool IsEnabled()
         {

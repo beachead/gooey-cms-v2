@@ -17,6 +17,7 @@ using Gooeycms.Business.Pages;
 using Gooeycms.Data.Model.Content;
 using Gooeycms.Business.Content;
 using Beachead.Persistence.Hibernate;
+using Gooeycms.Data.Model.Subscription;
 
 namespace Gooeycms.Business.Store
 {
@@ -26,6 +27,12 @@ namespace Gooeycms.Business.Store
         private SitePackageManager() { }
         public static SitePackageManager Instance { get { return SitePackageManager.instance; } }
 
+        public IList<Package> GetSitePackagesForUser(UserInfo user)
+        {
+            PackageDao dao = new PackageDao();
+            return dao.FindByUserId(user.Id);
+        }
+
         public Data.Guid CreatePackage(Data.Guid siteGuid, String title, String features, String category, Double salePrice)
         {
             PackageDao dao = new PackageDao();
@@ -34,6 +41,7 @@ namespace Gooeycms.Business.Store
             //Delete the existing package, before creating a new one
             if (package != null)
             {
+                //TODO Delete the existing package before creating a new one
             }
 
             String packageGuid = System.Guid.NewGuid().ToString();
@@ -172,11 +180,43 @@ namespace Gooeycms.Business.Store
 
         public void AddScreenshot(Data.Guid packageGuid, String filename, byte[] imagedata)
         {
+            Package package = GetPackage(packageGuid);
+            if (package != null)
+            {
+                String imageFilename = packageGuid + "-" + filename;
+
+                package.Screenshots = package.Screenshots + imageFilename + Package.ScreenshotSeparator;
+
+                IStorageClient client = StorageHelper.GetStorageClient();
+                client.Save("package-screenshots", package.PackageTypeString, imageFilename, imagedata, Permissions.Public);
+
+                PackageDao dao = new PackageDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Save<Package>(package);
+                    tx.Commit();
+                }
+            }
         }
 
         public Package GetPackage(Data.Guid packageGuid)
         {
-            throw new NotImplementedException();
+            PackageDao dao = new PackageDao();
+            return dao.FindByPackageGuid(packageGuid);
+        }
+
+        public IList<String> GetScreenshotUrls(Package package)
+        {
+            IStorageClient client = StorageHelper.GetStorageClient();
+            IList<String> results = new List<String>();
+
+            foreach (String screenshot in package.ScreenshotList)
+            {
+                StorageFile file = client.GetFile("package-screenshots", package.PackageTypeString, screenshot);
+                results.Add(file.Url);
+            }
+
+            return results;
         }
     }
 }

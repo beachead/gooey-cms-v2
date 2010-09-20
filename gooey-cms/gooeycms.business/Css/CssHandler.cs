@@ -5,6 +5,7 @@ using Gooeycms.Business.Handler;
 using Gooeycms.Business.Pages;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business.Css
 {

@@ -91,6 +91,13 @@
     <Compile Include="Signup.aspx.designer.cs">
       <DependentUpon>Signup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="store\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="store\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +365,7 @@
     <Content Include="Signup.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="store\Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -377,11 +385,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61386</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/gooeycms.webrole.ecommerce</IISUrl>
+          <IISUrl>http://store.gooeycms.net</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

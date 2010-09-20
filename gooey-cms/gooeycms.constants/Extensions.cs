@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Gooeycms.Business.Util
+namespace Gooeycms.Extensions
 {
     public static class Extensions
     {
@@ -23,6 +23,23 @@ namespace Gooeycms.Business.Util
                 return result;
             }
             return default(V);
+        }
+
+        public static IList<String> SplitAsList(this String item, char value)
+        {
+            IList<String> results = new List<String>();
+
+            if (item != null)
+            {
+                String[] items = item.Split(value);
+                foreach (String temp in items)
+                {
+                    if (!String.IsNullOrEmpty(temp))
+                        results.Add(temp);
+                }
+            }
+
+            return results;
         }
     }
 }

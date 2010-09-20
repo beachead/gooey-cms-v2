@@ -4,6 +4,7 @@ using Gooeycms.Data.Model;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using System.Collections.Generic;
 using Gooeycms.Business.Util;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business
 {
@@ -160,6 +161,20 @@ namespace Gooeycms.Business
                     result = "submit-email,downloadfile,gooeykeycheck,submit,campaign";
 
                 return result;
+            }
+        }
+
+        public static IList<String> StorePackageCategories
+        {
+            get
+            {
+                IList<String> categories = new List<String>();
+
+                String result = GetAsString(ConfigConstants.StorePackageCategories);
+                if (result != null)
+                    categories = result.SplitAsList(TextConstants.CommaSeparator);
+
+                return categories;
             }
         }
     }

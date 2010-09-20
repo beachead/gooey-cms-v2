@@ -94,9 +94,16 @@
     <Content Include="auth\Themes\ImageBrowser.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
+    <Content Include="css\store.css" />
     <Content Include="Global.asax" />
+    <Content Include="images\bg_theme_panel.png" />
+    <Content Include="images\bullet_features.gif" />
     <Content Include="images\logo_gooey-login.png" />
     <Content Include="images\logo_gooey_internal.png" />
+    <Content Include="scripts\global.js" />
+    <Content Include="scripts\jquery-1.4.2.min.js" />
+    <Content Include="scripts\jquery.cycle.all.min.js" />
+    <Content Include="scripts\store.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

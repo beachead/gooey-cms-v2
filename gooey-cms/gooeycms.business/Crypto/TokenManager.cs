@@ -5,6 +5,7 @@ using System.Text;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model;
 using Beachead.Persistence.Hibernate;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business.Crypto
 {
