@@ -218,5 +218,21 @@ namespace Gooeycms.Business.Store
 
             return results;
         }
+
+        public IList<Package> GetPackages(string packageType, int lastMaxPos)
+        {
+            PackageDao dao = new PackageDao();
+            IList<Package> packages = dao.FindByPackageType(packageType);
+
+            int end = (lastMaxPos + 8);
+            if (end > packages.Count)
+                end = packages.Count;
+
+            IList<Package> results = new List<Package>();
+            for (int i = lastMaxPos; i < end; i++)
+                results.Add(packages[i]);
+
+            return results;
+        }
     }
 }

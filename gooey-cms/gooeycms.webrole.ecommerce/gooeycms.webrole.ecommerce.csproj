@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Anthem">
+      <HintPath>..\..\lib\Anthem.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -103,18 +106,23 @@
   <ItemGroup>
     <Content Include="..\gooeycms.website.webrole\css\global.css">
       <Link>css\global.css</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\gooeycms.website.webrole\css\home.css">
       <Link>css\home.css</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\gooeycms.website.webrole\css\pricing.css">
       <Link>css\pricing.css</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\gooeycms.website.webrole\css\signup.css">
       <Link>css\signup.css</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\gooeycms.website.webrole\css\store.css">
       <Link>css\store.css</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\gooeycms.website.webrole\images\bg_body.jpg">
       <Link>images\bg_body.jpg</Link>

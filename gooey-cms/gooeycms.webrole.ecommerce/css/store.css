@@ -194,6 +194,12 @@ li.theme .purchase {
 	right: 10px;
 }
 
+li.theme .demo {
+	position: absolute;
+	bottom: 25px;
+	right: 140px;
+}
+
 
 /* 63px 68px; */
 
