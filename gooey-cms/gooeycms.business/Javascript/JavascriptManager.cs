@@ -85,8 +85,27 @@ namespace Gooeycms.Business.Javascript
             return List(theme.ThemeGuid);
         }
 
+        public void Save(Data.Guid siteGuid, CmsPage page, JavascriptFile file)
+        {
+            String key = page.UrlHash;
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.AddMetadata(GetEnabledKey(key), file.IsEnabled.StringValue());
 
-        private void Save(String key, string filename, byte[] data, Boolean enabledByDefault)
+            String directory = String.Format(SiteHelper.JavascriptDirectoryKey, siteGuid.Value);
+            client.Save(directory, key, file.FullName, Encoding.UTF8.GetBytes(file.Content), Permissions.Private);
+        }
+
+        public void Save(Data.Guid siteGuid, CmsTheme theme, JavascriptFile file)
+        {
+            String key = theme.ThemeGuid;
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.AddMetadata(GetEnabledKey(key), file.IsEnabled.StringValue());
+
+            String directory = String.Format(SiteHelper.JavascriptDirectoryKey,siteGuid.Value);
+            client.Save(directory, key, file.FullName, Encoding.UTF8.GetBytes(file.Content), Permissions.Private);
+        }
+
+        public void Save(String key, string filename, byte[] data, Boolean enabledByDefault)
         {
             CurrentSite.Cache.Clear("javascript-files-" + key);
             if (!filename.EndsWith(JavascriptFile.Extension))

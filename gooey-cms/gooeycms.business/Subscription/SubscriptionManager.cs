@@ -125,11 +125,27 @@ namespace Gooeycms.Business.Subscription
             return dao.FindByGuid(siteGuid);
         }
 
-        internal static CmsSubscription GetSubscriptionForDomain(string host)
+        public static CmsSubscription GetSubscriptionForDomain(string host)
         {
             String subdomain = host.ToLower().Replace(GooeyConfigManager.DefaultCmsDomain,"");
             CmsSubscriptionDao dao = new CmsSubscriptionDao();
             return dao.FindByDomains(subdomain, host);
+        }
+
+        public static void Create(MembershipUserWrapper wrapper, CmsSubscription subscription)
+        {
+            CmsSubscriptionDao dao = new CmsSubscriptionDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.SaveObject(subscription);
+                tx.Commit();
+            }
+
+            using (Transaction tx = new Transaction())
+            {
+                dao.AddUserToSubscription(wrapper.UserInfo.Id, subscription.Id);
+                tx.Commit();
+            }
         }
     }
 }

@@ -21,5 +21,11 @@ namespace Gooeycms.Data.Model.Site
             string hql = "select paths from CmsSitePath paths where paths.SubscriptionGuid = :guid and paths.IsDirectory = 1 order by paths.Parent, paths.Url";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsSitePath>();
         }
+
+        public System.Collections.Generic.IList<CmsSitePath> FindAllBySiteGuid(Guid siteGuid)
+        {
+            string hql = "select paths from CmsSitePath paths where paths.SubscriptionGuid = :guid order by depth asc, position asc";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsSitePath>();
+        }
     }
 }

@@ -18,11 +18,20 @@ using Gooeycms.Data.Model.Content;
 using Gooeycms.Business.Content;
 using Beachead.Persistence.Hibernate;
 using Gooeycms.Data.Model.Subscription;
+using Gooeycms.Business.Subscription;
+using Gooeycms.Constants;
+using Gooeycms.Business.Membership;
+using Gooeycms.Business.Web;
+using Gooeycms.Data.Model.Site;
 
 namespace Gooeycms.Business.Store
 {
     public class SitePackageManager
     {
+        public const String PackageContainer = "packaged-sites";
+        public const String PackageDirectory = "binary-data";
+        public const String PackageExtension = ".zip";
+
         private static SitePackageManager instance = new SitePackageManager();
         private SitePackageManager() { }
         public static SitePackageManager Instance { get { return SitePackageManager.instance; } }
@@ -50,12 +59,14 @@ namespace Gooeycms.Business.Store
             IList<SitePackageTheme> packageThemes = new List<SitePackageTheme>();
             IList<SitePackagePage> packagePages = new List<SitePackagePage>();
             IList<SiteContentType> packageContentTypes = new List<SiteContentType>();
+            IList<CmsSitePath> sitePaths = new List<CmsSitePath>();
 
             PackageThemes(siteGuid, packageThemes);
             PackagePages(siteGuid, packagePages);
             PackageContentTypes(siteGuid, packageContentTypes);
 
             sitepackage.Themes = packageThemes;
+            sitepackage.SiteMapPaths = CmsSiteMap.Instance.GetAllPaths(siteGuid);
             sitepackage.Pages = packagePages;
             sitepackage.ContentTypes = packageContentTypes;
 
@@ -76,7 +87,7 @@ namespace Gooeycms.Business.Store
             }
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.Save("packaged-sites", "binary-data", packageGuid + ".bin", data, Permissions.Private);
+            client.Save(PackageContainer,PackageDirectory, packageGuid + PackageExtension, data, Permissions.Private);
 
 
             //Save this package into the database
@@ -101,6 +112,7 @@ namespace Gooeycms.Business.Store
             return packageGuid;
         }
 
+
         private static void PackageContentTypes(Data.Guid siteGuid, IList<SiteContentType> packageContentTypes)
         {
             IList<CmsContentType> contentTypes = ContentManager.Instance.GetContentTypes(siteGuid);
@@ -121,6 +133,7 @@ namespace Gooeycms.Business.Store
             IList<CmsPage> pages = PageManager.Instance.Filter(siteGuid, null);
             foreach (CmsPage page in pages)
             {
+                PageManager.LoadPageData(page);
                 SitePackagePage packagePage = new SitePackagePage();
 
                 IList<JavascriptFile> jsFiles = JavascriptManager.Instance.List(page);
@@ -137,7 +150,7 @@ namespace Gooeycms.Business.Store
                     file.Content = temp.Content;
                 }
 
-                packagePage.Images = ImageManager.Instance.GetImagesWithData(siteGuid, page.Guid);
+                packagePage.Images = ImageManager.Instance.GetImagesWithData(siteGuid, StorageClientConst.RootFolder);
                 packagePage.Javascript = jsFiles;
                 packagePage.Css = cssFiles;
                 packagePage.Page = page;
@@ -233,6 +246,155 @@ namespace Gooeycms.Business.Store
                 results.Add(packages[i]);
 
             return results;
+        }
+
+        public void DeployDemoPackage(Data.Guid packageGuid)
+        {
+            PackageDao dao = new PackageDao();
+            Package package = dao.FindByPackageGuid(packageGuid);
+            if (package != null)
+            {
+                //Check if our demo account exists
+                MembershipUserWrapper wrapper = MembershipUtil.FindByUsername(MembershipUtil.DemoAccountUsername);
+                if (!wrapper.IsValid())
+                    wrapper = MembershipUtil.CreateDemoAccount();
+                
+
+                //Create a new subscription for the demo account
+                CmsSubscription subscription = new CmsSubscription();
+                subscription.Guid = package.Guid;
+                subscription.Created = DateTime.Now;
+                subscription.Subdomain = package.Guid + "-demo";
+                subscription.SubscriptionPlanId = (int)SubscriptionPlans.Demo;
+                subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
+                subscription.IsDemo = true;
+                subscription.Expires = DateTime.MaxValue;
+                SubscriptionManager.Create(wrapper, subscription);
+
+                //Deploy the package into the demo site
+                IStorageClient client = StorageHelper.GetStorageClient();
+                byte [] zipped = client.Open(PackageContainer, PackageDirectory, package.Guid + PackageExtension);
+
+                Compression.ZipHandler zip = new Compression.ZipHandler(zipped);
+                byte [] serialized = zip.Decompress()[0].Data;
+
+                SitePackage sitepackage = Serializer.ToObject<SitePackage>(serialized);
+
+                Data.Guid guid = Data.Guid.New(subscription.Guid);
+
+                DeployThemes(sitepackage, guid);
+                DeployPages(sitepackage, guid);
+                DeployContentTypes(sitepackage, guid);
+            }
+        }
+
+        private static void DeployContentTypes(SitePackage sitepackage, Data.Guid guid)
+        {
+            foreach (SiteContentType ct in sitepackage.ContentTypes)
+            {
+                CmsContentType type = ct.ContentType;
+                type.Id = 0;
+                type.Guid = null;
+
+                ContentManager.Instance.AddContentType(guid, type);
+
+                foreach (CmsContentTypeField field in ct.Fields)
+                {
+                    field.Id = 0;
+                    field.Parent = null;
+
+                    ContentManager.Instance.AddContentTypeField(type, field);
+                }
+            }
+        }
+
+        private static void DeployPages(SitePackage sitepackage, Data.Guid guid)
+        {
+            //Deploy the sitemap
+            foreach (CmsSitePath path in sitepackage.SiteMapPaths)
+            {
+                path.Id = 0;
+                path.SubscriptionGuid = guid.Value;
+
+                CmsSiteMap.Instance.Save(path);
+            }
+
+            //Deploy the pages into the site
+            foreach (SitePackagePage pageWrapper in sitepackage.Pages)
+            {
+                CmsPage page = pageWrapper.Page;
+
+                page.Id = 0;
+                page.SubscriptionId = guid.Value;
+                page.IsApproved = false;
+                page.Guid = System.Guid.NewGuid().ToString();
+                PageManager.Instance.Save(page);
+
+                //Save the javascript files for this theme
+                foreach (JavascriptFile js in pageWrapper.Javascript)
+                {
+                    JavascriptManager.Instance.Save(guid, page, js);
+                }
+
+                //Save the css files for this theme
+                foreach (CssFile css in pageWrapper.Css)
+                {
+                    CssManager.Instance.Save(guid, page, css);
+                }
+
+                //Save all the images for this theme
+                foreach (StorageFile file in pageWrapper.Images)
+                {
+                    ImageManager.Instance.AddImage(guid, StorageClientConst.RootFolder, file.Filename, file.ContentType, file.Data);
+                }
+            }
+        }
+
+        private static void DeployThemes(SitePackage sitepackage, Data.Guid guid)
+        {
+            //Deploy the themes into the site
+            foreach (SitePackageTheme themeWrapper in sitepackage.Themes)
+            {
+                CmsTheme theme = themeWrapper.Theme;
+
+                Boolean isEnabled = theme.IsEnabled;
+                theme = ThemeManager.Instance.Add(guid, theme.Name, theme.Description);
+
+                theme.IsEnabled = isEnabled;
+                ThemeManager.Instance.Save(theme);
+
+                //Save all of the templates for this theme
+                foreach (CmsTemplate template in themeWrapper.Templates)
+                {
+                    CmsTemplate newTemplate = new CmsTemplate();
+                    newTemplate.IsGlobalTemplateType = template.IsGlobalTemplateType;
+                    newTemplate.Name = template.Name;
+                    newTemplate.SubscriptionGuid = guid.Value;
+                    newTemplate.Theme = theme;
+                    newTemplate.Content = template.Content;
+                    newTemplate.LastSaved = template.LastSaved;
+
+                    TemplateManager.Instance.Save(newTemplate);
+                }
+
+                //Save the javascript files for this theme
+                foreach (JavascriptFile js in themeWrapper.Javascript)
+                {
+                    JavascriptManager.Instance.Save(guid, theme, js);
+                }
+
+                //Save the css files for this theme
+                foreach (CssFile css in themeWrapper.Css)
+                {
+                    CssManager.Instance.Save(guid, theme, css);
+                }
+
+                //Save all the images for this theme
+                foreach (StorageFile file in themeWrapper.Images)
+                {
+                    ImageManager.Instance.AddImage(guid, theme.ThemeGuid, file.Filename, file.ContentType, file.Data);
+                }
+            }
         }
     }
 }

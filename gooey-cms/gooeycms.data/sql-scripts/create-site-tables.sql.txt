@@ -7,7 +7,7 @@ END
 
 CREATE TABLE [dbo].[SiteConfiguration](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[site_guid] VARCHAR(36),
 	[name] VARCHAR(32),
 	[value] NVARCHAR(4000)
 	PRIMARY KEY CLUSTERED([id]),

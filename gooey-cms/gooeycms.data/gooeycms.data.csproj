@@ -105,10 +105,10 @@
     <EmbeddedResource Include="Mappings\SecurityToken.hbm.xml" />
     <EmbeddedResource Include="Mappings\StorePackage.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
+    <Content Include="sql-scripts\add-foreign-keys.sql.txt" />
     <Content Include="sql-scripts\create-store-tables.sql.txt" />
     <Content Include="sql-scripts\create-token-table.sql.txt" />
     <Content Include="sql-scripts\create-content-tables.sql.txt" />
-    <Content Include="sql-scripts\create-all-sql.txt" />
     <Content Include="sql-scripts\create-forms.sql.txt" />
     <Content Include="sql-scripts\create-help-tables.sql.txt" />
     <Content Include="sql-scripts\create-logins.sql.txt" />

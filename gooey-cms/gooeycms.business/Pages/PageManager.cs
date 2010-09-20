@@ -133,7 +133,7 @@ namespace Gooeycms.Business.Pages
             return result;
         }
 
-        private static void LoadPageData(CmsPage result)
+        public static void LoadPageData(CmsPage result)
         {
             if (result != null)
             {
@@ -152,17 +152,10 @@ namespace Gooeycms.Business.Pages
         {
             CmsPageDao dao = new CmsPageDao();
             CmsSitePath path =  null;
-            IStorageClient client = StorageHelper.GetStorageClient();
             try
             {
                 path = CmsSiteMap.Instance.AddNewPage(Data.Guid.New(page.SubscriptionId),parent, pageName);
-
-                using (Transaction tx = new Transaction())
-                {
-                    dao.Save<CmsPage>(page);
-                    tx.Commit();
-                }
-                client.Save(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey,page.SubscriptionId), StorageClientConst.RootFolder, page.Guid, page.Content, Permissions.Private);
+                Save(page);
             }
             catch (Exception ex)
             {
@@ -288,6 +281,19 @@ namespace Gooeycms.Business.Pages
 
             QueueManager queue = new QueueManager(QueueNames.PageActionQueue);
             queue.Put<PageTaskMessage>(message, TimeSpan.FromMinutes(60));
+        }
+
+        public void Save(CmsPage page)
+        {
+            CmsPageDao dao = new CmsPageDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<CmsPage>(page);
+                tx.Commit();
+            }
+
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.Save(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId), StorageClientConst.RootFolder, page.Guid, page.Content, Permissions.Private);
         }
     }
 }

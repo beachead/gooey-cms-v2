@@ -20,6 +20,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             if (!Page.IsPostBack)
             {
                 LoadAvailableSites();
+                Anthem.Manager.Register(this);
             }
         }
 
@@ -51,7 +52,13 @@ namespace Gooeycms.Webrole.Control.auth.Developer
                                             this.LstCategory.SelectedValue,
                                             Double.Parse(this.TxtPrice.Text));
 
-            Response.Redirect("./Screenshots.aspx?g=" + result.Value, true);
+            this.SavedPackageGuid.Value = result.Value;
+        }
+
+        [Anthem.Method]
+        public void DoDeploySite(String packageGuid)
+        {
+            SitePackageManager.Instance.DeployDemoPackage(packageGuid);
         }
     }
 }

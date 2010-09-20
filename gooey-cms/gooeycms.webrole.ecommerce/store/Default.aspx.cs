@@ -43,7 +43,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
-                Label approvalStatus = (Label)item.FindControl("LblApprovalStatus");
+                HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
 
                 IList<String> thumbnailsrc = SitePackageManager.Instance.GetScreenshotUrls(package);
 
@@ -52,6 +52,8 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
                 features.DataSource = package.FeatureList;
                 features.DataBind();
+
+                demolink.NavigateUrl = "http://demo-guid.gooeycms.net";
             }
         }
     }

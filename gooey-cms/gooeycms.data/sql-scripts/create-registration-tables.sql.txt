@@ -42,7 +42,6 @@ PRIMARY KEY CLUSTERED([id]),
 
 CREATE TABLE [Subscriptions] (
 [id] INT IDENTITY(1,1) NOT NULL,
-[subscription_type] INT NOT NULL,
 [subscription_plan] INT NOT NULL,
 [guid] VARCHAR(36) NOT NULL,
 [primary_user_guid] VARCHAR(36) NOT NULL,
@@ -54,12 +53,13 @@ CREATE TABLE [Subscriptions] (
 [disabled] BIT DEFAULT(0),
 [salesforce_addon] BIT DEFAULT(0),
 [generic_addon] BIT DEFAULT(0),
+[is_demo] BIT DEFAULT(0),
 PRIMARY KEY CLUSTERED([id]),
 );
 CREATE UNIQUE INDEX uq_subscriptions_guid ON [Subscriptions](guid);
 CREATE UNIQUE INDEX uq_subscriptions_subdomain ON [Subscriptions](subdomain);
-CREATE UNIQUE INDEX uq_subscriptions_customdomain ON [Subscriptions](custom_domain);
-CREATE UNIQUE INDEX uq_subscriptions_stagingdomain ON [Subscriptions](staging_domain);
+CREATE INDEX uq_subscriptions_customdomain ON [Subscriptions](custom_domain);
+CREATE INDEX uq_subscriptions_stagingdomain ON [Subscriptions](staging_domain);
 
 CREATE TABLE [Users] (
 [id] INT IDENTITY(1,1) NOT NULL,

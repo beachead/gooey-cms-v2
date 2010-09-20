@@ -28,7 +28,7 @@ CREATE TABLE [dbo].[Content_Types](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[guid] [varchar](36) NOT NULL,
 	[is_global] [bit] NOT NULL DEFAULT(0),
-	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[site_guid] VARCHAR(36),
 	[name] [varchar](50) NOT NULL,
 	[description] [varchar](256) NULL,
 	[is_file] [bit] NULL,
@@ -54,7 +54,7 @@ CREATE TABLE [dbo].[ContentType_Fields](
 
 CREATE TABLE [dbo].[Content](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[site_guid] [varchar](36) REFERENCES Subscriptions(guid),
+	[site_guid] [varchar](36),
 	[guid] [varchar](36) NOT NULL,
 	[content_type_id] [int] NULL,
 	[culture] [varchar](10) NULL,

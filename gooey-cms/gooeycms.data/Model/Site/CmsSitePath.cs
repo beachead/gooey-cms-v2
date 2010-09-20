@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Gooeycms.Data.Model.Site
 {
+    [Serializable]
     public class CmsSitePath : BasePersistedItem
     {
         public virtual String SubscriptionGuid { get; set; }

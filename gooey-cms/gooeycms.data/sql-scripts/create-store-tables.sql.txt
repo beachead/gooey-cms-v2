@@ -5,7 +5,7 @@ END
 
 CREATE TABLE [dbo].[Store_Packages](
 	[id] INT IDENTITY(1,1) NOT NULL,
-	[owner_subscription_id] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[owner_subscription_id] VARCHAR(36),
 	[package_type] VARCHAR(64),
 	[package_guid] VARCHAR(36),
 	[title] NVARCHAR(256),

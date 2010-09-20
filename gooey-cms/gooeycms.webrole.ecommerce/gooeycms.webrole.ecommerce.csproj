@@ -104,26 +104,6 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\gooeycms.website.webrole\css\global.css">
-      <Link>css\global.css</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\gooeycms.website.webrole\css\home.css">
-      <Link>css\home.css</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\gooeycms.website.webrole\css\pricing.css">
-      <Link>css\pricing.css</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\gooeycms.website.webrole\css\signup.css">
-      <Link>css\signup.css</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\gooeycms.website.webrole\css\store.css">
-      <Link>css\store.css</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\gooeycms.website.webrole\images\bg_body.jpg">
       <Link>images\bg_body.jpg</Link>
     </Content>
@@ -325,19 +305,12 @@
     <Content Include="..\gooeycms.website.webrole\images\___site_004.jpg">
       <Link>images\___site_004.jpg</Link>
     </Content>
-    <Content Include="..\gooeycms.website.webrole\js\global.js">
-      <Link>js\global.js</Link>
-    </Content>
-    <Content Include="..\gooeycms.website.webrole\js\jquery-1.4.2.min.js">
-      <Link>js\jquery-1.4.2.min.js</Link>
-    </Content>
-    <Content Include="..\gooeycms.website.webrole\js\jquery.cycle.all.min.js">
-      <Link>js\jquery.cycle.all.min.js</Link>
-    </Content>
-    <Content Include="..\gooeycms.website.webrole\js\store.js">
-      <Link>js\store.js</Link>
-    </Content>
     <Content Include="Cleanup.aspx" />
+    <Content Include="css\global.css" />
+    <Content Include="css\home.css" />
+    <Content Include="css\pricing.css" />
+    <Content Include="css\signup.css" />
+    <Content Include="css\store.css" />
     <Content Include="images\home\bg_features.png" />
     <Content Include="images\home\h2_built_for_speed.png" />
     <Content Include="images\home\h2_over_200_features.png" />
@@ -369,6 +342,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ContentPage.Master" />
+    <Content Include="js\global.js" />
+    <Content Include="js\jquery-1.4.2.min.js" />
+    <Content Include="js\jquery.cycle.all.min.js" />
+    <Content Include="js\store.js" />
     <Content Include="Signup-Review.aspx" />
     <Content Include="Signup.aspx" />
   </ItemGroup>

@@ -226,5 +226,21 @@ namespace Gooeycms.Business.Web
             //Regex pattern = new Regex("^(ht|f)tp(s?)\\:\\/\\/[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*(:(0-9)*)*(\\/?)([a-zA-Z0-9\\-\\.\\?\\,\\'\\/\\\\+&amp;%\$#_]*)?$",RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         }
+
+        public IList<CmsSitePath> GetAllPaths(Data.Guid siteGuid)
+        {
+            CmsSitePathDao dao = new CmsSitePathDao();
+            return dao.FindAllBySiteGuid(siteGuid);
+        }
+
+        public void Save(CmsSitePath path)
+        {
+            CmsSitePathDao dao = new CmsSitePathDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<CmsSitePath>(path);
+                tx.Commit();
+            }
+        }
     }
 }

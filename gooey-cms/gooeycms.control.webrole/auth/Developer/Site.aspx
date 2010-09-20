@@ -34,7 +34,10 @@ Choose a category for this site: <br />
 
 <div>
 <asp:Button ID="BtnSave_Noajax" Text="Package (noajax)" OnClick="BtnSave_Click" runat="server" />
-<anthem:Button ID="BtnSave" Text="Package" OnClick="BtnSave_Click" PreCallBackFunction="ajax_presave"  runat="server" />
+<button onclick="deploy_site">Deploy Site</button>
+
+<anthem:Button ID="BtnSave" Text="Package" OnClick="BtnSave_Click" PreCallBackFunction="ajax_presave" PostCallBackFunction="deploy_site"  runat="server" />
+<anthem:HiddenField ID="SavedPackageGuid" AutoUpdateAfterCallBack="true" runat="server" />
 </div>
 
 <div dojoType="dijit.Dialog" id="processing" title="Packaging Site..." style="display:none;" closable="false" draggable="false">
@@ -51,10 +54,40 @@ Choose a category for this site: <br />
     </table>
 </div>
 
+<div dojoType="dijit.Dialog" id="deploy-processing" title="Deploying Demo Site..." style="display:none;" closable="false" draggable="false">
+    <table>
+        <tr>
+            <td>
+                Please be patient while we create and deploy your demo site to GooeyCMS. <br /><br />
+                (This may take a few minutes. Do <b>NOT</b> refresh or leave this page)
+            </td>
+            <td>
+              <img id="Img2" alt="Spinner" src="~/images/spinner.gif" runat="server" />
+            </td>
+        </tr>
+    </table>
+</div>
+
 <script language="javascript" type="text/javascript">
     function ajax_presave() {
         var div = dijit.byId('processing');
         div.show();
+    }
+
+    function deploy_site() {
+        var old = dijit.byId('processing');
+        old.hide();
+
+        var div = dijit.byId('deploy-processing');
+        div.show();
+
+        Anthem_InvokePageMethod(
+            'DoDeploySite',
+            [document.getElementById('<%= SavedPackageGuid.ClientID %>').value],
+            function (result) {
+                alert('Your site was successfully packaged and deployed.');
+                window.location = './default.aspx';
+            }); 
     }
 </script>
 

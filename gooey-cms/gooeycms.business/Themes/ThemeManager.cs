@@ -89,7 +89,7 @@ namespace Gooeycms.Business.Themes
         public CmsTheme Add(Data.Guid guid, String name, String description)
         {
             //Make sure this theme doesn't exist
-            CmsTheme theme = this.GetByName(name);
+            CmsTheme theme = this.GetByName(guid,name);
             if (theme != null)
                 throw new ArgumentException("This theme name is already in use and may not be used again.");
 

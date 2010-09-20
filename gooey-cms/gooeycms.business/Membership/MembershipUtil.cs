@@ -18,6 +18,9 @@ namespace Gooeycms.Business.Membership
     /// </summary>
     public static class MembershipUtil
     {
+        public const String DemoAccountUsername = "demos@gooeycms.net";
+        public const String DemoAccountPassword = "gooeycms135!";
+
         public static MembershipUserWrapper CreateFromRegistration(Registration registration)
         {
             UserInfo info = new UserInfo();
@@ -100,6 +103,39 @@ namespace Gooeycms.Business.Membership
             IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
 
             SiteHelper.SetActiveSiteCookie(subscriptions);
+        }
+
+        public static MembershipUserWrapper CreateDemoAccount()
+        {
+            UserInfo info = new UserInfo();
+            info.Username = DemoAccountUsername;
+            info.Email = DemoAccountUsername;
+            info.Firstname = "GooeyCMS Demo";
+            info.Lastname = "Account";
+            info.Company = "GooeyCMS";
+            info.Address1 = "135 Gooey Ave";
+            info.Address2 = null;
+            info.City = "New York";
+            info.State = "NY";
+            info.Zipcode = "10114";
+            info.Guid = System.Guid.NewGuid().ToString();
+            info.Created = DateTime.Now;
+
+            UserInfoDao dao = new UserInfoDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.SaveObject(info);
+                tx.Commit();
+            }
+
+            MembershipUser user = System.Web.Security.Membership.CreateUser(DemoAccountUsername, DemoAccountPassword, DemoAccountUsername);
+            System.Web.Security.Roles.AddUserToRole(DemoAccountUsername, SecurityConstants.DOMAIN_ADMIN);
+
+            MembershipUserWrapper wrapper = new MembershipUserWrapper();
+            wrapper.MembershipUser = user;
+            wrapper.UserInfo = info;
+
+            return wrapper;
         }
     }
 }

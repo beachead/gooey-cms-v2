@@ -14,7 +14,7 @@ END
 
 CREATE TABLE Themes_Site (
 	[id] INT IDENTITY(1,1) NOT NULL,
-	[site_guid] VARCHAR(36) REFERENCES Subscriptions([guid]),
+	[site_guid] VARCHAR(36),
 	[guid] VARCHAR(36) NOT NULL,
 	[name] VARCHAR(100) NOT NULL,
 	[description] VARCHAR(255),

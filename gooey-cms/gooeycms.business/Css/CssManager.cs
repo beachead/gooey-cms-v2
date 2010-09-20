@@ -84,6 +84,26 @@ namespace Gooeycms.Business.Css
             return List(theme.ThemeGuid);
         }
 
+        public void Save(Data.Guid siteGuid, CmsPage page, CssFile file)
+        {
+            String key = page.UrlHash;
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.AddMetadata(GetEnabledKey(key), file.IsEnabled.StringValue());
+
+            String directory = String.Format(SiteHelper.StylesheetDirectoryKey, siteGuid.Value);
+            client.Save(directory, key, file.FullName, Encoding.UTF8.GetBytes(file.Content), Permissions.Private);
+        }
+
+        public void Save(Data.Guid siteGuid, CmsTheme theme, CssFile file)
+        {
+            String key = theme.ThemeGuid;
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.AddMetadata(GetEnabledKey(key), file.IsEnabled.StringValue());
+
+            String directory = String.Format(SiteHelper.StylesheetDirectoryKey, siteGuid.Value);
+            client.Save(directory, key, file.FullName, Encoding.UTF8.GetBytes(file.Content), Permissions.Private);
+        }
+
         private void Save(String key, string filename, byte[] data, Boolean enabledByDefault)
         {
             CurrentSite.Cache.Clear("css-files-" + key);
@@ -103,8 +123,8 @@ namespace Gooeycms.Business.Css
             IStorageClient client = StorageHelper.GetStorageClient();
             client.AddMetadata(GetEnabledKey(key), enabled);
 
-            String directory = CurrentSite.StylesheetStorageContainer;
-            client.Save(directory, key, filename, data, Permissions.Private);
+            String container = CurrentSite.StylesheetStorageContainer;
+            client.Save(container, key, filename, data, Permissions.Private);
 
             if (enabledByDefault)
                 SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);

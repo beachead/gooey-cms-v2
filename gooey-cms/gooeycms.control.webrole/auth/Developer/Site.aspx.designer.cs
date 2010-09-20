@@ -76,6 +76,15 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
         protected global::Anthem.Button BtnSave;
         
         /// <summary>
+        /// SavedPackageGuid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Anthem.HiddenField SavedPackageGuid;
+        
+        /// <summary>
         /// Img1 control.
         /// </summary>
         /// <remarks>
@@ -83,5 +92,14 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
+        
+        /// <summary>
+        /// Img2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage Img2;
     }
 }

@@ -15,7 +15,7 @@ END
 
 CREATE TABLE [dbo].[SiteMap](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[site_guid] VARCHAR(36),
 	[url_hash] VARCHAR(64) NOT NULL,
 	[url] [varchar](4096) NOT NULL,
 	[parent] [varchar](255) NULL,
@@ -35,7 +35,7 @@ CREATE UNIQUE INDEX unq_sitemap_guid_url ON [SiteMap]([site_guid],[url_hash]);
 CREATE TABLE Pages (
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[guid] VARCHAR(36) NOT NULL,
-	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[site_guid] VARCHAR(36),
 	[culture] [varchar](10) NULL,
 	[date_saved] [datetime] NULL,
 	[author] [varchar](128) NULL,

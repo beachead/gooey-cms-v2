@@ -6,7 +6,7 @@ END
 CREATE TABLE [dbo].[Form](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[guid] VARCHAR(36),
-	[site_guid] VARCHAR(36) REFERENCES Subscriptions(guid),
+	[site_guid] VARCHAR(36),
 	[inserted] DATETIME,
 	[form_url] VARCHAR(1024),
 	[ipaddress] VARCHAR(255),

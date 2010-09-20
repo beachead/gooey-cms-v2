@@ -1,0 +1,11 @@
+﻿ALTER TABLE Content ADD CONSTRAINT fk_content_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Content_types ADD CONSTRAINT fk_contenttype_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Form ADD CONSTRAINT fk_form_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Pages ADD CONSTRAINT fk_pages_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE SiteConfiguration ADD CONSTRAINT fk_siteconfig_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE SiteMap ADD CONSTRAINT fk_sitemap_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Store_Packages ADD CONSTRAINT fk_storepackage_subscription_guid FOREIGN KEY(owner_subscription_id) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Themes_Site ADD CONSTRAINT fk_themessite_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Themes_Site_Templates ADD CONSTRAINT fk_themessitetemplate_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE User_Subscriptions ADD CONSTRAINT fk_usersubscription_subscription_guid FOREIGN KEY(subscription_id) REFERENCES Subscriptions(id) ON DELETE CASCADE;
+ALTER TABLE User_Subscriptions ADD CONSTRAINT fk_usersubscriptionuser_id FOREIGN KEY(user_id) REFERENCES Users(id) ON DELETE CASCADE;

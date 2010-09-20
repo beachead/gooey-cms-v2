@@ -8,6 +8,7 @@ using Gooeycms.Business.Javascript;
 using Gooeycms.Business.Css;
 using Gooeycms.Business.Storage;
 using Gooeycms.Data.Model.Content;
+using Gooeycms.Data.Model.Site;
 
 namespace Gooeycms.Business.Store
 {
@@ -43,5 +44,6 @@ namespace Gooeycms.Business.Store
         public IList<SitePackageTheme> Themes { get; set; }
         public IList<SitePackagePage> Pages { get; set; }
         public IList<SiteContentType> ContentTypes { get; set; }
+        public IList<CmsSitePath> SiteMapPaths { get; set; }
     }
 }

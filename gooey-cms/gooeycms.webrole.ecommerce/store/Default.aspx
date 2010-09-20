@@ -46,7 +46,7 @@
 				        </ul>
 				        <ul class="thumb-nav"></ul>
 				        <a class="purchase"><img src="../images/btn_purchase.png" width="137" height="39" alt="" /></a>
-				        <a class="demo" href="http://demo-guid.gooeycms.net"><img src="../images/btn_purchase.png" width="137" height="39" alt="View Demo" tooltip="View Demo"  /></a>
+				        <asp:HyperLink ID="DemoLink" CssClass="demo" runat="server"><img src="../images/btn_purchase.png" width="137" height="39" alt="View Demo" tooltip="View Demo"  /></asp:HyperLink>
 				        <ul class="features">
                                 <asp:Repeater ID="FeatureList" runat="server">
                                     <ItemTemplate>
