@@ -36,21 +36,22 @@
                 <tr>
                     <td style="font-weight:bold;">Purchaser:</td>
                     <td><asp:Label ID="LblPurchaser" runat="server" /></td>
+                    <td rowspan="2">
+                        <input type="hidden" name="cmd" value="_xclick">
+                        <input type="hidden" name="business" value="seller_1272749312_biz@gmail.com" />
+                        <input type="hidden" name="amount" value="<%= Amount %>" />
+                        <input type="hidden" name="item_name" value="<%= PackageTitle %>" />
+                        <input type="hidden" name="item_number" value="<%= PackageGuid %>" />
+                        <input type="hidden" name="custom" value="<%= PackageGuid %>" />
+                        <input type="hidden" name="return" value="<%= ReturnUrl %>" />
+                        <asp:ImageButton ID="BtnPaypalPurchase" ImageUrl="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" PostBackUrl="https://www.sandbox.paypal.com/cgi-bin/webscr" runat="server" />                                        
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Total Price:</b></td>
+                    <td><asp:Label ID="LblPrice" runat="server" /></td>
                 </tr>
             </table>
-        </div>
-        <div style="padding-left:25px;">
-            <b>Total Price:</b> <asp:Label ID="LblPrice" runat="server" />&nbsp;
-            <asp:Panel ID="PaypayPanel" Visible="true" runat="server">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="seller_1272749312_biz@gmail.com" />
-                <input type="hidden" name="amount" value="<%= Amount %>" />
-                <input type="hidden" name="item_name" value="<%= PackageTitle %>" />
-                <input type="hidden" name="item_number" value="<%= PackageGuid %>" />
-                <input type="hidden" name="custom" value="<%= PackageGuid %>" />
-                <input type="hidden" name="return" value="<%= ReturnUrl %>" />
-                <asp:ImageButton ID="ImageButton1" ImageUrl="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" PostBackUrl="https://www.sandbox.paypal.com/cgi-bin/webscr" runat="server" />                    
-            </asp:Panel> 
         </div>
     </div>
 </asp:Content>

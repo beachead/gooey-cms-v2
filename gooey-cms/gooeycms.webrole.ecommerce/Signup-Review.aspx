@@ -45,7 +45,7 @@
                             <input type="hidden" name="sra" value="1" />
                             <input type="hidden" name="custom" value="<%= Guid %>" />
                             <input type="hidden" name="return" value="<%=ReturnUrl %>" />
-                            <asp:ImageButton ID="ImageButton1" ImageUrl="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" PostBackUrl="https://www.sandbox.paypal.com/cgi-bin/webscr" runat="server" />                    
+                            <asp:ImageButton ID="BtnPaypalPurchase" ImageUrl="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" PostBackUrl="https://www.sandbox.paypal.com/cgi-bin/webscr" runat="server" />                    
                         </asp:Panel>                        
                         <asp:Panel ID="FreePanel" Visible="false" runat="server">
                             <asp:ImageButton ID="BtnSubscribe" ImageUrl="images/btn_create_acct.png" OnClick="BtnSubscribe_Click" runat="server" />

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
 using Gooeycms.Business.Membership;
+using Gooeycms.Business;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -19,6 +20,9 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!LoggedInUser.IsLoggedIn)
+                Response.Redirect("./Purchase.aspx?g=" + Request.QueryString["g"], true);
+
             if (!Page.IsPostBack)
                 DoDataBind();
         }
@@ -40,6 +44,10 @@ namespace Gooeycms.Webrole.Ecommerce.store
             PackageTitle = package.Title;
             PackageGuid = package.Guid;
             ReturnUrl = "http://store.gooeycms.net/store/complete.aspx";
+
+            BtnPaypalPurchase.PostBackUrl = GooeyConfigManager.PaypalPostUrl;
+            if (GooeyConfigManager.IsPaypalSandbox)
+                BtnPaypalPurchase.OnClientClick = "alert('This purchase is using the paypal sandbox environment. No actual funds will be transferred.')";
 
             /*
              * PAYPAL NOTE:

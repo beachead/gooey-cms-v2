@@ -101,11 +101,42 @@ namespace Gooeycms.Business
             }
         }
 
+        public static String PaypalPostUrl
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String,Object>("paypal-posturl");
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString("paypal-posturl");
+                    if (String.IsNullOrEmpty(result))
+                        result = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+                    cache.Add("paypal-posturl",result);
+                }
+
+                return result;
+            }
+        }
+
+        public static Boolean IsPaypalSandbox
+        {
+            get { return (PaypalPostUrl.Contains("sandbox")); }
+        }
+
         public static String AdminSiteHost
         {
             get
             {
-                return "control.gooeycms.net";
+                String result = (String)cache.GetValue<String, Object>("gooey-admin-url");
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString("gooey-admin-url");
+                    if (String.IsNullOrEmpty(result))
+                        result = "control.gooeycms.net";
+                    cache.Add("gooey-admin-url", result);
+                }
+
+                return result;
             }
         }
 

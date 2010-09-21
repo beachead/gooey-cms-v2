@@ -58,6 +58,10 @@ namespace Gooeycms.Webrole.Ecommerce
                 this.SkipPaypal.NavigateUrl = "subscription.handler?" + builder.ToString();
                 this.DebugPanel.Visible = true;
             }
+
+            BtnPaypalPurchase.PostBackUrl = GooeyConfigManager.PaypalPostUrl;
+            if (GooeyConfigManager.IsPaypalSandbox)
+                BtnPaypalPurchase.OnClientClick = "alert('This purchase is using the paypal sandbox environment. No actual funds will be transferred.')";
         }
 
         protected void BtnSubscribe_Click(object sender, EventArgs e)
