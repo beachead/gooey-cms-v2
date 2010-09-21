@@ -101,6 +101,13 @@
     <Compile Include="store\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="store\Purchase.aspx.cs">
+      <DependentUpon>Purchase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="store\Purchase.aspx.designer.cs">
+      <DependentUpon>Purchase.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="store\Default.aspx" />
+    <Content Include="store\Purchase.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,10 @@ namespace Gooeycms.Webrole.Control
             MembershipUtil.ProcessLogin(this.LoginControl.UserName);
 
             Data.Guid guid = SiteHelper.GetActiveSiteGuid();
-            SiteHelper.Configure(guid);
+            if (!guid.IsEmpty())
+                SiteHelper.Configure(guid);
+            else
+                Response.Redirect("~/auth/dashboard.aspx", true);
         }
     }
 }

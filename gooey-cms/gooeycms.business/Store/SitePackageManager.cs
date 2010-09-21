@@ -31,6 +31,7 @@ namespace Gooeycms.Business.Store
         public const String PackageContainer = "packaged-sites";
         public const String PackageDirectory = "binary-data";
         public const String PackageExtension = ".zip";
+        public const String DemoSitePrefix = "gooeycmsdemo";
 
         private static SitePackageManager instance = new SitePackageManager();
         private SitePackageManager() { }
@@ -254,6 +255,9 @@ namespace Gooeycms.Business.Store
             Package package = dao.FindByPackageGuid(packageGuid);
             if (package != null)
             {
+                //Get the owner's subscription for this package
+                CmsSubscription owner = SubscriptionManager.GetSubscription(package.OwnerSubscriptionId);
+
                 //Check if our demo account exists
                 MembershipUserWrapper wrapper = MembershipUtil.FindByUsername(MembershipUtil.DemoAccountUsername);
                 if (!wrapper.IsValid())
@@ -264,7 +268,7 @@ namespace Gooeycms.Business.Store
                 CmsSubscription subscription = new CmsSubscription();
                 subscription.Guid = package.Guid;
                 subscription.Created = DateTime.Now;
-                subscription.Subdomain = package.Guid + "-demo";
+                subscription.Subdomain = DemoSitePrefix + "-" + owner.Subdomain;
                 subscription.SubscriptionPlanId = (int)SubscriptionPlans.Demo;
                 subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
                 subscription.IsDemo = true;

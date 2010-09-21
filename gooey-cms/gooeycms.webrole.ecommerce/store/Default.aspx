@@ -33,7 +33,7 @@
             <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" runat="server">
                 <ItemTemplate>
    			        <li class="theme">  
-				        <div class="title">School Site - $1,000</div>
+				        <div class="title"><%# Eval("Title") %> - <%# Eval("Price") %></div>
 				        <div class="logo"><img src="../images/___placeholder_logo.png" width="93" height="27" alt="" /></div>
 				        <div class="prev"><a href=""><img src="../images/btn_prev.png" width="29" height="32" alt="" /></a></div>
 				        <div class="next"><a href=""><img src="../images/btn_next.png" width="29" height="32" alt="" /></a></div>
@@ -45,7 +45,7 @@
                                 </asp:Repeater>
 				        </ul>
 				        <ul class="thumb-nav"></ul>
-				        <a class="purchase"><img src="../images/btn_purchase.png" width="137" height="39" alt="" /></a>
+				        <a class="purchase" href='./purchase.aspx?g=<%# Eval("Guid") %>'><img src="../images/btn_purchase.png" width="137" height="39" alt="" /></a>
 				        <asp:HyperLink ID="DemoLink" CssClass="demo" runat="server"><img src="../images/btn_purchase.png" width="137" height="39" alt="View Demo" tooltip="View Demo"  /></asp:HyperLink>
 				        <ul class="features">
                                 <asp:Repeater ID="FeatureList" runat="server">

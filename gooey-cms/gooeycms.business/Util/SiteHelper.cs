@@ -66,7 +66,9 @@ namespace Gooeycms.Business.Util
                 if ((isRequired) && (String.IsNullOrEmpty(guid)))
                     throw new ArgumentException("No site has been selected to manage themes for or cookies are disabled.");
 
-                guid = new TextEncryption().Decrypt(guid);
+                if (!String.IsNullOrEmpty(guid))
+                    guid = new TextEncryption().Decrypt(guid);
+
                 result = Data.Guid.New(guid);
             }
             else
