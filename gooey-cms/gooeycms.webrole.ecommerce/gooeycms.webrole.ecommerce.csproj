@@ -94,6 +94,13 @@
     <Compile Include="Signup.aspx.designer.cs">
       <DependentUpon>Signup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="store\Confirm.aspx.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="store\Confirm.aspx.designer.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="store\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -357,6 +364,7 @@
     <Content Include="Signup.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="store\Confirm.aspx" />
     <Content Include="store\Default.aspx" />
     <Content Include="store\Purchase.aspx" />
     <Content Include="Web.config" />

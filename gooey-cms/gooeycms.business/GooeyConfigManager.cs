@@ -84,6 +84,23 @@ namespace Gooeycms.Business
             }
         }
 
+        public static String PaypalPdtToken
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String,Object>("paypal-pdt");
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString("paypal-pdt");
+                    if (String.IsNullOrEmpty(result))
+                        result = "3X14M2n_ysG7k2c5AK0OHj_vf7RvBWTEkkinHwBZL7UccC65sD4IL0pBScK";
+                    cache.Add("paypal-pdt",result);
+                }
+
+                return result;
+            }
+        }
+
         public static String AdminSiteHost
         {
             get
