@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Store.UserPackage,gooeycms.data" table="Store_User_Packages">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="user_guid" name="UserGuid" type="String" />
+    <property column="package_guid" name="PackageGuid" type="String" />
+    <property column="package_title" name="PackageTitle" type="String" />
+    <property column="package_type" name="PackageType" type="String" />    
+  </class>
+</hibernate-mapping>

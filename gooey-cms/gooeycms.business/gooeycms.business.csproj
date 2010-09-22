@@ -157,6 +157,7 @@
     <Compile Include="Pages\PreviewDto.cs" />
     <Compile Include="Pages\ResourceControl.cs" />
     <Compile Include="Pages\VariableControl.cs" />
+    <Compile Include="Paypal\PaypalManager.cs" />
     <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
     <Compile Include="Handler\BaseHttpHandler.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Storage\QueueManager.cs" />
     <Compile Include="Storage\QueueMessageWrapper.cs" />
     <Compile Include="Store\ContentTypeField.cs" />
+    <Compile Include="Store\ReceiptManager.cs" />
     <Compile Include="Store\SitePackage.cs" />
     <Compile Include="Store\SitePackageManager.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
@@ -201,6 +203,7 @@
     <Compile Include="Web\CmsUrl.cs" />
     <Compile Include="Web\ControlHelper.cs" />
     <Compile Include="Web\Microsoft\GridViewHelper.cs" />
+    <Compile Include="Web\WebPostRequest.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
   </ItemGroup>
   <ItemGroup>

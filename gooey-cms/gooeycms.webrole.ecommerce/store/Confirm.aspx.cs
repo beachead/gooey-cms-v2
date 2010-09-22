@@ -17,6 +17,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
         protected String PackageTitle;
         protected String PackageGuid;
         protected String ReturnUrl;
+        protected String ReceiptGuid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,9 +41,21 @@ namespace Gooeycms.Webrole.Ecommerce.store
             this.LblPrice.Text = String.Format("{0:c}", package.Price);
             this.LblPurchaser.Text = LoggedInUser.Wrapper.UserInfo.Firstname + " " + LoggedInUser.Wrapper.UserInfo.Lastname;
 
+            //Create a receipt that we'll use to process this purchase
+            Receipt receipt = new Receipt();
+            receipt.Amount = package.Price;
+            receipt.Created = DateTime.Now;
+            receipt.Guid = System.Guid.NewGuid().ToString();
+            receipt.PackageGuid = package.Guid;
+            receipt.UserGuid = LoggedInUser.Wrapper.UserInfo.Guid;
+            receipt.IsComplete = false;
+            
+            ReceiptManager.Instance.Issue(receipt);
+
             Amount = package.Price;
             PackageTitle = package.Title;
             PackageGuid = package.Guid;
+            ReceiptGuid = receipt.Guid;
             ReturnUrl = "http://store.gooeycms.net/store/complete.aspx";
 
             BtnPaypalPurchase.PostBackUrl = GooeyConfigManager.PaypalPostUrl;

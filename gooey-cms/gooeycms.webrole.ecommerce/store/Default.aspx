@@ -33,10 +33,8 @@
             <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" runat="server">
                 <ItemTemplate>
    			        <li class="theme">  
-				        <div class="title"><%# Eval("Title") %> - <%# Eval("Price") %></div>
+				        <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c}") %></div>
 				        <div class="logo"><img src="../images/___placeholder_logo.png" width="93" height="27" alt="" /></div>
-				        <div class="prev"><a href=""><img src="../images/btn_prev.png" width="29" height="32" alt="" /></a></div>
-				        <div class="next"><a href=""><img src="../images/btn_next.png" width="29" height="32" alt="" /></a></div>
 				        <ul class="thumbs">
                                 <asp:Repeater ID="ThumbnailImages" runat="server">
                                     <ItemTemplate>

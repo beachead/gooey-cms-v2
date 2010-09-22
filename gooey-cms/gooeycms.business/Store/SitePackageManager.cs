@@ -400,5 +400,27 @@ namespace Gooeycms.Business.Store
                 }
             }
         }
+
+        public void AddToUser(Data.Guid userGuid, Package package)
+        {
+            //Make sure this package isn't already assocaited
+            UserPackageDao dao = new UserPackageDao();
+
+            UserPackage userPackage = dao.FindByUserAndPackage(userGuid, package.Guid);
+            if (userPackage == null)
+            {
+                userPackage = new UserPackage();
+                userPackage.UserGuid = userGuid.Value;
+                userPackage.PackageGuid = package.Guid;
+                userPackage.PackageTitle = package.Title;
+                userPackage.PackageType = package.PackageTypeString;
+
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Save<UserPackage>(userPackage);
+                    tx.Commit();
+                }
+            }
+        }
     }
 }

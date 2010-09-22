@@ -3,6 +3,11 @@ BEGIN
 DROP TABLE [Store_Packages];
 END
 
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Store_Receipts]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Store_Receipts];
+END
+
 CREATE TABLE [dbo].[Store_Packages](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[owner_subscription_id] VARCHAR(36),
@@ -24,3 +29,30 @@ CREATE INDEX idx_package_type ON [Store_Packages](package_type);
 
 DELETE FROM Configurations where name = 'package.categories';
 INSERT INTO Configurations (name,value) VALUES ('package.categories','commercial');
+
+CREATE TABLE [dbo].[Store_Receipts] (
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36),
+	[package_guid] VARCHAR(36),
+	[user_guid] VARCHAR(36),
+	[created_date] DATETIME,
+	[processed_date] DATETIME,
+	[paypal_txid] VARCHAR(128),
+	[amount] SMALLMONEY,
+	[is_complete] BIT DEFAULT(0),
+	[paid_developer_on] DATETIME,
+	[paid_amt] SMALLMONEY,
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE UNIQUE INDEX unq_receipt_guid ON [Store_Receipts](guid);
+
+CREATE TABLE [dbo].[Store_User_Packages] (
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[user_guid] VARCHAR(36) NOT NULL,
+	[package_guid] VARCHAR(36) NOT NULL,
+	[package_title] VARCHAR(128),
+	[package_type] VARCHAR(64),
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE UNIQUE INDEX unq_user_package ON [Store_User_Packages](user_guid,package_guid);
+CREATE INDEX idx_user_guid ON [Store_User_Packages](user_guid);

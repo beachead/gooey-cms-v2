@@ -42,7 +42,7 @@
                         <input type="hidden" name="amount" value="<%= Amount %>" />
                         <input type="hidden" name="item_name" value="<%= PackageTitle %>" />
                         <input type="hidden" name="item_number" value="<%= PackageGuid %>" />
-                        <input type="hidden" name="custom" value="<%= PackageGuid %>" />
+                        <input type="hidden" name="custom" value="<%= ReceiptGuid %>" />
                         <input type="hidden" name="return" value="<%= ReturnUrl %>" />
                         <asp:ImageButton ID="BtnPaypalPurchase" ImageUrl="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" PostBackUrl="https://www.sandbox.paypal.com/cgi-bin/webscr" runat="server" />                                        
                     </td>

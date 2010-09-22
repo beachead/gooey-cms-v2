@@ -81,6 +81,10 @@
     <Compile Include="Model\Site\CmsSitePathDao.cs" />
     <Compile Include="Model\Store\Package.cs" />
     <Compile Include="Model\Store\PackageDao.cs" />
+    <Compile Include="Model\Store\Receipt.cs" />
+    <Compile Include="Model\Store\ReceiptDao.cs" />
+    <Compile Include="Model\Store\UserPackage.cs" />
+    <Compile Include="Model\Store\UserPackageDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlan.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlanDao.cs" />
@@ -104,6 +108,8 @@
     <EmbeddedResource Include="Mappings\CmsForms.hbm.xml" />
     <EmbeddedResource Include="Mappings\SecurityToken.hbm.xml" />
     <EmbeddedResource Include="Mappings\StorePackage.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Receipt.hbm.xml" />
+    <EmbeddedResource Include="Mappings\UserPackages.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\add-foreign-keys.sql.txt" />
     <Content Include="sql-scripts\create-store-tables.sql.txt" />
