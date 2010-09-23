@@ -182,6 +182,8 @@ namespace Gooeycms.Business.Store
                     file.Content = temp.Content;
                 }
 
+                packageTheme.Header = theme.Header;
+                packageTheme.Footer = theme.Footer;
                 packageTheme.Templates = TemplateManager.Instance.GetTemplates(theme);
                 packageTheme.Images = ImageManager.Instance.GetImagesWithData(siteGuid, theme.ThemeGuid);
                 packageTheme.Javascript = jsFiles;
@@ -366,6 +368,8 @@ namespace Gooeycms.Business.Store
                 theme = ThemeManager.Instance.Add(guid, theme.Name, theme.Description);
 
                 theme.IsEnabled = isEnabled;
+                theme.Header = themeWrapper.Header;
+                theme.Footer = themeWrapper.Footer;
                 ThemeManager.Instance.Save(theme);
 
                 //Save all of the templates for this theme
