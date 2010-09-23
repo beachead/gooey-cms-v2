@@ -33,10 +33,7 @@ Choose a category for this site: <br />
 </div>
 
 <div>
-<asp:Button ID="BtnSave_Noajax" Text="Package (noajax)" OnClick="BtnSave_Click" runat="server" />
-<button onclick="deploy_site">Deploy Site</button>
-
-<anthem:Button ID="BtnSave" Text="Package" OnClick="BtnSave_Click" PreCallBackFunction="ajax_presave" PostCallBackFunction="deploy_site"  runat="server" />
+<anthem:Button ID="BtnSave" Text="Package &amp; Deploy" OnClick="BtnSave_Click" PreCallBackFunction="ajax_presave" PostCallBackFunction="deploy_site"  runat="server" />
 <anthem:HiddenField ID="SavedPackageGuid" AutoUpdateAfterCallBack="true" runat="server" />
 </div>
 

@@ -141,7 +141,7 @@ namespace Gooeycms.Business.Content
 
         public static String GetControlId(CmsContentTypeField field)
         {
-            return String.Format("Dynamic_{0}_{1}", field.FieldType, field.Name.Replace(" ", "_"));
+            return String.Format("Dynamic_{0}_{1}", field.FieldType, field.SystemName.Replace(" ", "_"));
         }
 
         public static void SetControl(Control control, string value)

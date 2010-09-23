@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
+using Gooeycms.Data.Model.Subscription;
+using Gooeycms.Business.Subscription;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -41,6 +43,11 @@ namespace Gooeycms.Webrole.Ecommerce.store
             {
                 Package package = (Package)item.DataItem;
 
+                //Find the subscription for this package
+                CmsSubscription subscription = SubscriptionManager.GetSubscription(package.Guid);
+                if (subscription == null)
+                    throw new ApplicationException("There was a problem finding the subscription.");
+
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
                 HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
@@ -53,7 +60,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 features.DataSource = package.FeatureList;
                 features.DataBind();
 
-                demolink.NavigateUrl = "http://demo-guid.gooeycms.net";
+                demolink.NavigateUrl = "http://www.demosite.com";
             }
         }
     }

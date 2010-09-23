@@ -31,7 +31,7 @@ namespace Gooeycms.Business.Store
         public const String PackageContainer = "packaged-sites";
         public const String PackageDirectory = "binary-data";
         public const String PackageExtension = ".zip";
-        public const String DemoSitePrefix = "gooeycmsdemo";
+        //public const String DemoSitePrefix = "gooeycmsdemo";
 
         private static SitePackageManager instance = new SitePackageManager();
         private SitePackageManager() { }
@@ -268,7 +268,7 @@ namespace Gooeycms.Business.Store
                 CmsSubscription subscription = new CmsSubscription();
                 subscription.Guid = package.Guid;
                 subscription.Created = DateTime.Now;
-                subscription.Subdomain = DemoSitePrefix + "-" + owner.Subdomain;
+                subscription.Subdomain = packageGuid + "-" + owner.Subdomain;
                 subscription.SubscriptionPlanId = (int)SubscriptionPlans.Demo;
                 subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
                 subscription.IsDemo = true;

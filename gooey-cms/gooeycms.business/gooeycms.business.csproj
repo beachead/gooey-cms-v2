@@ -148,7 +148,7 @@
     <Compile Include="Markup\Validator\IMarkupValidator.cs" />
     <Compile Include="Membership\LoggedInUser.cs" />
     <Compile Include="Css\CssManager.cs" />
-    <Compile Include="Pages\DynamicContentFormatter.cs" />
+    <Compile Include="Markup\Dynamic\DynamicContentFormatter.cs" />
     <Compile Include="Javascript\JavascriptManager.cs" />
     <Compile Include="Pages\NavigationControl.cs" />
     <Compile Include="Pages\PageNotFoundException.cs" />
