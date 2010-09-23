@@ -6,6 +6,7 @@ using Beachead.Core.Markup;
 using Gooeycms.Business.Markup.Markdown;
 using Gooeycms.Business.Markup.Forms_v2;
 using Beachead.Core.Markup.Standard;
+using Gooeycms.Business.Markup.Dynamic;
 
 namespace Gooeycms.Business.Markup.Engine
 {
@@ -17,6 +18,7 @@ namespace Gooeycms.Business.Markup.Engine
             formatters.Add(new TableTagFormatter());
             formatters.Add(new MarkdownFormatter());
             formatters.Add(new FormMarkupFormatter());
+            formatters.Add(new DynamicContentFormatter());
 
             return formatters;
         }

@@ -304,7 +304,7 @@ namespace Gooeycms.Business.Content
                 }
 
                 CmsContentField field = new CmsContentField();
-                field.Name = typeField.Name;
+                field.Name = typeField.SystemName;
                 field.ObjectType = typeField.ObjectType;
                 field.Value = result;
 

@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.ServiceModel.Activation;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Cache;
+using Gooeycms.Business.Markup.Dynamic;
 
 namespace Gooeycms.Business.Pages
 {

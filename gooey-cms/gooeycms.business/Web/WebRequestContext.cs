@@ -4,6 +4,11 @@ namespace Gooeycms.Business.Web
 {
     public class WebRequestContext
     {
+        public static WebRequestContext Instance
+        {
+            get { return new WebRequestContext(); }
+        }
+
         /// <summary>
         /// Returns the current HTTP context of the call
         /// </summary>
@@ -16,6 +21,7 @@ namespace Gooeycms.Business.Web
                 return HttpContext.Current;
             }
         }
+
 
         /// <summary>
         /// Returns the current HTTP request

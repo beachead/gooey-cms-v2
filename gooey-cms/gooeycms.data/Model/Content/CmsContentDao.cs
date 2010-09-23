@@ -24,5 +24,11 @@ namespace Gooeycms.Data.Model.Content
             String hql = "select content from CmsContent content where content.Guid = :guid";
             return base.NewHqlQuery(hql).SetString("guid", guid.Value).UniqueResult<CmsContent>();
         }
+
+        public CmsContent FindByGuid(Guid siteId, Guid guid)
+        {
+            String hql = "select content from CmsContent content where content.SubscriptionId = :siteGuid and content.Guid = :guid";
+            return base.NewHqlQuery(hql).SetString("siteGuid", siteId.Value).SetString("guid", guid.Value).UniqueResult<CmsContent>();
+        }
     }
 }
