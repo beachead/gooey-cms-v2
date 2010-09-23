@@ -363,6 +363,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ContentPage.Master" />
+    <Content Include="images\small_arrow.png" />
     <Content Include="js\global.js" />
     <Content Include="js\jquery-1.4.2.min.js" />
     <Content Include="js\jquery.cycle.all.min.js" />
