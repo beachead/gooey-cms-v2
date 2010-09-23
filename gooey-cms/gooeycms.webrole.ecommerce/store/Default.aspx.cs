@@ -8,6 +8,7 @@ using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
+using Gooeycms.Business;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -45,8 +46,11 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
                 //Find the subscription for this package
                 CmsSubscription subscription = SubscriptionManager.GetSubscription(package.Guid);
-                if (subscription == null)
-                    throw new ApplicationException("There was a problem finding the subscription.");
+                String demourl = null;
+                if (subscription != null)
+                {
+                    demourl = "http://" + subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
+                }
 
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
@@ -60,7 +64,10 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 features.DataSource = package.FeatureList;
                 features.DataBind();
 
-                demolink.NavigateUrl = "http://www.demosite.com";
+                if (demourl != null)
+                    demolink.NavigateUrl = demourl;
+                else
+                    demolink.Attributes["onclick"] = "alert('A demo for this site or theme is not currently available.'); return false;";
             }
         }
     }
