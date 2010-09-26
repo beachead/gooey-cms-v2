@@ -55,6 +55,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
                 HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
+                HyperLink adminLink = (HyperLink)item.FindControl("AdminDemoLink");
 
                 IList<String> thumbnailsrc = SitePackageManager.Instance.GetScreenshotUrls(package);
 
@@ -65,9 +66,14 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 features.DataBind();
 
                 if (demourl != null)
+                {
                     demolink.NavigateUrl = demourl;
+                    adminLink.NavigateUrl = "http://" + GooeyConfigManager.AdminSiteHost + "/demo.aspx?g=" + subscription.Guid;
+                }
                 else
+                {
                     demolink.Attributes["onclick"] = "alert('A demo for this site or theme is not currently available.'); return false;";
+                }
             }
         }
     }
