@@ -14,6 +14,13 @@ namespace Gooeycms.Webrole.Control
         {
             MembershipUtil.ProcessLogin(this.LoginControl.UserName);
 
+            String returnUrl = Request.QueryString["ReturnUrl"];
+            if (returnUrl != null)
+            {
+                if (returnUrl.Contains("http"))
+                    return;
+            }
+
             Data.Guid guid = SiteHelper.GetActiveSiteGuid();
             if (!guid.IsEmpty())
                 SiteHelper.Configure(guid);
