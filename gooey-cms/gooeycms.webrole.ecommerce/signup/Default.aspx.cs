@@ -14,6 +14,7 @@ namespace Gooeycms.Webrole.Ecommerce
 {
     public partial class Signup : System.Web.UI.Page
     {
+        protected String TrialExpires = DateTime.Now.AddDays(30).ToString("MMMM dd,yyyy");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
