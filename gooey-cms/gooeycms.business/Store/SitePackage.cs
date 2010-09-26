@@ -16,6 +16,8 @@ namespace Gooeycms.Business.Store
     public class SitePackageTheme 
     {
         public CmsTheme Theme { get; set; }
+        public String Header { get; set; }
+        public String Footer { get; set; }
         public IList<CmsTemplate> Templates { get; set; }
         public IList<JavascriptFile> Javascript { get; set; }
         public IList<CssFile> Css { get; set; }

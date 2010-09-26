@@ -80,46 +80,46 @@
       <DependentUpon>ContentPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Signup-Review.aspx.cs">
+    <Compile Include="signup\Signup-Review.aspx.cs">
       <DependentUpon>Signup-Review.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Signup-Review.aspx.designer.cs">
+    <Compile Include="signup\Signup-Review.aspx.designer.cs">
       <DependentUpon>Signup-Review.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Signup.aspx.cs">
-      <DependentUpon>Signup.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Signup.aspx.designer.cs">
-      <DependentUpon>Signup.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="store\Complete.aspx.cs">
-      <DependentUpon>Complete.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="store\Complete.aspx.designer.cs">
-      <DependentUpon>Complete.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="store\Confirm.aspx.cs">
-      <DependentUpon>Confirm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="store\Confirm.aspx.designer.cs">
-      <DependentUpon>Confirm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="store\Default.aspx.cs">
+    <Compile Include="signup\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="store\Default.aspx.designer.cs">
+    <Compile Include="signup\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="store\Purchase.aspx.cs">
+    <Compile Include="Complete.aspx.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Complete.aspx.designer.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Confirm.aspx.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Confirm.aspx.designer.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase.aspx.cs">
       <DependentUpon>Purchase.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="store\Purchase.aspx.designer.cs">
+    <Compile Include="Purchase.aspx.designer.cs">
       <DependentUpon>Purchase.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebRole.cs" />
@@ -368,14 +368,14 @@
     <Content Include="js\jquery-1.4.2.min.js" />
     <Content Include="js\jquery.cycle.all.min.js" />
     <Content Include="js\store.js" />
-    <Content Include="Signup-Review.aspx" />
-    <Content Include="Signup.aspx" />
+    <Content Include="signup\Signup-Review.aspx" />
+    <Content Include="signup\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="store\Complete.aspx" />
-    <Content Include="store\Confirm.aspx" />
-    <Content Include="store\Default.aspx" />
-    <Content Include="store\Purchase.aspx" />
+    <Content Include="Complete.aspx" />
+    <Content Include="Confirm.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Purchase.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

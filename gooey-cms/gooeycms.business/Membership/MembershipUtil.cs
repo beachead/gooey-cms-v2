@@ -10,6 +10,7 @@ using Gooeycms.Constants;
 using Gooeycms.Business.Subscription;
 using System.Web;
 using Gooeycms.Business.Util;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business.Membership
 {
@@ -23,49 +24,63 @@ namespace Gooeycms.Business.Membership
 
         public static MembershipUserWrapper CreateFromRegistration(Registration registration)
         {
-            UserInfo info = new UserInfo();
-            info.Username = registration.Email;
-            info.Email = registration.Email;
-            info.Firstname = registration.Firstname;
-            info.Lastname = registration.Lastname;
-            info.Company = registration.Company;
-            info.Address1 = registration.Address1;
-            info.Address2 = registration.Address2;
-            info.City = registration.City;
-            info.State = registration.State;
-            info.Zipcode = registration.Zipcode;
-            info.Guid = System.Guid.NewGuid().ToString();
-            info.Created = DateTime.Now;
+            MembershipUserWrapper wrapper = new MembershipUserWrapper();
+            if (String.IsNullOrEmpty(registration.ExistingAccountGuid))
+            {
+                UserInfo info = new UserInfo();
+                MembershipUser user = null;
 
-            UserInfoDao dao = new UserInfoDao();
-            using (Transaction tx = new Transaction())
-            {
-                dao.SaveObject(info);
-                tx.Commit();
-            }
+                info.Username = registration.Email;
+                info.Email = registration.Email;
+                info.Firstname = registration.Firstname;
+                info.Lastname = registration.Lastname;
+                info.Company = registration.Company;
+                info.Address1 = registration.Address1;
+                info.Address2 = registration.Address2;
+                info.City = registration.City;
+                info.State = registration.State;
+                info.Zipcode = registration.Zipcode;
+                info.Guid = System.Guid.NewGuid().ToString();
+                info.Created = DateTime.Now;
 
-            //Create the account in the asp.net membership system
-            String password = Decrypt(registration.EncryptedPassword);
-            MembershipUser user = null;
-            try
-            {
-                user = System.Web.Security.Membership.CreateUser(registration.Email, password, registration.Email);
-                System.Web.Security.Roles.AddUserToRole(registration.Email, SecurityConstants.DOMAIN_ADMIN);
-            }
-            catch (MembershipCreateUserException e)
-            {
-                //Rollback the user info
+                UserInfoDao dao = new UserInfoDao();
                 using (Transaction tx = new Transaction())
                 {
-                    dao.DeleteObject(info);
+                    dao.SaveObject(info);
                     tx.Commit();
                 }
-                throw e;
-            }
 
-            MembershipUserWrapper wrapper = new MembershipUserWrapper();
-            wrapper.MembershipUser = user;
-            wrapper.UserInfo = info;
+                //Create the account in the asp.net membership system
+                String password = Decrypt(registration.EncryptedPassword);
+                try
+                {
+                    user = System.Web.Security.Membership.CreateUser(registration.Email, password, registration.Email);
+                    System.Web.Security.Roles.AddUserToRole(registration.Email, SecurityConstants.DOMAIN_ADMIN);
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    //Rollback the user info
+                    using (Transaction tx = new Transaction())
+                    {
+                        dao.DeleteObject(info);
+                        tx.Commit();
+                    }
+                    throw e;
+                }
+
+                wrapper.MembershipUser = user;
+                wrapper.UserInfo = info;
+            }
+            else
+            {
+                UserInfo info = new UserInfoDao().FindByGuid(registration.ExistingAccountGuid);
+                if (info != null)
+                {
+                    //make sure the email addresses match
+                    if (info.Email.EqualsCaseInsensitive(registration.Email))
+                        wrapper = FindByUsername(info.Email);
+                }
+            }
 
             return wrapper;
         }

@@ -5,6 +5,8 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Membership;
 using Gooeycms.Constants;
 using Gooeycms.Data.Model.Subscription;
+using Gooeycms.Business.Themes;
+using Gooeycms.Data.Model.Theme;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -52,8 +54,17 @@ namespace Gooeycms.Business.Subscription
             subscription.Guid = registration.Guid;
             subscription.Created = DateTime.Now;
             subscription.Subdomain = registration.Sitename;
-            subscription.Domain = registration.Domain;
-            subscription.StagingDomain = registration.Staging;
+            
+            if (String.IsNullOrEmpty(registration.Domain))
+                subscription.Domain = registration.Sitename + GooeyConfigManager.DefaultCmsDomain;
+            else
+                subscription.Domain = registration.Domain;
+
+            if (String.IsNullOrEmpty(registration.Staging))
+                subscription.StagingDomain = GooeyConfigManager.DefaultStagingPrefix + registration.Sitename + GooeyConfigManager.DefaultCmsDomain;
+            else
+                subscription.StagingDomain = registration.Staging;
+
             subscription.SubscriptionPlanId = registration.SubscriptionPlanId;
             subscription.Expires = DateTime.Now.AddYears(100);
             subscription.IsDisabled = false;
@@ -73,6 +84,20 @@ namespace Gooeycms.Business.Subscription
                 dao.AddUserToSubscription(wrapper.UserInfo.Id, subscription.Id);
                 tx.Commit();
             }
+
+            //Create a default template for this site.
+            CmsTheme theme = ThemeManager.Instance.Add(subscription.Guid,"Gooey Default Theme", "A bare-bones default theme");
+            theme.IsEnabled = true;
+            ThemeManager.Instance.Save(theme);
+
+            CmsTemplate template = new CmsTemplate();
+            template.Content = GooeyConfigManager.DefaultTemplate;
+            template.IsGlobalTemplateType = false;
+            template.Name = "Gooey Default Page Template";
+            template.SubscriptionGuid = subscription.Guid;
+            template.LastSaved = DateTime.Now;
+            template.Theme = theme;
+            TemplateManager.Instance.Save(template);
 
             return subscription;
         }

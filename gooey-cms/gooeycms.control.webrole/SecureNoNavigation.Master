@@ -1,10 +1,10 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Secure.Master.cs" Inherits="Gooeycms.Webrole.Control.Secure" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SecureNoNavigation.master.cs" Inherits="Gooeycms.Webrole.Control.SecureNoNavigation" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
     <title>Gooey CMS Management | {0}</title>
-    <link href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
+    <link id="Link1" href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
@@ -24,21 +24,7 @@
 </head>
 <body class="claro">
     <form id="aspnetform" clientidmode="Static" runat="server">
-   
     <div>
-        <div id="header-region">
-            
-            <ul class="menu">
-                <li class="<% Response.Write(NavigationOn[1]); %>"><a id="A1" href="/auth/content/default.aspx" runat="server">Manage Content</a></li>
-                <li class="<% Response.Write(NavigationOn[2]); %>"><a id="A2" href="/auth/pages/default.aspx" runat="server">Manage Pages</a></li>
-                <li class="<% Response.Write(NavigationOn[3]); %>"><a id="A3" href="/auth/campaigns/default.aspx" runat="server">Manage Campaigns</a></li>                
-                <li class="<% Response.Write(NavigationOn[4]); %>"><a id="A4" href="/auth/promotion/default.aspx" runat="server">Promotion</a></li>                                
-                <li class="<% Response.Write(NavigationOn[5]); %>"><a id="A5" href="/auth/site/default.aspx" runat="server">Manage Site</a></li>
-                <li class="<% Response.Write(NavigationOn[6]); %>"><a id="A8" href="/auth/themes/default.aspx" runat="server">Manage Themes</a></li>
-                <li class="<% Response.Write(NavigationOn[7]); %>"><a id="A6" href="/auth/users/default.aspx" runat="server">User Management</a></li>
-                <li><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>                
-            </ul>
-        </div>
         <div id="main">
             <table class="content" cellpadding="0" cellspacing="0">
                 <tr>
@@ -57,10 +43,9 @@
                     </td>
                     <td class="right-column">
                          <div id="logo" style="padding-top:3px;padding-right:15px;">
-                            <img src="~/images/logo_gooey_internal.png" runat="server" />
+                            <img id="Img1" src="~/images/logo_gooey_internal.png" runat="server" />
                             <div style="padding-top:12px;">
                             Welcome, <asp:Label ID="LoggedInUsername" runat="server" /> &nbsp;<br />
-                            <a href="~/auth/dashboard.aspx" style="#666666; font-size:10px;" runat="server">My Sites</a>
                             <a id="change_password" href="~/secure/ChangePassword.aspx" style="color:#666666; font-size:10px;" runat="server">Change Password</a>                
                             <asp:LoginStatus ID="LoginStatus" runat="server" style="color:#666666; font-size:10px;"
                                 LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;

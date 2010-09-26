@@ -43,7 +43,7 @@
                                 </asp:Repeater>
 				        </ul>
 				        <ul class="thumb-nav"></ul>
-				        <asp:HyperLink ID="DemoLink" CssClass="demo-site" runat="server">view live demo site <img style="vertical-align:middle;" src="../images/small_arrow.png" width="15" height="24" border="0" alt="View Demo" tooltip="View Demo"  /></asp:HyperLink>
+				        <div class="demo-site">view <asp:HyperLink ID="DemoLink" runat="server">live</asp:HyperLink> or <asp:HyperLink ID="AdminDemoLink" runat="server">admin</asp:HyperLink> demo site <img style="vertical-align:middle;" src="../images/small_arrow.png" width="15" height="24" border="0" alt="View Demo" tooltip="View Demo"  /></div>
 				        <a class="purchase" href='./purchase.aspx?g=<%# Eval("Guid") %>'>purchase site <img style="vertical-align:middle;" src="../images/small_arrow.png" width="15" height="24" border="0" alt="purchase site" /></a>
 				        <ul class="features">
                                 <asp:Repeater ID="FeatureList" runat="server">

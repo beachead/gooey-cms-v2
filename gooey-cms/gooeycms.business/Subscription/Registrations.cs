@@ -78,9 +78,11 @@ namespace Gooeycms.Business.Subscription
         /// <param name="registration"></param>
         public static void ConvertToAccount(Registration registration, String subscriberId)
         {
-            MembershipUtil.CreateFromRegistration(registration);
-            SubscriptionManager.CreateFromRegistration(registration);
+            MembershipUserWrapper wrapper = MembershipUtil.CreateFromRegistration(registration);
+            if (wrapper == null)
+                throw new ArgumentException("The subscription could not be created because the registration was not valid.");
 
+            SubscriptionManager.CreateFromRegistration(registration);
             registration.IsComplete = true;
             Save(registration);
         }
