@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Membership;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -27,6 +28,7 @@ namespace Gooeycms.Webrole.Control
                 Root = Page.ResolveUrl("~/");
 
             this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
+            this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
         }
 
         protected void OnLogout_Click(Object sender, EventArgs e)

@@ -36,7 +36,7 @@
                 <li class="<% Response.Write(NavigationOn[5]); %>"><a id="A5" href="/auth/site/default.aspx" runat="server">Manage Site</a></li>
                 <li class="<% Response.Write(NavigationOn[6]); %>"><a id="A8" href="/auth/themes/default.aspx" runat="server">Manage Themes</a></li>
                 <li class="<% Response.Write(NavigationOn[7]); %>"><a id="A6" href="/auth/users/default.aspx" runat="server">User Management</a></li>
-                <li><a id="A7" href="~/" runat="server">Staging Server</a></li>                
+                <li><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>                
             </ul>
         </div>
         <div id="main">
