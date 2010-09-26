@@ -3,7 +3,7 @@
 <div id="content">
     <ol id="signup-steps">
 	    <li>
-		    <h2><img src="images/h2_create_gooey_acct.png" width="435" height="35" alt="create your gooey cms account" /> [NEED IMAGE]</h2>
+		    <h2><img src="../images/h2_create_gooey_acct.png" width="435" height="35" alt="create your gooey cms account" /> [NEED IMAGE]</h2>
             <table cellspacing="0" class="form">		    
                 <tr>
                     <td class="label"><label for="first-name">First Name</label></td>
@@ -48,7 +48,7 @@
                             <asp:ImageButton ID="BtnPaypalPurchase" ImageUrl="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" PostBackUrl="https://www.sandbox.paypal.com/cgi-bin/webscr" runat="server" />                    
                         </asp:Panel>                        
                         <asp:Panel ID="FreePanel" Visible="false" runat="server">
-                            <asp:ImageButton ID="BtnSubscribe" ImageUrl="images/btn_create_acct.png" OnClick="BtnSubscribe_Click" runat="server" />
+                            <asp:ImageButton ID="BtnSubscribe" ImageUrl="../images/btn_create_acct.png" OnClick="BtnSubscribe_Click" runat="server" />
                         </asp:Panel>
                     </td>
                 </tr>

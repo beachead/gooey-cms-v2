@@ -53,6 +53,34 @@ namespace Gooeycms.Business
             return result;
         }
 
+        public static String DefaultTemplate
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String, Object>("default-template");
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString("default-template");
+                    if (result == null)
+                    {
+                        result =
+@"
+    <div>
+        {header}
+    </div>
+    <div>
+        {content}
+    </div>
+    <div>
+        {footer}
+    </div>";
+                        cache.Add("default-template", result);
+                    }
+                }
+                return result;
+            }
+        }
+
         public static Double SalesForcePrice
         {
             get
