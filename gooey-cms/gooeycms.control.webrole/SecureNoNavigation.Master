@@ -1,0 +1,61 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SecureNoNavigation.master.cs" Inherits="Gooeycms.Webrole.Control.SecureNoNavigation" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>Gooey CMS Management | {0}</title>
+    <link id="Link1" href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
+    <script src="<%=Root %>scripts/functions.js" type="text/javascript" language="javascript"></script> 
+    <script src="<%=Root %>scripts/mootools-core.js" type="text/javascript" language="javascript"></script>    
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        dojo.require("dojo.parser");
+        dojo.require("dijit.TitlePane");
+        dojo.require("dijit.dijit");
+        dojo.require("dijit.Dialog");
+        dojo.require("dijit.layout.TabContainer");
+        dojo.require("dijit.layout.ContentPane");
+        dojo.require("dijit.form.ValidationTextBox");
+        dojo.require("dijit.Tooltip");
+    </script>
+</head>
+<body class="claro">
+    <form id="aspnetform" clientidmode="Static" runat="server">
+    <div>
+        <div id="main">
+            <table class="content" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="center-column">
+                        <div id="subnav">
+                            <div id="subnav-inner">
+                                <asp:ContentPlaceHolder ID="Subnavigation" runat="server"></asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                        <div id="instructions-area">
+                            <asp:ContentPlaceHolder ID="Instructions" runat="server"></asp:ContentPlaceHolder>
+                        </div>
+                        <div id="editor-area">
+                            <asp:ContentPlaceHolder ID="Editor" runat="server"></asp:ContentPlaceHolder>          
+                        </div>
+                    </td>
+                    <td class="right-column">
+                         <div id="logo" style="padding-top:3px;padding-right:15px;">
+                            <img id="Img1" src="~/images/logo_gooey_internal.png" runat="server" />
+                            <div style="padding-top:12px;">
+                            Welcome, <asp:Label ID="LoggedInUsername" runat="server" /> &nbsp;<br />
+                            <a id="change_password" href="~/secure/ChangePassword.aspx" style="color:#666666; font-size:10px;" runat="server">Change Password</a>                
+                            <asp:LoginStatus ID="LoginStatus" runat="server" style="color:#666666; font-size:10px;"
+                                LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;
+                            </div>
+                         </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

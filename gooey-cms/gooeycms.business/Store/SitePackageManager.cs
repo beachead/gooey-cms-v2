@@ -427,5 +427,23 @@ namespace Gooeycms.Business.Store
                 }
             }
         }
+
+        public IList<Package> GetPurchasedPackages(UserInfo user)
+        {
+            IList<Package> packages = new List<Package>();
+
+            UserPackageDao dao = new UserPackageDao();
+            PackageDao packageDao = new PackageDao();
+
+            IList<UserPackage> ups = dao.FindByUserAndPackage(user.Guid);
+            foreach (UserPackage up in ups)
+            {
+                Package package = packageDao.FindByPackageGuid(up.PackageGuid);
+                if (package != null)
+                    packages.Add(package);
+            }
+
+            return packages;
+        }
     }
 }

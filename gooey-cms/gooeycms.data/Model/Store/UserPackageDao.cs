@@ -12,5 +12,11 @@ namespace Gooeycms.Data.Model.Store
             String hql = "select up from UserPackage up where up.UserGuid = :user and up.PackageGuid = :package";
             return base.NewHqlQuery(hql).SetString("user", userGuid.Value).SetString("package", packageGuid).UniqueResult<UserPackage>();
         }
+
+        public IList<UserPackage> FindByUserAndPackage(string guid)
+        {
+            String hql = "select up from UserPackage up where up.UserGuid = :user";
+            return base.NewHqlQuery(hql).SetString("user", guid).List<UserPackage>();
+        }
     }
 }

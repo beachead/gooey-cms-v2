@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Ecommerce {
     public partial class Signup {
         
         /// <summary>
+        /// LoginView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LoginView LoginView;
+        
+        /// <summary>
         /// Firstname control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,15 @@ namespace Gooeycms.Webrole.Ecommerce {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator CompanyRequired;
         
         /// <summary>
+        /// PnlCreatePassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PnlCreatePassword;
+        
+        /// <summary>
         /// Password1 control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace Gooeycms.Webrole.Ecommerce {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator PasswordValidate;
+        
+        /// <summary>
+        /// PnlNoPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PnlNoPassword;
         
         /// <summary>
         /// ScriptManager control.

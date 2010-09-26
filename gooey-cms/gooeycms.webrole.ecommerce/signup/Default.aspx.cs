@@ -8,6 +8,7 @@ using Gooeycms.Business.Subscription;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Constants;
 using Gooeycms.Business;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Ecommerce
 {
@@ -17,9 +18,40 @@ namespace Gooeycms.Webrole.Ecommerce
         {
             if (!Page.IsPostBack)
             {
+                HyperLink lnk = (HyperLink)LoginView.FindControl("LnkSignIn");
+                if (lnk != null)
+                    lnk.NavigateUrl = "http://" + GooeyConfigManager.AdminSiteHost + "/login.aspx?ReturnUrl=" + Server.UrlEncode("http://store.gooeycms.net/signup/");
+
                 this.SalesForceCost.Text = GooeyConfigManager.SalesForcePrice.ToString();
                 this.DefaultCmsDomain.Text = GooeyConfigManager.DefaultCmsDomain;
                 LoadSelectedPlan(Request.QueryString.ToString().Contains("free"));
+
+                LoadExistingData();
+            }
+        }
+
+        private void LoadExistingData()
+        {
+            this.PnlCreatePassword.Visible = true;
+            this.PnlNoPassword.Visible = false;
+
+            if (LoggedInUser.IsLoggedIn)
+            {
+                UserInfo user = LoggedInUser.Wrapper.UserInfo;
+                this.Firstname.Text = user.Firstname;
+                this.Firstname.Enabled = false;
+
+                this.Lastname.Text = user.Lastname;
+                this.Lastname.Enabled = false;
+
+                this.Email.Text = user.Email;
+                this.Email.Enabled = false;
+
+                this.Company.Text = user.Company;
+                this.Company.Enabled = false;
+
+                this.PnlCreatePassword.Visible = false;
+                this.PnlNoPassword.Visible = true;
             }
         }
 
@@ -55,7 +87,7 @@ namespace Gooeycms.Webrole.Ecommerce
         protected void Subdomain_TextChanged(Object sender, EventArgs e)
         {
             bool isAvailable = SubscriptionManager.IsSubdomainAvailable(this.Subdomain.Text);
-            this.IsAvailableImage.ImageUrl = (isAvailable) ? "images/icon_available.png" : "missingimage.jpg";
+            this.IsAvailableImage.ImageUrl = (isAvailable) ? "../images/icon_available.png" : "missingimage.jpg";
             this.IsAvailableImage.Visible = true;
         }
 
@@ -82,6 +114,8 @@ namespace Gooeycms.Webrole.Ecommerce
             registration.EncryptedPassword = Registrations.Encrypt(this.Password1.Text);
             registration.SubscriptionPlanId = (int)selectedPlan;
             registration.IsSalesforceEnabled = this.SalesForceOption.Checked;
+            if (LoggedInUser.IsLoggedIn)
+                registration.ExistingAccountGuid = LoggedInUser.Wrapper.UserInfo.Guid;
 
             Registrations.Save(registration);
             Response.Redirect("Signup-Review.aspx?g=" + registration.Guid, true);

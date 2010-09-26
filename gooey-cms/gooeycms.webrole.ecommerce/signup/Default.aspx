@@ -3,7 +3,18 @@
 	<!-- START: content -->
 	<div id="content">
 		<h1><img src="../images/h1_minute_away2.png" width="720" height="28" alt="you're a minute away from a great relationship!" /></h1>
- 
+        
+        <div style="padding-left:70px;">
+        <asp:LoginView ID="LoginView" runat="server">
+            <AnonymousTemplate>
+            Are you an existing client? <asp:HyperLink ID="LnkSignIn" runat="server">Sign In Now</asp:HyperLink>.                
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+                You are currently logged in as <asp:LoginName runat="server" />&nbsp;<asp:LoginStatus ID="LoggedInStatus" LogoutText="Logout" runat="server" />
+            </LoggedInTemplate>
+        </asp:LoginView>
+        </div>
+
 		<div class="callout" id="callout">
 			<p>Your 30 day trial lasts until July 15th, 2010. If you don’t want to continue using Gooey CMS, please cancel before July 15th.</p>
 			<p class="x-3">For additional details, <a href="">click here</a>.</p>
@@ -46,6 +57,7 @@
 			</li>
 			<li>
 				<h2><img src="../images/h2_create_password.png" width="435" height="35" alt="create your password" /></h2>
+                <asp:Panel ID="PnlCreatePassword" runat="server">
 				<table cellspacing="0" class="form">
 				<tr>
 				<td class="label"><label for="password">Password</label></td>
@@ -58,6 +70,10 @@
                     <asp:CompareValidator id="PasswordValidate" runat="server" ErrorMessage="Passwords do not match!" ControlToValidate="Password1" ControlToCompare="Password2"></asp:CompareValidator></td>
 				</tr>
 				</table>
+                </asp:Panel>
+                <asp:Panel ID="PnlNoPassword" runat="server">
+                Uses your existing GooeyCMS password
+                </asp:Panel>
 			</li>
             <asp:ScriptManager ID="ScriptManager" runat="server" />       
 			<li>

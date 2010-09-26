@@ -31,6 +31,16 @@ namespace Gooeycms.Data.Model.Store
         public virtual DateTime Approved { get; set; }
         public virtual String Screenshots { get; set; }
 
+        public virtual PackageTypes PackageType
+        {
+            get
+            {
+                return (PackageTypes)Enum.Parse(typeof(PackageTypes), this.PackageTypeString, true);
+            }
+            set { this.PackageTypeString = value.ToString(); }
+
+        }
+
         public virtual IList<String> ScreenshotList
         {
             get
