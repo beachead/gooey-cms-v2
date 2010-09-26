@@ -8,6 +8,7 @@ using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Membership;
+using System.Web.Security;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -17,7 +18,13 @@ namespace Gooeycms.Webrole.Ecommerce.store
         {
             //check if the user is logged in... if so, go to the confirmation page
             if (LoggedInUser.IsLoggedIn)
-                Response.Redirect("./Confirm.aspx?g=" + Request.QueryString["g"], true);
+            {
+                //Make sure we're not logged into our demo account
+                if (!LoggedInUser.Username.Equals(MembershipUtil.DemoAccountUsername))
+                    Response.Redirect("./Confirm.aspx?g=" + Request.QueryString["g"], true);
+                else
+                    FormsAuthentication.SignOut();
+            }
             
             if (!Page.IsPostBack)
             {
@@ -71,7 +78,9 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
             Response.Cookies.Add(purchase);
 
-            Response.Redirect("~/Signup.aspx");
+            Response.Redirect("~/signup/");
         }
+
+        public string MembershipUti { get; set; }
     }
 }
