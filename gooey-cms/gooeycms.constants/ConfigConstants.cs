@@ -16,5 +16,11 @@ namespace Gooeycms.Constants
         public const String TokenEncyrptionKey = "token-encryption-key";
         public const String DefaultSystemFormFields = "default-form-fields";
         public const String StorePackageCategories = "package.categories";
+        public const String SmtpServer = "smtp-server";
+        public const String SmtpPort = "smtp-port";
+        public const String DefaultTemplate = "default-template";
+        public const String PaypalPdt = "paypal-pdt";
+        public const String PaypalUrl = "paypal-posturl";
+        public const String GooeyAdminUrl = "gooey-admin-url";
     }
 }

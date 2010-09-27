@@ -202,6 +202,7 @@
     <Compile Include="Util\CurrentSite.cs" />
     <Compile Include="Web\CmsUrl.cs" />
     <Compile Include="Web\ControlHelper.cs" />
+    <Compile Include="Web\EmailClient.cs" />
     <Compile Include="Web\Microsoft\GridViewHelper.cs" />
     <Compile Include="Web\WebPostRequest.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
