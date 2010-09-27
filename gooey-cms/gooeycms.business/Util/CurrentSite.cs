@@ -50,11 +50,21 @@ namespace Gooeycms.Business.Util
                 get { return GetSiteConfiguration("markup-headerimage", "", false); }
             }
 
+            public static String LeadEmailFromAddress
+            {
+                get { return GetSiteConfiguration("lead-email-from", "form-leads@gooeycms.net", false); }
+            }
+
+            public static String LeadEmailSubject
+            {
+                get { return GetSiteConfiguration("lead-email-subject", "Lead Submission", false); }
+            }
+
             public static Boolean IsLeadEmailEnabled
             {
                 get
                 {
-                    String value = GetSiteConfiguration("lead-email-enabled", "false", false);
+                    String value = GetSiteConfiguration("lead-email-enabled", "true", false);
                     return Boolean.Parse(value);
                 }
             }

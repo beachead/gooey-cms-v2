@@ -57,10 +57,10 @@ namespace Gooeycms.Business
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>("default-template");
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.DefaultTemplate);
                 if (result == null)
                 {
-                    result = GooeyConfigManager.GetAsString("default-template");
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.DefaultTemplate);
                     if (result == null)
                     {
                         result =
@@ -74,7 +74,7 @@ namespace Gooeycms.Business
     <div>
         {footer}
     </div>";
-                        cache.Add("default-template", result);
+                        cache.Add(ConfigConstants.DefaultTemplate, result);
                     }
                 }
                 return result;
@@ -112,17 +112,51 @@ namespace Gooeycms.Business
             }
         }
 
+        public static String SmtpServer
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.SmtpServer);
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.SmtpServer);
+                    if (result == null)
+                        throw new ApplicationException("An SMTP server has not been configured in the gooey site configuration. This is a required setting. (key=" + ConfigConstants.SmtpServer);
+
+                    cache.Add(ConfigConstants.SmtpServer, result);
+                }
+                return result;
+            }
+        }
+
+        public static String SmtpPort
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.SmtpPort);
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.SmtpPort);
+                    if (result == null)
+                        result = "2525";
+
+                    cache.Add(ConfigConstants.SmtpPort, result);
+                }
+                return result;
+            }
+        }
+
         public static String PaypalPdtToken
         {
             get
             {
-                String result = (String)cache.GetValue<String,Object>("paypal-pdt");
+                String result = (String)cache.GetValue<String,Object>(ConfigConstants.PaypalPdt);
                 if (result == null)
                 {
-                    result = GooeyConfigManager.GetAsString("paypal-pdt");
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.PaypalPdt);
                     if (String.IsNullOrEmpty(result))
                         result = "3X14M2n_ysG7k2c5AK0OHj_vf7RvBWTEkkinHwBZL7UccC65sD4IL0pBScK";
-                    cache.Add("paypal-pdt",result);
+                    cache.Add(ConfigConstants.PaypalPdt, result);
                 }
 
                 return result;
@@ -133,13 +167,13 @@ namespace Gooeycms.Business
         {
             get
             {
-                String result = (String)cache.GetValue<String,Object>("paypal-posturl");
+                String result = (String)cache.GetValue<String,Object>(ConfigConstants.PaypalUrl);
                 if (result == null)
                 {
-                    result = GooeyConfigManager.GetAsString("paypal-posturl");
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.PaypalUrl);
                     if (String.IsNullOrEmpty(result))
                         result = "https://www.sandbox.paypal.com/cgi-bin/webscr";
-                    cache.Add("paypal-posturl",result);
+                    cache.Add(ConfigConstants.PaypalUrl, result);
                 }
 
                 return result;
@@ -155,13 +189,13 @@ namespace Gooeycms.Business
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>("gooey-admin-url");
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.GooeyAdminUrl);
                 if (result == null)
                 {
-                    result = GooeyConfigManager.GetAsString("gooey-admin-url");
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.GooeyAdminUrl);
                     if (String.IsNullOrEmpty(result))
                         result = "control.gooeycms.net";
-                    cache.Add("gooey-admin-url", result);
+                    cache.Add(ConfigConstants.GooeyAdminUrl, result);
                 }
 
                 return result;
