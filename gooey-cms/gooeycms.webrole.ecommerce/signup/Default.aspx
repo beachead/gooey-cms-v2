@@ -16,7 +16,7 @@
         </div>
 
 		<div class="callout" id="callout">
-			<p>Your 30 day trial lasts until July 15th, 2010. If you don’t want to continue using Gooey CMS, please cancel before July 15th.</p>
+			<p>Your 30 day trial lasts until <br /><% Response.Write(TrialExpires); %>. If you don’t want to continue using Gooey CMS, please cancel before <% Response.Write(TrialExpires); %>.</p>
 			<p class="x-3">For additional details, <a href="">click here</a>.</p>
 		</div>
  

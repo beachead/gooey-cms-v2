@@ -21,8 +21,8 @@ namespace Gooeycms.Business.Markup.Forms_v2
         private static Regex FormCheckField = new Regex(@"<checkbox\s+(\w+)\s*/?>([*])?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex SubmitButtonField = new Regex(@"<submit\s+([\w|\s]+)\s*(onclick=.*?)?\s*/?>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        private static Regex RedirectTo = new Regex(@"redirectto=""?(.*?)""?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static Regex EmailTo = new Regex(@"emailto=""?(.*?)""?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex RedirectTo = new Regex(@"redirectto=""(.*?)""", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex EmailTo = new Regex(@"emailto=""(.*?)""", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public override StringBuilder Convert(StringBuilder markup)
         {
@@ -52,12 +52,10 @@ namespace Gooeycms.Business.Markup.Forms_v2
             String error = GetHiddenFields(currentUrl, formMetaInfo, metainfo);
 
             String pagename = url.PathWithoutExtension;
-            String token = AntiXss.UrlEncode(TokenManager.Issue(pagename, TimeSpan.FromMinutes(2)));
-
             if (error == null)
             {
                 StringBuilder formhtml = new StringBuilder();
-                formhtml.Append(@"<form action=""/gooeyforms/formprocess.handler?token=" + token + @"&pagename=" + AntiXss.UrlEncode(pagename) + @""" method=""post"">").AppendLine();
+                formhtml.Append(@"<form action=""/gooeyforms/formprocess.handler?&pagename=" + AntiXss.UrlEncode(pagename) + @""" method=""post"">").AppendLine();
                 formhtml.AppendLine(metainfo.ToString());
                 formhtml.Append(content);
                 formhtml.Append(@"</form>").AppendLine();
