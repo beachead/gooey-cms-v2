@@ -478,5 +478,15 @@ namespace Gooeycms.Business.Store
                 }
             }
         }
+
+        public void Save(Package package)
+        {
+            PackageDao dao = new PackageDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<Package>(package);
+                tx.Commit();
+            }
+        }
     }
 }

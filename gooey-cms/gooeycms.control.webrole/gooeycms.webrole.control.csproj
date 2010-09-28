@@ -86,6 +86,7 @@
     <Content Include="auth\Content\Default.aspx" />
     <Content Include="auth\Content\Edit.aspx" />
     <Content Include="auth\Developer\Default.aspx" />
+    <Content Include="auth\Developer\Edit.aspx" />
     <Content Include="auth\Developer\Site.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
@@ -178,6 +179,13 @@
     </Compile>
     <Compile Include="auth\Developer\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Developer\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Developer\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Developer\Site.aspx.cs">
       <DependentUpon>Site.aspx</DependentUpon>
