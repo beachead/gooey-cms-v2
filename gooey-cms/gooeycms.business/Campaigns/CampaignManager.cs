@@ -104,12 +104,16 @@ namespace Gooeycms.Business.Campaigns
         public static String Combine(HashSet<String> campaigns, String separator)
         {
             StringBuilder builder = new StringBuilder();
-            foreach (String campaign in campaigns)
+            if (campaigns.Count > 0)
             {
-                if (!String.IsNullOrWhiteSpace(campaign))
-                    builder.Append(campaign.Trim()).Append(separator);
+                foreach (String campaign in campaigns)
+                {
+                    if (!String.IsNullOrWhiteSpace(campaign))
+                        builder.Append(campaign.Trim()).Append(separator);
+                }
+                if (builder.Length > 0)
+                    builder = builder.Remove(builder.Length - 1, 1);
             }
-            builder = builder.Remove(builder.Length - 1, 1);
 
             return builder.ToString();
         }
