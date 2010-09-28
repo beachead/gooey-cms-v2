@@ -39,9 +39,14 @@ namespace Gooeycms.Webrole.Control.auth.Developer
 
                 if (upload.HasFile)
                     SitePackageManager.Instance.AddScreenshot(Data.Guid.New(packageGuid), upload.FileName, upload.FileBytes);
-
-                DoDataBind();
             }
+            else if (e.CommandName.Equals("DeletePackage"))
+            {
+                String packageGuid = (String)e.CommandArgument;
+                SitePackageManager.Instance.DeletePackage(packageGuid);
+            }
+
+            DoDataBind();
         }
 
         protected void SitePackages_OnItemDataBound(object sender, RepeaterItemEventArgs e)

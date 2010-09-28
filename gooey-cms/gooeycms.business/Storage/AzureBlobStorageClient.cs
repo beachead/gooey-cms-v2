@@ -91,6 +91,17 @@ namespace Gooeycms.Business.Storage
             return filename;
         }
 
+        /// <summary>
+        /// Deletes all the blobs in the container and then removes the container
+        /// </summary>
+        /// <param name="containerName"></param>
+        public void Delete(String containerName)
+        {
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            if (container.Exists())
+                container.Delete();
+        }
+
         public void Delete(String containerName, String directoryName, string filename)
         {
             filename = filename.Replace(" ", "");

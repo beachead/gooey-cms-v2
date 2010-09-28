@@ -7,6 +7,8 @@ using Gooeycms.Constants;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Themes;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Business.Storage;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -170,6 +172,31 @@ namespace Gooeycms.Business.Subscription
             {
                 dao.AddUserToSubscription(wrapper.UserInfo.Id, subscription.Id);
                 tx.Commit();
+            }
+        }
+
+        internal static void Delete(CmsSubscription subscription)
+        {
+            if (subscription != null)
+            {
+                CmsSubscriptionDao dao = new CmsSubscriptionDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<CmsSubscription>(subscription);
+                    tx.Commit();
+                }
+
+                //Delete any cloud storage files for this subscription
+                String pagesContainer = String.Format(SiteHelper.PageDirectoryKey,subscription.Guid);
+                String javascriptContainer = String.Format(SiteHelper.JavascriptDirectoryKey,subscription.Guid);
+                String cssContainer = String.Format(SiteHelper.StylesheetDirectoryKey,subscription.Guid);
+                String imagesContainer = String.Format(SiteHelper.ImagesDirectoryKey, subscription.Guid);
+
+                IStorageClient client = StorageHelper.GetStorageClient();
+                client.Delete(pagesContainer);
+                client.Delete(javascriptContainer);
+                client.Delete(cssContainer);
+                client.Delete(imagesContainer);
             }
         }
     }
