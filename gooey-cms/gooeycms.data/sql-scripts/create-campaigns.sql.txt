@@ -1,0 +1,18 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Campaigns]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Campaigns];
+END
+
+CREATE TABLE [dbo].[Campaigns](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36),
+	[site_guid] VARCHAR(36),
+	[name] NVARCHAR(128),
+	[tracking_code] NVARCHAR(64),
+	[start_date] DATETIME,
+	[end_date] DATETIME,
+	PRIMARY KEY CLUSTERED([id]),
+);
+ALTER TABLE Campaigns ADD CONSTRAINT fk_campaigns_subscription FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+CREATE INDEX idx_site_guid ON Campaigns(site_guid);
+CREATE INDEX idx_siteguid ON Campaigns(guid,site_guid);

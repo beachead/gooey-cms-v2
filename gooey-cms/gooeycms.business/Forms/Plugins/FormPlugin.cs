@@ -16,6 +16,7 @@ namespace Gooeycms.Business.Forms.Plugins
             public String Email;
             public String IpAddress;
             public String Campaigns;
+            public String Filename;
         }
 
         #region IFormPlugin Members
@@ -73,6 +74,7 @@ namespace Gooeycms.Business.Forms.Plugins
             info.Campaigns = this.GetField("campaign");
             info.Culture = this.GetField("culture");
             info.Resource = this.GetField("resource");
+            info.Filename = this.GetField("filename");
             info.Email = this.GetField("email");
             if (info.Email == null)
                 info.Email = this.GetField("Email");

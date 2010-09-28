@@ -11,6 +11,7 @@
     <property column="ipaddress" name="IpAddress" type="String" />
     <property column="email" name="Email" type="String" />
     <property column="campaigns" name="RawCampaigns" type="String" />
+    <property column="download_file" name="DownloadedFile" type="String" />
     <property column="form_keys" name="_FormKeys" type="String" />
     <property column="form_values" name="_FormValues" type="String" />
   </class>

@@ -8,6 +8,7 @@ using Gooeycms.Business.Web;
 using Gooeycms.Business.Crypto;
 using Microsoft.Security.Application;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Content;
 
 namespace Gooeycms.Business.Markup.Forms_v2
 {
@@ -85,6 +86,15 @@ namespace Gooeycms.Business.Markup.Forms_v2
 
             metainfo.AppendFormat(@"<input type=""hidden"" name=""{{form_id}}_culture"" value=""{0}"" />", AntiXss.HtmlEncode(CurrentSite.Culture)).AppendLine();
             metainfo.AppendFormat(@"<input type=""hidden"" name=""{{form_id}}_resource"" value=""{0}"" />", AntiXss.HtmlEncode(currentUrl)).AppendLine();
+
+            //Check if there's a file we need to download after the form is submitted
+            String filename = WebRequestContext.Instance.Request.QueryString["fget"];
+            String encryptedFilename = "";
+            if (!String.IsNullOrWhiteSpace(filename))
+                encryptedFilename = ContentManager.EncryptFilename(filename);
+
+            metainfo.AppendFormat(@"<input type=""hidden"" name=""{{form_id}}_gooey-filename"" value=""{0}"" />", AntiXss.HtmlEncode(encryptedFilename)).AppendLine();
+
             return error;
         }
 

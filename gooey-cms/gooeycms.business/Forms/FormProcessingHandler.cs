@@ -6,6 +6,7 @@ using Gooeycms.Business.Handler;
 using Gooeycms.Business.Forms.Plugins;
 using Gooeycms.Business.Crypto;
 using System.Web;
+using Gooeycms.Business.Campaigns;
 
 namespace Gooeycms.Business.Forms
 {
@@ -26,6 +27,15 @@ namespace Gooeycms.Business.Forms
                 redirect = fields["redirect"];
             else
                 redirect = postingResource;
+
+            String encryptedFilename = fields["gooey-filename"];
+            String decryptedFilename = "";
+            if (!String.IsNullOrWhiteSpace(encryptedFilename))
+                decryptedFilename = TextEncryption.Decode(encryptedFilename);
+            fields.Add("filename", decryptedFilename);
+
+            String campaignTrail = CampaignManager.Instance.GetCurrentCampaignTrailAsString();
+            fields.Add("campaign", campaignTrail);
 
             IList<IFormPlugin> plugins = FormPluginFactory.Instance.GetPlugins();
             foreach (IFormPlugin plugin in plugins)
@@ -48,32 +58,17 @@ namespace Gooeycms.Business.Forms
                 }
             }
 
-            String campaignTracking = "";
-            /* TODO : Implement campaign tracking
-            CampaignManager campaignManager = new CampaignManager();
-            if (campaignManager.IsTrackingEnabled())
-            {
-                String gpId = campaignManager.GetCampaignEngine().GetGoalPageId();
-                campaignTracking = "&" + gpId + "=true";
-            }
-            */
-
+            String goalPageIdentifier = CampaignManager.Instance.GetCampaignEngine().GetGoalPageId();
             String msg = "";
             if (exception != null)
                 msg = "There was a problem processing this request: " + exception.Message;
 
             String append = (redirect.Contains("?")) ? "&" : "?";
-            redirect = redirect + append + "msg=" + context.Server.UrlEncode(msg) + campaignTracking;
+            redirect = redirect + append + "msg=" + context.Server.UrlEncode(msg) + "&" + goalPageIdentifier + "=true";
 
             //check if we need to download a file
-            if (fields.ContainsKey("downloadfile"))
-            {
-                String download = fields["downloadfile"];
-                if (!String.IsNullOrEmpty(download))
-                {
-                    redirect = redirect + "&d=" + context.Server.UrlEncode(TextEncryption.Encode(download));
-                }
-            }
+            if (!String.IsNullOrEmpty(encryptedFilename))
+                redirect = redirect + "&d=" + context.Server.UrlEncode(encryptedFilename);
 
             //Redirect to the appropriate page
             context.Response.Redirect(redirect, true);       

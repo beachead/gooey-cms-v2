@@ -95,9 +95,14 @@
     <Compile Include="Cache\SitePageCacheRefreshInvoker.cs" />
     <Compile Include="Cache\SitePageCacheRefreshProcessor.cs" />
     <Compile Include="Cache\SitePageRefreshRequest.cs" />
+    <Compile Include="Campaigns\CampaignManager.cs" />
+    <Compile Include="Campaigns\Engine\GoogleAnalytics.cs" />
+    <Compile Include="Campaigns\ICampaignEngine.cs" />
     <Compile Include="Compression\ZipHandler.cs" />
+    <Compile Include="Content\ContentFileUploadHandler.cs" />
     <Compile Include="Content\ContentManager.cs" />
     <Compile Include="Content\ContentWebControlManager.cs" />
+    <Compile Include="Content\FileDownloadHandler.cs" />
     <Compile Include="Crypto\TextHash.cs" />
     <Compile Include="Crypto\TokenManager.cs" />
     <Compile Include="Css\CssFile.cs" />

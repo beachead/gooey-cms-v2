@@ -58,7 +58,7 @@ namespace Gooeycms.Webrole.Control.auth.Content
                 IList<CmsPage> pages = PageManager.Instance.Filter(PageManager.Filters.AllPages);
                 foreach (CmsPage page in pages)
                 {
-                    ListItem item = new ListItem(page.Url, page.UrlHash);
+                    ListItem item = new ListItem(page.Url, page.Url);
                     this.RegistrationPage.Items.Add(item);
                 }
                 this.RegistrationPage.Visible = true;

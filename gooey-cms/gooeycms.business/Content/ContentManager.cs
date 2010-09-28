@@ -9,6 +9,7 @@ using Gooeycms.Business.Membership;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Web;
 using System.Web.UI;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Business.Content
 {
@@ -202,6 +203,17 @@ namespace Gooeycms.Business.Content
             }
         }
 
+        public IList<CmsContent> GetFileContent()
+        {
+            return GetFileContent(CurrentSite.Guid);
+        }
+
+        public IList<CmsContent> GetFileContent(Data.Guid siteGuid)
+        {
+            CmsContentDao dao = new CmsContentDao();
+            return dao.FindFilesBySite(siteGuid);
+        }
+
         public IList<CmsContent> GetExistingContent(CmsContentType filter)
         {
             return GetExistingContent(CurrentSite.Guid, filter);
@@ -229,7 +241,7 @@ namespace Gooeycms.Business.Content
                 throw new ApplicationException("The subscription id must not be null. This is a programming error.");
 
             IList<CmsContentField> fields = new List<CmsContentField>();
-            PopulateFields(dynamicControls, content, null);
+            PopulateFields(content.SubscriptionId,dynamicControls, content, null);
 
             CmsContentDao dao = new CmsContentDao();
             using (Transaction tx = new Transaction())
@@ -241,7 +253,7 @@ namespace Gooeycms.Business.Content
             return content;
         }
 
-        private void PopulateFields(Control parent, CmsContent item, String oldFilename)
+        private void PopulateFields(Data.Guid siteGuid, Control parent, CmsContent item, String oldFilename)
         {
             if (item.ContentType.IsFileType)
             {
@@ -255,16 +267,18 @@ namespace Gooeycms.Business.Content
                     String filename = (oldFilename == null) ? upload.FileName : oldFilename;
                     String mimeType = upload.PostedFile.ContentType;
 
+                    Boolean overwrite = false;
+                    if (String.IsNullOrWhiteSpace(oldFilename))
+                        overwrite = true;
+
+                    if (!ContentFileUploadImpl.IsValidFileType(filename))
+                        throw new ArgumentException("The specified filetype is not currently supported by the CMS. Valid file types are:" + ContentFileUploadImpl.ValidExtensionsString);
+
+                    ContentFileUploadImpl handler = new ContentFileUploadImpl();
+                    handler.Save(siteGuid,data, filename, overwrite);
+
                     CmsContentField filenameField = new CmsContentField();
                     CmsContentField mimeTypeField = new CmsContentField();
-
-                    //Save the file to the filesystem
-                    /*
-                    bool allowOverwrite = false;
-                    if (oldFilename != null)
-                        allowOverwrite = true;
-                    */
-                    //TODO Actually save the file---filehandler.Save(filename, mimeType, data, allowOverwrite);
 
                     filenameField.Name = "filename";
                     filenameField.ObjectType = "System.String";
@@ -317,6 +331,58 @@ namespace Gooeycms.Business.Content
         {
             CmsContentDao dao = new CmsContentDao();
             return dao.FindByGuid(guid);
+        }
+
+        public void Update(CmsContent item, Table table)
+        {
+            //Save the filename, so we can restore it
+            String filename = null;
+            if (item.ContentType.IsFileType)
+                filename = item.FindField("filename").Value;
+
+            //Remove all of the existing items
+            foreach (CmsContentField field in item.Fields)
+            {
+                if (!(field.Name.Equals("filename")) &&
+                     !(field.Name.Equals("mimetype")))
+                {
+                    item.RemoveField(field);
+                }
+            }
+            PopulateFields(item.SubscriptionId,table, item, filename);
+
+            Save(item);
+        }
+
+        public void Save(CmsContent item)
+        {
+            CmsContentDao dao = new CmsContentDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<CmsContent>(item);
+                tx.Commit();
+            }
+        }
+
+        public CmsContent GetFile(String filename)
+        {
+            return GetFile(CurrentSite.Guid, filename);
+        }
+
+        public CmsContent GetFile(Data.Guid siteGuid, string filename)
+        {
+            CmsContentDao dao = new CmsContentDao();
+            return dao.FindByFilename(siteGuid, filename);
+        }
+
+        internal static string DecryptFilename(Data.EncryptedValue encryptedDownload)
+        {
+            return TextEncryption.Decode(encryptedDownload.Value);
+        }
+
+        internal static string EncryptFilename(string filename)
+        {
+            return TextEncryption.Encode(filename);
         }
     }
 }

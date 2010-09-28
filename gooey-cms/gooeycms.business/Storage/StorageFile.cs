@@ -6,6 +6,7 @@ namespace Gooeycms.Business.Storage
     [Serializable]
     public class StorageFile
     {
+        public long Size { get; set; }
         public Uri Uri { get; set; }
         public String Filename { get; set; }
         public System.Collections.Specialized.NameValueCollection Metadata { get; set; }
