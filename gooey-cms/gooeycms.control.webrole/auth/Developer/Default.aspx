@@ -28,7 +28,7 @@ This page will allow you to package your site or theme for sale in the Gooey Sto
 				            <div class="title" style="margin-top:0px;">
                                 <%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c}") %>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span style="color:#666666;font-size:11px;"><a style="color:#646464;" href='./Site.aspx?e=<%# Eval("Guid") %>'>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="BtnDelete" ForeColor="#646464" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton>&nbsp;&nbsp;</span>
+                                <span style="color:#666666;font-size:11px;"><a style="color:#646464;" href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="BtnDelete" ForeColor="#646464" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton>&nbsp;&nbsp;</span>
                             </div>
 				            <ul class="thumbs" style="padding-left:0px;">
                                 <asp:Repeater ID="ThumbnailImages" runat="server">
