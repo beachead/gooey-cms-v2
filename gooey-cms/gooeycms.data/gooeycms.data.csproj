@@ -63,6 +63,8 @@
     <Compile Include="Guid.cs" />
     <Compile Include="Model\BaseDao.cs" />
     <Compile Include="Model\BasePersistedItem.cs" />
+    <Compile Include="Model\Campaign\CmsCampaign.cs" />
+    <Compile Include="Model\Campaign\CmsCampaignDao.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Content\CmsContent.cs" />
     <Compile Include="Model\Content\CmsContentDao.cs" />
@@ -110,8 +112,10 @@
     <EmbeddedResource Include="Mappings\StorePackage.hbm.xml" />
     <EmbeddedResource Include="Mappings\Receipt.hbm.xml" />
     <EmbeddedResource Include="Mappings\UserPackages.hbm.xml" />
+    <EmbeddedResource Include="Mappings\CmsCampaigns.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\add-foreign-keys.sql.txt" />
+    <Content Include="sql-scripts\create-campaigns.sql.txt" />
     <Content Include="sql-scripts\create-store-tables.sql.txt" />
     <Content Include="sql-scripts\create-token-table.sql.txt" />
     <Content Include="sql-scripts\create-content-tables.sql.txt" />

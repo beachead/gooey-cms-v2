@@ -8,6 +8,7 @@ using Gooeycms.Business.Content;
 using Gooeycms.Data.Model.Content;
 using Gooeycms.Business.Pages;
 using Gooeycms.Data.Model.Page;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control.auth.Content
 {
@@ -20,6 +21,35 @@ namespace Gooeycms.Webrole.Control.auth.Content
 
             if (!Page.IsPostBack)
                 LoadStaticData();
+        }
+
+        protected void BtnSaveContent_Click(object sender, EventArgs e)
+        {
+            String guid = Request.QueryString["tid"];
+            CmsContent item = ContentManager.Instance.GetContent(guid);
+
+            String filterId = "";
+            if (item != null)
+            {
+                Boolean requireRegistration = Boolean.Parse(this.RequireRegistration.SelectedValue);
+                String regPage = null;
+                if (requireRegistration)
+                {
+                    regPage = this.RegistrationPage.SelectedValue;
+                    if (String.IsNullOrEmpty(regPage))
+                        throw new ArgumentException("You must select a registration page if the content requires registration.");
+                }
+
+                item.Content = this.TxtEditor.Text;
+                item.Author = LoggedInUser.Username;
+                item.LastSaved = DateTime.Now;
+                item.RequiresRegistration = requireRegistration;
+                item.RegistrationPage = regPage;
+
+                ContentManager.Instance.Update(item, this.ControlTable);
+                filterId = item.ContentType.Guid;
+            }
+            Response.Redirect("./Default.aspx?s=1&filter=" + filterId, true);
         }
 
         protected void RequireRegistration_Change(object sender, EventArgs e)
@@ -36,7 +66,7 @@ namespace Gooeycms.Webrole.Control.auth.Content
                 IList<CmsPage> pages = PageManager.Instance.Filter(PageManager.Filters.AllPages);
                 foreach (CmsPage page in pages)
                 {
-                    ListItem item = new ListItem(page.Url, page.UrlHash);
+                    ListItem item = new ListItem(page.Url, page.Url);
                     this.RegistrationPage.Items.Add(item);
                 }
                 this.RegistrationPage.Visible = true;

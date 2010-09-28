@@ -33,14 +33,18 @@ namespace Gooeycms.Business.Forms.Plugins
             {
                 if (base.IsValidField(key))
                 {
-                    keys.Append(key).Append(FIELD_SEPARATOR);
-                    values.Append(base.GetField(key)).Append(FIELD_SEPARATOR);
+                    if (!key.Equals("filename"))
+                    {
+                        keys.Append(key).Append(FIELD_SEPARATOR);
+                        values.Append(base.GetField(key)).Append(FIELD_SEPARATOR);
+                    }
                 }
             }
 
             CmsForm form = new CmsForm();
             form.Guid = System.Guid.NewGuid().ToString();
             form.SubscriptionId = CurrentSite.Guid.Value;
+            form.DownloadedFile = common.Filename;
             form.Email = common.Email;
             form.IpAddress = common.IpAddress;
             form.RawCampaigns = common.Campaigns;

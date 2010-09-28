@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Gooeycms.Business.Storage
 {
@@ -25,6 +26,7 @@ namespace Gooeycms.Business.Storage
 
         byte[] Open(String containerName, String directoryName, String filename);
         String OpenAsString(String containerName, String directoryName, String filename);
+        void Read(String containerName, String directoryName, String filename, Stream stream);
 
         StorageFile GetFile(String containerName, String directoryName, String filename);
         StorageFile GetInfo(String containerName, String directoryName, String filename);

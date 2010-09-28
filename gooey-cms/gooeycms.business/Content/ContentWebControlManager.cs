@@ -78,9 +78,14 @@ namespace Gooeycms.Business.Content
                 Control upload = new FileUpload();
                 upload.ID = "fileupload";
 
+                CmsContentTypeField temp = new CmsContentTypeField();
+                temp.Name = "Select file to upload";
+                temp.SystemName = "file";
+
                 ContentWebControl field = new ContentWebControl();
                 field.Description = description;
                 field.Control = upload;
+                field.Field = temp;
 
                 results.Add(field);
             }

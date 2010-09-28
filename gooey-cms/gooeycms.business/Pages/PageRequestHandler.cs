@@ -18,6 +18,7 @@ using System.ServiceModel.Activation;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Cache;
 using Gooeycms.Business.Markup.Dynamic;
+using Gooeycms.Business.Campaigns;
 
 namespace Gooeycms.Business.Pages
 {
@@ -60,11 +61,14 @@ namespace Gooeycms.Business.Pages
 
             if (String.IsNullOrEmpty(preview))
             {
+                CampaignManager.Instance.TrackCampaigns();
+
                 //If the page is in the cache, return immediately
                 if (isInCache)
                     return;
 
                 ValidateSite();
+
                 this.page = PageManager.Instance.GetLatestPage(url);
             }
             else

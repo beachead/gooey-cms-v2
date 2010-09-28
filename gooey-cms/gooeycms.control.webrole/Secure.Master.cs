@@ -24,6 +24,9 @@ namespace Gooeycms.Webrole.Control
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!CurrentSite.IsSet)
+                Response.Redirect("~/auth/dashboard.aspx");
+
             if (Root == null)
                 Root = Page.ResolveUrl("~/");
 

@@ -8,6 +8,9 @@ using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Data.Model;
 using Gooeycms.Extensions;
+using System.Web.UI;
+using Gooeycms.Business.Campaigns;
+using Gooeycms.Business.Campaigns.Engine;
 
 namespace Gooeycms.Business.Util
 {
@@ -43,6 +46,11 @@ namespace Gooeycms.Business.Util
                 }
                 return value;
 
+            }
+
+            public static String GoogleAccountId
+            {
+                get { return GetSiteConfiguration("google-account-id", "", false); }
             }
 
             public static String HeaderImageTemplate
@@ -88,6 +96,7 @@ namespace Gooeycms.Business.Util
             }
         }
 
+
         private static String GetStorageKey(String type)
         {
             return String.Format(type, SiteHelper.GetActiveSiteGuid(true).Value);
@@ -111,6 +120,22 @@ namespace Gooeycms.Business.Util
         public static String ImageStorageDirectory
         {
             get { return GetStorageKey(SiteHelper.ImagesDirectoryKey); }
+        }
+
+        public static Boolean IsSet
+        {
+            get
+            {
+                Boolean result = false;
+                try
+                {
+                    SiteHelper.GetActiveSiteGuid(true);
+                    result = true;
+                }
+                catch (Exception) { }
+
+                return result;
+            }
         }
 
         public static Data.Guid Guid
@@ -146,6 +171,18 @@ namespace Gooeycms.Business.Util
             }
         }
 
+        public static ICampaignEngine GetCampaignEngine()
+        {
+            ICampaignEngine engine = CurrentSite.Cache.Get<ICampaignEngine>("campaign-engine");
+            if (engine == null)
+            {
+                engine = new GoogleAnalytics();
+                CurrentSite.Cache.Add("campaign-engine", engine);
+            }
+
+            return engine;
+        }
+
         public static CmsTheme GetCurrentTheme()
         {
             CmsTheme result = CurrentSite.Cache.Get<CmsTheme>("currenttheme");
@@ -177,6 +214,17 @@ namespace Gooeycms.Business.Util
 
                 return result;
             }
+        }
+
+        public static String ToAbsoluteUrl(String path)
+        {
+            Control resolver = new Control();
+
+            path = resolver.ResolveUrl(path);
+            if (!path.StartsWith("/"))
+                path = "/" + path;
+
+            return "http://" + CurrentSite.ProductionDomain + path;
         }
 
         public static Boolean IsSalesForceEnabled

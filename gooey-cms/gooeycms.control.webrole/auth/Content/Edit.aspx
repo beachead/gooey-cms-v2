@@ -54,6 +54,6 @@
     </div>
 
     <div style="padding-top:7px;">
-    <asp:Button ID="BtnSaveContent" Text="Save" runat="server" />
+    <asp:Button ID="BtnSaveContent" Text="Save" OnClick="BtnSaveContent_Click" runat="server" />
     </div>
 </asp:Content>

@@ -5,6 +5,7 @@ using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
 using System.Text;
+using System.IO;
 
 namespace Gooeycms.Business.Storage
 {
@@ -123,6 +124,26 @@ namespace Gooeycms.Business.Storage
             return Encoding.UTF8.GetString(data);
         }
 
+        public void Read(String containerName, String directoryName, String filename, Stream stream)
+        {
+            filename = filename.Replace(" ", "");
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            if (container.Exists())
+            {
+                CloudBlob blob = GetCloudBlob(container, directoryName, filename);
+                if (blob.Exists())
+                {
+                    byte[] buffer = new byte[1<<16]; //64KB
+                    int bytesRead = 0;
+                    using (BlobStream blobstream = blob.OpenRead())
+                    {
+                        while ((bytesRead = blobstream.Read(buffer, 0, buffer.Length)) != 0)
+                            stream.Write(buffer, 0, bytesRead);
+                    }
+                }
+            }
+        }
+
         public StorageFile GetFile(String containerName, String directoryName, String filename)
         {
             filename = filename.Replace(" ", "");
@@ -226,6 +247,7 @@ namespace Gooeycms.Business.Storage
                 file.Filename = GetBlobFilename(blob);
                 file.Uri = blob.Uri;
                 file.Metadata = blob.Metadata;
+                file.Size = blob.Properties.Length;
             }
 
             return file;

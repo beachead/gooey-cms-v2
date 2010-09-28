@@ -77,6 +77,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="auth\Campaigns\Create.aspx" />
+    <Content Include="auth\Campaigns\Default.aspx" />
+    <Content Include="auth\Campaigns\Links.aspx" />
     <Content Include="auth\Content\Add.aspx" />
     <Content Include="auth\Content\ContentTypeFields.aspx" />
     <Content Include="auth\Content\ContentTypes.aspx" />
@@ -112,6 +115,27 @@
   <ItemGroup>
     <Compile Include="App_Code\ValidatedHelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\Create.aspx.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\Create.aspx.designer.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Campaigns\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Campaigns\Links.aspx.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\Links.aspx.designer.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Content\Add.aspx.cs">
       <DependentUpon>Add.aspx</DependentUpon>

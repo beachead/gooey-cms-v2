@@ -14,5 +14,10 @@ namespace Gooeycms.Data
         {
             return new EncryptedValue(value);
         }
+
+        public static implicit operator EncryptedValue(string guid)
+        {
+            return new EncryptedValue(guid);
+        }
     }
 }

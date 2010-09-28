@@ -33,10 +33,14 @@ namespace Gooeycms.Business.Forms.Plugins
                 builder.AppendFormat("IP Address:   {0}", common.IpAddress).AppendLine();
                 builder.AppendFormat("Email:   {0}", common.Email).AppendLine();
                 builder.AppendFormat("Campaign:   {0}", common.Campaigns).AppendLine();
+                builder.AppendFormat("Download:   {0}", common.Filename).AppendLine(); 
 
                 foreach (String key in base.FormFields.Keys)
                 {
-                    if ((base.IsValidField(key)) && (!key.EqualsCaseInsensitive("resource")) && (!key.EqualsCaseInsensitive("culture")))
+                    if ((base.IsValidField(key)) && 
+                        (!key.EqualsCaseInsensitive("resource")) && 
+                        (!key.EqualsCaseInsensitive("culture")) &&
+                        (!key.EqualsCaseInsensitive("filename")))
                         builder.AppendFormat("{0}:  {1}", key, base.GetField(key)).AppendLine();
                 }
                 String message = builder.ToString().Trim();
