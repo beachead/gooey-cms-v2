@@ -23,6 +23,7 @@ namespace Gooeycms.Business.Storage
         void CopyDirectory(String sourceContainer, String sourceDirectory, String destinationContainer, String destinationDirectory);
 
         void Delete(String containerName, String directoryName, String filename);
+        void Delete(String containerName);
 
         byte[] Open(String containerName, String directoryName, String filename);
         String OpenAsString(String containerName, String directoryName, String filename);

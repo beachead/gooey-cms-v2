@@ -445,5 +445,38 @@ namespace Gooeycms.Business.Store
 
             return packages;
         }
+
+        public void DeletePackage(string packageGuid)
+        {
+            Package package = GetPackage(packageGuid);
+            if (package != null)
+            {
+                //Delete the entries in the database
+                CmsSubscription subscription = SubscriptionManager.GetSubscription(package.Guid);
+                SubscriptionManager.Delete(subscription);
+
+                PackageDao packageDao = new PackageDao();
+                using (Transaction tx = new Transaction())
+                {
+                    packageDao.Delete<Package>(package);
+                    tx.Commit();
+                }
+
+                //Delete the file from the cloud storage
+                try
+                {
+                    IStorageClient client = StorageHelper.GetStorageClient();
+                    foreach (String screenshot in package.ScreenshotList)
+                    {
+                        client.Delete("package-screenshots", package.PackageTypeString, screenshot); 
+                    }
+                    client.Delete(PackageContainer, PackageDirectory, package.Guid + PackageExtension);
+                }
+                catch (Exception e)
+                {
+                    Logging.Error("There was a problem deleting the package " + package.Guid, e);
+                }
+            }
+        }
     }
 }
