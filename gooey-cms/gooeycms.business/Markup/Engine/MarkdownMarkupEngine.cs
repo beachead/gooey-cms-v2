@@ -15,10 +15,10 @@ namespace Gooeycms.Business.Markup.Engine
         public override IList<IMarkupFormatter> GetFormatters()
         {
             IList<IMarkupFormatter> formatters = new List<IMarkupFormatter>();
+            formatters.Add(new DynamicContentFormatter());
             formatters.Add(new TableTagFormatter());
             formatters.Add(new MarkdownFormatter());
             formatters.Add(new FormMarkupFormatter());
-            formatters.Add(new DynamicContentFormatter());
 
             return formatters;
         }
