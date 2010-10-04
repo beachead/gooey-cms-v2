@@ -47,11 +47,6 @@ namespace Gooeycms.Data.Model.Content
             hql.Append("and content.ContentType.Name = :contentTypeName ");
 
             IQuery query = base.NewHqlQuery(hql.ToString());
-
-            if (limit > 0)
-            {
-                query.SetMaxResults(limit);
-            }
             query = query.SetString("subscriptionGuid", this.subscriptionGuid);
             query = query.SetString("contentTypeName", this.contentType);
 
@@ -77,6 +72,10 @@ namespace Gooeycms.Data.Model.Content
                 if (!this.orderAscending)
                     ((List<CmsContent>)results).Reverse();
             }
+
+            //Check if we need to limit the results
+            if (this.limit > 0)
+                results = results.Take(this.limit).ToList();
 
             return results;
         }
