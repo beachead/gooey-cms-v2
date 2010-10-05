@@ -72,6 +72,7 @@
     <Compile Include="Model\Content\CmsContentType.cs" />
     <Compile Include="Model\Content\CmsContentTypeDao.cs" />
     <Compile Include="Model\Content\CmsContentTypeField.cs" />
+    <Compile Include="Model\Content\ContentQueryBuilder.cs" />
     <Compile Include="Model\Form\CmsForm.cs" />
     <Compile Include="Model\Form\CmsFormDao.cs" />
     <Compile Include="Model\Help\HelpPage.cs" />
