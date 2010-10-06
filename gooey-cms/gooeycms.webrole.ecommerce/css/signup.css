@@ -1,3 +1,7 @@
+#content {
+    overflow: visible;
+}
+
 #callout{
 	top: 100px;
 	left: 410px;;

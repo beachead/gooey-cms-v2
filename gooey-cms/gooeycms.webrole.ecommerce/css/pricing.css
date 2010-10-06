@@ -1,5 +1,6 @@
 h2 {
 	color: #4395f1;
+	margin-top: 0;
 }
 
 
@@ -21,6 +22,7 @@ h2 {
 	color: #fff;
 	font-weight: normal;
 	margin-bottom: 20px;
+	margin-top: 15px;
 	font-size: 1.4em;
 	text-shadow: #173454 0 -0.01em 0.2em;
 }
