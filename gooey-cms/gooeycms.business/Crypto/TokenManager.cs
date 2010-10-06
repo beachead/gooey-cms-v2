@@ -102,5 +102,15 @@ namespace Gooeycms.Business.Crypto
                 tx.Commit();
             }
         }
+
+        internal static void Invalidate(String token)
+        {
+            SecurityToken dbToken = GetFromDatabase(token);
+            dbToken.Expires = DateTime.Now;
+            dbToken.MaxUses = 0;
+            dbToken.Uses = Int32.MaxValue;
+
+            SaveToDatabase(dbToken);
+        }
     }
 }

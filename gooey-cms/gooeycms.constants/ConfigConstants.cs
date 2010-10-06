@@ -22,5 +22,7 @@ namespace Gooeycms.Constants
         public const String PaypalPdt = "paypal-pdt";
         public const String PaypalUrl = "paypal-posturl";
         public const String GooeyAdminUrl = "gooey-admin-url";
+        public const String InviteEmailTemplate = "invite-email-template";
+        public const String ApprovedEmailTemplate = "approved-email-template";
     }
 }
