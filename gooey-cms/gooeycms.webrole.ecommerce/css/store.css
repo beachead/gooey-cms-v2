@@ -122,6 +122,12 @@ li.theme .title {
 	clear: right;
 }
 
+/* PREVIEW */
+
+div.preview {
+    position: relative;
+}
+
 /* theme slideshow */
 li.theme ul.thumbs {
 	width: 344px;
@@ -142,10 +148,12 @@ ul.thumb-nav {
 	height: 6px;
 	clear: both;
 }
+
 ul.thumb-nav li {
 	list-style: none;
 	display: inline;
 }
+
 ul.thumb-nav li a {
 	width: 12px;
 	height: 4px;
@@ -174,13 +182,30 @@ div.next {
 	left: 361px;
 }
 
-
-li.theme ul.features {
-	margin-left: 40px;
-	margin-top: 10px;
+li.theme div.features {
+    bottom: -20px;
+    left: 19px;
+    position: absolute;
 }
 
-li.theme ul.features li {
+li.theme div.features ul {
+	background-color: #bfd9f6;
+    bottom: 20px;
+    display: none;
+    margin-left: 10px;
+	margin-top: 10px;
+	opacity: .9;
+    	-moz-opacity: .9;
+	    -webkit-opacity: .9;
+	padding: 10px;
+    position: absolute;
+    width: 306px;
+    z-index: 4;
+    -moz-border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0;
+}
+
+li.theme div.features li {
 	list-style: none;
 	font-size: .9em;
 	background: transparent url(../images/bullet_features.gif) 0 7px no-repeat;
@@ -208,6 +233,17 @@ li.theme .demo {
 	right: 140px;
 }
 
+
+li.theme ul.options-links {
+    margin-right: 20px;
+}
+
+li.theme ul.options-links li {
+    list-style: none;
+    background: transparent url(../images/small_arrow.png) center right no-repeat;
+    padding-right: 20px;
+    text-align: right;
+}
 
 /* 63px 68px; */
 

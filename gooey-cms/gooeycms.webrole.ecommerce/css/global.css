@@ -64,6 +64,7 @@ body {
 	padding: 15px 63px 60px 68px;
 	position: relative;
 	clear: both;
+	overflow: auto;
 }
 
 #login {
