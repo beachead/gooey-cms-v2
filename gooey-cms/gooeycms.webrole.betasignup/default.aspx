@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="js/global2.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" action="default.aspx" runat="server">
         <!-- START: main -->
         <div id="main">
 

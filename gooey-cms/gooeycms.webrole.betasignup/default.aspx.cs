@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Subscription;
+using Gooeycms.Business;
 
 namespace gooeycms.webrole.betasignup
 {
@@ -12,7 +13,8 @@ namespace gooeycms.webrole.betasignup
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (GooeyConfigManager.InviteEmailTemplate == null)
+                throw new ApplicationException("The invite template has not been configured. You must configure the email templates before continuing.");
         }
 
         protected void BtnSubmit_Click(object sender, EventArgs e)
