@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.test", "gooeycms.t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.worker.control", "gooeycms.worker.control\gooeycms.worker.control.csproj", "{BE246258-9B8E-4EE4-8D1C-20867E3FEB9B}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "gooey-cms-betasignup", "gooey-cms-betasignup\gooey-cms-betasignup.ccproj", "{C5E33EC7-841E-46EE-9BD0-B36BFEC67442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gooeycms.webrole.betasignup", "gooeycms.webrole.betasignup\gooeycms.webrole.betasignup.csproj", "{A50C02B1-1971-4A23-828D-B2316896DC7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,14 @@ Global
 		{BE246258-9B8E-4EE4-8D1C-20867E3FEB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE246258-9B8E-4EE4-8D1C-20867E3FEB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE246258-9B8E-4EE4-8D1C-20867E3FEB9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E33EC7-841E-46EE-9BD0-B36BFEC67442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E33EC7-841E-46EE-9BD0-B36BFEC67442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E33EC7-841E-46EE-9BD0-B36BFEC67442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E33EC7-841E-46EE-9BD0-B36BFEC67442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A50C02B1-1971-4A23-828D-B2316896DC7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A50C02B1-1971-4A23-828D-B2316896DC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A50C02B1-1971-4A23-828D-B2316896DC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A50C02B1-1971-4A23-828D-B2316896DC7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

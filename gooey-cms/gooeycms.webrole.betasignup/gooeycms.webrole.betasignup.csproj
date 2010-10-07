@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A50C02B1-1971-4A23-828D-B2316896DC7E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gooeycms.webrole.betasignup</RootNamespace>
+    <AssemblyName>gooeycms.webrole.betasignup</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics" />
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="auth\default.aspx" />
+    <Content Include="css\global.css" />
+    <Content Include="css\home.css" />
+    <Content Include="css\invite.css" />
+    <Content Include="css\pricing.css" />
+    <Content Include="css\signup.css" />
+    <Content Include="css\store.css" />
+    <Content Include="default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="images\bg_body.jpg" />
+    <Content Include="images\bg_callout.png" />
+    <Content Include="images\bg_callout_bottom.png" />
+    <Content Include="images\bg_callout_top.png" />
+    <Content Include="images\bg_content_bottom.png" />
+    <Content Include="images\bg_features.png" />
+    <Content Include="images\bg_filter_list_bottom.png" />
+    <Content Include="images\bg_filter_list_item.png" />
+    <Content Include="images\bg_filter_list_top.png" />
+    <Content Include="images\bg_gradient-box_bottom.png" />
+    <Content Include="images\bg_gradient-box_top.png" />
+    <Content Include="images\bg_main.jpg" />
+    <Content Include="images\bg_main.png" />
+    <Content Include="images\bg_masthead.png" />
+    <Content Include="images\bg_masthead_no-line.png" />
+    <Content Include="images\bg_pricing_panels%28orig%29.png" />
+    <Content Include="images\bg_pricing_panels.png" />
+    <Content Include="images\bg_side-shadow.png" />
+    <Content Include="images\bg_store-options.png" />
+    <Content Include="images\bg_theme_panel.png" />
+    <Content Include="images\btn_contact-us.png" />
+    <Content Include="images\btn_create_acct.png" />
+    <Content Include="images\btn_feature_tour.png" />
+    <Content Include="images\btn_login.png" />
+    <Content Include="images\btn_next.png" />
+    <Content Include="images\btn_prev.png" />
+    <Content Include="images\btn_purchase.gif" />
+    <Content Include="images\btn_purchase.png" />
+    <Content Include="images\btn_sign-up.png" />
+    <Content Include="images\btn_some_themes.png" />
+    <Content Include="images\btn_this_price.png" />
+    <Content Include="images\build.png" />
+    <Content Include="images\build_your_biz.png" />
+    <Content Include="images\bullet.gif" />
+    <Content Include="images\bullet_features.gif" />
+    <Content Include="images\designers_developers.png" />
+    <Content Include="images\h1[a]_developer_site.png" />
+    <Content Include="images\h1_are_you_a_designer.png" />
+    <Content Include="images\h1_finally_enterprise_cms.png" />
+    <Content Include="images\h1_minute_away2.png" />
+    <Content Include="images\h2_choose_options.png" />
+    <Content Include="images\h2_close_deal.png" />
+    <Content Include="images\h2_create_gooey_acct.png" />
+    <Content Include="images\h2_create_gooey_address.png" />
+    <Content Include="images\h2_create_password.png" />
+    <Content Include="images\h2_enter_email.png" />
+    <Content Include="images\icon_available.png" />
+    <Content Include="images\logo_gooey.png" />
+    <Content Include="images\logo_gooey_internal.png" />
+    <Content Include="images\nav_help.gif" />
+    <Content Include="images\nav_help_on.gif" />
+    <Content Include="images\nav_home.gif" />
+    <Content Include="images\nav_home_on.gif" />
+    <Content Include="images\nav_pricing.gif" />
+    <Content Include="images\nav_pricing_on.gif" />
+    <Content Include="images\nav_signup.gif" />
+    <Content Include="images\nav_signup_on.gif" />
+    <Content Include="images\nav_store.gif" />
+    <Content Include="images\nav_store_on.gif" />
+    <Content Include="images\nav_tour.gif" />
+    <Content Include="images\nav_tour_on.gif" />
+    <Content Include="images\sep_nav_item.gif" />
+    <Content Include="images\signup6.png" />
+    <Content Include="images\txt_for.png" />
+    <Content Include="images\txt_hey_designers.png" />
+    <Content Include="images\txt_increasing_revenue.png" />
+    <Content Include="images\txt_show_me.png" />
+    <Content Include="images\___placeholder_logo.png" />
+    <Content Include="images\___site_001.jpg" />
+    <Content Include="images\___site_002.jpg" />
+    <Content Include="images\___site_003.jpg" />
+    <Content Include="images\___site_004.jpg" />
+    <Content Include="Login.aspx" />
+    <Content Include="orig-default.aspx" />
+    <Content Include="js\global.js" />
+    <Content Include="js\global2.js" />
+    <Content Include="js\jquery-1.4.2.min.js" />
+    <Content Include="js\jquery.cycle.all.min.js" />
+    <Content Include="js\store.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="auth\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebRole.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="auth\Web.config" />
+    <None Include="css\global.css.bak" />
+    <None Include="css\home.css.bak" />
+    <None Include="css\invite.css.bak" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
+      <Project>{A3D01157-7412-47B1-A123-2F3071D86B6E}</Project>
+      <Name>gooeycms.business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">
+      <Project>{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}</Project>
+      <Name>gooeycms.constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.data\gooeycms.data.csproj">
+      <Project>{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}</Project>
+      <Name>gooeycms.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.persistence\gooeycms.persistence.csproj">
+      <Project>{F80B0AF1-6D4F-4AE2-84D2-45D19C456E22}</Project>
+      <Name>gooeycms.persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55690</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://invite.gooeycms.com</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Subscription.CmsInvite,gooeycms.data" table="Invites">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="guid" name="Guid" type="String" />
+    <property column="firstname" name="Firstname" type="String" />
+    <property column="lastname" name="Lastname" type="String" />
+    <property column="email" name="Email" type="String" />
+    <property column="token" name="Token" type="String" />
+    <property column="date_created" name="Created" type="DateTime" />
+    <property column="date_issued" name="Issued" type="DateTime" />
+    <property column="date_responded" name="Responded" type="DateTime" />
+  </class>
+</hibernate-mapping>
