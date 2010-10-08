@@ -23,14 +23,14 @@ namespace Gooeycms.Webrole.Control.auth.Developer
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             String guid = Request.QueryString["e"];
-            Package package = SitePackageManager.Instance.GetPackage(guid);
+            Package package = SitePackageManager.NewInstance.GetPackage(guid);
             if (package != null)
             {
                 package.Title = this.TxtTitle.Text;
                 package.Price = Double.Parse(this.TxtPrice.Text, System.Globalization.NumberStyles.Any);
                 package.Features = this.TxtFeatures.Text;
 
-                SitePackageManager.Instance.Save(package);
+                SitePackageManager.NewInstance.Save(package);
             }
             Response.Redirect("./default.aspx?msg=Successfully+updated+package+info", true);
         }
@@ -45,7 +45,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             }
 
             String guid = Request.QueryString["e"];
-            Package package = SitePackageManager.Instance.GetPackage(guid);
+            Package package = SitePackageManager.NewInstance.GetPackage(guid);
             if (package == null)
                 Response.Redirect("./Default.aspx", true);
 

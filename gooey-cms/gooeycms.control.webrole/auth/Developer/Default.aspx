@@ -12,7 +12,7 @@
 This page will allow you to package your site or theme for sale in the Gooey Store.
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-<a href="./site.aspx">Create New Site Package</a>&nbsp;or&nbsp;<a href="./theme.aspx">Create New Theme Package</a>
+<a href="./site.aspx?g=<%=System.Guid.NewGuid().ToString() %>">Create New Site Package</a>&nbsp;or&nbsp;<a href="./theme.aspx">Create New Theme Package</a>
 <br />
 
 <div style="padding-top:10px; width:900px;">

@@ -50,6 +50,21 @@
                     </tr>
                     <tr>
                         <td colspan="2">
+                            <anthem:Panel ID="PanelImageList" AutoUpdateAfterCallBack="true"  runat="server">
+                                <asp:DataList ID="AvailableImageList" RepeatDirection="Horizontal" BackColor="#F7F6F3" 
+                                    RepeatColumns="4" runat="server" CellPadding="6" CellSpacing="6">
+                                    <ItemTemplate>
+                                        <div style="width:125px;padding-bottom:5px;text-align:center;">
+                                        <br />
+                                        <span style="font-size:10px;"><%# DataBinder.Eval(Container,"DataItem.Filename") %></span>
+                                        <br />
+                                        <a href="#" onclick="javascript:_imageclick('<%# DataBinder.Eval(Container,"DataItem.Filename") %>'); return false;">Select</a>
+                                        <a href="#" onclick="javascript:_imagedelete('<%# DataBinder.Eval(Container,"DataItem.Filename") %>'); return false;">Delete</a>
+                                        </div>
+                                    </ItemTemplate>
+                                    <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                </asp:DataList>
+                            </anthem:Panel>
                             <anthem:Panel ID="PanelImages" AutoUpdateAfterCallBack="true" runat="server">
                                 <asp:DataList ID="AvailableImages" RepeatDirection="Horizontal" BackColor="#F7F6F3" 
                                     RepeatColumns="4" runat="server" CellPadding="6" CellSpacing="6">

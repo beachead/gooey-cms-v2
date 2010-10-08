@@ -34,7 +34,7 @@ namespace Gooeycms.Webrole.Control.auth
         private void DoDataBind()
         {
             UserInfo user = LoggedInUser.Wrapper.UserInfo;
-            IList<Package> packages = SitePackageManager.Instance.GetPurchasedPackages(user);
+            IList<Package> packages = SitePackageManager.NewInstance.GetPurchasedPackages(user);
 
             SitePackages.DataSource = packages;
             SitePackages.DataBind();
@@ -69,7 +69,7 @@ namespace Gooeycms.Webrole.Control.auth
                 Button applyButton = (Button)item.FindControl("BtnApplyPackage");
                 DropDownList siteList = (DropDownList)item.FindControl("LstSites");
 
-                IList<String> thumbnailsrc = SitePackageManager.Instance.GetScreenshotUrls(package);
+                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
 
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();

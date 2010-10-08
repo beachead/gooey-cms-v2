@@ -166,6 +166,7 @@
     <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
     <Compile Include="Handler\BaseHttpHandler.cs" />
+    <Compile Include="Storage\BlobSnapshot.cs" />
     <Compile Include="Storage\IQueueMessage.cs" />
     <Compile Include="Storage\IQueueMessageProcessor.cs" />
     <Compile Include="Storage\QueueManager.cs" />

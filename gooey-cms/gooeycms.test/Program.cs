@@ -9,6 +9,15 @@ namespace Gooeycms.test
     {
         static void Main(string[] args)
         {
+            int step = 1;
+            int max = 5;
+
+            double dec = (double)step / (double)max;
+
+            int result = (int)Math.Round(dec * 100, 0);
+            Console.WriteLine(result);
+            Console.ReadLine();
+            /*
             String test = "\u001FTESTING\u001FTESTING1\u001FTESTING2";
             Console.WriteLine(test);
 
@@ -16,6 +25,7 @@ namespace Gooeycms.test
             foreach (String item in items)
                 Console.WriteLine(item);
             Console.ReadLine();
+             */
             /*
             string test =
 @"
