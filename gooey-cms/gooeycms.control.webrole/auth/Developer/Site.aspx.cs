@@ -10,6 +10,7 @@ using Gooeycms.Data.Model.Subscription;
 using System.Web.Security;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business;
+using Gooeycms.Data.Model.Store;
 
 namespace Gooeycms.Webrole.Control.auth.Developer
 {
@@ -44,21 +45,28 @@ namespace Gooeycms.Webrole.Control.auth.Developer
 
         protected void BtnSave_Click(Object sender, EventArgs e)
         {
-            Data.Guid guid = Data.Guid.New(this.LstAvailableSites.SelectedValue);
-            Data.Guid result = SitePackageManager.Instance.CreatePackage(
-                                            guid,
-                                            this.TxtTitle.Text,
-                                            this.TxtFeatures.Text,
-                                            this.LstCategory.SelectedValue,
-                                            Double.Parse(this.TxtPrice.Text));
+            String guid = Request.QueryString["g"];
+            System.Guid.Parse(guid);
 
-            this.SavedPackageGuid.Value = result.Value;
-        }
+            Package package = SitePackageManager.NewInstance.GetPackage(guid);
+            if (package == null)
+                package = new Package();
 
-        [Anthem.Method]
-        public void DoDeploySite(String packageGuid)
-        {
-            SitePackageManager.Instance.DeployDemoPackage(packageGuid);
+            Data.Guid siteGuid = Data.Guid.New(this.LstAvailableSites.SelectedValue);
+            package.Category = this.LstCategory.SelectedValue;
+            package.Created = DateTime.Now;
+            package.Approved = DateTime.MaxValue;
+            package.Features = this.TxtFeatures.Text;
+            package.Guid = guid;
+            package.IsApproved = false;
+            package.OwnerSubscriptionId = siteGuid.Value;
+            package.PackageType = PackageTypes.Site;
+            package.Price = Double.Parse(this.TxtPrice.Text);
+            package.Title = this.TxtTitle.Text;
+
+            SitePackageManager.NewInstance.Save(package);
+
+            this.SavedPackageGuid.Value = package.Guid;
         }
     }
 }

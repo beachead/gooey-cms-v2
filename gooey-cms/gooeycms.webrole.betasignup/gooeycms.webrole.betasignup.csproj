@@ -135,7 +135,6 @@
     <Content Include="images\___site_003.jpg" />
     <Content Include="images\___site_004.jpg" />
     <Content Include="Login.aspx" />
-    <Content Include="orig-default.aspx" />
     <Content Include="js\global.js" />
     <Content Include="js\global2.js" />
     <Content Include="js\jquery-1.4.2.min.js" />

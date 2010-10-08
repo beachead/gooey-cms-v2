@@ -7,10 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.Webrole.Control.auth.Pages {
+namespace Gooeycms.Webrole.Control.auth.Developer {
     
     
-    public partial class ImageBrowser {
+    public partial class DoPackage {
+        
+        /// <summary>
+        /// Link1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlLink Link1;
         
         /// <summary>
         /// form1 control.
@@ -22,75 +31,48 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// LblUploadStatus control.
+        /// scriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Label LblUploadStatus;
+        protected global::System.Web.UI.ScriptManager scriptManager;
         
         /// <summary>
-        /// FileUpload control.
+        /// ExistingGuid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
+        protected global::System.Web.UI.WebControls.HiddenField ExistingGuid;
         
         /// <summary>
-        /// BtnUpload control.
+        /// LblSiteTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Button BtnUpload;
+        protected global::System.Web.UI.WebControls.Label LblSiteTitle;
         
         /// <summary>
-        /// LblUploadedFiles control.
+        /// ProgressControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Label LblUploadedFiles;
+        protected global::MattBerseth.WebControls.AJAX.Progress.ProgressControl ProgressControl;
         
         /// <summary>
-        /// PanelImageList control.
+        /// Img2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Panel PanelImageList;
-        
-        /// <summary>
-        /// AvailableImageList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList AvailableImageList;
-        
-        /// <summary>
-        /// PanelImages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Anthem.Panel PanelImages;
-        
-        /// <summary>
-        /// AvailableImages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList AvailableImages;
+        protected global::System.Web.UI.HtmlControls.HtmlImage Img2;
     }
 }

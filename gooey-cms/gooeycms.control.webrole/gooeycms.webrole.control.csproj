@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\lib\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Anthem, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Anthem.dll</HintPath>
@@ -46,6 +49,9 @@
     <Reference Include="FredCK.FCKeditorV2, Version=2.6.3.22451, Culture=neutral, PublicKeyToken=4f86767c9b519a06, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FredCK.FCKeditorV2.dll</HintPath>
+    </Reference>
+    <Reference Include="MattBerseth.WebControls.AJAX">
+      <HintPath>..\..\lib\MattBerseth.WebControls.AJAX.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -80,6 +86,7 @@
     <Content Include="auth\Campaigns\Create.aspx" />
     <Content Include="auth\Campaigns\Default.aspx" />
     <Content Include="auth\Campaigns\Links.aspx" />
+    <Content Include="auth\cleanup.aspx" />
     <Content Include="auth\Content\Add.aspx" />
     <Content Include="auth\Content\ContentTypeFields.aspx" />
     <Content Include="auth\Content\ContentTypes.aspx" />
@@ -87,6 +94,7 @@
     <Content Include="auth\Content\Edit.aspx" />
     <Content Include="auth\Developer\Default.aspx" />
     <Content Include="auth\Developer\Edit.aspx" />
+    <Content Include="auth\Developer\DoPackage.aspx" />
     <Content Include="auth\Developer\Site.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
@@ -105,6 +113,7 @@
     <Content Include="images\bullet_features.gif" />
     <Content Include="images\logo_gooey-login.png" />
     <Content Include="images\logo_gooey_internal.png" />
+    <Content Include="images\progress_green.gif" />
     <Content Include="scripts\global.js" />
     <Content Include="scripts\jquery-1.4.2.min.js" />
     <Content Include="scripts\jquery.cycle.all.min.js" />
@@ -137,6 +146,13 @@
     </Compile>
     <Compile Include="auth\Campaigns\Links.aspx.designer.cs">
       <DependentUpon>Links.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\cleanup.aspx.cs">
+      <DependentUpon>cleanup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\cleanup.aspx.designer.cs">
+      <DependentUpon>cleanup.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Content\Add.aspx.cs">
       <DependentUpon>Add.aspx</DependentUpon>
@@ -186,6 +202,13 @@
     </Compile>
     <Compile Include="auth\Developer\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Developer\DoPackage.aspx.cs">
+      <DependentUpon>DoPackage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Developer\DoPackage.aspx.designer.cs">
+      <DependentUpon>DoPackage.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Developer\Site.aspx.cs">
       <DependentUpon>Site.aspx</DependentUpon>
