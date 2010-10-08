@@ -2,6 +2,7 @@
 
 namespace Gooeycms.Data
 {
+    [Serializable]
     public struct Guid
     {
         public Guid(String value) : this()

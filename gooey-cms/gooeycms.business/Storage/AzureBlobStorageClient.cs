@@ -6,6 +6,7 @@ using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
 using System.Text;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace Gooeycms.Business.Storage
 {
@@ -89,6 +90,37 @@ namespace Gooeycms.Business.Storage
                 filename = directoryName + "/" + filename;
             }
             return filename;
+        }
+
+        /// <summary>
+        /// Deletes all of the snapshots associated with each file in the container and directory
+        /// </summary>
+        /// <param name="containerName"></param>
+        /// <param name="directoryName"></param>
+        public void DeleteSnapshots(String containerName, String directoryName)
+        {
+            BlobRequestOptions options = new BlobRequestOptions()
+            {
+                BlobListingDetails = BlobListingDetails.Snapshots,
+                UseFlatBlobListing = true
+            };
+
+            IList<BlobSnapshot> snapshotNames = new List<BlobSnapshot>();
+
+            ResultContinuation continuation = null;
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            do
+            {
+                ResultSegment<IListBlobItem> blobPages = container.ListBlobsSegmented(0, continuation, options);
+                continuation = blobPages.ContinuationToken;
+
+                foreach (CloudBlob blob in blobPages.Results)
+                {
+                    if (blob.SnapshotTime.HasValue)
+                        blob.DeleteIfExists();
+                }
+            } while (continuation != null);
+
         }
 
         /// <summary>
@@ -176,6 +208,103 @@ namespace Gooeycms.Business.Storage
             return result;
         }
 
+        public void CopyFromSnapshots(IList<BlobSnapshot> snapshots, String copyFromContainerName, String copyToContainerName, String copyToDirectoryName, Permissions permissions)
+        {
+            CloudBlobContainer copyFromContainer = GetBlobContainer(copyFromContainerName);
+            CloudBlobContainer copyToContainer = GetBlobContainer(copyToContainerName);
+
+            Boolean containerCreated = copyToContainer.CreateIfNotExist();
+            if (containerCreated)
+            {
+                BlobContainerPermissions perms = new BlobContainerPermissions();
+                if (permissions == Permissions.Private)
+                    perms.PublicAccess = BlobContainerPublicAccessType.Off;
+                else if (permissions == Permissions.Public)
+                    perms.PublicAccess = BlobContainerPublicAccessType.Blob;
+
+                copyToContainer.SetPermissions(perms);
+            }
+
+            foreach (BlobSnapshot snapshot in snapshots)
+            {
+                String filename = snapshot.Filename.Replace(" ", "");
+
+                String copyToBlobFileName = GetRelativeFilename(copyToDirectoryName, filename);
+                //Get a reference to the snapshot itself
+                String snapshotUri = snapshot.Uri + "?snapshot=" + snapshot.SnapshotTime.Value.ToString("o");
+
+                CloudBlob copyToBlob = copyToContainer.GetBlobReference(copyToBlobFileName);
+                CloudBlob snapshotBlob = copyFromContainer.GetBlobReference(snapshotUri);
+                if (snapshotBlob.Exists())
+                    copyToBlob.CopyFromBlob(snapshotBlob);
+            }
+        }
+
+        public IList<BlobSnapshot> CreateSnapshot(String containerFolder, String directoryName)
+        {
+            BlobRequestOptions options = new BlobRequestOptions()
+            {
+                BlobListingDetails = BlobListingDetails.None,
+            };
+
+            IList<BlobSnapshot> snapshotNames = new List<BlobSnapshot>();
+
+            ResultContinuation continuation = null;
+            CloudBlobContainer container = GetBlobContainer(containerFolder);
+            do
+            {
+                ResultSegment<IListBlobItem> blobPages;
+                if (directoryName != null)
+                {
+                    CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
+                    blobPages = directory.ListBlobsSegmented(0, continuation, options);
+                }
+                else
+                    blobPages = container.ListBlobsSegmented(0, continuation, options);
+
+                continuation = blobPages.ContinuationToken;
+                foreach (IListBlobItem item in blobPages.Results)
+                {
+                    if (item is CloudBlob)
+                    {
+                        CloudBlob blob = (CloudBlob)item;
+
+                        //Create a snapshot of this blob
+                        CloudBlob snapshot = blob.CreateSnapshot();
+
+                        BlobSnapshot temp = new BlobSnapshot();
+                        temp.SnapshotTime = snapshot.SnapshotTime;
+                        temp.Uri = new Uri(snapshot.Attributes.Uri.AbsoluteUri);
+                        temp.Filename = GetBlobFilename(snapshot);
+
+                        snapshotNames.Add(temp);
+                    }
+                }
+            } while (continuation != null);
+
+            return snapshotNames;
+        }
+
+        private IEnumerable<IListBlobItem> GetCloudBlobs(CloudBlobContainer container, String directoryName)
+        {
+            IEnumerable<IListBlobItem> items = null; ;
+            if (directoryName != null)
+            {
+                try
+                {
+                    CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
+                    items = directory.ListBlobs();
+                }
+                catch (Exception) { }
+            }
+            else
+            {
+                items = container.ListBlobs();
+            }
+
+            return items;
+        }
+
         public IList<StorageFile> List(String containerFolder)
         {
             return List(containerFolder, StorageClientConst.RootFolder);
@@ -188,35 +317,24 @@ namespace Gooeycms.Business.Storage
             CloudBlobContainer container = GetBlobContainer(containerFolder);
             if (container.Exists())
             {
-                IEnumerable<IListBlobItem> items = null; ;
-                if (directoryName != null)
-                {
-                    try
-                    {
-                        CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
-                        items = directory.ListBlobs();
-                    }
-                    catch (Exception) { }
-                }
-                else
-                {
-                    items = container.ListBlobs();
-                }
+                IEnumerable<IListBlobItem> items = GetCloudBlobs(container, directoryName);
 
                 if (items != null)
                 {
                     foreach (IListBlobItem item in items)
                     {
-                        CloudBlob blob = container.GetBlobReference(item.Uri.ToString());
-                        if (blob.Exists())
+                        if (item is CloudBlob)
                         {
-                            blob.FetchAttributes();
-                            results.Add(new StorageFile()
+                            CloudBlob blob = (CloudBlob)item;
+                            if (blob.Exists())
                             {
-                                Filename = GetBlobFilename(blob),
-                                Uri = blob.Uri,
-                                Metadata = blob.Metadata
-                            });
+                                results.Add(new StorageFile()
+                                {
+                                    Filename = GetBlobFilename(blob),
+                                    Uri = blob.Uri,
+                                    Metadata = blob.Metadata
+                                });
+                            }
                         }
                     }
                 }

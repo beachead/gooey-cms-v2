@@ -166,6 +166,7 @@
     <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
     <Compile Include="Handler\BaseHttpHandler.cs" />
+    <Compile Include="Storage\BlobSnapshot.cs" />
     <Compile Include="Storage\IQueueMessage.cs" />
     <Compile Include="Storage\IQueueMessageProcessor.cs" />
     <Compile Include="Storage\QueueManager.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Store\ReceiptManager.cs" />
     <Compile Include="Store\SitePackage.cs" />
     <Compile Include="Store\SitePackageManager.cs" />
+    <Compile Include="Subscription\InviteManager.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Membership\MembershipProfile.cs" />

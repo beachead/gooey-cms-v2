@@ -5,6 +5,7 @@ using Microsoft.WindowsAzure.ServiceRuntime;
 using System.Collections.Generic;
 using Gooeycms.Business.Util;
 using Gooeycms.Extensions;
+using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Business
 {
@@ -51,6 +52,25 @@ namespace Gooeycms.Business
                 result = config.Value;
 
             return result;
+        }
+
+        public static void Persist(String key, String value)
+        {
+            ConfigurationDao dao = new ConfigurationDao();
+
+            Configuration config = dao.FindByKey(key);
+            if (config == null)
+            {
+                config = new Configuration();
+                config.Name = key;
+            }
+            config.Value = value;
+
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save(config);
+                tx.Commit();
+            }
         }
 
         public static String DefaultTemplate
@@ -285,6 +305,44 @@ namespace Gooeycms.Business
                     categories = result.SplitAsList(TextConstants.CommaSeparator);
 
                 return categories;
+            }
+        }
+
+        public static String InviteEmailTemplate
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.InviteEmailTemplate);
+                if (result == null)
+                {
+                    result = GetAsString(ConfigConstants.InviteEmailTemplate);
+                    cache[ConfigConstants.InviteEmailTemplate] = result;
+                }
+                return result;
+            }
+            set
+            {
+                Persist(ConfigConstants.InviteEmailTemplate, value);
+                cache[ConfigConstants.InviteEmailTemplate] = value;
+            }
+        }
+
+        public static String ApprovedEmailTemplate
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.ApprovedEmailTemplate);
+                if (result == null)
+                {
+                    result = GetAsString(ConfigConstants.ApprovedEmailTemplate);
+                    cache[ConfigConstants.ApprovedEmailTemplate] = result;
+                }
+                return result;
+            }
+            set
+            {
+                Persist(ConfigConstants.ApprovedEmailTemplate, value);
+                cache[ConfigConstants.ApprovedEmailTemplate] = value;
             }
         }
     }

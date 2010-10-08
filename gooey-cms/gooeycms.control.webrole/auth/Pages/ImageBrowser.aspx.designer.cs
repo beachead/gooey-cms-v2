@@ -58,6 +58,24 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::Anthem.Label LblUploadedFiles;
         
         /// <summary>
+        /// PanelImageList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Anthem.Panel PanelImageList;
+        
+        /// <summary>
+        /// AvailableImageList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList AvailableImageList;
+        
+        /// <summary>
         /// PanelImages control.
         /// </summary>
         /// <remarks>

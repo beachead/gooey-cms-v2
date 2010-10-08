@@ -1,4 +1,9 @@
-﻿.hidden 
+﻿.green .ajax__progress_indicator
+{
+    background-image:url(../images/progress_green.gif);
+}  
+
+.hidden 
 {
     visibility: hidden;
     display: none;

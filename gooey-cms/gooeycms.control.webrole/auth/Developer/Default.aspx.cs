@@ -24,7 +24,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
         private void DoDataBind()
         {
             UserInfo user = LoggedInUser.Wrapper.UserInfo;
-            IList<Package> packages = SitePackageManager.Instance.GetSitePackagesForUser(user);
+            IList<Package> packages = SitePackageManager.NewInstance.GetSitePackagesForUser(user);
 
             SitePackages.DataSource = packages;
             SitePackages.DataBind();
@@ -38,12 +38,12 @@ namespace Gooeycms.Webrole.Control.auth.Developer
                 String packageGuid = (String)e.CommandArgument;
 
                 if (upload.HasFile)
-                    SitePackageManager.Instance.AddScreenshot(Data.Guid.New(packageGuid), upload.FileName, upload.FileBytes);
+                    SitePackageManager.NewInstance.AddScreenshot(Data.Guid.New(packageGuid), upload.FileName, upload.FileBytes);
             }
             else if (e.CommandName.Equals("DeletePackage"))
             {
                 String packageGuid = (String)e.CommandArgument;
-                SitePackageManager.Instance.DeletePackage(packageGuid);
+                SitePackageManager.NewInstance.DeletePackage(packageGuid);
             }
 
             DoDataBind();
@@ -60,7 +60,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
                 Repeater features = (Repeater)item.FindControl("FeatureList");
                 Label approvalStatus = (Label)item.FindControl("LblApprovalStatus");
 
-                IList<String> thumbnailsrc = SitePackageManager.Instance.GetScreenshotUrls(package);
+                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
 
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();

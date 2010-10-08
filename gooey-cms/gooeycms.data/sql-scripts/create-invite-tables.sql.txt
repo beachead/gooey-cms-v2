@@ -1,0 +1,17 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Invites]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Invites];
+END
+
+CREATE TABLE [dbo].[Invites](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36),
+	[firstname] VARCHAR(256),
+	[lastname] VARCHAR(256),
+	[email] VARCHAR(256),
+	[token] VARCHAR(128),
+	[date_created] DATETIME,
+	[date_issued] DATETIME,
+	[date_responded] DATETIME
+	PRIMARY KEY CLUSTERED([id]),
+);

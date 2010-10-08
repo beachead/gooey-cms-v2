@@ -21,7 +21,7 @@ namespace Gooeycms.Business.Store
         public IList<CmsTemplate> Templates { get; set; }
         public IList<JavascriptFile> Javascript { get; set; }
         public IList<CssFile> Css { get; set; }
-        public IList<StorageFile> Images { get; set; }
+        public IList<BlobSnapshot> Images { get; set; }
     }
 
     [Serializable]
@@ -30,7 +30,6 @@ namespace Gooeycms.Business.Store
         public CmsPage Page { get; set; }
         public IList<JavascriptFile> Javascript { get; set; }
         public IList<CssFile> Css { get; set; }
-        public IList<StorageFile> Images { get; set; }
     }
 
     [Serializable]
@@ -43,9 +42,11 @@ namespace Gooeycms.Business.Store
     [Serializable]
     public class SitePackage
     {
+        public Data.Guid OriginalSiteGuid { get; set; }
         public IList<SitePackageTheme> Themes { get; set; }
         public IList<SitePackagePage> Pages { get; set; }
         public IList<SiteContentType> ContentTypes { get; set; }
         public IList<CmsSitePath> SiteMapPaths { get; set; }
+        public IList<BlobSnapshot> PageImages { get; set; }
     }
 }

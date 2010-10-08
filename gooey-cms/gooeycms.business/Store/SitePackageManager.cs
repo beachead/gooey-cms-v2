@@ -31,11 +31,23 @@ namespace Gooeycms.Business.Store
         public const String PackageContainer = "packaged-sites";
         public const String PackageDirectory = "binary-data";
         public const String PackageExtension = ".zip";
+
+        private const Int32 CreatePackageSteps = 7;
+        private const Int32 DeployPackageSteps = 8;
+        public const Int32 MaxSteps = CreatePackageSteps + DeployPackageSteps;
+
         //public const String DemoSitePrefix = "gooeycmsdemo";
 
-        private static SitePackageManager instance = new SitePackageManager();
         private SitePackageManager() { }
-        public static SitePackageManager Instance { get { return SitePackageManager.instance; } }
+        public static SitePackageManager NewInstance { get { return new SitePackageManager(); } }
+
+        private String guid;
+        private int currentStepCount = 1;
+
+        public interface IPackageStatusNotifier
+        {
+            void OnNotify(String guid, String eventName, int stepCount, int maxSteps);
+        }
 
         public IList<Package> GetSitePackagesForUser(UserInfo user)
         {
@@ -43,18 +55,12 @@ namespace Gooeycms.Business.Store
             return dao.FindByUserId(user.Id);
         }
 
-        public Data.Guid CreatePackage(Data.Guid siteGuid, String title, String features, String category, Double salePrice)
+        public Data.Guid CreatePackage(Package package, IPackageStatusNotifier notifier)
         {
             PackageDao dao = new PackageDao();
-            Package package = dao.FindBySiteGuid(siteGuid);
 
-            //Delete the existing package, before creating a new one
-            if (package != null)
-            {
-                //TODO Delete the existing package before creating a new one
-            }
-
-            String packageGuid = System.Guid.NewGuid().ToString();
+            this.guid = package.Guid;
+            String siteGuid = package.OwnerSubscriptionId;
 
             SitePackage sitepackage = new SitePackage();
             IList<SitePackageTheme> packageThemes = new List<SitePackageTheme>();
@@ -62,15 +68,28 @@ namespace Gooeycms.Business.Store
             IList<SiteContentType> packageContentTypes = new List<SiteContentType>();
             IList<CmsSitePath> sitePaths = new List<CmsSitePath>();
 
-            PackageThemes(siteGuid, packageThemes);
+
+            DoNotify(notifier, "Packaging Themes");
+            PackageThemes(siteGuid, packageThemes, notifier);
+
+            DoNotify(notifier, "Packaging Pages");
             PackagePages(siteGuid, packagePages);
+
+            DoNotify(notifier, "Packaging Content Types");
             PackageContentTypes(siteGuid, packageContentTypes);
 
+            IStorageClient client = StorageHelper.GetStorageClient();
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid);
+
+            DoNotify(notifier, "Creating Page Image Snapshots (this may take a while)");
+            sitepackage.PageImages = client.CreateSnapshot(imageDirectory, StorageClientConst.RootFolder);
             sitepackage.Themes = packageThemes;
             sitepackage.SiteMapPaths = CmsSiteMap.Instance.GetAllPaths(siteGuid);
             sitepackage.Pages = packagePages;
             sitepackage.ContentTypes = packageContentTypes;
+            sitepackage.OriginalSiteGuid = siteGuid;
 
+            DoNotify(notifier, "Creating Package Archive");
             byte[] data = null;
             using (MemoryStream outputstream = new MemoryStream())
             {
@@ -87,34 +106,20 @@ namespace Gooeycms.Business.Store
                 data = outputstream.ToArray();
             }
 
-            IStorageClient client = StorageHelper.GetStorageClient();
-            client.Save(PackageContainer,PackageDirectory, packageGuid + PackageExtension, data, Permissions.Private);
+            DoNotify(notifier, "Saving Package Archive");
+            client = StorageHelper.GetStorageClient();
+            client.Save(PackageContainer,PackageDirectory, package.Guid + PackageExtension, data, Permissions.Private);
 
-
-            //Save this package into the database
-            package = new Package();
-            package.OwnerSubscriptionId = siteGuid.Value;
-            package.PackageTypeString = PackageTypes.Site.ToString();
-            package.Price = salePrice;
-            package.Guid = packageGuid;
-            package.Features = features;
-            package.Title = title;
-            package.Category = category;
-            package.PageCount = packagePages.Count;
-            package.IsApproved = false;
-            package.Created = DateTime.Now;
-            package.Approved = DateTime.MaxValue;
-            using (Transaction tx = new Transaction())
-            {
-                dao.Save<Package>(package);
-                tx.Commit();
-            }
-
-            return packageGuid;
+            return package.Guid;
         }
 
+        private void DoNotify(IPackageStatusNotifier notifier, String eventName)
+        {
+            if (notifier != null)
+                notifier.OnNotify(this.guid, eventName, currentStepCount++,MaxSteps);
+        }
 
-        private static void PackageContentTypes(Data.Guid siteGuid, IList<SiteContentType> packageContentTypes)
+        private void PackageContentTypes(Data.Guid siteGuid, IList<SiteContentType> packageContentTypes)
         {
             IList<CmsContentType> contentTypes = ContentManager.Instance.GetContentTypes(siteGuid);
             foreach (CmsContentType contentType in contentTypes)
@@ -129,7 +134,7 @@ namespace Gooeycms.Business.Store
             }
         }
 
-        private static void PackagePages(Data.Guid siteGuid, IList<SitePackagePage> packagePages)
+        private void PackagePages(Data.Guid siteGuid, IList<SitePackagePage> packagePages)
         {
             IList<CmsPage> pages = PageManager.Instance.Filter(siteGuid, null);
             foreach (CmsPage page in pages)
@@ -151,7 +156,6 @@ namespace Gooeycms.Business.Store
                     file.Content = temp.Content;
                 }
 
-                packagePage.Images = ImageManager.Instance.GetImagesWithData(siteGuid, StorageClientConst.RootFolder);
                 packagePage.Javascript = jsFiles;
                 packagePage.Css = cssFiles;
                 packagePage.Page = page;
@@ -160,7 +164,7 @@ namespace Gooeycms.Business.Store
             }
         }
 
-        private static void PackageThemes(Data.Guid siteGuid, IList<SitePackageTheme> packageThemes)
+        private void PackageThemes(Data.Guid siteGuid, IList<SitePackageTheme> packageThemes, IPackageStatusNotifier notifier)
         {
             IList<CmsTheme> themes = ThemeManager.Instance.GetAllBySite(siteGuid);
             foreach (CmsTheme theme in themes)
@@ -182,10 +186,15 @@ namespace Gooeycms.Business.Store
                     file.Content = temp.Content;
                 }
 
+                //Create a snapshot of the images
+                IStorageClient client = StorageHelper.GetStorageClient();
+                String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
+
+                DoNotify(notifier, "Creating Theme Image Snapshots (This may take a while)");
                 packageTheme.Header = theme.Header;
                 packageTheme.Footer = theme.Footer;
                 packageTheme.Templates = TemplateManager.Instance.GetTemplates(theme);
-                packageTheme.Images = ImageManager.Instance.GetImagesWithData(siteGuid, theme.ThemeGuid);
+                packageTheme.Images = client.CreateSnapshot(imageDirectory, theme.ThemeGuid);
                 packageTheme.Javascript = jsFiles;
                 packageTheme.Css = cssFiles;
                 packageTheme.Theme = theme;
@@ -251,8 +260,10 @@ namespace Gooeycms.Business.Store
             return results;
         }
 
-        public void DeployDemoPackage(Data.Guid packageGuid)
+        public void DeployDemoPackage(Data.Guid packageGuid, IPackageStatusNotifier notifier)
         {
+            DoNotify(notifier, "Deploying Demo Package");
+
             PackageDao dao = new PackageDao();
             Package package = dao.FindByPackageGuid(packageGuid);
             if (package != null)
@@ -260,6 +271,7 @@ namespace Gooeycms.Business.Store
                 //Get the owner's subscription for this package
                 CmsSubscription owner = SubscriptionManager.GetSubscription(package.OwnerSubscriptionId);
 
+                DoNotify(notifier, "Creating Demo Account");
                 //Check if our demo account exists
                 MembershipUserWrapper wrapper = MembershipUtil.FindByUsername(MembershipUtil.DemoAccountUsername);
                 if (!wrapper.IsValid())
@@ -278,6 +290,7 @@ namespace Gooeycms.Business.Store
                 subscription.Expires = DateTime.MaxValue;
                 SubscriptionManager.Create(wrapper, subscription);
 
+                DoNotify(notifier, "Reading Package From Archive");
                 //Deploy the package into the demo site
                 IStorageClient client = StorageHelper.GetStorageClient();
                 byte [] zipped = client.Open(PackageContainer, PackageDirectory, package.Guid + PackageExtension);
@@ -289,8 +302,13 @@ namespace Gooeycms.Business.Store
 
                 Data.Guid guid = Data.Guid.New(subscription.Guid);
 
-                DeployThemes(sitepackage, guid);
-                DeployPages(sitepackage, guid);
+                DoNotify(notifier, "Deploying Package Themes To Site");
+                DeployThemes(sitepackage, guid, notifier);
+
+                DoNotify(notifier, "Deploying Package Pages To Site");
+                DeployPages(sitepackage, guid, notifier);
+
+                DoNotify(notifier, "Deploying Package Content Types To Site");
                 DeployContentTypes(sitepackage, guid);
             }
         }
@@ -315,7 +333,7 @@ namespace Gooeycms.Business.Store
             }
         }
 
-        private static void DeployPages(SitePackage sitepackage, Data.Guid guid)
+        private void DeployPages(SitePackage sitepackage, Data.Guid guid, IPackageStatusNotifier notifier)
         {
             //Deploy the sitemap
             foreach (CmsSitePath path in sitepackage.SiteMapPaths)
@@ -348,16 +366,18 @@ namespace Gooeycms.Business.Store
                 {
                     CssManager.Instance.Save(guid, page, css);
                 }
-
-                //Save all the images for this theme
-                foreach (StorageFile file in pageWrapper.Images)
-                {
-                    ImageManager.Instance.AddImage(guid, StorageClientConst.RootFolder, file.Filename, file.ContentType, file.Data);
-                }
             }
+
+            DoNotify(notifier, "Copying Page Images to Site. (This may take a few minutes) ");
+            //Save all the page-level images for this site
+            String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, sitepackage.OriginalSiteGuid.Value);
+            String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, guid.Value);
+
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.CopyFromSnapshots(sitepackage.PageImages, copyFromImageContainer, copyToImageContainer, StorageClientConst.RootFolder, Permissions.Public);
         }
 
-        private static void DeployThemes(SitePackage sitepackage, Data.Guid guid)
+        private void DeployThemes(SitePackage sitepackage, Data.Guid guid, IPackageStatusNotifier notifier)
         {
             //Deploy the themes into the site
             foreach (SitePackageTheme themeWrapper in sitepackage.Themes)
@@ -399,10 +419,12 @@ namespace Gooeycms.Business.Store
                 }
 
                 //Save all the images for this theme
-                foreach (StorageFile file in themeWrapper.Images)
-                {
-                    ImageManager.Instance.AddImage(guid, theme.ThemeGuid, file.Filename, file.ContentType, file.Data);
-                }
+                DoNotify(notifier, "Copying Theme Images From Snapshot to Site. (This may take a few minutes) ");
+                String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, sitepackage.OriginalSiteGuid.Value);
+                String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, guid.Value);
+
+                IStorageClient client = StorageHelper.GetStorageClient();
+                client.CopyFromSnapshots(themeWrapper.Images, copyFromImageContainer, copyToImageContainer, theme.ThemeGuid, Permissions.Public);
             }
         }
 
@@ -463,9 +485,9 @@ namespace Gooeycms.Business.Store
                 }
 
                 //Delete the file from the cloud storage
+                IStorageClient client = StorageHelper.GetStorageClient();
                 try
                 {
-                    IStorageClient client = StorageHelper.GetStorageClient();
                     foreach (String screenshot in package.ScreenshotList)
                     {
                         client.Delete("package-screenshots", package.PackageTypeString, screenshot); 
@@ -476,6 +498,10 @@ namespace Gooeycms.Business.Store
                 {
                     Logging.Error("There was a problem deleting the package " + package.Guid, e);
                 }
+
+                //Delete the snapshots associated with this package
+                String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, package.OwnerSubscriptionId);
+                client.DeleteSnapshots(imageDirectory, StorageClientConst.RootFolder);
             }
         }
 
