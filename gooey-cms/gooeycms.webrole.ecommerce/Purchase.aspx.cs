@@ -36,7 +36,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
         {
             Data.Guid guid = Data.Guid.New(Request.QueryString["g"]);
             IList<Package> results = new List<Package>();
-            Package package = SitePackageManager.Instance.GetPackage(guid);
+            Package package = SitePackageManager.NewInstance.GetPackage(guid);
 
             results.Add(package);
             SitePackages.DataSource = results;
@@ -57,7 +57,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
 
-                IList<String> thumbnailsrc = SitePackageManager.Instance.GetScreenshotUrls(package);
+                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
 
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();

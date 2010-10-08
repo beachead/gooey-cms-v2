@@ -35,11 +35,11 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 //Make sure the txid is valid and compare the amount paid to the expected amount
                 Boolean isResponseValid = PaypalManager.Instance.ValidatePDTResponse(txid,expectedAmount);
 
-                Package package = SitePackageManager.Instance.GetPackage(packageGuid);
+                Package package = SitePackageManager.NewInstance.GetPackage(packageGuid);
                 this.LblPurchaseType.Text = package.PackageTypeString;
 
                 //Place the package into the user's package queue
-                SitePackageManager.Instance.AddToUser(receipt.UserGuid,package);
+                SitePackageManager.NewInstance.AddToUser(receipt.UserGuid,package);
 
                 //Update the receipt 
                 receipt.IsComplete = true;
