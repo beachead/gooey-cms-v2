@@ -32,7 +32,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
             if (!String.IsNullOrEmpty(tempPos))
                 lastMaxPos = Int32.Parse(tempPos);
 
-            IList<Package> packages = SitePackageManager.Instance.GetPackages(packageType,lastMaxPos);
+            IList<Package> packages = SitePackageManager.NewInstance.GetPackages(packageType,lastMaxPos);
 
             SitePackages.DataSource = packages;
             SitePackages.DataBind();
@@ -58,7 +58,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
                 HyperLink adminLink = (HyperLink)item.FindControl("AdminDemoLink");
 
-                IList<String> thumbnailsrc = SitePackageManager.Instance.GetScreenshotUrls(package);
+                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
 
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();
