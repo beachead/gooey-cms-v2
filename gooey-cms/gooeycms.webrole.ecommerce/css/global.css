@@ -175,6 +175,21 @@ body {
 }
 
 
+/* columns */
+
+div.columns {
+    overflow: auto;
+}
+
+div.columns div.left-column {
+    float: left;
+}
+
+div.columns div.right-column {
+    float: left;
+}
+
+
 /* LISTS */
 
 /* ul.adjacent */
@@ -215,6 +230,10 @@ ul.adjacent li {
 /* table.form */
 table.form {}
 
+table.form.pct-100 {
+    width: 100%;
+}
+
 table.form td {
 	padding: 5px;
 }
@@ -222,6 +241,10 @@ table.form td {
 table.form td.label {
 	padding-right: 10px;
 	text-align: right;
+}
+
+table.form td.controls {
+    text-align: right;
 }
 
 input.std, 

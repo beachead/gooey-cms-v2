@@ -1,9 +1,6 @@
 /* over writes */
-#masthead {
-	background-image: url(../images/bg_masthead_no-line.png);
-}
 
-#content {
+#content.store {
 	padding-left: 0;
 	padding-right: 0;
 	width: 857px;
@@ -97,6 +94,14 @@ ul#filter li li:last-child a {
 /* themes-panel */
 ul#themes-panel {
 	margin: 10px 0 0 10px;
+}
+
+ul#themes-panel.collapse-margin {
+   margin-left: 0;
+}
+
+ul#themes-panel.collapse-margin li.theme {
+    margin-left: 0;
 }
 
 ul#themes-panel li.theme {
@@ -247,3 +252,15 @@ li.theme ul.options-links li {
 
 /* 63px 68px; */
 
+div.left-column {
+    width: 400px;
+}
+    
+div.right-column {
+    width: 325px;    
+}
+    
+table.form tr.controls {
+    height: 100px;
+}
+    

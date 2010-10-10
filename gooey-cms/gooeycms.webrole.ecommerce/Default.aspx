@@ -2,6 +2,11 @@
 
 <asp:Content ID="localCSS" ContentPlaceHolderID="localCSS" runat="server">
 	<link rel="stylesheet" type="text/css" href="/css/store.css" />
+    <style type="text/css">
+    #masthead {
+	    background-image: url(../images/bg_masthead_no-line.png);
+    }
+    </style>
 </asp:Content>
 
 <asp:Content id="localJS" ContentPlaceHolderID="localJS" runat="server">
@@ -10,7 +15,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 	<!-- START: content -->
-	<div id="content">
+	<div id="content" class="store">
         
         <anthem:HiddenField ID="LastMaxPos" runat="server" />
 		<h1><img src="../images/h1_are_you_a_designer.png" width="598" height="21" alt="Are you a designer?  Learn how to make money with Gooey CMS on our" /><a href=""><img src="/images/h1[a]_developer_site.png" width="122" height="21" alt="developer site" /></a></h1>
