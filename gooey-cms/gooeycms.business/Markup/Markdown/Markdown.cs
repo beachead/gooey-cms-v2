@@ -1044,7 +1044,7 @@ namespace MarkdownSharp
         }
 
         private static Regex _headerSetext = new Regex(@"
-                ^(.+?)
+                ^\s*(.+?)
                 [ ]*
                 \n
                 (=+|-+)     # $1 = string of ='s or -'s
@@ -1053,7 +1053,7 @@ namespace MarkdownSharp
             RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
         private static Regex _headerAtx = new Regex(@"
-                ^(\#{1,6})  # $1 = string of #'s
+                ^\s*(\#{1,6})  # $1 = string of #'s
                 [ ]*
                 (.+?)       # $2 = Header text
                 [ ]*
