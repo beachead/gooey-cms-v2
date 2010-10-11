@@ -7,13 +7,16 @@
 <asp:TextBox ID="ResizableTextArea" TextMode="MultiLine"  Wrap="false" runat="server" /> 
 
 <script language="javascript" type="text/javascript">
+
+    var oParent = document.getElementById('<%=ResizableTextArea.ClientID %>').parentNode;
+
     var rt = new ResizeableTextbox('<%=ResizableTextArea.ClientID %>');
 
     rt.GetContainer().style.left = '0px';
     rt.GetContainer().style.top = '0px';
     rt.SetMaxWidth(2000);
     rt.SetMaxHeight(2000);   
-    rt.SetCurrentWidth(800);
+    rt.SetCurrentWidth(880);
     rt.SetCurrentHeight(300);
 
     var myDiv = document.getElementById('<%=ResizableTextArea.ClientID %>_rtContainer');
@@ -26,4 +29,5 @@
         window.mytimeout = window.setTimeout(function () { keypressHandler(obj) }, 500);
         return true;
     }
+
 </script>
