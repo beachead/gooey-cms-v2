@@ -26,6 +26,7 @@
     <property column="salesforce_addon" name="IsSalesforceEnabled" type="Boolean" />
     <property column="generic_addon" name="IsGenericOptionsEnabled" type="Boolean" />
     <property column="is_demo" name="IsDemo" type="Boolean" />
+    <property column="logo_name" name="LogoName" type="String" />
   </class>
 
 

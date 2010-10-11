@@ -25,6 +25,11 @@ namespace Gooeycms.Extensions
             return default(V);
         }
 
+        public static Boolean IsEmpty(this String item)
+        {
+            return (String.IsNullOrEmpty(item));
+        }
+
         public static IList<String> SplitAsList(this String item, char value)
         {
             IList<String> results = new List<String>();

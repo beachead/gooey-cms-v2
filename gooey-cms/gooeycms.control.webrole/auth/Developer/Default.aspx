@@ -16,6 +16,16 @@ This page will allow you to package your site or theme for sale in the Gooey Sto
 <br />
 
 <div style="padding-top:10px; width:900px;">
+    <table>
+        <tr>
+            <td><asp:Image ID="LogoSrc" runat="server" /></td>
+            <td>
+                Upload Logo:&nbsp;<asp:FileUpload ID="LogoFile" runat="server" />&nbsp;<asp:Button ID="BtnUploadLogo" OnClick="BtnUploadLogo_Click" Text="Upload" runat="server" />
+            </td>
+        </tr>
+    </table>
+    
+    <hr />
     <div dojoType="dijit.layout.TabContainer" style="width: 100%; height: 100%;" doLayout="false">
         <div dojoType="dijit.layout.ContentPane" title="My Site Packages" selected="true">
 		    <ul id="themes-panel">

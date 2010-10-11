@@ -204,6 +204,7 @@
     <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Util\EmbeddedResource.cs" />
+    <Compile Include="Util\Logos.cs" />
     <Compile Include="Util\Serializer.cs" />
     <Compile Include="Util\SiteHelper.cs" />
     <Compile Include="Util\CurrentSite.cs" />

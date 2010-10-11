@@ -54,6 +54,7 @@ CREATE TABLE [Subscriptions] (
 [salesforce_addon] BIT DEFAULT(0),
 [generic_addon] BIT DEFAULT(0),
 [is_demo] BIT DEFAULT(0),
+[logo_name] NVARCHAR(128),
 PRIMARY KEY CLUSTERED([id]),
 );
 CREATE UNIQUE INDEX uq_subscriptions_guid ON [Subscriptions](guid);
