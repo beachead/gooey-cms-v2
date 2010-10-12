@@ -23,7 +23,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
         protected void OnRowCommand(object sender, GridViewCommandEventArgs e)
         {
-            HiddenField field = GridViewHelper.FindControl<HiddenField>(e.CommandSource, "ContentId");
+            HiddenField field = GridViewHelper.FindControl<HiddenField>(e.CommandSource, "CampaignId");
             switch (e.CommandName)
             {
                 case "deleteid":
@@ -35,7 +35,6 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
         private void Delete(String guid)
         {
             CampaignManager.Instance.Delete(guid);
-
             this.CampaignTable.DataBind();
         }
     }

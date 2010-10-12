@@ -39,10 +39,11 @@ This page allows you to manage and generate links for campaigns that are current
             </asp:BoundField>
             <asp:TemplateField HeaderText="Actions">
                 <ItemTemplate>
+                    <asp:HiddenField ID="CampaignId" Value='<%# Eval("Guid") %>' runat="server" />
                     <a href="./Create.aspx?id=<%# Eval("Guid") %>">Edit</a>&nbsp;
                     <a href="./Elements.aspx?id=<%# Eval("Guid") %>">Elements</a>&nbsp;                    
                     <a href="#" onclick="window.open('./Links.aspx?id=<%# Eval("Guid") %>','','top=15,left=10,width=600,height=150'); return false;">Build Links</a>&nbsp;
-                    <asp:LinkButton ID="DeleteItem" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want ToolTip delete this campaign?');" Text="Delete" runat="server" />
+                    <asp:LinkButton ID="DeleteItem" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this campaign?');" Text="Delete" runat="server" />
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:TemplateField>
