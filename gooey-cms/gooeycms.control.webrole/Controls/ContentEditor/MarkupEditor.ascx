@@ -14,8 +14,8 @@
     </style>
     <div dojoType="dijit.Dialog" id="waitDialog" closable="false" draggable="false">
         Please wait while your preview is generated.
-    </div>    
-
+    </div>   
+    
     <div dojoType="dijit.Dialog" id="fulleditor" style="width:90%;height:90%;" closeable="true" draggable="true" title="Pop-up Markup Editor">
         <div style="padding-bottom:7px;">
         <button onclick="savePopup();return false;">Save &amp; Close</button>&nbsp;
@@ -36,13 +36,13 @@
         <li><a href="#" onclick="javascript:return __Wrap('<b>', '</b>','<%=PageMarkupText.TextboxId %>');" title="Bold" class="formatlink" id="BoldLink"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('<i>', '</i>','<%=PageMarkupText.TextboxId %>');" title="Italics" class="formatlink" id="ItalicLink"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('__ ', ' __','<%=PageMarkupText.TextboxId %>');" title="Underline" class="formatlink" id="UnderlineLink"></a></li>
-        <li><a href="#" onclick="javascript:return __Wrap('== ', ' ==','<%=PageMarkupText.TextboxId %>');" title="H1" class="formatlink" id="H1Link"></a></li>
-        <li><a href="#" onclick="javascript:return __Wrap('=== ', ' ===','<%=PageMarkupText.TextboxId %>');" title="H2" class="formatlink" id="H2Link"></a></li>
-        <li><a href="#" onclick="javascript:return __Wrap('---StartList---\r\n* Item 1\r\n* Item 2 ', '\r\n---EndList---','<%=PageMarkupText.TextboxId %>');" title="Unordered List" class="formatlink" id="UnorderedList"></a></li>
+        <li><a href="#" onclick="javascript:return __Wrap('# ', '','<%=PageMarkupText.TextboxId %>');" title="H1" class="formatlink" id="H1Link"></a></li>
+        <li><a href="#" onclick="javascript:return __Wrap('## ', '','<%=PageMarkupText.TextboxId %>');" title="H2" class="formatlink" id="H2Link"></a></li>
+        <li><a href="#" onclick="javascript:return __Wrap('\r\n* Item 1\r\n* Item 2 ', '\r\n','<%=PageMarkupText.TextboxId %>');" title="Unordered List" class="formatlink" id="UnorderedList"></a></li>
         <li><a href="#" onclick="javascript:return __Insert('{BR}','<%=PageMarkupText.TextboxId %>');" title="Linebreak" class="formatlink" id="BrLink"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('<nomarkup>', '</nomarkup>','<%=PageMarkupText.TextboxId %>');" title="No Markup" class="formatlink" id="NoMarkup"></a></li>
         <li><a href="#" onclick="javascript:return __Wrap('<esc>', '</esc>','<%=PageMarkupText.TextboxId %>');" title="Escape HTML" class="formatlink" id="EscapeLink"></a></li>                  
-        <li><a href="#" onclick="javascript:window.open('ImageBrowser.aspx?<%=ImageBrowserQuerystring %>','','width=700,height=500,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;" title="Image Browser" class="formatlink" id="ImageLink"></a></li>             
+        <li><a href="#" onclick="javascript:showFormEditor(); return false;" title="Form Editor" class="formatlink" id="FormLink"></a></li>             
         <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li><% } %>
         <li><a href="#" onclick="javascript:showEditor(); return false;" title="Popup Editor" class="formatlink" id="PopupEditor"></a></li>        
         </ul>
@@ -80,6 +80,34 @@
                 popup.parentNode.replaceChild(newpopup,popup);
             }
 
+        }
+    }
+
+    function getCurrentEditorText() {
+        var inline = dojo.byId('<%= PageMarkupText.TextboxId  %>');
+        return inline.value;
+    }
+
+    function doEditorInsert(text) {
+        __Insert(text,'<%=PageMarkupText.TextboxId %>');
+    }
+
+    function showFormEditor() {
+        var inline = dojo.byId('<%=PageMarkupText.TextboxId  %>');
+        var container = dijit.byId('formeditor-container');
+        var editor = dojo.byId('formeditor');
+        if (container) {
+            if (editor) {
+                editor.style.width = 630 + "px";
+                editor.style.height = 350  + "px";
+            }
+            if (typeof(onSavedFormOpen) == 'function') {
+                onSavedFormOpen();
+            }
+
+            container.show();
+        } else {
+            alert('The form editor is not available from within this page context.');
         }
     }
 

@@ -114,6 +114,14 @@ namespace Gooeycms.Business.Membership
 
         public static void ProcessLogin(string username)
         {
+            //Immediately expire any existing cookies
+            try
+            {
+                HttpContext.Current.Response.Cookies["selected-site"].Expires = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+                HttpContext.Current.Request.Cookies.Remove("selected-site");
+            }
+            catch (Exception) { }
+
             MembershipUserWrapper wrapper = FindByUsername(username);
             IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
 

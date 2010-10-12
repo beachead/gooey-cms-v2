@@ -66,6 +66,25 @@ namespace Gooeycms.Business.Campaigns
             return dao.FindBySite(siteGuid);
         }
 
+        public void Delete(Data.Guid siteGuid, Data.Guid guid)
+        {
+            CmsCampaign campaign = GetCampaign(siteGuid, guid);
+            if (campaign != null)
+            {
+                CmsCampaignDao dao = new CmsCampaignDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<CmsCampaign>(campaign);
+                    tx.Commit();
+                }
+            }
+        }
+
+        public void Delete(Data.Guid guid)
+        {
+            Delete(CurrentSite.Guid, guid);
+        }
+
         /// <summary>
         /// Returns the campaign engine that is being used by the CMS
         /// Currently only one is supported, Google Analytics

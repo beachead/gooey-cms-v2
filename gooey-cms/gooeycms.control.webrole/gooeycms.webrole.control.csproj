@@ -110,6 +110,7 @@
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
     <Content Include="css\store.css" />
+    <Content Include="default.aspx" />
     <Content Include="demo.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\bg_theme_panel.png" />
@@ -363,6 +364,13 @@
     </Compile>
     <Compile Include="auth\Themes\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="demo.aspx.cs">
       <DependentUpon>demo.aspx</DependentUpon>

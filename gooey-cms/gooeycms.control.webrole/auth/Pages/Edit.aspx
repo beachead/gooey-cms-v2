@@ -13,6 +13,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+    <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true" />
+
     <style type="text/css">
         #blanket {
         background-color:#111;
@@ -111,10 +113,107 @@
         </div>
     </div>
 
+    <div dojoType="dijit.Dialog"  style="width:680px;height:500px;" id="formeditor-container" title="Form Editor" closable="true" draggable="true">
+        <b>Saved Forms:</b>
+        <hr />
+        <table>
+            <tr>
+                <td>Load Saved Form:</td>
+                <td>
+                    <asp:DropDownList ID="LstSavedForms" runat="server">
+                        <asp:ListItem Text="Test" Value="135" />
+                    </asp:DropDownList>
+                    &nbsp;
+                    <asp:Button ID="BtnLoadForm" Text="Load Form" OnClientClick="loadSavedForm(); return false;" runat="server" />&nbsp;
+                    <asp:Button ID="BtnEditForm" Text="Edit Form" OnClientClick="editSavedForm(); return false;" runat="server" />&nbsp;&nbsp;
+                    <asp:Button ID="BtnDeleteForm" Text="Delete Form" OnClientClick="deleteSavedForm();" runat="server" />&nbsp;
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><b>Save New Form</b></td>
+            </tr>
+            <tr>
+                <td>
+                    Name:&nbsp;<input type="text" id="formname" style="width:150px;" dojoType="dijit.form.ValidationTextBox" required="true" promptMessage="Input a name for this saved form"  />&nbsp;<asp:Button ID="BtnSaveForm" Text="Save" OnClientClick="saveSavedForm(); return false;" runat="server" />&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea id="formeditor" style="background: none repeat scroll 0% 0% rgb(248, 248, 248); border: 1px solid rgb(2, 2, 2);" wrap="off"></textarea>       
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
     <script language="javascript" type="text/javascript">
         function onPopupSave() {
             var btnSave = dojo.byId('<% Response.Write(BtnSave.ClientID); %>');
             btnSave.click();
+        }
+
+        function onSavedFormOpen() {
+            var text = getCurrentEditorText();
+            PageMethods.DoFindFormMarkup(text, onFindFormMarkupSuccess, onAjaxFailure);
+        }
+
+        function onFindFormMarkupSuccess(result, userContext, methodName) {
+            var editor = $get('formeditor');
+            editor.value = result;
+        }
+
+        function loadSavedForm() {
+            var savedFormId = $get('<%= LstSavedForms.ClientID %>').value;
+            PageMethods.DoLoadSavedForm(savedFormId, onLoadFormSuccess, onAjaxFailure);
+
+            var container = dijit.byId('formeditor-container');
+            container.hide();
+        }
+
+        function onLoadFormSuccess(result, userContext, methodName) {
+            doEditorInsert(result);
+        }
+
+        function saveSavedForm() {
+            var name = $get('formname').value;
+            var form = $get('formeditor').value;
+
+            if (name.length == 0) {
+                alert('Please input a name for this form.');
+            } else {
+                PageMethods.DoSaveForm(name, form, onSaveFormSuccess, onAjaxFailure);
+            }
+        }
+
+        function onSaveFormSuccess(result, userContext, methodName) {
+            var response = confirm('Form was successfully saved. Would you like to load this form now?');
+            if (response) {
+                var result = $get('formeditor').value;
+                doEditorInsert(result);
+            }
+        }
+
+        function editSavedForm() {
+            alert('Edit!');
+        }
+
+        function onEditFormSuccess(result, userContext, methodName) {
+        }
+
+        function deleteSavedForm() {
+            var result = confirm('Are you sure you want to delete this form?');
+            if (result) {
+                alert('Delete!');
+            }
+        }
+
+        function onDeleteFormSuccess(result, userContext, methodName) {
+        }
+
+        function onAjaxFailure(error, userContext, methodName) {
+            alert(error.get_message());
         }
     </script>
 </asp:Content>

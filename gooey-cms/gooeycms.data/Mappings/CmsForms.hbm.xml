@@ -15,4 +15,16 @@
     <property column="form_keys" name="_FormKeys" type="String" />
     <property column="form_values" name="_FormValues" type="String" />
   </class>
+  <class name="Gooeycms.Data.Model.Form.CmsSavedForm, gooeycms.data" table="Site_Saved_Forms">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="guid" name="Guid" type="String" />
+    <property column="site_guid" name="SubscriptionId" type="String" />
+    <property column="user_guid" name="UserGuid" type="String" />
+    <property column="name" name="Name" type="String" />
+    <property column="markup" name="Markup" type="String" />
+    <property column="saved" name="DateSaved" type="DateTime" />
+  </class>  
+  
   </hibernate-mapping>

@@ -75,6 +75,8 @@
     <Compile Include="Model\Content\ContentQueryBuilder.cs" />
     <Compile Include="Model\Form\CmsForm.cs" />
     <Compile Include="Model\Form\CmsFormDao.cs" />
+    <Compile Include="Model\Form\CmsSavedForm.cs" />
+    <Compile Include="Model\Form\CmsSavedFormDao.cs" />
     <Compile Include="Model\Help\HelpPage.cs" />
     <Compile Include="Model\Help\HelpPageDao.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />

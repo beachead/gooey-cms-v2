@@ -3,6 +3,11 @@ BEGIN
 DROP TABLE [Form];
 END
 
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Site_Saved_Forms]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Site_Saved_Forms];
+END
+
 CREATE TABLE [dbo].[Form](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[guid] VARCHAR(36),
@@ -21,3 +26,16 @@ CREATE INDEX idx_form_guid ON [Form](guid);
 CREATE INDEX idx_form_siteguid ON [Form](site_guid);
 CREATE INDEX idx_form_guid_site ON [Form](guid,site_guid);
 CREATE INDEX idx_form_guid_inserted ON [Form](guid,inserted);
+
+CREATE TABLE [dbo].[Site_Saved_Forms](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36),
+	[site_guid] VARCHAR(36),
+	[user_guid] VARCHAR(36),
+	[name] NVARCHAR(128),
+	[markup] NTEXT,
+	[saved] DATETIME,
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE INDEX idx_savedform_guid ON [Site_Saved_Forms](guid);
+CREATE INDEX idx_savedform_name ON [Site_Saved_Forms](guid,name);

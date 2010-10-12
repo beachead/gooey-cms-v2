@@ -72,7 +72,6 @@ namespace Beachead.Web.CMS.controls
             String url = preview.Save();
 
             return url;
-            //Anthem.Manager.AddScriptForClientSideEval("DisplayPreview('" + url + "');");
         }
     }
 }

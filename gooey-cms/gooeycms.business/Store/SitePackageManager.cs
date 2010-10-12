@@ -137,28 +137,28 @@ namespace Gooeycms.Business.Store
         private void PackagePages(Data.Guid siteGuid, IList<SitePackagePage> packagePages)
         {
             IList<CmsPage> pages = PageManager.Instance.Filter(siteGuid, null);
-            foreach (CmsPage page in pages)
+            foreach (CmsPage item in pages)
             {
-                PageManager.LoadPageData(page);
+                CmsPage loadedPage = PageManager.Instance.GetLatestPage(siteGuid, item.Url, true);
                 SitePackagePage packagePage = new SitePackagePage();
 
-                IList<JavascriptFile> jsFiles = JavascriptManager.Instance.List(page);
+                IList<JavascriptFile> jsFiles = JavascriptManager.Instance.List(loadedPage);
                 foreach (JavascriptFile file in jsFiles)
                 {
-                    JavascriptFile temp = JavascriptManager.Instance.Get(page, file.FullName);
+                    JavascriptFile temp = JavascriptManager.Instance.Get(loadedPage, file.FullName);
                     file.Content = temp.Content;
                 }
 
-                IList<CssFile> cssFiles = CssManager.Instance.List(page);
+                IList<CssFile> cssFiles = CssManager.Instance.List(loadedPage);
                 foreach (CssFile file in cssFiles)
                 {
-                    CssFile temp = CssManager.Instance.Get(page, file.FullName);
+                    CssFile temp = CssManager.Instance.Get(loadedPage, file.FullName);
                     file.Content = temp.Content;
                 }
 
                 packagePage.Javascript = jsFiles;
                 packagePage.Css = cssFiles;
-                packagePage.Page = page;
+                packagePage.Page = loadedPage;
 
                 packagePages.Add(packagePage);
             }

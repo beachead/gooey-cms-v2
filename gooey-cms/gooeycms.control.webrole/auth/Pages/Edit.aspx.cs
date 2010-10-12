@@ -13,6 +13,8 @@ using Gooeycms.Webrole.Control.App_Code;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Storage;
 using Gooeycms.Extensions;
+using System.Text.RegularExpressions;
+using Gooeycms.Business.Markup.Forms_v2;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
@@ -174,6 +176,30 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             }
             else 
                 return "::ALERT::You must save the page once before using the preview capability.";
+        }
+
+        [System.Web.Services.WebMethod()]
+        public static String DoSaveForm(String formName, String formContents)
+        {
+            return "THIS IS A TEST";
+        }
+
+        [System.Web.Services.WebMethod()]
+        public static String DoLoadSavedForm(String formId)
+        {
+            return "THIS IS A TEST";
+        }
+
+        [System.Web.Services.WebMethod()]
+        public static String DoFindFormMarkup(String markup)
+        {
+            String result = null;
+
+            Match match = FormMarkupFormatter.Form.Match(markup);
+            if (match.Success)
+                result = match.Value;
+
+            return result;
         }
 
         private String GetSelectedCulture()

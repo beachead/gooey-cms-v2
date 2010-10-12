@@ -14,7 +14,7 @@ namespace Gooeycms.Business.Markup.Forms_v2
 {
     public class FormMarkupFormatter : BaseFormatter
     {
-        private static Regex Form = new Regex(@"<form\s*(.*?)>(.*?)</form>", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        public static Regex Form = new Regex(@"<form\s*(.*?)>(.*?)</form>", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
         private static Regex FormTextField = new Regex(@"<textbox\s+(\w+)\s*/?>([*])?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex FormTextBoxField = new Regex(@"<textarea\s+(\w+)\s*(\d+\s*,\s*\d+)?\s*/?>([*])?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex FormSelectField = new Regex(@"\<select\s*(\w+)\s*>([*])?\s*(\#.*?)\<\s*/select\s*>", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
