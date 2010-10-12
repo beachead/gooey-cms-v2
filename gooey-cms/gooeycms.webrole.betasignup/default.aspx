@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>gooey cms</title>
+	<title>gooey cms: private launch invite</title>
 	<link rel="stylesheet" type="text/css" href="css/global.css" />
 	<link rel="stylesheet" type="text/css" href="css/invite.css" />
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
@@ -17,7 +17,7 @@
 
 	        <!-- START: masthead -->
 	        <div id="masthead">
-		        <div id="logo"><a href="#"><img src="images/logo_gooey_internal.png" width="225" height="75" alt="" /></a></div>
+		        <div id="logo"><a href="#"><img src="images/logo_gooey_internal.png" width="225" height="75" alt="Gooey CMS" /></a></div>
 		        <div id="nav">
 		        </div>
 	        </div>
@@ -25,11 +25,11 @@
 
 	        <!-- START: content -->
 	        <div id="content">
-		        <h1><IMG SRC="images/build_your_biz.png" WIDTH="495" HEIGHT="37" BORDER="0" ALT=""></h1>
+		        <h1><IMG SRC="images/build_your_biz.png" WIDTH="495" HEIGHT="37" BORDER="0" ALT="build your business one website at a time."></h1>
 		        <div class="callout" id="callout">
-        <IMG SRC="images/signup6.png" WIDTH="417" HEIGHT="117" BORDER="0" ALT=""></div>
+        <IMG SRC="images/signup6.png" WIDTH="417" HEIGHT="117" BORDER="0" ALT="Signup for an invitation code to our private launch." /></div>
 
-        <p><br><img src="images/designers_developers.png" width="531" height="230" border="0" alt=""></p>
+        <p><br><img src="images/designers_developers.png" width="574" height="248" border="0" alt="designers and developers reimagine how to build, host, and launch your client’s websites reimagine your business. be one of the first to experience gooey cms." /></p>
 
         <!-- START: signup-form -->
                 <asp:Label ID="LblStatus" runat="server" />

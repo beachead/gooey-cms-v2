@@ -1,4 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ContentPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Ecommerce.Signup" %>
+<asp:Content ContentPlaceHolderID="localCSS" runat="server">
+	<link rel="stylesheet" type="text/css" href="/css/signup.css" />
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 	<!-- START: content -->
 	<div id="content">
