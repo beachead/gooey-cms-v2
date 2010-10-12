@@ -42,22 +42,24 @@ namespace Gooeycms.Business.Forms
             }
         }
 
-        public void Save(CmsSavedForm savedForm)
+        public void Save(CmsSavedForm tempForm)
         {
-            if (savedForm.Guid == null)
-                savedForm.Guid = System.Guid.NewGuid().ToString();
-            if (savedForm.SubscriptionId == null)
-                savedForm.SubscriptionId = CurrentSite.Guid.Value;
-
             CmsSavedFormDao dao = new CmsSavedFormDao();
-            
-            CmsSavedForm exists = dao.FindBySiteAndName(savedForm.SubscriptionId, savedForm.Name);
-            if (exists != null)
-                throw new ArgumentException("The saved form name is already in use and may not be used again.");
+            CmsSavedForm exists = dao.FindBySiteAndName(tempForm.SubscriptionId, tempForm.Name);
+            if (exists == null)
+                exists = new CmsSavedForm();
+
+            if (tempForm.Guid == null)
+                exists.Guid = System.Guid.NewGuid().ToString();
+            if (tempForm.SubscriptionId == null)
+                exists.SubscriptionId = CurrentSite.Guid.Value;
+            exists.Markup = tempForm.Markup;
+            exists.DateSaved = tempForm.DateSaved;
+            exists.Name = tempForm.Name;
 
             using (Transaction tx = new Transaction())
             {
-                dao.Save<CmsSavedForm>(savedForm);
+                dao.Save<CmsSavedForm>(exists);
                 tx.Commit();
             }
         }

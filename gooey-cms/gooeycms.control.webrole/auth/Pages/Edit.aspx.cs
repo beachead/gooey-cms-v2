@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using Gooeycms.Business.Markup.Forms_v2;
 using Gooeycms.Data.Model.Form;
 using Gooeycms.Business.Forms;
+using Microsoft.Security.Application;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
@@ -198,6 +199,19 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             FormManager.Instance.Save(form);
 
             return formName + "," + form.Guid;
+        }
+
+        [System.Web.Services.WebMethod()]
+        public static String DoEditSavedForm(String formId)
+        {
+            String result;
+            CmsSavedForm form = FormManager.Instance.GetSavedForm(CurrentSite.Guid, formId);
+            if (form == null)
+                throw new ArgumentException("Could not find a form for the form id:" + formId);
+            else
+                result = form.Markup + "," + form.Name;
+
+            return result;
         }
 
         [System.Web.Services.WebMethod()]

@@ -165,13 +165,13 @@
         function loadSavedForm() {
             var savedFormId = $get('<%= LstSavedForms.ClientID %>').value;
             PageMethods.DoLoadSavedForm(savedFormId, onLoadFormSuccess, onAjaxFailure);
-
-            var container = dijit.byId('formeditor-container');
-            container.hide();
         }
 
         function onLoadFormSuccess(result, userContext, methodName) {
             doEditorInsert(result);
+
+            var container = dijit.byId('formeditor-container');
+            container.hide();
         }
 
         function saveSavedForm() {
@@ -186,19 +186,31 @@
         }
 
         function onSaveFormSuccess(result, userContext, methodName) {
-            var response = confirm('Form was successfully saved. Would you like to load this form now?');
-            if (response) {
-                alert(result);
+            var response = result.split(',');
+            var option = document.createElement("option");
+            option.text = response[0];
+            option.value = response[1];
+            $get('<%= LstSavedForms.ClientID %>').options.add(option);
+
+            var doLoad = confirm('Form was successfully saved. Would you like to load this form now?');
+            if (doLoad) {
                 var markup = $get('formeditor').value;
                 doEditorInsert(markup);
             }
         }
 
         function editSavedForm() {
-            alert('Edit!');
+            var savedFormId = $get('<%= LstSavedForms.ClientID %>').value;
+            PageMethods.DoEditSavedForm(savedFormId, onEditFormSuccess, onAjaxFailure);
         }
 
         function onEditFormSuccess(result, userContext, methodName) {
+            var arr = result.split(',');
+            
+            var editor = $get('formeditor');
+            var name = $get('formname');
+            editor.value = arr[0];
+            name.value = arr[1];
         }
 
         function deleteSavedForm() {
