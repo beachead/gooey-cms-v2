@@ -176,6 +176,19 @@ namespace Gooeycms.Business.Content
             return dao.FindFieldByContentTypeAndKey(contentTypeGuid, fieldKey);
         }
 
+        public void Delete(CmsContent content)
+        {
+            if (content != null)
+            {
+                CmsContentDao dao = new CmsContentDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<CmsContent>(content);
+                    tx.Commit();
+                }
+            }
+        }
+
         public void Delete(CmsContentType contentType)
         {
             if (contentType != null)

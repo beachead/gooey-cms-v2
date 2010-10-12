@@ -22,7 +22,8 @@
    <div dojoType="dijit.TitlePane" title="Manage Existing Content">
         <asp:GridView ID="ContentTable" runat="server" Width="90%" AutoGenerateColumns="False" 
             CellPadding="4" DataSourceID="ExistingContent" ForeColor="#333333" 
-            GridLines="None">
+            GridLines="None"
+            OnRowCommand="OnRowCommand">
             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             <Columns>
                 <asp:TemplateField HeaderText="Title">
