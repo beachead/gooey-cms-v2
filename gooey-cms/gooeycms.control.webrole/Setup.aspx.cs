@@ -25,6 +25,7 @@ namespace Gooeycms.Webrole.Control
                 MembershipUser user = Membership.GetUser(username);
                 if (user != null)
                 {
+                    user.UnlockUser();
                     String password = user.ResetPassword();
                     bool result = user.ChangePassword(password, pwd);
                     if (result)
