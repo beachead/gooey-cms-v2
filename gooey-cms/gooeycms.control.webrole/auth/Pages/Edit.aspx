@@ -120,9 +120,7 @@
             <tr>
                 <td>Load Saved Form:</td>
                 <td>
-                    <asp:DropDownList ID="LstSavedForms" runat="server">
-                        <asp:ListItem Text="Test" Value="135" />
-                    </asp:DropDownList>
+                    <asp:DropDownList ID="LstSavedForms" runat="server" />
                     &nbsp;
                     <asp:Button ID="BtnLoadForm" Text="Load Form" OnClientClick="loadSavedForm(); return false;" runat="server" />&nbsp;
                     <asp:Button ID="BtnEditForm" Text="Edit Form" OnClientClick="editSavedForm(); return false;" runat="server" />&nbsp;&nbsp;
@@ -190,8 +188,9 @@
         function onSaveFormSuccess(result, userContext, methodName) {
             var response = confirm('Form was successfully saved. Would you like to load this form now?');
             if (response) {
-                var result = $get('formeditor').value;
-                doEditorInsert(result);
+                alert(result);
+                var markup = $get('formeditor').value;
+                doEditorInsert(markup);
             }
         }
 

@@ -15,6 +15,8 @@ using Gooeycms.Business.Storage;
 using Gooeycms.Extensions;
 using System.Text.RegularExpressions;
 using Gooeycms.Business.Markup.Forms_v2;
+using Gooeycms.Data.Model.Form;
+using Gooeycms.Business.Forms;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
@@ -42,6 +44,13 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 {
                     ListItem item = new ListItem(path.Url, path.Url);
                     this.ParentDirectories.Items.Add(item);
+                }
+
+                IList<CmsSavedForm> forms = FormManager.Instance.GetSavedForms(CurrentSite.Guid);
+                foreach (CmsSavedForm form in forms)
+                {
+                    ListItem item = new ListItem(form.Name, form.Guid);
+                    this.LstSavedForms.Items.Add(item);
                 }
 
                 if (Request.QueryString["pid"] != null)
@@ -181,13 +190,27 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         [System.Web.Services.WebMethod()]
         public static String DoSaveForm(String formName, String formContents)
         {
-            return "THIS IS A TEST";
+            CmsSavedForm form = new CmsSavedForm();
+            form.Name = formName;
+            form.Markup = formContents;
+            form.DateSaved = DateTime.Now;
+
+            FormManager.Instance.Save(form);
+
+            return formName + "," + form.Guid;
         }
 
         [System.Web.Services.WebMethod()]
         public static String DoLoadSavedForm(String formId)
         {
-            return "THIS IS A TEST";
+            String result;
+            CmsSavedForm form = FormManager.Instance.GetSavedForm(CurrentSite.Guid, formId);
+            if (form == null)
+                throw new ArgumentException("Could not find a form for the form id:" + formId);
+            else
+                result = form.Markup;
+
+            return result;
         }
 
         [System.Web.Services.WebMethod()]
