@@ -2,11 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<head id="Head1" profile="http://control.gooeycms.net" runat="server">
+<head id="Head1" runat="server">
     <title>Gooey CMS Management | Login</title>
-    <link href="http://control.gooeycms.net/images/gooey-icon.ico" rel="icon" />
     <link id="Link1" href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
-
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <form id="form1" runat="server">

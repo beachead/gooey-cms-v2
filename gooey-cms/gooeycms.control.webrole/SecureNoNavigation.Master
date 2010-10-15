@@ -4,8 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" profile="http://control.gooeycms.net" runat="server">
     <title>Gooey CMS Management | {0}</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <link id="Link1" href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
-    <link href="~/images/gooey-icon.ico" rel="icon" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />

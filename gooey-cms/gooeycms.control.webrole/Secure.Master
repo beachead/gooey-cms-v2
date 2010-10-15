@@ -5,7 +5,7 @@
 <head id="Head1" profile="http://control.gooeycms.net" runat="server">
     <title>Gooey CMS Management | {0}</title>
     <link href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
-    <link href="~/images/gooey-icon.ico" rel="icon" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
