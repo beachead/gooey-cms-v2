@@ -7,24 +7,38 @@
     <link rel="stylesheet" type="text/css" href="../../css/store.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
+        <ul>
+            <li><a href="./site.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW SITE</a></li>
+            <li><a href="./theme.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW THEME</a></li> 
+        </ul>    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 This page will allow you to package your site or theme for sale in the Gooey Store.
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-<a href="./site.aspx?g=<%=System.Guid.NewGuid().ToString() %>">Create New Site Package</a>&nbsp;or&nbsp;<a href="./theme.aspx">Create New Theme Package</a>
-<br />
-
-<div style="padding-top:10px; width:900px;">
-    <table>
+<div style="width:900px;">
+   <table>
         <tr>
-            <td><asp:Image ID="LogoSrc" runat="server" /></td>
+            <td valign="top"><asp:Image ID="LogoSrc" runat="server" />&nbsp;Upload Logo:
+            <asp:FileUpload ID="LogoFile" runat="server" /><asp:Button ID="BtnUploadLogo" OnClick="BtnUploadLogo_Click" Text="Upload" runat="server" /></td>
             <td>
-                Upload Logo:&nbsp;<asp:FileUpload ID="LogoFile" runat="server" />&nbsp;<asp:Button ID="BtnUploadLogo" OnClick="BtnUploadLogo_Click" Text="Upload" runat="server" />
+                
             </td>
-        </tr>
+ <td width="100px;">&nbsp;</td>
+ <td>
+ <div class="column last maincontent">
+<ul class="benefits" id="distribute-perks">
+	<li class="even">You pick the price</li>
+	<li>You get 70% of sales revenue</li>
+	<li class="even">Receive revenue checks quarterly</li>
+	<li>No charge for free sites</li>
+	<li class="even">No credit card fees</li>
+	<li>No hosting fees</li>
+	<li class="even">No marketing fees</li>
+</ul>
+</div>
+ </td>       </tr>
     </table>
-    
     <hr />
     <div dojoType="dijit.layout.TabContainer" style="width: 100%; height: 100%;" doLayout="false">
         <div dojoType="dijit.layout.ContentPane" title="My Site Packages" selected="true">

@@ -15,21 +15,20 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <div style="font-size:28px;font-weight:bold;height:30px;">GooeyCMS Dashboard</div>
-    <table>
-        <tr>
-            <td style="vertical-align:top;">
-                <asp:DropDownList ID="AvailableSites" runat="server" />&nbsp;
+
+    <table border=0>
+    <tr><td><img src="../images/dashboard.png" width="362px" height="45px" border="0" /></td><td style="padding-left:80px;"></td><td> <img src="../images/purchases.png" width="201px" height="61px" border="0" /></td></tr>
+       <tr>
+            <td style="vertical-align:top; padding-left:10px;">
+                <br />Select a site:<br /><asp:DropDownList ID="AvailableSites" runat="server" />&nbsp;
                 <asp:Button ID="BtnManageSite" Text="Manage Site" OnClick="BtnManageSite_Click" runat="server" />                
             </td>
+            <td style="padding-left:80px;"></td>
             <td>
-            <div style="padding-left:80px;">
-            <b>My Purchases:</b><br />
-            </div>
 		    <ul id="themes-panel">
                 <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" OnItemCommand="SitePackages_OnItemCommand" runat="server">
-                    <ItemTemplate>
-			            <li class="theme">    
+                   <ItemTemplate>
+    	            <li class="theme">    
 				            <div class="title" style="margin-top:0px;">
                                 <%# Eval("Title") %>
                             </div>
