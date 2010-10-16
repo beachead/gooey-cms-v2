@@ -251,3 +251,11 @@ li .package-link a:visisted
 {
     color: #646464;
 }
+
+.ajaxOrderedList ul {
+    margin: 0px;
+    padding: 0px;
+}
+.ajaxOrderedList li {
+    list-style:none outside none;
+}

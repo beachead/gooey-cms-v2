@@ -19,6 +19,8 @@ This page allows you to associate javascript files from your global library to y
     dojo.addOnLoad(function () {dijit.byId('javascriptTabContainer').selectChild('<% Response.Write(SelectedPanel); %>');});
     </script>    
 
+    <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
+
     <beachead:StatusPanel ID="ErrorPanel" runat="server" />
     <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="width:90em;height:700px;overflow:auto;">
         <div id="modifypanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Scripts">
@@ -28,7 +30,7 @@ This page allows you to associate javascript files from your global library to y
             <br /><br />
             <table>
                 <tr>
-                    <td>
+                    <td style="vertical-align:top;">
                         Disabled Scripts<br />
                         <asp:ListBox ID="LstDisabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
                     </td>
@@ -36,6 +38,20 @@ This page allows you to associate javascript files from your global library to y
                     <td>
                         Enabled Scripts<br />
                         <asp:ListBox ID="LstEnabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
+                    </td>
+                    <td style="padding-left:7px;">
+                        Load Order:(click-and-drag to reorder)<br />
+                        <div style="border:1px solid #DDD; overflow:auto;min-height:100px;width:310px;padding-left:5px;">
+                        <ajaxToolkit:ReorderList ID="LstEnabledFilesOrderable" CssClass="ajaxOrderedList" DragHandleAlignment="Left" AllowReorder="true" runat="server">
+                            <ItemTemplate>
+                                <div style="cursor:move;"><%# Eval("Name") %></div>
+                            </ItemTemplate>
+                            <ReorderTemplate>
+                                <div style="height :20px; width:300px; border: dotted 2px black;"></div>
+                            </ReorderTemplate>
+                        </ajaxToolkit:ReorderList>
+                        </div>
+                        <br /><br />
                     </td>
                 </tr>
                 <tr>

@@ -31,6 +31,15 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
         
         /// <summary>
+        /// ScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ToolkitScriptManager ScriptManager;
+        
+        /// <summary>
         /// ErrorPanel control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox LstEnabledFiles;
+        
+        /// <summary>
+        /// LstEnabledFilesOrderable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ReorderList LstEnabledFilesOrderable;
         
         /// <summary>
         /// BtnEnableScripts control.

@@ -42,6 +42,9 @@ namespace Gooeycms.Webrole.Control.auth.Themes
                 else
                     this.LstDisabledFiles.Items.Add(item);
             }
+
+            this.LstEnabledFilesOrderable.DataSource = files;
+            this.LstEnabledFilesOrderable.DataBind();
         }
 
         protected void BtnEnableScripts_Click(object sender, EventArgs e)
