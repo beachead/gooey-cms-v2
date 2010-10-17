@@ -13,64 +13,283 @@
     {analytics.tracking}
     
     <script type="text/javascript" language="javascript">
+
         function downloadFile(id) {
             document.location = '/gooeyfiles/files.handler?d=' + id;
         }
-        {download-link}
 
-        function filledIn(el) {
-            var isValid = false;
-            if (el.type == "select-one") {
-                isValid = (el.selectedIndex > 0);
+        if (!document.getElementsByClassName) {
+            document.getElementsByClassName = function (cl) {
+                var retnode = [];
+                var myclass = new RegExp('\\b' + cl + '\\b');
+                var elem = this.getElementsByTagName('*');
+                for (var i = 0; i < elem.length; i++) {
+                    var classes = elem[i].className;
+                    if (myclass.test(classes)) retnode.push(elem[i]);
+                }
+                return retnode;
             }
-            else {
-                if (el.value) {
-                    if (el.type == "checkbox") {
-                        isValid = el.checked;
+        }
+
+        var Gooey = {};
+
+        /* defaults */
+        Gooey.defaults = {
+            MSG_MISSING_VALUE: 'Missing value in required field',
+            GOOEY_ERROR_CLASS: 'gooey-error-label'
+        }
+
+        /* util */
+        Gooey.Util = {};
+
+        Gooey.Util.addLoadEvent = function (func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    if (oldonload) {
+                        oldonload();
                     }
-                    else if (el.type == "select-one") {
-                        isValid = (el.selectedIndex > 0)
-                    } else if (el.value != "") {
-                        isValid = true;
-                    }
+                    func();
                 }
             }
-            return isValid;
+        }
+
+        /* validation */
+        Gooey.Validate = {
+
+            errorMessages: [],
+
+            validate: function () {
+
+                // clear previous errors, if they exist
+                if (this.errorMessages.length > 0) {
+                    this.removeErrors();
+                }
+
+                var cRequiredFields = document.getElementsByClassName('required'),
+			        oRequiredFieldGroups = {},
+			        eField = null,
+			        aGroup = [],
+			        bFieldValid = true,
+					bFormValid = true;
+
+                // sort through the required fields and group them by name
+                for (var i = 0, len = cRequiredFields.length; i < len; i++) {
+                    eField = cRequiredFields[i];
+                    if (!oRequiredFieldGroups[eField.name]) {
+                        oRequiredFieldGroups[eField.name] = [eField];
+                    } else {
+                        oRequiredFieldGroups[eField.name].push(eField);
+                    }
+                }
+
+                // dispatch the proper handler, based on whether this is an individual field or a field group
+                for (var group in oRequiredFieldGroups) {
+                    bFieldValid = true;
+
+                    aGroup = oRequiredFieldGroups[group];
+
+                    if (aGroup.length == 1) {
+                        if (!this.validateSingleField(aGroup[0])) {
+                            bFieldValid = false;
+                            bFormValid = false;
+                        }
+                    } else {
+                        if (!this.validateFieldGroup(aGroup)) {
+                            bFieldValid = false;
+                            bFormValid = false;
+                        }
+                    }
+
+                    if (!bFieldValid) {
+                        this.insertError(aGroup[0]);
+                    }
+                }
+                return bFormValid;
+            },
+
+            validateSingleField: function (oField) {
+                var bIsValid = true;
+                switch (oField.type) {
+                    case 'checkbox':
+                    case 'radio':
+                        bIsValid = this.isChecked(oField);
+                        break;
+
+                    case 'select-one':
+                        bIsValid = this.isSelected(oField);
+                        break;
+
+                    case 'text':
+                    case 'textarea':
+                        bIsValid = this.isValidText(oField);
+                        break;
+                }
+                return bIsValid;
+            },
+
+            validateFieldGroup: function (aGroup) {
+                var bIsValid = false;
+                switch (aGroup[0].type) {
+                    case 'checkbox':
+                    case 'radio':
+                        for (var i = 0, len = aGroup.length; i < len; i++) {
+                            if (this.isChecked(aGroup[i])) {
+                                bIsValid = true;
+                            }
+                        }
+                        break;
+
+                }
+                return bIsValid;
+            },
+
+            insertError: function (eField) {
+                var sErrorMessage = Gooey.defaults.MSG_MISSING_VALUE,
+			        eParent = eField.parentNode,
+			        eErrorMessage = null;
+                if (eField.getAttribute('gy_err')) {
+                    sErrorMessage = eField.getAttribute('gy_err');
+                }
+                eErrorMessage = Gooey.Dom.make('SPAN', sErrorMessage, { Class: Gooey.defaults.GOOEY_ERROR_CLASS });
+                this.errorMessages.push(eErrorMessage);
+                //Gooey.Dom.append(eErrorMessage, eParent);
+                Gooey.Dom.insertAfter(eErrorMessage, eParent);
+            },
+
+            removeErrors: function () {
+                var eNode, eParentNode;
+                for (var i = 0, len = this.errorMessages.length - 1; i <= len; i++) {
+                    eNode = this.errorMessages[i];
+                    eParentNode = eNode.parentNode;
+                    eParentNode.removeChild(eNode);
+                }
+                this.errorMessages = [];
+
+            },
+
+            isValidText: function (oField) {
+                return oField.value != '';
+            },
+
+            isChecked: function (oField) {
+                return oField.checked;
+            },
+
+            isSelected: function (oField) {
+                return oField.selectedIndex != 0;
+            }
+        }
+
+        /* dom manipulation */
+        Gooey.Dom = {
+
+            make: function (sElement, sMessage, oAtts) {
+                var el = document.createElement(sElement);
+                for (var i in oAtts) {
+                    el.setAttribute(i, oAtts[i]);
+                }
+                el.innerHTML = sMessage;
+                return el;
+            },
+
+            append: function (eNode, eDestination) {
+                eDestination.appendChild(eNode);
+            },
+
+            insertAfter: function (eNode, eDestination) {
+                var eNextSibling = eDestination.firstChild.nextSibling;
+
+                if (eNextSibling !== null) {
+                    eDestination.insertBefore(eNode, eNextSibling);
+                } else {
+                    this.Dom.append(eNode, eDestination);
+                }
+            },
+
+            remove: function (cNodes) {
+                var eNode = null,
+			        eParent = null;
+
+                for (var i = cNodes.length - 1; i >= 0; i--) {
+                    eNode = cNodes[i];
+                    eParent = eNode.parentNode;
+                    eNode.style.backgroundColor = "red";
+                    eParent.removeChild(eNode);
+
+                }
+            }
+        }
+
+
+        Gooey.Util.addLoadEvent(
+            function () {
+                var frm = document.getElementById('content').getElementsByTagName('form')[0];
+                frm.onsubmit = function () {
+                    return Gooey.Validate.validate();
+                }
+            }
+        );
+
+
+        /*
+        function filledIn(el) {
+        var isValid = false;
+        if (el.type == "select-one") {
+        isValid = (el.selectedIndex > 0);
+        }
+        else {
+        if (el.value) {
+        if (el.type == "checkbox") {
+        isValid = el.checked;
+        }
+        else if (el.type == "select-one") {
+        isValid = (el.selectedIndex > 0)
+        } else if (el.value != "") {
+        isValid = true;
+        }
+        }
+        }
+        return isValid;
         }
 
         function getNext(el) {
-            var els = el.parent(".formerror");
-            var nextEl = null;
-            if (els.length > 0) {
-                nextEl = els[0];
-            }
-            return nextEl;
+        var els = el.parent(".formerror");
+        var nextEl = null;
+        if (els.length > 0) {
+        nextEl = els[0];
+        }
+        return nextEl;
         }
 
         function showErrorMessage(el) {
-            $("#form_error").css("color", "red");
-            $("#form_error").text("Required * fields must be filled in");
+        $("#form_error").css("color", "red");
+        $("#form_error").text("Required * fields must be filled in");
         }
 
         function validate(guid) {
-            var isValid = true;
-            $(".required").each(function (i) {
-                if (this.id.match(guid) != null) {
-                    if (!filledIn(this)) {
-                        showErrorMessage(this);
-                        isValid = false;
-                    } else {
-                        //removeErrorMessage(el);
-                    }
-                }
-            });
+        var isValid = true;
+        $(".required").each(function (i) {
+        if (this.id.match(guid) != null) {
+        if (!filledIn(this)) {
+        showErrorMessage(this);
+        isValid = false;
+        } else {
+        //removeErrorMessage(el);
+        }
+        }
+        });
 
-            return isValid;
+        return isValid;
         }
 
         function submitForm(guid) {
-            return validate(guid);
+        return validate(guid);
         }
+
+        */
     </script>
 </body>
 </html>
