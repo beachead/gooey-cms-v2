@@ -18,9 +18,9 @@
 
     <table border=0>
     <tr><td><img src="../images/dashboard.png" width="362px" height="45px" border="0" /></td><td style="padding-left:80px;"></td><td> <img src="../images/purchases.png" width="201px" height="61px" border="0" /></td></tr>
-       <tr>
-            <td style="vertical-align:top; padding-left:10px;">
-                <br />Select a site:<br /><asp:DropDownList ID="AvailableSites" runat="server" />&nbsp;
+    <tr><td colspan="3"><hr /></td></tr>
+    <tr>        <td style="vertical-align:top; padding-left:10px;">
+                <br />Select a site to manage:<br /><asp:DropDownList ID="AvailableSites" runat="server" />&nbsp;
                 <asp:Button ID="BtnManageSite" Text="Manage Site" OnClick="BtnManageSite_Click" runat="server" />                
             </td>
             <td style="padding-left:80px;"></td>

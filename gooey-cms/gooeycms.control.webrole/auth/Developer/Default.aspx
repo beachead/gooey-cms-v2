@@ -8,22 +8,22 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
+            <li class="on">DEVELOPERS HOME</a></li>
             <li><a href="./site.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW SITE</a></li>
             <li><a href="./theme.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW THEME</a></li> 
+            <li><a href="Settings.aspx">DEVELOPER SETTINGS</a></li> 
         </ul>    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-This page will allow you to package your site or theme for sale in the Gooey Store.
+<br /><img src="/images/build_your_biz.png" width="495px" height="37px" border="0" />
+<p>View the sites you have purchased, apply them to your subscriptions or your clients and create new sites or themes to sell.</p>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
 <div style="width:900px;">
    <table>
         <tr>
-            <td valign="top"><asp:Image ID="LogoSrc" runat="server" />&nbsp;Upload Logo:
-            <asp:FileUpload ID="LogoFile" runat="server" /><asp:Button ID="BtnUploadLogo" OnClick="BtnUploadLogo_Click" Text="Upload" runat="server" /></td>
-            <td>
-                
-            </td>
+            <td valign="top"<asp:Image ID="LogoSrc" runat="server" /></td>
+            <td valign="top">&nbsp;</td>
  <td width="100px;">&nbsp;</td>
  <td>
  <div class="column last maincontent">
