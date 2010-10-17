@@ -50,11 +50,11 @@
                         </div>
                     </td>
                     <td class="right-column">
-                    <div id="subnav1">
-                        <div id="subnav-inner1">
+                    <div class="subnav blue">
+                        <div class="subnav-inner">
                             <ul>
-                                <li style="padding-left:30px;"><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">DASHBOARD</asp:HyperLink></li>
-                                <li><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">DEVELOPERS</asp:HyperLink></li> 
+                                <li style="padding-left: 40px;"><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">DASHBOARD</asp:HyperLink></li>
+                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">DEVELOPERS</asp:HyperLink></li> 
                             </ul>
                         </div>
                     </div> 
@@ -67,8 +67,8 @@
                                 LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;
                             </div>
                          </div>
-    <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= dashboardLink.ClientID %>" position="below"><p>Access the different sites you are working on here.</p>View your purchases.</div>
-    <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= developersLink.ClientID %>" position="below"><p>Finished a site?<br /><br />Start selling your own gooey cms site.</p></div>
+                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= dashboardLink.ClientID %>" position="below"><p>Access the different sites you are working on here.</p>View your purchases.</div>
+                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= developersLink.ClientID %>" position="below"><p>Finished a site?<br /><br />Start selling your own gooey cms site.</p></div>
                   </td>
                 </tr>
             </table>

@@ -8,7 +8,7 @@
         <ul>
             <li class=""><a href="./">Manage Themes:</a></li>
             <li class="on">Manage Templates</li> 
-            <li class=""><a href="./AddNewTheme.aspx">Add Theme</a></li>           
+            <li class="last"><a href="./AddNewTheme.aspx">Add Theme</a></li>           
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

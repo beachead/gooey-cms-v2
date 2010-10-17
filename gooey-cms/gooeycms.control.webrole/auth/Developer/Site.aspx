@@ -11,7 +11,7 @@
             <li><a href="Default.aspx">DEVELOPERS HOME</a></li>
             <li class="on">PACKAGE A NEW SITE</li>
             <li><a href="./theme.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW THEME</a></li> 
-            <li><a href="Settings.aspx">DEVELOPER SETTINGS</a></li> 
+            <li class="last"><a href="Settings.aspx">DEVELOPER SETTINGS</a></li> 
         </ul>    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

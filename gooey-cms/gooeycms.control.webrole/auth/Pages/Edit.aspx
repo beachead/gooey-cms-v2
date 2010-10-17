@@ -7,7 +7,7 @@
         <ul>
             <li class=""><a href="./Default.aspx">MANAGE PAGES</a></li>        
             <li class="on"><%=PageAction %> PAGE</li>
-            <li><a href="../promotion/PagePromotion.aspx">PROMOTION</a></li>        
+            <li class="last"><a href="../promotion/PagePromotion.aspx">PROMOTION</a></li>        
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

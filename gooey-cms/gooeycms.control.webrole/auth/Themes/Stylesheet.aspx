@@ -6,7 +6,7 @@
         <ul>
             <li><a id="A2" href="~/auth/Themes/Default.aspx" runat="server">Manage Themes</a>:</li>
             <li><a id="A1" href="~/auth/Themes/Add.aspx" runat="server">Add Theme</a></li>
-            <li>Manage Stylesheets</li>
+            <li class="last">Manage Stylesheets</li>
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

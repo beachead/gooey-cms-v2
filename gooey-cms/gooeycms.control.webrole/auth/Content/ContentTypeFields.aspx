@@ -5,7 +5,7 @@
         <ul>
             <li><a href="./Default.aspx">SITE CONTENT</a></li>
             <li><a href="">PROMOTION</a></li> 
-            <li><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
+            <li class="last"><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

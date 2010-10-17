@@ -9,7 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
             <li><a href="http://store.gooeycms.net/signup/">REGISTER NEW SITE</a></li>
-            <li><a href="http://store.gooeycms.net/">PURCHASE SITES OR THEMES</a></li> 
+            <li class="last"><a href="http://store.gooeycms.net/">PURCHASE SITES OR THEMES</a></li> 
         </ul>    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

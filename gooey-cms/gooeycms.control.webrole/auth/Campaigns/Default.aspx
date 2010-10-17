@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
             <li><a href="./Create.aspx">NEW CAMPAIGN</a></li>    
-            <li><a href="#" onclick="alert('Not implemented yet'); return false;">LEAD REPORT</a></li>  
+            <li class="last"><a href="#" onclick="alert('Not implemented yet'); return false;">LEAD REPORT</a></li>  
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
