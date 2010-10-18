@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="localCSS" runat="server"></asp:ContentPlaceHolder>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
     <script src="<%=Root %>scripts/functions.js" type="text/javascript" language="javascript"></script> 
     <script src="<%=Root %>scripts/mootools-core.js" type="text/javascript" language="javascript"></script>    
@@ -24,6 +25,7 @@
         dojo.require("dijit.form.ValidationTextBox");
         dojo.require("dijit.Tooltip");
     </script>
+    <asp:ContentPlaceHolder ID="localJS" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body class="claro">
     <form id="aspnetform" clientidmode="Static" runat="server">
@@ -59,18 +61,27 @@
                         </div>
                     </td>
                     <td class="right-column">
-                         <div id="logo" style="padding-top:3px;padding-right:15px;">
+                        <div class="subnav blue">
+                            <div class="subnav-inner">
+                                <ul>
+                                    <li style="padding-left: 40px;"><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">DASHBOARD</asp:HyperLink></li>
+                                    <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">DEVELOPERS</asp:HyperLink></li> 
+                                </ul>
+                            </div>
+                        </div> 
+                      <div id="logo" style="padding-top:3px;padding-right:15px;">
                             <img src="~/images/logo_gooey_internal.png" runat="server" />
                             <div style="padding-top:12px;">
                             Welcome, <asp:Label ID="LoggedInUsername" runat="server" /> &nbsp;<br />
-                            <a href="~/auth/dashboard.aspx" style="#666666; font-size:10px;" runat="server">My Sites</a>
                             <a id="change_password" href="~/secure/ChangePassword.aspx" style="color:#666666; font-size:10px;" runat="server">Change Password</a>                
                             <asp:LoginStatus ID="LoginStatus" runat="server" style="color:#666666; font-size:10px;"
                                 LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;
                             </div>
                          </div>
+                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= dashboardLink.ClientID %>" position="below"><p>Access the different sites you are working on here.</p>View your purchases.</div>
+                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= developersLink.ClientID %>" position="below"><p>Finished a site?<br /><br />Start selling your own gooey cms site.</p></div>
                     </td>
-                </tr>
+              </tr>
             </table>
         </div>
     </div>

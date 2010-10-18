@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
             <li><a href="./">MANAGE THEMES</a></li>
-            <li class="on">ADD THEME</li>
+            <li class="last on">ADD THEME</li>
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">

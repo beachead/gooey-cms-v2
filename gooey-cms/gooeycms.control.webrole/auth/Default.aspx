@@ -3,6 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>       
             <li class=""><a href="./themes/">THEMES</a></li>  
@@ -10,12 +11,14 @@
             <li class=""><a href="./structure/">SITE NAVIGATION</a></li>            
             <li class=""><a href="./configuration/">SITE SETTINGS</a></li>          
             <li class=""><a href="./content/">CONTENT TYPES & TAGS</a></li>
-            <li class=""><a href="./internationalization/">LANGUAGES</a></li>            
+            <li class="last"><a href="./internationalization/">LANGUAGES</a></li>            
         </ul>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 This management area allows you to manage your global site configurations and available content types.
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
 <h1 class="main">Site Administration</h1>
 <a href="./themes/">Themes</a>

@@ -50,7 +50,15 @@
                         </div>
                     </td>
                     <td class="right-column">
-                         <div id="logo" style="padding-top:3px;padding-right:15px;">
+                    <div class="subnav blue">
+                        <div class="subnav-inner">
+                            <ul>
+                                <li style="padding-left: 40px;"><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">DASHBOARD</asp:HyperLink></li>
+                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">DEVELOPERS</asp:HyperLink></li> 
+                            </ul>
+                        </div>
+                    </div> 
+                            <div id="logo" style="padding-top:3px;padding-right:15px;">
                             <img id="Img1" src="~/images/logo_gooey_internal.png" runat="server" />
                             <div style="padding-top:12px;">
                             Welcome, <asp:Label ID="LoggedInUsername" runat="server" /> &nbsp;<br />
@@ -59,7 +67,9 @@
                                 LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;
                             </div>
                          </div>
-                    </td>
+                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= dashboardLink.ClientID %>" position="below"><p>Access the different sites you are working on here.</p>View your purchases.</div>
+                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= developersLink.ClientID %>" position="below"><p>Finished a site?<br /><br />Start selling your own gooey cms site.</p></div>
+                  </td>
                 </tr>
             </table>
         </div>

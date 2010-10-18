@@ -38,20 +38,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             SitePackages.DataBind();
         }
 
-        protected void BtnUploadLogo_Click(Object sender, EventArgs e)
-        {
-            CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
-            if (LogoFile.HasFile)
-            {
-                FileInfo info = new FileInfo(LogoFile.FileName);
 
-                String name = subscription.LogoName;
-                if (name.IsEmpty())
-                    name = System.Guid.NewGuid().ToString() + info.Extension;
-
-                Logos.SaveLogoFile(subscription, name, LogoFile.FileBytes);
-            }
-        }
 
         protected void SitePackages_OnItemCommand(object source, RepeaterCommandEventArgs e)
         {

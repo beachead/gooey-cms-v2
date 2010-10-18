@@ -7,7 +7,7 @@
             <li class="on">MANAGE PAGES</li>
             <li><a href="./Edit.aspx">ADD NEW PAGE</a></li>
             <li><a href="./Promotion.aspx">PROMOTION</a></li> 
-            <li><a href="./Redirects.aspx">MANAGE REDIRECTS</a></li>       
+            <li class="last"><a href="./Redirects.aspx">MANAGE REDIRECTS</a></li>       
         </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
