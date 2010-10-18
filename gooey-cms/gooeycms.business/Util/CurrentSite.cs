@@ -11,6 +11,7 @@ using Gooeycms.Extensions;
 using System.Web.UI;
 using Gooeycms.Business.Campaigns;
 using Gooeycms.Business.Campaigns.Engine;
+using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Business.Util
 {
@@ -26,6 +27,28 @@ namespace Gooeycms.Business.Util
 
         public static class Configuration
         {
+            private static void SetSiteConfiguration(String key, String value)
+            {
+                Data.Guid guid = CurrentSite.Guid;
+
+                SiteConfigurationDao dao = new SiteConfigurationDao();
+                SiteConfiguration result = dao.FindByKey(guid, key);
+                if (result == null)
+                    result = new SiteConfiguration();
+
+                result.Name = key;
+                result.Value = value;
+                result.SubscriptionGuid = guid.Value;
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Save<SiteConfiguration>(result);
+                    tx.Commit();
+                }
+
+                Cache.Clear(key);
+                Cache.Add(key, value);
+            }
+
             private static String GetSiteConfiguration(String key, String def, Boolean required)
             {
                 String value = Cache.Get<String>(key);
@@ -48,9 +71,23 @@ namespace Gooeycms.Business.Util
 
             }
 
+            public static Boolean IsGoogleAnalyticsEnabled
+            {
+                get 
+                {
+                    Boolean result = false;
+                    String strResult = GetSiteConfiguration("google-analytics-enabled", "false", true);
+                    Boolean.TryParse(strResult, out result);
+
+                    return result;
+                }
+                set { SetSiteConfiguration("google-analytics-enabled", value.StringValue()); }
+            }
+
             public static String GoogleAccountId
             {
                 get { return GetSiteConfiguration("google-account-id", "", false); }
+                set { SetSiteConfiguration("google-account-id", value); }
             }
 
             public static String HeaderImageTemplate

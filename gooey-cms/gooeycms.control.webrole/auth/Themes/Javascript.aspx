@@ -42,7 +42,7 @@ This page allows you to associate javascript files from your global library to y
                     </td>
                     </asp:Panel>
                     <td style="padding-left:7px;vertical-align:top;">
-                        Enabled/Disabled Scripts:(click-and-drag to reorder)<br />
+                        Enabled Scripts:(click-and-drag to reorder)<br />
                         <ajaxToolkit:ReorderList ID="LstEnabledFilesOrderable" CssClass="ajaxOrderedList"  PostBackOnReorder="false" 
                                                 OnItemReorder="LstEnabledFiles_Reorder" 
                                                 OnItemCommand="LstEnabledFiles_ItemCommand"

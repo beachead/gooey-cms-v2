@@ -29,7 +29,6 @@ namespace Gooeycms.Business.Pages
         private CmsPage page = null;
         private CmsTheme theme = null;
         private StringBuilder output = new StringBuilder();
-        private String analytics = "";
         private Boolean isInCache = false;
 
         /// <summary>
@@ -151,7 +150,7 @@ namespace Gooeycms.Business.Pages
             template = template.Replace("{campaign-bottom}", bottomElements.ToString());
 
             output = output.Replace("{page.html}", template.ToString());
-            output = output.Replace("{analytics.tracking}", this.analytics);
+            output = output.Replace("{analytics.tracking}", CampaignManager.Instance.GetCampaignEngine().GetTrackingScript());
 
             WebRequestContext context = new WebRequestContext();
             String downloadId = Request.QueryString["d"];

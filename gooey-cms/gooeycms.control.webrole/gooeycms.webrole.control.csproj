@@ -94,6 +94,7 @@
     <Content Include="auth\Campaigns\Create.aspx" />
     <Content Include="auth\Campaigns\Default.aspx" />
     <Content Include="auth\Campaigns\Links.aspx" />
+    <Content Include="auth\Campaigns\Settings.aspx" />
     <Content Include="auth\cleanup.aspx" />
     <Content Include="auth\Content\Add.aspx" />
     <Content Include="auth\Content\ContentTypeFields.aspx" />
@@ -160,6 +161,13 @@
     </Compile>
     <Compile Include="auth\Campaigns\Links.aspx.designer.cs">
       <DependentUpon>Links.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Campaigns\Settings.aspx.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\Settings.aspx.designer.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\cleanup.aspx.cs">
       <DependentUpon>cleanup.aspx</DependentUpon>

@@ -14,7 +14,7 @@ namespace Gooeycms.Business.Campaigns.Engine
         private static String TrackingLinkFormat = @"utm_source={0}&utm_medium={1}&utm_campaign={2}";
         private static String TrackingLinkFileFormat = "/utm_source/{0}/utm_medium/{1}/utm_campaign/{2}/{3}";
         private static String TrackingSnippet = @"
-""<script type=""text/javascript"">
+<script type=""text/javascript"">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '{google-account-id}']);
   _gaq.push(['_trackPageview']);
@@ -34,7 +34,7 @@ namespace Gooeycms.Business.Campaigns.Engine
         {
             get
             {
-                return (!String.IsNullOrWhiteSpace(CurrentSite.Configuration.GoogleAccountId));
+                return ((CurrentSite.Configuration.IsGoogleAnalyticsEnabled) && (!String.IsNullOrWhiteSpace(CurrentSite.Configuration.GoogleAccountId)));
             }
         }
 
