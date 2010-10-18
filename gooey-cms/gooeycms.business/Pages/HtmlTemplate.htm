@@ -18,6 +18,9 @@
             document.location = '/gooeyfiles/files.handler?d=' + id;
         }
 
+        //DO NOT REMOVE THE BELOW LINE. IT IS DYNAMICALLY REPLACED (OR REMOVED) BY THE CMS
+        {download-link}
+
         if (!document.getElementsByClassName) {
             document.getElementsByClassName = function (cl) {
                 var retnode = [];
