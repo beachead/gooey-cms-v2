@@ -9,6 +9,7 @@ namespace Gooeycms.Business.Css
         public const String Extension = ".css";
 
         public Boolean IsEnabled { get; set; }
+        public Boolean SortOrder { get; set; }
         public String Content { get; set; }
         public String FullName { get; set; }
 

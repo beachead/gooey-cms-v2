@@ -3,12 +3,13 @@
 namespace Gooeycms.Business.Javascript
 {
     [Serializable]
-    public class JavascriptFile
+    public class JavascriptFile : IComparable<JavascriptFile>
     {
         public const String Separator = "-";
         public const String Extension = ".js";
 
         public Boolean IsEnabled { get; set; }
+        public Int32 SortOrder { get; set; }
         public String Content { get; set; }
         public String FullName { get; set; }
 
@@ -16,6 +17,11 @@ namespace Gooeycms.Business.Javascript
         {
             get { return FullName; }
             set { this.FullName = value; }
+        }
+
+        public int CompareTo(JavascriptFile other)
+        {
+            return (this.SortOrder.CompareTo(other.SortOrder));
         }
     }
 }

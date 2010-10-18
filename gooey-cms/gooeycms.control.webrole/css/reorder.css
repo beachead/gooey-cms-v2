@@ -1,0 +1,28 @@
+﻿.ajaxOrderedList ul {
+    -moz-border-radius:5px 5px 5px 5px;
+    -moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-color:#F5F5F5 #E1E1E1 #C4C4C4;
+    border-left:1px solid #E1E1E1;
+    border-right:1px solid #E1E1E1;
+    border-style:solid;
+    border-width:1px;
+    margin-bottom:1.6em;
+    padding: 10px;
+}
+
+.ajaxOrderedList li {
+    background: url("../images/check.png") no-repeat scroll 12px 50% transparent;
+    padding:3px 0 3px 38px;
+    list-style:none;
+}
+
+.ajaxOrderedList div.alt {
+    background-color:#F5F5F5;
+}
+
+li a.normal {
+    color: #000000;
+    text-decoration: underline;
+}
+

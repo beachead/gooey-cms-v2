@@ -49,6 +49,15 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         protected global::Gooeycms.Webrole.Controls.StatusPanel ErrorPanel;
         
         /// <summary>
+        /// DisablePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel DisablePanel;
+        
+        /// <summary>
         /// LstDisabledFiles control.
         /// </summary>
         /// <remarks>
@@ -56,24 +65,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox LstDisabledFiles;
-        
-        /// <summary>
-        /// LstEnabledFiles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox LstEnabledFiles;
-        
-        /// <summary>
-        /// LstEnabledFilesOrderable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ReorderList LstEnabledFilesOrderable;
         
         /// <summary>
         /// BtnEnableScripts control.
@@ -85,13 +76,13 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         protected global::System.Web.UI.WebControls.Button BtnEnableScripts;
         
         /// <summary>
-        /// BtnDisableScripts control.
+        /// LstEnabledFilesOrderable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnDisableScripts;
+        protected global::AjaxControlToolkit.ReorderList LstEnabledFilesOrderable;
         
         /// <summary>
         /// ChkProviders control.

@@ -116,10 +116,12 @@
     <Content Include="auth\Themes\ImageBrowser.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
+    <Content Include="css\reorder.css" />
     <Content Include="css\store.css" />
     <Content Include="default.aspx" />
     <Content Include="demo.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\drag_arrow.png" />
     <Content Include="images\bg_theme_panel.png" />
     <Content Include="images\bullet_features.gif" />
     <Content Include="images\logo_gooey-login.png" />

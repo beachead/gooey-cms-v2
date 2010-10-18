@@ -6,6 +6,7 @@ using Gooeycms.Business.Javascript;
 using Gooeycms.Business.Themes;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
+using AjaxControlToolkit;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
@@ -28,23 +29,65 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         {
             this.Editor.Text = "";
             this.LstExistingFile.Items.Clear();
-            this.LstEnabledFiles.Items.Clear();
             this.LstDisabledFiles.Items.Clear();
 
             IList<JavascriptFile> files = JavascriptManager.Instance.List(this.GetSelectedTheme());
+            IList<JavascriptFile> enabledFiles = new List<JavascriptFile>();
             foreach (JavascriptFile file in files)
             {
                 ListItem item = new ListItem(file.Name, file.FullName);
                 this.LstExistingFile.Items.Add(item);
 
-                if (file.IsEnabled)
-                    this.LstEnabledFiles.Items.Add(item);
-                else
+                if (!file.IsEnabled)
                     this.LstDisabledFiles.Items.Add(item);
+
+                if (file.IsEnabled)
+                    enabledFiles.Add(file);
             }
 
-            this.LstEnabledFilesOrderable.DataSource = files;
+            this.LstEnabledFilesOrderable.DataSource = enabledFiles;
             this.LstEnabledFilesOrderable.DataBind();
+
+            if (files.Count == enabledFiles.Count)
+                this.DisablePanel.Visible = false;
+            else
+                this.DisablePanel.Visible = true;
+        }
+
+        protected void LstEnabledFiles_ItemCommand(object sender, AjaxControlToolkit.ReorderListCommandEventArgs e)
+        {
+            CmsTheme theme = GetSelectedTheme();
+            switch (e.CommandName)
+            { 
+                case "Disable":
+                    JavascriptManager.Instance.Disable(theme, e.CommandArgument.ToString());
+                    break;
+            }
+
+            LoadTabData();
+        }
+
+        protected void LstEnabledFiles_Reorder(object sender, ReorderListItemReorderEventArgs e)
+        {
+            CmsTheme theme = GetSelectedTheme();
+
+            //Get the original order of the items
+            IList<JavascriptFile> files = JavascriptManager.Instance.List(this.GetSelectedTheme());
+
+            //Reorder the item
+            JavascriptFile movedFile = files[e.OldIndex];
+            files.RemoveAt(e.OldIndex);
+            files.Insert(e.NewIndex, movedFile);
+
+            //Update the ordering of all the items
+            int i = 0;
+            foreach (JavascriptFile file in files)
+            {
+                file.SortOrder = i++;
+                JavascriptManager.Instance.UpdateSortInfo(theme, file.Name, i++);
+            }
+
+            LoadTabData();
         }
 
         protected void BtnEnableScripts_Click(object sender, EventArgs e)
@@ -63,6 +106,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         protected void BtnDisableScripts_Click(object sender, EventArgs e)
         {
             CmsTheme theme = GetSelectedTheme();
+            /*
             foreach (ListItem item in this.LstEnabledFiles.Items)
             {
                 if (item.Selected)
@@ -70,6 +114,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
                     JavascriptManager.Instance.Disable(theme, item.Value);
                 }
             }
+            */
             LoadTabData();
         }
 

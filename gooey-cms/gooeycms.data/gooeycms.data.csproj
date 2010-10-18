@@ -79,6 +79,10 @@
     <Compile Include="Model\Form\CmsSavedFormDao.cs" />
     <Compile Include="Model\Help\HelpPage.cs" />
     <Compile Include="Model\Help\HelpPageDao.cs" />
+    <Compile Include="Model\Page\BaseCmsAsset.cs" />
+    <Compile Include="Model\Page\CmsAssetDao.cs" />
+    <Compile Include="Model\Page\CmsCss.cs" />
+    <Compile Include="Model\Page\CmsJavascript.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />
     <Compile Include="Model\Page\CmsPageDao.cs" />
     <Compile Include="Model\SecurityToken.cs" />
@@ -119,8 +123,10 @@
     <EmbeddedResource Include="Mappings\UserPackages.hbm.xml" />
     <EmbeddedResource Include="Mappings\CmsCampaigns.hbm.xml" />
     <EmbeddedResource Include="Mappings\CmsInvite.hbm.xml" />
+    <EmbeddedResource Include="Mappings\CmsAssets.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\add-foreign-keys.sql.txt" />
+    <Content Include="sql-scripts\create-asset-tables.sql.txt" />
     <Content Include="sql-scripts\create-invite-tables.sql.txt" />
     <Content Include="sql-scripts\create-campaigns.sql.txt" />
     <Content Include="sql-scripts\create-store-tables.sql.txt" />

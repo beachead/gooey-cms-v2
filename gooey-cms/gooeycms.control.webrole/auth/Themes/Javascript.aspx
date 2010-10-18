@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Javascript.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Themes.Javascript" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
+<asp:Content ID="ContentStylesheets" ContentPlaceHolderID="localCSS" runat="server">
+    <link rel="stylesheet" href="../../css/reorder.css" />
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
@@ -30,33 +33,37 @@ This page allows you to associate javascript files from your global library to y
             <br /><br />
             <table>
                 <tr>
+                    <asp:Panel ID="DisablePanel" AutoUpdateAfterCallBack="true" Visible="true" runat="server">
                     <td style="vertical-align:top;">
                         Disabled Scripts<br />
                         <asp:ListBox ID="LstDisabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
+                        <br />
+                        <asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" Text="Enable" runat="server" />
                     </td>
-                    <td style="width:15px;">&nbsp;</td>
-                    <td>
-                        Enabled Scripts<br />
-                        <asp:ListBox ID="LstEnabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
-                    </td>
-                    <td style="padding-left:7px;">
-                        Load Order:(click-and-drag to reorder)<br />
-                        <div style="border:1px solid #DDD; overflow:auto;min-height:100px;width:310px;padding-left:5px;">
-                        <ajaxToolkit:ReorderList ID="LstEnabledFilesOrderable" CssClass="ajaxOrderedList" DragHandleAlignment="Left" AllowReorder="true" runat="server">
+                    </asp:Panel>
+                    <td style="padding-left:7px;vertical-align:top;">
+                        Enabled/Disabled Scripts:(click-and-drag to reorder)<br />
+                        <ajaxToolkit:ReorderList ID="LstEnabledFilesOrderable" CssClass="ajaxOrderedList"  PostBackOnReorder="false" 
+                                                OnItemReorder="LstEnabledFiles_Reorder" 
+                                                OnItemCommand="LstEnabledFiles_ItemCommand"
+                                                DragHandleAlignment="Left" AllowReorder="true" runat="server">
                             <ItemTemplate>
-                                <div style="cursor:move;"><%# Eval("Name") %></div>
+                                <div class="<%# ((Container.DisplayIndex % 2) == 0) ? "" : "alt" %>">
+                                    <%# Eval("Name") %>&nbsp;
+                                    <asp:LinkButton ID="LnkDisableScript" CssClass="normal" CommandName="Disable" CommandArgument='<%# Eval("Name") %>' Text="Disable" runat="server" />
+                                </div>
                             </ItemTemplate>
+                            <DragHandleTemplate>
+                                <div style="padding-right:5px;cursor:move;">
+                                <img src="../../images/drag_arrow.png" alt="drag" />
+                                </div>
+                            </DragHandleTemplate>
                             <ReorderTemplate>
-                                <div style="height :20px; width:300px; border: dotted 2px black;"></div>
+                                <div style="height :20px; border: dotted 2px black;"></div>
                             </ReorderTemplate>
                         </ajaxToolkit:ReorderList>
-                        </div>
                         <br /><br />
                     </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" Text="Enable" runat="server" /></td>
-                    <td><asp:Button ID="BtnDisableScripts" OnClick="BtnDisableScripts_Click" Text="Disable" runat="server" /></td>
                 </tr>
             </table>
         </div>

@@ -64,6 +64,8 @@ namespace Gooeycms.Business.Javascript
                 {
                     results.Add(Convert(key, file));
                 }
+                ((List<JavascriptFile>)results).Sort();
+
                 cache.Add("javascript-files-" + key, results);
             }
             return results;
@@ -105,7 +107,7 @@ namespace Gooeycms.Business.Javascript
             client.Save(directory, key, file.FullName, Encoding.UTF8.GetBytes(file.Content), Permissions.Private);
         }
 
-        public void Save(String key, string filename, byte[] data, Boolean enabledByDefault)
+        public void Save(String key, string filename, byte[] data, Boolean enabledByDefault, Int32 defaultSortOrder)
         {
             CurrentSite.Cache.Clear("javascript-files-" + key);
             if (!filename.EndsWith(JavascriptFile.Extension))
@@ -114,15 +116,18 @@ namespace Gooeycms.Business.Javascript
             }
 
             String enabled = enabledByDefault.StringValue();
+            int sortOrder = defaultSortOrder;
             try
             {
                 JavascriptFile exists = Get(key, filename);
                 enabled = (exists.IsEnabled) ? Boolean.TrueString : Boolean.FalseString;
+                sortOrder = exists.SortOrder;
             }
             catch (PageNotFoundException) { }
 
             IStorageClient client = StorageHelper.GetStorageClient();
             client.AddMetadata(GetEnabledKey(key), enabled);
+            client.AddMetadata(GetSortKey(key), sortOrder.ToString()); 
 
             String directory = CurrentSite.JavascriptStorageContainer;
             client.Save(directory, key, filename, data, Permissions.Private);
@@ -133,12 +138,35 @@ namespace Gooeycms.Business.Javascript
 
         public void Save(CmsPage page, string filename, byte[] data)
         {
-            Save(page.UrlHash, filename, data, true);
+            Save(page.UrlHash, filename, data, true,0);
         }
 
         public void Save(CmsTheme theme, string filename, byte[] data)
         {
-            Save(theme.ThemeGuid, filename, data, false);
+            Save(theme.ThemeGuid, filename, data, false,0);
+        }
+
+        private void UpdateSortInfo(String key, String filename, Int32 newSortOrder)
+        {
+            CurrentSite.Cache.Clear("javascript-files-" + key);
+
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.AddMetadata(GetSortKey(key), newSortOrder.ToString());
+
+            String directory = CurrentSite.JavascriptStorageContainer;
+            client.SetMetadata(directory, key, filename);
+
+            SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
+        }
+
+        public void UpdateSortInfo(CmsTheme theme, String filename, Int32 newSortOrder)
+        {
+            UpdateSortInfo(theme.ThemeGuid, filename, newSortOrder);
+        }
+
+        public void UpdateSortInfo(CmsPage page, String filename, Int32 newSortOrder)
+        {
+            UpdateSortInfo(page.UrlHash, filename, newSortOrder);
         }
 
         private void EnableDisable(String key, String filename, Boolean enabled)
@@ -208,17 +236,21 @@ namespace Gooeycms.Business.Javascript
             SitePageCacheRefreshInvoker.InvokeRefresh(theme.SubscriptionGuid, SitePageRefreshRequest.PageRefreshType.Staging);
         }
 
-        private static JavascriptFile Convert(String enabledKey, StorageFile file)
+        private static JavascriptFile Convert(String key, StorageFile file)
         {
             JavascriptFile temp = new JavascriptFile();
 
+            Int32 sortOrder = 0;
             Boolean isEnabled = true;
-            String enabled = file.Metadata[GetEnabledKey(enabledKey)];
+            String enabled = file.Metadata[GetEnabledKey(key)];
+            String sortOrderStr = file.Metadata[GetSortKey(key)];
+
             Boolean.TryParse(enabled, out isEnabled);
+            Int32.TryParse(sortOrderStr, out sortOrder);
 
             temp.IsEnabled = isEnabled;
             temp.FullName = file.Filename;
-
+            temp.SortOrder = sortOrder;
             if ((file.Data != null) && (file.Data.Length > 0))
                 temp.Content = Encoding.UTF8.GetString(file.Data);
 
@@ -228,6 +260,11 @@ namespace Gooeycms.Business.Javascript
         private static string GetEnabledKey(String key)
         {
             return "enabled_" + key.Replace("-", "_");
+        }
+
+        private static String GetSortKey(String key)
+        {
+            return "sort_" + key.Replace("-", "_");
         }
     }
 }
