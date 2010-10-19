@@ -225,41 +225,40 @@ ul.menu li {
 	color:#FFFFFF;
 }
 
-li.on {
+ul.menu li.on {
 	text-decoration: none;
 	font-size: 11px;
 }
 
-li a:link, li a:visited {
+ul.menu li a:link, 
+ul.menu li a:visited {
 	color:#FFFFFF;
 	text-decoration:none;	
 }
 
-li a:hover 
-{
+ul.menu li a:hover {
 	color:#004bc7;
 	text-decoration:underline;	
 }
 
-#instructions-area 
-{
+/* instructions-area */
+#instructions-area {
 	padding-top:5px;
 }
 
-#editor-area
-{
+/* editor-area */
+#editor-area {
 	padding-top:15px;
 }
 
-td .page-group
-{
+/* page-group */
+td .page-group {
 	border:0px solid #E6E7F2;	
 	background-color:#ffffff;
 	vertical-align:top;	
 }
 
-.page-group 
-{
+.page-group {
 	width:97%;
 	margin-bottom:5px;
 	padding:5px;
@@ -267,19 +266,16 @@ td .page-group
 	min-height: 10px;
 }
 
-.page-group b, b.small
-{
+.page-group b, b.small {
 	font-weight:bold;
 	font-size:10px;
 }
 
-td .header 
-{
+td .header  {
 	font-weight: bold;
 }
 
-ul.image-list
-{
+ul.image-list {
 	margin:0px;
 	padding-top:0px;
 	padding-right:0px;
@@ -289,8 +285,7 @@ ul.image-list
 }
 
 
-.remember
-{
+.remember {
 	padding-left:80px;
 }
 
@@ -298,4 +293,38 @@ li .package-link a:visisted
 {
     color: #646464;
 }
+
+
+
+/*******    UTILITIES **********
+*/
+
+
+/* ul.adjacent */
+ul.adjacent {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.adjacent li {
+    float:left;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ul.flat */
+ul.flat {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.flat li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 
