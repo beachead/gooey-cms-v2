@@ -157,6 +157,7 @@ div.subnav li a,
 #subnav li a {
     color: #666;
     font-size: 10px;
+    text-decoration: none;
 }
 
 div.subnav li a:hover,

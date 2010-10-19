@@ -252,14 +252,11 @@ a.formatlink {
     width: 80%;
 }
 
-#helpContentsList li {
+#helpContents li.help-content-item {
+    display: none;
     list-style: none;
     margin: 0;
     padding: 0;
-}
-
-#helpContents li.help-content-item {
-    display: none;
 }
 
 #helpContents table {
