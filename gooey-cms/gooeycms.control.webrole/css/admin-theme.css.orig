@@ -304,7 +304,10 @@ li .package-link a:visisted
 */
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> gooey-cms-v2/MarkupEditorResizable
 /* ul.adjacent */
 ul.adjacent {
     list-style: none;
