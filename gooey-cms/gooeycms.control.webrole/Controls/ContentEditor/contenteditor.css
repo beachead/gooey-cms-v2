@@ -217,3 +217,60 @@ a.formatlink {
 	float: left;
 	text-decoration: none;
 }
+
+/* Help Panel */
+
+#HelpLink {
+    margin-left: 20px;
+}
+
+#helpPanel {
+    border: 1px solid #ccc;
+    overflow: auto;
+    width: 99%;
+}
+
+#helpTopics {
+    float: left;
+    width: 20%;
+    background-color: #eeeef5;
+}
+
+#helpTopics li a {
+    border-bottom: 1px solid #fff;
+    display: block;
+    padding: 8px;
+    outline: none;
+}
+
+#helpTopics li a.active {
+    background-color: #fff;
+}
+
+#helpContents {
+    float: left;
+    width: 80%;
+}
+
+#helpContents li.help-content-item {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#helpContents table {
+    width: 100%;
+}
+
+#helpContents th,
+#helpContents td {
+    text-align: left;
+    padding: 5px 8px;
+    border-left: 1px solid #eeeef5;
+    border-bottom: 1px solid #eeeef5;
+}
+
+#helpContents .first {
+    border-left-width: 0 !important;
+}
