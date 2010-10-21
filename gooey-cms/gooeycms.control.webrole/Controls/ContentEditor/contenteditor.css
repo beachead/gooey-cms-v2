@@ -1,7 +1,7 @@
 ﻿#FormatUl {
-	margin: 0px;
+	margin: 0px 0 5px 0;
 	padding: 0px;
-	height:100%;
+    overflow: auto;
 }
 
 #FormatUl li {
