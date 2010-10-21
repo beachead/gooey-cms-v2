@@ -1,33 +1,49 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ResizableTextBox.ascx.cs" Inherits="Beachead.Web.CMS.controls.ResizableTextBox.ResizableTextBox" %>
+
 <link rel="stylesheet" href="<% Response.Write(CssPath); %>" type="text/css" media="screen" />
+<style type="text/css">
+#<%=ResizableTextArea.ClientID %> {
+    width: 100%;
+    height: 100px;
+    padding: 0;
+}
+</style>
 <script type="text/javascript" src="<% Response.Write(ScriptPath); %>"></script>
-
-<div id="<%=ResizableTextArea.ClientID %>_rtContainer" style="width:100%;height:100%;border:0px;">   
-</div>
-<asp:TextBox ID="ResizableTextArea" TextMode="MultiLine"  Wrap="false" runat="server" /> 
-
 <script language="javascript" type="text/javascript">
 
-    var oParent = document.getElementById('<%=ResizableTextArea.ClientID %>').parentNode;
+    dojo.addOnLoad(function () {
+        var oTextEditor = dojo.byId('<%=ResizableTextArea.ClientID %>');
+        oTextEditor.style.height = (oTextEditor.scrollHeight + 20) + "px";
+        oTextEditor.style.overflowY = 'hidden';
 
-    var rt = new ResizeableTextbox('<%=ResizableTextArea.ClientID %>');
+        dojo.connect(oTextEditor, "onkeyup", function (e) {
 
-    rt.GetContainer().style.left = '0px';
-    rt.GetContainer().style.top = '0px';
-    rt.SetMaxWidth(2000);
-    rt.SetMaxHeight(2000);   
-    rt.SetCurrentWidth(880);
-    rt.SetCurrentHeight(300);
+            var nContentHeight = oTextEditor.scrollHeight;
+            var nEditorHeight = parseInt(oTextEditor.style.height);
+            //var nHeight = oTextEditor.offsetHeight;
 
-    var myDiv = document.getElementById('<%=ResizableTextArea.ClientID %>_rtContainer');
-    myDiv.appendChild(rt.GetContainer());
+            if (nContentHeight > nEditorHeight - 24) {
+                dojo.animateProperty({
+                    node: oTextEditor,
+                    properties: {
+                        height: { end: nContentHeight + 24, start: nEditorHeight }
+                    }
+                }).play();
+            }
 
-    rt.StartListening();
+            if (nEditorHeight > nContentHeight + 16) {
+                dojo.animateProperty({
+                    node: oTextEditor,
+                    properties: {
+                        height: { end: nContentHeight, start: nEditorHeight }
+                    }
+                }).play();
+            }
 
-    function performAction(obj) {
-        if (window.mytimeout) window.clearTimeout(window.mytimeout);
-        window.mytimeout = window.setTimeout(function () { keypressHandler(obj) }, 500);
-        return true;
-    }
+
+        });
+    });
 
 </script>
+
+<asp:TextBox ID="ResizableTextArea" TextMode="MultiLine"  Wrap="false" runat="server" /> 
