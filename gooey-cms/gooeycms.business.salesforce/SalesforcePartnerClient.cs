@@ -107,12 +107,15 @@ namespace gooeycms.business.salesforce
                         (type == fieldType.textarea) ||
                         (type == fieldType.phone))
                     {
-                        LeadField item = new LeadField();
-                        item.Label = field.label;
-                        item.ApiName = field.name;
-                        item.IsRequired = field.nillable;
+                        if (field.createable)
+                        {
+                            LeadField item = new LeadField();
+                            item.Label = field.label;
+                            item.ApiName = field.name;
+                            item.IsRequired = ((!field.nillable) && (!field.defaultedOnCreate));
 
-                        fieldnames.Add(item);
+                            fieldnames.Add(item);
+                        }
                     }
                 }
             }
@@ -136,10 +139,26 @@ namespace gooeycms.business.salesforce
                 validFields[item.ApiName] = item;
             
             IList<System.Xml.XmlElement> elements = new List<System.Xml.XmlElement>();
+            Dictionary<String, Boolean> associatedFields = new Dictionary<string, bool>(StringComparer.InvariantCultureIgnoreCase);
             foreach (String key in values.Keys)
             {
                 if (validFields.ContainsKey(key))
-                    elements.Add(GetNewXmlElement(validFields[key].ApiName,values[key]));
+                {
+                    elements.Add(GetNewXmlElement(validFields[key].ApiName, values[key]));
+                    associatedFields[validFields[key].ApiName] = true;
+                }
+            }
+
+            //Make sure all the required fields have actually been populated
+            foreach (LeadField field in temp)
+            {
+                if (field.IsRequired)
+                {
+                    if (!associatedFields.ContainsKey(field.ApiName))
+                    {
+                        elements.Add(GetNewXmlElement(field.ApiName, "NotSupplied"));
+                    }
+                }
             }
 
             lead.Any = elements.ToArray<System.Xml.XmlElement>();

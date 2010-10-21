@@ -216,6 +216,10 @@
     <Compile Include="Web\WebRequestContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business.salesforce\gooeycms.business.salesforce.csproj">
+      <Project>{6C6A2B71-C39A-4D38-A0F6-EF672670C57B}</Project>
+      <Name>gooeycms.business.salesforce</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">
       <Project>{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}</Project>
       <Name>gooeycms.constants</Name>

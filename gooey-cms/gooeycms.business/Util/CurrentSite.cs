@@ -188,6 +188,12 @@ namespace Gooeycms.Business.Util
                     set { Configuration.SetEncryptedSiteConfiguration("salesforce-token", value); }
                 }
 
+                public static Boolean IsEnabled
+                {
+                    get { return Boolean.Parse(Configuration.GetSiteConfiguration("salesforce-enabled", "false", false)); }
+                    set { Configuration.SetSiteConfiguration("salesforce-enabled", value.StringValue()); }
+                }
+
             }
         }
 
@@ -320,15 +326,6 @@ namespace Gooeycms.Business.Util
                 path = "/" + path;
 
             return "http://" + CurrentSite.ProductionDomain + path;
-        }
-
-        public static Boolean IsSalesForceEnabled
-        {
-            get
-            {
-                //TODO Implement the code to determine if sales-force is available
-                return false;
-            }
         }
 
         public static Boolean IsProductionHost

@@ -38,12 +38,23 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             Boolean isEnabled = CurrentSite.Subscription.IsSalesforceEnabled;
             if (isEnabled)
             {
+                if (CurrentSite.Configuration.Salesforce.IsEnabled)
+                {
+                    this.RdoSalesforceEnabledYes.Checked = true;
+                    this.RdoSalesforceEnabledNo.Checked = false;
+                }
+                else
+                {
+                    this.RdoSalesforceEnabledYes.Checked = false;
+                    this.RdoSalesforceEnabledNo.Checked = true;
+                }
+
                 String username = CurrentSite.Configuration.Salesforce.Username;
                 String password = CurrentSite.Configuration.Salesforce.Password;
                 String token = CurrentSite.Configuration.Salesforce.Token;
 
                 this.TxtSalesforceUsername.Text = username;
-                this.TxtSalesforcePassword.Text = "nottheactualpassword";
+                this.RequiredFieldValidator1.Enabled = false;
                 this.TxtSalesforceToken.Text = token;
 
                 //Try to login to salesforce to validate the account
@@ -79,6 +90,8 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             if (!String.IsNullOrWhiteSpace(this.TxtSalesforcePassword.Text))
                 CurrentSite.Configuration.Salesforce.Password = this.TxtSalesforcePassword.Text;
             CurrentSite.Configuration.Salesforce.Token = this.TxtSalesforceToken.Text;
+            CurrentSite.Configuration.Salesforce.IsEnabled = this.RdoSalesforceEnabledYes.Checked;
+
 
             SelectedPanel = "salesforce-panel";
         }
