@@ -39,6 +39,7 @@
             <li><a href="#" onclick="javascript:return __Wrap('# ', '','<%=PageMarkupText.TextboxId %>');" title="H1" class="formatlink" id="H1Link"></a></li>
             <li><a href="#" onclick="javascript:return __Wrap('## ', '','<%=PageMarkupText.TextboxId %>');" title="H2" class="formatlink" id="H2Link"></a></li>
             <li><a href="#" onclick="javascript:return __Wrap('\r\n* Item 1\r\n* Item 2 ', '\r\n','<%=PageMarkupText.TextboxId %>');" title="Unordered List" class="formatlink" id="UnorderedList"></a></li>
+            <li><a href="#" onclick="javascript:return __Wrap('\r\n1. Item 1\r\n2. Item 2 ', '\r\n','<%=PageMarkupText.TextboxId %>');" title="Ordered List" class="formatlink" id="OrderedList"></a></li>
             <li><a href="#" onclick="javascript:return __Insert('{BR}','<%=PageMarkupText.TextboxId %>');" title="Linebreak" class="formatlink" id="BrLink"></a></li>
             <li><a href="#" onclick="javascript:return __Wrap('<nomarkup>', '</nomarkup>','<%=PageMarkupText.TextboxId %>');" title="No Markup" class="formatlink" id="NoMarkup"></a></li>
             <li><a href="#" onclick="javascript:return __Wrap('<esc>', '</esc>','<%=PageMarkupText.TextboxId %>');" title="Escape HTML" class="formatlink" id="EscapeLink"></a></li>                  
@@ -187,4 +188,5 @@
                 return __Insert ('    ','<%=PageMarkupText.TextboxId %>');
             }
         });
+
 </script>

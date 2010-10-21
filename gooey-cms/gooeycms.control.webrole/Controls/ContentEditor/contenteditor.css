@@ -46,6 +46,10 @@
 }
 #UnorderedList {
 	background-image: url(Images/UL.png);
+	background-image: url(Images/UnorderedList.gif);
+}
+#OrderedList {
+	background-image: url(Images/OrderedList.gif);
 }
 #SubLink {
 	background-image: url(Images/Sub.png);
