@@ -12,6 +12,9 @@ using System.Web.UI;
 using Gooeycms.Business.Campaigns;
 using Gooeycms.Business.Campaigns.Engine;
 using Beachead.Persistence.Hibernate;
+using Gooeycms.Data.Model.Subscription;
+using Gooeycms.Business.Subscription;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Business.Util
 {
@@ -25,8 +28,24 @@ namespace Gooeycms.Business.Util
             }
         }
 
+        public static CmsSubscription Subscription
+        {
+            get
+            {
+                return SubscriptionManager.GetSubscription(CurrentSite.Guid);
+            }
+        }
+
         public static class Configuration
         {
+            private static void SetEncryptedSiteConfiguration(String key, String value)
+            {
+                TextEncryption crypto = new TextEncryption(CurrentSite.Guid.Value);
+                String encryptedValue = crypto.Encrypt(value);
+
+                SetSiteConfiguration(key, encryptedValue);
+            }
+
             private static void SetSiteConfiguration(String key, String value)
             {
                 Data.Guid guid = CurrentSite.Guid;
@@ -47,6 +66,23 @@ namespace Gooeycms.Business.Util
 
                 Cache.Clear(key);
                 Cache.Add(key, value);
+            }
+
+            private static String GetEncryptedSiteConfiguration(String key)
+            {
+                String result = null;
+                String encrypted = GetSiteConfiguration(key, null, false);
+                if (encrypted != null)
+                {
+                    try
+                    {
+                        TextEncryption crypto = new TextEncryption(CurrentSite.Guid.Value);
+                        result = crypto.Decrypt(encrypted);
+                    }
+                    catch (Exception) { }
+                }
+
+                return result;
             }
 
             private static String GetSiteConfiguration(String key, String def, Boolean required)
@@ -130,6 +166,28 @@ namespace Gooeycms.Business.Util
                     String result = GetSiteConfiguration("markup-engine-name", null, false);
                     return result;
                 }
+            }
+
+            public static class Salesforce
+            {
+                public static String Username
+                {
+                    get { return Configuration.GetEncryptedSiteConfiguration("salesforce-username"); }
+                    set { Configuration.SetEncryptedSiteConfiguration("salesforce-username", value); }
+                }
+
+                public static String Password
+                {
+                    get { return Configuration.GetEncryptedSiteConfiguration("salesforce-password"); }
+                    set { Configuration.SetEncryptedSiteConfiguration("salesforce-password", value); }
+                }
+
+                public static String Token
+                {
+                    get { return Configuration.GetEncryptedSiteConfiguration("salesforce-token"); }
+                    set { Configuration.SetEncryptedSiteConfiguration("salesforce-token", value); }
+                }
+
             }
         }
 

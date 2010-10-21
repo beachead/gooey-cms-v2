@@ -2,6 +2,8 @@
 using System.Net.Mail;
 using System;
 using System.IO;
+using gooeycms.business.salesforce;
+using System.Collections.Generic;
 
 namespace Gooeycms.test
 {
@@ -9,14 +11,26 @@ namespace Gooeycms.test
     {
         static void Main(string[] args)
         {
-            int step = 1;
-            int max = 5;
+            SalesforcePartnerClient client = new SalesforcePartnerClient();
+            client.Login("cadams@prayer-warrior.net", "3Becca135ZWjDhWUzSjs8cJaiBWGX2H6v");
+            
+            IList<SalesforcePartnerClient.LeadField> results = client.GetAvailableLeadFields();
+            foreach (SalesforcePartnerClient.LeadField result in results)
+                Console.WriteLine(result.ApiName + " " + result.Label + " " + result.IsRequired);
 
-            double dec = (double)step / (double)max;
+            //Create a lead
+            Dictionary<String, String> values = new Dictionary<string, string>();
+            values["email"] = "mynewlead@testing.com";
+            values["FirstName"] = "Chris";
+            values["LastName"] = "Adams";
+            values["Company"] = "My Company";
 
-            int result = (int)Math.Round(dec * 100, 0);
-            Console.WriteLine(result);
+            client.AddLead(values);
+
+            client.Logout();
+
             Console.ReadLine();
+
             /*
             String test = "\u001FTESTING\u001FTESTING1\u001FTESTING2";
             Console.WriteLine(test);

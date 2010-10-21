@@ -5,11 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Util;
+using gooeycms.business.salesforce;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
     public partial class Settings : System.Web.UI.Page
     {
+        protected String SelectedPanel = "analytics-panel";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -24,9 +27,56 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                     this.RdoGoogleEnabledNo.Checked = true;
                     this.RdoGoogleEnabledYes.Checked = false;
                 }
-
                 this.TxtGoogleAccountId.Text = CurrentSite.Configuration.GoogleAccountId;
+
+                LoadSalesforceInfo();
             }
+        }
+
+        protected void LoadSalesforceInfo()
+        {
+            Boolean isEnabled = CurrentSite.Subscription.IsSalesforceEnabled;
+            if (isEnabled)
+            {
+                String username = CurrentSite.Configuration.Salesforce.Username;
+                String password = CurrentSite.Configuration.Salesforce.Password;
+                String token = CurrentSite.Configuration.Salesforce.Token;
+
+                this.TxtSalesforceUsername.Text = username;
+                this.TxtSalesforcePassword.Text = "nottheactualpassword";
+                this.TxtSalesforceToken.Text = token;
+
+                //Try to login to salesforce to validate the account
+                SalesforceClient client = new SalesforceClient();
+                try
+                {
+                    client.Login(username, password + token);                    
+                    client.Logout();
+
+                    IList<String> fields = SalesforceClient.GetAvailableFields();
+                    this.LblSalesforceAuthenticated.Text = "True";
+
+                    foreach (String field in fields)
+                    {
+                        ListItem item = new ListItem(field, field);
+                        this.LstSalesforceAvailableFields.Items.Add(item);
+                    }
+                }
+                catch (LoginException ex)
+                {
+                    this.LblSalesforceAuthenticated.Text = "False (" + ex.Message + ")";
+                }
+            }
+        }
+
+        protected void BtnSaveLogin_Click(object sender, EventArgs e)
+        {
+            CurrentSite.Configuration.Salesforce.Username = this.TxtSalesforceUsername.Text;
+            if (!String.IsNullOrWhiteSpace(this.TxtSalesforcePassword.Text))
+                CurrentSite.Configuration.Salesforce.Password = this.TxtSalesforcePassword.Text;
+            CurrentSite.Configuration.Salesforce.Token = this.TxtSalesforceToken.Text;
+
+            SelectedPanel = "salesforce-panel";
         }
 
         protected void BtnSaveGoogle_Click(object sender, EventArgs e)
@@ -36,6 +86,8 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
             CurrentSite.Configuration.GoogleAccountId = accountId;
             CurrentSite.Configuration.IsGoogleAnalyticsEnabled = isEnabled;
+
+            SelectedPanel = "analytics-panel";
         }
     }
 }
