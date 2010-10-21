@@ -159,7 +159,7 @@
                 eErrorMessage = Gooey.Dom.make('SPAN', sErrorMessage, { Class: Gooey.defaults.GOOEY_ERROR_CLASS });
                 this.errorMessages.push(eErrorMessage);
                 //Gooey.Dom.append(eErrorMessage, eParent);
-                Gooey.Dom.insertAfter(eErrorMessage, eParent);
+                Gooey.Dom.append(eErrorMessage, eParent);
             },
 
             removeErrors: function () {
@@ -223,76 +223,34 @@
                     eParent.removeChild(eNode);
 
                 }
+            },
+
+            wrapRequired: function (oNode) {
+
+                var wrapper = document.createElement('span');
+                wrapper.setAttribute('class', 'gooey-error-msg');
+                wrapper.appendChild(oNode.cloneNode(true));
+                oNode.parentNode.replaceChild(wrapper, oNode);
             }
         }
 
-        /*
         Gooey.Util.addLoadEvent(
             function () {
-                var frm = document.getElementById('content').getElementsByTagName('form')[0];
+                var frm = document.getElementsByTagName('form')[0];
                 frm.onsubmit = function () {
                     return Gooey.Validate.validate();
                 }
+
+                var aRequiredFields = document.getElementsByClassName('required');
+                for (var i = 0, l = aRequiredFields.length; i < l; i++) {
+                    Gooey.Dom.wrapRequired(aRequiredFields[i]);
+                }
+
             }
         );
-        */
 
-        /*
-        function filledIn(el) {
-        var isValid = false;
-        if (el.type == "select-one") {
-        isValid = (el.selectedIndex > 0);
-        }
-        else {
-        if (el.value) {
-        if (el.type == "checkbox") {
-        isValid = el.checked;
-        }
-        else if (el.type == "select-one") {
-        isValid = (el.selectedIndex > 0)
-        } else if (el.value != "") {
-        isValid = true;
-        }
-        }
-        }
-        return isValid;
-        }
 
-        function getNext(el) {
-        var els = el.parent(".formerror");
-        var nextEl = null;
-        if (els.length > 0) {
-        nextEl = els[0];
-        }
-        return nextEl;
-        }
-
-        function showErrorMessage(el) {
-        $("#form_error").css("color", "red");
-        $("#form_error").text("Required * fields must be filled in");
-        }
-
-        function validate(guid) {
-        var isValid = true;
-        $(".required").each(function (i) {
-        if (this.id.match(guid) != null) {
-        if (!filledIn(this)) {
-        showErrorMessage(this);
-        isValid = false;
-        } else {
-        //removeErrorMessage(el);
-        }
-        }
-        });
-
-        return isValid;
-        }
-
-        function submitForm(guid) {
-        return validate(guid);
-        }
-
-        */
+       
     </script>
 </body>
 </html>
