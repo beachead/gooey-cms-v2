@@ -47,18 +47,17 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 this.TxtSalesforceToken.Text = token;
 
                 //Try to login to salesforce to validate the account
-                SalesforceClient client = new SalesforceClient();
+                SalesforcePartnerClient client = new SalesforcePartnerClient();
                 try
                 {
-                    client.Login(username, password + token);                    
-                    client.Logout();
+                    client.Login(username, password + token);
 
-                    IList<String> fields = SalesforceClient.GetAvailableFields();
+                    IList<SalesforcePartnerClient.LeadField> fields = client.GetAvailableLeadFields();
                     this.LblSalesforceAuthenticated.Text = "True";
 
-                    foreach (String field in fields)
+                    foreach (SalesforcePartnerClient.LeadField field in fields)
                     {
-                        ListItem item = new ListItem(field, field);
+                        ListItem item = new ListItem(field.ApiName + " (" + field.Label + ")", field.ApiName);
                         this.LstSalesforceAvailableFields.Items.Add(item);
                     }
                 }
@@ -66,6 +65,11 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 {
                     this.LblSalesforceAuthenticated.Text = "False (" + ex.Message + ")";
                 }
+                finally
+                {
+                    client.Logout();
+                }
+
             }
         }
 

@@ -9,11 +9,16 @@ namespace gooeycms.business.salesforce
 {
     public class SalesforcePartnerClient
     {
-        public struct LeadField
+        public class LeadField : IComparable<LeadField>
         {
-            public String Label;
-            public String ApiName;
-            public Boolean IsRequired;
+            public String Label { get; set; }
+            public String ApiName { get; set; }
+            public Boolean IsRequired { get; set; }
+
+            public int CompareTo(LeadField other)
+            {
+                return (this.ApiName.CompareTo(other.ApiName));
+            }
         }
 
         private SalesforcePartner.SforceService binding = null;
@@ -89,7 +94,7 @@ namespace gooeycms.business.salesforce
             DescribeSObjectResult result = this.binding.describeSObject("lead");
             Field[] fields = result.fields;
 
-            IList<LeadField> fieldnames = new List<LeadField>();
+            List<LeadField> fieldnames = new List<LeadField>();
             if (fields != null)
             {
                 foreach (Field field in fields)
@@ -112,6 +117,7 @@ namespace gooeycms.business.salesforce
                 }
             }
 
+            fieldnames.Sort();
             return fieldnames;
         }
 
