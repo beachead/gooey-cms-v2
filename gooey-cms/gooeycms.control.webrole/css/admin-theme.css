@@ -12,18 +12,25 @@
 body {
 	color:#333;
 	font-family:Verdana,sans-serif;
-	font-size:11px;
-	font-style:normal;
-	font-variant:normal;
-	font-weight:normal;	
+	font-size: 80% !important;
 	line-height:120%;
 	margin:0;
 	padding:0;	
 }
 
+h1 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 3px;
+}
+
 img {
     border: none;
 }
+
+a { color: #4395F1; }
+a:visited { color: #4395F1; }
+a:hover { color: #004bc7; }
+
 
 table.UserManagerListing
 {
@@ -50,17 +57,7 @@ h1.main
 	padding-bottom:10px;	
 }
 
-input 
-{
-	font-family:Verdana,Helvetica;
-	font-size:11px;
-}
 
-select
-{
-	font-family:Verdana,Helvetica;
-	font-size:11px;
-}
 
 #header-region 
 {
@@ -141,7 +138,8 @@ div.subnav li,
 #subnav li {
     background: transparent url('../images/bg_subnav_item.png') top right no-repeat;
     float: left;
-    padding: 7px 25px 0 5px;
+    font-size: .8em;
+    padding: 8px 25px 0 5px;
 	margin: 0px 0 0 2px; 
     height: 23px;
 	list-style: none;
@@ -153,10 +151,14 @@ div.subnav li.last,
     padding-right: 0;
 }
 
+div.subnav li.on,
+#subnav li.on {
+    font-size: .85em;
+}
+
 div.subnav li a,
 #subnav li a {
     color: #666;
-    font-size: 10px;
     text-decoration: none;
 }
 
@@ -287,6 +289,52 @@ ul.image-list {
 	list-style-image:none;
 	list-style-type:none;	
 }
+
+
+/* table.data */
+table.data {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.data th {
+    text-align: left;
+    background-color: #c0d7f0;
+    color: #333;
+    padding: 5px;
+}
+
+table.data td {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+table.data tr.controls td,
+div.controls {
+    text-align: right;
+    padding-top: 10px;
+}
+
+
+/* table.form */
+table.form {
+    border-collapse: collapse;
+}
+
+table.form td {
+    padding: 5px;
+}
+
+table.form td.label {
+    text-align: right;
+}
+
+table.form tr.controls td {
+    text-align: right;
+}
+
+    
+
 
 
 .remember {
