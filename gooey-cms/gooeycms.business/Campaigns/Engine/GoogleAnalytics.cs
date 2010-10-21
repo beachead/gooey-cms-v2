@@ -44,7 +44,7 @@ namespace Gooeycms.Business.Campaigns.Engine
         /// <returns></returns>
         public String GetTrackingScript()
         {
-            String accountId = CurrentSite.Configuration.GoogleAccountId;
+            String accountId = CurrentSite.Configuration.GoogleAccountId.Trim();
             String result = "";
             if (!IsEnabled)
                 result = "";
