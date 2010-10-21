@@ -45,10 +45,13 @@ namespace Gooeycms.Business.Campaigns.Engine
         public String GetTrackingScript()
         {
             String accountId = CurrentSite.Configuration.GoogleAccountId;
+            String result = "";
             if (!IsEnabled)
-                throw new ApplicationException("Google analystics has not been configured for this site. Please configure google analystics before attempting to use the tracking script.");
+                result = "";
+            else 
+                result = TrackingSnippet.Replace("{google-account-id}", accountId);
 
-            return TrackingSnippet.Replace("{google-account-id}", accountId);
+            return result;
         }
 
         /// <summary>
