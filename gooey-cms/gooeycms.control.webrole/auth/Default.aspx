@@ -15,26 +15,36 @@
         </ul>
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-This management area allows you to manage your global site configurations and available content types.
-</asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-<h1 class="main">Site Administration</h1>
-<a href="./themes/">Themes</a>
-<div class="content-item">Manage your site themes and templates</div>
+    <h1>Site Administration</h1>
 
-<a href="./configuration/default.aspx">Site Configuration</a>
-<div class="content-item">Manage site-wide configuration and settings.</div>
+    <p>This management area allows you to manage your global site configurations and available content types.</p>
+    
+    <p>
+        <strong><a href="./themes/">Themes</a></strong><br />
+        Manage your site themes and templates.
+    </p>
 
-<a href="./structure/">Site Structure</a>
-<div class="content-item">Manage the site structure and organization. Add/Edit/Delete paths and pages.</div>
+    <p>
+        <strong><a href="./configuration/default.aspx">Site Configuration</a></strong><br />
+        Manage site-wide configuration and settings.
+    </p>
 
-<a href="./content/">Content</a>
-<div class="content-item">Manage the available CMS content types and tags.</div>
+    <p>
+        <strong><a href="./structure/">Site Structure</a></strong><br />
+        Manage the site structure and organization. Add/Edit/Delete paths and pages.
+    </p>
 
-<a href="./internationalization/">Internationalization</a>
-<div class="content-item">Manage the languages that are available on the site and resource files.</div>
+    <p>
+        <strong><a href="./content/">Content</a></strong><br />
+        Manage the available CMS content types and tags.
+    </p>
+
+    <p>
+        <strong><a href="./internationalization/">Internationalization</a></strong><br />
+        Manage the languages that are available on the site and resource files.
+    </p>
 
 </asp:Content>
 

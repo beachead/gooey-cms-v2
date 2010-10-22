@@ -9,17 +9,17 @@
             <li class="last on">ADD THEME</li>
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-This page allows you to add a new theme to the site or modify an existing theme.
-</asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <asp:Label ID="Callout" Text="Add New Theme" runat="server" />
-    <br /><br />
+
+    <h1><asp:Label ID="Callout" Text="Add New Theme" runat="server" /></h1>
+    <p>This page allows you to add a new theme to the site or modify an existing theme.</p>
     
     <beachead:StatusPanel ID="Status" ShowStatus="false" runat="server" />
 
-    <b class="small">1. General Info</b>
-    <table>
+    <h2>1. General Info</h2>
+    
+    <table class="form">
         <tr>
             <td>Theme Name:</td>    
             <td>
@@ -31,7 +31,7 @@ This page allows you to add a new theme to the site or modify an existing theme.
             <td>Theme Description (one-line):</td>    
             <td><asp:TextBox ID="ThemeDescription" Width="250px" runat="server" /></td>
         </tr>         
-        <tr>
+        <tr class="controls">
             <td colspan="2"><asp:Button ID="Save" Text="Save" OnClick="SaveTheme_Click" runat="server" /></td>
         </tr>        
     </table>
