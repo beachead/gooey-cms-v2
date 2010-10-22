@@ -104,7 +104,7 @@ namespace Gooeycms.Business.Markup.Forms_v2
             String value = AntiXss.HtmlEncode(match.Groups[1].Value);
             String args = match.Groups[2].Value;
 
-            String textbox = String.Format(@"<input type=""submit"" id=""{0}"" name=""{0}"" {2} value=""{1}"" onclick=""return Gooey.Validate.validate();"" />", id, value.Trim(), args.Trim());
+            String textbox = String.Format(@"<input type=""submit"" id=""{0}"" name=""{0}"" {2} value=""{1}"" />", id, value.Trim(), args.Trim());
 
             return textbox;
         }
