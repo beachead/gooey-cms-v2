@@ -8,15 +8,14 @@
             <li class="last"><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
 
+<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+    <h1>Manage Content Type Fields</h1>
 <div dojoType="dijit.TitlePane" title="Manage Existing Fields">
 <asp:GridView ID="FieldTable" runat="server" AutoGenerateColumns="False" 
-        CellPadding="4" ForeColor="#333333" 
+        CssClass="data" ForeColor="#333333" 
         GridLines="None" OnRowCommand="OnRowCommand" 
-        DataSourceID="ContentFieldDataSource" Width="90%">
+        DataSourceID="ContentFieldDataSource">
     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
     <Columns>
         <asp:BoundField DataField="Name" HeaderText="Label" SortExpression="Name">
@@ -59,9 +58,9 @@
 </div>
 <br />
 <div dojoType="dijit.TitlePane" title="Add/Edit Field">
-    <table>
+    <table class="form">
         <tr>
-            <td>Field Type</td>
+            <td class="label">Field Type</td>
             <td>
                 <asp:DropDownList ID="FieldType" AutoPostBack="true" OnSelectedIndexChanged="FieldType_Change" runat="server">
                     <asp:ListItem Text="...select..." Value="" /> 
@@ -74,21 +73,22 @@
             </td>
         </tr>
         <tr>
-            <td>System Name (no spaces)</td>
+            <td class="label">System Name (no spaces)</td>
             <td><asp:TextBox ID="TxtSystemName" dojoType="dijit.form.ValidationTextBox" promptMessage="The system name is used when referencing this field within the CMS system. May only contain letters and no spaces" regExp="[a-zA-Z]+" invalidMessage="The system name may only contain letters without numbers or spaces" required="true"  runat="server" /></td>
             <asp:RegularExpressionValidator ID="SystemNameValidator" ControlToValidate="TxtSystemName" ValidationExpression="[a-zA-Z]+" Display="None" runat="server" />
         </tr>  
         <tr>
-            <td>Label</td>
+            <td class="label">Label</td>
             <td><asp:TextBox ID="TxtName" dojoType="dijit.form.ValidationTextBox" required="true" promptMessage="Input the human-readable label for this field" regExp="[a-zA-Z_0-9\s]+" invalidMessage="The label may only contain letters, numbers and/or spaces." runat="server" /></td>
             <asp:RegularExpressionValidator ID="TxtNameValidator" ControlToValidate="TxtName" ValidationExpression="[a-zA-Z_0-9\s]+" Display="None" runat="server" />
         </tr>    
         <tr>
-            <td>Description</td>
+            <td class="label">Description</td>
             <td><asp:TextBox ID="Description" dojoType="dijit.form.ValidationTextBox" required="false" Width="250px" runat="server" /></td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td>&nbsp;</td>
+            <td>
             <asp:CheckBox ID="ChkRequiredField" Text="Required Field" runat="server" />
             <div dojoType="dijit.Tooltip" connectId="<%= ChkRequiredField.ClientID %>" position="after">
                 This is your <b>arbitrary</b> HTML here
@@ -97,18 +97,18 @@
         </tr>
         <asp:Panel ID="TextAreaFields" Visible="false" runat="server">
         <tr>
-            <td>Rows</td>
+            <td class="label">Rows</td>
             <td><asp:TextBox ID="Rows" MaxLength="3" Width="50px" Text="10" runat="server" /></td>
         </tr>
         <tr>
-            <td>Columns</td>
+            <td class="label">Columns</td>
             <td><asp:TextBox ID="Cols" MaxLength="3" Width="50px" Text="150" runat="server" /></td>
         </tr>    
         </asp:Panel>
     
         <asp:Panel ID="DropdownFields" Visible="false" runat="server">
         <tr>
-            <td>
+            <td class="label">
                 Values<br />
                 (one per line)
             </td>
@@ -117,7 +117,7 @@
             </td>
         </tr>
         </asp:Panel>
-        <tr>
+        <tr class="controls">
             <td colspan="2">
                 <asp:HiddenField ID="ExistingId" runat="server" />
                 <asp:Button ID="Add" Text="Save" OnClick="Add_Click" runat="server" />

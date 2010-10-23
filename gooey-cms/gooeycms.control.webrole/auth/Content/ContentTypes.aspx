@@ -8,15 +8,18 @@
             <li class="on last">MANAGE CONTENT TYPES</li>       
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-</asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
 
-<div dojoType="dijit.TitlePane" title="Existing Custom Content Types">
+    <h1>Manage Content Types</h1>
+    
+    <div dojoType="dijit.TitlePane" title="Existing Custom Content Types">
+
+
     <asp:GridView ID="ExistingContentTypes" runat="server" AutoGenerateColumns="False" 
-            CellPadding="4" ForeColor="#333333" 
+            ForeColor="#333333" 
             DataSourceID="ContentTypeDataSource"
-            GridLines="None" OnRowCommand="OnRowCommand" Width="90%">
+            GridLines="None" OnRowCommand="OnRowCommand" CssClass="data">
         <EmptyDataTemplate>
             There are no custom content types defined. You can create a new 
             custom content type below.
@@ -60,30 +63,30 @@
 <div dojoType="dijit.TitlePane" title="Define Custom Content Type">
     <asp:Label ID="Status" runat="server" />
     <asp:HiddenField ID="GlobalTypeToken" runat="server" />
-    <table>
+    <table class="form">
         <tr>
-            <td>Name:</td>
+            <td class="label">Name:</td>
             <td><asp:TextBox ID="ContentName" runat="server" /></td>
         </tr>
         <tr>
-            <td>Description:</td>
+            <td class="label">Description:</td>
             <td><asp:TextBox ID="ContentDescription" runat="server" /></td>
         </tr>
         <tr>
-            <td>Supports File Uploads?</td>
+            <td class="label">Supports File Uploads?</td>
             <td>
                 <asp:RadioButton ID="ContentFileYes" GroupName="Files" Text="Yes" runat="server" />
                 <asp:RadioButton ID="ContentFileNo" GroupName="Files" Checked="true" Text="No" runat="server" />                    
             </td>
         </tr> 
         <tr>
-            <td>Show Content Editor?</td>
+            <td class="label">Show Content Editor?</td>
             <td>
                 <asp:RadioButton ID="ContentEditorYes" GroupName="Editor" Checked="true" Text="Yes" runat="server" />
                 <asp:RadioButton ID="ContentEditorNo" GroupName="Editor" Text="No" runat="server" />                    
             </td>
         </tr>             
-        <tr>
+        <tr class="controls">
             <td colspan="2">
                 <asp:Button ID="AddContent" OnClick="AddContentType_Click" Text="Add" runat="server" />
             </td>

@@ -8,14 +8,15 @@
             <li class="last"><a href="./Settings.aspx">CAMPAIGN SETTINGS</a></li>  
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-This page allows you to manage and generate links for campaigns that are currently running on the site.
-</asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <a href="./create.aspx">Create Campaign</a><br /><br />
+    <h1>Create Campaign</h1>
+    <p>This page allows you to manage and generate links for campaigns that are currently running on the site.</p>
+
+    <a href="./create.aspx">Manage Campaigns</a><br /><br />
     <asp:GridView ID="CampaignTable" runat="server" 
         DataSourceID="CampaignDataSource"
-        AutoGenerateColumns="False" CellPadding="4" 
+        AutoGenerateColumns="False" CssClass="data"
         ForeColor="#333333" GridLines="None"
         OnRowCommand="OnRowCommand">
         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />

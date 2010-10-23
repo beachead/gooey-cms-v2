@@ -7,14 +7,16 @@
             <li class="last"><a href="~/auth/Themes/Add.aspx" runat="server">ADD THEME</a></li>
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-    Modify which themes are available on your site, <a href="http://corp.gooeycms.net/store">purchase new themes</a> or edit existing themes. 
-</asp:Content>
+
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <div style="padding-top:15px;">
+
+    <h1>Manage Themes</h1>
+    <p>Modify which themes are available on your site, <a href="http://corp.gooeycms.net/store">purchase new themes</a> or edit existing themes.</p>
+    
         <asp:Label ID="StatusLabel" Visible="false" runat="server" />
-        <asp:GridView ID="GridView1" runat="server" Width="90%" AutoGenerateColumns="False" 
-            CellPadding="4" ForeColor="#333333" GridLines="None" DataSourceID="ThemesDataSource">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+            CssClass="data" ForeColor="#333333" GridLines="None" DataSourceID="ThemesDataSource">
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             <Columns>
@@ -75,6 +77,8 @@
                 <asp:Parameter Name="guid" Type="String" />
             </SelectParameters>
         </asp:ObjectDataSource>  
+   
+    <div class="controls">
         <asp:Button ID="BtnSaveThemes" OnClick="OnSaveThemes_Click" Text="Save" runat="server" />              
-    </div>
+   </div>
 </asp:Content>

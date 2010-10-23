@@ -6,16 +6,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
-            <li class=""><a href="./">Manage Themes:</a></li>
-            <li class="on">Manage Templates</li> 
+            <li><a href="Default.aspx">MANAGE THEMES</a></li>
             <li class="last"><a href="./AddNewTheme.aspx">Add Theme</a></li>           
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-</asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <asp:HiddenField ID="ThemeGuid" runat="server" />    
-    Managing Templates for: <b><asp:Label ID="ThemeName" runat="server" /></b><br /><br />
+    <h1>Manage Templates: <asp:Label ID="ThemeName" runat="server" /></h1> 
     
     <asp:Button ID="BtnAddNewTemplate" OnClick="BtnAddTemplate_Click" Text="Add New Template" runat="server" />&nbsp;
     or edit existing&nbsp;

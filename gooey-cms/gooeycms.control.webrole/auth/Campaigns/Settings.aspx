@@ -1,10 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Settings.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Settings" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="localCSS" runat="server">
-</asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
+
+    <script type="text/javascript">
+        dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(SelectedPanel); %>'); });
+    </script>    
+
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
             <li><a href="./Create.aspx">NEW CAMPAIGN</a></li>    
@@ -12,16 +16,12 @@
             <li class="last on">CAMPAIGN SETTINGS</li>  
         </ul>
 </asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
-Configure your campaign settings below.
-</asp:Content>
+
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
+    <h1>Campaign Settings</h1>
+    <p>Configure your campaign settings below.</hp>
 
-<script type="text/javascript">
-    dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(SelectedPanel); %>'); });
-</script>    
-
-<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="width:90em;height:700px;overflow:auto;">
+<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:700px;overflow:auto;">
     <div id="analytics-panel" dojoType="dijit.layout.ContentPane" title="Google Analytics Setup" style="display:none;">
         <table>
             <tr>
@@ -36,6 +36,7 @@ Configure your campaign settings below.
                     <asp:RadioButton ID="RdoGoogleEnabledYes" GroupName="GoogleEnabled" Text="Enabled" runat="server" />&nbsp; 
                     <asp:RadioButton ID="RdoGoogleEnabledNo" GroupName="GoogleEnabled" Text="Disabled" Checked="true" runat="server" />
                 </td>
+
             </tr>
             <tr>
                 <td>Google Analytics Account ID</td>

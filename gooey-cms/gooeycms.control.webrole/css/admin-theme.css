@@ -1,13 +1,14 @@
-﻿.green .ajax__progress_indicator
-{
-    background-image:url(../images/progress_green.gif);
-}  
+﻿/*
+	(1) HTML ELEMENTS
+	(2) LAYOUT COMPONENTS
+	(3) COMPONENT FORMATTING
+	(4) GENERAL PURPOSE
+	(5) HACKS
+		made in washington */
 
-.hidden 
-{
-    visibility: hidden;
-    display: none;
-}
+/************************************************
+	(1) HTML ELEMENTS
+*************************************************/
 
 body {
 	color:#333;
@@ -23,50 +24,45 @@ h1 {
     padding-bottom: 3px;
 }
 
-img {
-    border: none;
-}
-
-a { color: #4395F1; }
-a:visited { color: #4395F1; }
-a:hover { color: #004bc7; }
-
-
-table.UserManagerListing
-{
-	width: 90%;
-	/*border: solid 1px #C8C8C8;*/
-	border-collapse: collapse; 
-	vertical-align: top;
-}
-
-table.CommonListing td {
-	border:1px solid #C8C8C8;
-}
-
-h1.main 
-{
+/*
+h1.main {
 	font-size:14px;
 	font-weight: bold;
 	margin: 0px 0px 15px 0px;
 }
+*/
 
-.content-item
-{
-	padding-left:15px;
-	padding-bottom:10px;	
+img {
+    border: none;
+}
+
+a           { color: #4395F1; }
+a:visited   { color: #4395F1; }
+a:hover     { color: #004bc7; }
+
+
+
+/************************************************
+	(2) layout components
+*************************************************/
+
+/* instructions-area */
+#instructions-area {
+	padding-top:5px;
+}
+
+/* editor-area */
+#editor-area {
+	padding-top:15px;
 }
 
 
-
-#header-region 
-{
+#header-region {
 	background-color: #4395f1;
 	min-height: 35px;
 }	
 
-#logo 
-{
+#logo {
 	margin:10px 0 0 25px;
 	float: right;
 	font-weight:bold;
@@ -78,25 +74,21 @@ h1.main
 	text-decoration:none;
 }
 
-#main 
-{
+#main {
 	min-height:400px;
 }
 
-table.content 
-{
+table.content {
 	width:100%;
 	height:500px;
 }
 
-td.left-column 
-{
+td.left-column {
 	width:5%;
 	background-color:#EEEEF5;
 }
 
-td.right-column 
-{
+td.right-column {
 	width:15%;
 	vertical-align:top;
 	background-color:#EEEEF5;	
@@ -128,10 +120,20 @@ div.subnav div.subnav-inner,
 	background: transparent url(../images/bg_subnav_right.png) top right no-repeat;
 }
 
+
+
+
+/************************************************
+	(3) COMPONENT FORMATTING
+*************************************************/
+
+
+/* subnav */
 div.subnav ul,
 #subnav ul {
     margin: 0;
 	padding-left:5px;
+	text-transform: uppercase;
 }
 
 div.subnav li,
@@ -176,6 +178,10 @@ div.subnav.blue div.subnav-inner {
     background-image: url(../images/bg_subnav_right1.gif);
 }
 
+
+/************************************************
+	(4) GENERAL PURPOSE
+*************************************************/
 
 
 
@@ -247,15 +253,7 @@ ul.menu li a:hover {
 	text-decoration:underline;	
 }
 
-/* instructions-area */
-#instructions-area {
-	padding-top:5px;
-}
 
-/* editor-area */
-#editor-area {
-	padding-top:15px;
-}
 
 /* page-group */
 td .page-group {
@@ -334,22 +332,33 @@ table.form tr.controls td {
 }
 
     
+table.UserManagerListing {
+	width: 90%;
+	/*border: solid 1px #C8C8C8;*/
+	border-collapse: collapse; 
+	vertical-align: top;
+}
 
+table.CommonListing td {
+	border:1px solid #C8C8C8;
+}
+
+.content-item {
+	padding-left:15px;
+	padding-bottom:10px;	
+}
 
 
 .remember {
 	padding-left:80px;
 }
 
-li .package-link a:visisted 
-{
+li .package-link a:visisted  {
     color: #646464;
 }
-
-
-
-/*******    UTILITIES **********
-*/
+.green .ajax__progress_indicator {
+    background-image:url(../images/progress_green.gif);
+}  
 
 
 
@@ -381,3 +390,14 @@ ul.flat li {
 }
 
 
+/*******    UTILITIES **********
+*/
+
+.hidden  {
+    visibility: hidden;
+    display: none;
+}
+
+/************************************************
+	(5) HACKS
+*************************************************/

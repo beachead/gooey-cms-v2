@@ -1,25 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Stylesheet.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Themes.Stylesheet" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li><a id="A2" href="~/auth/Themes/Default.aspx" runat="server">Manage Themes</a>:</li>
-            <li><a id="A1" href="~/auth/Themes/Add.aspx" runat="server">Add Theme</a></li>
-            <li class="last">Manage Stylesheets</li>
-        </ul>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-This page allows you to associate css files from your global library to your theme
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+
+<asp:Content ContentPlaceHolderID="localJS" ID="localJS" runat="server">
     <script type="text/javascript">
         dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(OutsideSelectedPanel); %>'); });
         dojo.addOnLoad(function () { dijit.byId('stylesheetTabContainer').selectChild('<% Response.Write(SelectedPanel); %>'); });
     </script>    
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
+    <ul>
+        <li><a href="Default.aspx">MANAGE THEMES</a></li>
+        <li class="last"><a href="./AddNewTheme.aspx">Add Theme</a></li>           
+    </ul>
+</asp:Content>
+
+
+<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+
+    <h1>Template CSS</h1>
+    <p>This page allows you to associate css files from your global library with your theme.</p>
 
     <beachead:StatusPanel ID="ErrorPanel" runat="server" />
-    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="width:90em;height:700px;overflow:auto;">
+    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:700px;overflow:auto;">
         <div id="modifypanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Stylesheets">
             From this page you can manage which stylesheets are enabled for this theme. <br /><br />
             To enable a style, choose it from the <i>disabled</i> list and click <i>enable</i>.<br />

@@ -22,15 +22,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         protected global::System.Web.UI.WebControls.Label LblStatus;
         
         /// <summary>
-        /// BtnSave2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSave2;
-        
-        /// <summary>
         /// TxtFooter control.
         /// </summary>
         /// <remarks>
