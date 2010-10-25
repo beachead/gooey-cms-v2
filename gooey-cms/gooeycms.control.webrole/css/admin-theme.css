@@ -153,9 +153,9 @@ div.subnav li.last,
     padding-right: 0;
 }
 
-div.subnav li.on,
-#subnav li.on {
-    font-size: .85em;
+div.subnav li a.active,
+#subnav li a.active {
+    text-decoration: underline;
 }
 
 div.subnav li a,
@@ -183,7 +183,20 @@ div.subnav.blue div.subnav-inner {
 	(4) GENERAL PURPOSE
 *************************************************/
 
+/* ul.page-controls */
+div.page-controls {
+    margin: 0;
+    padding: 0;
+    float: right;
+    overflow: auto;
+}
 
+div.page-controls li {
+    float: left;
+    list-style: none;
+    margin: 0 0 0 10px;
+    padding: 0;
+}
 
 /* ul.check */
 ul.check {

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Stylesheet.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Themes.Stylesheet" %>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 
 <asp:Content ContentPlaceHolderID="localJS" ID="localJS" runat="server">
@@ -8,11 +9,9 @@
     </script>    
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-    <ul>
-        <li><a href="Default.aspx">MANAGE THEMES</a></li>
-        <li class="last"><a href="./AddNewTheme.aspx">Add Theme</a></li>           
-    </ul>
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" navSection="manageTemplates" navItem="css" />
 </asp:Content>
 
 
