@@ -59,6 +59,7 @@ namespace Gooeycms.Business.Markup.Dynamic
             String orderBy = match.Groups["orderby"].Value;
             String limitBy = match.Groups["limit"].Value;
             String block = match.Groups["block"].Value;
+            String where = match.Groups["where"].Value;
 
             String orderByField = null;
             String orderByDirection = "asc";
@@ -78,10 +79,11 @@ namespace Gooeycms.Business.Markup.Dynamic
 
             //Perform the search for the content type
             ContentQueryBuilder query = new ContentQueryBuilder();
-            IList<CmsContent> results = query.SetContentType(contentType)
+            IList<CmsContent> results = query.SetSubscriptionGuid(CurrentSite.Guid)
+                                             .SetContentType(contentType)
                                              .SetOrderBy(orderByField, orderByDirection)
                                              .SetLimit(limit)
-                                             .SetSubscriptionGuid(CurrentSite.Guid)
+                                             .SetWhereClause(where)
                                              .ExecuteQuery();
 
             StringBuilder replacement = new StringBuilder();

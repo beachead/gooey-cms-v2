@@ -19,6 +19,7 @@ namespace Gooeycms.webrole.sites
         {
             if (intraProcessCommunicationTimer == null)
             {
+                log4net.Config.XmlConfigurator.Configure();
                 intraProcessCommunicationTimer = new System.Threading.Timer(new System.Threading.TimerCallback((object context) =>
                     {
                         bool acquired = semaphore.WaitOne(TimeSpan.FromSeconds(0));
