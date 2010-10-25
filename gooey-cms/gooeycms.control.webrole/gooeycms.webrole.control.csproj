@@ -117,6 +117,7 @@
     <Content Include="auth\Themes\ImageBrowser.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
+    <Content Include="Controls\Subnav.ascx" />
     <Content Include="css\reorder.css" />
     <Content Include="css\store.css" />
     <Content Include="default.aspx" />
@@ -395,6 +396,12 @@
     </Compile>
     <Compile Include="auth\Themes\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Subnav.ascx.cs">
+      <DependentUpon>Subnav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Subnav.ascx.designer.cs">
+      <DependentUpon>Subnav.ascx</DependentUpon>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
