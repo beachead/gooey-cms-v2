@@ -6,12 +6,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
         <ul>
             <li class=""><a href="./Default.aspx">MANAGE PAGES</a></li>        
-            <li class="on"><%=PageAction %> PAGE</li>
+            <li class="on"><%=PageAction.ToUpper() %> PAGE</li>
             <li class="last"><a href="../promotion/PagePromotion.aspx">PROMOTION</a></li>        
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-</asp:Content>
+
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true" />
 
@@ -33,13 +33,13 @@
         height:300px;
         z-index: 9002;    
     </style>
-    <b><%=PageAction %> Page:</b><br /><br />
-    <asp:Label ID="Status" runat="server" />
+    <h1><%=PageAction %> Page</h1>
+    <p><asp:Label ID="Status" runat="server" /></p>
 
     <div dojoType="dijit.TitlePane" title="Path Options">
-        <table>
+        <table class="form">
             <tr>
-                <td>Parent Directory</td>
+                <td class="label">Parent Directory</td>
                 <td colspan="3">Page Name</td>
             </tr>
             <tr>
@@ -53,30 +53,30 @@
     </div>
 
     <div dojoType="dijit.TitlePane" title="Metatag Options">
-        <table>
+        <table class="form">
             <tr>
-                <td style="vertical-align:top;">Page Title:</td>
+                <td class="label">Page Title:</td>
                 <td>
                     <asp:TextBox ID="PageTitle" TabIndex="2" Width="300px" runat="server" />
                     <asp:RequiredFieldValidator ID="PageTitleRequired" Text="You must enter a title for this page" ControlToValidate="PageTitle" runat="server" />
                 </td>
             </tr>
             <tr>
-                <td style="vertical-align:top;">Page Description:</td>
+                <td class="label"">Page Description:</td>
                 <td>
                     <asp:TextBox ID="PageDescription" Width="300px" TabIndex="3" TextMode="MultiLine" Rows="5" runat="server" /><br />
                     <asp:RequiredFieldValidator ID="PageDescriptionRequired" Enabled="false" Text="You must provide a description for this page" ControlToValidate="PageDescription" runat="server" />
                 </td>
             </tr>
             <tr>
-                <td style="vertical-align:top;">Page Keywords:</td>
+                <td class="label">Page Keywords:</td>
                 <td>
                     <asp:TextBox ID="PageKeywords" Width="300px" TabIndex="4" runat="server" /><br />
                     <asp:RequiredFieldValidator ID="PageKeywordsRequired" Enabled="false" Text="You must enter keywords for this page" ControlToValidate="PageKeywords" runat="server" />
                 </td>
             </tr>
             <tr>
-                <td style="vertical-align:top;">Body Load Options:</td>
+                <td class="label">Body Load Options:</td>
                 <td>
                     <asp:TextBox ID="BodyLoadOptions" Width="300px" TabIndex="4" runat="server" /><br />
                 </td>
@@ -99,11 +99,11 @@
 
     <div dojoType="dijit.TitlePane" title="Page Editor">
         <div class="page-group">
-            <b>Template:</b><br />
+            <strong>Template:</strong><br />
             <asp:DropDownList ID="PageTemplate" runat="server" />
         </div>
         <div class="page-group">
-        <b>Body:</b><br />
+        <strong>Body:</strong><br />
         <beachead:Editor ID="PageMarkupText" TabIndex="5" runat="server" />
         </div>
         <div>
@@ -116,9 +116,9 @@
     <div dojoType="dijit.Dialog"  style="width:680px;height:500px;" id="formeditor-container" title="Form Editor" closable="true" draggable="true">
         <b>Saved Forms:</b>
         <hr />
-        <table>
+        <table class="form">
             <tr>
-                <td>Load Saved Form:</td>
+                <td class="label">Load Saved Form:</td>
                 <td>
                     <asp:DropDownList ID="LstSavedForms" runat="server" />
                     &nbsp;

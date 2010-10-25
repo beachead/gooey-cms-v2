@@ -8,9 +8,12 @@
             <li class="last"><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-</asp:Content>
+
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+
+    <h1>Add Content</h1>
+
     <script language="javascript" type="text/javascript">
         dojo.query("a").onclick(function (e) {
             if (!confirm('Are you sure you want to navigate away from this page')) {

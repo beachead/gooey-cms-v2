@@ -8,22 +8,22 @@
             <li class="last"><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-    Content Types such as news and events can be edited and managed from this area.<br />
-    To add new content types, click Manage Content Types above.<br /><br />
-</asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+
+    <h1>Manage Content</h1>
+    <p>Content Types such as news and events can be edited and managed from this area. To add new content types, click Manage Content Types above.</p>
+
    <a href="./Add.aspx">Add New Content</a>
    <br /><br />
 
-   <b>Filter</b>: Content Type&nbsp;<asp:DropDownList ID="LstContentTypes" runat="server" />&nbsp;<asp:Button ID="BtnFilter" Text="Filter" runat="server" />
+   <strong>Filter</strong>: Content Type&nbsp;<asp:DropDownList ID="LstContentTypes" runat="server" />&nbsp;<asp:Button ID="BtnFilter" Text="Filter" runat="server" />
    <br />
 
    <div dojoType="dijit.TitlePane" title="Manage Existing Content">
-        <asp:GridView ID="ContentTable" runat="server" Width="90%" AutoGenerateColumns="False" 
+        <asp:GridView ID="ContentTable" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" DataSourceID="ExistingContent" ForeColor="#333333" 
-            GridLines="None"
-            OnRowCommand="OnRowCommand">
+            GridLines="None" OnRowCommand="OnRowCommand" CssClass="data">
             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             <Columns>
                 <asp:TemplateField HeaderText="Title">

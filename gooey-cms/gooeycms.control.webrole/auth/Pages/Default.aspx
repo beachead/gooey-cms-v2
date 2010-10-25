@@ -10,12 +10,12 @@
             <li class="last"><a href="./Redirects.aspx">MANAGE REDIRECTS</a></li>       
         </ul>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-    Pages on your site can be added, edited and managed from this area.<br />
-    Use the below filter to quickly find your existing pages.
-</asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-<br />
+
+    <h1>Manage Pages</h1>
+    <p>Pages on your site can be added, edited and managed from this area. Use the below filter to quickly find your existing pages.</p>
+
     <a href="./Edit.aspx">Add New Page</a><br /><br />
     Filter: <input id="filter_searchbox" type="text" value="*" onkeypress="return performFilter(this);" title="Use * for wildcard character"/>&nbsp;
     <a href="#" onclick="filter_clear(); return false;">clear</a>&nbsp;
@@ -27,7 +27,7 @@
     <anthem:GridView ID="PageListing" AutoUpdateAfterCallBack="True" 
             DataSourceID="PageListDataSource" AutoGenerateColumns="False" PageSize="25" 
             ForeColor="#333333" GridLines="None" runat="server" 
-            CellPadding="4" UpdateAfterCallBack="True" Width="80%">
+            UpdateAfterCallBack="True" CssClass="data">
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

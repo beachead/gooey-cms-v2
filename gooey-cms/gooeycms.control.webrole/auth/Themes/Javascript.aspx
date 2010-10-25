@@ -1,26 +1,26 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Javascript.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Themes.Javascript" %>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 <asp:Content ID="ContentStylesheets" ContentPlaceHolderID="localCSS" runat="server">
     <link rel="stylesheet" href="../../css/reorder.css" />
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li><a id="A2" href="~/auth/Themes/Default.aspx" runat="server">Manage Themes</a>:</li>
-            <li><a id="A1" href="~/auth/Themes/Add.aspx" runat="server">Add Theme</a></li>
-            <li>Manage Javascript</li>
-            <li class="last"><a href="#" onclick="window.open('/auth/Pages/ImageBrowser.aspx','','width=500,height=400,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;">Image Library</a></li>
-        </ul>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-This page allows you to associate javascript files from your global library to your theme
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+
+<asp:Content ContentPlaceHolderID="localJS" ID="localJS" runat="server">
     <script type="text/javascript">
-    dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(OutsideSelectedPanel); %>'); });
-    dojo.addOnLoad(function () {dijit.byId('javascriptTabContainer').selectChild('<% Response.Write(SelectedPanel); %>');});
+        dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(OutsideSelectedPanel); %>'); });
+        dojo.addOnLoad(function () { dijit.byId('javascriptTabContainer').selectChild('<% Response.Write(SelectedPanel); %>'); });
     </script>    
+</asp:Content>
+
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" navSection="manageTemplates" navItem="javascript" />
+</asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+    <h1>Template JavaScript</h1>
+    <p>This page allows you to associate javascript files from your global library to your theme</p>
+
 
     <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
 

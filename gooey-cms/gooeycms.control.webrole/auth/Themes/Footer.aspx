@@ -1,16 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Footer.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Themes.Footer" %>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" navSection="manageTemplates" navItem="footer" />
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-</asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+    <h1>Template Footer</h1>
     <asp:Label ID="LblStatus" runat="server" />
     <br />
-    <asp:Button ID="BtnSave2" Text="Save" OnClick="BtnSave_Click" runat="server" />
+
     <div dojoType="dijit.TitlePane" title="Footer Template">
         <beachead:Editor ID="TxtFooter" ShowPreviewWindow="false" runat="server" />
     </div>
-    <asp:Button ID="BtnSave" Text="Save" OnClick="BtnSave_Click" runat="server" />
+
+    <div class="controls">
+        <asp:Button ID="BtnSave" Text="Save" OnClick="BtnSave_Click" runat="server" />
+    </div>
+
 </asp:Content>
