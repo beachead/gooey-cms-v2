@@ -1,14 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" ValidateRequest="false" CodeBehind="Edit.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Pages.Edit" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li class=""><a href="./Default.aspx">MANAGE PAGES</a></li>        
-            <li class="on"><%=PageAction.ToUpper() %> PAGE</li>
-            <li class="last"><a href="../promotion/PagePromotion.aspx">PROMOTION</a></li>        
-        </ul>
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="pages" NavItem="new" />
 </asp:Content>
 
 

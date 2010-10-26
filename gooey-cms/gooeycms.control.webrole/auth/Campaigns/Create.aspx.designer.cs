@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns {
     public partial class Create {
         
         /// <summary>
+        /// Subnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        
+        /// <summary>
         /// Status control.
         /// </summary>
         /// <remarks>

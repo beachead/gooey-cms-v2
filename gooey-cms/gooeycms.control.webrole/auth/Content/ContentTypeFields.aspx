@@ -1,13 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="ContentTypeFields.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Content.ContentTypeFields" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="content" NavItem="contenttypes" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li><a href="./Default.aspx">SITE CONTENT</a></li>
-            <li><a href="">PROMOTION</a></li> 
-            <li class="last"><a href="./ContentTypes.aspx">MANAGE CONTENT TYPES</a></li>       
-        </ul>
-</asp:Content>
+
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <h1>Manage Content Type Fields</h1>

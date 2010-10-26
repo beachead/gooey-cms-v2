@@ -13,6 +13,24 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
     public partial class Templates {
         
         /// <summary>
+        /// Subnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        
+        /// <summary>
+        /// BtnAddNewTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAddNewTemplate;
+        
+        /// <summary>
         /// ThemeGuid control.
         /// </summary>
         /// <remarks>
@@ -29,15 +47,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ThemeName;
-        
-        /// <summary>
-        /// BtnAddNewTemplate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAddNewTemplate;
         
         /// <summary>
         /// LstExistingTemplates control.

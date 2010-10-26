@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.Auth.Themes {
     public partial class Default {
         
         /// <summary>
+        /// Subnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        
+        /// <summary>
         /// StatusLabel control.
         /// </summary>
         /// <remarks>

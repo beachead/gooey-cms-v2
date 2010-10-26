@@ -1,20 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Settings.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Settings" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="campaigns" NavItem="campaignsettings" />
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
 
     <script type="text/javascript">
         dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(SelectedPanel); %>'); });
     </script>    
 
-</asp:Content>
-
-<asp:Content ID="Content4" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li><a href="./Create.aspx">NEW CAMPAIGN</a></li>    
-            <li><a href="./Create.aspx">LEAD REPORT</a></li>    
-            <li class="last on">CAMPAIGN SETTINGS</li>  
-        </ul>
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">

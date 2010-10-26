@@ -1,22 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Templates.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Themes.Templates" %>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li><a href="Default.aspx">MANAGE THEMES</a></li>
-            <li class="last"><a href="./AddNewTheme.aspx">Add Theme</a></li>           
-        </ul>
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" navSection="templates" navItem="templates" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+
+    <div class="page-controls">
+        <ul>
+            <li><asp:Button ID="BtnAddNewTemplate" OnClick="BtnAddTemplate_Click" Text="Add New Template" runat="server" /></li>
+        </ul>
+        </div>
+
     <asp:HiddenField ID="ThemeGuid" runat="server" />    
     <h1>Manage Templates: <asp:Label ID="ThemeName" runat="server" /></h1> 
     
-    <asp:Button ID="BtnAddNewTemplate" OnClick="BtnAddTemplate_Click" Text="Add New Template" runat="server" />&nbsp;
-    or edit existing&nbsp;
+    
     <asp:DropDownList ID="LstExistingTemplates" runat="server" />&nbsp;
     <asp:Button ID="BtnEditTemplate" OnClick="BtnEditTemplate_Click" Text="Edit" runat="server" />&nbsp;
     <asp:Button ID="BtnDeleteTemplate" OnClick="BtnDeleteTemplate_Click" OnClientClick="return confirm('Are you sure you want to delete this template? This will also delete all pages associated with this template.\n\nThis action can NOT be reversed!');" Text="Delete" runat="server" />    

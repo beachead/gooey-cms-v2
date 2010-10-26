@@ -1,14 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Pages.Default" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li class="on">MANAGE PAGES</li>
-            <li><a href="./Edit.aspx">ADD NEW PAGE</a></li>
-            <li><a href="./Promotion.aspx">PROMOTION</a></li> 
-            <li class="last"><a href="./Redirects.aspx">MANAGE REDIRECTS</a></li>       
-        </ul>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="pages" NavItem="" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
