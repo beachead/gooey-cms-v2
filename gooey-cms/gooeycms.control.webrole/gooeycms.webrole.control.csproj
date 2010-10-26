@@ -156,6 +156,7 @@
     <Content Include="images\Vista\html.png" />
     <Content Include="images\Vista\jpg.png" />
     <Content Include="images\Vista\network-drive.png" />
+    <Content Include="images\Vista\notes.gif" />
     <Content Include="images\Vista\png.png" />
     <Content Include="images\Vista\rename.gif" />
     <Content Include="images\Vista\searches.png" />

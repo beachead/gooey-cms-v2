@@ -75,9 +75,11 @@
         <ContextMenus>
             <telerik:RadTreeViewContextMenu ID="DirectoryContextMenu" runat="server">
                 <Items>
-                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif"></telerik:RadMenuItem>
+                    <telerik:RadMenuItem Value="NewPage" Text="New Page" ImageUrl="~/Images/Vista/notes.gif"></telerik:RadMenuItem>
                     <telerik:RadMenuItem Value="NewFolder" Text="New Folder" ImageUrl="~/Images/Vista/12.gif"></telerik:RadMenuItem>
                     <telerik:RadMenuItem IsSeparator="true" />
+                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
+    <telerik:RadMenuItem IsSeparator="true" />
                     <telerik:RadMenuItem Value="DeleteDirectory" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
                 </Items>
             </telerik:RadTreeViewContextMenu>
@@ -85,7 +87,7 @@
             <telerik:RadTreeViewContextMenu ID="PageContextMenu" runat="server">
                 <Items>
                     <telerik:RadMenuItem Value="Edit" Text="Edit ..." ImageUrl="~/Images/Vista/9.gif"></telerik:RadMenuItem>
-                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif"></telerik:RadMenuItem>
+                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
                     <telerik:RadMenuItem IsSeparator="true" />
                     <telerik:RadMenuItem Value="DeletePage" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
                 </Items>

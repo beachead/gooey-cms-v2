@@ -30,7 +30,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         protected void PageTreeview_NodeDataBound(object sender, RadTreeNodeEventArgs e)
         {
             CmsSitePath path = (CmsSitePath)e.Node.DataItem;
-            e.Node.ToolTip = path.Url;
 
             if (path.IsDirectory)
             {
@@ -40,15 +39,18 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                     e.Node.ContextMenuID = "DirectoryContextMenu";
                 e.Node.ImageUrl = "~/Images/Vista/folder.png";
                 e.Node.Category = "directory";
-                e.Node.Value = path.Url;
+                e.Node.Text = path.Name;
+                e.Node.Value = e.Node.GetFullPath("/");
             }
             else
             {
                 e.Node.ContextMenuID = "PageContextMenu";
                 e.Node.ImageUrl = "~/Images/Vista/aspx.png";
                 e.Node.Category = "page";
-                e.Node.Value = Server.UrlEncode(path.Url);
+                e.Node.Text = path.Name;
+                e.Node.Value = e.Node.GetFullPath("/");
             }
+            e.Node.ToolTip = e.Node.GetFullPath("/");
         }
 
         protected void PageTreeView_NodeEdit(object sender, Telerik.Web.UI.RadTreeNodeEditEventArgs e)
@@ -85,7 +87,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             }
 
             dest.Expanded = true;
-            src.TreeView.ClearSelectedNodes();
+            src.TreeView.UnselectAllNodes();
         }
 
         protected void PageTreeView_ContextMenuItemClick(object sender, Telerik.Web.UI.RadTreeViewContextMenuEventArgs e)
@@ -93,19 +95,25 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             switch (e.MenuItem.Value)
             {
                 case "NewFolder":
-                    InsertNewClientNode(e.Node);
+                    InsertNewClientNode(e.Node, "New Folder", "~/Images/Vista/folder.png", true, "DirectoryContextMenu");
+                    break;
+                case "NewPage":
+                    InsertNewClientNode(e.Node, "New Page", "~/Images/Vista/aspx.png", false, "PageContextMenu");
                     break;
                 default:
                     break;
             }
         }
 
-        private void InsertNewClientNode(RadTreeNode parent)
+        private void InsertNewClientNode(RadTreeNode parent, String text, String image, bool allowDrop, String contextMenu)
         {
-            RadTreeNode newFolder = new RadTreeNode("New Folder");
+            RadTreeNode newFolder = new RadTreeNode();
+            newFolder.Text = text;
             newFolder.Selected = true;
-            newFolder.ImageUrl = "~/Images/Vista/folder.png";
+            newFolder.ImageUrl = image;
+            newFolder.AllowDrop = allowDrop;
             newFolder.Value = System.Guid.NewGuid().ToString();
+            newFolder.ContextMenuID = contextMenu;
             parent.Nodes.Add(newFolder);
             parent.Expanded = true;
 
