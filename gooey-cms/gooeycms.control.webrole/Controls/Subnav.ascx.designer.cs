@@ -22,22 +22,139 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.MultiView mvSubnav;
         
         /// <summary>
-        /// manageTemplates control.
+        /// content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View manageTemplates;
+        protected global::System.Web.UI.WebControls.View content;
         
         /// <summary>
-        /// manageTheme control.
+        /// content_new control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink manageTheme;
+        protected global::System.Web.UI.WebControls.HyperLink content_new;
+        
+        /// <summary>
+        /// content_promtion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink content_promtion;
+        
+        /// <summary>
+        /// content_contenttypes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink content_contenttypes;
+        
+        /// <summary>
+        /// pages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View pages;
+        
+        /// <summary>
+        /// pages_new control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink pages_new;
+        
+        /// <summary>
+        /// pages_promotion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink pages_promotion;
+        
+        /// <summary>
+        /// pages_manageredirects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink pages_manageredirects;
+        
+        /// <summary>
+        /// campaigns control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View campaigns;
+        
+        /// <summary>
+        /// campaigns_new control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink campaigns_new;
+        
+        /// <summary>
+        /// campaigns_leadreport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink campaigns_leadreport;
+        
+        /// <summary>
+        /// campaigns_campaignsettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink campaigns_campaignsettings;
+        
+        /// <summary>
+        /// themes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View themes;
+        
+        /// <summary>
+        /// themes_theme control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink themes_theme;
+        
+        /// <summary>
+        /// themes_add control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink themes_add;
         
         /// <summary>
         /// templates control.
@@ -46,51 +163,69 @@ namespace Gooeycms.Webrole.Control.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink templates;
+        protected global::System.Web.UI.WebControls.View templates;
         
         /// <summary>
-        /// header control.
+        /// templates_theme control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink header;
+        protected global::System.Web.UI.WebControls.HyperLink templates_theme;
         
         /// <summary>
-        /// footer control.
+        /// templates_templates control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink footer;
+        protected global::System.Web.UI.WebControls.HyperLink templates_templates;
         
         /// <summary>
-        /// css control.
+        /// templates_header control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink css;
+        protected global::System.Web.UI.WebControls.HyperLink templates_header;
         
         /// <summary>
-        /// javascript control.
+        /// templates_footer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink javascript;
+        protected global::System.Web.UI.WebControls.HyperLink templates_footer;
         
         /// <summary>
-        /// images control.
+        /// templates_stylesheets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink images;
+        protected global::System.Web.UI.WebControls.HyperLink templates_stylesheets;
+        
+        /// <summary>
+        /// templates_javascript control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink templates_javascript;
+        
+        /// <summary>
+        /// templates_images control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink templates_images;
     }
 }

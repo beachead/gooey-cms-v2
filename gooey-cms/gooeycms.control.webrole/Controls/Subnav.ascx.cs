@@ -9,21 +9,16 @@ namespace Gooeycms.Webrole.Control.Controls
 {
     public partial class Subnav : System.Web.UI.UserControl
     {
-        public String tid = String.Empty;
-        public String navSection = String.Empty;
-        public String navItem = String.Empty;
+        public String NavSection = String.Empty;
+        public String NavItem = String.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["tid"] != null)
-            {
-                tid = Request.QueryString["tid"];
-            }
-
-            View activeSetion = (View) FindControl(navSection);
+            NavSection = NavSection.ToLower();
+            View activeSetion = (View) FindControl(NavSection);
             mvSubnav.SetActiveView(activeSetion);
 
-            HyperLink activeItem = (HyperLink)activeSetion.FindControl(navItem);
+            HyperLink activeItem = (HyperLink)activeSetion.FindControl(NavSection + "_" + NavItem);
 
             if (activeItem != null)
             {
@@ -33,10 +28,10 @@ namespace Gooeycms.Webrole.Control.Controls
 
         }
 
-        protected void appendTid(object sender, EventArgs e)
+        protected void AppendQuerystring(object sender, EventArgs e)
         {
             HyperLink A = (HyperLink) sender;
-            A.NavigateUrl = A.NavigateUrl + "?tid=" + Request.QueryString["tid"];
+            A.NavigateUrl = A.NavigateUrl + "?" + Request.QueryString.ToString();
         }
     }
 }

@@ -14,7 +14,7 @@
 
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
-    <gooey:Subnav ID="Subnav" runat="server" navSection="manageTemplates" navItem="javascript" />
+    <gooey:Subnav ID="Subnav" runat="server" navSection="templates" navItem="javascript" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">

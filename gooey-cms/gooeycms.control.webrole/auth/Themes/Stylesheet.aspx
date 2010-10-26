@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Stylesheet.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Themes.Stylesheet" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 
 <asp:Content ID="ContentStylesheets" ContentPlaceHolderID="localCSS" runat="server">
@@ -15,7 +16,7 @@
 
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
-    <gooey:Subnav ID="Subnav" runat="server" navSection="manageTemplates" navItem="css" />
+    <gooey:Subnav ID="Subnav" runat="server" navSection="templates" navItem="stylesheets" />
 </asp:Content>
 
 

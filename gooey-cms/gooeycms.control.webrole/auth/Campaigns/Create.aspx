@@ -1,12 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Create.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Create" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="campaigns" NavItem="new" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li><a href="./Default.aspx">List Campaigns</a></li>              
-            <li class="last on">Modify Campaign</li>      
-        </ul>
-</asp:Content>
+
 
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">

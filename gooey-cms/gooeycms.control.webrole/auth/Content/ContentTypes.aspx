@@ -1,12 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="ContentTypes.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Content.ContentTypes" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-        <ul>
-            <li><a href="./Default.aspx">MANAGE CONTENT</a></li>
-            <li><a href="">PROMOTION</a></li> 
-            <li class="on last">MANAGE CONTENT TYPES</li>       
-        </ul>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="content" NavItem="contenttypes" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">

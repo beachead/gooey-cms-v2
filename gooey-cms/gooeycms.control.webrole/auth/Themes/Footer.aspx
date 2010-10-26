@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
-    <gooey:Subnav ID="Subnav" runat="server" navSection="manageTemplates" navItem="footer" />
+    <gooey:Subnav ID="Subnav" runat="server" navSection="templates" navItem="footer" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
