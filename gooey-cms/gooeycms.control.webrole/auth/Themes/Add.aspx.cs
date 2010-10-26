@@ -38,7 +38,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
                 this.ThemeDescription.Enabled = false;
                 this.Save.Enabled = false;
 
-                Response.Redirect("./Templates.aspx?tid=" + result.Id.ToString(), true);
+                Response.Redirect("./Templates.aspx?tid=" + result.ThemeGuid, true);
             }
             catch (Exception ex)
             {

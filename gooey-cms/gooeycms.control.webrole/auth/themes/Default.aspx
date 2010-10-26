@@ -17,13 +17,6 @@
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             <Columns>
-                <asp:TemplateField HeaderText="Id">
-                    <HeaderStyle HorizontalAlign="Left" />
-                    <ItemTemplate>
-                        <asp:HiddenField ID="HiddenId" Value='<%# Eval("Theme.ThemeGuid") %>' runat="server" />
-                        <asp:Label ID="Id" Text='<%# Eval("Theme.Id") %>' runat="server" />
-                    </ItemTemplate>
-                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Name">
                      <HeaderStyle HorizontalAlign="Left" />
                     <ItemTemplate>
@@ -36,7 +29,7 @@
                         <asp:Label ID="Description" Text='<%# Eval("Theme.Description") %>' runat="server" />
                     </ItemTemplate>                
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Enabled">
+                <asp:TemplateField HeaderText="Active">
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemTemplate>
                         <asp:RadioButton ID="Enabled" Checked='<%# Eval("Theme.IsEnabled") %>' AutoPostBack="true" OnCheckedChanged="OnEnableClick_Change" runat="server" />
@@ -46,16 +39,16 @@
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemTemplate>
                         <asp:HyperLink ID="EditTemplates" Text="Templates" runat="server" 
-                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Templates.aspx?tid={0}") %>' />&nbsp;
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Templates.aspx?tid={0}") %>' />&nbsp;|&nbsp;
                         <asp:HyperLink ID="EditHeaderFooter" Text="Header" runat="server"
-                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Header.aspx?tid={0}") %>' /> /
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Header.aspx?tid={0}") %>' />&nbsp;
                         <asp:HyperLink ID="HyperLink1" Text="Footer" runat="server"
-                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Footer.aspx?tid={0}") %>' />&nbsp;
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Footer.aspx?tid={0}") %>' />&nbsp;|&nbsp;
                         <asp:HyperLink ID="EditCss" Text="CSS" runat="server"
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Stylesheet.aspx?tid={0}") %>'  />&nbsp;
                         <asp:HyperLink ID="EditJavascript" Text="Javascript" runat="server"
-                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />&nbsp;
-                        <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=600,height=500,left=150');">Images</a>&nbsp;
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />&nbsp;|&nbsp;
+                        <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=600,height=500,left=150');">Images</a>&nbsp;|&nbsp;
                         <asp:LinkButton ID="DeleteTemplate" Text="[delete]" OnClientClick="return confirm('Are you sure you want to delete this theme?\r\n\r\nWARNING: This will also delete ALL javascript, css and image files associated with this theme.')" OnClick="OnDelete_Click" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
