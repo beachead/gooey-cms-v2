@@ -89,6 +89,10 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.UI, Version=2010.2.929.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Telerik.Web.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="auth\Campaigns\Create.aspx" />
@@ -109,6 +113,7 @@
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\default.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
+    <Content Include="auth\Pages\Default2.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
     <Content Include="auth\Pages\Stylesheet.aspx" />
@@ -129,6 +134,35 @@
     <Content Include="images\logo_gooey-login.png" />
     <Content Include="images\logo_gooey_internal.png" />
     <Content Include="images\progress_green.gif" />
+    <Content Include="images\Vista\12.gif" />
+    <Content Include="images\Vista\7.gif" />
+    <Content Include="images\Vista\9.gif" />
+    <Content Include="images\Vista\ascx.png" />
+    <Content Include="images\Vista\asmx.png" />
+    <Content Include="images\Vista\aspx.png" />
+    <Content Include="images\Vista\computer.png" />
+    <Content Include="images\Vista\cs.png" />
+    <Content Include="images\Vista\desktop.png" />
+    <Content Include="images\Vista\folder-contacts.png" />
+    <Content Include="images\Vista\folder-documents.png" />
+    <Content Include="images\Vista\folder-favorites.png" />
+    <Content Include="images\Vista\folder-music.png" />
+    <Content Include="images\Vista\folder-open.png" />
+    <Content Include="images\Vista\folder-personal.png" />
+    <Content Include="images\Vista\folder-pictures.png" />
+    <Content Include="images\Vista\folder-videos.png" />
+    <Content Include="images\Vista\folder.png" />
+    <Content Include="images\Vista\gif.png" />
+    <Content Include="images\Vista\html.png" />
+    <Content Include="images\Vista\jpg.png" />
+    <Content Include="images\Vista\network-drive.png" />
+    <Content Include="images\Vista\png.png" />
+    <Content Include="images\Vista\rename.gif" />
+    <Content Include="images\Vista\searches.png" />
+    <Content Include="images\Vista\system-drive.png" />
+    <Content Include="images\Vista\unknown.png" />
+    <Content Include="images\Vista\vb.png" />
+    <Content Include="images\Vista\xml.png" />
     <Content Include="images\___placeholder_logo.png" />
     <Content Include="scripts\global.js" />
     <Content Include="scripts\jquery-1.4.2.min.js" />
@@ -275,6 +309,13 @@
     <Compile Include="auth\Pages\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auth\Pages\Default2.aspx.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Default2.aspx.designer.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\Pages\Edit.aspx.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -399,6 +440,7 @@
     </Compile>
     <Compile Include="Controls\Subnav.ascx.cs">
       <DependentUpon>Subnav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Subnav.ascx.designer.cs">
       <DependentUpon>Subnav.ascx</DependentUpon>

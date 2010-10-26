@@ -11,6 +11,8 @@
     <div>
         <asp:Button ID="BtnTest" Text="Test" OnClick="BtnTest_Click" runat="server" />
         <asp:Label ID="Token" runat="server" />
+
+        <asp:HyperLink ID="HyperLink" OnPreRender="AppendQuerystring" NavigateUrl="./debugpas.aspx" Text="Click Here" runat="server" />
     </div>
     </form>
 </body>

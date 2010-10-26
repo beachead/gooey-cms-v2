@@ -27,8 +27,7 @@ namespace Gooeycms.Webrole.Control
             if (!CurrentSite.IsSet)
                 Response.Redirect("~/auth/dashboard.aspx");
 
-            if (Root == null)
-                Root = Page.ResolveUrl("~/");
+            Page.Header.DataBind();
 
             this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
             this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;

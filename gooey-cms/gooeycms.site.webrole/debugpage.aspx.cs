@@ -27,5 +27,11 @@ namespace Gooeycms.webrole.sites
         {
             this.Token.Text = Server.UrlEncode(TokenManager.Issue("cadams@prayer-warrior.net", TimeSpan.FromMinutes(2)));
         }
+
+        protected void AppendQuerystring(Object sender, EventArgs e)
+        {
+            HyperLink A = (HyperLink)sender;
+            A.NavigateUrl = A.NavigateUrl + "?" + Request.QueryString.ToString();
+        }
     }
 }

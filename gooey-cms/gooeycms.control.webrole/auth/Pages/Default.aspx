@@ -1,5 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Pages.Default" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
+
+<asp:Content ID="Contenta" ContentPlaceHolderID="localCSS" runat="server">
+	<link href="<%=ResolveUrl("~/javascript/astreeview/astreeview.css")%>" type="text/css" rel="stylesheet" />
+	<link href="<%=ResolveUrl("~/javascript/contextmenu/contextmenu.css")%>" type="text/css" rel="stylesheet" />
+</asp:Content>
+<asp:Content ID="ContentLocalJs" ContentPlaceHolderID="localJS" runat="server">
+	<script src="<%=ResolveUrl("~/javascript/astreeview/astreeview_packed.js")%>" type="text/javascript"></script>
+	<script src="<%=ResolveUrl("~/javascript/contextmenu/contextmenu_packed.js")%>" type="text/javascript"></script>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
@@ -12,7 +21,6 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-
     <h1>Manage Pages</h1>
     <p>Pages on your site can be added, edited and managed from this area. Use the below filter to quickly find your existing pages.</p>
 

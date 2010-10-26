@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+using System;
 namespace Gooeycms.Data.Model.Site
 {
     public class CmsSitePathDao : BaseDao
@@ -26,6 +28,17 @@ namespace Gooeycms.Data.Model.Site
         {
             string hql = "select paths from CmsSitePath paths where paths.SubscriptionGuid = :guid order by depth asc, position asc";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsSitePath>();
+        }
+
+        /// <summary>
+        /// Finds all of the children of the specified parent
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        public IList<CmsSitePath> FindChildren(Data.Guid siteGuid, String parent)
+        {
+            String hql = "select path from CmsSitePath path where path.SubscriptionGuid = :guid and path.Parent = :url order by path.Position asc";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("url", parent).List<CmsSitePath>();
         }
     }
 }

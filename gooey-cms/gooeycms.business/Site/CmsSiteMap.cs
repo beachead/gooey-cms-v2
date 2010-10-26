@@ -233,6 +233,19 @@ namespace Gooeycms.Business.Web
             return dao.FindAllBySiteGuid(siteGuid);
         }
 
+        /// <summary>
+        /// Gets the children for the specified parent
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        public IList<CmsSitePath> GetChildren(CmsSitePath parent)
+        {
+            CmsSitePathDao dao = new CmsSitePathDao();
+            IList<CmsSitePath> children = dao.FindChildren(parent.SubscriptionGuid,parent.Url);
+
+            return children;
+        }
+
         public void Save(CmsSitePath path)
         {
             CmsSitePathDao dao = new CmsSitePathDao();

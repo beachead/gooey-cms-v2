@@ -1,4 +1,7 @@
 ﻿using System;
+using Gooeycms.Data.Model.Site;
+using Gooeycms.Business.Web;
+using System.Collections.Generic;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
