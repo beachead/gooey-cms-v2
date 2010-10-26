@@ -17,7 +17,7 @@ namespace Gooeycms.Business.Markup.Markdown
 
         public override StringBuilder Convert(StringBuilder markup)
         {
-            imageContainerUrl = CurrentSite.GetContainerUrl(SiteHelper.ImagesDirectoryKey);
+            imageContainerUrl = CurrentSite.GetContainerUrl(SiteHelper.ImagesContainerKey);
             if (base.IsPartOfTheme)
             {
                 String guid = CurrentSite.GetCurrentTheme().ThemeGuid;

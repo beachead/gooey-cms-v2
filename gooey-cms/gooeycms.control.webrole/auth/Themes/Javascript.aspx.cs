@@ -103,21 +103,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             LoadTabData();
         }
 
-        protected void BtnDisableScripts_Click(object sender, EventArgs e)
-        {
-            CmsTheme theme = GetSelectedTheme();
-            /*
-            foreach (ListItem item in this.LstEnabledFiles.Items)
-            {
-                if (item.Selected)
-                {
-                    JavascriptManager.Instance.Disable(theme, item.Value);
-                }
-            }
-            */
-            LoadTabData();
-        }
-
         protected void BtnEdit_Click(object sender, EventArgs e)
         {
             String name = this.LstExistingFile.SelectedValue;

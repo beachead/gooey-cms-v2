@@ -205,22 +205,22 @@ namespace Gooeycms.Business.Util
 
         public static String PageStorageContainer
         {
-            get { return GetStorageKey(SiteHelper.PageDirectoryKey); }
+            get { return GetStorageKey(SiteHelper.PageContainerKey); }
         }
 
         public static String JavascriptStorageContainer
         {
-            get { return GetStorageKey(SiteHelper.JavascriptDirectoryKey); }
+            get { return GetStorageKey(SiteHelper.JavascriptContainerKey); }
         }
 
         public static String StylesheetStorageContainer
         {
-            get { return GetStorageKey(SiteHelper.StylesheetDirectoryKey); }
+            get { return GetStorageKey(SiteHelper.StylesheetContainerKey); }
         }
 
         public static String ImageStorageDirectory
         {
-            get { return GetStorageKey(SiteHelper.ImagesDirectoryKey); }
+            get { return GetStorageKey(SiteHelper.ImagesContainerKey); }
         }
 
         public static Boolean IsSet

@@ -7,6 +7,7 @@ using Gooeycms.Business.Css;
 using Gooeycms.Business.Themes;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
+using AjaxControlToolkit;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
@@ -29,20 +30,64 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         {
             this.Editor.Text = "";
             this.LstExistingFile.Items.Clear();
-            this.LstEnabledFiles.Items.Clear();
             this.LstDisabledFiles.Items.Clear();
 
             IList<CssFile> files = CssManager.Instance.List(this.GetSelectedTheme());
+            IList<CssFile> enabledFiles = new List<CssFile>();
             foreach (CssFile file in files)
             {
                 ListItem item = new ListItem(file.Name, file.FullName);
                 this.LstExistingFile.Items.Add(item);
 
-                if (file.IsEnabled)
-                    this.LstEnabledFiles.Items.Add(item);
-                else
+                if (!file.IsEnabled)
                     this.LstDisabledFiles.Items.Add(item);
+
+                if (file.IsEnabled)
+                    enabledFiles.Add(file);
             }
+
+            this.LstEnabledFilesOrderable.DataSource = enabledFiles;
+            this.LstEnabledFilesOrderable.DataBind();
+
+            if (files.Count == enabledFiles.Count)
+                this.DisablePanel.Visible = false;
+            else
+                this.DisablePanel.Visible = true;
+        }
+
+        protected void LstEnabledFiles_ItemCommand(object sender, AjaxControlToolkit.ReorderListCommandEventArgs e)
+        {
+            CmsTheme theme = GetSelectedTheme();
+            switch (e.CommandName)
+            {
+                case "Disable":
+                    CssManager.Instance.Disable(theme, e.CommandArgument.ToString());
+                    break;
+            }
+
+            LoadTabData();
+        }
+
+        protected void LstEnabledFiles_Reorder(object sender, ReorderListItemReorderEventArgs e)
+        {
+            CmsTheme theme = GetSelectedTheme();
+
+            //Get the original order of the items
+            IList<CssFile> files = CssManager.Instance.List(this.GetSelectedTheme());
+
+            //Reorder the item
+            CssFile movedFile = files[e.OldIndex];
+            files.RemoveAt(e.OldIndex);
+            files.Insert(e.NewIndex, movedFile);
+
+            //Update the ordering of all the items
+            int i = 0;
+            foreach (CssFile file in files)
+            {
+                CssManager.Instance.UpdateSortInfo(theme, file.Name, i++);
+            }
+
+            LoadTabData();
         }
 
         protected void BtnEnableScripts_Click(object sender, EventArgs e)
@@ -53,19 +98,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
                 if (item.Selected)
                 {
                     CssManager.Instance.Enable(theme, item.Value);
-                }
-            }
-            LoadTabData();
-        }
-
-        protected void BtnDisableScripts_Click(object sender, EventArgs e)
-        {
-            CmsTheme theme = GetSelectedTheme();
-            foreach (ListItem item in this.LstEnabledFiles.Items)
-            {
-                if (item.Selected)
-                {
-                    CssManager.Instance.Disable(theme, item.Value);
                 }
             }
             LoadTabData();
@@ -85,7 +117,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         protected void BtnSaveEdit_Click(object sender, EventArgs e)
         {
             String filename = this.LstExistingFile.SelectedValue;
-            byte [] data = Encoding.UTF8.GetBytes(this.Editor.Text);
+            byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
 
             CmsTheme theme = GetSelectedTheme();
             CssManager.Instance.Save(theme, filename, data);
@@ -119,7 +151,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             else
             {
                 filename = this.TxtNewFileName.Text;
-                data = Encoding.UTF8.GetBytes("/* Replace with your stylesheet content */");
+                data = Encoding.UTF8.GetBytes("//Replace with your javascript content");
             }
 
             CmsTheme theme = GetSelectedTheme();

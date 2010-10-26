@@ -9,6 +9,7 @@ using Gooeycms.Data.Model.Theme;
 using Gooeycms.Business.Javascript;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Business.Pages;
+using AjaxControlToolkit;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
@@ -27,44 +28,76 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         private void LoadTabData()
         {
             this.Editor.Text = "";
-            this.LstExisting.Items.Clear();
-            this.LstEnabledFiles.Items.Clear();
+            this.LstExistingFile.Items.Clear();
             this.LstDisabledFiles.Items.Clear();
 
             IList<JavascriptFile> files = JavascriptManager.Instance.List(this.GetSelectedPage());
+            IList<JavascriptFile> enabledFiles = new List<JavascriptFile>();
             foreach (JavascriptFile file in files)
             {
                 ListItem item = new ListItem(file.Name, file.FullName);
-                this.LstExisting.Items.Add(item);
+                this.LstExistingFile.Items.Add(item);
+
+                if (!file.IsEnabled)
+                    this.LstDisabledFiles.Items.Add(item);
 
                 if (file.IsEnabled)
-                    this.LstEnabledFiles.Items.Add(item);
-                else
-                    this.LstDisabledFiles.Items.Add(item);
+                    enabledFiles.Add(file);
             }
+
+            this.LstEnabledFilesOrderable.DataSource = enabledFiles;
+            this.LstEnabledFilesOrderable.DataBind();
+
+            if (files.Count == enabledFiles.Count)
+                this.DisablePanel.Visible = false;
+            else
+                this.DisablePanel.Visible = true;
+        }
+
+        protected void LstEnabledFiles_ItemCommand(object sender, AjaxControlToolkit.ReorderListCommandEventArgs e)
+        {
+            CmsPage theme = GetSelectedPage();
+            switch (e.CommandName)
+            {
+                case "Disable":
+                    JavascriptManager.Instance.Disable(theme, e.CommandArgument.ToString());
+                    break;
+            }
+
+            LoadTabData();
+        }
+
+        protected void LstEnabledFiles_Reorder(object sender, ReorderListItemReorderEventArgs e)
+        {
+            CmsPage theme = GetSelectedPage();
+
+            //Get the original order of the items
+            IList<JavascriptFile> files = JavascriptManager.Instance.List(this.GetSelectedPage());
+
+            //Reorder the item
+            JavascriptFile movedFile = files[e.OldIndex];
+            files.RemoveAt(e.OldIndex);
+            files.Insert(e.NewIndex, movedFile);
+
+            //Update the ordering of all the items
+            int i = 0;
+            foreach (JavascriptFile file in files)
+            {
+                file.SortOrder = i++;
+                JavascriptManager.Instance.UpdateSortInfo(theme, file.Name, i++);
+            }
+
+            LoadTabData();
         }
 
         protected void BtnEnableScripts_Click(object sender, EventArgs e)
         {
-            CmsPage page = GetSelectedPage();
+            CmsPage theme = GetSelectedPage();
             foreach (ListItem item in this.LstDisabledFiles.Items)
             {
                 if (item.Selected)
                 {
-                    JavascriptManager.Instance.Enable(page, item.Value);
-                }
-            }
-            LoadTabData();
-        }
-
-        protected void BtnDisableScripts_Click(object sender, EventArgs e)
-        {
-            CmsPage page = GetSelectedPage();
-            foreach (ListItem item in this.LstEnabledFiles.Items)
-            {
-                if (item.Selected)
-                {
-                    JavascriptManager.Instance.Disable(page, item.Value);
+                    JavascriptManager.Instance.Enable(theme, item.Value);
                 }
             }
             LoadTabData();
@@ -100,13 +133,13 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             SelectedPanel = "managepanel";
             LoadTabData();
 
-            this.LstExisting.SelectedValue = filename;
+            this.LstExistingFile.SelectedValue = filename;
             this.Editor.Text = text;
         }
 
         protected void BtnEdit_Click(object sender, EventArgs e)
         {
-            String name = this.LstExisting.SelectedValue;
+            String name = this.LstExistingFile.SelectedValue;
             JavascriptFile file = JavascriptManager.Instance.Get(this.GetSelectedPage(), name);
 
             this.Editor.Text = file.Content;
@@ -115,7 +148,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            String filename = this.LstExisting.SelectedValue;
+            String filename = this.LstExistingFile.SelectedValue;
             byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
 
             CmsPage page = GetSelectedPage();

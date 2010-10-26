@@ -79,7 +79,7 @@ namespace Gooeycms.Business.Store
             PackageContentTypes(siteGuid, packageContentTypes);
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid);
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid);
 
             DoNotify(notifier, "Creating Page Image Snapshots (this may take a while)");
             sitepackage.PageImages = client.CreateSnapshot(imageDirectory, StorageClientConst.RootFolder);
@@ -188,7 +188,7 @@ namespace Gooeycms.Business.Store
 
                 //Create a snapshot of the images
                 IStorageClient client = StorageHelper.GetStorageClient();
-                String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
+                String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
 
                 DoNotify(notifier, "Creating Theme Image Snapshots (This may take a while)");
                 packageTheme.Header = theme.Header;
@@ -370,8 +370,8 @@ namespace Gooeycms.Business.Store
 
             DoNotify(notifier, "Copying Page Images to Site. (This may take a few minutes) ");
             //Save all the page-level images for this site
-            String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, sitepackage.OriginalSiteGuid.Value);
-            String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, guid.Value);
+            String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, sitepackage.OriginalSiteGuid.Value);
+            String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, guid.Value);
 
             IStorageClient client = StorageHelper.GetStorageClient();
             client.CopyFromSnapshots(sitepackage.PageImages, copyFromImageContainer, copyToImageContainer, StorageClientConst.RootFolder, Permissions.Public);
@@ -420,8 +420,8 @@ namespace Gooeycms.Business.Store
 
                 //Save all the images for this theme
                 DoNotify(notifier, "Copying Theme Images From Snapshot to Site. (This may take a few minutes) ");
-                String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, sitepackage.OriginalSiteGuid.Value);
-                String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, guid.Value);
+                String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, sitepackage.OriginalSiteGuid.Value);
+                String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, guid.Value);
 
                 IStorageClient client = StorageHelper.GetStorageClient();
                 client.CopyFromSnapshots(themeWrapper.Images, copyFromImageContainer, copyToImageContainer, theme.ThemeGuid, Permissions.Public);
@@ -500,7 +500,7 @@ namespace Gooeycms.Business.Store
                 }
 
                 //Delete the snapshots associated with this package
-                String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, package.OwnerSubscriptionId);
+                String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, package.OwnerSubscriptionId);
                 client.DeleteSnapshots(imageDirectory, StorageClientConst.RootFolder);
             }
         }

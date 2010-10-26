@@ -187,10 +187,10 @@ namespace Gooeycms.Business.Subscription
                 }
 
                 //Delete any cloud storage files for this subscription
-                String pagesContainer = String.Format(SiteHelper.PageDirectoryKey,subscription.Guid);
-                String javascriptContainer = String.Format(SiteHelper.JavascriptDirectoryKey,subscription.Guid);
-                String cssContainer = String.Format(SiteHelper.StylesheetDirectoryKey,subscription.Guid);
-                String imagesContainer = String.Format(SiteHelper.ImagesDirectoryKey, subscription.Guid);
+                String pagesContainer = String.Format(SiteHelper.PageContainerKey,subscription.Guid);
+                String javascriptContainer = String.Format(SiteHelper.JavascriptContainerKey,subscription.Guid);
+                String cssContainer = String.Format(SiteHelper.StylesheetContainerKey,subscription.Guid);
+                String imagesContainer = String.Format(SiteHelper.ImagesContainerKey, subscription.Guid);
 
                 IStorageClient client = StorageHelper.GetStorageClient();
                 client.Delete(pagesContainer);

@@ -1,22 +1,19 @@
 ﻿using System;
+using Gooeycms.Business.Storage;
 
 namespace Gooeycms.Business.Css
 {
     [Serializable]
-    public class CssFile 
+    public class CssFile : SortableAssetFile
     {
-        public const String Separator = "-";
-        public const String Extension = ".css";
-
-        public Boolean IsEnabled { get; set; }
-        public Boolean SortOrder { get; set; }
-        public String Content { get; set; }
-        public String FullName { get; set; }
-
-        public String Name
+        public override string Separator
         {
-            get { return FullName; }
-            set { this.FullName = value; }
+            get { return SortableAssetFile.DefaultSeparator; }
+        }
+
+        public override string Extension
+        {
+            get { return SortableAssetFile.CssExtension; }
         }
     }
 }

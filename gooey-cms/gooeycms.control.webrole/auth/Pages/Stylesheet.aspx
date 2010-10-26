@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <title></title>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" href="../../css/reorder.css" />
     <script src="/scripts/functions.js" type="text/javascript" language="javascript"></script> 
     <script src="/scripts/mootools-core.js" type="text/javascript" language="javascript"></script> 
     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
@@ -20,6 +21,7 @@
 </head>
 <body class="claro">
     <form id="form1" runat="server">
+        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
         <script language="javascript" type="text/javascript">
             function showErrorMessage(text) {
                 dojo.byId('lblErrorMessage').innerHTML = text;
@@ -36,24 +38,42 @@
          <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="width:880px;height:560px;overflow:auto;">
             <div id="enablepanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Stylesheets">
                 <table>
-                    <tr>
-                        <td>
-                            Avaible Scripts<br />
-                            <asp:ListBox ID="LstDisabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
-                        </td>
-                        <td style="width:15px;">&nbsp;</td>
-                        <td>
-                            Associated Scripts<br />
-                            <asp:ListBox ID="LstEnabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" Text="Enable" runat="server" /></td>
-                        <td><asp:Button ID="BtnDisableScripts" OnClick="BtnDisableScripts_Click" Text="Disable" runat="server" /></td>
-                    </tr>
+              <tr>
+                    <asp:Panel ID="DisablePanel" AutoUpdateAfterCallBack="true" Visible="true" runat="server">
+                    <td style="vertical-align:top;">
+                        Disabled Stylesheets<br />
+                        <asp:ListBox ID="LstDisabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
+                        <br />
+                        <asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" Text="Enable" runat="server" />
+                    </td>
+                    </asp:Panel>
+                    <td style="vertical-align:top;">
+                        Enabled Stylesheets:(click-and-drag to reorder)<br />
+                        <ajaxToolkit:ReorderList ID="LstEnabledFilesOrderable" CssClass="ajaxOrderedList"  PostBackOnReorder="false" 
+                                                OnItemReorder="LstEnabledFiles_Reorder" 
+                                                OnItemCommand="LstEnabledFiles_ItemCommand"
+                                                DragHandleAlignment="Left" AllowReorder="true" runat="server">
+                            <ItemTemplate>
+                                <div class="<%# ((Container.DisplayIndex % 2) == 0) ? "" : "alt" %>">
+                                    <%# Eval("Name") %>&nbsp;
+                                    <asp:LinkButton ID="LnkDisableScript" CssClass="normal" CommandName="Disable" CommandArgument='<%# Eval("Name") %>' Text="Disable" runat="server" />
+                                </div>
+                            </ItemTemplate>
+                            <DragHandleTemplate>
+                                <div style="padding-right:5px;cursor:move;">
+                                <img src="../../images/drag_arrow.png" alt="drag" />
+                                </div>
+                            </DragHandleTemplate>
+                            <ReorderTemplate>
+                                <div style="height :20px; border: dotted 2px black;"></div>
+                            </ReorderTemplate>
+                        </ajaxToolkit:ReorderList>
+                        <br /><br />
+                    </td>
+                </tr>
                 </table>                
             </div>
-            <div id="managepanel" dojoType="dijit.layout.ContentPane" title="Manage Stylesheets">
+            <div id="managepanel" dojoType="dijit.layout.ContentPane" title="Manage Stylesheets" style="display:none;">
                 <div dojoType="dijit.TitlePane" title="Add Stylesheet">
                     <table>
                         <tr>
@@ -76,7 +96,7 @@
                     <tr>
                         <td>
                             Edit Existing 
-                            <asp:DropDownList ID="LstExisting" runat="server" />&nbsp;<asp:Button ID="BtnEdit" OnClick="BtnEdit_Click" Text="Edit" runat="server" />
+                            <asp:DropDownList ID="LstExistingFile" runat="server" />&nbsp;<asp:Button ID="BtnEdit" OnClick="BtnEdit_Click" Text="Edit" runat="server" />
                         </td>
                     </tr>
                     <tr>

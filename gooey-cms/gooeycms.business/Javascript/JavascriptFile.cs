@@ -1,27 +1,19 @@
 ﻿using System;
+using Gooeycms.Business.Storage;
 
 namespace Gooeycms.Business.Javascript
 {
     [Serializable]
-    public class JavascriptFile : IComparable<JavascriptFile>
+    public class JavascriptFile : SortableAssetFile
     {
-        public const String Separator = "-";
-        public const String Extension = ".js";
-
-        public Boolean IsEnabled { get; set; }
-        public Int32 SortOrder { get; set; }
-        public String Content { get; set; }
-        public String FullName { get; set; }
-
-        public String Name
+        public override string Separator
         {
-            get { return FullName; }
-            set { this.FullName = value; }
+            get { return SortableAssetFile.DefaultSeparator; }
         }
 
-        public int CompareTo(JavascriptFile other)
+        public override string Extension
         {
-            return (this.SortOrder.CompareTo(other.SortOrder));
+            get { return SortableAssetFile.JavascriptExtension; }
         }
     }
 }

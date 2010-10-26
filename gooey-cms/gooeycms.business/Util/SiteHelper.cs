@@ -15,10 +15,10 @@ namespace Gooeycms.Business.Util
     {
         private static Dictionary<String, Data.Guid> siteGuidCache = new Dictionary<string, Data.Guid>();
 
-        public const String PageDirectoryKey = "{0}-cmspages";
-        public const String JavascriptDirectoryKey = "{0}-javascripts";
-        public const String StylesheetDirectoryKey = "{0}-stylesheets";
-        public const String ImagesDirectoryKey = "{0}-images";
+        public const String PageContainerKey = "{0}-cmspages";
+        public const String JavascriptContainerKey = "{0}-javascripts";
+        public const String StylesheetContainerKey = "{0}-stylesheets";
+        public const String ImagesContainerKey = "{0}-images";
 
         public static void SetActiveSiteCookie(IList<CmsSubscription> items)
         {

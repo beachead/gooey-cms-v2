@@ -56,7 +56,7 @@ namespace Gooeycms.Business.Images
             images = null;
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
             foreach (StorageFile file in results)
             {
                 if ((file.Filename.Length > 0) && (file.Data.Length > 0))
@@ -119,7 +119,7 @@ namespace Gooeycms.Business.Images
         /// <returns></returns>
         public IList<StorageFile> GetAllImagePaths(Data.Guid siteGuid, String folder)
         {
-            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
 
             IStorageClient client = StorageHelper.GetStorageClient();
             IList<StorageFile> allimages = client.List(imageDirectory, folder);
@@ -142,7 +142,7 @@ namespace Gooeycms.Business.Images
         /// <returns></returns>
         public IList<StorageFile> GetImagesWithData(Data.Guid siteGuid, String folder)
         {
-            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, siteGuid.Value);
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
 
             IStorageClient client = StorageHelper.GetStorageClient();
             IList<StorageFile> allimages = client.List(imageDirectory, folder);

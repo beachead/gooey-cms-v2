@@ -2,6 +2,10 @@
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 
+<asp:Content ID="ContentStylesheets" ContentPlaceHolderID="localCSS" runat="server">
+    <link rel="stylesheet" href="../../css/reorder.css" />
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="localJS" ID="localJS" runat="server">
     <script type="text/javascript">
         dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(OutsideSelectedPanel); %>'); });
@@ -20,8 +24,10 @@
     <h1>Template CSS</h1>
     <p>This page allows you to associate css files from your global library with your theme.</p>
 
+    <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
+
     <beachead:StatusPanel ID="ErrorPanel" runat="server" />
-    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:700px;overflow:auto;">
+    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:500px;width:700px;overflow:auto;">
         <div id="modifypanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Stylesheets">
             From this page you can manage which stylesheets are enabled for this theme. <br /><br />
             To enable a style, choose it from the <i>disabled</i> list and click <i>enable</i>.<br />
@@ -29,19 +35,37 @@
             <br /><br />
             <table>
                 <tr>
-                    <td>
+                    <asp:Panel ID="DisablePanel" AutoUpdateAfterCallBack="true" Visible="true" runat="server">
+                    <td style="vertical-align:top;">
                         Disabled Stylesheets<br />
                         <asp:ListBox ID="LstDisabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
+                        <br />
+                        <asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" Text="Enable" runat="server" />
                     </td>
-                    <td style="width:15px;">&nbsp;</td>
-                    <td>
-                        Enabled Stylesheets<br />
-                        <asp:ListBox ID="LstEnabledFiles" SelectionMode="Multiple" Rows="10" Width="150px" runat="server" />
+                    </asp:Panel>
+                    <td style="vertical-align:top;">
+                        Enabled Stylesheets:(click-and-drag to reorder)<br />
+                        <ajaxToolkit:ReorderList ID="LstEnabledFilesOrderable" CssClass="ajaxOrderedList"  PostBackOnReorder="false" 
+                                                OnItemReorder="LstEnabledFiles_Reorder" 
+                                                OnItemCommand="LstEnabledFiles_ItemCommand"
+                                                DragHandleAlignment="Left" AllowReorder="true" runat="server">
+                            <ItemTemplate>
+                                <div class="<%# ((Container.DisplayIndex % 2) == 0) ? "" : "alt" %>">
+                                    <%# Eval("Name") %>&nbsp;
+                                    <asp:LinkButton ID="LnkDisableScript" CssClass="normal" CommandName="Disable" CommandArgument='<%# Eval("Name") %>' Text="Disable" runat="server" />
+                                </div>
+                            </ItemTemplate>
+                            <DragHandleTemplate>
+                                <div style="padding-right:5px;cursor:move;">
+                                <img src="../../images/drag_arrow.png" alt="drag" />
+                                </div>
+                            </DragHandleTemplate>
+                            <ReorderTemplate>
+                                <div style="height :20px; border: dotted 2px black;"></div>
+                            </ReorderTemplate>
+                        </ajaxToolkit:ReorderList>
+                        <br /><br />
                     </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" Text="Enable" runat="server" /></td>
-                    <td><asp:Button ID="BtnDisableScripts" OnClick="BtnDisableScripts_Click" Text="Disable" runat="server" /></td>
                 </tr>
             </table>
         </div>

@@ -2,12 +2,10 @@
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 
 <asp:Content ID="Contenta" ContentPlaceHolderID="localCSS" runat="server">
-	<link href="<%=ResolveUrl("~/javascript/astreeview/astreeview.css")%>" type="text/css" rel="stylesheet" />
-	<link href="<%=ResolveUrl("~/javascript/contextmenu/contextmenu.css")%>" type="text/css" rel="stylesheet" />
+
 </asp:Content>
 <asp:Content ID="ContentLocalJs" ContentPlaceHolderID="localJS" runat="server">
-	<script src="<%=ResolveUrl("~/javascript/astreeview/astreeview_packed.js")%>" type="text/javascript"></script>
-	<script src="<%=ResolveUrl("~/javascript/contextmenu/contextmenu_packed.js")%>" type="text/javascript"></script>
+
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

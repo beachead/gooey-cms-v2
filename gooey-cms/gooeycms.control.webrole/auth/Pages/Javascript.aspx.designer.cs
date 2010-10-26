@@ -22,6 +22,24 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ToolkitScriptManager ScriptManager;
+        
+        /// <summary>
+        /// DisablePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel DisablePanel;
+        
+        /// <summary>
         /// LstDisabledFiles control.
         /// </summary>
         /// <remarks>
@@ -29,15 +47,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox LstDisabledFiles;
-        
-        /// <summary>
-        /// LstEnabledFiles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox LstEnabledFiles;
         
         /// <summary>
         /// BtnEnableScripts control.
@@ -49,13 +58,13 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.WebControls.Button BtnEnableScripts;
         
         /// <summary>
-        /// BtnDisableScripts control.
+        /// LstEnabledFilesOrderable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnDisableScripts;
+        protected global::AjaxControlToolkit.ReorderList LstEnabledFilesOrderable;
         
         /// <summary>
         /// FileUpload control.
@@ -94,13 +103,13 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.WebControls.Button BtnCreateNew;
         
         /// <summary>
-        /// LstExisting control.
+        /// LstExistingFile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList LstExisting;
+        protected global::System.Web.UI.WebControls.DropDownList LstExistingFile;
         
         /// <summary>
         /// BtnEdit control.

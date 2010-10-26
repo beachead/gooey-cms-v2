@@ -114,8 +114,8 @@ namespace Gooeycms.Business.Pages
             //Include all of the javascript files
             JavascriptManager js = new JavascriptManager(this.page);
             CssManager css = new CssManager(this.page);
-            output = output.Replace("{head.scripts.include}", js.GetJavascriptIncludes(this.page));
-            output = output.Replace("{head.css.include}", css.GetCssIncludes(this.page));
+            output = output.Replace("{head.scripts.include}", js.GetIncludes(this.page));
+            output = output.Replace("{head.css.include}", css.GetIncludes(this.page));
 
             //Include any custom body options
             if (!String.IsNullOrEmpty(this.page.OnBodyLoad))

@@ -16,7 +16,7 @@ namespace Gooeycms.Webrole.Control.auth
             String guid = Request.QueryString["g"];
             String directory = Request.QueryString["d"];
 
-            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesDirectoryKey, guid);
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, guid);
             IStorageClient client = StorageHelper.GetStorageClient();
             client.DeleteSnapshots(imageDirectory, directory);
         }

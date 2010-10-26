@@ -13,7 +13,7 @@ namespace Beachead.Core.Markup.Standard
 
         public override StringBuilder Convert(StringBuilder markup)
         {
-            String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesDirectoryKey);
+            String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesContainerKey);
             if (base.IsPartOfTheme)
             {
                 String guid = CurrentSite.GetCurrentTheme().ThemeGuid;

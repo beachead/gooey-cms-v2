@@ -174,7 +174,7 @@ namespace Gooeycms.Business.Pages
         {
             if (page != null)
             {
-                String container = SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId);
+                String container = SiteHelper.GetStorageKey(SiteHelper.PageContainerKey, page.SubscriptionId);
 
                 IStorageClient client = StorageHelper.GetStorageClient();
                 CmsPageDao dao = new CmsPageDao();
@@ -200,7 +200,7 @@ namespace Gooeycms.Business.Pages
         {
             if (page != null)
             {
-                String container = SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId);
+                String container = SiteHelper.GetStorageKey(SiteHelper.PageContainerKey, page.SubscriptionId);
 
                 IStorageClient client = StorageHelper.GetStorageClient();
                 CmsPageDao dao = new CmsPageDao();
@@ -236,7 +236,7 @@ namespace Gooeycms.Business.Pages
             IList<CmsPage> approved = dao.FindApprovedPages(Data.Guid.New(page.SubscriptionId), Data.Hash.New(page.UrlHash));
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            String container = SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId);
+            String container = SiteHelper.GetStorageKey(SiteHelper.PageContainerKey, page.SubscriptionId);
 
             //Loop through all of the unapproved pages and remove any old versions.
             //Start at the first one, since we always want to leave the latest unapproved version
@@ -293,7 +293,7 @@ namespace Gooeycms.Business.Pages
             }
 
             IStorageClient client = StorageHelper.GetStorageClient();
-            client.Save(SiteHelper.GetStorageKey(SiteHelper.PageDirectoryKey, page.SubscriptionId), StorageClientConst.RootFolder, page.Guid, page.Content, Permissions.Private);
+            client.Save(SiteHelper.GetStorageKey(SiteHelper.PageContainerKey, page.SubscriptionId), StorageClientConst.RootFolder, page.Guid, page.Content, Permissions.Private);
         }
     }
 }
