@@ -9,7 +9,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
     {
         protected override void OnPageLoad(object sender, EventArgs e)
         {
-            Master.SetNavigationOn(Secure.NavigationType.Pages);
             if (!Page.IsPostBack)
             {
                 Anthem.Manager.Register(this);

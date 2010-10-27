@@ -18,7 +18,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
         protected override void OnPageLoad(object sender, EventArgs e)
         {
-            Master.SetNavigationOn(Secure.NavigationType.Site);
             Master.SetTitle("Manage Stylesheets");
             if (!Page.IsPostBack)
             {

@@ -13,7 +13,7 @@ namespace Gooeycms.Webrole.Control.Auth
     {
         protected override void OnPageLoad(object sender, EventArgs e)
         {
-            Master.SetNavigationOn(Secure.NavigationType.Site);
+
         }
     }
 }

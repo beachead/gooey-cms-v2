@@ -13,7 +13,6 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
         protected String PageAction = "Add";
         protected override void OnPageLoad(object sender, EventArgs e)
         {
-            Master.SetNavigationOn(Secure.NavigationType.Site);
             if (!Page.IsPostBack)
             {
                 CheckExists();

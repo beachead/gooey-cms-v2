@@ -15,8 +15,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         private CmsTheme theme;
         protected override void OnPageLoad(object sender, EventArgs e)
         {
-            Master.SetNavigationOn(Secure.NavigationType.Site);
-
             this.theme = ThemeManager.Instance.GetByGuid(Data.Guid.New(Request.QueryString["tid"]));
             if (!Page.IsPostBack)
             {
