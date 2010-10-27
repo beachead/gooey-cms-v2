@@ -17,7 +17,7 @@
     <h1>Campaign Settings</h1>
     <p>Configure your campaign settings below.</hp>
 
-<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:700px;overflow:auto;">
+<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:500px;overflow:auto;">
     <div id="analytics-panel" dojoType="dijit.layout.ContentPane" title="Google Analytics Setup" style="display:none;">
         <table>
             <tr>

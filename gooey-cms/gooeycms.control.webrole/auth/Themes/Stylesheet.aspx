@@ -28,7 +28,7 @@
     <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
 
     <beachead:StatusPanel ID="ErrorPanel" runat="server" />
-    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:500px;width:700px;overflow:auto;">
+    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:500px;overflow:auto;">
         <div id="modifypanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Stylesheets">
             From this page you can manage which stylesheets are enabled for this theme. <br /><br />
             To enable a style, choose it from the <i>disabled</i> list and click <i>enable</i>.<br />

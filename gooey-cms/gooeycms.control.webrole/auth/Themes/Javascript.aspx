@@ -25,7 +25,7 @@
     <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
 
     <beachead:StatusPanel ID="ErrorPanel" runat="server" />
-    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="width:90em;height:700px;overflow:auto;">
+    <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:500px;overflow:auto;">
         <div id="modifypanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Scripts">
             From this page you can manage which scripts are enabled for this theme. <br /><br />
             To enable a script, choose it from the <i>disabled</i> list and click <i>enable</i>.<br />
