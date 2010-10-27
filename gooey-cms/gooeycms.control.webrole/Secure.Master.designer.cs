@@ -58,67 +58,67 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.HtmlControls.HtmlForm aspnetform;
         
         /// <summary>
-        /// A1 control.
+        /// NavContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
+        protected global::System.Web.UI.WebControls.HyperLink NavContent;
         
         /// <summary>
-        /// A2 control.
+        /// NavPages control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A2;
+        protected global::System.Web.UI.WebControls.HyperLink NavPages;
         
         /// <summary>
-        /// A3 control.
+        /// NavCampaigns control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
+        protected global::System.Web.UI.WebControls.HyperLink NavCampaigns;
         
         /// <summary>
-        /// A4 control.
+        /// NavPromotion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A4;
+        protected global::System.Web.UI.WebControls.HyperLink NavPromotion;
         
         /// <summary>
-        /// A5 control.
+        /// NavSite control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A5;
+        protected global::System.Web.UI.WebControls.HyperLink NavSite;
         
         /// <summary>
-        /// A8 control.
+        /// NavThemes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A8;
+        protected global::System.Web.UI.WebControls.HyperLink NavThemes;
         
         /// <summary>
-        /// A6 control.
+        /// NavUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A6;
+        protected global::System.Web.UI.WebControls.HyperLink NavUsers;
         
         /// <summary>
         /// StagingLink control.
