@@ -34,13 +34,12 @@
         <div id="header-region">
             
             <ul class="menu">
-                <li class="<% Response.Write(NavigationOn[1]); %>"><a id="A1" href="/auth/content/default.aspx" runat="server">Manage Content</a></li>
-                <li class="<% Response.Write(NavigationOn[2]); %>"><a id="A2" href="/auth/pages/default.aspx" runat="server">Manage Pages</a></li>
-                <li class="<% Response.Write(NavigationOn[3]); %>"><a id="A3" href="/auth/campaigns/default.aspx" runat="server">Manage Campaigns</a></li>                
-                <li class="<% Response.Write(NavigationOn[4]); %>"><a id="A4" href="/auth/promotion/default.aspx" runat="server">Promotion</a></li>                                
-                <li class="<% Response.Write(NavigationOn[5]); %>"><a id="A5" href="/auth/site/default.aspx" runat="server">Manage Site</a></li>
-                <li class="<% Response.Write(NavigationOn[6]); %>"><a id="A8" href="/auth/themes/default.aspx" runat="server">Manage Themes</a></li>
-                <li class="<% Response.Write(NavigationOn[7]); %>"><a id="A6" href="/auth/users/default.aspx" runat="server">User Management</a></li>
+                <li><asp:HyperLink id="NavContent" NavigateUrl="~/auth/content/default.aspx" runat="server" onprerender="SetActive">Manage Content</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavPages" NavigateUrl="~/auth/pages/default.aspx" runat="server" onprerender="SetActive">Manage Pages</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavPromotion" NavigateUrl="~/auth/promotion/default.aspx" runat="server" onprerender="SetActive">Promotion</asp:HyperLink></li>                                
+                <li><asp:HyperLink id="NavSite" NavigateUrl="~/auth/site/default.aspx" runat="server" onprerender="SetActive">Manage Site</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavThemes" NavigateUrl="~/auth/themes/default.aspx" runat="server" onprerender="SetActive">Manage Themes</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">User Management</asp:HyperLink></li>
                 <li><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>                
             </ul>
         </div>
