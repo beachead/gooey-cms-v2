@@ -127,6 +127,15 @@ div.subnav div.subnav-inner,
 	(3) COMPONENT FORMATTING
 *************************************************/
 
+/* header-region */
+#header-region ul.menu a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+#header-region ul.menu a.active {
+    text-decoration: underline;
+}
 
 /* subnav */
 div.subnav ul,
