@@ -99,20 +99,28 @@ namespace Gooeycms.Business.Pages
             return GetLatestPage(CurrentSite.Guid, uri, loadData);
         }
 
+        public CmsPage GetLatestPage(Data.Guid siteGuid, CmsUrl uri, bool loadData)
+        {
+            return GetLatestPage(siteGuid, uri, loadData, false);
+        }
+
         /// <summary>
         /// Gets the latest page based upon the path
         /// </summary>
         /// <param name="siteGuid">The site guid</param>
         /// <param name="path">The page path</param>
         /// <returns></returns>
-        public CmsPage GetLatestPage(Data.Guid siteGuid, CmsUrl uri, bool loadData)
+        public CmsPage GetLatestPage(Data.Guid siteGuid, CmsUrl uri, bool loadData, bool forceLatest)
         {
             String path = uri.Path;
             Data.Hash pathHash = TextHash.MD5(path);
 
             CmsPageDao dao = new CmsPageDao();
 
-            Boolean approvedOnly = !(CurrentSite.IsStagingHost);
+            Boolean approvedOnly = true;
+            if (!forceLatest)
+                approvedOnly = !(CurrentSite.IsStagingHost);
+
             CmsPage result = dao.FindLatesBySiteAndHash(siteGuid, pathHash, approvedOnly);
 
             //Check if there's a default page that should be loaded

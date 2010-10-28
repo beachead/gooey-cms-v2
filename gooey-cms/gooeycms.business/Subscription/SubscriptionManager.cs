@@ -105,8 +105,8 @@ namespace Gooeycms.Business.Subscription
             template.Theme = theme;
             TemplateManager.Instance.Save(template);
 
-            //Create a default page for this site.
-            PageManager.CreateDefaultPage(subscription.Guid, template.Name);
+            //Create a defaults for this site.
+            SiteHelper.Configure(subscription.Guid);
 
             return subscription;
         }

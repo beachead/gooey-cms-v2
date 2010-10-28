@@ -140,13 +140,17 @@ namespace Gooeycms.Business.Util
                 path = CmsSiteMap.Instance.AddRootDirectory(siteGuid);
 
             //Check if there's a default page, if not create one
-            CmsPage page = PageManager.Instance.GetLatestPage("/default.aspx");
+            CmsPage page = PageManager.Instance.GetLatestPage(siteGuid,"/default.aspx",false,true);
             if (page == null)
             {
-                IList<CmsTemplate> templates = TemplateManager.Instance.GetTemplates(CurrentSite.GetCurrentTheme());
-                if (templates.Count > 0)
+                CmsTheme currentTheme = ThemeManager.Instance.GetDefaultBySite(siteGuid);
+                if (currentTheme != null)
                 {
-                    PageManager.CreateDefaultPage(siteGuid.Value, templates[0].Name);
+                    IList<CmsTemplate> templates = TemplateManager.Instance.GetTemplates(currentTheme);
+                    if (templates.Count > 0)
+                    {
+                        PageManager.CreateDefaultPage(siteGuid.Value, templates[0].Name);
+                    }
                 }
             }
         }
