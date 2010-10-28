@@ -24,5 +24,6 @@ namespace Gooeycms.Constants
         public const String GooeyAdminUrl = "gooey-admin-url";
         public const String InviteEmailTemplate = "invite-email-template";
         public const String ApprovedEmailTemplate = "approved-email-template";
+        public const String DefaultHomepage = "default-homepage";
     }
 }

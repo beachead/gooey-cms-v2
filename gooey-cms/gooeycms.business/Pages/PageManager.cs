@@ -295,5 +295,22 @@ namespace Gooeycms.Business.Pages
             IStorageClient client = StorageHelper.GetStorageClient();
             client.Save(SiteHelper.GetStorageKey(SiteHelper.PageContainerKey, page.SubscriptionId), StorageClientConst.RootFolder, page.Guid, page.Content, Permissions.Private);
         }
+
+        public static void CreateDefaultPage(string subscriptionGuid, string templateName)
+        {
+            String fullurl = CmsSiteMap.PathCombine("/", GooeyConfigManager.DefaultPageName);
+            CmsPage page = new CmsPage();
+            page.SubscriptionId = subscriptionGuid;
+            page.Content = GooeyConfigManager.DefaultHomepage;
+            page.Culture = GooeyConfigManager.DefaultCulture;
+            page.DateSaved = DateTime.Now;
+            page.Description = "GooeyCMS Default Homepage";
+            page.Template = templateName;
+            page.Title = "Default Homepage";
+            page.Url = fullurl;
+            page.UrlHash = TextHash.MD5(page.Url).Value;
+            page.Guid = System.Guid.NewGuid().ToString();
+            PageManager.Instance.AddNewPage("/", GooeyConfigManager.DefaultPageName, page);
+        }
     }
 }

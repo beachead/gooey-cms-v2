@@ -9,6 +9,10 @@ using Gooeycms.Business.Themes;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Business.Storage;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Pages;
+using Gooeycms.Data.Model.Page;
+using Gooeycms.Business.Web;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -100,6 +104,9 @@ namespace Gooeycms.Business.Subscription
             template.LastSaved = DateTime.Now;
             template.Theme = theme;
             TemplateManager.Instance.Save(template);
+
+            //Create a default page for this site.
+            PageManager.CreateDefaultPage(subscription.Guid, template.Name);
 
             return subscription;
         }

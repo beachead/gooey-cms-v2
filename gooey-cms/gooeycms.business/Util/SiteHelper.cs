@@ -8,6 +8,10 @@ using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Site;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Extensions;
+using Gooeycms.Data.Model.Page;
+using Gooeycms.Business.Pages;
+using Gooeycms.Business.Themes;
+using Gooeycms.Data.Model.Theme;
 
 namespace Gooeycms.Business.Util
 {
@@ -134,6 +138,17 @@ namespace Gooeycms.Business.Util
             CmsSitePath path = CmsSiteMap.Instance.GetRootPath(siteGuid);
             if (path == null)
                 path = CmsSiteMap.Instance.AddRootDirectory(siteGuid);
+
+            //Check if there's a default page, if not create one
+            CmsPage page = PageManager.Instance.GetLatestPage("/default.aspx");
+            if (page == null)
+            {
+                IList<CmsTemplate> templates = TemplateManager.Instance.GetTemplates(CurrentSite.GetCurrentTheme());
+                if (templates.Count > 0)
+                {
+                    PageManager.CreateDefaultPage(siteGuid.Value, templates[0].Name);
+                }
+            }
         }
 
         public static String GetStorageKey(String type, String guid)

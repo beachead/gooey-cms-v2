@@ -101,6 +101,35 @@ namespace Gooeycms.Business
             }
         }
 
+        public static String DefaultHomepage
+        {
+            get
+            {
+                String result = (String)cache.GetValue<String, Object>(ConfigConstants.DefaultHomepage);
+                if (result == null)
+                {
+                    result = GooeyConfigManager.GetAsString(ConfigConstants.DefaultHomepage);
+                    if (result == null)
+                    {
+                        result =
+@"
+#Default Homepage
+
+This is your GooeyCMS Default Homepage
+";
+                    }
+                    cache.Add(ConfigConstants.DefaultHomepage, result);
+                }
+
+                return result;
+            }
+        }
+
+        public static String DefaultCulture
+        {
+            get { return "en-us"; }
+        }
+
         public static Double SalesForcePrice
         {
             get
