@@ -113,9 +113,9 @@ namespace Gooeycms.Business
                     {
                         result =
 @"
-#Default Homepage
+## Welcome to gooey cms. 
 
-This is your GooeyCMS Default Homepage
+This is your home page.
 ";
                     }
                     cache.Add(ConfigConstants.DefaultHomepage, result);
