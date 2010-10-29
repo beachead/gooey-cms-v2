@@ -43,7 +43,14 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
         protected void BtnGenerateReport_Click(object sender, EventArgs e)
         {
-            String csv = LeadManager.Instance.GenerateCsvReport(ReportStartDate.SelectedDate, ReportEndDate.SelectedDate);
+            IList<String> selectedPages = new List<String>();
+            foreach (ListItem item in this.LstSelectPages.Items)
+            {
+                if (item.Selected)
+                    selectedPages.Add(item.Value);
+            }
+
+            String csv = LeadManager.Instance.GenerateCsvReport(ReportStartDate.SelectedDate, ReportEndDate.SelectedDate, selectedPages);
             Response.Clear();
             Response.ClearHeaders();
             Response.ClearContent();

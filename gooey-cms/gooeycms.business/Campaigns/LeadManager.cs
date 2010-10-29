@@ -45,20 +45,21 @@ namespace Gooeycms.Business.Campaigns
                 }
                 else if (mode == FormDataMode.IncludeFormData)
                 {
-                    results = dao.FindUniqueResponses(siteGuid, startdate.Value, enddate.Value);
+                    results = dao.FindUniqueResponses(siteGuid, startdate.Value, enddate.Value, null);
                 }
             }
             return results;
         }
 
-        public String GenerateCsvReport(DateTime? startdate, DateTime? enddate)
+        public String GenerateCsvReport(DateTime? startdate, DateTime? enddate, IList<String> filterPages)
         {
-            return GenerateCsvReport(CurrentSite.Guid, startdate, enddate);
+            return GenerateCsvReport(CurrentSite.Guid, startdate, enddate, filterPages);
         }
 
-        public string GenerateCsvReport(Data.Guid siteGuid, DateTime? startdate, DateTime? enddate)
+        public string GenerateCsvReport(Data.Guid siteGuid, DateTime? startdate, DateTime? enddate, IList<String> filterPages)
         {
-            IList<CmsForm> forms = this.GetUniqueLeadResponses(siteGuid, startdate, enddate, FormDataMode.IncludeFormData);
+            CmsFormDao dao = new CmsFormDao();
+            IList<CmsForm> forms = dao.FindUniqueResponses(siteGuid, startdate.Value, enddate.Value, filterPages);
 
             HashSet<String> headerKeys = new HashSet<string>();
             foreach (CmsForm form in forms)
