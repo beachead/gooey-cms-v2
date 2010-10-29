@@ -18,6 +18,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
         {
             if (!Page.IsPostBack)
             {
+                this.Status.Text = Server.HtmlEncode(Request.QueryString["msg"]);
             }
         }
 

@@ -9,6 +9,7 @@
     <h1>Create Campaign</h1>
     <p>This page allows you to manage and generate links for campaigns that are currently running on the site.</p>
 
+    <asp:Label ID="Status" ForeColor="Green" runat="server" /><br />
     <a href="./create.aspx">Manage Campaigns</a><br /><br />
     <asp:GridView ID="CampaignTable" runat="server" 
         DataSourceID="CampaignDataSource"
