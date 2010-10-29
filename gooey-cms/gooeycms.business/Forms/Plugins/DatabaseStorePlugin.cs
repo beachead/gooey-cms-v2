@@ -10,7 +10,7 @@ namespace Gooeycms.Business.Forms.Plugins
 {
     public class DatabaseStorePlugin : FormPlugin
     {
-        public const char FIELD_SEPARATOR = TextConstants.DefaultSeparator;
+        public const char FIELD_SEPARATOR = CmsForm.FieldSeparator;
 
         public override bool IsEnabled()
         {

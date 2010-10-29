@@ -98,6 +98,7 @@
     <Compile Include="Campaigns\CampaignManager.cs" />
     <Compile Include="Campaigns\Engine\GoogleAnalytics.cs" />
     <Compile Include="Campaigns\ICampaignEngine.cs" />
+    <Compile Include="Campaigns\LeadManager.cs" />
     <Compile Include="Compression\ZipHandler.cs" />
     <Compile Include="Content\ContentFileUploadHandler.cs" />
     <Compile Include="Content\ContentManager.cs" />
