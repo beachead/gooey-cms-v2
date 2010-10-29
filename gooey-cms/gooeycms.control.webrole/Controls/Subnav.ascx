@@ -32,7 +32,7 @@
     <!-- Manage  Themes -->
     <asp:View ID="themes" runat="server">
         <ul>
-            <li><asp:HyperLink ID="themes_theme" NavigateUrl="~/auth/Themes/Default.aspx" Text="Manage Theme" runat="server" /></li>
+            <li><asp:HyperLink ID="themes_theme" NavigateUrl="~/auth/Themes/Default.aspx" Text="Manage Themes" runat="server" /></li>
             <li class="last"><asp:HyperLink ID="themes_add" NavigateUrl="~/auth/Themes/Add.aspx" Text="Add Theme" runat="server" /></li>
         </ul>
     </asp:View>
