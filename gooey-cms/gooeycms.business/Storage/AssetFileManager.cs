@@ -208,6 +208,19 @@ namespace Gooeycms.Business.Storage
             return Get(page.UrlHash, name);
         }
 
+        public Boolean ContainsSnapshots(CmsTheme theme)
+        {
+            String container = CurrentSiteAssetStorageContainer;
+            IStorageClient client = StorageHelper.GetStorageClient();
+            return (client.ContainsSnapshots(container, theme.ThemeGuid));
+        }
+
+        public void DeleteAll(CmsTheme theme)
+        {
+            String container = CurrentSiteAssetStorageContainer;
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.Delete(container, theme.ThemeGuid);
+        }
 
         public void Delete(CmsTheme theme, string name)
         {

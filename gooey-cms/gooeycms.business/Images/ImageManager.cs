@@ -162,5 +162,23 @@ namespace Gooeycms.Business.Images
 
             return results;
         }
+
+        internal void DeleteAllImages(Data.Guid siteGuid, string folder)
+        {
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
+            IStorageClient client = StorageHelper.GetStorageClient();
+            if (client.ContainsSnapshots(imageDirectory,folder))
+                throw new ArgumentException("Can not delete this folder because snapshots exist for the images");
+
+            client.Delete(imageDirectory, folder);
+        }
+
+        internal Boolean ContainsSnapshots(Data.Guid siteGuid, string folder)
+        {
+            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
+            IStorageClient client = StorageHelper.GetStorageClient();
+
+            return (client.ContainsSnapshots(imageDirectory, folder));
+        }
     }
 }

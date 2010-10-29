@@ -123,6 +123,23 @@ namespace Gooeycms.Business.Storage
 
         }
 
+        public Boolean ContainsSnapshots(String containerName, String directoryName)
+        {
+            Boolean result = false;
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            CloudBlobDirectory dir = container.GetDirectoryReference(directoryName);
+            foreach (CloudBlob blob in dir.ListBlobs())
+            {
+                if (blob.SnapshotTime.HasValue)
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Deletes all the blobs in the container and then removes the container
         /// </summary>
@@ -134,15 +151,30 @@ namespace Gooeycms.Business.Storage
                 container.Delete();
         }
 
+        public void Delete(String containerName, String directoryName)
+        {
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            CloudBlobDirectory dir = container.GetDirectoryReference(directoryName);
+            foreach (CloudBlob blob in dir.ListBlobs()) 
+            {
+                if (!blob.SnapshotTime.HasValue)
+                {
+                    blob.DeleteIfExists();
+                }
+            }
+        }
+
         public void Delete(String containerName, String directoryName, string filename)
         {
             filename = filename.Replace(" ", "");
             CloudBlobContainer container = GetBlobContainer(containerName);
+            
             if (container.Exists())
             {
                 filename = GetRelativeFilename(directoryName, filename);
                 CloudBlob blob = container.GetBlobReference(filename);
-                blob.DeleteIfExists();
+                if (!blob.SnapshotTime.HasValue)
+                    blob.DeleteIfExists();
             }
         }
 

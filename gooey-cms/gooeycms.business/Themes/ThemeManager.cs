@@ -4,6 +4,9 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Business.Cache;
+using Gooeycms.Business.Images;
+using Gooeycms.Business.Javascript;
+using Gooeycms.Business.Css;
 
 namespace Gooeycms.Business.Themes
 {
@@ -135,6 +138,32 @@ namespace Gooeycms.Business.Themes
             }
 
             return theme;
+        }
+
+        public void Delete(CmsTheme theme)
+        {
+            //Delete all the images associated with this theme
+            if (ContainsSnapshots(theme))
+                throw new ArgumentException("You must first delete all packages associated with this site prior to deleting this theme.");
+
+            ImageManager.Instance.DeleteAllImages(theme.SubscriptionGuid, theme.ThemeGuid);
+            JavascriptManager.Instance.DeleteAll(theme);
+            CssManager.Instance.DeleteAll(theme);
+
+            CmsThemeDao dao = new CmsThemeDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Delete<CmsTheme>(theme);
+                tx.Commit();
+            }
+        }
+
+        private bool ContainsSnapshots(CmsTheme theme)
+        {
+            Boolean imageContains = ImageManager.Instance.ContainsSnapshots(theme.SubscriptionGuid, theme.ThemeGuid);
+            Boolean jsContains = JavascriptManager.Instance.ContainsSnapshots(theme);
+
+            return (imageContains || jsContains);
         }
     }
 }
