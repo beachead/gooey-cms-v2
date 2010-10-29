@@ -1,20 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default2.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Pages.Default2" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="localCSS" runat="server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="Subnavigation" runat="server">
-</asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
-</asp:Content>
-<asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
-    </telerik:RadScriptManager>
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="pages" NavItem="" />
+</asp:Content>
+
+<asp:Content ID="localCSS" ContentPlaceHolderID="localCSS" runat="server">
+<style type="text/css">
+.rtDropAbove, 
+.rtDropBelow {
+    border-width: 3px !important;
+}
+</style>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
     <script type="text/javascript" language="javascript">
         //<!--
         function onClientContextMenuItemClicking(sender, args) {
@@ -61,6 +63,10 @@
         }
         //-->
     </script>
+</asp:Content>
+
+<asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
+    <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
 
     <telerik:RadAjaxPanel ID="UpdatePanel" runat="server">
     <telerik:RadTreeView ID="PageTreeView" Skin="Windows7" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="true" 
