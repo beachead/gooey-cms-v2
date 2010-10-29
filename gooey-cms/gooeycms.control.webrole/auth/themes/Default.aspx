@@ -13,7 +13,10 @@
     
         <asp:Label ID="StatusLabel" Visible="false" runat="server" />
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-            CssClass="data" ForeColor="#333333" GridLines="None" DataSourceID="ThemesDataSource">
+                      CssClass="data" ForeColor="#333333" GridLines="None"
+                      OnRowCommand="OnRowCommand_Click"
+                      OnRowDataBound="OnRowDataBound"
+                      DataSourceID="ThemesDataSource">
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             <Columns>
@@ -49,7 +52,7 @@
                         <asp:HyperLink ID="EditJavascript" Text="Javascript" runat="server"
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />&nbsp;|&nbsp;
                         <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=600,height=500,left=150');">Images</a>&nbsp;|&nbsp;
-                        <asp:LinkButton ID="DeleteTemplate" Text="[delete]" OnClientClick="return confirm('Are you sure you want to delete this theme?\r\n\r\nWARNING: This will also delete ALL javascript, css and image files associated with this theme.')" OnClick="OnDelete_Click" runat="server" />
+                        <asp:LinkButton ID="DeleteTheme" Text="[delete]" CommandArgument='<%# Eval("Theme.ThemeGuid") %>' CommandName='deletetheme' OnClientClick="return confirm('Are you sure you want to delete this theme?\r\n\r\nWARNING: This will also delete ALL javascript, css and image files associated with this theme.')" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

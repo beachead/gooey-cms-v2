@@ -4,6 +4,8 @@ using Gooeycms.Business.Themes;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
+using Gooeycms.Business.Adapters;
+using Gooeycms.Business.Images;
 
 namespace Gooeycms.Webrole.Control.Auth.Themes
 {
@@ -46,6 +48,7 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
                 HiddenField guid = ((HiddenField)oldrow.FindControl("HiddenId"));
                 RadioButton enabled = ((RadioButton)oldrow.FindControl("Enabled"));
 
+
                 CmsTheme theme = ThemeManager.Instance.GetByGuid((Data.Guid.New(guid.Value)));
                 if (theme != null)
                 {
@@ -55,9 +58,45 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
             }
         }
 
+        protected void OnRowCommand_Click(object sender, GridViewCommandEventArgs e)
+        {
+            String guid = (String)e.CommandArgument;
+            switch (e.CommandName)
+            {
+                case "deletetheme":
+                    DeleteTheme(guid);
+                    break;
+                default:
+                    throw new ArgumentException("The specified command is not supported: " + e.CommandName);
+            }
+        }
+
+        protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.DataItem != null)
+            {
+                ThemeAdapter theme = (ThemeAdapter)e.Row.DataItem;
+                LinkButton button = (LinkButton)e.Row.FindControl("DeleteTheme");
+
+                if (theme.Theme.IsEnabled)
+                    button.OnClientClick = "alert('You may not delete the currently active theme.\\r\\r\\n\\nYou must set a new theme active and save those changes before deleting this theme.'); return false;";
+            }
+        }
+
+        private void DeleteTheme(Data.Guid themeGuid)
+        {
+            CmsTheme theme = ThemeManager.Instance.GetByGuid(themeGuid);
+            if ((theme != null) && (!theme.IsEnabled))
+            {
+                ThemeManager.Instance.Delete(theme);
+            }
+
+            this.GridView1.DataBind();
+        }
+
+        /*
         protected void OnDelete_Click(object sender, EventArgs e)
         {
-            /*
             HiddenField field = GridViewHelper.FindControl<HiddenField>(sender, "HiddenId");
 
             try
@@ -72,8 +111,8 @@ namespace Gooeycms.Webrole.Control.Auth.Themes
                 this.StatusLabel.Text = "There was an error deleting theme: " + ex.Message;
             }
             this.StatusLabel.Visible = true;
-            */
         }
+        */
 
         protected void ThemesDataSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
         {
