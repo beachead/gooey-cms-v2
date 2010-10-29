@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace Gooeycms.Data.Model.Content
 {
@@ -141,7 +142,7 @@ namespace Gooeycms.Data.Model.Content
         public IList<CmsContent> ExecuteQuery()
         {
             StringBuilder hql = new StringBuilder();
-            hql.Append("select content from CmsContent content join content._Fields fields where content.SubscriptionId = :subscriptionGuid ");
+            hql.Append("select distinct content.Id from CmsContent content join content._Fields fields where content.SubscriptionId = :subscriptionGuid ");
             hql.Append("and content.ContentType.Name = :contentTypeName ");
 
             //Check if we have a where clause which needs to be added
@@ -212,7 +213,12 @@ namespace Gooeycms.Data.Model.Content
                 }
             }
 
-            IList<CmsContent> results = query.List<CmsContent>();
+            IList<Int32> temp = query.List<Int32>();
+            HashSet<Int32> uniquePrimaryKeys = new HashSet<Int32>(temp);
+
+            hql = new StringBuilder();
+            hql.Append("select content from CmsContent content where content.Id in (:primaryKeys)");
+            IList<CmsContent> results = base.NewHqlQuery(hql.ToString()).SetParameterList("primaryKeys", (IList)uniquePrimaryKeys.ToList<Int32>()).List<CmsContent>();
 
             //Check if we need to sort the results
             if (this.orderBy != null)
