@@ -128,5 +128,17 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image LoadingImage;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new Gooeycms.Webrole.Control.Secure Master {
+            get {
+                return ((Gooeycms.Webrole.Control.Secure)(base.Master));
+            }
+        }
     }
 }
