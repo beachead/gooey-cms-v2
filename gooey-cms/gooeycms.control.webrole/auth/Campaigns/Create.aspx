@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Create.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Create" %>
+<%@ MasterType VirtualPath="~/Secure.master" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">

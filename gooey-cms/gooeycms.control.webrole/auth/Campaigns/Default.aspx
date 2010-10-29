@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Default" %>
+<%@ MasterType VirtualPath="~/Secure.master" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
-    <gooey:Subnav ID="Subnav" runat="server" NavSection="campaigns" NavItem="" />
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="campaigns" NavItem="listing" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
@@ -10,7 +11,7 @@
     <p>This page allows you to manage and generate links for campaigns that are currently running on the site.</p>
 
     <asp:Label ID="Status" ForeColor="Green" runat="server" /><br />
-    <a href="./create.aspx">Manage Campaigns</a><br /><br />
+    <a href="./create.aspx">Create New Campaign</a><br /><br />
     <asp:GridView ID="CampaignTable" runat="server" 
         DataSourceID="CampaignDataSource"
         AutoGenerateColumns="False" CssClass="data"

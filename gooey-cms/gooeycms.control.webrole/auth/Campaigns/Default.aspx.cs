@@ -16,6 +16,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Master.SetTitle("Campaign Listings");
             if (!Page.IsPostBack)
             {
                 this.Status.Text = Server.HtmlEncode(Request.QueryString["msg"]);

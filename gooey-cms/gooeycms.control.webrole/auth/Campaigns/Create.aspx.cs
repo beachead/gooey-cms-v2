@@ -14,6 +14,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Master.SetTitle("Edit Campaign");
             if (!Page.IsPostBack)
             {
                 LoadExisting();
