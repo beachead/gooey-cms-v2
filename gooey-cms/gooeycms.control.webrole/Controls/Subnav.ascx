@@ -23,6 +23,7 @@
     <!-- Manage  Campaigns -->
     <asp:View ID="campaigns" runat="server">
         <ul>
+            <li><asp:HyperLink ID="campaigns_listing" NavigateUrl="~/auth/Campaigns/Default.aspx" Text="My Campaigns" runat="server" /></li>
             <li><asp:HyperLink ID="campaigns_new" NavigateUrl="~/auth/Campaigns/Create.aspx" Text="Create Campaign" runat="server" /></li>
             <li><asp:HyperLink ID="campaigns_leadreport" NavigateUrl="~/auth/Campaigns/Leads.aspx" Text="Lead Report" runat="server" /></li>
             <li class="last"><asp:HyperLink ID="campaigns_campaignsettings" NavigateUrl="~/auth/Campaigns/Settings.aspx" Text="Campaign Settings" runat="server" /></li>
@@ -32,7 +33,7 @@
     <!-- Manage  Themes -->
     <asp:View ID="themes" runat="server">
         <ul>
-            <li><asp:HyperLink ID="themes_theme" NavigateUrl="~/auth/Themes/Default.aspx" Text="Manage Theme" runat="server" /></li>
+            <li><asp:HyperLink ID="themes_theme" NavigateUrl="~/auth/Themes/Default.aspx" Text="Manage Themes" runat="server" /></li>
             <li class="last"><asp:HyperLink ID="themes_add" NavigateUrl="~/auth/Themes/Add.aspx" Text="Add Theme" runat="server" /></li>
         </ul>
     </asp:View>

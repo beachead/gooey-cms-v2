@@ -23,13 +23,16 @@ namespace Gooeycms.Business.Campaigns
             if (campaign.SubscriptionId == null)
                 throw new ApplicationException("The subscription id for this campaign has not been set.");
 
-            
-            //Make sure this tracking code hasn't been used
-            CmsCampaign check = GetByTrackingCode(campaign.SubscriptionId, campaign.TrackingCode);
-            if (check != null)
-                throw new ArgumentException("The tracking code: " + campaign.TrackingCode + " has already been associated with camapaign: " + check.Name + " and may not be used again.");
+            if (campaign.Guid == null)
+            {
+                //Make sure this tracking code hasn't been used
+                CmsCampaign check = GetByTrackingCode(campaign.SubscriptionId, campaign.TrackingCode);
+                if (check != null)
+                    throw new ArgumentException("The tracking code: " + campaign.TrackingCode + " has already been associated with camapaign: " + check.Name + " and may not be used again.");
 
-            campaign.Guid = System.Guid.NewGuid().ToString();
+                campaign.Guid = System.Guid.NewGuid().ToString();
+            }
+
             CmsCampaignDao dao = new CmsCampaignDao();
             using (Transaction tx = new Transaction())
             {

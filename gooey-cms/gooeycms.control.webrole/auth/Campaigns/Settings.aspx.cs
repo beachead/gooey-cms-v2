@@ -15,6 +15,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Master.SetTitle("Campaign Settings");
             if (!Page.IsPostBack)
             {
                 if (CurrentSite.Configuration.IsGoogleAnalyticsEnabled)

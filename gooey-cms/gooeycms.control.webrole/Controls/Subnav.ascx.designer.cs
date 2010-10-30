@@ -103,6 +103,15 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.View campaigns;
         
         /// <summary>
+        /// campaigns_listing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink campaigns_listing;
+        
+        /// <summary>
         /// campaigns_new control.
         /// </summary>
         /// <remarks>
