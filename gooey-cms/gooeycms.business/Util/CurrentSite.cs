@@ -370,5 +370,21 @@ namespace Gooeycms.Business.Util
         {
             get { return "http://"; }
         }
+
+        public static string GetDefaultTemplateName()
+        {
+            String name = null;
+            CmsTheme theme = ThemeManager.Instance.GetDefaultBySite(CurrentSite.Guid);
+            if (theme != null)
+            {
+                IList<CmsTemplate> templates = TemplateManager.Instance.GetTemplates(theme);
+                if (templates.Count > 0)
+                {
+                    name = templates[0].Name;
+                }
+            }
+
+            return name;
+        }
     }
 }

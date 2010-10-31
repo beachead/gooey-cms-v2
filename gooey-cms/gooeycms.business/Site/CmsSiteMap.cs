@@ -9,6 +9,12 @@ namespace Gooeycms.Business.Web
 {
     public class CmsSiteMap
     {
+        public enum NodeTypes
+        {
+            Directory,
+            Page
+        }
+
         public const String PathSeparator = "/";
         public const String RootPath = PathSeparator;
 
@@ -108,6 +114,9 @@ namespace Gooeycms.Business.Web
 
         public CmsSitePath AddChildDirectory(Data.Guid siteGuid, String parentPath, String newDirectory)
         {
+            if (String.IsNullOrEmpty(parentPath))
+                parentPath = RootPath;
+
             CmsSitePath parent = GetPath(siteGuid, parentPath);
             if (parent == null)
                 throw new ArgumentException("Could not add child directory because the parent path '" + parentPath + "' does not exist.");
