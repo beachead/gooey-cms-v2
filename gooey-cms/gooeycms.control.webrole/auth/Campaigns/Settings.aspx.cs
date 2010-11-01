@@ -59,6 +59,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 this.TxtSalesforceToken.Text = token;
 
                 //Try to login to salesforce to validate the account
+                this.LstSalesforceAvailableFields.Items.Clear();
                 SalesforcePartnerClient client = new SalesforcePartnerClient();
                 try
                 {
@@ -93,7 +94,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             CurrentSite.Configuration.Salesforce.Token = this.TxtSalesforceToken.Text;
             CurrentSite.Configuration.Salesforce.IsEnabled = this.RdoSalesforceEnabledYes.Checked;
 
-
+            this.LoadSalesforceInfo();
             SelectedPanel = "salesforce-panel";
         }
 

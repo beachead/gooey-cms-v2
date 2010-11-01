@@ -49,7 +49,7 @@ namespace gooeycms.business.salesforce
                     {
                         case Salesforce.ExceptionCode.INVALID_LOGIN:
                             status = LoginStatus.InvalidLogin;
-                            errorMessage = "Invalid username or password specified.\r\nEnsure that your password is in the form of mypasswordXXXXXX where XXXXXX is your security token.";
+                            errorMessage = "Invalid username, password or token specified.";
                             break;
                     }
                 }
