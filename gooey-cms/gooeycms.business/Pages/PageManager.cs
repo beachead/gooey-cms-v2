@@ -8,6 +8,8 @@ using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Site;
 using System.Threading.Tasks;
+using Gooeycms.Business.Javascript;
+using Gooeycms.Business.Css;
 
 namespace Gooeycms.Business.Pages
 {
@@ -23,6 +25,12 @@ namespace Gooeycms.Business.Pages
         public static PageManager Instance 
         {
             get { return PageManager.instance; }
+        }
+
+        public IList<CmsPage> GetPages(Data.Guid siteGuid, CmsUrl url)
+        {
+            CmsPageDao dao = new CmsPageDao();
+            return dao.FindByPageHash(siteGuid, TextHash.MD5(url.ToString()));
         }
 
         /// <summary>
@@ -197,11 +205,11 @@ namespace Gooeycms.Business.Pages
                     }
                     tx.Commit();
                 }
-
-                CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
-                if (page != null)
-                    CmsSiteMap.Instance.Remove(path);
             }
+
+            CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
+            if (path != null)
+                CmsSiteMap.Instance.Remove(path);
         }
 
         public void Remove(CmsPage page)
@@ -319,6 +327,63 @@ namespace Gooeycms.Business.Pages
             page.UrlHash = TextHash.MD5(page.Url).Value;
             page.Guid = System.Guid.NewGuid().ToString();
             PageManager.Instance.AddNewPage("/", GooeyConfigManager.DefaultPageName, page);
+        }
+
+        public void Rename(Data.Guid siteGuid, String oldpath, String newpath)
+        {
+            String container = SiteHelper.GetStorageKey(SiteHelper.PageContainerKey, siteGuid.Value);
+
+            IList<CmsPage> pages = GetPages(siteGuid, oldpath);
+            if (pages.Count > 0)
+            {
+                CmsPage page = pages[0];
+
+                //Update the sitemap
+                CmsSitePath parentPath = CmsSiteMap.Instance.GetParentPath(newpath);
+                CmsSitePath pagePath = CmsSiteMap.Instance.GetPath(oldpath);
+                pagePath.Depth = parentPath.Depth + 1;
+                pagePath.Parent = parentPath.Url;
+                pagePath.Url = newpath;
+                pagePath.UrlHash = TextHash.MD5(pagePath.Url).Value;
+                CmsSiteMap.Instance.Save(pagePath);
+
+                //Update the page reference in the database
+                page.Url = pagePath.Url;
+                page.UrlHash = pagePath.UrlHash;
+                Save(page);
+
+                CmsPage newpage = GetLatestPage(page.Url);
+                JavascriptManager.Instance.Rename(page, newpage);
+                CssManager.Instance.Rename(page, newpage);
+            }
+        }
+
+        public void Rename(string oldpath, string newpath)
+        {
+            Rename(CurrentSite.Guid, oldpath, newpath);
+        }
+
+        public void DeleteFolder(CmsSitePath folder)
+        {
+            if (!folder.IsDirectory)
+                throw new ArgumentException("This method may only be used to delete folders not pages");
+
+            IList<CmsSitePath> pages = CmsSiteMap.Instance.GetChildren(folder);
+            foreach (CmsSitePath path in pages)
+            {
+                CmsUrl url = new CmsUrl(path.Url);
+                CmsPage page = this.GetLatestPage(url, false);
+                if (page == null)
+                {
+                    page = new CmsPage();
+                    page.Url = path.Url;
+                    page.UrlHash = TextHash.MD5(page.Url).Value;
+                }               
+                this.DeleteAll(page);
+            }
+
+            //Delete the directory itself from the sitemap
+            CmsSiteMap.Instance.Remove(folder);
         }
     }
 }

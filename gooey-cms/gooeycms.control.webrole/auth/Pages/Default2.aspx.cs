@@ -74,6 +74,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
         protected void PageTreeView_NodeEdit(object sender, Telerik.Web.UI.RadTreeNodeEditEventArgs e)
         {
+            String oldpath = e.Node.Value;
             Boolean isRename = !(e.Node.Text.Contains("--New"));
             String fixedName = e.Text.Replace(" ", "-");
             e.Node.Text = fixedName;
@@ -94,8 +95,11 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                     AddNewDefaultPage(parent, current);
                 }
             }
-            else
+            else //perform a rename of the path
             {
+                String newpath = GetNodeUrl(e.Node);
+                PageManager.Instance.Rename(oldpath, newpath);
+                path = CmsSiteMap.Instance.GetPath(newpath);
             }
 
             e.Node.Text = path.Name;
@@ -130,6 +134,9 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             String result = null;
             if (node != null)
                 result = node.GetFullPath("/").Replace(RootNodeValue,"").Replace("//","/");
+
+            if (String.IsNullOrEmpty(result))
+                result = CmsSiteMap.RootPath;
 
             return result;
         }
@@ -176,9 +183,40 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 case "NewPage":
                     InsertNewClientNode(e.Node, "--New Page--", "~/Images/Vista/aspx.png", false, "PageContextMenu", CmsSiteMap.NodeTypes.Page);
                     break;
+                case "DeletePage":
+                    DeleteAndRefreshPage(e.Node);
+                    break;
+                case "DeleteDirectory":
+                    DeleteAndRefreshFolder(e.Node);
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void DeleteAndRefreshFolder(RadTreeNode node)
+        {
+            String fullpath = this.GetNodeUrl(node);
+
+            CmsSitePath folder = CmsSiteMap.Instance.GetPath(fullpath);
+            PageManager.Instance.DeleteFolder(folder);
+
+            node.Remove();
+        }
+
+        private void DeleteAndRefreshPage(RadTreeNode node)
+        {
+            String fullpath = this.GetNodeUrl(node);
+            CmsPage page = PageManager.Instance.GetLatestPage(fullpath);
+            if (page == null) 
+            {
+                page = new CmsPage();
+                page.Url = fullpath;
+                page.UrlHash = TextHash.MD5(page.Url).Value;
+            }
+            PageManager.Instance.DeleteAll(page);
+
+            node.Remove();
         }
 
         private void InsertNewClientNode(RadTreeNode parent, String text, String image, bool allowDrop, String contextMenu, CmsSiteMap.NodeTypes nodeType)

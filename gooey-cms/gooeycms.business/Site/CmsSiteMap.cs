@@ -264,5 +264,32 @@ namespace Gooeycms.Business.Web
                 tx.Commit();
             }
         }
+
+        public void Rename(string oldpath, string newpath)
+        {
+            CmsSitePath path = CmsSiteMap.Instance.GetPath(oldpath);
+            path.Url = newpath;
+            path.UrlHash = TextHash.MD5(path.Url).Value;
+
+            CmsSiteMap.Instance.Save(path);
+        }
+
+        /// <summary>
+        /// Returns the parent path of the specified full path
+        /// (e.g. /foo/bar/test returns the path for /foo/bar)
+        /// </summary>
+        /// <param name="oldpath"></param>
+        /// <returns></returns>
+        internal CmsSitePath GetParentPath(string oldpath)
+        {
+            String lookup;
+            int pos = oldpath.LastIndexOf("/");
+            lookup = oldpath.Substring(0, pos);
+
+            if (String.IsNullOrEmpty(lookup))
+                lookup = RootPath;
+
+            return GetPath(lookup);
+        }
     }
 }

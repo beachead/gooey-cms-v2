@@ -49,5 +49,11 @@ namespace Gooeycms.Data.Model.Page
             String hql = "select page from CmsPage page where page.IsApproved = 1 and page.SubscriptionId = :guid and page.UrlHash = :hash order by page.DateSaved desc";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("hash", hash.Value).List<CmsPage>();
         }
+
+        public System.Collections.Generic.IList<CmsPage> FindByPageHash(Guid siteGuid, Data.Hash hash)
+        {
+            String hql = "select page from CmsPage page where page.SubscriptionId = :guid and page.UrlHash = :hash";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("hash", hash.Value).List<CmsPage>();
+        }
     }
 }

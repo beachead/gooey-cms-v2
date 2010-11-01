@@ -19,7 +19,8 @@ namespace Gooeycms.Business.Storage
     {
         void Save(String containerName, String directoryName, String filename, byte[] data, Permissions permissions);
         void Save(String containerName, String directoryName, String filename, String contents, Permissions permissions);
-        
+
+        void Rename(String container, String directory, String filename, String renameTo, Permissions permissions);
         void CopyDirectory(String sourceContainer, String sourceDirectory, String destinationContainer, String destinationDirectory);
         void CopyFromSnapshots(IList<BlobSnapshot> snapshots, String copyFromContainerName, String copyToContainerName, String copyToDirectoryName, Permissions permissions);
         IList<BlobSnapshot> CreateSnapshot(String containerName, String directoryName);
@@ -28,6 +29,7 @@ namespace Gooeycms.Business.Storage
         void Delete(String containerName, String directoryName);
         void Delete(String containerName, String directoryName, String filename);
 
+        Boolean ContainsSnapshots(String containerName, String directoryName, String filename);
         Boolean ContainsSnapshots(String containerName, String directoryName);
         void DeleteSnapshots(String containerName, String directoryName);
 
