@@ -60,7 +60,7 @@ namespace Beachead.Core.Markup.Standard
                     foreach (TableCell cell in row.TableCells)
                     {
                         String formatted = base.FormatEngine.Convert(cell.Value);
-                        html.AppendFormat("<td colspan={0}>", cell.Colspan);
+                        html.AppendFormat("<td style=\"vertical-align:top;\" colspan={0}>", cell.Colspan);
                         html.Append(formatted);
                         html.Append("</td>");
                     }
