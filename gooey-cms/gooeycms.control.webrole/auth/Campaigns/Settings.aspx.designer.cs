@@ -154,7 +154,52 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox LstSalesforceAvailableFields;
+        protected global::Anthem.ListBox LstSalesforceAvailableFields;
+        
+        /// <summary>
+        /// TxtSalesforceField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtSalesforceField;
+        
+        /// <summary>
+        /// TxtSalesforceFriendly control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtSalesforceFriendly;
+        
+        /// <summary>
+        /// BtnAddCustomMapping control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAddCustomMapping;
+        
+        /// <summary>
+        /// LstCustomMappings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox LstCustomMappings;
+        
+        /// <summary>
+        /// BtnRemoveMapping control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnRemoveMapping;
         
         /// <summary>
         /// Master property.

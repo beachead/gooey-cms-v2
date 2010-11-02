@@ -86,7 +86,37 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                     client.Logout();
                 }
 
+                this.LstCustomMappings.Items.Clear();
+                IDictionary<String, String> custom = CurrentSite.Configuration.Salesforce.CustomFieldMappings;
+                foreach (String mapping in custom.Keys)
+                {
+                    String line = custom[mapping] + " --> " + mapping;
+                    ListItem item = new ListItem(line, mapping);
+                    this.LstCustomMappings.Items.Add(item);
+                }
             }
+        }
+
+        protected void LstSalesforceAvailableFields_Changed(Object sender, EventArgs e)
+        {
+            String sfValue = this.LstSalesforceAvailableFields.SelectedValue;
+            this.TxtSalesforceField.Text = sfValue;
+        }
+
+        protected void BtnAddCustomMapping_Click(Object sender, EventArgs e)
+        {
+            CurrentSite.Configuration.Salesforce.AddCustomFieldMapping(this.TxtSalesforceField.Text, this.TxtSalesforceFriendly.Text);
+
+            this.LoadSalesforceInfo();
+            SelectedPanel = "salesforce-panel";
+        }
+
+        protected void BtnRemoveCustomMapping_Click(Object sender, EventArgs e)
+        {
+            CurrentSite.Configuration.Salesforce.RemoveCustomFieldMapping(this.LstCustomMappings.SelectedValue);
+
+            this.LoadSalesforceInfo();
+            SelectedPanel = "salesforce-panel";
         }
 
         protected void BtnSaveLogin_Click(object sender, EventArgs e)

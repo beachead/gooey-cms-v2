@@ -26,7 +26,7 @@ namespace Gooeycms.Business.Forms.Plugins
             try
             {
                 client.Login(username, apiPassword);
-                client.AddLead(base.FormFields);
+                client.AddLead(base.FormFields, CurrentSite.Configuration.Salesforce.CustomFieldMappings);
                 client.Logout();
             }
             catch (Exception e)

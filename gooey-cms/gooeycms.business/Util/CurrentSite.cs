@@ -15,6 +15,8 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Constants;
+using System.Text;
 
 namespace Gooeycms.Business.Util
 {
@@ -194,6 +196,55 @@ namespace Gooeycms.Business.Util
                     set { Configuration.SetSiteConfiguration("salesforce-enabled", value.StringValue()); }
                 }
 
+                public static void AddCustomFieldMapping(String original, String custom)
+                {
+                    IDictionary<String, String> mappings = CustomFieldMappings;
+                    StringBuilder builder = new StringBuilder();
+                    foreach (String mapped in mappings.Keys)
+                    {
+                        builder.Append(mapped).Append("=").Append(mappings[mapped]).Append(TextConstants.DefaultSeparator);
+                    }
+                    builder.Append(custom).Append("=").Append(original);
+
+                    String flattened = builder.ToString();
+                    Configuration.SetSiteConfiguration("salesforce-mappings", flattened);
+                }
+
+                public static void RemoveCustomFieldMapping(String custom)
+                {
+                    IDictionary<String, String> mappings = CustomFieldMappings;
+                    StringBuilder builder = new StringBuilder();
+                    foreach (String mapped in mappings.Keys)
+                    {
+                        if (!mapped.Equals(custom))
+                            builder.Append(mapped).Append("=").Append(mappings[mapped]).Append(TextConstants.DefaultSeparator);
+                    }
+
+                    String flattened = builder.ToString();
+                    Configuration.SetSiteConfiguration("salesforce-mappings", flattened);
+                }
+
+                public static IDictionary<String, String> CustomFieldMappings
+                {
+                    get 
+                    {
+                        IDictionary<String, String> results = new Dictionary<String, String>(StringComparer.InvariantCultureIgnoreCase);
+                        String result = Configuration.GetSiteConfiguration("salesforce-mappings", null, false);
+                        if (result != null)
+                        {
+                            String[] pairs = result.Split(TextConstants.DefaultSeparator);
+                            foreach (String pair in pairs)
+                            {
+                                String[] arr = pair.Split('=');
+                                if (arr.Length == 2)
+                                {
+                                    results[arr[0].Trim()] = arr[1].Trim();
+                                }
+                            }
+                        }
+                        return results;
+                    }
+                }
             }
         }
 
