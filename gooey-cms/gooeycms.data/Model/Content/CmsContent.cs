@@ -7,6 +7,7 @@ using Gooeycms.Data.Collections;
 
 namespace Gooeycms.Data.Model.Content
 {
+    [Serializable]
     public class CmsContent : BasePersistedItem
     {
         public virtual CmsContentType @ContentType { get; set; }

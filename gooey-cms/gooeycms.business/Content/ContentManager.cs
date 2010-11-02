@@ -397,5 +397,11 @@ namespace Gooeycms.Business.Content
         {
             return TextEncryption.Encode(filename);
         }
+
+        internal IList<CmsContent> GetAllContent(Data.Guid siteGuid)
+        {
+            CmsContentDao dao = new CmsContentDao();
+            return dao.FindAllContent(siteGuid);
+        }
     }
 }
