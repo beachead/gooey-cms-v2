@@ -114,8 +114,13 @@ ul#themes-panel li.theme {
 	position: relative;
 }
 
+li.theme div.theme-header {
+    overflow: auto;
+}
+
 li.theme .logo {
 	margin: 8px 0 0 20px;
+	float: left;
 }
 
 li.theme .title {
@@ -124,7 +129,18 @@ li.theme .title {
 	color: #4395F1;
 	font-size: 1.1em;
 	font-weight: bold;
-	clear: right;
+}
+
+li.theme ul.options-links {
+    margin-right: 20px;
+    float: right;
+}
+
+li.theme ul.options-links li {
+    list-style: none;
+    background: transparent url(../images/small_arrow.png) center right no-repeat;
+    padding-right: 20px;
+    text-align: right;
 }
 
 /* PREVIEW */
@@ -238,17 +254,6 @@ li.theme .demo {
 	right: 140px;
 }
 
-
-li.theme ul.options-links {
-    margin-right: 20px;
-}
-
-li.theme ul.options-links li {
-    list-style: none;
-    background: transparent url(../images/small_arrow.png) center right no-repeat;
-    padding-right: 20px;
-    text-align: right;
-}
 
 /* 63px 68px; */
 

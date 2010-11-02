@@ -47,12 +47,14 @@
             <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" runat="server">
                 <ItemTemplate>
    			        <li class="theme">  
-				        <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c}") %></div>
-				        <div class="logo"><asp:Image ID="LogoSrc" Width="93" Height="27" runat="server" /></div>
-				        <ul class="options-links">
-                            <li>view <asp:HyperLink ID="DemoLink" runat="server">live</asp:HyperLink> or <asp:HyperLink ID="AdminDemoLink" runat="server">admin</asp:HyperLink> demo site</li>
-                            <li><a href='./purchase.aspx?g=<%# Eval("Guid") %>'>purchase site</a></li>
-                        </ul>
+                        <div class="theme-header">
+				            <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c}") %></div>
+				            <div class="logo"><asp:Image ID="LogoSrc" Width="115" Height="60" runat="server" /></div>
+				            <ul class="options-links">
+                                <li>view <asp:HyperLink ID="DemoLink" runat="server">live</asp:HyperLink> or <asp:HyperLink ID="AdminDemoLink" runat="server">admin</asp:HyperLink> demo site</li>
+                                <li><a href='./purchase.aspx?g=<%# Eval("Guid") %>'>purchase site</a></li>
+                            </ul>
+                        </div>
                         <!-- start: preview -->
                         <div class="preview">
                             <ul class="thumbs">
