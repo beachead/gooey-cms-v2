@@ -115,6 +115,7 @@
     <Content Include="auth\global-admin\default.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\Pages\Default2.aspx" />
+    <Content Include="auth\Pages\EditInline.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
     <Content Include="auth\Pages\Stylesheet.aspx" />
@@ -332,6 +333,13 @@
     </Compile>
     <Compile Include="auth\Pages\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Pages\EditInline.aspx.cs">
+      <DependentUpon>EditInline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\EditInline.aspx.designer.cs">
+      <DependentUpon>EditInline.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Pages\ImageBrowser.aspx.cs">
       <DependentUpon>ImageBrowser.aspx</DependentUpon>

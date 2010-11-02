@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Gooeycms.Extensions
 {
@@ -28,6 +29,18 @@ namespace Gooeycms.Extensions
         public static Boolean IsEmpty(this String item)
         {
             return (String.IsNullOrEmpty(item));
+        }
+
+        public static String AsString<T>(this IList<T> items, String separator)
+        {
+            StringBuilder builder  = new StringBuilder();
+            foreach (T item in items)
+            {
+                builder.Append(item.ToString()).Append(separator);
+            }
+            builder = builder.Remove(builder.Length - 1, 1);
+
+            return builder.ToString();
         }
 
         public static IList<String> SplitAsList(this String item, char value)

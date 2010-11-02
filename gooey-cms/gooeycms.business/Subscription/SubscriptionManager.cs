@@ -18,10 +18,24 @@ namespace Gooeycms.Business.Subscription
 {
     public static class SubscriptionManager
     {
+        public static List<String> InvalidSubdomainPrefixes = new List<String>() { "demo-","staging-" };
+
+        public static bool IsSubdomainValid(String subdomain)
+        {
+            return (!InvalidSubdomainPrefixes.Exists(d => subdomain.Contains(d)));
+        }
+
         public static bool IsSubdomainAvailable(String subdomain)
         {
-            CmsSubscriptionDao dao = new CmsSubscriptionDao();
-            return (dao.FindBySubdomain(subdomain) == null);
+            bool result = false;
+
+            bool validSubdomain = IsSubdomainValid(subdomain);
+            if (validSubdomain)
+            {
+                CmsSubscriptionDao dao = new CmsSubscriptionDao();
+                result = (dao.FindBySubdomain(subdomain) == null);
+            }
+            return result;
         }
 
         public static IList<CmsSubscriptionPlan> GetSubscriptionPlans()

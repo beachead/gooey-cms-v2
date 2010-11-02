@@ -25,7 +25,7 @@ namespace Gooeycms.test
             values["LastName"] = "Adams";
             values["Company"] = "My Company";
 
-            client.AddLead(values);
+            client.AddLead(values, null);
 
             client.Logout();
 

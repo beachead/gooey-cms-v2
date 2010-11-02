@@ -9,6 +9,7 @@ using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Constants;
 using Gooeycms.Business;
 using Gooeycms.Business.Membership;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Webrole.Ecommerce
 {
@@ -101,33 +102,43 @@ namespace Gooeycms.Webrole.Ecommerce
 
         protected void CreateAccount_Click(Object sender, EventArgs e)
         {
-            SubscriptionPlans selectedPlan;
-            try
+            if (SubscriptionManager.IsSubdomainAvailable(this.Subdomain.Text))
             {
-                selectedPlan = (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), this.SelectedPlan.SelectedValue, true);
+                SubscriptionPlans selectedPlan;
+                try
+                {
+                    selectedPlan = (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), this.SelectedPlan.SelectedValue, true);
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException("Could not find a mapping for the selected subscription plan: " + this.SelectedPlan.SelectedValue + ". The subscription plan SKU must match one of the following: " + String.Join(" ", Enum.GetNames(typeof(SubscriptionPlans))));
+                }
+
+                Registration registration = new Registration();
+                registration.Created = DateTime.Now;
+                registration.Guid = System.Guid.NewGuid().ToString();
+                registration.Firstname = this.Firstname.Text;
+                registration.Lastname = this.Lastname.Text;
+                registration.Email = this.Email.Text;
+                registration.Company = this.Company.Text;
+                registration.Sitename = this.Subdomain.Text;
+                registration.EncryptedPassword = Registrations.Encrypt(this.Password1.Text);
+                registration.SubscriptionPlanId = (int)selectedPlan;
+                registration.IsSalesforceEnabled = this.SalesForceOption.Checked;
+                registration.IsCampaignEnabled = this.CampaignOption.Checked;
+                if (LoggedInUser.IsLoggedIn)
+                    registration.ExistingAccountGuid = LoggedInUser.Wrapper.UserInfo.Guid;
+
+                Registrations.Save(registration);
+                Response.Redirect("Signup-Review.aspx?g=" + registration.Guid, true);
             }
-            catch (Exception)
+            else
             {
-                throw new ApplicationException("Could not find a mapping for the selected subscription plan: " + this.SelectedPlan.SelectedValue + ". The subscription plan SKU must match one of the following: " + String.Join(" ",Enum.GetNames(typeof(SubscriptionPlans))));
+                if (SubscriptionManager.IsSubdomainValid(this.Subdomain.Text))
+                    throw new ApplicationException("The subdomain " + this.Subdomain.Text + " is already in use and may not be used again.");
+                else
+                    throw new ArgumentException("Subdomains may not start with " + SubscriptionManager.InvalidSubdomainPrefixes.AsString(","));
             }
-
-            Registration registration = new Registration();
-            registration.Created = DateTime.Now;
-            registration.Guid = System.Guid.NewGuid().ToString();
-            registration.Firstname = this.Firstname.Text;
-            registration.Lastname = this.Lastname.Text;
-            registration.Email = this.Email.Text;
-            registration.Company = this.Company.Text;
-            registration.Sitename = this.Subdomain.Text;
-            registration.EncryptedPassword = Registrations.Encrypt(this.Password1.Text);
-            registration.SubscriptionPlanId = (int)selectedPlan;
-            registration.IsSalesforceEnabled = this.SalesForceOption.Checked;
-            registration.IsCampaignEnabled = this.CampaignOption.Checked;
-            if (LoggedInUser.IsLoggedIn)
-                registration.ExistingAccountGuid = LoggedInUser.Wrapper.UserInfo.Guid;
-
-            Registrations.Save(registration);
-            Response.Redirect("Signup-Review.aspx?g=" + registration.Guid, true);
         }
     }
 }
