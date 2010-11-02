@@ -281,7 +281,7 @@ namespace Gooeycms.Business.Content
                     String mimeType = upload.PostedFile.ContentType;
 
                     Boolean overwrite = false;
-                    if (String.IsNullOrWhiteSpace(oldFilename))
+                    if (!String.IsNullOrWhiteSpace(oldFilename))
                         overwrite = true;
 
                     if (!ContentFileUploadImpl.IsValidFileType(filename))
