@@ -2,7 +2,7 @@
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
-    <gooey:Subnav ID="Subnav" runat="server" NavSection="content" NavItem="" />
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="content" NavItem="home" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
