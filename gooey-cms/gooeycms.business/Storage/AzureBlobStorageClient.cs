@@ -123,6 +123,19 @@ namespace Gooeycms.Business.Storage
 
         }
 
+        public Boolean ContainsSnapshots(String containerName, String directoryName, String filename)
+        {
+            Boolean result = false;
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            CloudBlob blob = container.GetBlobReference(filename);
+            if (blob.Exists())
+            {
+                result = blob.SnapshotTime.HasValue;
+            }
+
+            return result;
+        }
+
         public Boolean ContainsSnapshots(String containerName, String directoryName)
         {
             Boolean result = false;
@@ -238,6 +251,21 @@ namespace Gooeycms.Business.Storage
             }
 
             return result;
+        }
+
+        //Renames a specific file
+        public void Rename(String containerName, String directoryName, String filename, String renameTo, Permissions permissions)
+        {
+            if (ContainsSnapshots(containerName, directoryName, filename))
+                throw new ArgumentException("Could not rename container=" + containerName + ", directory=" + directoryName + ", filename=" + filename + " because it contains snapshots.");
+
+            byte[] data = this.Open(containerName, directoryName, filename);
+
+            //Create the file with the new name
+            this.Save(containerName, directoryName, renameTo, data, permissions);
+
+            //Delete the old file
+            this.Delete(containerName, directoryName, filename);
         }
 
         public void CopyFromSnapshots(IList<BlobSnapshot> snapshots, String copyFromContainerName, String copyToContainerName, String copyToDirectoryName, Permissions permissions)

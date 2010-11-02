@@ -52,6 +52,7 @@ CREATE TABLE [Subscriptions] (
 [expires] DATETIME,
 [disabled] BIT DEFAULT(0),
 [salesforce_addon] BIT DEFAULT(0),
+[campaign_addon] BIT DEFAULT(0),
 [generic_addon] BIT DEFAULT(0),
 [is_demo] BIT DEFAULT(0),
 [logo_name] NVARCHAR(128),
@@ -106,6 +107,7 @@ EXEC sp_addrolemember N'db_owner', N'gooeycms'
 
 /* setup the default configuration values */
 insert into configurations values ('salesforce-price','50');
+insert into configurations values ('campaign-price','19.95');
 insert into configurations values ('default-cms-domain','.gooeycms.net');
 insert into configurations values ('logging-enabled','false');
 insert into configurations values ('subscription-processor','Gooeycms.Business.Subscription.Debug.DebugSubscriptionProcessor');

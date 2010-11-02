@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Gooeycms.Business.Web.Microsoft;
 using Gooeycms.Data.Model.Campaign;
 using Gooeycms.Business.Campaigns;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
@@ -16,6 +17,9 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!CurrentSite.Subscription.IsCampaignEnabled)
+                Response.Redirect("~/auth/default.aspx?addon=campaigns", true);
+
             Master.SetTitle("My Campaigns");
             if (!Page.IsPostBack)
             {

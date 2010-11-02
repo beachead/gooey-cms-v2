@@ -23,8 +23,15 @@ namespace Gooeycms.Data.Model.Site
         {
             get
             {
-                int pos = this.Url.LastIndexOf("/") + 1;
-                return this.Url.Substring(pos);
+                if (Depth >= 1)
+                {
+                    int pos = this.Url.LastIndexOf("/") + 1;
+                    return this.Url.Substring(pos);
+                }
+                else
+                {
+                    return this.Url;
+                }
             }
         }
 

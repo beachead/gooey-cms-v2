@@ -13,6 +13,15 @@ using Gooeycms.Data.Model.Site;
 namespace Gooeycms.Business.Store
 {
     [Serializable]
+    public class SiteContent
+    {
+        public CmsContent Content { get; set; }
+        public Boolean IsFileType { get; set; }
+        public String Filename { get; set; }
+        public byte[] FileData { get; set; }
+    }
+
+    [Serializable]
     public class SitePackageTheme 
     {
         public CmsTheme Theme { get; set; }
@@ -46,6 +55,7 @@ namespace Gooeycms.Business.Store
         public IList<SitePackageTheme> Themes { get; set; }
         public IList<SitePackagePage> Pages { get; set; }
         public IList<SiteContentType> ContentTypes { get; set; }
+        public IList<SiteContent> SiteContent { get; set; }
         public IList<CmsSitePath> SiteMapPaths { get; set; }
         public IList<BlobSnapshot> PageImages { get; set; }
     }

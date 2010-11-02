@@ -66,8 +66,8 @@ namespace Gooeycms.Business.Store
             IList<SitePackageTheme> packageThemes = new List<SitePackageTheme>();
             IList<SitePackagePage> packagePages = new List<SitePackagePage>();
             IList<SiteContentType> packageContentTypes = new List<SiteContentType>();
+            IList<SiteContent> packageContent = new List<SiteContent>();
             IList<CmsSitePath> sitePaths = new List<CmsSitePath>();
-
 
             DoNotify(notifier, "Packaging Themes");
             PackageThemes(siteGuid, packageThemes, notifier);
@@ -78,6 +78,9 @@ namespace Gooeycms.Business.Store
             DoNotify(notifier, "Packaging Content Types");
             PackageContentTypes(siteGuid, packageContentTypes);
 
+            DoNotify(notifier, "Packaging Content");
+            PackageContent(siteGuid, packageContent);
+
             IStorageClient client = StorageHelper.GetStorageClient();
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid);
 
@@ -87,6 +90,7 @@ namespace Gooeycms.Business.Store
             sitepackage.SiteMapPaths = CmsSiteMap.Instance.GetAllPaths(siteGuid);
             sitepackage.Pages = packagePages;
             sitepackage.ContentTypes = packageContentTypes;
+            sitepackage.SiteContent = packageContent;
             sitepackage.OriginalSiteGuid = siteGuid;
 
             DoNotify(notifier, "Creating Package Archive");
@@ -131,6 +135,22 @@ namespace Gooeycms.Business.Store
                 packageContentType.ContentType = contentType;
                 packageContentType.Fields = fields;
                 packageContentTypes.Add(packageContentType);
+            }
+        }
+
+        private void PackageContent(Data.Guid siteGuid, IList<SiteContent> packageContents)
+        {
+            IList<CmsContent> content = ContentManager.Instance.GetAllContent(siteGuid);
+            foreach (CmsContent item in content)
+            {
+                /* currently does not support file type content types in the package */
+                if (!item.ContentType.IsFileType)
+                {
+                    SiteContent packageContent = new SiteContent();
+                    packageContent.Content = item;
+
+                    packageContents.Add(packageContent);
+                }
             }
         }
 
@@ -310,6 +330,42 @@ namespace Gooeycms.Business.Store
 
                 DoNotify(notifier, "Deploying Package Content Types To Site");
                 DeployContentTypes(sitepackage, guid);
+
+                DoNotify(notifier, "Deploying Package Content To Site");
+                DeployContent(sitepackage, guid);
+            }
+        }
+
+        private void DeployContent(SitePackage sitepackage, Data.Guid guid)
+        {
+            foreach (SiteContent ct in sitepackage.SiteContent)
+            {
+                CmsContent newcontent = new CmsContent();
+                CmsContent content = ct.Content;
+                IList<CmsContentField> fields = new List<CmsContentField>(content.Fields);
+
+                newcontent.Guid = System.Guid.NewGuid().ToString();
+                newcontent.SubscriptionId = guid.Value;
+                newcontent.ContentType = content.ContentType;
+                newcontent.Content = content.Content;
+                newcontent.Culture = content.Culture;
+                newcontent.ExpireDate = content.ExpireDate;
+                newcontent.IsApproved = content.IsApproved;
+                newcontent.LastSaved = content.LastSaved;
+                newcontent.PublishDate = content.PublishDate;
+                newcontent.RegistrationPage = content.RegistrationPage;
+                newcontent.RequiresRegistration = content.RequiresRegistration;
+                foreach (CmsContentField field in fields)
+                {
+                    CmsContentField newfield = new CmsContentField();
+                    newfield.Name = field.Name;
+                    newfield.ObjectType = field.ObjectType;
+                    newfield.Value = field.Value;
+
+                    newcontent.AddField(newfield);
+                }
+
+                ContentManager.Instance.Save(newcontent);
             }
         }
 

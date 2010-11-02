@@ -48,7 +48,7 @@
                 <ItemTemplate>
    			        <li class="theme">  
 				        <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c}") %></div>
-				        <div class="logo"><img src="../images/___placeholder_logo.png" width="93" height="27" alt="" /></div>
+				        <div class="logo"><asp:Image ID="LogoSrc" Width="93" Height="27" runat="server" /></div>
 				        <ul class="options-links">
                             <li>view <asp:HyperLink ID="DemoLink" runat="server">live</asp:HyperLink> or <asp:HyperLink ID="AdminDemoLink" runat="server">admin</asp:HyperLink> demo site</li>
                             <li><a href='./purchase.aspx?g=<%# Eval("Guid") %>'>purchase site</a></li>

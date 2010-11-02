@@ -14,6 +14,9 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!CurrentSite.Subscription.IsCampaignEnabled)
+                Response.Redirect("~/auth/default.aspx?addon=campaigns", true);
+
             Master.SetTitle("Edit Campaign");
             if (!Page.IsPostBack)
             {

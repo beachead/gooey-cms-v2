@@ -49,7 +49,7 @@ namespace gooeycms.business.salesforce
                     {
                         case Salesforce.ExceptionCode.INVALID_LOGIN:
                             status = LoginStatus.InvalidLogin;
-                            errorMessage = "Invalid username or password specified.\r\nEnsure that your password is in the form of mypasswordXXXXXX where XXXXXX is your security token.";
+                            errorMessage = "Invalid username, password or token specified.";
                             break;
                     }
                 }
@@ -124,7 +124,7 @@ namespace gooeycms.business.salesforce
             return fieldnames;
         }
 
-        public void AddLead(Dictionary<String, String> values)
+        public void AddLead(Dictionary<String, String> values, IDictionary<String,String> fieldMappings)
         {
             if (this.result == null)
                 throw new ApplicationException("The client is not logged into salesforce");
@@ -142,10 +142,17 @@ namespace gooeycms.business.salesforce
             Dictionary<String, Boolean> associatedFields = new Dictionary<string, bool>(StringComparer.InvariantCultureIgnoreCase);
             foreach (String key in values.Keys)
             {
-                if (validFields.ContainsKey(key))
+                String actualKey = key;
+                if (fieldMappings != null)
                 {
-                    elements.Add(GetNewXmlElement(validFields[key].ApiName, values[key]));
-                    associatedFields[validFields[key].ApiName] = true;
+                    if (fieldMappings.ContainsKey(key))
+                        actualKey = fieldMappings[key];
+                }
+
+                if (validFields.ContainsKey(actualKey))
+                {
+                    elements.Add(GetNewXmlElement(validFields[actualKey].ApiName, values[key]));
+                    associatedFields[validFields[actualKey].ApiName] = true;
                 }
             }
 

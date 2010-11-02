@@ -18,7 +18,7 @@
     <h1>Campaign Settings</h1>
     <p>Configure your campaign settings below.</hp>
 
-<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:500px;overflow:auto;">
+<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:600px;overflow:auto;">
     <div id="analytics-panel" dojoType="dijit.layout.ContentPane" title="Google Analytics Setup" style="display:none;">
         <table>
             <tr>
@@ -97,7 +97,7 @@
             </tr>
             </table>
         </div>
-        <div dojoType="dijit.TitlePane" title="Salesforce Information">
+        <div dojoType="dijit.TitlePane" title="Salesforce Fields">
             <table>
                 <tr>
                     <td>Successfully Authenticated:</td>
@@ -106,9 +106,41 @@
                 <tr>
                     <td style="vertical-align:top;">Available Lead Fields</td>
                     <td>
-                        <asp:ListBox ID="LstSalesforceAvailableFields" SelectionMode="Multiple" Rows="10" runat="server" />
+                        <anthem:ListBox ID="LstSalesforceAvailableFields" onchange="settext(this);" SelectionMode="Single" Rows="10" runat="server" />
                     </td>
                 </tr>
+            </table>
+            <table>
+                <tr>
+                    <td colspan="4" style="padding-top:12px;"><b>Custom Mappings:</b> <i>(Choose field above)</i></td>
+                </tr>
+                <tr>
+                    <td>SalesForce Field:</td>
+                    <td><asp:TextBox ID="TxtSalesforceField" Width="225px" runat="server" /></td>
+                    <td>Custom Name:</td>
+                    <td>
+                        <asp:TextBox ID="TxtSalesforceFriendly" runat="server" />&nbsp;
+                        <asp:Button ID="BtnAddCustomMapping" OnClick="BtnAddCustomMapping_Click" Text="Add Mapping" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:top;">Existing Mappings:</td>
+                    <td>
+                        <asp:ListBox ID="LstCustomMappings" Width="350px" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><asp:Button ID="BtnRemoveMapping" Width="350px" OnClick="BtnRemoveCustomMapping_Click" Text="Remove Mapping" runat="server" /></td>
+                </tr>
+
+                <script language="javascript" type="text/javascript">
+                    function settext(list) {
+                        var item = list.options[list.selectedIndex].value;
+                        if (item)
+                            document.getElementById('<%= TxtSalesforceField.ClientID %>').value = item;
+                    }
+                </script>
             </table>
         </div>
     </div>

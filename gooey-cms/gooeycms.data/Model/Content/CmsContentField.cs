@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gooeycms.Data.Model.Content
 {
+    [Serializable]
     public class CmsContentField : BasePersistedItem
     {
         public virtual CmsContent Parent { get; set; }

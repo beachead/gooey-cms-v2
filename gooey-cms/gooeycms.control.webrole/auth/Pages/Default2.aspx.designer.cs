@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
     public partial class Default2 {
         
         /// <summary>
+        /// Subnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        
+        /// <summary>
         /// RadScriptManager1 control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,42 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadScriptManager RadScriptManager1;
+        
+        /// <summary>
+        /// RadSplitter1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadSplitter RadSplitter1;
+        
+        /// <summary>
+        /// LeftPane control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadPane LeftPane;
+        
+        /// <summary>
+        /// SlidingZone1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadSlidingZone SlidingZone1;
+        
+        /// <summary>
+        /// PageListingPane control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadSlidingPane PageListingPane;
         
         /// <summary>
         /// UpdatePanel control.
@@ -56,5 +101,23 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTreeViewContextMenu PageContextMenu;
+        
+        /// <summary>
+        /// RadSplitbar1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadSplitBar RadSplitbar1;
+        
+        /// <summary>
+        /// MainPane control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadPane MainPane;
     }
 }

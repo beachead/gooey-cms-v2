@@ -130,6 +130,18 @@ This is your home page.
             get { return "en-us"; }
         }
 
+        public static Double CampaignOptionPrice
+        {
+            get
+            {
+                Nullable<Double> result = GooeyConfigManager.GetAsDouble(ConfigConstants.CampaignOptionPrice);
+                if (!result.HasValue)
+                    throw new ApplicationException("The sales force price has not been configured in the configuration table (key=" + ConfigConstants.SalesForcePrice + "). This is a required field for the application to function properly.");
+
+                return result.Value;
+            }
+        }
+
         public static Double SalesForcePrice
         {
             get

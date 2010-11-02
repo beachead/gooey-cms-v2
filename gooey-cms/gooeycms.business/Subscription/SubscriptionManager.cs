@@ -76,6 +76,7 @@ namespace Gooeycms.Business.Subscription
             subscription.IsDisabled = false;
             subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
             subscription.IsSalesforceEnabled = registration.IsSalesforceEnabled;
+            subscription.IsCampaignEnabled = registration.IsCampaignEnabled;
             subscription.IsGenericOptionsEnabled = registration.IsGenericOptionEnabled;
 
             CmsSubscriptionDao dao = new CmsSubscriptionDao();
@@ -117,6 +118,8 @@ namespace Gooeycms.Business.Subscription
 
             StringBuilder desc = new StringBuilder();
             desc.Append(plan.Name + " @ $" + plan.Price + " / month");
+            if (registration.IsCampaignEnabled)
+                desc.Append(" + Campaign Option @ $" + GooeyConfigManager.CampaignOptionPrice + " / month");
             if (registration.IsSalesforceEnabled)
                 desc.Append(" + Salesforce Option @ $" + GooeyConfigManager.SalesForcePrice + " / month");
 
@@ -129,8 +132,10 @@ namespace Gooeycms.Business.Subscription
 
             StringBuilder desc = new StringBuilder();
             desc.Append(header + " " + plan.Name);
+            if (registration.IsCampaignEnabled)
+                desc.Append(" + Campaigns");
             if (registration.IsSalesforceEnabled)
-                desc.Append(" + Salesforce");
+                desc.Append(" + (incl. Salesforce)"); 
 
             return desc.ToString();
         }

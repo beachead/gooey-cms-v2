@@ -208,11 +208,50 @@ namespace Gooeycms.Business.Storage
             return Get(page.UrlHash, name);
         }
 
+        public byte[] GetData(String container, String directory, String filename)
+        {
+            IStorageClient client = StorageHelper.GetStorageClient();
+            return client.Open(container, directory, filename);
+        }
+
+        /// <summary>
+        /// Renames all of the specified assets to the new page
+        /// </summary>
+        /// <param name="oldpage"></param>
+        /// <param name="newpage"></param>
+        public void Rename(CmsPage oldpage, CmsPage newpage)
+        {
+            String container = CurrentSiteAssetStorageContainer;
+            IStorageClient client = StorageHelper.GetStorageClient();
+
+            IList<T> oldfiles = List(oldpage);
+            
+            //Upload to the new directory
+            foreach (T oldfile in oldfiles)
+            {
+                byte[] data = GetData(container, oldpage.UrlHash, oldfile.FullName);
+                Save(newpage, oldfile.FullName, data);
+            }
+
+            //Delete the old files
+            foreach (T oldfile in oldfiles)
+            {
+                Delete(container, oldpage.UrlHash, oldfile.FullName);
+            }
+        }
+
         public Boolean ContainsSnapshots(CmsTheme theme)
         {
             String container = CurrentSiteAssetStorageContainer;
             IStorageClient client = StorageHelper.GetStorageClient();
             return (client.ContainsSnapshots(container, theme.ThemeGuid));
+        }
+
+        public Boolean ContainsSnapshots(CmsPage page)
+        {
+            String container = CurrentSiteAssetStorageContainer;
+            IStorageClient client = StorageHelper.GetStorageClient();
+            return (client.ContainsSnapshots(container, page.UrlHash));
         }
 
         public void DeleteAll(CmsTheme theme)
@@ -229,6 +268,12 @@ namespace Gooeycms.Business.Storage
 
             client.Delete(container, theme.ThemeGuid, name);
             SitePageCacheRefreshInvoker.InvokeRefresh(theme.SubscriptionGuid, SitePageRefreshRequest.PageRefreshType.Staging);
+        }
+
+        public void Delete(String container, String directory, String filename)
+        {
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.Delete(container, directory, filename);
         }
 
         private static T Convert(String key, StorageFile file)

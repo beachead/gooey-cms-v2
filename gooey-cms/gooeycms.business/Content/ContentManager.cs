@@ -281,7 +281,7 @@ namespace Gooeycms.Business.Content
                     String mimeType = upload.PostedFile.ContentType;
 
                     Boolean overwrite = false;
-                    if (String.IsNullOrWhiteSpace(oldFilename))
+                    if (!String.IsNullOrWhiteSpace(oldFilename))
                         overwrite = true;
 
                     if (!ContentFileUploadImpl.IsValidFileType(filename))
@@ -396,6 +396,12 @@ namespace Gooeycms.Business.Content
         internal static string EncryptFilename(string filename)
         {
             return TextEncryption.Encode(filename);
+        }
+
+        internal IList<CmsContent> GetAllContent(Data.Guid siteGuid)
+        {
+            CmsContentDao dao = new CmsContentDao();
+            return dao.FindAllContent(siteGuid);
         }
     }
 }

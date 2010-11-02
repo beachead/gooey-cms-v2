@@ -9,6 +9,12 @@ namespace Gooeycms.Business.Web
 {
     public class CmsSiteMap
     {
+        public enum NodeTypes
+        {
+            Directory,
+            Page
+        }
+
         public const String PathSeparator = "/";
         public const String RootPath = PathSeparator;
 
@@ -108,6 +114,9 @@ namespace Gooeycms.Business.Web
 
         public CmsSitePath AddChildDirectory(Data.Guid siteGuid, String parentPath, String newDirectory)
         {
+            if (String.IsNullOrEmpty(parentPath))
+                parentPath = RootPath;
+
             CmsSitePath parent = GetPath(siteGuid, parentPath);
             if (parent == null)
                 throw new ArgumentException("Could not add child directory because the parent path '" + parentPath + "' does not exist.");
@@ -253,6 +262,58 @@ namespace Gooeycms.Business.Web
             {
                 dao.Save<CmsSitePath>(path);
                 tx.Commit();
+            }
+        }
+
+        public void Rename(string oldpath, string newpath)
+        {
+            CmsSitePath path = CmsSiteMap.Instance.GetPath(oldpath);
+            path.Url = newpath;
+            path.UrlHash = TextHash.MD5(path.Url).Value;
+
+            CmsSiteMap.Instance.Save(path);
+        }
+
+        /// <summary>
+        /// Returns the parent path of the specified full path
+        /// (e.g. /foo/bar/test returns the path for /foo/bar)
+        /// </summary>
+        /// <param name="oldpath"></param>
+        /// <returns></returns>
+        internal CmsSitePath GetParentPath(string oldpath)
+        {
+            String lookup;
+            int pos = oldpath.LastIndexOf("/");
+            lookup = oldpath.Substring(0, pos);
+
+            if (String.IsNullOrEmpty(lookup))
+                lookup = RootPath;
+
+            return GetPath(lookup);
+        }
+
+        public void Reorder(String parent, String previous, String newpath, int addOn)
+        {
+            CmsSitePath parentPath = this.GetPath(parent);
+            List<CmsSitePath> children = new List<CmsSitePath>(this.GetChildren(parentPath));
+
+
+            int previousIndex = 0;
+            int currentIndex = children.FindIndex(d => newpath.Equals(d.Url));
+            if (previous != null)
+            {
+                previousIndex = children.FindIndex(d => previous.Equals(d.Url)) + addOn;
+            }
+
+            CmsSitePath currentPath = children[currentIndex];
+            children.RemoveAt(currentIndex);
+            children.Insert(previousIndex, currentPath);
+
+            int pos = 0;
+            foreach (CmsSitePath path in children)
+            {
+                path.Position = pos++;
+                Save(path);
             }
         }
     }

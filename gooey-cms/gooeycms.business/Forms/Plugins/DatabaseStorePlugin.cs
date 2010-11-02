@@ -14,7 +14,7 @@ namespace Gooeycms.Business.Forms.Plugins
 
         public override bool IsEnabled()
         {
-            return true;
+            return (CurrentSite.Subscription.IsCampaignEnabled);
         }
 
         public override bool IsExceptionFatal()
