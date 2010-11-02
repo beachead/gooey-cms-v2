@@ -47,7 +47,12 @@
                 }
                 break;
             case "Edit":
-                window.location = 'Edit.aspx?a=edit&pid=' + treeNode.get_value();
+                //window.location = 'Edit.aspx?a=edit&pid=' + treeNode.get_value();
+                var splitter = $find("<%= RadSplitter1.ClientID %>");
+                var pane = splitter.getPaneById("<%= MainPane.ClientID %>");
+                if (pane) {
+                    pane.set_contentUrl('EditInline.aspx?a=edit&pid=' + treeNode.get_value());
+                }
                 break;
             case "Rename":
                 var result = confirm('Warning: Renaming this page will break any links, redirects, or registrations you have that reference this page.\n\nWould you like to continue?');
@@ -100,40 +105,50 @@
     <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
     </telerik:RadScriptManager>
 
-    
 
-    <telerik:RadAjaxPanel ID="UpdatePanel" runat="server">
-    <telerik:RadTreeView ID="PageTreeView" Skin="Windows7" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="true" 
-                         OnNodeDataBound="PageTreeview_NodeDataBound"  
-                         OnClientContextMenuItemClicking="onClientContextMenuItemClicking"
-                         OnClientDoubleClick="onClientDoubleClick"
-                         OnClientNodeDropping="onClientNodeDropping"
-                         OnContextMenuItemClick="PageTreeView_ContextMenuItemClick"
-                         OnClientContextMenuShowing="onClientContextMenuShowing"
-                         OnNodeEdit="PageTreeView_NodeEdit"
-                         OnNodeDrop="PageTreeView_NodeDrop"
-                         runat="server">
-        <ContextMenus>
-            <telerik:RadTreeViewContextMenu ID="DirectoryContextMenu" runat="server">
-                <Items>
-                    <telerik:RadMenuItem Value="NewPage" Text="New Page" ImageUrl="~/Images/Vista/notes.gif"></telerik:RadMenuItem>
-                    <telerik:RadMenuItem Value="NewFolder" Text="New Folder" ImageUrl="~/Images/Vista/12.gif"></telerik:RadMenuItem>
-                    <telerik:RadMenuItem IsSeparator="true" />
-                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
-    <telerik:RadMenuItem IsSeparator="true" />
-                    <telerik:RadMenuItem Value="DeleteDirectory" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
-                </Items>
-            </telerik:RadTreeViewContextMenu>
+<telerik:RadSplitter id="RadSplitter1" SkinID="Outlook" runat="server" Height="700px" width="100%">
+    <telerik:RadPane id="LeftPane" runat="server" width="22" Scrolling="None">
+        <telerik:RadSlidingZone id="SlidingZone1" runat="server" width="22" DockedPaneId="PageListingPane">
+            <telerik:RadSlidingPane id="PageListingPane" title="Page Manager" EnableResize="false" DockOnOpen="true" width="150px" runat="server">
+                <telerik:RadAjaxPanel ID="UpdatePanel" runat="server">
+                <telerik:RadTreeView ID="PageTreeView" Skin="Windows7" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="true" 
+                                     OnNodeDataBound="PageTreeview_NodeDataBound"  
+                                     OnClientContextMenuItemClicking="onClientContextMenuItemClicking"
+                                     OnClientDoubleClick="onClientDoubleClick"
+                                     OnClientNodeDropping="onClientNodeDropping"
+                                     OnContextMenuItemClick="PageTreeView_ContextMenuItemClick"
+                                     OnClientContextMenuShowing="onClientContextMenuShowing"
+                                     OnNodeEdit="PageTreeView_NodeEdit"
+                                     OnNodeDrop="PageTreeView_NodeDrop"
+                                     runat="server">
+                    <ContextMenus>
+                        <telerik:RadTreeViewContextMenu ID="DirectoryContextMenu" runat="server">
+                            <Items>
+                                <telerik:RadMenuItem Value="NewPage" Text="New Page" ImageUrl="~/Images/Vista/notes.gif"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Value="NewFolder" Text="New Folder" ImageUrl="~/Images/Vista/12.gif"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem IsSeparator="true" />
+                                <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem IsSeparator="true" />
+                                <telerik:RadMenuItem Value="DeleteDirectory" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
+                            </Items>
+                        </telerik:RadTreeViewContextMenu>
 
-            <telerik:RadTreeViewContextMenu ID="PageContextMenu" runat="server">
-                <Items>
-                    <telerik:RadMenuItem Value="Edit" Text="Edit ..." ImageUrl="~/Images/Vista/9.gif"></telerik:RadMenuItem>
-                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
-                    <telerik:RadMenuItem IsSeparator="true" />
-                    <telerik:RadMenuItem Value="DeletePage" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
-                </Items>
-            </telerik:RadTreeViewContextMenu>
-        </ContextMenus>
-    </telerik:RadTreeView>
-    </telerik:RadAjaxPanel>
+                        <telerik:RadTreeViewContextMenu ID="PageContextMenu" runat="server">
+                            <Items>
+                                <telerik:RadMenuItem Value="Edit" Text="Edit ..." ImageUrl="~/Images/Vista/9.gif"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem IsSeparator="true" />
+                                <telerik:RadMenuItem Value="DeletePage" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
+                            </Items>
+                        </telerik:RadTreeViewContextMenu>
+                    </ContextMenus>
+                </telerik:RadTreeView>
+                </telerik:RadAjaxPanel>
+            </telerik:RadSlidingPane>
+        </telerik:RadSlidingZone>
+    </telerik:RadPane>
+    <telerik:RadSplitBar id="RadSplitbar1" runat="server"></telerik:RadSplitBar>
+    <telerik:RadPane id="MainPane" Scrolling="Both" ContentUrl="" runat="server">
+    </telerik:RadPane>
+</telerik:RadSplitter>
 </asp:Content>
