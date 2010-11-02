@@ -291,5 +291,30 @@ namespace Gooeycms.Business.Web
 
             return GetPath(lookup);
         }
+
+        public void Reorder(String parent, String previous, String newpath, int addOn)
+        {
+            CmsSitePath parentPath = this.GetPath(parent);
+            List<CmsSitePath> children = new List<CmsSitePath>(this.GetChildren(parentPath));
+
+
+            int previousIndex = 0;
+            int currentIndex = children.FindIndex(d => newpath.Equals(d.Url));
+            if (previous != null)
+            {
+                previousIndex = children.FindIndex(d => previous.Equals(d.Url)) + addOn;
+            }
+
+            CmsSitePath currentPath = children[currentIndex];
+            children.RemoveAt(currentIndex);
+            children.Insert(previousIndex, currentPath);
+
+            int pos = 0;
+            foreach (CmsSitePath path in children)
+            {
+                path.Position = pos++;
+                Save(path);
+            }
+        }
     }
 }

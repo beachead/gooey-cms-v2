@@ -65,6 +65,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             }
             else
             {
+                e.Node.AllowDrop = false;
                 e.Node.ContextMenuID = "PageContextMenu";
                 e.Node.ImageUrl = "~/Images/Vista/aspx.png";
                 e.Node.Category = CmsSiteMap.NodeTypes.Page.ToString();
@@ -149,21 +150,48 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             if (dest != null)
             {
+                String oldparent = this.GetNodeUrl(src.ParentNode);
+                String newparent = this.GetNodeUrl(dest.ParentNode);
+
+                String pagename = src.Text;
+                String current = this.GetNodeUrl(src);
+                String destination = this.GetNodeUrl(dest);
+
+                //Check if we need to rename the page
+                Boolean rename = !(oldparent.Equals(newparent));
+
+                String newpath;
                 switch (pos)
                 {
                     case RadTreeViewDropPosition.Above: //Sibling of the destination
                         src.Owner.Nodes.Remove(src);
                         dest.InsertBefore(src);
+                        newpath = GetNodeUrl(src);
+
+                        if (rename)
+                            PageManager.Instance.Rename(current, newpath);
+                        CmsSiteMap.Instance.Reorder(newparent, destination, newpath, -1);
                         break;
                     case RadTreeViewDropPosition.Below:
                         src.Owner.Nodes.Remove(src);
                         dest.InsertAfter(src);
+                        newpath = GetNodeUrl(src);
+
+                        if (rename)
+                            PageManager.Instance.Rename(current, newpath);
+                        CmsSiteMap.Instance.Reorder(newparent, destination, newpath, 0);
                         break;
                     case RadTreeViewDropPosition.Over:
                         if (!src.IsAncestorOf(dest))
                         {
                             src.Owner.Nodes.Remove(src);
                             dest.Nodes.Add(src);
+
+
+                            String newpage = GetNodeUrl(src);
+                            String parent = GetNodeUrl(dest);
+                            PageManager.Instance.Rename(current, newpage);
+                            CmsSiteMap.Instance.Reorder(parent, null, newpage, 0);
                         }
                         break;
                 }
