@@ -10,6 +10,7 @@ using Gooeycms.Business.Campaigns;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Content;
 using Gooeycms.Business.Content;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
@@ -17,6 +18,9 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!CurrentSite.Subscription.IsCampaignEnabled)
+                Response.Redirect("~/auth/default.aspx?addon=campaigns", true);
+
             if (!Page.IsPostBack)
             {
                 IList<CmsPage> pages = PageManager.Instance.Filter(PageManager.Filters.AllPages);

@@ -34,7 +34,7 @@ input.cms-address {
 
 }
 
-#lbl-salesforce-integration {
+.option-item {
 	color: #4395f1;
 	font-size: 1.4em;
 	font-weight: bold;

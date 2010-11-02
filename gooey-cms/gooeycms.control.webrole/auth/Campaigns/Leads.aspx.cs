@@ -8,6 +8,7 @@ using System.Threading;
 using System.Text;
 using Gooeycms.Data.Model.Form;
 using Gooeycms.Business.Campaigns;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
@@ -15,6 +16,9 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!CurrentSite.Subscription.IsCampaignEnabled)
+                Response.Redirect("~/auth/default.aspx?addon=campaigns", true);
+
             Master.SetTitle("Lead Report");
             RadScriptManager.RegisterPostBackControl(this.BtnGenerateReport);
         }

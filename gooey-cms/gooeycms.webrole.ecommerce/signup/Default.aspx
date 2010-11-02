@@ -99,8 +99,12 @@
 				<h2><img src="../images/h2_choose_options.png" width="435" height="35" alt="choose your options" /></h2>
 				<p>We offer a few options for some customers who may need to<br />integrate Gooey CMS with their CRM or Analytics system.</p>
 				<p>
-                    <asp:CheckBox ID="SalesForceOption" runat="server" />
-					<label id="lbl-salesforce-integration" for="salesforce-integration">salesforce integration - $<asp:Label ID="SalesForceCost" runat="server" /> / month</label>
+                    <anthem:CheckBox ID="CampaignOption" AutoUpdateAfterCallBack="true" runat="server" />
+					<label id="lbl-campaign-integration" class="option-item" for="salesforce-integration">campaign integration - $<asp:Label ID="CampaignOptionCost" runat="server" /> / month</label>
+				</p>
+				<p>
+                    <anthem:CheckBox ID="SalesForceOption" OnCheckedChanged="SalesForceOption_Checked" AutoCallBack="true"  runat="server" />
+					<label id="lbl-salesforce-integration" class="option-item" for="salesforce-integration">salesforce integration - $<asp:Label ID="SalesForceCost" runat="server" /> / month</label>
 				</p>
 				<p id="salesforce-disclaimer">Salesforce Integration allows you to send sales leads from any of your<br />forms directly into Salesforce (requires <a href="#">Salesforce Enterprise account</a>).</p>
 			</li>

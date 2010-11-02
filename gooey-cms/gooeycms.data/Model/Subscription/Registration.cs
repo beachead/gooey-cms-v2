@@ -28,6 +28,7 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual Int32 SubscriptionPlanId { get; set; }
         public virtual Boolean IsComplete { get; set; }
         public virtual Boolean IsSalesforceEnabled { get; set; }
+        public virtual Boolean IsCampaignEnabled { get; set; }
         public virtual Boolean IsGenericOptionEnabled { get; set; }
         public virtual Boolean IsDemoAccount { get; set; }
     }

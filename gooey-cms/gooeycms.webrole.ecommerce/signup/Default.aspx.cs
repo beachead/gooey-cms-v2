@@ -24,6 +24,7 @@ namespace Gooeycms.Webrole.Ecommerce
                     lnk.NavigateUrl = "http://" + GooeyConfigManager.AdminSiteHost + "/login.aspx?ReturnUrl=" + Server.UrlEncode("http://store.gooeycms.net/signup/");
 
                 this.SalesForceCost.Text = GooeyConfigManager.SalesForcePrice.ToString();
+                this.CampaignOptionCost.Text = GooeyConfigManager.CampaignOptionPrice.ToString();
                 this.DefaultCmsDomain.Text = GooeyConfigManager.DefaultCmsDomain;
                 LoadSelectedPlan(Request.QueryString.ToString().Contains("free"));
 
@@ -76,6 +77,12 @@ namespace Gooeycms.Webrole.Ecommerce
                 this.OptionsPanel.Visible = true;
         }
 
+        protected void SalesForceOption_Checked(Object sender, EventArgs e)
+        {
+            if (this.SalesForceOption.Checked)
+                this.CampaignOption.Checked = true;
+        }
+
         protected void SelectedPlan_Changed(Object Sender, EventArgs e)
         {
             CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(this.SelectedPlan.SelectedValue);
@@ -115,6 +122,7 @@ namespace Gooeycms.Webrole.Ecommerce
             registration.EncryptedPassword = Registrations.Encrypt(this.Password1.Text);
             registration.SubscriptionPlanId = (int)selectedPlan;
             registration.IsSalesforceEnabled = this.SalesForceOption.Checked;
+            registration.IsCampaignEnabled = this.CampaignOption.Checked;
             if (LoggedInUser.IsLoggedIn)
                 registration.ExistingAccountGuid = LoggedInUser.Wrapper.UserInfo.Guid;
 

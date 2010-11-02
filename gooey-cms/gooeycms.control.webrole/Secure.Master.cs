@@ -22,6 +22,9 @@ namespace Gooeycms.Webrole.Control
 
             this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
             this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
+
+            if (!CurrentSite.Subscription.IsCampaignEnabled)
+                this.NavCampaigns.Visible = false;
         }
 
         protected void OnLogout_Click(Object sender, EventArgs e)

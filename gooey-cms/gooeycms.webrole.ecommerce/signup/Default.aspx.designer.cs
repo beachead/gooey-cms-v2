@@ -193,13 +193,31 @@ namespace Gooeycms.Webrole.Ecommerce {
         protected global::System.Web.UI.WebControls.Panel OptionsPanel;
         
         /// <summary>
+        /// CampaignOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Anthem.CheckBox CampaignOption;
+        
+        /// <summary>
+        /// CampaignOptionCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CampaignOptionCost;
+        
+        /// <summary>
         /// SalesForceOption control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox SalesForceOption;
+        protected global::Anthem.CheckBox SalesForceOption;
         
         /// <summary>
         /// SalesForceCost control.
