@@ -66,7 +66,7 @@
     <div class="nice-box">
         <ol id="distribute-perks">
 	        <li>Choose the site you want to package.</li>
-	        <li>Name your site (Examples: Real Estate Site, Preschool site).</li>
+	        <li>Name your site<br />(Examples: Real Estate Site, Preschool site).</li>
 	        <li>Set a price (Examples: 450.00, 1000.00)</li>
 	        <li>Enter a list of key features (click for example).</li>
 	        <li>Choose a category that best descibes your site.</li>
