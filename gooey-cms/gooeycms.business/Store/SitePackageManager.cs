@@ -302,7 +302,7 @@ namespace Gooeycms.Business.Store
                 CmsSubscription subscription = new CmsSubscription();
                 subscription.Guid = package.Guid;
                 subscription.Created = DateTime.Now;
-                subscription.Subdomain = packageGuid + "-" + owner.Subdomain;
+                subscription.Subdomain = "demo-" + owner.Subdomain;
                 subscription.StagingDomain = subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
                 subscription.SubscriptionPlanId = (int)SubscriptionPlans.Demo;
                 subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
