@@ -21,8 +21,14 @@ ul#themes-panel li.theme {
 	position: relative;
 }
 
+
+li.theme div.theme-header {
+    overflow: auto;
+}
+
 li.theme .logo {
 	margin: 8px 0 0 20px;
+	float: left;
 }
 
 li.theme .title {
@@ -31,7 +37,19 @@ li.theme .title {
 	color: #4395F1;
 	font-size: 1.1em;
 	font-weight: bold;
-	clear: right;
+}
+
+li.theme ul.options-links {
+    margin-right: 20px;
+    float: right;
+}
+
+li.theme ul.options-links li {
+    list-style: none;
+    background: transparent url(../images/small_arrow.png) center right no-repeat;
+    padding-right: 20px;
+    padding-left: 0;
+    text-align: right;
 }
 
 /* theme slideshow */
@@ -39,6 +57,7 @@ li.theme ul.thumbs {
 	width: 344px;
 	height: 167px;
 	margin: 10px 20px 0 20px;
+	padding-left: 0;
 	clear: both;
 }
 
@@ -86,16 +105,38 @@ div.next {
 	left: 361px;
 }
 
-
-li.theme ul.features {
-	margin-left: 0px;
-	margin-top: 10px;
+li.theme div.theme-add-screenshot {
+    padding-left: 20px;
 }
 
-li.theme ul.features li {
+
+li.theme div.features {
+    bottom: 25px;
+    left: 19px;
+    position: absolute;
+}
+
+li.theme div.features ul {
+	background-color: #bfd9f6;
+    bottom: 20px;
+    display: none;
+    margin-left: 10px;
+	margin-top: 10px;
+	opacity: .9;
+    	-moz-opacity: .9;
+	    -webkit-opacity: .9;
+	padding: 10px;
+    position: absolute;
+    width: 306px;
+    z-index: 4;
+    -moz-border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0;
+}
+
+li.theme div.features li {
 	list-style: none;
 	font-size: .9em;
-	background: transparent url(../../images/bullet_features.gif) 0 7px no-repeat;
+	background: transparent url(../images/bullet_features.gif) 0 7px no-repeat;
 	padding-left: 10px;
 }
 

@@ -41,44 +41,55 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-<div style="width:900px;">
-    <div dojoType="dijit.layout.TabContainer" style="width: 100%; height: 100%;" doLayout="false">
-        <div dojoType="dijit.layout.ContentPane" title="My Site Packages" selected="true">
+
+
 		    <ul id="themes-panel">
                 <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" OnItemCommand="SitePackages_OnItemCommand" runat="server">
                     <ItemTemplate>
 			            <li class="theme">    
-                            <div style="padding-left:30px;padding-top:5px;">
-                                <asp:Label ID="LblApprovalStatus" runat="server" />
+
+                            <!-- start: theme-header -->
+                            <div class="theme-header">
+				                <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c0}") %></div>
+				                <div class="logo"><asp:Label ID="LblApprovalStatus" runat="server" /></div>
+				                <ul class="options-links">
+                                    <li><a href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a></li>
+                                    <li><asp:LinkButton ID="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton></li>
+                                </ul>
                             </div>
-				            <div class="title" style="margin-top:0px;">
-                                <%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c}") %>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span style="color:#666666;font-size:11px;"><a style="color:#646464;" href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="BtnDelete" ForeColor="#646464" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton>&nbsp;&nbsp;</span>
+                            <!-- end: theme-header -->
+
+                            <!-- start: preview -->
+                            <div class="preview">
+                                <ul class="thumbs">
+                                    <asp:Repeater ID="ThumbnailImages" runat="server">
+                                        <ItemTemplate>
+                                            <li><img src='<%# Container.DataItem %>' width="344" height="167" alt="" /></li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+				                </ul>
+
+				                <div class="theme-add-screenshot">
+                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="Add Screenshot" runat="server" />
+                                </div>
+				        
+				                <div class="features">
+                                    <a href="#" class="showFeatures">Features</a>
+				                    <ul>
+                                        <asp:Repeater ID="FeatureList" runat="server">
+                                            <ItemTemplate>
+                                                <li><%# Container.DataItem %></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+				                    </ul>
+                                </div>
                             </div>
-				            <ul class="thumbs" style="padding-left:0px;">
-                                <asp:Repeater ID="ThumbnailImages" runat="server">
-                                    <ItemTemplate>
-                                        <li><img src='<%# Container.DataItem %>' width="344" height="167" alt="" /></li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-				            </ul>                    
-                            <div style="padding-left:20px;padding-top:5px;">
-                                <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="Add Screenshot" runat="server" />
-                            </div>
-				            <ul class="thumb-nav"></ul>
-				            <ul class="features" style="margin:0px;">
-                                <asp:Repeater ID="FeatureList" runat="server">
-                                    <ItemTemplate>
-                                        <li><%# Container.DataItem %></li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-				            </ul>
+                            <!-- end: preview -->
+
 			            </li>                                        
                     </ItemTemplate>
                 </asp:Repeater>
             </ul>                        
-        </div>
-    </div>
-</div>
+
+
 </asp:Content>

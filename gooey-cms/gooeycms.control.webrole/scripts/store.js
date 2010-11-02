@@ -27,4 +27,17 @@ $j(function () {
 
 		}
 	);
+
+	$j('#themes-panel').delegate('a.showFeatures', 'hover', function () {
+		var jTrigger = $j(this),
+        jFeature = jTrigger.parent(),
+        jList = jFeature.find('ul');
+		if (jList.is(':visible')) {
+		    jList.slideUp();
+		} else {
+		    jList.slideDown();
+		}
+	});
+
+
 });
