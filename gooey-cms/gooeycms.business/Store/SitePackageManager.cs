@@ -264,10 +264,10 @@ namespace Gooeycms.Business.Store
             return results;
         }
 
-        public IList<Package> GetPackages(string packageType, int lastMaxPos)
+        public IList<Package> GetApprovedPackages(string packageType, int lastMaxPos)
         {
             PackageDao dao = new PackageDao();
-            IList<Package> packages = dao.FindByPackageType(packageType);
+            IList<Package> packages = dao.FindByPackageType(packageType, PackageDao.ApprovalStatus.Approved);
 
             int end = (lastMaxPos + 8);
             if (end > packages.Count)
@@ -307,6 +307,7 @@ namespace Gooeycms.Business.Store
                 subscription.SubscriptionPlanId = (int)SubscriptionPlans.Demo;
                 subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
                 subscription.IsDemo = true;
+                subscription.IsCampaignEnabled = true;
                 subscription.Expires = DateTime.MaxValue;
                 SubscriptionManager.Create(wrapper, subscription);
 
@@ -568,6 +569,29 @@ namespace Gooeycms.Business.Store
             {
                 dao.Save<Package>(package);
                 tx.Commit();
+            }
+        }
+
+        public IList<Package> GetUnapprovedPackages()
+        {
+            PackageDao dao = new PackageDao();
+            return dao.FindByApprovalStatus(false);
+        }
+
+        public void ApprovePackage(Data.Guid guid)
+        {
+            Package package = this.GetPackage(guid);
+            if (package != null)
+            {
+                package.IsApproved = true;
+                package.Approved = DateTime.Now;
+
+                PackageDao dao = new PackageDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Save<Package>(package);
+                    tx.Commit();
+                }
             }
         }
     }

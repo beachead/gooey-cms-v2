@@ -31,6 +31,15 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.View content;
         
         /// <summary>
+        /// content_home control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink content_home;
+        
+        /// <summary>
         /// content_new control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace Gooeycms.Webrole.Control.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View pages;
+        
+        /// <summary>
+        /// pages_home control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink pages_home;
         
         /// <summary>
         /// pages_new control.
@@ -236,5 +254,23 @@ namespace Gooeycms.Webrole.Control.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink templates_images;
+        
+        /// <summary>
+        /// global_admin_developer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View global_admin_developer;
+        
+        /// <summary>
+        /// global_admin_developer_approval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink global_admin_developer_approval;
     }
 }

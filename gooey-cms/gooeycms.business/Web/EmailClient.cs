@@ -86,6 +86,15 @@ namespace Gooeycms.Business.Web
         {
             Send(subject, message.ToString());
         }
+
+        public static EmailClient GetDefaultClient()
+        {
+            EmailClient client = new EmailClient();
+            client.SmtpServer = GooeyConfigManager.SmtpServer;
+            client.SmtpPort = GooeyConfigManager.SmtpPort;
+
+            return client;
+        }
     }
 }
 

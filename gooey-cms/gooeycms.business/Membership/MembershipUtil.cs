@@ -112,6 +112,18 @@ namespace Gooeycms.Business.Membership
             return wrapper;
         }
 
+
+        public static MembershipUserWrapper FindByUserGuid(Data.Guid userGuid)
+        {
+            UserInfoDao dao = new UserInfoDao();
+            UserInfo user = dao.FindByGuid(userGuid);
+            if (user == null)
+                throw new MembershipException("The specified user guid is not valid");
+
+            MembershipUser user2 = System.Web.Security.Membership.GetUser(user.Username);
+            return new MembershipUserWrapper(user, user2);
+        }
+
         public static void ProcessLogin(string username)
         {
             //Immediately expire any existing cookies

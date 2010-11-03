@@ -156,6 +156,7 @@
     <Compile Include="Css\CssManager.cs" />
     <Compile Include="Markup\Dynamic\DynamicContentFormatter.cs" />
     <Compile Include="Javascript\JavascriptManager.cs" />
+    <Compile Include="Membership\MembershipException.cs" />
     <Compile Include="Pages\NavigationControl.cs" />
     <Compile Include="Pages\PageNotFoundException.cs" />
     <Compile Include="Pages\PageRoleWorker.cs" />

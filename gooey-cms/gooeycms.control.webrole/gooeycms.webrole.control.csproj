@@ -113,6 +113,8 @@
     <Content Include="auth\Developer\Site.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\default.aspx" />
+    <Content Include="auth\global-admin\Developer\Default.aspx" />
+    <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\Pages\Default2.aspx" />
     <Content Include="auth\Pages\EditInline.aspx" />
@@ -305,6 +307,20 @@
     </Compile>
     <Compile Include="auth\global-admin\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Developer\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Developer\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Developer\SendEmail.aspx.cs">
+      <DependentUpon>SendEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Developer\SendEmail.aspx.designer.cs">
+      <DependentUpon>SendEmail.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Help\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

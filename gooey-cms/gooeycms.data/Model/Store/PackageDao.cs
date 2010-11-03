@@ -8,6 +8,13 @@ namespace Gooeycms.Data.Model.Store
 {
     public class PackageDao : BaseDao
     {
+        public enum ApprovalStatus
+        {
+            Approved,
+            NotApproved,
+            Any
+        }
+
         public IList<Package> FindByUserId(Int32 userId)
         {
             return base.Session.GetNamedQuery("CmsPackageByUserId").SetParameter("userId", userId).List<Package>();
@@ -24,18 +31,33 @@ namespace Gooeycms.Data.Model.Store
             return base.NewHqlQuery(hql).SetString("guid", packageGuid.Value).UniqueResult<Package>();
         }
 
-        public IList<Package> FindByPackageType(string packageType)
+        public IList<Package> FindByPackageType(string packageType, ApprovalStatus status)
         {
-            String hql = "select package from Package package ";
+            String hql = "select package from Package package where ";
+
+            if (status == ApprovalStatus.Approved)
+                hql = hql + "package.IsApproved = 1 ";
+            else if (status == ApprovalStatus.NotApproved)
+                hql = hql + "package.IsApproved = 0 ";
+            else
+                hql = hql + "(package.IsApproved = 1 or package.IsApproved = 0) ";
+
             if (!String.IsNullOrEmpty(packageType))
-                hql = hql + "where package.PackageTypeString = :type";
-            hql = hql + " order by package.Created desc";
+                hql = hql + "and package.PackageTypeString = :type ";
+
+            hql = hql + "order by package.Created desc";
 
             IQuery query = base.NewHqlQuery(hql);
             if (!String.IsNullOrEmpty(packageType))
                 query.SetString("type", packageType);
 
             return query.List<Package>();
+        }
+
+        public IList<Package> FindByApprovalStatus(bool isApproved)
+        {
+            String hql = "select package from Package package where package.IsApproved = :approved order by package.Created asc";
+            return base.NewHqlQuery(hql).SetBoolean("approved", isApproved).List<Package>();
         }
     }
 }

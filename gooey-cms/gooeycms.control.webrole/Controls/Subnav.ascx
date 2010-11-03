@@ -53,4 +53,10 @@
         </ul>
     </asp:View>
 
+    <asp:View ID="global_admin_developer" runat="server">
+        <ul>
+            <li><asp:HyperLink ID="global_admin_developer_approval" NavigateUrl="~/auth/global-admin/Developer/Default.aspx" Text="Approve Packages" runat="server" /></li>
+        </ul>
+    </asp:View>
+
 </asp:MultiView>
