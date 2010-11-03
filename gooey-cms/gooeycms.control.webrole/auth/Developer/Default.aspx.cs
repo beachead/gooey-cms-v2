@@ -28,16 +28,12 @@ namespace Gooeycms.Webrole.Control.auth.Developer
 
         private void DoDataBind()
         {
-            CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
             UserInfo user = LoggedInUser.Wrapper.UserInfo;
             IList<Package> packages = SitePackageManager.NewInstance.GetSitePackagesForUser(user);
-
-            this.LogoSrc.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
 
             SitePackages.DataSource = packages;
             SitePackages.DataBind();
         }
-
 
 
         protected void SitePackages_OnItemCommand(object source, RepeaterCommandEventArgs e)
@@ -65,24 +61,22 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             if ((item.ItemType == ListItemType.Item) || (item.ItemType == ListItemType.AlternatingItem))
             {
                 Package package = (Package)item.DataItem;
+                CmsSubscription subscription = SubscriptionManager.GetSubscription(package.OwnerSubscriptionId);
+
 
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
                 Label approvalStatus = (Label)item.FindControl("LblApprovalStatus");
+                Image logo = (Image)item.FindControl("Logo");
+                logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
 
                 IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
-
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();
 
                 features.DataSource = package.FeatureList;
                 features.DataBind();
-
-                approvalStatus.Text = (package.IsApproved) ? "Approved on " + package.Approved : "AWAITING APPROVAL";
             }
         }
-
-
-        public CmsSubscription SubscripitonManager { get; set; }
     }
 }

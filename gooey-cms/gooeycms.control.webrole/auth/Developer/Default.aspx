@@ -18,31 +18,29 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
     <div style="overflow: auto;">
-        <div style="float: right; width: 333px;">
-            <div style="float: left; margin-right: 30px;">
-                <asp:Image ID="LogoSrc" runat="server" />
-            </div>
-            <div style="float: left;">
-                <ul class="check">
-	                <li class="alt">You pick the price</li>
-	                <li>You get 70% of sales revenue</li>
-	                <li class="alt">Receive revenue checks quarterly</li>
-	                <li>No charge for free sites</li>
-	                <li class="alt">No credit card fees</li>
-	                <li>No hosting fees</li>
-	                <li class="alt">No marketing fees</li>
-                </ul>
-            </div>
-        </div>
-
-        <h1><img src="/images/build_your_biz.png" width="495px" height="37px" border="0" /></h1>
-        <p>View the sites you have purchased, apply them to your subscriptions or your clients and create new sites or themes to sell.</p>
+        <table>
+            <tr>
+                <td style="vertical-align:top; width:70%; padding-right:20px;">
+                    <h1><img src="/images/build_your_biz.png" width="495px" height="37px" border="0" /></h1>
+                    <p>View the sites you have purchased, apply them to your subscriptions or your clients and create new sites or themes to sell.</p>                
+                </td>
+                <td>
+                    <ul class="check">
+	                    <li class="alt">You pick the price</li>
+	                    <li>You get 70% of sales revenue</li>
+	                    <li class="alt">Receive revenue checks quarterly</li>
+	                    <li>No charge for free sites</li>
+	                    <li class="alt">No credit card fees</li>
+	                    <li>No hosting fees</li>
+	                    <li class="alt">No marketing fees</li>
+                    </ul>                
+                </td>
+            </tr>
+        </table>
     </div>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-
-
 		    <ul id="themes-panel">
                 <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" OnItemCommand="SitePackages_OnItemCommand" runat="server">
                     <ItemTemplate>
@@ -51,7 +49,7 @@
                             <!-- start: theme-header -->
                             <div class="theme-header">
 				                <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c0}") %></div>
-				                <div class="logo"><asp:Label ID="LblApprovalStatus" runat="server" /></div>
+				                <div class="logo"><asp:Image ID="Logo" runat="server" /></div>
 				                <ul class="options-links">
                                     <li><a href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a></li>
                                     <li><asp:LinkButton ID="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton></li>
