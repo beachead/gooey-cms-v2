@@ -33,5 +33,18 @@ namespace Gooeycms.Business.Membership
                 return username;
             }
         }
+
+        public static String Email
+        {
+            get
+            {
+                String email = null;
+                MembershipUser user = System.Web.Security.Membership.GetUser();
+                if (user != null)
+                    email = user.Email;
+
+                return email;
+            }
+        }
     }
 }

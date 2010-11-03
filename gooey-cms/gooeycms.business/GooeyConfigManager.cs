@@ -13,10 +13,28 @@ namespace Gooeycms.Business
     {
         private static Dictionary<String, object> cache = new Dictionary<string, object>();
 
+        private static string GetCachedValue(String key, String defaultValue = null, Boolean required = false)
+        {
+            String result = (String)cache.GetValue<String, Object>(key);
+            if (result == null)
+            {
+                result = GetAsString(key);
+                if (result == null)
+                {
+                    if ((defaultValue == null) && (required))
+                        throw new ArgumentException("The configuration value for " + key + " has not been specified and is a required field.");
+
+                    result = defaultValue;
+                    cache.Add(key, result);
+                }
+                cache[key] = result;
+            }
+            return result;
+        }
 
         public static Nullable<Double> GetAsDouble(String key)
         {
-            String temp = GetAsString(key);
+            String temp = GetCachedValue(key);
 
             Nullable<Double> result = null;
             if (temp != null)
@@ -36,7 +54,7 @@ namespace Gooeycms.Business
         public static Boolean GetAsBoolean(String key, Boolean defaultValue)
         {
             Boolean result = defaultValue;
-            String temp = GetAsString(key);
+            String temp = GetCachedValue(key);
             Boolean.TryParse(temp, out result);
 
             return result;
@@ -77,13 +95,7 @@ namespace Gooeycms.Business
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.DefaultTemplate);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.DefaultTemplate);
-                    if (result == null)
-                    {
-                        result =
+                String defaultTemplate =
 @"
     <div>
         {header}
@@ -94,10 +106,7 @@ namespace Gooeycms.Business
     <div>
         {footer}
     </div>";
-                        cache.Add(ConfigConstants.DefaultTemplate, result);
-                    }
-                }
-                return result;
+                return GetCachedValue(ConfigConstants.DefaultTemplate,defaultTemplate);
             }
         }
 
@@ -105,23 +114,13 @@ namespace Gooeycms.Business
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.DefaultHomepage);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.DefaultHomepage);
-                    if (result == null)
-                    {
-                        result =
+                String defaultHomepage = 
 @"
 ## Welcome to gooey cms. 
 
 This is your home page.
 ";
-                    }
-                    cache.Add(ConfigConstants.DefaultHomepage, result);
-                }
-
-                return result;
+                return GetCachedValue(ConfigConstants.DefaultHomepage,defaultHomepage);
             }
         }
 
@@ -158,17 +157,12 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.DefaultCmsDomain);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.DefaultCmsDomain);
-                    if (String.IsNullOrEmpty(result))
-                        throw new ApplicationException("The default cms domain has not been configured in the configuration table (key=" + ConfigConstants.DefaultCmsDomain + "). This is a required field for the application to function properly.");
-                    if (!result.StartsWith("."))
-                        throw new ApplicationException("The deafult domain must start with a period. The current value is " + result + ", but should be '." + result + "')");
+                String result = GetCachedValue(ConfigConstants.DefaultCmsDomain);
+                if (String.IsNullOrEmpty(result))
+                    throw new ApplicationException("The default cms domain has not been configured in the configuration table (key=" + ConfigConstants.DefaultCmsDomain + "). This is a required field for the application to function properly.");
+                if (!result.StartsWith("."))
+                    throw new ApplicationException("The deafult domain must start with a period. The current value is " + result + ", but should be '." + result + "')");
 
-                    cache.Add(ConfigConstants.DefaultCmsDomain, result);
-                }
                 return result;
             }
         }
@@ -177,15 +171,7 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.SmtpServer);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.SmtpServer);
-                    if (result == null)
-                        throw new ApplicationException("An SMTP server has not been configured in the gooey site configuration. This is a required setting. (key=" + ConfigConstants.SmtpServer);
-
-                    cache.Add(ConfigConstants.SmtpServer, result);
-                }
+                String result = GetCachedValue(ConfigConstants.SmtpServer);
                 return result;
             }
         }
@@ -194,15 +180,7 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.SmtpPort);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.SmtpPort);
-                    if (result == null)
-                        result = "2525";
-
-                    cache.Add(ConfigConstants.SmtpPort, result);
-                }
+                String result = GetCachedValue(ConfigConstants.SmtpPort,"2525");
                 return result;
             }
         }
@@ -211,15 +189,7 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String,Object>(ConfigConstants.PaypalPdt);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.PaypalPdt);
-                    if (String.IsNullOrEmpty(result))
-                        result = "3X14M2n_ysG7k2c5AK0OHj_vf7RvBWTEkkinHwBZL7UccC65sD4IL0pBScK";
-                    cache.Add(ConfigConstants.PaypalPdt, result);
-                }
-
+                String result = GetCachedValue(ConfigConstants.PaypalPdt, "3X14M2n_ysG7k2c5AK0OHj_vf7RvBWTEkkinHwBZL7UccC65sD4IL0pBScK");
                 return result;
             }
         }
@@ -228,15 +198,7 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String,Object>(ConfigConstants.PaypalUrl);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.PaypalUrl);
-                    if (String.IsNullOrEmpty(result))
-                        result = "https://www.sandbox.paypal.com/cgi-bin/webscr";
-                    cache.Add(ConfigConstants.PaypalUrl, result);
-                }
-
+                String result = GetCachedValue(ConfigConstants.PaypalUrl, "https://www.sandbox.paypal.com/cgi-bin/webscr");
                 return result;
             }
         }
@@ -250,15 +212,7 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.GooeyAdminUrl);
-                if (result == null)
-                {
-                    result = GooeyConfigManager.GetAsString(ConfigConstants.GooeyAdminUrl);
-                    if (String.IsNullOrEmpty(result))
-                        result = "control.gooeycms.net";
-                    cache.Add(ConfigConstants.GooeyAdminUrl, result);
-                }
-
+                String result = GetCachedValue(ConfigConstants.PaypalUrl, "control.gooeycms.net");
                 return result;
             }
         }
@@ -267,7 +221,7 @@ This is your home page.
         {
             get
             {
-                String result = GooeyConfigManager.GetAsString(ConfigConstants.SubscriptionProcessor);
+                String result = GetCachedValue(ConfigConstants.SubscriptionProcessor);
                 if (String.IsNullOrEmpty(result))
                     throw new ApplicationException("The configuration processor has not been configured in the configuration table (key=" + ConfigConstants.SubscriptionProcessor + "). This is a required field for the application to function properly.");
 
@@ -291,10 +245,7 @@ This is your home page.
         {
             get
             {
-                String result = GetAsString(ConfigConstants.DefaultPageName);
-                if (String.IsNullOrEmpty(result))
-                    result = "default.aspx";
-
+                String result = GetCachedValue(ConfigConstants.DefaultPageName,"default.aspx");
                 return result;
             }
         }
@@ -303,10 +254,7 @@ This is your home page.
         {
             get
             {
-                String result = GetAsString(ConfigConstants.DefaultStagingPrefix);
-                if (String.IsNullOrEmpty(result))
-                    result = "staging-";
-
+                String result = GetCachedValue(ConfigConstants.DefaultStagingPrefix, "staging-");
                 return result;
             }
         }
@@ -315,10 +263,7 @@ This is your home page.
         {
             get
             {
-                String result = GetAsString(ConfigConstants.TokenEncyrptionKey);
-                if (String.IsNullOrEmpty(result))
-                    result = "token135adfjasdfk#GAGDJ a asfl;jasdf$%WT%WEGJKAFD";
-
+                String result = GetCachedValue(ConfigConstants.TokenEncyrptionKey, "token135adfjasdfk#GAGDJ a asfl;jasdf$%WT%WEGJKAFD");
                 return result;
             }
         }
@@ -327,10 +272,7 @@ This is your home page.
         {
             get
             {
-                String result = GetAsString(ConfigConstants.DefaultSystemFormFields);
-                if (String.IsNullOrEmpty(result))
-                    result = "submit-email,downloadfile,gooeykeycheck,submit,campaign,gooey-filename";
-
+                String result = GetCachedValue(ConfigConstants.DefaultSystemFormFields, "submit-email,downloadfile,gooeykeycheck,submit,campaign,gooey-filename");
                 return result;
             }
         }
@@ -341,7 +283,7 @@ This is your home page.
             {
                 IList<String> categories = new List<String>();
 
-                String result = GetAsString(ConfigConstants.StorePackageCategories);
+                String result = GetCachedValue(ConfigConstants.StorePackageCategories);
                 if (result != null)
                     categories = result.SplitAsList(TextConstants.CommaSeparator);
 
@@ -353,12 +295,7 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.InviteEmailTemplate);
-                if (result == null)
-                {
-                    result = GetAsString(ConfigConstants.InviteEmailTemplate);
-                    cache[ConfigConstants.InviteEmailTemplate] = result;
-                }
+                String result = GetCachedValue(ConfigConstants.InviteEmailTemplate);
                 return result;
             }
             set
@@ -372,18 +309,23 @@ This is your home page.
         {
             get
             {
-                String result = (String)cache.GetValue<String, Object>(ConfigConstants.ApprovedEmailTemplate);
-                if (result == null)
-                {
-                    result = GetAsString(ConfigConstants.ApprovedEmailTemplate);
-                    cache[ConfigConstants.ApprovedEmailTemplate] = result;
-                }
-                return result;
+                return GetCachedValue(ConfigConstants.ApprovedEmailTemplate);
             }
             set
             {
                 Persist(ConfigConstants.ApprovedEmailTemplate, value);
                 cache[ConfigConstants.ApprovedEmailTemplate] = value;
+            }
+        }
+
+        public static class EmailAddresses
+        {
+            public static String SiteAdmin
+            {
+                get
+                {
+                    return GetCachedValue(ConfigConstants.EmailAddressesSiteAdmin, required: true);
+                }
             }
         }
     }

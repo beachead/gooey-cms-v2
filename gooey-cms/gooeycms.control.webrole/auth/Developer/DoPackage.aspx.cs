@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
+using Gooeycms.Business.Web;
+using Gooeycms.Business;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control.auth.Developer
 {
@@ -49,6 +52,21 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             Package package = manager.GetPackage(guid);
             manager.CreatePackage(package, notifier);
             manager.DeployDemoPackage(package.Guid, notifier);
+
+            //Send an email to the admin
+            String body = String.Format(
+@"A new package was created which requires approval.
+Author: {0}
+Package Unique Id: {1}
+Owner Subscription Id: {2}
+Title: {3}
+Date: {4}",LoggedInUser.Username,package.Guid,package.OwnerSubscriptionId,package.Title,package.Created);
+
+
+            EmailClient client = EmailClient.GetDefaultClient();
+            client.ToAddress = GooeyConfigManager.EmailAddresses.SiteAdmin;
+            client.FromAddress = LoggedInUser.Email;
+            client.Send("New Site Package Requiring Approval", body);
         }
 
         [System.Web.Services.WebMethod()]
