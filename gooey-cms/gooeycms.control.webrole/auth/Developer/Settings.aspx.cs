@@ -35,7 +35,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
         }
 
 
-            protected void BtnUploadLogo_Click(Object sender, EventArgs e)
+        protected void BtnUploadLogo_Click(Object sender, EventArgs e)
         {
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
             if (LogoFile.HasFile)
@@ -48,6 +48,8 @@ namespace Gooeycms.Webrole.Control.auth.Developer
 
                 Logos.SaveLogoFile(subscription, name, LogoFile.FileBytes);
             }
+
+            Response.Redirect("./Settings.aspx");
         }
     }
 }

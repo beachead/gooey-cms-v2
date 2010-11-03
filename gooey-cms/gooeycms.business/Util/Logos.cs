@@ -22,7 +22,7 @@ namespace Gooeycms.Business.Util
             else
             {
                 StorageFile logo = GetLogoFile(logoname);
-                result = logo.Url;
+                result = logo.Url + "?" + DateTime.Now.Ticks;
             }
 
             return result;
