@@ -22,15 +22,6 @@ namespace Gooeycms.Webrole.Ecommerce.store {
         protected global::System.Web.UI.WebControls.LinkButton LnkNewUser2;
         
         /// <summary>
-        /// LoginControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Login LoginControl;
-        
-        /// <summary>
         /// SitePackages control.
         /// </summary>
         /// <remarks>
@@ -38,5 +29,14 @@ namespace Gooeycms.Webrole.Ecommerce.store {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater SitePackages;
+        
+        /// <summary>
+        /// LoginControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Login LoginControl;
     }
 }

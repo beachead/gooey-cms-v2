@@ -56,3 +56,5 @@ CREATE TABLE [dbo].[Store_User_Packages] (
 );
 CREATE UNIQUE INDEX unq_user_package ON [Store_User_Packages](user_guid,package_guid);
 CREATE INDEX idx_user_guid ON [Store_User_Packages](user_guid);
+
+insert into configurations (name,value) values ('emailaddresses-siteadmin','geoff@beachead.com');

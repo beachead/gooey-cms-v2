@@ -46,6 +46,13 @@ namespace Gooeycms.Webrole.Control.auth.Developer
                 if (upload.HasFile)
                     SitePackageManager.NewInstance.AddScreenshot(Data.Guid.New(packageGuid), upload.FileName, upload.FileBytes);
             }
+            else if (e.CommandName.Equals("DeleteScreenshot"))
+            {
+                String temp = (String)e.CommandArgument;
+                String[] arr = temp.Split('|');
+                if (arr.Length == 2)
+                    SitePackageManager.NewInstance.DeleteScreenshot(arr[0].Trim(),arr[1].Trim());
+            }
             else if (e.CommandName.Equals("DeletePackage"))
             {
                 String packageGuid = (String)e.CommandArgument;
@@ -70,7 +77,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
                 Image logo = (Image)item.FindControl("Logo");
                 logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
 
-                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
+                IList<Gooeycms.Business.Store.SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();
 

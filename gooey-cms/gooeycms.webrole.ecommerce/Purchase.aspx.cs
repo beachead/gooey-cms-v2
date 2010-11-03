@@ -57,7 +57,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
 
-                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
+                IList<SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
 
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();

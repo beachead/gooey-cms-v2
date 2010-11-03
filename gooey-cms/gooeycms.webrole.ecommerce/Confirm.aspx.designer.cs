@@ -31,15 +31,6 @@ namespace Gooeycms.Webrole.Ecommerce.store {
         protected global::System.Web.UI.WebControls.Label LblPurchaser;
         
         /// <summary>
-        /// BtnPaypalPurchase control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton BtnPaypalPurchase;
-        
-        /// <summary>
         /// LblPrice control.
         /// </summary>
         /// <remarks>
@@ -47,5 +38,14 @@ namespace Gooeycms.Webrole.Ecommerce.store {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblPrice;
+        
+        /// <summary>
+        /// BtnPaypalPurchase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton BtnPaypalPurchase;
     }
 }

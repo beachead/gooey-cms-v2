@@ -63,7 +63,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
                 logo.ImageUrl = Logos.GetImageSrc(owner.LogoName);
 
-                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
+                IList<SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();
 

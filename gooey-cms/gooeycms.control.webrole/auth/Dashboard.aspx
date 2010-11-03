@@ -35,7 +35,7 @@
 				            <ul class="thumbs" style="padding-left:0px;">
                                 <asp:Repeater ID="ThumbnailImages" runat="server">
                                     <ItemTemplate>
-                                        <li><img src='<%# Container.DataItem %>' width="344" height="167" alt="" /></li>
+                                        <li><img src='<%# DataBinder.Eval(Container.DataItem,"Url") %>' width="344" height="167" alt="" /></li>
                                     </ItemTemplate>
                                 </asp:Repeater>
 				            </ul>                    

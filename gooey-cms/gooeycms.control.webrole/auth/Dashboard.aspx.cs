@@ -69,7 +69,7 @@ namespace Gooeycms.Webrole.Control.auth
                 Button applyButton = (Button)item.FindControl("BtnApplyPackage");
                 DropDownList siteList = (DropDownList)item.FindControl("LstSites");
 
-                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
+                IList<Gooeycms.Business.Store.SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
 
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();

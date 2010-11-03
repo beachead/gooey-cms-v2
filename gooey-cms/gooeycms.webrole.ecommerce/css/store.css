@@ -221,7 +221,7 @@ li.theme div.features ul {
 	padding: 10px;
     position: absolute;
     width: 306px;
-    z-index: 4;
+    z-index: 100;
     -moz-border-radius: 10px 10px 0 0;
     border-radius: 10px 10px 0 0;
 }

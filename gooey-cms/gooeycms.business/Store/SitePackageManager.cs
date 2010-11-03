@@ -28,6 +28,13 @@ namespace Gooeycms.Business.Store
 {
     public class SitePackageManager
     {
+        public class PackageScreenshot
+        {
+            public String Name { get; set; }
+            public String PackageGuid { get; set; }
+            public String Url { get; set; }
+        }
+
         public const String PackageContainer = "packaged-sites";
         public const String PackageDirectory = "binary-data";
         public const String PackageExtension = ".zip";
@@ -244,21 +251,46 @@ namespace Gooeycms.Business.Store
             }
         }
 
+        public void DeleteScreenshot(Data.Guid packageGuid, String imageFilename)
+        {
+            Package package = GetPackage(packageGuid);
+            if (package != null)
+            {
+                package.Screenshots = package.Screenshots.Replace(imageFilename + Package.ScreenshotSeparator, "");
+
+                IStorageClient client = StorageHelper.GetStorageClient();
+                client.Delete("package-screenshots", package.PackageTypeString, imageFilename);
+
+                PackageDao dao = new PackageDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Save<Package>(package);
+                    tx.Commit();
+                }
+            }
+        }
+
         public Package GetPackage(Data.Guid packageGuid)
         {
             PackageDao dao = new PackageDao();
             return dao.FindByPackageGuid(packageGuid);
         }
 
-        public IList<String> GetScreenshotUrls(Package package)
+        public IList<PackageScreenshot> GetScreenshotUrls(Package package)
         {
             IStorageClient client = StorageHelper.GetStorageClient();
-            IList<String> results = new List<String>();
+            IList<PackageScreenshot> results = new List<PackageScreenshot>();
 
             foreach (String screenshot in package.ScreenshotList)
             {
                 StorageFile file = client.GetFile("package-screenshots", package.PackageTypeString, screenshot);
-                results.Add(file.Url);
+
+                PackageScreenshot item = new PackageScreenshot();
+                item.Name = file.Filename;
+                item.PackageGuid = package.Guid;
+                item.Url = file.Url;
+
+                results.Add(item);
             }
 
             return results;

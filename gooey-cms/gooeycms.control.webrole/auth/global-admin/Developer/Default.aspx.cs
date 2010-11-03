@@ -66,7 +66,7 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Developer
                 String demourl = "http://" + subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
                 demolink.NavigateUrl = demourl;
 
-                IList<String> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
+                IList<Gooeycms.Business.Store.SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
 
                 thumbnails.DataSource = thumbnailsrc;
                 thumbnails.DataBind();
