@@ -71,6 +71,7 @@ body {
 	position: absolute;
 	top: 0;
 	right: 61px;
+	z-index: 2;
 }
 
 #masthead {
@@ -93,6 +94,7 @@ body {
 	padding-top: 45px;
 	margin-right: 56px;
 	position: relative;
+	z-index: 1;
 }
 
 #footer {
