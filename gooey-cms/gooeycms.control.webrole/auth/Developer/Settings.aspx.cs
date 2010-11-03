@@ -47,9 +47,9 @@ namespace Gooeycms.Webrole.Control.auth.Developer
                     name = System.Guid.NewGuid().ToString() + info.Extension;
 
                 Logos.SaveLogoFile(subscription, name, LogoFile.FileBytes);
+                this.LogoSrc.ImageUrl = Logos.GetImageSrc(name);
+                this.LblStatus.Text = "Successfully updated logo. All of your packages will now use this new logo.";
             }
-
-            Response.Redirect("./Settings.aspx");
         }
     }
 }

@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
     public partial class Settings {
         
         /// <summary>
+        /// LblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStatus;
+        
+        /// <summary>
         /// LogoSrc control.
         /// </summary>
         /// <remarks>

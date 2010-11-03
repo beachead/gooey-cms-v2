@@ -21,12 +21,12 @@ Upload your organization's logo.
 <div style="width:900px;">
    <table>
         <tr>
+            <td><asp:Label ID="LblStatus" runat="server" /></td>
+        </tr>
+        <tr>
             <td valign="top"><asp:Image ID="LogoSrc" runat="server" />&nbsp;Upload Logo:
-            <asp:FileUpload ID="LogoFile" runat="server" /><asp:Button ID="BtnUploadLogo" OnClick="BtnUploadLogo_Click" Text="Upload" runat="server" /></td>
-            <td>
-                
+            <asp:FileUpload ID="LogoFile" runat="server" /><asp:Button ID="BtnUploadLogo" OnClick="BtnUploadLogo_Click" Text="Upload" runat="server" />
             </td>
- <td width="100px;">&nbsp;</td>
       </tr>
     </table>
     <hr />
