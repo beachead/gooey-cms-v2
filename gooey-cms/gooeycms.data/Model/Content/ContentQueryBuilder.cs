@@ -214,36 +214,43 @@ namespace Gooeycms.Data.Model.Content
             }
 
             IList<Int32> temp = query.List<Int32>();
-            HashSet<Int32> uniquePrimaryKeys = new HashSet<Int32>(temp);
-
-            hql = new StringBuilder();
-            hql.Append("select content from CmsContent content where content.Id in (:primaryKeys)");
-            IList<CmsContent> results = base.NewHqlQuery(hql.ToString()).SetParameterList("primaryKeys", (IList)uniquePrimaryKeys.ToList<Int32>()).List<CmsContent>();
-
-            //Check if we need to sort the results
-            if (this.orderBy != null)
+            IList<CmsContent> results = null;
+            if ((temp != null) && (temp.Count > 0))
             {
-                ((List<CmsContent>)results).Sort(delegate(CmsContent left, CmsContent right)
+                HashSet<Int32> uniquePrimaryKeys = new HashSet<Int32>(temp);
+
+                hql = new StringBuilder();
+                hql.Append("select content from CmsContent content where content.Id in (:primaryKeys)");
+                results = base.NewHqlQuery(hql.ToString()).SetParameterList("primaryKeys", (IList)uniquePrimaryKeys.ToList<Int32>()).List<CmsContent>();
+
+                //Check if we need to sort the results
+                if (this.orderBy != null)
                 {
-                    //Pull out the order-by field for each of the items
-                    CmsContentField leftCompareField = left.FindField(this.orderBy);
-                    CmsContentField rightCompareField = right.FindField(this.orderBy);
-                    if (leftCompareField == null)
-                        throw new ApplicationException("Invalid order-by specified in select clause. '" + this.orderBy + "' is not a valid field name");
+                    ((List<CmsContent>)results).Sort(delegate(CmsContent left, CmsContent right)
+                    {
+                        //Pull out the order-by field for each of the items
+                        CmsContentField leftCompareField = left.FindField(this.orderBy);
+                        CmsContentField rightCompareField = right.FindField(this.orderBy);
+                        if (leftCompareField == null)
+                            throw new ApplicationException("Invalid order-by specified in select clause. '" + this.orderBy + "' is not a valid field name");
 
-                    IComparable leftCompare = leftCompareField.GetValueAsComparable();
-                    IComparable rightCompare = rightCompareField.GetValueAsComparable();
+                        IComparable leftCompare = leftCompareField.GetValueAsComparable();
+                        IComparable rightCompare = rightCompareField.GetValueAsComparable();
 
-                    return leftCompare.CompareTo(rightCompare);
-                });
+                        return leftCompare.CompareTo(rightCompare);
+                    });
 
-                if (!this.orderAscending)
-                    ((List<CmsContent>)results).Reverse();
+                    if (!this.orderAscending)
+                        ((List<CmsContent>)results).Reverse();
+                }
+
+                //Check if we need to limit the results
+                if (this.limit > 0)
+                    results = results.Take(this.limit).ToList();
             }
 
-            //Check if we need to limit the results
-            if (this.limit > 0)
-                results = results.Take(this.limit).ToList();
+            if (results == null)
+                results = new List<CmsContent>();
 
             return results;
         }
