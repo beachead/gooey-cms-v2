@@ -21,7 +21,7 @@
         dojo.require("dijit.Tooltip");
     </script>
 </head>
-<body>
+<body class="claro">
     <form id="form1" runat="server">
     <div>
     <div style="padding-top:15px;padding-left:15px;">
@@ -55,7 +55,10 @@
             </anthem:Panel>
             <tr>
                 <td>Campaign Source:</td>
-                <td><asp:TextBox ID="Source" runat="server" /> (internal, google, etc.)</td>
+                <td>
+                <asp:TextBox ID="Source" dojoType="dijit.form.ValidationTextBox" promptMessage="Input the source for this campaign, such as email" required="true" runat="server" /> (internal, google, etc.) 
+                <asp:RequiredFieldValidator ID="RequiredSource" ControlToValidate="Source" Display="None" runat="server" />
+                </td>
             </tr>
             <tr>
                 <td>Link Type:</td>
