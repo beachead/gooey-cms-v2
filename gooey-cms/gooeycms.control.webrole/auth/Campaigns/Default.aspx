@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Default" %>
 <%@ MasterType VirtualPath="~/Secure.master" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
     <gooey:Subnav ID="Subnav" runat="server" NavSection="campaigns" NavItem="listing" />
@@ -9,6 +10,9 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <h1>Create Campaign</h1>
     <p>This page allows you to manage and generate links for campaigns that are currently running on the site.</p>
+
+    <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+    </telerik:RadScriptManager>
 
     <asp:Label ID="Status" ForeColor="Green" runat="server" /><br />
     <a href="./create.aspx">Create New Campaign</a><br /><br />
@@ -41,8 +45,8 @@
                 <ItemTemplate>
                     <asp:HiddenField ID="CampaignId" Value='<%# Eval("Guid") %>' runat="server" />
                     <a href="./Create.aspx?id=<%# Eval("Guid") %>">Edit</a>&nbsp;
-                    <!--<a href="./Elements.aspx?id=<%# Eval("Guid") %>">Elements</a>&nbsp;                    -->
-                    <a href="#" onclick="window.open('./Links.aspx?id=<%# Eval("Guid") %>','','top=15,left=10,width=600,height=250'); return false;">Build Links</a>&nbsp;
+                    <!--<a href="./Elements.aspx?id=<%# Eval("Guid") %>">Elements</a>&nbsp;  -->
+                    <a href="#" onclick="window.radopen('./Links.aspx?id=<%# Eval("Guid") %>');">Build Links</a>&nbsp;
                     <asp:LinkButton ID="DeleteItem" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this campaign?');" Text="Delete" runat="server" />
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
@@ -62,4 +66,7 @@
         SelectMethod="GetCampaigns" 
         TypeName="Gooeycms.Business.Campaigns.CampaignManager">
     </asp:ObjectDataSource>   
+
+    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Height="350" Width="700" ShowContentDuringLoad="false"  VisibleStatusbar="false" Behaviors="Close,Move,Resize" runat="server" EnableShadow="true">
+    </telerik:RadWindowManager>
 </asp:Content>
