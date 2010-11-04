@@ -328,6 +328,9 @@ namespace Gooeycms.Business.Content
                     case CmsContentTypeField.Datetime:
                         result = ContentWebControlManager.GetDateTimeValue(control);
                         break;
+                    case CmsContentTypeField.Dropdown:
+                        result = ContentWebControlManager.GetDropdownValue(control);
+                        break;
                 }
 
                 CmsContentField field = new CmsContentField();

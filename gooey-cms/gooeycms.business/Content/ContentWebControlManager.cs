@@ -144,6 +144,15 @@ namespace Gooeycms.Business.Content
             return result;
         }
 
+        public static string GetDropdownValue(Control control)
+        {
+            if (!(control is DropDownList))
+                throw new ArgumentException("Expected a DropDownList control, but received " + control.GetType().FullName);
+
+            DropDownList dropdown = (DropDownList)control;
+            return (dropdown != null) ? dropdown.SelectedValue : null;
+        }
+
         public static String GetControlId(CmsContentTypeField field)
         {
             return String.Format("Dynamic_{0}_{1}", field.FieldType, field.SystemName.Replace(" ", "_"));
