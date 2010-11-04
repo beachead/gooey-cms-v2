@@ -46,9 +46,6 @@
                     <ItemTemplate>
 			            <li class="theme">    
 
-				                <div class="theme-add-screenshot">
-                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="Add Screenshot" runat="server" />
-                                </div>
                             <!-- start: theme-header -->
                             <div class="theme-header">
 				                <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c0}") %></div>
@@ -66,16 +63,18 @@
                                     <asp:Repeater ID="ThumbnailImages" OnItemCommand="SitePackages_OnItemCommand" runat="server">
                                         <ItemTemplate>
                                             <li>
-                                            <div style="position:absolute;top:5px;left:325px;z-index:105;background-color:#FFFFFF;">
-                                                <asp:LinkButton ID="BtnDeleteScreenshot" CommandName="DeleteScreenshot" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"PackageGuid") + "|" + DataBinder.Eval(Container.DataItem,"Name") %>' runat="server"><span style="color:red;font-weight:bold;">X</span></asp:LinkButton>
-                                            </div>                                            
-                                            <img src='<%# DataBinder.Eval(Container.DataItem,"Url") %>' width="344" height="167" alt="" />
+                                                <asp:LinkButton ID="BtnDeleteScreenshot" CssClass="delete-screenshot" CommandName="DeleteScreenshot" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"PackageGuid") + "|" + DataBinder.Eval(Container.DataItem,"Name") %>' runat="server">X</asp:LinkButton>
+                                                <img src='<%# DataBinder.Eval(Container.DataItem,"Url") %>' width="344" height="167" alt="" />
                                             </li>
                                         </ItemTemplate>
                                     </asp:Repeater>
 				                </ul>
                                 <ul class="thumb-nav"></ul>
 				        
+				                <div class="theme-add-screenshot">
+                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="Add Screenshot" runat="server" />
+                                </div>
+
 				                <div class="features">
                                     <a href="#" class="showFeatures">Features</a>
 				                    <ul>
