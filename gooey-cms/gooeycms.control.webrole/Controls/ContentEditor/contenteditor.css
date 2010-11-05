@@ -1,4 +1,5 @@
-﻿#FormatUl {
+﻿/* Format List */
+#FormatUl {
 	margin: 0px 0 5px 0;
 	padding: 0px;
     overflow: auto;
@@ -11,62 +12,84 @@
 	padding: 0px;
 }
 
-#FormLink {
-    background-image: url(Images/Forms.png);
+/* editor buttons */
+a.formatlink {
+    background: transparent url(Images/spr_editor_icons.png) 0 0 no-repeat;
+    width: 37px;
+    height: 31px;
+    float: left;
+    margin-right: 5px;
 }
-#BoldLink {
-	background-image: url(Images/Bold.png);
-}
+
+
+#BoldLink { background-position: 0 0;}
+#BoldLink:hover { background-position: 0 -30px;}
+
+#ItalicLink { background-position: -47px 0;}
+#ItalicLink:hover { background-position: -47px -30px;}
+
+#UnderlineLink { background-position: -94px 0;}
+#UnderlineLink:hover { background-position: -94px -30px; }
+
+#H1Link { background-position: -188px 0; }
+#H1Link:hover { background-position: -188px -30px; }
+
+#H2Link { background-position: -235px 0;}
+#H2Link:hover { background-position: -235px -30px;}
+
+#UnorderedList { background-position: -282px 0; }
+#UnorderedList:hover { background-position: -282px -30px; }
+
+#OrderedList { background-position: -329px 0;}
+#OrderedList:hover { background-position: -329px -30px;}
+
+#BrLink { background-position: -141px 0; }
+#BrLink:hover { background-position: -141px -30px; }
+
+#ImageLink { background-position: -376px 0 ;}
+#ImageLink:hover { background-position: -376px -30px ;}
+
+#FormLink { background-position: -423px 0 ;}
+#FormLink:hover { background-position: -423px -30px ;}
+
+a.PreviewLink { background-position: -470px 0; }
+a.PreviewLink:hover { background-position: -470px -30px; }
+
+#PopupEditor { background-position: -517px 0 ;}
+#PopupEditor:hover { background-position: -517px -30px ;}
+
+/*
 .PreviewLink {
-	background-image: url(Images/Search.png);
-}
-#ItalicLink {
-	background-image: url(Images/Italic.png);
+	background-position: 0 0;
 }
 #PopupEditor {
-	background-image: url(Images/ExternalLink.gif);
-}
-#UnderlineLink {
-	background-image: url(Images/Underline.png);
+	background-position: 0 0;
 }
 #StrikeLink {
-	background-image: url(Images/Strike.png);
+	background-position: 0 0;
 }
-#H1Link {
-	background-image: url(Images/H1.png);
-}
-#H2Link {
-	background-image: url(Images/H2.png);
-}
+
 #H3Link {
-	background-image: url(Images/H3.png);
+	background-position: 0 0;
 }
 #H4Link {
-	background-image: url(Images/H4.png);
+	background-position: 0 0;
 }
-#UnorderedList {
-	background-image: url(Images/UL.png);
-}
-#OrderedList {
-	background-image: url(Images/File.png);
-}
+
 #SubLink {
-	background-image: url(Images/Sub.png);
+	background-position: 0 0;
 }
 #SupLink {
-	background-image: url(Images/Sup.png);
+	background-position: 0 0;
 }
 #PageListLink {
-	background-image: url(Images/PageLink.png);
+	background-position: 0 0;
 }
 #FileLink {
-	background-image: url(Images/File.png);
+	background-position: 0 0;
 }
 #LinkLink {
 	background-image: url(Images/Link.png);
-}
-#ImageLink {
-	background-image: url(Images/Image.png);
 }
 #ImageUploadLink {
 	background-image: url(Images/image_add.png);
@@ -82,9 +105,6 @@
 }
 #BoxLink {
 	background-image: url(Images/Box.png);
-}
-#BrLink {
-	background-image: url(Images/BR.png);
 }
 #VariableListLink {
 	background-image: url(Images/Snippet.png);
@@ -114,6 +134,7 @@
 #VariableListDiv {
 
 }
+*/
 
     #ImageBrowserToolbar {
         width:100%;
@@ -184,11 +205,6 @@ a.variableListItem {
 	display: block;
 }
 
-a.formatlink:hover {
-	text-decoration: none;
-	border: solid 1px #D9671E;
-}
-
 a.formatlink_underline:hover {
 	text-decoration: none;
 	border: solid 1px #D9671E;
@@ -208,18 +224,7 @@ a.formatlink_underline {
 	text-decoration: underline;
 }
 
-a.formatlink {
-	background-position: center;
-	background-repeat: no-repeat;
-	width: 20px;
-	height: 20px;
-	border: solid 1px #214C9A;
-	text-align:center;
-	/*text-indent: -2000px;*/
-	margin-right: 2px;
-	float: left;
-	text-decoration: none;
-}
+
 
 /* Help Panel */
 
