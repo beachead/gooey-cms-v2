@@ -76,7 +76,7 @@
                 <li><a href="#" onclick="javascript:return __Insert('{BR}','<%=PageMarkupText.TextboxId %>');" title="Linebreak" class="formatlink" id="BrLink"></a></li>
                 <li><a href="#" onclick="javascript:window.open('ImageBrowser.aspx?<%=ImageBrowserQuerystring %>','','width=700,height=500,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;" title="Image Browser" class="formatlink" id="ImageLink"></a></li>
                 <li><a href="#" onclick="javascript:showFormEditor(); return false;" title="Form Editor" class="formatlink" id="FormLink"></a></li>             
-                <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li><% } %>
+                <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" class="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li><% } %>
                 <li><a href="#" onclick="javascript:showEditor(); return false;" title="Popup Editor" class="formatlink" id="PopupEditor"></a></li>
                 <li><a href="#" onclick="javascript:showHelpPanel(); return false;" title="Show Markup Help" id="HelpLink">Help</a></li>
             </ul>
