@@ -122,7 +122,7 @@ namespace Gooeycms.Business.Markup.Forms_v2
         {
             String id = "{form_id}_" + match.Groups[1].Value;
             String isrequired = (String.IsNullOrWhiteSpace(match.Groups[2].Value)) ? "" : "required";
-            String textbox = String.Format(@"<input type=""checkbox"" id=""{0}"" name=""{0}"" class=""form-checkbox {1}"" />", id, isrequired);
+            String textbox = String.Format(@"<input type=""checkbox"" id=""{0}"" name=""{0}"" class=""form-checkbox {1}"" value=""true"" />", id, isrequired);
 
             return textbox;
         }

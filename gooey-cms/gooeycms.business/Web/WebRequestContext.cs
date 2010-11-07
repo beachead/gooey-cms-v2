@@ -57,7 +57,7 @@ namespace Gooeycms.Business.Web
 
         public static CmsUrl CurrentPage()
         {
-            return new CmsUrl(HttpContext.Current.Request.Path);
+            return CmsUrl.Parse(HttpContext.Current.Request.RawUrl);
         }
     }
 }

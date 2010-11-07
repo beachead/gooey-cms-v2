@@ -14,6 +14,7 @@ namespace Gooeycms.Business.Markup.Dynamic
         private CmsContent loadedContent = null;
         private String loadedContentType = null;
 
+        private static Regex WriteIfPageBlock = new Regex(@"<%\s*writeifpage\s*\(\s*[""']?(?<pagename>.*?)[""']?\s*,\s*[""']?(?<text>.*?)[""']?\s*\)\s*%>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         private static Regex ForEachBlock = new Regex(@"<%\s*foreach\s+(?<id>\w+)\s*(where(?<where>.*?))?\s*(orderby(?<orderby>.*?))?\s*(limit(?<limit>.*?))?\s*%>(?<block>.*?)<%\s*next\s*%>", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
         private static Regex Field = new Regex(@"{(?<id>\w+)\.(?<key>\w+)}", RegexOptions.Compiled);
         private static Regex OrderBy = new Regex(@"(?<field>\w+)\s*(?<direction>asc|desc)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -22,6 +23,9 @@ namespace Gooeycms.Business.Markup.Dynamic
         public override StringBuilder Convert(StringBuilder stringBuilder)
         {
             String content = stringBuilder.ToString();
+
+            //Replace any write-if page blocks
+            content = WriteIfPageBlock.Replace(content, new MatchEvaluator(WriteIfPageEvaluator));
 
             //Find any blocks of dynamic code
             content = ForEachBlock.Replace(content, new MatchEvaluator(BlockMatchEvaluator));
@@ -51,6 +55,19 @@ namespace Gooeycms.Business.Markup.Dynamic
         private Boolean Validate(String contentType)
         {
             return (contentType.EqualsCaseInsensitive(loadedContentType));
+        }
+
+        private String WriteIfPageEvaluator(Match match)
+        {
+            String pagename = match.Groups["pagename"].Value;
+            String text = match.Groups["text"].Value;
+
+            //Check if the page name matches the current page being requested
+            CmsUrl url = WebRequestContext.CurrentPage();
+            if (url.Path.EndsWith(pagename, StringComparison.InvariantCultureIgnoreCase))
+                return text;
+            else
+                return "";
         }
 
         private string BlockMatchEvaluator(Match match)
