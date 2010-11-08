@@ -36,9 +36,44 @@ namespace Gooeycms.Webrole.Control.auth.Content
             HiddenField field = GridViewHelper.FindControl<HiddenField>(e.CommandSource, "ExistingFieldId");
             switch (e.CommandName)
             {
+                case "editid":
+                    Edit(Int32.Parse(field.Value));
+                    break;
                 case "deleteid":
                     Delete(Int32.Parse(field.Value));
                     break;
+            }
+        }
+
+        private void Edit(int primaryKey)
+        {
+            String guid = Request.QueryString["tid"];
+            CmsContentTypeField field = ContentManager.Instance.GetContentTypeField(guid, primaryKey);
+            if (field != null)
+            {
+                this.ExistingId.Value = primaryKey.ToString();
+                this.FieldType.SelectedValue = field.FieldType;
+
+                this.DropdownFields.Visible = false;
+                this.TextAreaFields.Visible = false;
+                if (field.FieldType.Equals("Dropdown"))
+                {
+                    this.DropdownFields.Visible = true;
+                    this.Options.Text = field._SelectOptions;
+                }
+                else if (field.FieldType.Equals("Textarea"))
+                {
+                    this.TextAreaFields.Visible = true;
+                    this.Rows.Text = field.Rows.ToString();
+                    this.Cols.Text = field.Columns.ToString();
+                }
+                
+                this.TxtName.Text = field.Name;
+                this.TxtSystemName.Text = field.SystemName;
+                this.TxtSystemName.Enabled = false;
+                this.Description.Text = field.Description;
+                this.ChkRequiredField.Checked = field.IsRequired;
+                this.Add.Text = "Update Field";
             }
         }
 
@@ -48,6 +83,23 @@ namespace Gooeycms.Webrole.Control.auth.Content
             ContentManager.Instance.DeleteField(guid, primaryKey);
 
             this.FieldTable.DataBind();
+        }
+
+        protected void BtnAddNew_Click(object sender, EventArgs e)
+        {
+            this.DropdownFields.Visible = false;
+            this.TextAreaFields.Visible = false;
+            this.FieldType.SelectedIndex = 0;
+            this.TxtName.Text = "";
+            this.TxtSystemName.Text = "";
+            this.TxtSystemName.Enabled = true;
+            this.Description.Text = "";
+            this.ChkRequiredField.Checked = false;
+            this.Cols.Text = "";
+            this.Rows.Text = "";
+            this.Options.Text = "";
+            this.ExistingId.Value = "";
+            this.Add.Text = "Add Field";
         }
 
         /// <summary>
@@ -60,7 +112,13 @@ namespace Gooeycms.Webrole.Control.auth.Content
             String guid = Request.QueryString["tid"];
             CmsContentType type = ContentManager.Instance.GetContentType(guid);
 
-            CmsContentTypeField field = new CmsContentTypeField();
+            int existing = 0;
+            Int32.TryParse(this.ExistingId.Value, out existing);
+
+            CmsContentTypeField field = ContentManager.Instance.GetContentTypeField(guid, existing);
+            if (field == null)
+                field = new CmsContentTypeField();
+
             field.Parent = type;
             field.SystemName = this.TxtSystemName.Text;
             field.Name = this.TxtName.Text;
@@ -70,10 +128,7 @@ namespace Gooeycms.Webrole.Control.auth.Content
 
             ContentManager.Instance.AddContentTypeField(type, field);
 
-            this.FieldType.SelectedIndex = 0;
-            this.TxtName.Text = "";
-            this.TxtSystemName.Text = "";
-            this.Description.Text = "";
+            BtnAddNew_Click(sender, e);
 
             this.FieldTable.DataBind();
         }

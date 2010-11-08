@@ -8,6 +8,11 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <h1>Manage Content Type Fields</h1>
+
+<div style="padding-bottom:5px;">
+<asp:Button ID="BtnAddNew" Text="Add New Field" CausesValidation="false" OnClick="BtnAddNew_Click" runat="server" />
+</div>
+
 <div dojoType="dijit.TitlePane" title="Manage Existing Fields">
 <asp:GridView ID="FieldTable" runat="server" AutoGenerateColumns="False" 
         CssClass="data" ForeColor="#333333" 
@@ -33,6 +38,7 @@
             <HeaderStyle HorizontalAlign="Left" />
             <ItemTemplate>
                 <asp:HiddenField ID="ExistingFieldId" Value='<%# Eval("Id") %>' Visible='<%# Eval("IsUserField") %>' runat="server" />
+                <asp:LinkButton ID="EditItem" CommandName="editid" Text="edit" Visible='<%# Eval("IsUserField") %>' CausesValidation="false" runat="server" />
                 <asp:LinkButton ID="DeleteItem" CommandName="deleteid" Text="delete" Visible='<%# Eval("IsUserField") %>' OnClientClick="return confirm('Are you sure you want to delete this field? This will not impact existing CMS content');" CausesValidation="false" runat="server" />
             </ItemTemplate>
         </asp:TemplateField>
@@ -115,11 +121,13 @@
         </tr>
         </asp:Panel>
         <tr class="controls">
-            <td colspan="2">
+            <td>&nbsp;</td>
+            <td style="text-align:left;padding-left:170px;">
                 <asp:HiddenField ID="ExistingId" runat="server" />
-                <asp:Button ID="Add" Text="Save" OnClick="Add_Click" runat="server" />
+                <asp:Button ID="Add" Text="Add Field" OnClick="Add_Click" runat="server" />
             </td>
         </tr>
     </table>    
 </div>
+<br />
 </asp:Content>
