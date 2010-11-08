@@ -14,6 +14,12 @@ namespace Gooeycms.Webrole.Control.auth.Content
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                String guid = Request.QueryString["tid"];
+                CmsContentType type = ContentManager.Instance.GetContentType(guid);
+                this.LblContentTypeName.Text = type.Name + " (" + type.Description + ")";
+            }
         }
 
         protected void FieldType_Change(object sender, EventArgs e)

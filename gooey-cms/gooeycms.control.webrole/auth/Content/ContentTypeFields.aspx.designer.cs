@@ -22,6 +22,15 @@ namespace Gooeycms.Webrole.Control.auth.Content {
         protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
         
         /// <summary>
+        /// LblContentTypeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblContentTypeName;
+        
+        /// <summary>
         /// BtnAddNew control.
         /// </summary>
         /// <remarks>
