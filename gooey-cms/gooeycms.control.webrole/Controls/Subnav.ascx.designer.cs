@@ -112,6 +112,42 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.HyperLink pages_manageredirects;
         
         /// <summary>
+        /// promotion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View promotion;
+        
+        /// <summary>
+        /// promotion_promotion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink promotion_promotion;
+        
+        /// <summary>
+        /// promotion_managepages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink promotion_managepages;
+        
+        /// <summary>
+        /// promotion_managecontent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink promotion_managecontent;
+        
+        /// <summary>
         /// campaigns control.
         /// </summary>
         /// <remarks>

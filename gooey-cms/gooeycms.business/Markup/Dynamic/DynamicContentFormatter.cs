@@ -101,6 +101,7 @@ namespace Gooeycms.Business.Markup.Dynamic
                                              .SetOrderBy(orderByField, orderByDirection)
                                              .SetLimit(limit)
                                              .SetWhereClause(where)
+                                             .SetApprovedOnly(CurrentSite.IsProductionHost)
                                              .ExecuteQuery();
 
             StringBuilder replacement = new StringBuilder();

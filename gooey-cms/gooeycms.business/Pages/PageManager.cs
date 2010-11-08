@@ -27,6 +27,17 @@ namespace Gooeycms.Business.Pages
             get { return PageManager.instance; }
         }
 
+        public IList<CmsPage> GetUnapprovedPages(Data.Guid siteGuid)
+        {
+            CmsPageDao dao = new CmsPageDao();
+            return dao.FindUnapprovedPages(siteGuid);
+        }
+
+        public IList<CmsPage> GetUnapprovedPages()
+        {
+            return GetUnapprovedPages(CurrentSite.Guid);
+        }
+
         public IList<CmsPage> GetPages(Data.Guid siteGuid, CmsUrl url)
         {
             CmsPageDao dao = new CmsPageDao();
@@ -69,10 +80,15 @@ namespace Gooeycms.Business.Pages
 
         public CmsPage GetPage(Data.Guid pageGuid, Boolean loadData)
         {
+            return GetPage(CurrentSite.Guid, pageGuid, loadData);
+        }
+
+        public CmsPage GetPage(Data.Guid siteGuid, Data.Guid pageGuid, Boolean loadData)
+        {
             CmsPageDao dao = new CmsPageDao();
             Boolean approvedOnly = !(CurrentSite.IsStagingHost);
 
-            CmsPage result = dao.FindByPageGuid(pageGuid);
+            CmsPage result = dao.FindByPageGuid(siteGuid, pageGuid);
             if (loadData)
                 LoadPageData(result);
 
@@ -80,7 +96,7 @@ namespace Gooeycms.Business.Pages
             {
                 if (!result.IsApproved)
                 {
-                    Logging.Info("A request was made for page: " + pageGuid + ", (owner=" + result.SubscriptionId +") however, this page is not approved and will not be returned.");
+                    Logging.Info("A request was made for page: " + pageGuid + ", (owner=" + result.SubscriptionId + ") however, this page is not approved and will not be returned.");
                     result = null;
                 }
             }
@@ -179,6 +195,45 @@ namespace Gooeycms.Business.Pages
                 
                 CmsSiteMap.Instance.Remove(path);
                 this.Remove(page);
+            }
+        }
+
+        public void Delete(Data.Guid pageGuid)
+        {
+            Delete(CurrentSite.Guid, pageGuid);
+        }
+
+        /// <summary>
+        /// Deletes a specific page from the system
+        /// </summary>
+        /// <param name="pageGuid"></param>
+        public void Delete(Data.Guid siteGuid, Data.Guid pageGuid)
+        {
+            String container = SiteHelper.GetStorageKey(SiteHelper.PageContainerKey, siteGuid.Value);
+            IStorageClient client = StorageHelper.GetStorageClient();
+            CmsPageDao dao = new CmsPageDao();
+
+            CmsPage page = GetPage(pageGuid, false);
+            if (page != null)
+            {
+                if (!page.SubscriptionId.Equals(siteGuid.Value))
+                    throw new ArgumentException("This page does not belong to the current subscription and can not be retrieved.");
+
+                client.Delete(container, StorageClientConst.RootFolder, page.Guid);
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<CmsPage>(page);
+                    tx.Commit();
+                }
+
+                //Check if there are other versions of this page, if not, delete the sitepath as well
+                IList<CmsPage> pages = GetPages(siteGuid, page.Url);
+                if ((pages == null) || (pages.Count == 0))
+                {
+                    CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
+                    if (path != null)
+                        CmsSiteMap.Instance.Remove(path);
+                }
             }
         }
 
@@ -384,6 +439,22 @@ namespace Gooeycms.Business.Pages
 
             //Delete the directory itself from the sitemap
             CmsSiteMap.Instance.Remove(folder);
+        }
+
+        public void Approve(Data.Guid siteGuid, Data.Guid pageGuid, String approvedBy)
+        {
+            CmsPage page = GetPage(pageGuid, false);
+            if (page != null)
+            {
+                page.ApprovedBy = approvedBy;
+                page.IsApproved = true;
+                Save(page);
+            }
+        }
+
+        public void Approve(Data.Guid guid, string approvedBy)
+        {
+            Approve(CurrentSite.Guid, guid, approvedBy);
         }
     }
 }
