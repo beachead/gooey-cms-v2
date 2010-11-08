@@ -322,19 +322,29 @@ namespace Gooeycms.Business.Store
             {
                 //Get the owner's subscription for this package
                 CmsSubscription owner = SubscriptionManager.GetSubscription(package.OwnerSubscriptionId);
-
                 DoNotify(notifier, "Creating Demo Account");
+
                 //Check if our demo account exists
                 MembershipUserWrapper wrapper = MembershipUtil.FindByUsername(MembershipUtil.DemoAccountUsername);
                 if (!wrapper.IsValid())
                     wrapper = MembershipUtil.CreateDemoAccount();
-                
+                                
+                //Find a free subdomain name
+                String subdomain = "demo-" + owner.Subdomain;
+                Boolean isAvailable = SubscriptionManager.IsSubdomainAvailable(subdomain);
+                int i = 1;
+                while (!isAvailable)
+                {
+                    i++;
+                    subdomain = "demo" + i.ToString() + "-" + owner.Subdomain;
+                    isAvailable = SubscriptionManager.IsSubdomainAvailable(subdomain);
+                }
 
                 //Create a new subscription for the demo account
                 CmsSubscription subscription = new CmsSubscription();
                 subscription.Guid = package.Guid;
                 subscription.Created = DateTime.Now;
-                subscription.Subdomain = "demo-" + owner.Subdomain;
+                subscription.Subdomain = subdomain;
                 subscription.StagingDomain = subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
                 subscription.SubscriptionPlanId = (int)SubscriptionPlans.Demo;
                 subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
