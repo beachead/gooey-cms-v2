@@ -19,12 +19,6 @@ namespace Gooeycms.Data.Model.Content
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("typeGuid", filter.Guid).List<CmsContent>();
         }
 
-        public CmsContent FindByGuid(Guid guid)
-        {
-            String hql = "select content from CmsContent content where content.Guid = :guid";
-            return base.NewHqlQuery(hql).SetString("guid", guid.Value).UniqueResult<CmsContent>();
-        }
-
         public CmsContent FindByGuid(Guid siteId, Guid guid)
         {
             String hql = "select content from CmsContent content where content.SubscriptionId = :siteGuid and content.Guid = :guid";
@@ -42,6 +36,12 @@ namespace Gooeycms.Data.Model.Content
 
             String hql = "select item from CmsContent item join item._Fields fields where item.SubscriptionId = :guid and fields.Name = 'filename' and fields.Value = :filename";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("filename", filename).UniqueResult<CmsContent>();
+        }
+
+        public IList<CmsContent> FindUnapprovedContent(Guid siteGuid)
+        {
+            String hql = "select content from CmsContent content where content.SubscriptionId = :guid and content.IsApproved = 0";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsContent>();
         }
     }
 }

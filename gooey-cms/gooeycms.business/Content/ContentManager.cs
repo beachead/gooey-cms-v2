@@ -36,6 +36,12 @@ namespace Gooeycms.Business.Content
 
             return ContentManager.Instance.GetExistingContent(type);
         }
+
+
+        public IList<CmsContent> GetUnapprovedContent()
+        {
+            return ContentManager.Instance.GetUnapprovedContent();
+        }
     }
 
     public enum ContentTypeFilter
@@ -343,10 +349,15 @@ namespace Gooeycms.Business.Content
             }
         }
 
-        public CmsContent GetContent(Data.Guid guid)
+        public CmsContent GetContent(Data.Guid siteGuid, Data.Guid contentGuid)
         {
             CmsContentDao dao = new CmsContentDao();
-            return dao.FindByGuid(guid);
+            return dao.FindByGuid(siteGuid,contentGuid);
+        }
+
+        public CmsContent GetContent(Data.Guid guid)
+        {
+            return GetContent(CurrentSite.Guid, guid);
         }
 
         public void Update(CmsContent item, Table table)
@@ -405,6 +416,33 @@ namespace Gooeycms.Business.Content
         {
             CmsContentDao dao = new CmsContentDao();
             return dao.FindAllContent(siteGuid);
+        }
+
+        public IList<CmsContent> GetUnapprovedContent(Data.Guid siteGuid)
+        {
+            CmsContentDao dao = new CmsContentDao();
+            return dao.FindUnapprovedContent(siteGuid);
+        }
+
+        public IList<CmsContent> GetUnapprovedContent()
+        {
+            return GetUnapprovedContent(CurrentSite.Guid);
+        }
+
+        public void Approve(Data.Guid siteGuid, Data.Guid contentGuid, String approvedBy)
+        {
+            CmsContent content = GetContent(siteGuid,contentGuid);
+            if (content != null)
+            {
+                content.Author = approvedBy;
+                content.IsApproved = true;
+                Save(content);
+            }
+        }
+
+        public void Approve(Data.Guid guid, string approvedBy)
+        {
+            Approve(CurrentSite.Guid, guid, approvedBy);
         }
     }
 }

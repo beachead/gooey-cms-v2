@@ -29,5 +29,15 @@ namespace Gooeycms.Business.Adapters
 
             return results;
         }
+
+        public IList<PageAdapter> GetUnapprovedPages()
+        {
+            IList<PageAdapter> results = new List<PageAdapter>();
+            IList<CmsPage> pages = PageManager.Instance.GetUnapprovedPages();
+            foreach (CmsPage page in pages)
+                results.Add(new PageAdapter(page));
+
+            return results;
+        }
     }
 }

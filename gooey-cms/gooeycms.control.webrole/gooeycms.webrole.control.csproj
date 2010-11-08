@@ -121,6 +121,7 @@
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
     <Content Include="auth\Pages\Stylesheet.aspx" />
+    <Content Include="auth\Promotion\Default.aspx" />
     <Content Include="auth\Themes\Footer.aspx" />
     <Content Include="auth\Themes\Header.aspx" />
     <Content Include="auth\Themes\ImageBrowser.aspx" />
@@ -377,6 +378,13 @@
     </Compile>
     <Compile Include="auth\Pages\Stylesheet.aspx.designer.cs">
       <DependentUpon>Stylesheet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Promotion\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Promotion\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Themes\Footer.aspx.cs">
       <DependentUpon>Footer.aspx</DependentUpon>

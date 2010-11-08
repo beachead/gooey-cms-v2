@@ -437,5 +437,10 @@ namespace Gooeycms.Business.Util
 
             return name;
         }
+
+        public static void RefreshPageCache()
+        {
+            SitePageCacheRefreshInvoker.InvokeRefresh(Guid.Value, SitePageRefreshRequest.PageRefreshType.All);
+        }
     }
 }

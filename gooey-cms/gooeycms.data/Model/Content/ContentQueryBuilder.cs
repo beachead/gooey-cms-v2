@@ -47,7 +47,8 @@ namespace Gooeycms.Data.Model.Content
         private Boolean orderAscending = true;
         private String contentType;
         private Int32 limit = 0;
-        private IList<WhereInfo> whereClauses = new List<WhereInfo>(); 
+        private IList<WhereInfo> whereClauses = new List<WhereInfo>();
+        private Boolean approvedOnly = false;
 
         public ContentQueryBuilder SetSubscriptionGuid(Guid guid)
         {
@@ -71,6 +72,12 @@ namespace Gooeycms.Data.Model.Content
         public ContentQueryBuilder SetLimit(int value)
         {
             this.limit = value;
+            return this;
+        }
+
+        public ContentQueryBuilder SetApprovedOnly(bool approvedOnly)
+        {
+            this.approvedOnly = approvedOnly;
             return this;
         }
         public ContentQueryBuilder SetWhereClause(String clause)
@@ -144,6 +151,11 @@ namespace Gooeycms.Data.Model.Content
             StringBuilder hql = new StringBuilder();
             hql.Append("select distinct content.Id from CmsContent content join content._Fields fields where content.SubscriptionId = :subscriptionGuid ");
             hql.Append("and content.ContentType.Name = :contentTypeName ");
+
+            if (this.approvedOnly)
+            {
+                hql.Append(" and content.IsApproved = 1 ");
+            }
 
             //Check if we have a where clause which needs to be added
             if (this.whereClauses.Count > 0)

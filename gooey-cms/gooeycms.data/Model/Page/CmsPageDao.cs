@@ -12,14 +12,18 @@ namespace Gooeycms.Data.Model.Page
         /// <param name="approvedOnly"></param>
         public CmsPage FindLatesBySiteAndHash(Data.Guid guid, Data.Hash hash, bool approvedOnly)
         {
-            String hql = "select page from CmsPage page where page.SubscriptionId = :guid and page.UrlHash = :hash order by page.Id desc";
+            String approvedQuery = "";
+            if (approvedOnly)
+                approvedQuery = " and page.IsApproved = 1";
+
+            String hql = "select page from CmsPage page where page.SubscriptionId = :guid" + approvedQuery + " and page.UrlHash = :hash order by page.Id desc";
             return base.NewHqlQuery(hql).SetString("guid", guid.Value).SetString("hash", hash.Value).SetMaxResults(1).UniqueResult<CmsPage>();
         }
 
-        public CmsPage FindByPageGuid(Data.Guid pageGuid)
+        public CmsPage FindByPageGuid(Data.Guid siteGuid, Data.Guid pageGuid)
         {
-            String hql = "select page from CmsPage page where page.Guid = :pageGuid";
-            return base.NewHqlQuery(hql).SetString("pageGuid", pageGuid.Value).UniqueResult<CmsPage>();
+            String hql = "select page from CmsPage page where page.SubscriptionId = :siteGuid and page.Guid = :pageGuid";
+            return base.NewHqlQuery(hql).SetString("siteGuid",siteGuid.Value).SetString("pageGuid", pageGuid.Value).UniqueResult<CmsPage>();
         }
 
         public System.Collections.Generic.IList<CmsPage> SearchByUrl(Data.Guid siteGuid, string filter)
@@ -32,10 +36,16 @@ namespace Gooeycms.Data.Model.Page
             return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid.Value).SetString("filter", filter).List<CmsPage>();
         }
 
-        public System.Collections.Generic.IList<CmsPage> FindUnapprovedPages(Guid siteGuid, Hash hash)
+        public System.Collections.Generic.IList<CmsPage> FindUnapprovedPages(Guid siteGuid, Hash urlHash)
         {
             String hql = "select page from CmsPage page where page.IsApproved = 0 and page.SubscriptionId = :guid and page.UrlHash = :hash order by page.DateSaved desc";
-            return base.NewHqlQuery(hql).SetString("guid",siteGuid.Value).SetString("hash", hash.Value).List<CmsPage>();
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("hash", urlHash.Value).List<CmsPage>();
+        }
+
+        public System.Collections.Generic.IList<CmsPage> FindUnapprovedPages(Guid siteGuid)
+        {
+            String hql = "select page from CmsPage page where page.IsApproved = 0 and page.SubscriptionId = :guid  order by page.DateSaved desc";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsPage>();
         }
 
         public System.Collections.Generic.IList<CmsPage> FindAllPages(Guid siteGuid, Hash hash)
