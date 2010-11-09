@@ -4,6 +4,9 @@
 	<script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
 	<script type="text/javascript" src="../../scripts/store.js"></script>
+    <script type="text/javascript" type="text/javascript">
+        dojo.require("dojox.timing._base");
+    </script>
 </asp:Content>
 
 <asp:Content ID="localCSS" ContentPlaceHolderID="localCSS" runat="server">
@@ -50,7 +53,7 @@
 </div>
 
 <div>
-<anthem:Button ID="BtnSave" Text="Package &amp; Deploy" OnClick="BtnSave_Click" PostCallBackFunction="deploy_site"  runat="server" />
+<anthem:Button ID="BtnSave" Text="Package &amp; Deploy" OnClick="BtnSave_Click" PostCallBackFunction="deploySite"  runat="server" />
 <anthem:HiddenField ID="SavedPackageGuid" AutoUpdateAfterCallBack="true" runat="server" />
 </div>
       
@@ -84,9 +87,19 @@
 
 
 <script language="javascript" type="text/javascript">
-    function deploy_site() {
+    function _deploy_site() {
         window.open('./dopackage.aspx?g=' + document.getElementById('<%=SavedPackageGuid.ClientID %>').value, '', 'top=40,left=200,width=450,height=115,scrollbars=no');
         window.location = './default.aspx';
+    }
+
+    function deploySite() {
+        var dlgDeploy = new dijit.Dialog({
+            title: "Site Deployment",
+            href: './dopackage.aspx?g=' + document.getElementById('<%=SavedPackageGuid.ClientID %>').value
+        });
+        dlgDeploy.show();
+        return false;
+    
     }
 </script>
 
