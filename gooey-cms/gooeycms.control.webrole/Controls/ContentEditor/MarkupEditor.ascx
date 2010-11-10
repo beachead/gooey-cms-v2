@@ -45,6 +45,10 @@
         #waitDialog .dijitDialogTitleBar .dijitDialogCloseIcon {
             display:none;
         }
+        #helpContentsList {
+            margin: 0;
+            padding: 0;
+        }
     </style>
     <div dojoType="dijit.Dialog" id="waitDialog" closable="false" draggable="false">
         Please wait while your preview is generated.
@@ -59,7 +63,7 @@
     </div>
 
     <% if (ShowPreviewWindow) { %>
-    <div dojoType="dijit.Dialog" id="preview-panel" style="width:90%;height:90%;border:0px;"  title="Preview Window" closeable="true">
+    <div dojoType="dijit.Dialog" id="preview-panel" style="width:90%;height:90%;border:0px;"  title="Page Preview" closeable="true">
             <iframe id="preview-frame" src=""></iframe>
     </div>
     <div dojoType="dijit.TitlePane" title="Markup Editor" style="position: relative;">
@@ -69,14 +73,14 @@
                 <li><a href="#" onclick="javascript:return __Wrap('**', '**','<%=PageMarkupText.TextboxId %>');" title="Bold" class="formatlink" id="BoldLink"></a></li>
                 <li><a href="#" onclick="javascript:return __Wrap('*', '*','<%=PageMarkupText.TextboxId %>');" title="Italics" class="formatlink" id="ItalicLink"></a></li>
                 <li><a href="#" onclick="javascript:return __Wrap('__ ', ' __','<%=PageMarkupText.TextboxId %>');" title="Underline" class="formatlink" id="UnderlineLink"></a></li>
-                <li><a href="#" onclick="javascript:return __Wrap('# ', '','<%=PageMarkupText.TextboxId %>');" title="H1" class="formatlink" id="H1Link"></a></li>
-                <li><a href="#" onclick="javascript:return __Wrap('## ', '','<%=PageMarkupText.TextboxId %>');" title="H2" class="formatlink" id="H2Link"></a></li>
+                <li><a href="#" onclick="javascript:return __Wrap('# ', '','<%=PageMarkupText.TextboxId %>');" title="H1 Heading" class="formatlink" id="H1Link"></a></li>
+                <li><a href="#" onclick="javascript:return __Wrap('## ', '','<%=PageMarkupText.TextboxId %>');" title="H2 Heading" class="formatlink" id="H2Link"></a></li>
                 <li><a href="#" onclick="javascript:return __Wrap('\r\n* Item 1\r\n* Item 2 ', '\r\n','<%=PageMarkupText.TextboxId %>');" title="Unordered List" class="formatlink" id="UnorderedList"></a></li>
                 <li><a href="#" onclick="javascript:return __Wrap('\r\n1. Item 1\r\n2. Item 2 ', '\r\n','<%=PageMarkupText.TextboxId %>');" title="Ordered List" class="formatlink" id="OrderedList"></a></li>
-                <li><a href="#" onclick="javascript:return __Insert('{BR}','<%=PageMarkupText.TextboxId %>');" title="Linebreak" class="formatlink" id="BrLink"></a></li>
+                <li><a href="#" onclick="javascript:return __Insert('{BR}','<%=PageMarkupText.TextboxId %>');" title="Line Break" class="formatlink" id="BrLink"></a></li>
                 <li><a href="#" onclick="javascript:window.open('ImageBrowser.aspx?<%=ImageBrowserQuerystring %>','','width=700,height=500,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;" title="Image Browser" class="formatlink" id="ImageLink"></a></li>
                 <li><a href="#" onclick="javascript:showFormEditor(); return false;" title="Form Editor" class="formatlink" id="FormLink"></a></li>             
-                <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" class="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Preview Window" CssClass="formatlink PreviewLink" /></li><% } %>
+                <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" class="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Page Preview" CssClass="formatlink PreviewLink" /></li><% } %>
                 <li><a href="#" onclick="javascript:showEditor(); return false;" title="Popup Editor" class="formatlink" id="PopupEditor"></a></li>
                 <li><a href="#" onclick="javascript:showHelpPanel(); return false;" title="Show Markup Help" id="HelpLink">Help</a></li>
             </ul>
@@ -214,14 +218,20 @@
 
                         <tr>
                         <td class="first">Link</td>
-                        <td>[link text](http://wwww.gooeycms.com)</td>
+                        <td>[link text](http://www.gooeycms.com)</td>
                         <td<a href="http://www.gooeycms.com">link text</a></td>
                         </tr>
 
                         <tr>
-                        <td class="first">Link</td>
-                        <td>[link text](http://wwww.gooeycms.com "a great CMS!")</td>
-                        <td<a href="http://www.gooeycms.com" title="a great CMS!">link text</a></td>
+                        <td class="first">Link w/ Title</td>
+                        <td>[link text](http://www.gooeycms.com "build your business one website at a time!")</td>
+                        <td><a href="http://www.gooeycms.com" title="build your business one website at a time">link text</a></td>
+                        </tr>
+
+                        <tr>
+                        <td class="first">Linked Image</td>
+                        <td>[ ![alt text](/images/progress_green.gif "build your business one website at a time") ](http://gooeycms.com "gooey cms")</td>
+                        <td><a href="http://www.gooeycms.com" title="build your business one website at a time"><img src="/images/progress_green.gif" title="gooey cms" /></a></td>
                         </tr>
                         </table>
                     </li>
@@ -235,13 +245,13 @@
                         </tr>
 
                         <tr>
-                        <td class="first">Link</td>
+                        <td class="first">Image</td>
                         <td>![alt text](/images/progress_green.gif)</td>
                         <td><img src="/images/progress_green.gif" alt="alt text"></td>
                         </tr>
 
                         <tr>
-                        <td class="first">Link</td>
+                        <td class="first">Image w/ Alt Text</td>
                         <td>![alt text](/images/progress_green.gif "Green Progress Indicator")</td>
                         <td><img src="/images/progress_green.gif" alt="alt text" title="Green Progress Indicator"></td>
                         </tr>
