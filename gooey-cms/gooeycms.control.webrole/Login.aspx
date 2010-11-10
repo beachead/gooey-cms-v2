@@ -10,6 +10,7 @@
     td.left-column {
         width: 100%;
         vertical-align: top;
+        background-color: #fff;
     }
     
     table.form {
