@@ -371,10 +371,6 @@ table.CommonListing td {
 }
 
 
-.remember {
-	padding-left:80px;
-}
-
 li .package-link a:visisted  {
     color: #646464;
 }

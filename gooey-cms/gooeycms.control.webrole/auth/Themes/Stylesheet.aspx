@@ -87,7 +87,7 @@
                     <asp:RequiredFieldValidator ID="RequiredName" ControlToValidate="TxtNewFileName" Display="None" ErrorMessage="You must specify a name" ValidationGroup="FileName" runat="server" />
                     <asp:RegularExpressionValidator ID="NewPatternValidator" ControlToValidate="TxtNewFileName" Display="None" ValidationExpression="[\w\d]+\.css" ValidationGroup="FileName" ErrorMessage="The file name may not contain spaces or special characters and must end in .css" runat="server" />
                 </div>
-                <div id="editpanel" dojoType="dijit.layout.ContentPane" title="Edit Scripts">
+                <div id="editpanel" dojoType="dijit.layout.ContentPane" title="Edit Stylesheets">
                     From this page you can edit or delete any of the css files in your styles library.
                     <br /><br />
 
