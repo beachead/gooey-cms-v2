@@ -69,6 +69,8 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             {
                 Package package = (Package)item.DataItem;
                 CmsSubscription subscription = SubscriptionManager.GetSubscription(package.OwnerSubscriptionId);
+                if (subscription == null)
+                    throw new ArgumentException("Could not find the owner's subscription for this package. Subscription ID: " + package.OwnerSubscriptionId);
 
 
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
