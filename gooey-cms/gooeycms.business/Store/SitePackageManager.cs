@@ -41,7 +41,9 @@ namespace Gooeycms.Business.Store
 
         private const Int32 CreatePackageSteps = 7;
         private const Int32 DeployPackageSteps = 8;
-        public const Int32 MaxSteps = CreatePackageSteps + DeployPackageSteps;
+        
+        public const Int32 DefaultMaxSteps = CreatePackageSteps + DeployPackageSteps;
+        public const Int32 DeployUserSiteSteps = 8;
 
         //public const String DemoSitePrefix = "gooeycmsdemo";
 
@@ -50,6 +52,7 @@ namespace Gooeycms.Business.Store
 
         private String guid;
         private int currentStepCount = 1;
+        private int maxSteps = DefaultMaxSteps;
 
         public interface IPackageStatusNotifier
         {
@@ -127,7 +130,7 @@ namespace Gooeycms.Business.Store
         private void DoNotify(IPackageStatusNotifier notifier, String eventName)
         {
             if (notifier != null)
-                notifier.OnNotify(this.guid, eventName, currentStepCount++,MaxSteps);
+                notifier.OnNotify(this.guid, eventName, currentStepCount++,maxSteps);
         }
 
         private void PackageContentTypes(Data.Guid siteGuid, IList<SiteContentType> packageContentTypes)
@@ -634,6 +637,55 @@ namespace Gooeycms.Business.Store
                     dao.Save<Package>(package);
                     tx.Commit();
                 }
+            }
+        }
+
+        public Boolean IsPackageValidForUser(Data.Guid userGuid, Data.Guid packageGuid)
+        {
+            UserPackageDao dao = new UserPackageDao();
+            UserPackage package = dao.FindByUserAndPackage(userGuid, packageGuid);
+
+            return (package != null);
+        }
+
+        public void DeployToSubscription(Data.Guid userGuid, Data.Guid siteGuid, Data.Guid packageGuid, IPackageStatusNotifier notifier)
+        {
+            maxSteps = DeployUserSiteSteps;
+
+            if (!IsPackageValidForUser(userGuid, packageGuid))
+                throw new ArgumentException("The specified package is not valid for the currently logged in user and may not be applied.");
+
+            Package package = GetPackage(packageGuid);
+
+            DoNotify(notifier, "Reading Package From Archive");
+            //Deploy the package into the demo site
+            IStorageClient client = StorageHelper.GetStorageClient();
+            byte[] zipped = client.Open(PackageContainer, PackageDirectory, package.Guid + PackageExtension);
+
+            Compression.ZipHandler zip = new Compression.ZipHandler(zipped);
+            byte[] serialized = zip.Decompress()[0].Data;
+
+            SitePackage sitepackage = Serializer.ToObject<SitePackage>(serialized);
+            Data.Guid guid = siteGuid;
+
+            if (package.PackageType == PackageTypes.Site)
+            {
+                DoNotify(notifier, "Erasing existing site data");
+                SubscriptionManager.Erase(siteGuid);
+            }
+
+            DoNotify(notifier, "Deploying Package Themes To Site");
+            DeployThemes(sitepackage, guid, notifier);
+            if (package.PackageType == PackageTypes.Site)
+            {
+                DoNotify(notifier, "Deploying Package Pages To Site");
+                DeployPages(sitepackage, guid, notifier);
+
+                DoNotify(notifier, "Deploying Package Content Types To Site");
+                DeployContentTypes(sitepackage, guid);
+
+                DoNotify(notifier, "Deploying Package Content To Site");
+                DeployContent(sitepackage, guid);
             }
         }
     }

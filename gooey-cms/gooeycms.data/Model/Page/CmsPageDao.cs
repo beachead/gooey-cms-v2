@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Gooeycms.Data.Model.Page
 {
@@ -64,6 +65,14 @@ namespace Gooeycms.Data.Model.Page
         {
             String hql = "select page from CmsPage page where page.SubscriptionId = :guid and page.UrlHash = :hash";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("hash", hash.Value).List<CmsPage>();
+        }
+
+        public void DeleteAllBySite(Guid siteGuid)
+        {
+            String hql = "select page from CmsPage page where page.SubscriptionId = :guid";
+            IList<CmsPage> results = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsPage>();
+            foreach (CmsPage result in results)
+                base.Delete<CmsPage>(result);
         }
     }
 }

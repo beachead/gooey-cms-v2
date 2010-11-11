@@ -116,6 +116,7 @@
     <Content Include="auth\global-admin\Developer\Default.aspx" />
     <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
+    <Content Include="auth\Package-Mgmt\apply.aspx" />
     <Content Include="auth\Pages\Default2.aspx" />
     <Content Include="auth\Pages\EditInline.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
@@ -329,6 +330,13 @@
     </Compile>
     <Compile Include="auth\global-admin\Help\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Package-Mgmt\apply.aspx.cs">
+      <DependentUpon>apply.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Package-Mgmt\apply.aspx.designer.cs">
+      <DependentUpon>apply.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Pages\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

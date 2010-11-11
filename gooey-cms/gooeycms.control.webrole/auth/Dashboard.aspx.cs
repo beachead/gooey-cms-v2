@@ -82,9 +82,11 @@ namespace Gooeycms.Webrole.Control.auth
                     ListItem listitem = new ListItem(subscription.DefaultDisplayName, subscription.Guid);
                     siteList.Items.Add(listitem);
                 }
+                ListItem newsubscription = new ListItem("<new subscription>", "");
+                siteList.Items.Add(newsubscription);
 
                 if (package.PackageType == PackageTypes.Site)
-                    applyButton.OnClientClick = "return confirm('WARNING!\\r\\nApplying this site will overwrite ALL of your existing content. \\r\\n\\r\\nAre you sure you want to continue?');";
+                    applyButton.OnClientClick = "return confirmation('" + siteList.ClientID + "','Site','" + package.Guid + "')";
             }
         }
     }

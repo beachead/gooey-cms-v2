@@ -57,7 +57,9 @@ namespace Gooeycms.Business.Themes
 
         public void Save(CmsTemplate template)
         {
-            CurrentSite.Cache.Clear();
+            if (CurrentSite.IsAvailable)
+                CurrentSite.Cache.Clear();
+
             using (Transaction tx = new Transaction())
             {
                 CmsTemplateDao dao = new CmsTemplateDao();

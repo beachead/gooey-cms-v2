@@ -13,6 +13,8 @@ using Gooeycms.Business.Pages;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Business.Web;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Data.Model.Content;
+using Gooeycms.Data.Model.Site;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -212,18 +214,56 @@ namespace Gooeycms.Business.Subscription
                     tx.Commit();
                 }
 
-                //Delete any cloud storage files for this subscription
-                String pagesContainer = String.Format(SiteHelper.PageContainerKey,subscription.Guid);
-                String javascriptContainer = String.Format(SiteHelper.JavascriptContainerKey,subscription.Guid);
-                String cssContainer = String.Format(SiteHelper.StylesheetContainerKey,subscription.Guid);
-                String imagesContainer = String.Format(SiteHelper.ImagesContainerKey, subscription.Guid);
-
-                IStorageClient client = StorageHelper.GetStorageClient();
-                client.Delete(pagesContainer);
-                client.Delete(javascriptContainer);
-                client.Delete(cssContainer);
-                client.Delete(imagesContainer);
+                Erase(subscription.Guid);
             }
+        }
+
+        /// <summary>
+        /// Erases all of the data for a site
+        /// </summary>
+        /// <param name="siteGuid"></param>
+        public static void Erase(Data.Guid siteGuid)
+        {
+            using (Transaction tx = new Transaction())
+            {
+                //Delete the cms content
+                CmsContentDao dao = new CmsContentDao();
+                dao.DeleteAllBySite(siteGuid);
+
+                //Delete the cms content types
+                CmsContentTypeDao typeDao = new CmsContentTypeDao();
+                typeDao.DeleteAllBySite(siteGuid);
+
+                //Delete the pages
+                CmsPageDao pageDao = new CmsPageDao();
+                pageDao.DeleteAllBySite(siteGuid);
+
+                //Delete the sitemap data for this subscription
+                CmsSitePathDao siteDao = new CmsSitePathDao();
+                siteDao.DeleteAllBySite(siteGuid);
+
+                //Delete the templates
+                CmsTemplateDao templateDao = new CmsTemplateDao();
+                templateDao.DeleteAllBySite(siteGuid);
+
+                //Delete the existing themes
+                CmsThemeDao themeDao = new CmsThemeDao();
+                themeDao.DeleteAllBySite(siteGuid);
+
+                tx.Commit();
+            }
+
+            //Delete any cloud storage files for this subscription
+            String pagesContainer = String.Format(SiteHelper.PageContainerKey, siteGuid);
+            String javascriptContainer = String.Format(SiteHelper.JavascriptContainerKey, siteGuid);
+            String cssContainer = String.Format(SiteHelper.StylesheetContainerKey, siteGuid);
+            String imagesContainer = String.Format(SiteHelper.ImagesContainerKey, siteGuid);
+
+            IStorageClient client = StorageHelper.GetStorageClient();
+            client.Delete(pagesContainer);
+            client.Delete(javascriptContainer);
+            client.Delete(cssContainer);
+            client.Delete(imagesContainer);
         }
     }
 }

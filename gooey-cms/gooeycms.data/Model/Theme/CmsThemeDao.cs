@@ -28,5 +28,13 @@ namespace Gooeycms.Data.Model.Theme
             String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :siteGuid and themes.IsEnabled = 1";
             return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid.Value).UniqueResult<CmsTheme>();
         }
+
+        public void DeleteAllBySite(Guid siteGuid)
+        {
+            String hql = "select themes from CmsTheme themes where themes.SubscriptionGuid = :guid";
+            IList<CmsTheme> results = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsTheme>();
+            foreach (CmsTheme result in results)
+                base.Delete<CmsTheme>(result);
+        }
     }
 }
