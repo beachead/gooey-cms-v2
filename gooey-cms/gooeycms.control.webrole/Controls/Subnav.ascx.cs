@@ -30,8 +30,11 @@ namespace Gooeycms.Webrole.Control.Controls
 
         protected void AppendQuerystring(object sender, EventArgs e)
         {
-            HyperLink A = (HyperLink) sender;
-            A.NavigateUrl = A.NavigateUrl + "?" + Request.QueryString.ToString();
+            if (!Page.IsPostBack)
+            {
+                HyperLink A = (HyperLink)sender;
+                A.NavigateUrl = A.NavigateUrl + "?" + Request.QueryString.ToString();
+            }
         }
     }
 }
