@@ -168,6 +168,23 @@
                         <td>
                             * List Item<br />
                             * List Item<br />
+                            * List Item<br />
+                            </pre>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>List Item</li>
+                                <li>List Item</li>
+                                <li>List Item</li>
+                            </ul>
+                        </td>
+                        </tr>
+
+                        <tr>
+                        <td class="first">Unordered List w/ Nested List</td>
+                        <td>
+                            * List Item<br />
+                            * List Item<br />
                             &nbsp;&nbsp;&nbsp;&nbsp;* List Item<br />
                             * List Item<br />
                             </pre>
@@ -187,6 +204,22 @@
 
                         <tr>
                         <td class="first">Ordered List</td>
+                        <td>
+                            1. List Item<br />
+                            2. List Item<br />
+                            3. List Item<br />
+                        </td>
+                        <td>
+                            <ol>
+                                <li>List Item</li>
+                                <li>List Item </li>
+                                <li>List Item</li>
+                            </ol>
+                        </td>
+                        </tr>
+
+                        <tr>
+                        <td class="first">Ordered List w/ Nested List</td>
                         <td>
                             1. List Item<br />
                             2. List Item<br />
