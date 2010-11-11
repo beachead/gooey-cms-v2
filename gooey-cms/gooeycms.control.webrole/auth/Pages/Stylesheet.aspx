@@ -37,7 +37,7 @@
         </script>  
          <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="width:880px;height:560px;overflow:auto;">
             <div id="enablepanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Stylesheets">
-                <table>
+                <table width="100%">
               <tr>
                     <asp:Panel ID="DisablePanel" AutoUpdateAfterCallBack="true" Visible="true" runat="server">
                     <td style="vertical-align:top;">
@@ -75,7 +75,7 @@
             </div>
             <div id="managepanel" dojoType="dijit.layout.ContentPane" title="Manage Stylesheets" style="display:none;">
                 <div dojoType="dijit.TitlePane" title="Add Stylesheet">
-                    <table>
+                    <table width="100%">
                         <tr>
                             <td>
                                 Upload File:<br />
@@ -92,7 +92,7 @@
                     </table>
                 </div>
                  <div dojoType="dijit.TitlePane" title="Edit">
-                 <table>
+                 <table width="100%">
                     <tr>
                         <td>
                             Edit Existing 

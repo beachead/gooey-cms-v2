@@ -150,7 +150,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             else
             {
                 filename = this.TxtNewFileName.Text;
-                data = Encoding.UTF8.GetBytes("//Replace with your javascript content");
+                data = Encoding.UTF8.GetBytes("/*Replace with your css content*/");
             }
 
             CmsTheme theme = GetSelectedTheme();
