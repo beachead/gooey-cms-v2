@@ -7,16 +7,16 @@ namespace Gooeycms.Data.Model.Store
 {
     public class UserPackageDao : BaseDao
     {
-        public UserPackage FindByUserAndPackage(Guid userGuid, string packageGuid)
+        public UserPackage FindByUserAndPackage(Guid userGuid, Guid packageGuid)
         {
             String hql = "select up from UserPackage up where up.UserGuid = :user and up.PackageGuid = :package";
-            return base.NewHqlQuery(hql).SetString("user", userGuid.Value).SetString("package", packageGuid).UniqueResult<UserPackage>();
+            return base.NewHqlQuery(hql).SetString("user", userGuid.Value).SetString("package", packageGuid.Value).UniqueResult<UserPackage>();
         }
 
-        public IList<UserPackage> FindByUserAndPackage(string guid)
+        public IList<UserPackage> FindByUserAndPackage(Guid guid)
         {
             String hql = "select up from UserPackage up where up.UserGuid = :user";
-            return base.NewHqlQuery(hql).SetString("user", guid).List<UserPackage>();
+            return base.NewHqlQuery(hql).SetString("user", guid.Value).List<UserPackage>();
         }
     }
 }

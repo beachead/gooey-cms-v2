@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using Gooeycms.Business.Web;
 using System.Web.UI;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Business.Cache;
 
 namespace Gooeycms.Business.Content
 {
@@ -389,6 +390,8 @@ namespace Gooeycms.Business.Content
                 dao.Save<CmsContent>(item);
                 tx.Commit();
             }
+
+            SitePageCacheRefreshInvoker.InvokeRefresh(item.SubscriptionId, SitePageRefreshRequest.PageRefreshType.All);
         }
 
         public CmsContent GetFile(String filename)

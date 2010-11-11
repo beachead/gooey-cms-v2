@@ -115,7 +115,9 @@ namespace Gooeycms.Business.Themes
 
         public void Save(CmsTheme theme)
         {
-            CurrentSite.Cache.Clear("default-theme");
+            if (CurrentSite.IsAvailable)
+                CurrentSite.Cache.Clear("default-theme");
+
             CmsThemeDao dao = new CmsThemeDao();
             using (Transaction tx = new Transaction())
             {
@@ -123,7 +125,8 @@ namespace Gooeycms.Business.Themes
                 tx.Commit();
             }
 
-            SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
+            if (CurrentSite.IsAvailable)
+                SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
         }
 
         internal CmsTheme GetDefaultBySite(Data.Guid siteGuid)

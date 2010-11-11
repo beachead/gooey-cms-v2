@@ -22,5 +22,13 @@ namespace Gooeycms.Data.Model.Theme
             String hql = "select template from CmsTemplate template where template.SubscriptionGuid = :guid and template.Name = :name";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("name", templateName).UniqueResult<CmsTemplate>();
         }
+
+        public void DeleteAllBySite(Guid siteGuid)
+        {
+            String hql = "select templates from CmsTemplate templates where templates.SubscriptionGuid = :guid";
+            IList<CmsTemplate> results = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsTemplate>();
+            foreach (CmsTemplate result in results)
+                base.Delete<CmsTemplate>(result);
+        }
     }
 }

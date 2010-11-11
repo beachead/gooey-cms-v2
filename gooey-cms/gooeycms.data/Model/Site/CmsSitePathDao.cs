@@ -40,5 +40,13 @@ namespace Gooeycms.Data.Model.Site
             String hql = "select path from CmsSitePath path where path.SubscriptionGuid = :guid and path.Parent = :url order by path.Position asc";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetString("url", parent).List<CmsSitePath>();
         }
+
+        public void DeleteAllBySite(Guid siteGuid)
+        {
+            String hql = "select path from CmsSitePath path where path.SubscriptionGuid = :guid";
+            IList<CmsSitePath> results = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsSitePath>();
+            foreach (CmsSitePath result in results)
+                base.Delete<CmsSitePath>(result);
+        }
     }
 }

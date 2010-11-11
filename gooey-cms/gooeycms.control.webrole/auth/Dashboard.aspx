@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Dashboard" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 	<script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
@@ -15,6 +17,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+
+    <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
 
     <table border=0>
     <tr><td><img src="../images/dashboard.png" width="362px" height="45px" border="0" /></td><td style="padding-left:80px;"></td><td> <img src="../images/purchases.png" width="201px" height="61px" border="0" /></td></tr>
@@ -40,7 +44,7 @@
                                 </asp:Repeater>
 				            </ul>                    
                             <div style="padding-left:20px;padding-top:5px;padding-bottom:10px;">
-                                <b>Apply To Site</b>: <asp:DropDownList ID="LstSites" runat="server" />&nbsp;<asp:Button ID="BtnApplyPackage" Text="Apply" runat="server" />
+                                <b>Apply To Site</b>: <asp:DropDownList ID="LstSites" runat="server" />&nbsp;<asp:Button ID="BtnApplyPackage" CommandName="ApplyPackage" CommandArgument='<%# Eval("Guid") %>' Text="Apply" runat="server" />
                             </div>
 				            <ul class="thumb-nav"></ul>
 				            <ul class="features" style="margin:0px;">
@@ -56,6 +60,33 @@
             </ul>                             
             </td>
         </tr>
-    
     </table>
+
+    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="495" Height="260" ShowContentDuringLoad="false" DestroyOnClose="true" VisibleStatusbar="false" Behaviors="Move,Close" runat="server" EnableShadow="true">
+    </telerik:RadWindowManager>
+
+    <script language="javascript" type="text/javascript">
+        function showApplyPackage(siteGuid,packageGuid) {
+            window.radopen('./Package-Mgmt/apply.aspx?s=' + siteGuid + '&g=' + packageGuid, null);
+        }
+
+        function confirmation(lstbox, type, packageGuid) {
+            var box = document.getElementById(lstbox);
+            if (box) {
+                var siteGuid = box.options[box.selectedIndex].value;
+                if (siteGuid == "") {
+                    alert('You will now be redirected to the gooey store to create your new subscription. Afterwards you can then come back and apply this site.');
+                    window.location = 'http://store.gooeycms.net/signup/';
+                    return false;
+                } else if (type == "Site") {
+                    var result = confirm('WARNING: Applying this site will overwrite ALL of your existing data.\r\nAre you sure you want to continue?');
+                    if (result) {
+                        showApplyPackage(siteGuid, packageGuid);
+                    }
+                    return false;
+                } else {
+                }
+            }
+        }
+    </script>
 </asp:Content>

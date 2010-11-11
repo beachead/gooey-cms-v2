@@ -18,6 +18,7 @@ namespace Gooeycms.Business.Cache
 
         private Dictionary<String, Object> table = new Dictionary<string, object>();
 
+
         public CacheInstance()
         {
         }

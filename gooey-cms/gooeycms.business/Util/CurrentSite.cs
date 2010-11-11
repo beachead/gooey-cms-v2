@@ -442,5 +442,24 @@ namespace Gooeycms.Business.Util
         {
             SitePageCacheRefreshInvoker.InvokeRefresh(Guid.Value, SitePageRefreshRequest.PageRefreshType.All);
         }
+
+        public static bool IsAvailable
+        {
+            get
+            {
+                Boolean result;
+                try
+                {
+                    Data.Guid test = CurrentSite.Guid;
+                    result = true;
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+
+                return result;
+            }
+        }
     }
 }

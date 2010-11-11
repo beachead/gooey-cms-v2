@@ -16,13 +16,16 @@ namespace Gooeycms.Business.Util
 
         public static String GetImageSrc(String logoname)
         {
-            String result;
-            if (logoname.IsEmpty())
-                result = "~/images/___placeholder_logo.png";
-            else
+            String result = "~/images/___placeholder_logo.png";
+            if (logoname != null)
             {
-                StorageFile logo = GetLogoFile(logoname);
-                result = logo.Url + "?" + DateTime.Now.Ticks;
+                if (logoname.IsEmpty())
+                    result = "~/images/___placeholder_logo.png";
+                else
+                {
+                    StorageFile logo = GetLogoFile(logoname);
+                    result = logo.Url + "?" + DateTime.Now.Ticks;
+                }
             }
 
             return result;

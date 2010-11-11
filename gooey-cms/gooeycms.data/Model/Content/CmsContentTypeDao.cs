@@ -42,5 +42,13 @@ namespace Gooeycms.Data.Model.Content
             String hql = "select field from CmsContentTypeField field where field.Parent.Guid = :guid and field.Id = :fieldKey";
             return base.NewHqlQuery(hql).SetString("guid", contentTypeGuid.Value).SetInt32("fieldKey",fieldKey).UniqueResult<CmsContentTypeField>();
         }
+
+        public void DeleteAllBySite(Guid siteGuid)
+        {
+            String hql = "select type from CmsContentType type where type.SubscriptionId = :guid";
+            IList<CmsContentType> results = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsContentType>();
+            foreach (CmsContentType result in results)
+                base.Delete<CmsContentType>(result);
+        }
     }
 }

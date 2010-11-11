@@ -43,5 +43,13 @@ namespace Gooeycms.Data.Model.Content
             String hql = "select content from CmsContent content where content.SubscriptionId = :guid and content.IsApproved = 0";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsContent>();
         }
+
+        public void DeleteAllBySite(Guid siteGuid)
+        {
+            String hql = "select content from CmsContent content where content.SubscriptionId = :guid";
+            IList<CmsContent> results = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsContent>();
+            foreach (CmsContent result in results)
+                base.Delete<CmsContent>(result);
+        }
     }
 }
