@@ -55,7 +55,13 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Developer
                 Package package = (Package)item.DataItem;
                 CmsSubscription subscription = SubscriptionManager.GetSubscription(package.Guid);
                 if (subscription == null)
-                    throw new ArgumentException("Could not find the owner's subscription for this package. Subscription ID: " + package.OwnerSubscriptionId);
+                {
+                    if (Request.QueryString["delete"] != null)
+                    {
+                        SitePackageManager.NewInstance.DeletePackage(package.Guid);
+                        throw new ArgumentException("Could not find the owner's subscription for this package. Subscription ID: " + package.OwnerSubscriptionId + ". This package was automatically deleted from the system.");
+                    }
+                }
 
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
