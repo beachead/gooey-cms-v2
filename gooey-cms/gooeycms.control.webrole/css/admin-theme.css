@@ -58,20 +58,29 @@ a:hover     { color: #004bc7; }
 
 
 #header-region {
-	background-color: #4395f1;
-	min-height: 35px;
-}	
+    overflow: auto;
+    background-color: #eee;
+}
+       
+#utility-nav {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+   
+#utility-nav li {
+    float: left;
+    margin-right: 15px;
+    list-style: none;
+}
+   
+#primary-nav {
+    background-color: #4395f1;
+    border-top: 2px solid #000;
+}
 
 #logo {
-	margin:10px 0 0 25px;
-	float: right;
-	font-weight:bold;
-	color:black;
-	display:block;
-	font-family:Helvetica,sans-serif;
-	font-size:20px;
-	line-height:20px;
-	text-decoration:none;
+	margin:10px 0 15px 25px;
 }
 
 #main {
@@ -241,9 +250,7 @@ ul.menu {
 	list-style-position:outside;
 	list-style-type:none;
 	text-align:left;	
-	padding:0px;
-	padding-left:15px;
-	padding-top:10px;
+	padding: 9px 0 6px 15px;
 	margin:0px; 
 
 }
@@ -252,7 +259,7 @@ ul.menu li {
 	background:transparent none repeat scroll 0 0;
 	font-size: 11px;
 	margin:0 1em;
-	padding:0;	
+	padding:0;
 	display: inline;	
 	list-style-image:none;
 	list-style-type:none;
