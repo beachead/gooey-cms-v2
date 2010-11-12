@@ -54,16 +54,24 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Developer
             {
                 Package package = (Package)item.DataItem;
                 CmsSubscription subscription = SubscriptionManager.GetSubscription(package.Guid);
+                if (subscription == null)
+                {
+                    if (Request.QueryString["delete"] != null)
+                    {
+                        SitePackageManager.NewInstance.DeletePackage(package.Guid);
+                        throw new ArgumentException("Could not find the owner's subscription for this package. Subscription ID: " + package.OwnerSubscriptionId + ". This package was automatically deleted from the system.");
+                    }
+                }
 
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
                 Label approvalStatus = (Label)item.FindControl("LblApprovalStatus");
                 Image logo = (Image)item.FindControl("Logo");
-                HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
-
-                logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
-
+                if (logo != null)
+                    logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
+                
                 String demourl = "http://" + subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
+                HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
                 demolink.NavigateUrl = demourl;
 
                 IList<Gooeycms.Business.Store.SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
