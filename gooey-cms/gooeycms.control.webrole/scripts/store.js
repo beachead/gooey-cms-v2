@@ -26,7 +26,7 @@ $j(function () {
 		    });
 
 		}
-	);
+	).css('overflow', 'visible'); // so that the "delete" button can be positioned beyond the boundary of its container
 
 	$j('#themes-panel').delegate('a.showFeatures', 'hover', function () {
 		var jTrigger = $j(this),
