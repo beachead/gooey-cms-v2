@@ -77,7 +77,8 @@ namespace Gooeycms.Webrole.Control.auth.Developer
                 Repeater features = (Repeater)item.FindControl("FeatureList");
                 Label approvalStatus = (Label)item.FindControl("LblApprovalStatus");
                 Image logo = (Image)item.FindControl("Logo");
-                logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
+                if (logo != null)
+                    logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
 
                 IList<Gooeycms.Business.Store.SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
                 thumbnails.DataSource = thumbnailsrc;
