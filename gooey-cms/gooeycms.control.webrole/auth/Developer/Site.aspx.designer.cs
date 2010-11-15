@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
     public partial class Site {
         
         /// <summary>
+        /// RadScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadScriptManager RadScriptManager1;
+        
+        /// <summary>
         /// LstAvailableSites control.
         /// </summary>
         /// <remarks>
@@ -74,5 +83,14 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Anthem.HiddenField SavedPackageGuid;
+        
+        /// <summary>
+        /// Singleton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager Singleton;
     }
 }
