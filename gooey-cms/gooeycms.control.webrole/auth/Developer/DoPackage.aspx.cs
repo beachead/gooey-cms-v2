@@ -57,7 +57,6 @@ Date: {4}", LoggedInUser.Username, package.Guid, package.OwnerSubscriptionId, pa
             RadProgressContext progress = RadProgressContext.Current;
             progress.CurrentOperationText = "Successfully Deployed Package";
             progress.OperationComplete = true;
-            RadAjaxPanel.ResponseScripts.Add("closeWindow();");
         }
 
         public void OnNotify(string guid, string eventName, int stepCount, int maxSteps)
