@@ -75,10 +75,12 @@ li.theme ul.thumbs li {
 li.theme ul.thumbs li a.delete-screenshot {
     position: absolute;
     top: -8px;
-    right: -9px;
+    right: -8px;
     background: transparent url(../images/icon_delete.png) 0 0 no-repeat;
     width: 20px;
     height: 20px;
+    overflow:visible; 
+    float:right;
 }
 
 

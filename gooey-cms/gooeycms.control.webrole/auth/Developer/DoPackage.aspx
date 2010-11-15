@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Gooey Package Tool</title>
+    <title>Gooey CMS | Packaging Site into Cloud</title>
     <link id="Link1" href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
     
 </head>

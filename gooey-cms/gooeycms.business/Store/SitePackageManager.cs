@@ -92,7 +92,7 @@ namespace Gooeycms.Business.Store
             IStorageClient client = StorageHelper.GetStorageClient();
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid);
 
-            DoNotify(notifier, "Creating Page Image Snapshots (this may take a while)");
+            DoNotify(notifier, "Creating Page Image Snapshots (please wait)");
             sitepackage.PageImages = client.CreateSnapshot(imageDirectory, StorageClientConst.RootFolder);
             sitepackage.Themes = packageThemes;
             sitepackage.SiteMapPaths = CmsSiteMap.Instance.GetAllPaths(siteGuid);
@@ -218,7 +218,7 @@ namespace Gooeycms.Business.Store
                 IStorageClient client = StorageHelper.GetStorageClient();
                 String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
 
-                DoNotify(notifier, "Creating Theme Image Snapshots (This may take a while)");
+                DoNotify(notifier, "Creating Theme Image Snapshots (please wait...)");
                 packageTheme.Header = theme.Header;
                 packageTheme.Footer = theme.Footer;
                 packageTheme.Templates = TemplateManager.Instance.GetTemplates(theme);
@@ -468,7 +468,7 @@ namespace Gooeycms.Business.Store
                 }
             }
 
-            DoNotify(notifier, "Copying Page Images to Site. (This may take a few minutes) ");
+            DoNotify(notifier, "Copying Page Images to Site (please wait...) ");
             //Save all the page-level images for this site
             String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, sitepackage.OriginalSiteGuid.Value);
             String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, guid.Value);
@@ -519,7 +519,7 @@ namespace Gooeycms.Business.Store
                 }
 
                 //Save all the images for this theme
-                DoNotify(notifier, "Copying Theme Images From Snapshot to Site. (This may take a few minutes) ");
+                DoNotify(notifier, "Copying Theme Images to Site (please wait...) ");
                 String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, sitepackage.OriginalSiteGuid.Value);
                 String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, guid.Value);
 
