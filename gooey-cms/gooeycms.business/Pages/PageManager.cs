@@ -141,7 +141,7 @@ namespace Gooeycms.Business.Pages
 
             CmsPageDao dao = new CmsPageDao();
 
-            Boolean approvedOnly = true;
+            Boolean approvedOnly = false;
             if (!forceLatest)
                 approvedOnly = !(CurrentSite.IsStagingHost);
 
