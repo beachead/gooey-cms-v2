@@ -52,7 +52,7 @@ li.theme ul.options-links {
 
 li.theme ul.options-links li {
     list-style: none;
-    background: transparent url(../images/small_arrow.png) center right no-repeat;
+    background: transparent url(../images/icon_arrow.png) center right no-repeat;
     padding-right: 20px;
     padding-left: 0;
     text-align: right;
@@ -74,11 +74,11 @@ li.theme ul.thumbs li {
 
 li.theme ul.thumbs li a.delete-screenshot {
     position: absolute;
-    top: 3px;
-    right: 6px;
-    color: #f00;
-    font-weight: bold;
-    text-decoration: none;
+    top: -8px;
+    right: -9px;
+    background: transparent url(../images/icon_delete.png) 0 0 no-repeat;
+    width: 20px;
+    height: 20px;
 }
 
 
