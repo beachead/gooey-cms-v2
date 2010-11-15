@@ -9,49 +9,36 @@ using Gooeycms.Business.Store;
 using Gooeycms.Business.Web;
 using Gooeycms.Business;
 using Gooeycms.Business.Membership;
+using Telerik.Web.UI;
 
 namespace Gooeycms.Webrole.Control.auth.Developer
 {
     public partial class DoPackage : System.Web.UI.Page, Gooeycms.Business.Store.SitePackageManager.IPackageStatusNotifier
     {
-        private static Dictionary<String, Pair> events = new Dictionary<string, Pair>();
-        private static HashSet<String> eventKeys = new HashSet<String>();
-        private static Gooeycms.Business.Store.SitePackageManager.IPackageStatusNotifier notifier = new DoPackage();
-
-        private String guid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            guid = Request.QueryString["g"];
             if (!Page.IsPostBack)
             {
-                this.ExistingGuid.Value = guid;
-                Package package = SitePackageManager.NewInstance.GetPackage(guid);
-                if (package == null)
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "self-close", @"<script language=""javascript"" type=""text/javascript"">self.close();</script>");
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.SelectedFilesCount;
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.TransferSpeed;
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.TimeEstimated;
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.TotalProgress;
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.TotalProgressBar;
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.TotalProgressPercent;
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.FilesCount;
+                this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.RequestSize;
 
-                this.LblSiteTitle.Text = package.Title;
-            }
-
-            List<String> localEventKeys = eventKeys.ToList<String>();
-            if (eventKeys.Count > 100)
-            {
-                for (int i = 0; i < 50; i++)
-                {
-                    String key = localEventKeys[i];
-                    events.Remove(key);
-                }
+                this.ProgressArea.Localization.CurrentFileName = "Package Deployment In Progress:<br />";
+                this.ProgressArea.Localization.UploadedFiles = "Progress";
             }
         }
 
-
-        [System.Web.Services.WebMethod()]
-        public static void DoPackageSite(String guid)
+        public void AjaxManager_OnRequest(object sender, AjaxRequestEventArgs e)
         {
             SitePackageManager manager = SitePackageManager.NewInstance;
-
-            Package package = manager.GetPackage(guid);
-            manager.CreatePackage(package, notifier);
-            manager.DeployDemoPackage(package.Guid, notifier);
+            Package package = manager.GetPackage(e.Argument);
+            manager.CreatePackage(package, this);
+            manager.DeployDemoPackage(package.Guid, this);
 
             //Send an email to the admin
             String body = String.Format(
@@ -60,38 +47,32 @@ Author: {0}
 Package Unique Id: {1}
 Owner Subscription Id: {2}
 Title: {3}
-Date: {4}",LoggedInUser.Username,package.Guid,package.OwnerSubscriptionId,package.Title,package.Created);
-
+Date: {4}", LoggedInUser.Username, package.Guid, package.OwnerSubscriptionId, package.Title, package.Created);
 
             EmailClient client = EmailClient.GetDefaultClient();
             client.ToAddress = GooeyConfigManager.EmailAddresses.SiteAdmin;
             client.FromAddress = LoggedInUser.Email;
             client.Send("New Site Package Requiring Approval", body);
-        }
 
-        [System.Web.Services.WebMethod()]
-        public static String DoUpdateStatus(String guid)
-        {
-            String result = "";
-            if (events.ContainsKey(guid))
-            {
-                Pair pair = events[guid];
-                if (pair != null)
-                {
-                    result = (String)pair.Second + "," + (String)pair.First;
-                }
-            }
-            return result;
+            RadProgressContext progress = RadProgressContext.Current;
+            progress.CurrentOperationText = "Successfully Deployed Package";
+            progress.OperationComplete = true;
+
+            RadAjaxPanel.ResponseScripts.Add("closeWindow();");
         }
 
         public void OnNotify(string guid, string eventName, int stepCount, int maxSteps)
         {
-            double dec = (double)stepCount / (double)maxSteps;
-            int result = (int)Math.Round(dec * 100, 0);
+            RadProgressContext progress = RadProgressContext.Current;
 
-            Pair pair = new Pair(eventName, result.ToString());
-            events[guid] = pair;
-            eventKeys.Add(guid);
+            progress.PrimaryTotal = 1;
+            progress.PrimaryValue = 1;
+            progress.PrimaryPercent = 100;
+
+            progress.CurrentOperationText = eventName;
+            progress.SecondaryValue = stepCount;
+            progress.SecondaryTotal = maxSteps;
+            progress.SecondaryPercent = Math.Round(((double)stepCount / (double)maxSteps) * 100);
         }
     }
 }

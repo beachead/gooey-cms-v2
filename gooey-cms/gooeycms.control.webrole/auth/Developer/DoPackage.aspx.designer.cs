@@ -31,48 +31,57 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// scriptManager control.
+        /// ScriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager scriptManager;
+        protected global::Telerik.Web.UI.RadScriptManager ScriptManager;
         
         /// <summary>
-        /// ExistingGuid control.
+        /// RadAjaxManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ExistingGuid;
+        protected global::Telerik.Web.UI.RadAjaxManager RadAjaxManager1;
         
         /// <summary>
-        /// LblSiteTitle control.
+        /// RadAjaxPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblSiteTitle;
+        protected global::Telerik.Web.UI.RadAjaxPanel RadAjaxPanel;
         
         /// <summary>
-        /// ProgressControl control.
+        /// ProgressManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::MattBerseth.WebControls.AJAX.Progress.ProgressControl ProgressControl;
+        protected global::Telerik.Web.UI.RadProgressManager ProgressManager;
         
         /// <summary>
-        /// Img2 control.
+        /// ProgressArea control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img2;
+        protected global::Telerik.Web.UI.RadProgressArea ProgressArea;
+        
+        /// <summary>
+        /// cb1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadCodeBlock cb1;
     }
 }
