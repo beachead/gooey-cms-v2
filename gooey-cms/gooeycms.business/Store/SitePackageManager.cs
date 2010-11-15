@@ -39,10 +39,8 @@ namespace Gooeycms.Business.Store
         public const String PackageDirectory = "binary-data";
         public const String PackageExtension = ".zip";
 
-        private const Int32 CreatePackageSteps = 7;
-        private const Int32 DeployPackageSteps = 8;
         
-        public const Int32 DefaultMaxSteps = CreatePackageSteps + DeployPackageSteps;
+        public const Int32 CreatePackageSiteSteps = 17;
         public const Int32 DeployUserSiteSteps = 8;
 
         //public const String DemoSitePrefix = "gooeycmsdemo";
@@ -52,7 +50,7 @@ namespace Gooeycms.Business.Store
 
         private String guid;
         private int currentStepCount = 1;
-        private int maxSteps = DefaultMaxSteps;
+        private int maxSteps = CreatePackageSiteSteps;
 
         public interface IPackageStatusNotifier
         {
