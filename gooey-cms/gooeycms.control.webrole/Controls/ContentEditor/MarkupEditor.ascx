@@ -257,14 +257,14 @@
 
                         <tr>
                         <td class="first">Link w/ Title</td>
-                        <td>[link text](http://www.gooeycms.com "build your business one website at a time!")</td>
-                        <td><a href="http://www.gooeycms.com" title="build your business one website at a time">link text</a></td>
+                        <td>[link text](http://www.gooeycms.com "Optional title")</td>
+                        <td><a href="http://www.gooeycms.com" title="Optional title">link text</a></td>
                         </tr>
 
                         <tr>
                         <td class="first">Linked Image</td>
-                        <td>[ ![alt text](/images/progress_green.gif "build your business one website at a time") ](http://gooeycms.com "gooey cms")</td>
-                        <td><a href="http://www.gooeycms.com" title="build your business one website at a time"><img src="/images/progress_green.gif" title="gooey cms" /></a></td>
+                        <td>[ ![alt text](/images/progress_green.gif) ](http://gooeycms.com "Optional title")</td>
+                        <td><a href="http://www.gooeycms.com" title="Optional title"><img src="/images/progress_green.gif" alt="alt text" /></a></td>
                         </tr>
                         </table>
                     </li>
@@ -285,8 +285,8 @@
 
                         <tr>
                         <td class="first">Image w/ Alt Text</td>
-                        <td>![alt text](/images/progress_green.gif "Green Progress Indicator")</td>
-                        <td><img src="/images/progress_green.gif" alt="alt text" title="Green Progress Indicator"></td>
+                        <td>![alt text](/images/progress_green.gif "Optional title")</td>
+                        <td><img src="/images/progress_green.gif" alt="alt text" title="Optional title"></td>
                         </tr>
                         </table>
                     </li>
