@@ -18,6 +18,9 @@ namespace Gooeycms.Webrole.Control.auth.Developer
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (LoggedInUser.IsDemoAccount)
+                Response.Redirect("~/auth/default.aspx");
+
             if (!Page.IsPostBack)
             {
                 LoadAvailableSites();

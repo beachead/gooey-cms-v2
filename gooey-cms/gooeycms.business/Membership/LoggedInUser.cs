@@ -46,5 +46,17 @@ namespace Gooeycms.Business.Membership
                 return email;
             }
         }
+
+        public static Boolean IsDemoAccount
+        {
+            get
+            {
+                Boolean result = false;
+                if (IsLoggedIn)
+                    result = (MembershipUtil.DemoAccountUsername.Equals(Username));
+
+                return result;
+            }
+        }
     }
 }

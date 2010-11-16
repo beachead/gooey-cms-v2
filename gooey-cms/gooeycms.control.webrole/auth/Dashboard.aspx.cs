@@ -17,6 +17,9 @@ namespace Gooeycms.Webrole.Control.auth
         private IList<CmsSubscription> subscriptions = null;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (LoggedInUser.IsDemoAccount)
+                Response.Redirect("~/auth/default.aspx");
+
             MembershipUserWrapper wrapper = MembershipUtil.FindByUsername(Membership.GetUser().UserName);
             subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
 

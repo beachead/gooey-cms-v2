@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Secure.Master.cs" Inherits="Gooeycms.Webrole.Control.Secure" %>
+<%@ Import Namespace="Gooeycms.Business.Membership" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -40,9 +41,11 @@
 
             <ul id="utility-nav">
                 <li>Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
+                <% if (!LoggedInUser.IsDemoAccount) { %>
                 <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink></li>
                 <li><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink></li> 
                 <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change Password</a></li>
+                <% } %>
                 <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
             </ul>
 
