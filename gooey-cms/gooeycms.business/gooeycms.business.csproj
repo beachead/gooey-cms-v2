@@ -205,6 +205,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subscription\SubscriptionProcessorFactory.cs" />
     <Compile Include="Subscription\SubscriptionManager.cs" />
+    <Compile Include="Subscription\SubscriptionRestrictionException.cs" />
     <Compile Include="Subscription\SubscriptionSecurityConstraint.cs" />
     <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />

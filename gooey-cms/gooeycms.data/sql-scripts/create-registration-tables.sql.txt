@@ -35,14 +35,19 @@ CREATE TABLE [Subscription_Plans] (
 [id] INT IDENTITY(1,1) NOT NULL,
 [sku] VARCHAR(25),
 [name] VARCHAR(128) NOT NULL,
-[price] DECIMAL NOT NULL,
+[price] DECIMAL(18,2) NOT NULL,
 [available] BIT DEFAULT(0),
+[allowed_pages] INT DEFAULT(500),
+[is_javascript_allowed] BIT DEFAULT(1),
+[is_images_allowed] BIT DEFAULT(1),
+[is_options_allowed] BIT DEFAULT(1),
+[is_leads_extended_allowed] BIT DEFAULT(1)
 PRIMARY KEY CLUSTERED([id]),
 );
 
 CREATE TABLE [Subscriptions] (
 [id] INT IDENTITY(1,1) NOT NULL,
-[subscription_plan] INT NOT NULL,
+[subscription_plan_sku] VARCHAR(36) NOT NULL,
 [guid] VARCHAR(36) NOT NULL,
 [primary_user_guid] VARCHAR(36) NOT NULL,
 [subdomain] VARCHAR(256),

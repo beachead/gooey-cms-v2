@@ -123,7 +123,7 @@ namespace Gooeycms.Webrole.Ecommerce
                 registration.Company = this.Company.Text;
                 registration.Sitename = this.Subdomain.Text;
                 registration.EncryptedPassword = Registrations.Encrypt(this.Password1.Text);
-                registration.SubscriptionPlanId = (int)selectedPlan;
+                registration.SubscriptionPlanSku = selectedPlan.ToString().ToLower();
                 registration.IsSalesforceEnabled = this.SalesForceOption.Checked;
                 registration.IsCampaignEnabled = this.CampaignOption.Checked;
                 if (LoggedInUser.IsLoggedIn)

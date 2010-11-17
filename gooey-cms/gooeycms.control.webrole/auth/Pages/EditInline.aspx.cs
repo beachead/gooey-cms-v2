@@ -104,6 +104,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             CmsPage page = new CmsPage();
             try
             {
+                Boolean isNewPage = false;
                 String existingPageGuid = Request.QueryString["pid"];
                 String path = CmsSiteMap.PathCombine(this.ParentDirectories.SelectedValue, this.PageName.Text);
 
@@ -113,9 +114,9 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                     CmsSitePath sitepath = CmsSiteMap.Instance.GetPath(path);
                     if (sitepath != null)
                         throw new ApplicationException("This page name already exists and may not be used again.");
-                }
 
-                PageManager.ValidateMarkup(this.PageMarkupText.Text);
+                    isNewPage = true;
+                }
 
                 String fullurl = CmsSiteMap.PathCombine(this.ParentDirectories.SelectedValue, this.PageName.Text);
                 page.Guid = System.Guid.NewGuid().ToString();
@@ -133,6 +134,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 page.Template = this.PageTemplate.SelectedValue;
                 page.OnBodyLoad = this.BodyLoadOptions.Text;
 
+                PageManager.Validate(page,isNewPage);
                 PageManager.PublishToWorker(page, PageTaskMessage.Actions.Save);
 
                 String msg = "The page has been successfully saved.";

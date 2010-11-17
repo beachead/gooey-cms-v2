@@ -122,6 +122,13 @@
     <Compile Include="Purchase.aspx.designer.cs">
       <DependentUpon>Purchase.aspx</DependentUpon>
     </Compile>
+    <Compile Include="signup\Upgrade.aspx.cs">
+      <DependentUpon>Upgrade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="signup\Upgrade.aspx.designer.cs">
+      <DependentUpon>Upgrade.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +383,7 @@
     <Content Include="Confirm.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Purchase.aspx" />
+    <Content Include="signup\Upgrade.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -48,7 +48,7 @@ namespace Gooeycms.Business.Subscription
 
         public static CmsSubscriptionPlan GetSubscriptionPlan(Registration registration)
         {
-            SubscriptionPlans temp = (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), registration.SubscriptionPlanId.ToString(), true);
+            SubscriptionPlans temp = (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), registration.SubscriptionPlanSku, true);
             CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(temp.ToString());
             return plan;
         }
@@ -87,7 +87,7 @@ namespace Gooeycms.Business.Subscription
             else
                 subscription.StagingDomain = registration.Staging;
 
-            subscription.SubscriptionPlanId = registration.SubscriptionPlanId;
+            subscription.SubscriptionPlanSku = registration.SubscriptionPlanSku;
             subscription.Expires = DateTime.Now.AddYears(100);
             subscription.IsDisabled = false;
             subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;

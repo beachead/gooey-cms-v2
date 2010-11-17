@@ -8,13 +8,18 @@
     <property column="name" name="Name" type="String" />
     <property column="price" name="Price" type="Decimal" />
     <property column="available" name="IsAvailable" type="Boolean" />
+    <property column="allowed_pages" name="MaxAllowedPages" type="Int32" />
+    <property column="is_javascript_allowed" name="IsJavascriptAllowed" type="Boolean" />
+    <property column="is_images_allowed" name="IsExternalImagesAllowed" type="Boolean" />
+    <property column="is_options_allowed" name="IsPlanOptionsAllowed" type="Boolean" />
+    <property column="is_email_only" name="IsLeadsEmailOnly" type="Boolean" />
   </class>
 
   <class name="Gooeycms.Data.Model.Subscription.CmsSubscription,gooeycms.data" table="Subscriptions">
     <id name="Id" column="id" type="Int32" unsaved-value="0">
       <generator class="native" />
     </id>
-    <property column="subscription_plan" name="SubscriptionPlanId" type="Int32" />
+    <property column="subscription_plan_sku" name="SubscriptionPlanSku" type="String" />
     <property column="guid" name="Guid" type="String" />    
     <property column="signup_date" name="Created" type="DateTime" />
     <property column="primary_user_guid" name="PrimaryUserGuid" type="String" />

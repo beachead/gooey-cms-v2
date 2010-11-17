@@ -10,3 +10,5 @@ ALTER TABLE Themes_Site_Templates ADD CONSTRAINT fk_themessitetemplate_subscript
 ALTER TABLE User_Subscriptions ADD CONSTRAINT fk_usersubscription_subscription_guid FOREIGN KEY(subscription_id) REFERENCES Subscriptions(id) ON DELETE CASCADE;
 ALTER TABLE User_Subscriptions ADD CONSTRAINT fk_usersubscriptionuser_id FOREIGN KEY(user_id) REFERENCES Users(id) ON DELETE CASCADE;
 ALTER TABLE Site_Saved_Forms ADD CONSTRAINT fk_savedform_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Subscription_Plans ADD CONSTRAINT unq_subscriptionplans_sku UNIQUE (sku);
+ALTER TABLE Subscriptions ADD CONSTRAINT fk_subscriptionplans_subscription FOREIGN KEY(subscription_plan_sku) REFERENCES subscription_Plans(sku);

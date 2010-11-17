@@ -18,6 +18,7 @@ using Gooeycms.Business.Markup.Forms_v2;
 using Gooeycms.Data.Model.Form;
 using Gooeycms.Business.Forms;
 using Microsoft.Security.Application;
+using Gooeycms.Business.Subscription;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
@@ -33,6 +34,14 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             if (!Page.IsPostBack)
             {
+                String url = Request.QueryString["pid"];
+                if (url == null)
+                {
+                    Boolean result = PageManager.IsAddPageAvailable();
+                    if (!result)
+                        Response.Redirect("http://store.gooeycms.net/signup/upgrade.aspx?type=" + SubscriptionRestrictionException.RestrictionType.MaxPageCountReached.ToString());
+                }
+
                 IList<CmsTemplate> templates = CurrentSite.GetTemplates();
                 foreach (CmsTemplate template in templates)
                 {
@@ -107,15 +116,16 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 String existingPageGuid = Request.QueryString["pid"];
                 String path = CmsSiteMap.PathCombine(this.ParentDirectories.SelectedValue, this.PageName.Text);
 
+                Boolean isNewPage = false;
                 //If we're adding a new page, make sure the page path isn't already in use
                 if (existingPageGuid == null)
                 {
                     CmsSitePath sitepath = CmsSiteMap.Instance.GetPath(path);
                     if (sitepath != null)
                         throw new ApplicationException("This page name already exists and may not be used again.");
-                }
 
-                PageManager.ValidateMarkup(this.PageMarkupText.Text);
+                    isNewPage = true;
+                }
 
                 String fullurl = CmsSiteMap.PathCombine(this.ParentDirectories.SelectedValue, this.PageName.Text);
                 page.Guid = System.Guid.NewGuid().ToString();
@@ -133,7 +143,8 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 page.Template = this.PageTemplate.SelectedValue;
                 page.OnBodyLoad = this.BodyLoadOptions.Text;
 
-                PageManager.PublishToWorker(page,PageTaskMessage.Actions.Save);
+                PageManager.Validate(page, isNewPage);
+                PageManager.PublishToWorker(page, PageTaskMessage.Actions.Save);
 
                 String msg = "The page has been successfully saved.";
                 if (Request.QueryString["a"] == null)
@@ -146,6 +157,10 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                     this.Status.Text = msg;
                     this.Status.ForeColor = System.Drawing.Color.Green;
                 }
+            }
+            catch (SubscriptionRestrictionException ex)
+            {
+                Response.Redirect("http://store.gooeycms.net/signup/upgrade.aspx?type=" + ex.TypeOfRestriction.ToString(), true);
             }
             catch (Exception ex)
             {
