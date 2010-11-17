@@ -25,7 +25,7 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual String Domain { get; set; }
         public virtual String Staging { get; set; }
         public virtual Int32 TemplateId { get; set; }
-        public virtual Int32 SubscriptionPlanId { get; set; }
+        public virtual String SubscriptionPlanSku { get; set; }
         public virtual Boolean IsComplete { get; set; }
         public virtual Boolean IsSalesforceEnabled { get; set; }
         public virtual Boolean IsCampaignEnabled { get; set; }

@@ -10,6 +10,8 @@ using Gooeycms.Data.Model.Site;
 using System.Threading.Tasks;
 using Gooeycms.Business.Javascript;
 using Gooeycms.Business.Css;
+using Gooeycms.Business.Subscription;
+using System.Text.RegularExpressions;
 
 namespace Gooeycms.Business.Pages
 {
@@ -19,6 +21,8 @@ namespace Gooeycms.Business.Pages
         {
             public const String AllPages = null;
         }
+
+        public static Regex JavascriptPattern = new Regex(@"<\s*script\s*.*?>", RegexOptions.IgnoreCase);
 
         private static PageManager instance = new PageManager();
         private PageManager() { }
@@ -340,8 +344,34 @@ namespace Gooeycms.Business.Pages
             this.Remove(page);
         }
 
-        public static void ValidateMarkup(string p)
+        public static Boolean IsAddPageAvailable()
         {
+            Boolean result = true;
+            if (CurrentSite.IsAvailable)
+            {
+                IList<CmsPage> pages = PageManager.Instance.Filter(CurrentSite.Guid, PageManager.Filters.AllPages);
+                if ((pages.Count) >= (CurrentSite.Restrictions.MaxAllowedPages))
+                    result = false;
+            }
+            return result;
+        }
+
+        public static void Validate(CmsPage page, Boolean checkPageCount)
+        {
+            if (CurrentSite.IsAvailable)
+            {
+                if (checkPageCount)
+                {
+                    if (!IsAddPageAvailable())
+                        throw new SubscriptionRestrictionException("This subscription has reached its max number of allowed pages of " + CurrentSite.Restrictions.MaxAllowedPages, SubscriptionRestrictionException.RestrictionType.MaxPageCountReached);
+                }
+
+                if (!CurrentSite.Restrictions.IsJavascriptAllowed)
+                {
+                    if (JavascriptPattern.IsMatch(page.Content))
+                        throw new SubscriptionRestrictionException("Script tags are not allowed with this subscription type.", SubscriptionRestrictionException.RestrictionType.IllegalScriptTags);
+                }
+            }
         }
 
         public static void PublishToWorker(CmsPage page,Gooeycms.Business.Pages.PageTaskMessage.Actions action)

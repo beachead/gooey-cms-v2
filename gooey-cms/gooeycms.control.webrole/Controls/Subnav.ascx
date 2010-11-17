@@ -56,7 +56,9 @@
             <li><asp:HyperLink ID="templates_header" NavigateUrl="~/auth/Themes/Header.aspx" Text="Header" runat="server" OnPreRender="AppendQuerystring" /></li>
             <li><asp:HyperLink ID="templates_footer" NavigateUrl="~/auth/Themes/Footer.aspx" Text="Footer" runat="server" OnPreRender="AppendQuerystring" /></li>
             <li><asp:HyperLink ID="templates_stylesheets" NavigateUrl="~/auth/Themes/Stylesheet.aspx" Text="Stylesheets" runat="server" OnPreRender="AppendQuerystring" /></li>
+            <% if (Gooeycms.Business.Util.CurrentSite.Restrictions.IsJavascriptAllowed) { %>
             <li><asp:HyperLink ID="templates_javascript" NavigateUrl="~/auth/Themes/Javascript.aspx" Text="JavaScript" runat="server" OnPreRender="AppendQuerystring" /></li>
+            <% } %>
             <li class="last"><asp:HyperLink ID="templates_images" NavigateUrl="~/auth/Themes/ImageBrowser.aspx" Text="Images" runat="server" OnPreRender="AppendQuerystring" onclick="window.open(this.href, 'imageBrowser','width=700,height=450,statusbar=no,menubar=no,centerscreen=yes');return false;" /></li>
         </ul>
     </asp:View>

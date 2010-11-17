@@ -49,8 +49,14 @@
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Footer.aspx?tid={0}") %>' />&nbsp;|&nbsp;
                         <asp:HyperLink ID="EditCss" Text="CSS" runat="server"
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Stylesheet.aspx?tid={0}") %>'  />&nbsp;
+                        <% if (Gooeycms.Business.Util.CurrentSite.Restrictions.IsJavascriptAllowed) { %>
                         <asp:HyperLink ID="EditJavascript" Text="Javascript" runat="server"
-                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />&nbsp;|&nbsp;
+                            NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />
+                        <% } else { %>
+                        <asp:HyperLink ID="UpgradeJavascript" Text="Javascript (requires upgrade)" runat="server"
+                            NavigateUrl='http://store.gooeycms.net/signup/upgrade.aspx' />
+                        <% } %>
+                        &nbsp;|&nbsp;
                         <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=600,height=500,left=150');">Images</a>&nbsp;|&nbsp;
                         <asp:LinkButton ID="DeleteTheme" Text="[delete]" CommandArgument='<%# Eval("Theme.ThemeGuid") %>' CommandName='deletetheme' OnClientClick="return confirm('Are you sure you want to delete this theme?\r\n\r\nWARNING: This will also delete ALL javascript, css and image files associated with this theme.')" runat="server" />
                     </ItemTemplate>

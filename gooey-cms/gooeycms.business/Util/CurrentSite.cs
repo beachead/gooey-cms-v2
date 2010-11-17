@@ -34,7 +34,27 @@ namespace Gooeycms.Business.Util
         {
             get
             {
-                return SubscriptionManager.GetSubscription(CurrentSite.Guid);
+                CmsSubscription result = Cache.Get<CmsSubscription>("subscription");
+                if ((result == null) || (GooeyConfigManager.IsDevelopmentEnvironment))
+                {
+                    result = SubscriptionManager.GetSubscription(CurrentSite.Guid);
+                    Cache.Add("subscription", result);
+                }
+                return result;
+            }
+        }
+
+        public static CmsSubscriptionPlan SubscriptionPlan
+        {
+            get
+            {
+                CmsSubscriptionPlan plan = Cache.Get<CmsSubscriptionPlan>("subscription-plan");
+                if ((plan == null) || (GooeyConfigManager.IsDevelopmentEnvironment))
+                {
+                    plan = SubscriptionManager.GetSubscriptionPlan(Subscription.SubscriptionPlan);
+                    Cache.Add("subscription-plan",plan);
+                }
+                return plan;
             }
         }
 
@@ -152,15 +172,6 @@ namespace Gooeycms.Business.Util
                 }
             }
 
-            public static Boolean IsLeadDbEnabled
-            {
-                get
-                {
-                    String value = GetSiteConfiguration("lead-db-enabled", "true", false);
-                    return Boolean.Parse(value);
-                }
-            }
-
             public static String MarkupEngineName
             {
                 get
@@ -248,6 +259,18 @@ namespace Gooeycms.Business.Util
             }
         }
 
+        public class Restrictions
+        {
+            public static Int32 MaxAllowedPages
+            {
+                get { return CurrentSite.SubscriptionPlan.MaxAllowedPages; }
+            }
+
+            public static Boolean IsJavascriptAllowed
+            {
+                get { return CurrentSite.SubscriptionPlan.IsJavascriptAllowed; }
+            }
+        }
 
         private static String GetStorageKey(String type)
         {
