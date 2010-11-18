@@ -11,16 +11,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="ScriptManager" runat="server" />
-        <telerik:RadAjaxManager id="RadAjaxManager1" runat="server" OnAjaxRequest="AjaxManager_OnRequest" ClientEvents-OnResponseEnd="closeWindow();">
-          <AjaxSettings>
-             <telerik:AjaxSetting AjaxControlID="RadAjaxManager1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="ProgressArea" />
-                </UpdatedControls>
-             </telerik:AjaxSetting>
-           </AjaxSettings>
+        <telerik:RadScriptManager ID="ScriptManager" AsyncPostBackTimeout="600" runat="server" />
+        <telerik:RadAjaxManager id="RadAjaxManager1" runat="server" RequestQueueSize="100" OnAjaxRequest="AjaxManager_OnRequest" ClientEvents-OnResponseEnd="closeWindow();">
         </telerik:RadAjaxManager>
+
 
         <script language="javascript" type="text/javascript">
             function closeWindow() {
@@ -31,8 +25,8 @@
         <telerik:RadAjaxPanel ID="RadAjaxPanel" runat="server">
         
         </telerik:RadAjaxPanel>
-        <telerik:RadProgressManager ID="ProgressManager" runat="server" />
-        <telerik:RadProgressArea ID="ProgressArea" runat="server" Skin="Windows7" />        
+        <telerik:RadProgressManager ID="ProgressManager" EnableMemoryOptimization="true" runat="server" />
+        <telerik:RadProgressArea ID="ProgressArea"  runat="server" Skin="Windows7" />        
         
         <telerik:RadCodeBlock ID="cb1" runat="server">
         <script language="javascript" type="text/javascript">
