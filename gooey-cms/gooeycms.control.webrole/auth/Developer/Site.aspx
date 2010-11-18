@@ -86,7 +86,7 @@
         </tr>
     </table>
 
-    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="463" Height="237" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="463" Height="237" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
 
     <script language="javascript" type="text/javascript">
