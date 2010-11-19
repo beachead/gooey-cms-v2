@@ -10,6 +10,7 @@ namespace Gooeycms.Constants
         public const String SalesForcePrice = "salesforce-price";
         public const String CampaignOptionPrice = "campaign-price";
         public const String DefaultCmsDomain = "default-cms-domain";
+        public const String DefaultAdminDomain = "default-admin-domain";
         public const String DefaultStagingPrefix = "default-staging-prefix";
         public const String SubscriptionProcessor = "subscription-processor";
         public const String IsLogginedEnabled = "logging-enabled";
@@ -26,7 +27,6 @@ namespace Gooeycms.Constants
         public const String InviteEmailTemplate = "invite-email-template";
         public const String ApprovedEmailTemplate = "approved-email-template";
         public const String DefaultHomepage = "default-homepage";
-
         public const String EmailAddressesSiteAdmin = "emailaddresses-siteadmin";
     }
 }
