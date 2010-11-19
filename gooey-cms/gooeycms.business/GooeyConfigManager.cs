@@ -212,7 +212,7 @@ This is your home page.
         {
             get
             {
-                String result = GetCachedValue(ConfigConstants.PaypalUrl, "control.gooeycms.net");
+                String result = GetCachedValue(ConfigConstants.DefaultAdminDomain, "control.gooeycms.net");
                 return result;
             }
         }
