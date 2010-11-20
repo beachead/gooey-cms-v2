@@ -23,6 +23,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
 
             if (!Page.IsPostBack)
             {
+                this.ChkTosText.Text = GooeyConfigManager.SitePackageTos;
                 LoadAvailableSites();
                 Anthem.Manager.Register(this);
             }

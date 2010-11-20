@@ -11,6 +11,9 @@ namespace Gooeycms.Business
 {
     public static class GooeyConfigManager
     {
+        private static String DefaultSitePackageTos = @"I certify that I am the creator of this website, and agree that Gooey CMS and its users may use, copy, display and store this website on other Gooey CMS powered websites, according to Gooey CMS's <a href=""#"" onclick=""window.open('/tos.aspx#site','','width=500,height=450'); return false;"">Terms of Service</a>.";
+        private static String DefaultThemePackageTos = @"I certify that I am the creator of this theme, and agree that Gooey CMS and its users may use, copy, display and store this theme on other Gooey CMS powered websites, according to Gooey CMS's <a href=""#"" onclick=""window.open('/tos.aspx#themes','','width=500,height=450'); return false;"">Terms of Service</a>.";
+
         private static Dictionary<String, object> cache = new Dictionary<string, object>();
 
         private static string GetCachedValue(String key, String defaultValue = null, Boolean required = false)
@@ -320,6 +323,22 @@ This is your home page.
             {
                 Persist(ConfigConstants.ApprovedEmailTemplate, value);
                 cache[ConfigConstants.ApprovedEmailTemplate] = value;
+            }
+        }
+
+        public static String SitePackageTos
+        {
+            get
+            {
+                return GetCachedValue(ConfigConstants.SitePackageTos, defaultValue: DefaultSitePackageTos);
+            }
+        }
+
+        public static Int32 DefaultAsyncTimeout
+        {
+            get
+            {
+                return Int32.Parse(GetCachedValue(ConfigConstants.DefaultAsyncTimeout,defaultValue: "600"));
             }
         }
 

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 
 namespace Gooeycms.Business.Storage
 {
+    [DebuggerDisplay("Filename = {Filename}, Uri = {Uri}, Size = {Size}")]
     [Serializable]
     public class StorageFile
     {
         public long Size { get; set; }
         public Uri Uri { get; set; }
         public String Filename { get; set; }
+        [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         public System.Collections.Specialized.NameValueCollection Metadata { get; set; }
         public String ContentType { get; set; }
         public byte[] Data { get; set; }
