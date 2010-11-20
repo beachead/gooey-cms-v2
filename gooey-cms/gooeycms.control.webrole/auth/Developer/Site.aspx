@@ -24,9 +24,9 @@
 
     <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
 
-    <table cellspacing="0" class="form">
+    <table cellspacing="0" class="form" style="width:90%;">
         <tr>
-            <td valign="top">
+            <td style="vertical-align:top;width:40%;">
                 <div>
                     <p>
                         Choose the site to package:<br />
@@ -55,7 +55,13 @@
                     </p>
                 </div>
                 <div>
-                    <anthem:Button ID="BtnSave" Text="Package &amp; Deploy" OnClick="BtnSave_Click" PostCallBackFunction="deploy_site" runat="server" />
+                    <table>
+                        <tr>
+                            <td style="vertical-align:top;"><asp:CheckBox ID="ChkAgreeTos" runat="server" /></td>
+                            <td><asp:Label ID="ChkTosText" runat="server" /></td>
+                        </tr>
+                    </table>
+                    <anthem:Button ID="BtnSave" Text="Package &amp; Deploy" OnClick="BtnSave_Click" PreCallBackFunction="validate_site" PostCallBackFunction="deploy_site" runat="server" />
                     <anthem:HiddenField ID="SavedPackageGuid" AutoUpdateAfterCallBack="true" runat="server" />
                 </div>
             </td>
@@ -65,7 +71,7 @@
             <td width="100px;">
                 &nbsp;
             </td>
-            <td>
+            <td style="vertical-align:top;">
                 <h2>
                     <img src="/images/steps_to_sell.png" width="272px" height="39px" border="0" /></h2>
                 <div class="nice-box">
@@ -90,6 +96,15 @@
     </telerik:RadWindowManager>
 
     <script language="javascript" type="text/javascript">
+        function validate_site() {
+            var box = document.getElementById('<%= ChkAgreeTos.ClientID %>');
+            var result = box.checked;
+            if (!result)
+                alert('You must agree to the terms of service prior to packaging this site.');
+
+            return result;
+        }
+
         function deploy_site() {
             window.radopen('./dopackage.aspx?g=' + document.getElementById('<%=SavedPackageGuid.ClientID %>').value, null);
         }

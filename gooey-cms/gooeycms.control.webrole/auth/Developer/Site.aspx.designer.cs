@@ -67,6 +67,24 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
         protected global::System.Web.UI.WebControls.DropDownList LstCategory;
         
         /// <summary>
+        /// ChkAgreeTos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ChkAgreeTos;
+        
+        /// <summary>
+        /// ChkTosText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ChkTosText;
+        
+        /// <summary>
         /// BtnSave control.
         /// </summary>
         /// <remarks>

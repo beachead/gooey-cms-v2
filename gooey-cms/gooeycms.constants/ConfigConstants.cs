@@ -29,5 +29,6 @@ namespace Gooeycms.Constants
         public const String ApprovedEmailTemplate = "approved-email-template";
         public const String DefaultHomepage = "default-homepage";
         public const String EmailAddressesSiteAdmin = "emailaddresses-siteadmin";
+        public const String SitePackageTos = "sitepackage-tos";
     }
 }
