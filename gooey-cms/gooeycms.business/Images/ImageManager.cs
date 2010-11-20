@@ -8,11 +8,23 @@ using Gooeycms.Business.Util;
 using Kaliko.ImageLibrary;
 using System.Text;
 using System.Text.RegularExpressions;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business.Images
 {
     public class ImageManager
     {
+        public static List<String> ValidImageExtensions = new List<String>() { "png", "gif", "jpg", "jpeg" };
+        public static Boolean IsValidImageType(String imagename)
+        {
+            Boolean result = false;
+            if (imagename != null)
+                result = (ValidImageExtensions.Exists(d => imagename.ToLower().EndsWith(d)));
+
+            return result;
+        }
+
+
         private static ImageManager instance = new ImageManager();
         private ImageManager() { }
         public static ImageManager Instance
@@ -37,9 +49,19 @@ namespace Gooeycms.Business.Images
             {
                 ZipHandler handler = new ZipHandler(contents);
                 images = handler.Decompress();
+                
+                //Make sure that the images are valid, removing any invalid ones
+                for (int i = images.Count - 1; i != 0; i--)
+                {
+                    StorageFile file = images[i];
+                    if (!IsValidImageType(file.Filename))
+                        images.RemoveAt(i);
+                }
             }
             else
             {
+                if (!IsValidImageType(filename))
+                    throw new ArgumentException("The specified image is not a supported image type. The filename must end with one of the approved extensions: " + ValidImageExtensions.AsString(",") + ". Filename:" + filename);
                 StorageFile file = new StorageFile();
                 file.Filename = filename;
                 file.Data = contents;
