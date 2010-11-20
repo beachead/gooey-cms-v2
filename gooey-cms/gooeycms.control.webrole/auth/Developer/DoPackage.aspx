@@ -11,7 +11,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="ScriptManager" AsyncPostBackTimeout="600" runat="server" />
+        <telerik:RadScriptManager ID="ScriptManager" runat="server" />
         <telerik:RadAjaxManager id="RadAjaxManager1" runat="server" RequestQueueSize="100" OnAjaxRequest="AjaxManager_OnRequest" ClientEvents-OnResponseEnd="closeWindow();">
         </telerik:RadAjaxManager>
 

@@ -323,6 +323,14 @@ This is your home page.
             }
         }
 
+        public static Int32 DefaultAsyncTimeout
+        {
+            get
+            {
+                return Int32.Parse(GetCachedValue(ConfigConstants.DefaultAsyncTimeout,defaultValue: "600"));
+            }
+        }
+
         public static class EmailAddresses
         {
             public static String SiteAdmin
