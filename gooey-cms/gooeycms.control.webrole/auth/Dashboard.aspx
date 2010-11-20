@@ -31,38 +31,54 @@
             <td>
 		    <ul id="themes-panel">
                 <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" OnItemCommand="SitePackages_OnItemCommand" runat="server">
-                   <ItemTemplate>
-    	            <li class="theme">    
-				            <div class="title" style="margin-top:0px;">
-                                <%# Eval("Title") %>
+                    <ItemTemplate>
+			            <li class="theme">    
+
+                            <!-- start: theme-header -->
+                            <div class="theme-header">
+				                <div class="title"><%# Eval("Title") %></div>
+				                <div class="logo"><asp:Image ID="Logo" runat="server" /></div>
                             </div>
-				            <ul class="thumbs" style="padding-left:0px;">
-                                <asp:Repeater ID="ThumbnailImages" runat="server">
-                                    <ItemTemplate>
-                                        <li><img src='<%# DataBinder.Eval(Container.DataItem,"Url") %>' width="344" height="167" alt="" /></li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-				            </ul>                    
-                            <div style="padding-left:20px;padding-top:5px;padding-bottom:10px;">
-                                <b>Apply To Site</b>: <asp:DropDownList ID="LstSites" runat="server" />&nbsp;<asp:Button ID="BtnApplyPackage" CommandName="ApplyPackage" CommandArgument='<%# Eval("Guid") %>' Text="Apply" runat="server" />
+                            <!-- end: theme-header -->
+
+                            <!-- start: preview -->
+                            <div class="preview">
+                                <ul class="thumbs">
+                                    <asp:Repeater ID="ThumbnailImages" OnItemCommand="SitePackages_OnItemCommand" runat="server">
+                                        <ItemTemplate>
+                                            <li>
+                                                <img src='<%# DataBinder.Eval(Container.DataItem,"Url") %>' width="344" height="167" alt="" />
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+				                </ul>
+                                <div style="padding-left:20px;padding-top:5px;padding-bottom:10px;">
+                                    <b>Apply To Site</b>: <asp:DropDownList ID="LstSites" runat="server" />&nbsp;<asp:Button ID="BtnApplyPackage" CommandName="ApplyPackage" CommandArgument='<%# Eval("Guid") %>' Text="Apply" runat="server" />
+                                </div>
+                                <ul class="thumb-nav"></ul>
+				        
+				                <div class="features">
+                                    <a href="#" class="showFeatures">Features</a>
+				                    <ul>
+                                        <asp:Repeater ID="FeatureList" runat="server">
+                                            <ItemTemplate>
+                                                <li><%# Container.DataItem %></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+				                    </ul>
+                                </div>
                             </div>
-				            <ul class="thumb-nav"></ul>
-				            <ul class="features" style="margin:0px;">
-                                <asp:Repeater ID="FeatureList" runat="server">
-                                    <ItemTemplate>
-                                        <li><%# Container.DataItem %></li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-				            </ul>
+                            <!-- end: preview -->
+
 			            </li>                                        
                     </ItemTemplate>
                 </asp:Repeater>
-            </ul>                             
+            </ul>                                                  
             </td>
         </tr>
     </table>
 
-    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="495" Height="260" ShowContentDuringLoad="false" DestroyOnClose="true" VisibleStatusbar="false" Behaviors="Move,Close" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="495" Height="260" ShowContentDuringLoad="false" DestroyOnClose="true" VisibleStatusbar="false" Behaviors="Move" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
 
     <script language="javascript" type="text/javascript">

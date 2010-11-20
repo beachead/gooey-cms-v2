@@ -10,8 +10,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <telerik:RadScriptManager ID="ScriptManager" runat="server" />
-        <telerik:RadAjaxManager id="RadAjaxManager1" runat="server" OnAjaxRequest="AjaxManager_OnRequest">
+        <telerik:RadScriptManager ID="ScriptManager" AsyncPostBackTimeout="600" runat="server" />
+        <telerik:RadAjaxManager id="RadAjaxManager1" runat="server" OnAjaxRequest="AjaxManager_OnRequest" ClientEvents-OnResponseEnd="closeWindow();">
           <AjaxSettings>
              <telerik:AjaxSetting AjaxControlID="RadAjaxManager1">
                 <UpdatedControls>
@@ -23,6 +23,7 @@
 
         <script language="javascript" type="text/javascript">
             function closeWindow() {
+                alert('Successfully applied the site.');
                 var win = window.frameElement.radWindow;
                 win.close();
             }
