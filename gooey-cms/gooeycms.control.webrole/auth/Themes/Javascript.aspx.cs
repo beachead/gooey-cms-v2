@@ -135,6 +135,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         {
             String name = this.LstExistingFile.SelectedValue;
             JavascriptManager.Instance.Delete(this.GetSelectedTheme(), name);
+            CurrentSite.Cache.Clear();
 
             LoadTabData();
             OutsideSelectedPanel = "mylibrarypanel";

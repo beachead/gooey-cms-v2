@@ -36,10 +36,14 @@
         
         <telerik:RadCodeBlock ID="cb1" runat="server">
         <script language="javascript" type="text/javascript">
+            var isRunOnce = false;
             function pageLoad() {
-                var manager = $find("<%= RadAjaxManager1.ClientID %>");
-                if (manager)
-                    manager.ajaxRequest('<%=Request.QueryString["s"] %>|<%=Request.QueryString["g"] %>');
+                if (!isRunOnce) {
+                    var manager = $find("<%= RadAjaxManager1.ClientID %>");
+                    if (manager)
+                        manager.ajaxRequest('<%=Request.QueryString["s"] %>|<%=Request.QueryString["g"] %>');
+                    isRunOnce = true;
+                }
             }
         </script>
         </telerik:RadCodeBlock>
