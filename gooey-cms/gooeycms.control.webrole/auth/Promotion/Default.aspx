@@ -7,7 +7,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Subnavigation" runat="server">
-    <gooey:Subnav ID="Subnav" runat="server" NavSection="promotion" NavItem="promotion" />
+    <gooey:Subnav ID="Subnav" runat="server" NavSection="Promotion" NavItem="promotion" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
