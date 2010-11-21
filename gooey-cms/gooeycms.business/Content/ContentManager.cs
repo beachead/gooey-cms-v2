@@ -363,6 +363,9 @@ namespace Gooeycms.Business.Content
 
         public void Update(CmsContent item, Table table)
         {
+            //Updating always unapproved the item
+            item.IsApproved = false;
+
             //Save the filename, so we can restore it
             String filename = null;
             if (item.ContentType.IsFileType)
