@@ -12,10 +12,17 @@ namespace Gooeycms.webrole.ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //cleanup all the users in the asp.net membership system
-            foreach (MembershipUser user in System.Web.Security.Membership.GetAllUsers())
+            if (Request.QueryString["all"] != null)
             {
-                System.Web.Security.Membership.DeleteUser(user.UserName);
+                //cleanup all the users in the asp.net membership system
+                foreach (MembershipUser user in System.Web.Security.Membership.GetAllUsers())
+                {
+                    System.Web.Security.Membership.DeleteUser(user.UserName);
+                }
+            }
+            else
+            {
+                System.Web.Security.Membership.DeleteUser(Request.QueryString["user"]);
             }
         }
     }   

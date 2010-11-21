@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Gooeycms.Business.Util;
+using Gooeycms.Data.Model.Subscription;
+using Gooeycms.Business.Subscription;
+using Gooeycms.Business.Crypto;
+using System.Web.Security;
+
+namespace Gooeycms.Business.Membership
+{
+    public class MembershipDataSource
+    {
+        /// <summary>
+        /// Deletes the specified user from the system
+        /// </summary>
+        /// <param name="guid"></param>
+        public void DeleteUser(UserInfo userAdapter)
+        {
+        }
+
+        public void UpdateUser(UserInfo userinfo)
+        {
+            //Find the existing user information
+            MembershipUserWrapper wrapper = MembershipUtil.FindByUserGuid(userinfo.Guid);
+            MembershipUser user = wrapper.MembershipUser;
+
+            //The user is changing their email address... we need to update the username
+            if (user.UserName != userinfo.Email)
+                throw new ArgumentException("GooeyCMS does not currently support changing your username/email address");
+
+            //Find the existing account
+            wrapper.UserInfo.Firstname = userinfo.Firstname;
+            wrapper.UserInfo.Lastname = userinfo.Lastname;
+
+            MembershipUtil.UpdateUserInfo(wrapper.UserInfo);
+
+        }
+
+        public void InsertUser(UserInfo userAdapter)
+        {
+            userAdapter.Username = userAdapter.Email;
+            MembershipUserWrapper wrapper = MembershipUtil.AddUser(userAdapter.Username, userAdapter.Password, userAdapter.Username, userAdapter.Firstname, userAdapter.Lastname);
+            SubscriptionManager.AddUserToSubscription(CurrentSite.Guid, wrapper.UserInfo);
+        }
+
+        public IList<UserInfo> GetUsers(String encryptedSiteGuid)
+        {
+            String siteGuid = TextEncryption.Decode(encryptedSiteGuid);
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(siteGuid);
+            return MembershipUtil.GetUsersBySite(subscription.Id);
+        }
+    }
+}

@@ -22,6 +22,12 @@
         </ul>
     </asp:View>
 
+    <asp:View ID="users" runat="server">
+        <ul>
+            <li><asp:HyperLink ID="users_default" NavigateUrl="~/auth/Users/Default.aspx" Text="Manage Users" runat="server" /></li>
+        </ul>
+    </asp:View>
+
     <asp:View ID="promotion" runat="server">
         <ul>
             <li><asp:HyperLink ID="promotion_promotion" NavigateUrl="~/auth/Promotion/Default.aspx" Text="Promotion" runat="server" /></li>
