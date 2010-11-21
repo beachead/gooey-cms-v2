@@ -1,4 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Secure.Master.cs" Inherits="Gooeycms.Webrole.Control.Secure" %>
+<%@ Import Namespace="Gooeycms.Business.Membership" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -42,7 +44,7 @@
                 <li><asp:HyperLink id="NavPromotion" NavigateUrl="~/auth/promotion/default.aspx" runat="server" onprerender="SetActive">Promotion</asp:HyperLink></li>                                
                 <li><asp:HyperLink id="NavSite" NavigateUrl="~/auth/site/default.aspx" runat="server" onprerender="SetActive">Manage Site</asp:HyperLink></li>
                 <li><asp:HyperLink id="NavThemes" NavigateUrl="~/auth/themes/default.aspx" runat="server" onprerender="SetActive">Manage Themes</asp:HyperLink></li>
-                <li runat="server" visible="false"><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">User Management</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">User Management</asp:HyperLink></li>
                 <li><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>                
             </ul>
         </div>
@@ -65,6 +67,7 @@
                         <div class="subnav-inner">
                             <ul>
                                 <li class="welcome">Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
+                                <% if (!LoggedInUser.IsDemoAccount) { %>
                                 <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink>
                                     <ul>
                                         <li><a href="#">Website 1</a></li>
@@ -87,6 +90,7 @@
                                         <li><a href="#">Developer Extras</a></li>
                                     </ul>
                                 </li>
+                                <% } %>
                             </ul>                                
                         </div>
                     </div>
