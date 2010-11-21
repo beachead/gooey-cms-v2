@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Default" %>
+
+
 <asp:Content ID="localJS" ContentPlaceHolderID="localJS" runat="server">
 	<script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
@@ -11,7 +13,6 @@
     <ul>
         <li class="on">DEVELOPERS HOME</a></li>
         <li><a href="./site.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW SITE</a></li>
-        <li><a href="./theme.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW THEME</a></li> 
         <li class="last"><a href="Settings.aspx">DEVELOPER SETTINGS</a></li> 
     </ul>    
 </asp:Content>

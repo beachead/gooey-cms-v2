@@ -11,6 +11,7 @@ using System.Web.Security;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business;
 using Gooeycms.Data.Model.Store;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Developer
 {
@@ -69,6 +70,9 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             package.Title = this.TxtTitle.Text;
 
             SitePackageManager.NewInstance.Save(package);
+
+            //Make this the "active" site so we can package it correctly
+            SiteHelper.SetActiveSiteCookie(siteGuid.Value);
 
             this.SavedPackageGuid.Value = package.Guid;
         }

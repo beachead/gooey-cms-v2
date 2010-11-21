@@ -8,6 +8,7 @@
     <link id="Link1" href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="localCSS" runat="server"></asp:ContentPlaceHolder>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
     <script src="<%# ResolveUrl("~/scripts/functions.js") %>" type="text/javascript" language="javascript"></script> 
     <script src="<%# ResolveUrl("~/scripts/mootools-core.js") %>" type="text/javascript" language="javascript"></script>    
@@ -22,6 +23,7 @@
         dojo.require("dijit.form.ValidationTextBox");
         dojo.require("dijit.Tooltip");
     </script>
+    <asp:ContentPlaceHolder ID="localJS" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body class="claro">
     <form id="aspnetform" clientidmode="Static" runat="server">

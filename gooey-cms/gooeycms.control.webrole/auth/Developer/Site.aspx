@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Site.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Site" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Site.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Site" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="localJS" ContentPlaceHolderID="localJS" runat="server">
@@ -16,7 +16,6 @@
     <ul>
         <li><a href="Default.aspx">DEVELOPERS HOME</a></li>
         <li class="on">PACKAGE A NEW SITE</li>
-        <li><a href="./theme.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW THEME</a></li>
         <li class="last"><a href="Settings.aspx">DEVELOPER SETTINGS</a></li>
     </ul>
 </asp:Content>
