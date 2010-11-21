@@ -90,6 +90,12 @@
                                         <li><a href="#">Developer Extras</a></li>
                                     </ul>
                                 </li>
+                                <% } else { %>
+                                <li><asp:HyperLink ID="HyperLink1" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                    <ul>
+                                        <li><asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+                                    </ul>
+                                </li>
                                 <% } %>
                             </ul>                                
                         </div>
