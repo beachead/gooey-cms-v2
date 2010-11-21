@@ -13,12 +13,22 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager" runat="server" />
+    <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnAjaxError" runat="server"></telerik:RadScriptManager>
 
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(onEndAjaxRequest);
             function RowDblClick(sender, eventArgs) {
                 sender.get_masterTableView().editItem(eventArgs.get_itemIndexHierarchical());
+            }
+
+            function onEndAjaxRequest(sender, args) {
+                if (args.get_error() != undefined && args.get_error().httpStatusCode == '500') {
+                    var msg = args.get_error().message;
+                    args.set_errorHandled(true);
+
+                    alert('There was a problem processing this request: ' + msg);
+                }
             }
         </script>
     </telerik:RadCodeBlock>
@@ -46,11 +56,12 @@
                                  AllowPaging="True" AutoGenerateColumns="False"  Skin="Windows7"
                                  DataSourceID="UserDataSource" runat="server" GridLines="None">
                     <MasterTableView Width="100%" CommandItemDisplay="TopAndBottom" DataKeyNames="Guid" AutoGenerateColumns="false" EditMode="InPlace">
+                        <CommandItemSettings AddNewRecordText="Add new user" />
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton"  UniqueName="EditColumnCommand">
                             </telerik:GridEditCommandColumn>
-                            <telerik:GridBoundColumn DataField="Guid" HeaderText="ID" UniqueName="Guid" ReadOnly="true" ColumnEditorID="Readonly" />
-                            <telerik:GridBoundColumn DataField="Email" HeaderText="Username/Email" UniqueName="Email" ColumnEditorID="GridEmailEditor" />
+                            <telerik:GridBoundColumn DataField="Guid" HeaderText="ID" UniqueName="Guid" SortExpression="Guid" ReadOnly="true" ColumnEditorID="Readonly" />
+                            <telerik:GridBoundColumn DataField="Email" HeaderText="Username/Email" SortExpression="Email" UniqueName="Email" ColumnEditorID="GridEmailEditor" />
                             <telerik:GridBoundColumn DataField="Password" HeaderText="Password" UniqueName="Password" EmptyDataText="[stored]" ItemStyle-Font-Italic="true" ColumnEditorID="GridPasswordEditor" />
                             <telerik:GridBoundColumn DataField="Firstname" HeaderText="Firstname" UniqueName="Firstname" ColumnEditorID="GridTextEditor" />
                             <telerik:GridBoundColumn DataField="Lastname" HeaderText="Lastname" UniqueName="Lastname" ColumnEditorID="GridTextEditor"  />

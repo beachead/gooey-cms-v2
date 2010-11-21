@@ -203,6 +203,11 @@ namespace Gooeycms.Business.Membership
             }
         }
 
+        public static Boolean IsUserInRole(String username, String rolename)
+        {
+            return System.Web.Security.Roles.IsUserInRole(username, rolename);
+        }
+
         public static MembershipUserWrapper AddUser(String username, String password, String email, String firstname, String lastname)
         {
             MembershipUserWrapper existing = FindByUsername(username);
@@ -231,9 +236,48 @@ namespace Gooeycms.Business.Membership
             }
 
             MembershipUser user = System.Web.Security.Membership.CreateUser(info.Username, password, info.Email);
-            System.Web.Security.Roles.AddUserToRole(DemoAccountUsername, SecurityConstants.Roles.SITE_STANDARD_USER);
-
             return new MembershipUserWrapper(info, user);
+        }
+
+        public static void AddUserToRole(string username, string rolename)
+        {
+            if (!Roles.RoleExists(rolename))
+                Roles.CreateRole(rolename);
+
+            if (!Roles.IsUserInRole(username, rolename))
+                System.Web.Security.Roles.AddUserToRole(username, rolename);
+        }
+
+        public static void RemoveUserFromRole(string username, string rolename)
+        {
+            if (Roles.IsUserInRole(username,rolename))
+                Roles.RemoveUserFromRole(username, rolename);
+        }
+
+        internal static void DeleteUser(UserInfo userAdapter)
+        {
+            UserInfoDao dao = new UserInfoDao();
+            UserInfo user = dao.FindByGuid(userAdapter.Guid);
+            if (user != null)
+            {
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<UserInfo>(user);
+                    tx.Commit();
+                }
+                System.Web.Security.Membership.DeleteUser(user.Username);
+            }
+        }
+
+        internal static void ChangePassword(String username, String password)
+        {
+            MembershipUser user = System.Web.Security.Membership.GetUser(username);
+            if (user != null)
+            {
+                user.UnlockUser();
+                String temp = user.ResetPassword();
+                bool result = user.ChangePassword(temp, password);
+            }
         }
     }
 }

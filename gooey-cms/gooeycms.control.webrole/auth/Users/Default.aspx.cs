@@ -13,7 +13,15 @@ namespace Gooeycms.Webrole.Control.auth.Users
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+        }
 
+        protected void RadScriptManager_OnAjaxError(Object sender, AsyncPostBackErrorEventArgs e)
+        {
+            String message = e.Exception.Message;
+            if (e.Exception.InnerException != null)
+                message = e.Exception.InnerException.Message;
+
+            RadScriptManager.AsyncPostBackErrorMessage = message;
         }
     }
 }

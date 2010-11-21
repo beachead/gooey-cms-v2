@@ -18,6 +18,7 @@ namespace Gooeycms.Business.Membership
         /// <param name="guid"></param>
         public void DeleteUser(UserInfo userAdapter)
         {
+            MembershipUtil.DeleteUser(userAdapter);
         }
 
         public void UpdateUser(UserInfo userinfo)
@@ -36,6 +37,11 @@ namespace Gooeycms.Business.Membership
 
             MembershipUtil.UpdateUserInfo(wrapper.UserInfo);
 
+            //Check if the user is changing their password
+            if (!String.IsNullOrEmpty(userinfo.Password))
+            {
+                MembershipUtil.ChangePassword(user.UserName,userinfo.Password);
+            }
         }
 
         public void InsertUser(UserInfo userAdapter)

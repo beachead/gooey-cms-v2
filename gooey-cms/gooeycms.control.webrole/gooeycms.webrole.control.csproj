@@ -128,6 +128,7 @@
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
     <Content Include="auth\Users\Default.aspx" />
+    <Content Include="auth\Users\edit-roles.aspx" />
     <Content Include="Controls\Subnav.ascx" />
     <Content Include="css\reorder.css" />
     <Content Include="css\store.css" />
@@ -442,6 +443,13 @@
     </Compile>
     <Compile Include="auth\Users\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Users\edit-roles.aspx.cs">
+      <DependentUpon>edit-roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Users\edit-roles.aspx.designer.cs">
+      <DependentUpon>edit-roles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentEditor\MarkupEditor.ascx.cs">
       <DependentUpon>MarkupEditor.ascx</DependentUpon>
