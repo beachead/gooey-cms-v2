@@ -187,6 +187,20 @@ namespace Gooeycms.Business.Subscription
             return dao.FindByDomains(subdomain, host);
         }
 
+        public static void AddUserToSubscription(Data.Guid siteGuid, UserInfo user)
+        {
+            CmsSubscription subscription = GetSubscription(siteGuid);
+            if (subscription != null)
+            {
+                CmsSubscriptionDao dao = new CmsSubscriptionDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.AddUserToSubscription(user.Id, subscription.Id);
+                    tx.Commit();
+                }
+            }
+        }
+
         public static void Create(MembershipUserWrapper wrapper, CmsSubscription subscription)
         {
             CmsSubscriptionDao dao = new CmsSubscriptionDao();

@@ -18,5 +18,10 @@ namespace Gooeycms.Data.Model.Subscription
             String hql = "select info from UserInfo info where info.Guid = :guid";
             return base.NewHqlQuery(hql).SetString("guid", guid.Value).UniqueResult<UserInfo>();
         }
+
+        public IList<UserInfo> FindBySiteGuid(Int32 primaryKey)
+        {
+            return base.Session.GetNamedQuery("UserInfoBySite").SetParameter("id", primaryKey).List<UserInfo>();            
+        }
     }
 }

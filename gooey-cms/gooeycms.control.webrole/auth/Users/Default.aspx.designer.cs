@@ -7,144 +7,108 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.Webrole.Control {
+namespace Gooeycms.Webrole.Control.auth.Users {
     
     
-    public partial class SecureNoNavigation {
+    public partial class Default {
         
         /// <summary>
-        /// Head1 control.
+        /// Subnav control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
         
         /// <summary>
-        /// Link1 control.
+        /// RadScriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink Link1;
+        protected global::Telerik.Web.UI.RadScriptManager RadScriptManager;
         
         /// <summary>
-        /// head control.
+        /// RadCodeBlock1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::Telerik.Web.UI.RadCodeBlock RadCodeBlock1;
         
         /// <summary>
-        /// localCSS control.
+        /// RadAjaxManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder localCSS;
+        protected global::Telerik.Web.UI.RadAjaxManager RadAjaxManager1;
         
         /// <summary>
-        /// localJS control.
+        /// RadAjaxLoadingPanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder localJS;
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
         
         /// <summary>
-        /// aspnetform control.
+        /// UserGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm aspnetform;
+        protected global::Telerik.Web.UI.RadGrid UserGridView;
         
         /// <summary>
-        /// Subnavigation control.
+        /// GridEmailEditor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Subnavigation;
+        protected global::Telerik.Web.UI.GridTextBoxColumnEditor GridEmailEditor;
         
         /// <summary>
-        /// Instructions control.
+        /// GridTextEditor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Instructions;
+        protected global::Telerik.Web.UI.GridTextBoxColumnEditor GridTextEditor;
         
         /// <summary>
-        /// Editor control.
+        /// GridPasswordEditor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Editor;
+        protected global::Telerik.Web.UI.GridTextBoxColumnEditor GridPasswordEditor;
         
         /// <summary>
-        /// dashboardLink control.
+        /// Singleton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink dashboardLink;
+        protected global::Telerik.Web.UI.RadWindowManager Singleton;
         
         /// <summary>
-        /// developersLink control.
+        /// UserDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink developersLink;
-        
-        /// <summary>
-        /// Img1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
-        
-        /// <summary>
-        /// LoggedInUsername control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LoggedInUsername;
-        
-        /// <summary>
-        /// change_password control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor change_password;
-        
-        /// <summary>
-        /// LoginStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginStatus LoginStatus;
+        protected global::System.Web.UI.WebControls.ObjectDataSource UserDataSource;
     }
 }

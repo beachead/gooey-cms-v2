@@ -10,6 +10,7 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual String Guid { get; set; }
         public virtual DateTime Created { get; set; }
         public virtual String Username { get; set; }
+        public virtual String Password { get; set; }
         public virtual String Email { get; set; }
         public virtual String Firstname { get; set; }
         public virtual String Lastname { get; set; }

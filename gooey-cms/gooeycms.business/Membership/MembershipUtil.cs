@@ -55,7 +55,7 @@ namespace Gooeycms.Business.Membership
                 try
                 {
                     user = System.Web.Security.Membership.CreateUser(registration.Email, password, registration.Email);
-                    System.Web.Security.Roles.AddUserToRole(registration.Email, SecurityConstants.DOMAIN_ADMIN);
+                    System.Web.Security.Roles.AddUserToRole(registration.Email, SecurityConstants.Roles.SITE_ADMINISTRATOR);
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -112,6 +112,16 @@ namespace Gooeycms.Business.Membership
             return wrapper;
         }
 
+        /// <summary>
+        /// Gets all of the users for the specified site
+        /// </summary>
+        /// <param name="siteGuid"></param>
+        /// <returns></returns>
+        public static IList<UserInfo> GetUsersBySite(Int32 sitePrimaryKey)
+        {
+            UserInfoDao dao = new UserInfoDao();
+            return dao.FindBySiteGuid(sitePrimaryKey);
+        }
 
         public static MembershipUserWrapper FindByUserGuid(Data.Guid userGuid)
         {
@@ -159,18 +169,115 @@ namespace Gooeycms.Business.Membership
             UserInfoDao dao = new UserInfoDao();
             using (Transaction tx = new Transaction())
             {
-                dao.SaveObject(info);
+                dao.Save<UserInfo>(info);
                 tx.Commit();
             }
 
             MembershipUser user = System.Web.Security.Membership.CreateUser(DemoAccountUsername, DemoAccountPassword, DemoAccountUsername);
-            System.Web.Security.Roles.AddUserToRole(DemoAccountUsername, SecurityConstants.DOMAIN_ADMIN);
+            System.Web.Security.Roles.AddUserToRole(DemoAccountUsername, SecurityConstants.Roles.SITE_ADMINISTRATOR);
 
             MembershipUserWrapper wrapper = new MembershipUserWrapper();
             wrapper.MembershipUser = user;
             wrapper.UserInfo = info;
 
             return wrapper;
+        }
+
+        public static Boolean IsValidUsername(String username)
+        {
+            return true;
+        }
+
+        public static Boolean IsValidEmail(String email)
+        {
+            return true;
+        }
+
+        public static void UpdateUserInfo(UserInfo userinfo)
+        {
+            UserInfoDao dao = new UserInfoDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<UserInfo>(userinfo);
+                tx.Commit();
+            }
+        }
+
+        public static Boolean IsUserInRole(String username, String rolename)
+        {
+            return System.Web.Security.Roles.IsUserInRole(username, rolename);
+        }
+
+        public static MembershipUserWrapper AddUser(String username, String password, String email, String firstname, String lastname)
+        {
+            MembershipUserWrapper existing = FindByUsername(username);
+            if (existing.MembershipUser != null)
+                throw new MembershipException("The username " + username + " already exists and may not be used again.");
+
+            if (!IsValidUsername(username))
+                throw new MembershipException("The username " + username + " is not valid and may not be used.");
+
+            if (!IsValidEmail(email))
+                throw new MembershipException("The email " + email + " is not valid and may not be used.");
+
+            UserInfo info = new UserInfo();
+            info.Guid = Guid.NewGuid().ToString();
+            info.Firstname = firstname;
+            info.Lastname = lastname;
+            info.Username = username;
+            info.Email = email;
+            info.Created = DateTime.Now;
+
+            UserInfoDao dao = new UserInfoDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<UserInfo>(info);
+                tx.Commit();
+            }
+
+            MembershipUser user = System.Web.Security.Membership.CreateUser(info.Username, password, info.Email);
+            return new MembershipUserWrapper(info, user);
+        }
+
+        public static void AddUserToRole(string username, string rolename)
+        {
+            if (!Roles.RoleExists(rolename))
+                Roles.CreateRole(rolename);
+
+            if (!Roles.IsUserInRole(username, rolename))
+                System.Web.Security.Roles.AddUserToRole(username, rolename);
+        }
+
+        public static void RemoveUserFromRole(string username, string rolename)
+        {
+            if (Roles.IsUserInRole(username,rolename))
+                Roles.RemoveUserFromRole(username, rolename);
+        }
+
+        internal static void DeleteUser(UserInfo userAdapter)
+        {
+            UserInfoDao dao = new UserInfoDao();
+            UserInfo user = dao.FindByGuid(userAdapter.Guid);
+            if (user != null)
+            {
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<UserInfo>(user);
+                    tx.Commit();
+                }
+                System.Web.Security.Membership.DeleteUser(user.Username);
+            }
+        }
+
+        internal static void ChangePassword(String username, String password)
+        {
+            MembershipUser user = System.Web.Security.Membership.GetUser(username);
+            if (user != null)
+            {
+                user.UnlockUser();
+                String temp = user.ResetPassword();
+                bool result = user.ChangePassword(temp, password);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Cleanup.aspx.cs" Inherits="gooeycms.webrole.ecommerce.Cleanup" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Cleanup.aspx.cs" Inherits="Gooeycms.webrole.ecommerce.Cleanup" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

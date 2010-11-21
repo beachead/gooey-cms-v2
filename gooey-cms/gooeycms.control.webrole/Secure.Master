@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Secure.Master.cs" Inherits="Gooeycms.Webrole.Control.Secure" %>
 <%@ Import Namespace="Gooeycms.Business.Membership" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -29,63 +30,107 @@
     <asp:ContentPlaceHolder ID="localJS" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body class="claro">
-    <form id="aspnetform" clientidmode="Static" runat="server">
 
-
-    <div>
-        <div id="header-region">
-
-            <div id="logo">
-                <img src="~/images/logo_gooey_internal.png" runat="server" width="140" />
-            </div>
-
-            <ul id="utility-nav">
-                <li>Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
-                <% if (!LoggedInUser.IsDemoAccount) { %>
-                <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink></li>
-                <li><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink></li> 
-                <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change Password</a></li>
-                <% } %>
-                <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+<form id="aspnetform" clientidmode="Static" runat="server">
+    
+    <!-- START: header-region -->
+    <div id="header-region">
+        <!-- START: primary-nav -->
+        <div id="primary-nav">
+            <ul class="menu">
+                <li><asp:HyperLink id="NavContent" NavigateUrl="~/auth/content/default.aspx" runat="server" onprerender="SetActive">Manage Content</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavPages" NavigateUrl="~/auth/pages/default.aspx" runat="server" onprerender="SetActive">Manage Pages</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavCampaigns" NavigateUrl="~/auth/campaigns/default.aspx" runat="server" onprerender="SetActive">Manage Campaigns</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavPromotion" NavigateUrl="~/auth/promotion/default.aspx" runat="server" onprerender="SetActive">Promotion</asp:HyperLink></li>                                
+                <li><asp:HyperLink id="NavSite" NavigateUrl="~/auth/site/default.aspx" runat="server" onprerender="SetActive">Manage Site</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavThemes" NavigateUrl="~/auth/themes/default.aspx" runat="server" onprerender="SetActive">Manage Themes</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">User Management</asp:HyperLink></li>
+                <li><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>                
             </ul>
-
-            <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= dashboardLink.ClientID %>" position="below"><p>Access the different sites you are working on here.</p>View your purchases.</div>
-            <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= developersLink.ClientID %>" position="below"><p>Finished a site?<br /><br />Start selling your own gooey cms site.</p></div>
-
-            <div id="primary-nav">
-                <ul class="menu">
-                    <li><asp:HyperLink id="NavContent" NavigateUrl="~/auth/content/default.aspx" runat="server" onprerender="SetActive">Manage Content</asp:HyperLink></li>
-                    <li><asp:HyperLink id="NavPages" NavigateUrl="~/auth/pages/default.aspx" runat="server" onprerender="SetActive">Manage Pages</asp:HyperLink></li>
-                    <li><asp:HyperLink id="NavCampaigns" NavigateUrl="~/auth/campaigns/default.aspx" runat="server" onprerender="SetActive">Manage Campaigns</asp:HyperLink></li>
-                    <li><asp:HyperLink id="NavPromotion" NavigateUrl="~/auth/promotion/default.aspx" runat="server" onprerender="SetActive">Promotion</asp:HyperLink></li>                                
-                    <li><asp:HyperLink id="NavSite" NavigateUrl="~/auth/site/default.aspx" runat="server" onprerender="SetActive">Manage Site</asp:HyperLink></li>
-                    <li><asp:HyperLink id="NavThemes" NavigateUrl="~/auth/themes/default.aspx" runat="server" onprerender="SetActive">Manage Themes</asp:HyperLink></li>
-                    <li><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">User Management</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>                
-                </ul>
-            </div>
         </div>
-        <div id="main">
-            <table class="content" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td class="center-column">
-                        <div id="subnav">
-                            <div id="subnav-inner">
-                                <asp:ContentPlaceHolder ID="Subnavigation" runat="server"></asp:ContentPlaceHolder>
-                            </div>
-                        </div>
-                        <div id="instructions-area">
-                            <asp:ContentPlaceHolder ID="Instructions" runat="server"></asp:ContentPlaceHolder>
-                        </div>
-                        <div id="editor-area">
-                            <asp:ContentPlaceHolder ID="Editor" runat="server"></asp:ContentPlaceHolder>          
-                        </div>
-                    </td>
-              </tr>
-            </table>
-        </div>
+        <!-- END: primary-nav -->
     </div>
-    </form>
+    <!-- END: header-region -->
+
+    <!-- START: main -->
+    <div id="main">
+        <table class="content" cellpadding="0" cellspacing="0">
+        <tr>
+        <td class="center-column">
+
+            <!-- START: navigation -->
+            <div id="navigation">
+
+                <!-- START: utility-nav -->
+                <div id="utility-nav">
+                    <div class="subnav blue">
+                        <div class="subnav-inner">
+                            <ul>
+                                <li class="welcome">Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
+                                <% if (!LoggedInUser.IsDemoAccount) { %>
+                                <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink>
+                                    <ul>
+                                        <li><a href="#">Website 1</a></li>
+                                        <li><a href="#">Website 2</a></li>
+                                        <li><a href="#">Website 3</a></li>
+                                    </ul>
+                                </li>
+                                <li><asp:HyperLink ID="accountLink" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                    <ul>
+                                        <li><a href="#" runat="server">Subscriptions</a></li>
+                                        <li><a href="#" runat="server">Billing</a></li>
+                                        <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change Password</a></li>
+                                        <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+                                    </ul>
+                                </li>
+                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink>
+                                    <ul>
+                                        <li><a href="#">Create a site</a></li>
+                                        <li><a href="#">Create a Theme</a></li>
+                                        <li><a href="#">Developer Extras</a></li>
+                                    </ul>
+                                </li>
+                                <% } else { %>
+                                <li><asp:HyperLink ID="HyperLink1" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                    <ul>
+                                        <li><asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+                                    </ul>
+                                </li>
+                                <% } %>
+                            </ul>                                
+                        </div>
+                    </div>
+                </div>
+                <!-- END: utility-nav -->
+
+                <!-- START: secondary-nav -->
+                <div id="secondary-nav">
+
+                    <div class="subnav">
+                        <div class="subnav-inner">
+                            <asp:ContentPlaceHolder ID="Subnavigation" runat="server"></asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: secondary-nav -->
+                        
+            </div>
+            <!-- END: navigation -->
+
+            <div id="instructions-area">
+                <asp:ContentPlaceHolder ID="Instructions" runat="server"></asp:ContentPlaceHolder>
+            </div>
+
+            <div id="editor-area">
+                <asp:ContentPlaceHolder ID="Editor" runat="server"></asp:ContentPlaceHolder>          
+            </div>
+        </td>
+        </tr>
+        </table>
+    </div>
+    <!-- END: main -->
+    
+</form>
 
 <!-- begin olark code --> <script type='text/javascript'>/*<![CDATA[*/ (function(d,u,o){window.olark={__k:o};var h=d.location.protocol=='https:'?'https://':'http://'; d.write(unescape("%3Cscript src='"+h+u+"' type='text/javascript'%3E%3C/script%3E")); })(document,'static.olark.com/javascript/olark.js', '9163-624-10-8802'); /*]]>*/</script> <!-- end olark code -->
 </body>

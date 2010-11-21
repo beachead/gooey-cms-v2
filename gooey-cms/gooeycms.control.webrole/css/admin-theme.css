@@ -56,24 +56,25 @@ a:hover     { color: #004bc7; }
 	padding-top:15px;
 }
 
-
 #header-region {
     overflow: auto;
     background-color: #eee;
+}
+
+#navigation {
+    position: relative;
+}
+
+#secondary-nav {
+    width: 700px;
 }
        
 #utility-nav {
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 0;
 }
-   
-#utility-nav li {
-    float: left;
-    margin-right: 15px;
-    list-style: none;
-}
-   
+
 #primary-nav {
     background-color: #4395f1;
     border-top: 2px solid #000;
@@ -85,6 +86,7 @@ a:hover     { color: #004bc7; }
 
 #main {
 	min-height:400px;
+    min-width: 1004px;
 }
 
 table.content {
@@ -116,15 +118,13 @@ td.center-column {
 
 /* subnav */ 
 
-div.subnav,
-#subnav {
+div.subnav {
 	height: 31px;
     margin-top: 10px;
 	background: transparent url(../images/bg_subnav_left.png) 0 0 no-repeat;
 }
 
-div.subnav div.subnav-inner,
-#subnav-inner {
+div.subnav div.subnav-inner {
 	height: 31px;
 	background: transparent url(../images/bg_subnav_right.png) top right no-repeat;
 }
@@ -146,44 +146,99 @@ div.subnav div.subnav-inner,
     text-decoration: underline;
 }
 
+
+/* utility-nav */
+#utility-nav div.subnav {
+    margin-top: 0;
+}
+
+#utility-nav li.welcome {
+    padding-left: 5px;
+    padding-right: 15px;
+}
+
+#utility-nav div.subnav li a {
+    border-right-color: #999;
+}
+
+#utility-nav li {
+    position: relative
+}
+
+#utility-nav li:hover ul {
+    display: block;
+}
+
+#utility-nav ul ul {
+    position: absolute;
+    top: 31px;
+    right: 9px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    display: none;
+    margin: 0;
+    padding: 0;
+    min-width: 150px;
+    background-color: #c2d9f2;
+}
+
+#utility-nav ul ul li {
+    background: none;
+    float: none;
+    font-size: 1em;
+    display: block;
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+
+#utility-nav ul ul li a {
+    border: none;
+    color: #000;
+    display: block;
+    float: none;
+    padding: 3px 5px;
+    text-decoration: none;
+    text-align: right;
+}
+
+#utility-nav ul ul li a:hover {
+    text-decoration: underline;
+}
+
 /* subnav */
-div.subnav ul,
-#subnav ul {
+div.subnav ul {
     margin: 0;
 	padding-left:5px;
 	text-transform: uppercase;
 }
 
-div.subnav li,
-#subnav li {
-    background: transparent url('../images/bg_subnav_item.png') top right no-repeat;
+div.subnav li {
     float: left;
     font-size: .8em;
-    padding: 8px 25px 0 5px;
-	margin: 0px 0 0 2px; 
+    padding: 8px 0 0 0;
+    margin: 0; 
     height: 23px;
 	list-style: none;
 }
 
-div.subnav li.last,
-#subnav li.last {
-    background: none;
-    padding-right: 0;
+div.subnav li.last a {
+    border: none;
 }
 
-div.subnav li a.active,
-#subnav li a.active {
+div.subnav li a.active {
     text-decoration: underline;
 }
 
-div.subnav li a,
-#subnav li a {
+div.subnav li a {
     color: #666;
     text-decoration: none;
+    float: left;
+    padding: 0 9px;
+    border-right: 1px solid #ccc;
 }
 
-div.subnav li a:hover,
-#subnav li a:hover {
+div.subnav li a:hover {
     text-decoration: none;
     color: #004bc7;
 }

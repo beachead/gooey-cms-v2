@@ -127,6 +127,8 @@
     <Content Include="auth\Themes\ImageBrowser.aspx" />
     <Content Include="auth\Themes\Javascript.aspx" />
     <Content Include="auth\Themes\Stylesheet.aspx" />
+    <Content Include="auth\Users\Default.aspx" />
+    <Content Include="auth\Users\edit-roles.aspx" />
     <Content Include="Controls\Subnav.ascx" />
     <Content Include="css\reorder.css" />
     <Content Include="css\store.css" />
@@ -435,6 +437,20 @@
     <Compile Include="auth\Themes\Templates.aspx.designer.cs">
       <DependentUpon>Templates.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auth\Users\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Users\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Users\edit-roles.aspx.cs">
+      <DependentUpon>edit-roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Users\edit-roles.aspx.designer.cs">
+      <DependentUpon>edit-roles.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ContentEditor\MarkupEditor.ascx.cs">
       <DependentUpon>MarkupEditor.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -654,6 +670,12 @@
     <None Include="App_Data\RadSpell\de-DE.tdf" />
     <None Include="App_Data\RadSpell\en-US.tdf" />
     <None Include="App_Data\RadSpell\fr-FR.tdf" />
+    <Content Include="auth\Users\Web.config" />
+    <Content Include="auth\Campaigns\Web.config" />
+    <Content Include="auth\Content\Web.config" />
+    <Content Include="auth\Pages\Web.config" />
+    <Content Include="auth\Promotion\Web.config" />
+    <Content Include="auth\Themes\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

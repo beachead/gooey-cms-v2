@@ -17,4 +17,14 @@
     <property column="state" name="State" type="String" />
     <property column="zipcode" name="Zipcode" type="String" />
   </class>
+
+  <sql-query name="UserInfoBySite">
+    <return alias="users"
+            class="Gooeycms.Data.Model.Subscription.UserInfo,gooeycms.data"/>
+    <![CDATA[  
+    select {users.*} from users {users} 
+    join user_subscriptions us on {users}.Id = us.user_id 
+    where us.subscription_id = :id
+    ]]>
+  </sql-query>
 </hibernate-mapping>
