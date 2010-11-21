@@ -4,6 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="localCSS" runat="server">
+    <style type="text/css">
+    .rgCommandRow
+    {
+      display :none;    
+    }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
 </asp:Content>
@@ -40,6 +46,11 @@
                 <telerik:AjaxUpdatedControl ControlID="RolesUpdatePanel" LoadingPanelID="RadAjaxLoadingPanel1" />
             </UpdatedControls>
         </telerik:AjaxSetting>
+        <telerik:AjaxSetting AjaxControlID="LnkAddUser">
+            <UpdatedControls>
+                <telerik:AjaxUpdatedControl ControlID="UserGridView" LoadingPanelID="RadAjaxLoadingPanel1" />                
+            </UpdatedControls>
+        </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
 
@@ -47,28 +58,35 @@
     <br /><br />
 
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" Skin="Windows7" runat="server" />
-
     <table style="width:100%;">
         <tr>
             <td style="width:65%;">
-                <telerik:RadGrid ID="UserGridView" Width="100%"
+                <asp:LinkButton ID="LnkAddUser" OnClick="LnkAddUser_Click" Text="Add New User" runat="server" />
+                <telerik:RadGrid ID="UserGridView" Width="90%"
                                  AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" 
-                                 AllowPaging="True" AutoGenerateColumns="False"  Skin="Windows7"
+                                 AllowPaging="True" AutoGenerateColumns="False"
                                  DataSourceID="UserDataSource" runat="server" GridLines="None">
                     <MasterTableView Width="100%" CommandItemDisplay="TopAndBottom" DataKeyNames="Guid" AutoGenerateColumns="false" EditMode="InPlace">
-                        <CommandItemSettings AddNewRecordText="Add new user" />
+                        <CommandItemSettings ShowRefreshButton="false" ShowAddNewRecordButton="false" />
                         <Columns>
-                            <telerik:GridEditCommandColumn ButtonType="ImageButton"  UniqueName="EditColumnCommand">
-                            </telerik:GridEditCommandColumn>
                             <telerik:GridBoundColumn DataField="Guid" HeaderText="ID" UniqueName="Guid" SortExpression="Guid" ReadOnly="true" ColumnEditorID="Readonly" />
                             <telerik:GridBoundColumn DataField="Email" HeaderText="Username/Email" SortExpression="Email" UniqueName="Email" ColumnEditorID="GridEmailEditor" />
                             <telerik:GridBoundColumn DataField="Password" HeaderText="Password" UniqueName="Password" EmptyDataText="[stored]" ItemStyle-Font-Italic="true" ColumnEditorID="GridPasswordEditor" />
                             <telerik:GridBoundColumn DataField="Firstname" HeaderText="Firstname" UniqueName="Firstname" ColumnEditorID="GridTextEditor" />
                             <telerik:GridBoundColumn DataField="Lastname" HeaderText="Lastname" UniqueName="Lastname" ColumnEditorID="GridTextEditor"  />
-                            <telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn ItemStyle-Width="125">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="LnkEditRoles" Text="Edit Roles" OnClientClick='<%# DataBinder.Eval(Container.DataItem, "Guid", "display_roles(\"{0}\"); return false;") %>' runat="server" />
+                                    <asp:LinkButton ID="LnkEditUser" Text="Edit" CommandName="Edit" runat="server" />&nbsp;&nbsp;
+                                    <asp:LinkButton ID="LnkEditRoles" Text="Manage Roles" OnClientClick='<%# DataBinder.Eval(Container.DataItem, "Guid", "display_roles(\"{0}\"); return false;") %>' runat="server" />
                                 </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:LinkButton ID="LnkSaveEdit" Text="Save" CommandName="Update" runat="server" />&nbsp;
+                                    <asp:LinkButton ID="LnkCancelEdit" Text="Cancel" CommandName="Cancel" runat="server" />                                
+                                </EditItemTemplate>
+                                <InsertItemTemplate>
+                                    <asp:LinkButton ID="LnkSaveEdit" Text="Add User" CommandName="PerformInsert" runat="server" />&nbsp;&nbsp;
+                                    <asp:LinkButton ID="LnkCancelEdit" Text="Cancel" CommandName="Cancel" runat="server" />                                
+                                </InsertItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridButtonColumn ConfirmText="Are you sure you want to delete this user?" ConfirmDialogType="Classic"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
