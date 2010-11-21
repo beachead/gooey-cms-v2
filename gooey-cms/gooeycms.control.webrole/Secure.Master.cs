@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business.Util;
+using Gooeycms.Constants;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -25,6 +26,22 @@ namespace Gooeycms.Webrole.Control
 
             if (!CurrentSite.Subscription.IsCampaignEnabled)
                 this.NavCampaigns.Visible = false;
+
+            if (!Page.IsPostBack)
+            {
+                SetMenuDisplay();
+            }
+        }
+
+        protected void SetMenuDisplay()
+        {
+            this.ListItemContent.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
+                                                                 SecurityConstants.Roles.SITE_ADMINISTRATOR,
+                                                                 SecurityConstants.Roles.SITE_CONTENT_EDITOR);
+
+            this.ListItemPages.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
+                                                               SecurityConstants.Roles.SITE_ADMINISTRATOR,
+                                                               SecurityConstants.Roles.SITE_PAGE_EDITOR);
         }
 
         protected void OnLogout_Click(Object sender, EventArgs e)
