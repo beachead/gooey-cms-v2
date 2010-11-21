@@ -23,5 +23,11 @@ namespace Gooeycms.Webrole.Control.auth.Users
 
             RadScriptManager.AsyncPostBackErrorMessage = message;
         }
+
+        protected void LnkAddUser_Click(Object sender, EventArgs e)
+        {
+            this.UserGridView.MasterTableView.InsertItem();
+            this.UserGridView.DataBind();
+        }
     }
 }
