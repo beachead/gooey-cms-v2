@@ -21,6 +21,16 @@ namespace Gooeycms.Business.Util
             return client.Exists(StorageClientConst.RootContainerIdentifier,StorageClientConst.RootFolder,ConfigConstants.FlashCrossDomainFilename);
         }
 
+        public static Boolean IsDevelopmentMode()
+        {
+            return GooeyConfigManager.IsDevelopmentEnvironment;
+        }
+
+        public static Boolean IsPaypalSandbox()
+        {
+            return GooeyConfigManager.IsPaypalSandbox;
+        }
+
         public static void SetupFlash()
         {
             byte [] data = Encoding.UTF8.GetBytes(GooeyConfigManager.FlashCrossDomainFile);
@@ -28,5 +38,18 @@ namespace Gooeycms.Business.Util
             IStorageClient client = StorageHelper.GetStorageClient();
             client.Save(StorageClientConst.RootContainerIdentifier, StorageClientConst.RootFolder, ConfigConstants.FlashCrossDomainFilename, data, Permissions.Public);
         }
+
+        public static void TogglePaypalMode()
+        {
+            if (GooeyConfigManager.IsPaypalSandbox)
+            {
+                GooeyConfigManager.PaypalPostUrl = ConfigConstants.PaypalProductionUrl;
+            }
+            else
+            {
+                GooeyConfigManager.PaypalPostUrl = ConfigConstants.PaypalSandboxUrl;
+            }
+        }
+
     }
 }

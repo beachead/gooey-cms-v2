@@ -33,5 +33,7 @@ namespace Gooeycms.Constants
         public const String DefaultFlashCrossDomainFile = "default-flash-css";
 
         public const String FlashCrossDomainFilename = "cross-domain.xml";
+        public const String PaypalSandboxUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+        public const String PaypalProductionUrl = "https://www.paypal.com/cgi-bin/webscr";
     }
 }

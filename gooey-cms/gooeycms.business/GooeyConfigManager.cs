@@ -208,8 +208,13 @@ This is your home page.
         {
             get
             {
-                String result = GetCachedValue(ConfigConstants.PaypalUrl, "https://www.sandbox.paypal.com/cgi-bin/webscr");
+                String result = GetCachedValue(ConfigConstants.PaypalUrl, ConfigConstants.PaypalSandboxUrl);
                 return result;
+            }
+            set
+            {
+                Persist(ConfigConstants.PaypalUrl, value);
+                cache[ConfigConstants.PaypalUrl] = value;
             }
         }
 

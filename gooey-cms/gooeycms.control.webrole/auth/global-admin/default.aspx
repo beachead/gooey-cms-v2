@@ -16,10 +16,16 @@
     <telerik:RadScriptManager ID="RadScriptManager" runat="server"></telerik:RadScriptManager>
 
     <div>
-        <telerik:RadAjaxPanel ID="SiteSetupPanel" runat="server">
+        <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
+        <telerik:RadAjaxPanel ID="SiteSetupPanel" LoadingPanelID="LoadingPanel" runat="server">
         <table>
             <tr>
                 <td><b>GooeyCMS Site Setup Status</b></td>
+            </tr>
+            <tr>
+                <td>Deployment Mode</td>
+                <td><asp:Image ID="DevModeStatusImage" runat="server" /></td>
+                <td><asp:Label ID="LblDevMode" runat="server" /></td>            
             </tr>
             <tr>
                 <td>Membership Roles</td>
@@ -27,9 +33,14 @@
                 <td><asp:LinkButton ID="BtnSetupMembership" OnClick="BtnSetupMembership_Click" Text="Setup" runat="server" /></td>
             </tr>
             <tr>
-                <td>Flash Configuration</td>
+                <td>Flash Support</td>
                 <td><asp:Image ID="FlashStatusImage" runat="server" /></td>
-                <td><asp:LinkButton ID="BtnSetupFlash" OnClick="BtnSetupFlash_Click" Text="Setup" runat="server" /></td>
+                <td><asp:LinkButton ID="BtnSetupFlash" OnClick="BtnSetupFlash_Click" Text="Configure Flash Support" runat="server" /></td>
+            </tr>
+            <tr>
+                <td>Paypal Payment Mode:</td>
+                <td><asp:Image ID="PaypalStatusImage" runat="server" /></td>
+                <td><asp:LinkButton ID="BtnTogglePaypal" OnClick="BtnTogglePaypal_Click" Text="" runat="server" /></td>
             </tr>
         </table>
         </telerik:RadAjaxPanel>

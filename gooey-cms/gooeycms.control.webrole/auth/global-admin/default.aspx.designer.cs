@@ -22,6 +22,15 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::Telerik.Web.UI.RadScriptManager RadScriptManager;
         
         /// <summary>
+        /// LoadingPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel LoadingPanel;
+        
+        /// <summary>
         /// SiteSetupPanel control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,24 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadAjaxPanel SiteSetupPanel;
+        
+        /// <summary>
+        /// DevModeStatusImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DevModeStatusImage;
+        
+        /// <summary>
+        /// LblDevMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblDevMode;
         
         /// <summary>
         /// MembershipStatusImage control.
@@ -65,5 +92,23 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton BtnSetupFlash;
+        
+        /// <summary>
+        /// PaypalStatusImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image PaypalStatusImage;
+        
+        /// <summary>
+        /// BtnTogglePaypal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnTogglePaypal;
     }
 }
