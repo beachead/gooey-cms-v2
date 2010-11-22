@@ -26,58 +26,61 @@
     <asp:ContentPlaceHolder ID="localJS" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body class="claro">
-    <form id="aspnetform" clientidmode="Static" runat="server">
-    <div>
+<form id="aspnetform" clientidmode="Static" runat="server">
 
-        <div id="header-region">
-            <ul class="menu">
-            </ul>
-        </div>
+    <div id="header-region">
+        <ul class="menu">
+        </ul>
+    </div>
 
+    <div id="main">
+        <table class="content" cellpadding="0" cellspacing="0">
+        <tr>
+        <td class="center-column">
+            <!-- START: navigation -->
+            <div id="navigation">
 
-        <div id="main">
-            <table class="content" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td class="center-column">
-                        <div id="secondary-nav">
-                            <div class="subnav">
-                                <div class="subnav-inner">
-                                    <asp:ContentPlaceHolder ID="Subnavigation" runat="server"></asp:ContentPlaceHolder>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="instructions-area">
-                            <asp:ContentPlaceHolder ID="Instructions" runat="server"></asp:ContentPlaceHolder>
-                        </div>
-                        <div id="editor-area">
-                            <asp:ContentPlaceHolder ID="Editor" runat="server"></asp:ContentPlaceHolder>          
-                        </div>
-                    </td>
-                    <td class="right-column">
-                    <div class="subnav blue">
+                <!-- START: utility-nav -->
+                <div id="utility-nav">
+                    <div class="subnav">
                         <div class="subnav-inner">
                             <ul>
-                                <li style="padding-left: 40px;"><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">DASHBOARD</asp:HyperLink></li>
-                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">DEVELOPERS</asp:HyperLink></li> 
-                            </ul>
+                                <li class="welcome">Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
+                                <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink></li>
+                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink></li>
+                            </ul>              
                         </div>
-                    </div> 
-                            <div id="logo" style="padding-top:3px;padding-right:15px;">
-                            <img id="Img1" src="~/images/logo_gooey_internal.png" runat="server" />
-                            <div style="padding-top:12px;">
-                            Welcome, <asp:Label ID="LoggedInUsername" runat="server" /> &nbsp;<br />
-                            <a id="change_password" href="~/secure/ChangePassword.aspx" style="color:#666666; font-size:10px;" runat="server">Change Password</a>                
-                            <asp:LoginStatus ID="LoginStatus" runat="server" style="color:#666666; font-size:10px;"
-                                LogoutText="Logout" OnLoggedOut="OnLogout_Click" /> &nbsp;
-                            </div>
-                         </div>
-                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= dashboardLink.ClientID %>" position="below"><p>Access the different sites you are working on here.</p>View your purchases.</div>
-                        <div style="visibility:hidden;" dojoType="dijit.Tooltip" connectId="<%= developersLink.ClientID %>" position="below"><p>Finished a site?<br /><br />Start selling your own gooey cms site.</p></div>
-                  </td>
-                </tr>
-            </table>
-        </div>
+                    </div>
+                </div>
+                <!-- END: utility-nav -->
+
+                <!-- START: secondary-nav -->
+                <div id="secondary-nav">
+
+                    <div class="subnav">
+                        <div class="subnav-inner">
+                            <asp:ContentPlaceHolder ID="Subnavigation" runat="server"></asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: secondary-nav -->
+                        
+            </div>
+            <!-- END: navigation -->
+            <div id="instructions-area">
+                <asp:ContentPlaceHolder ID="Instructions" runat="server"></asp:ContentPlaceHolder>
+            </div>
+            <div id="editor-area">
+                <asp:ContentPlaceHolder ID="Editor" runat="server"></asp:ContentPlaceHolder>          
+            </div>
+
+        </td>
+        </tr>
+        </table>
+
     </div>
-    </form>
+    <!-- END: main -->
+    
+</form>
 </body>
 </html>

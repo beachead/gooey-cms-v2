@@ -73,6 +73,7 @@ a:hover     { color: #004bc7; }
     position: absolute;
     top: 0;
     right: 0;
+    padding-right: 10px;
 }
 
 #primary-nav {
@@ -148,8 +149,21 @@ div.subnav div.subnav-inner {
 
 
 /* utility-nav */
+
 #utility-nav div.subnav {
+    background-image: url(../images/bg_utilnav_left.png);
+    height: 33px;
     margin-top: 0;
+}
+    
+#utility-nav div.subnav-inner {
+    background-image: url(../images/bg_utilnav_right.png);
+    margin-right: -11px;
+    height: 33px;
+}
+
+#utility-nav ul {
+    padding: 0 6px;
 }
 
 #utility-nav li.welcome {
@@ -162,24 +176,27 @@ div.subnav div.subnav-inner {
 }
 
 #utility-nav li {
-    position: relative
+    position: relative;
+    padding: 8px 0 10px 0;
 }
 
-#utility-nav li:hover ul {
+#utility-nav li:hover div.menu {
     display: block;
 }
 
-#utility-nav ul ul {
+#utility-nav div.menu {
     position: absolute;
-    top: 31px;
+    top: 32px;
     right: 9px;
-    border: 1px solid #ccc;
-    border-top: 0;
     display: none;
-    margin: 0;
-    padding: 0;
-    min-width: 150px;
-    background-color: #c2d9f2;
+    background: transparent url(../images/bg_utilnav_menu_right.png) bottom right no-repeat;
+}
+
+#utility-nav ul ul {
+    margin: 0 9px 0 0;
+    padding: 0 0 10px 0;
+    min-width: 120px;
+    background: transparent url(../images/bg_utilnav_menu_left.png) bottom left no-repeat;
 }
 
 #utility-nav ul ul li {
@@ -188,8 +205,9 @@ div.subnav div.subnav-inner {
     font-size: 1em;
     display: block;
     float: none;
+    height: auto;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 10px;
 }
 
 #utility-nav ul ul li a {
@@ -242,15 +260,6 @@ div.subnav li a:hover {
     text-decoration: none;
     color: #004bc7;
 }
-
-/* subnav overrides for right-column */
-div.subnav.blue {
-    background-image: url(../images/bg_subnav_left1.gif);
-}
-div.subnav.blue div.subnav-inner {
-    background-image: url(../images/bg_subnav_right1.gif);
-}
-
 
 /************************************************
 	(4) GENERAL PURPOSE
