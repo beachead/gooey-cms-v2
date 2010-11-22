@@ -27,10 +27,6 @@ namespace Gooeycms.Business.Membership
             MembershipUserWrapper wrapper = MembershipUtil.FindByUserGuid(userinfo.Guid);
             MembershipUser user = wrapper.MembershipUser;
 
-            //The user is changing their email address... we need to update the username
-            if (user.UserName != userinfo.Email)
-                throw new ArgumentException("GooeyCMS does not currently support changing your username/email address");
-
             //Find the existing account
             wrapper.UserInfo.Firstname = userinfo.Firstname;
             wrapper.UserInfo.Lastname = userinfo.Lastname;
