@@ -24,9 +24,10 @@ namespace Gooeycms.Webrole.Control.auth.Users
                 
                 this.LstRoles.Items.Add(RoleListItem(SecurityConstants.Roles.SITE_ADMINISTRATOR,"Check to allow the user to manage all aspects of the gooeycms site."));
                 this.LstRoles.Items.Add(RoleListItem(SecurityConstants.Roles.SITE_PAGE_EDITOR,"Check to allow the user to create/edit/delete cms pages."));
-                this.LstRoles.Items.Add(RoleListItem(SecurityConstants.Roles.SITE_CONTENT_EDITOR,"Check to allow the user to create/edit/delete cms content, such as news.")); 
-                this.LstRoles.Items.Add(RoleListItem(SecurityConstants.Roles.SITE_CAMPAIGNS,"Check to allow the user to manage site campaigns."));
-            }
+                this.LstRoles.Items.Add(RoleListItem(SecurityConstants.Roles.SITE_CONTENT_EDITOR,"Check to allow the user to create/edit/delete cms content."));
+                this.LstRoles.Items.Add(RoleListItem(SecurityConstants.Roles.SITE_PROMOTION, "Check to allow the user to promote content and pages."));
+                this.LstRoles.Items.Add(RoleListItem(SecurityConstants.Roles.SITE_CAMPAIGNS, "Check to allow the user to manage marketing campaigns."));
+           }
         }
 
         private RadListBoxItem RoleListItem(String role, String tooltip)

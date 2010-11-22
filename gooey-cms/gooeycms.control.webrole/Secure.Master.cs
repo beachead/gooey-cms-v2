@@ -42,6 +42,22 @@ namespace Gooeycms.Webrole.Control
             this.ListItemPages.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
                                                                SecurityConstants.Roles.SITE_ADMINISTRATOR,
                                                                SecurityConstants.Roles.SITE_PAGE_EDITOR);
+
+            this.ListItemCampaigns.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
+                                                                   SecurityConstants.Roles.SITE_ADMINISTRATOR,
+                                                                   SecurityConstants.Roles.SITE_CAMPAIGNS);
+
+            this.ListItemPromotion.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
+                                                                   SecurityConstants.Roles.SITE_ADMINISTRATOR,
+                                                                   SecurityConstants.Roles.SITE_PROMOTION);
+  
+            this.ListItemThemes.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
+                                                                SecurityConstants.Roles.SITE_ADMINISTRATOR);
+
+            this.ListItemUser.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
+                                                                SecurityConstants.Roles.SITE_ADMINISTRATOR);
+
+
         }
 
         protected void OnLogout_Click(Object sender, EventArgs e)

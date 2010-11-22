@@ -54,14 +54,14 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
 
-    Select a user to edit or add a new user
+    Select a user to edit or add a new user. Make sure to apply the appropriate roles to each user.
     <br /><br />
 
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" Skin="Windows7" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" Skin="Default" runat="server" />
     <table style="width:100%;">
         <tr>
             <td style="width:65%;">
-                <asp:LinkButton ID="LnkAddUser" OnClick="LnkAddUser_Click" Text="Add New User" runat="server" />
+               
                 <telerik:RadGrid ID="UserGridView" Width="90%"
                                  AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" 
                                  AllowPaging="True" AutoGenerateColumns="False"
@@ -69,7 +69,7 @@
                     <MasterTableView Width="100%" CommandItemDisplay="TopAndBottom" DataKeyNames="Guid" AutoGenerateColumns="false" EditMode="InPlace">
                         <CommandItemSettings ShowRefreshButton="false" ShowAddNewRecordButton="false" />
                         <Columns>
-                            <telerik:GridBoundColumn DataField="Email" HeaderText="Username/Email" SortExpression="Email" UniqueName="Email" ReadOnly="true" ColumnEditorID="Readonly" />
+                            <telerik:GridBoundColumn DataField="Email" HeaderText="Username" SortExpression="Email" UniqueName="Email" ColumnEditorID="GridEmailEditor" />
                             <telerik:GridBoundColumn DataField="Password" HeaderText="Password" UniqueName="Password" EmptyDataText="****" ItemStyle-Font-Italic="true" ColumnEditorID="GridPasswordEditor" />
                             <telerik:GridBoundColumn DataField="Firstname" HeaderText="Firstname" UniqueName="Firstname" ColumnEditorID="GridTextEditor" />
                             <telerik:GridBoundColumn DataField="Lastname" HeaderText="Lastname" UniqueName="Lastname" ColumnEditorID="GridTextEditor"  />
@@ -104,8 +104,10 @@
             </td>
         </tr>    
     </table>
+    <br />
+     <asp:LinkButton ID="LnkAddUser" OnClick="LnkAddUser_Click" Text="Add New User" runat="server" />
 
-    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="463" Height="237" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="500" Height="570" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
     
     <script type="text/javascript" language="javascript">

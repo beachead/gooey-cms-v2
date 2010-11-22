@@ -58,15 +58,6 @@ namespace Gooeycms.Webrole.Control.auth.Users {
         protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
         
         /// <summary>
-        /// LnkAddUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LnkAddUser;
-        
-        /// <summary>
         /// UserGridView control.
         /// </summary>
         /// <remarks>
@@ -101,6 +92,15 @@ namespace Gooeycms.Webrole.Control.auth.Users {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.GridTextBoxColumnEditor GridPasswordEditor;
+        
+        /// <summary>
+        /// LnkAddUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkAddUser;
         
         /// <summary>
         /// Singleton control.

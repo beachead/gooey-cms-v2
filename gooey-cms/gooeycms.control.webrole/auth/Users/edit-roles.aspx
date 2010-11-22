@@ -20,7 +20,7 @@
         </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <div style="padding-left:15px;padding-top:15px;">
+    <div style="padding-left:15px;padding-top:20px;">
         Manage Roles:
         
         <div style="padding:10px;">
@@ -29,5 +29,22 @@
         </div>
     </div>
     </form>
+<div style="padding: 15px 0 0 15px;">
+Role Descriptions:</div>
+<div style="padding:15px; font-size:11px;">
+<b>Site Administrator Role</b>:<br />Can control the key settings of your site, add new users and is the the most powerful role available.
+<br /><br />
+<b>Page Editors</b>:<br />Can create/edit and delete site pages.
+<br /><br />
+<b>Content Editors</b>:<br />Can create/edit and delete content types. I.E. News, Events, etc.
+<br /><br />
+<b>Promotion Manager</b>:<br />Can promote pages or content types live.
+<br /><br />
+<b>Campaign Manager</b>:<br />Can create/edit and delete marketing campaigns, export marketing leads, update Google Analytics, and update the Salesforce configuration for the site.
+</div>
+
+
+
+
 </body>
 </html>

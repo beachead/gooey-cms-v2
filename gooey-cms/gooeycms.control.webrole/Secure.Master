@@ -45,7 +45,7 @@
                 <li id="ListItemPromotion" runat="server"><asp:HyperLink id="NavPromotion" NavigateUrl="~/auth/promotion/default.aspx" runat="server" onprerender="SetActive">Promotion</asp:HyperLink></li>                                
                 <li id="ListItemSite" runat="server"><asp:HyperLink id="NavSite" NavigateUrl="~/auth/site/default.aspx" runat="server" onprerender="SetActive">Manage Site</asp:HyperLink></li>
                 <li id="ListItemThemes" runat="server"><asp:HyperLink id="NavThemes" NavigateUrl="~/auth/themes/default.aspx" runat="server" onprerender="SetActive">Manage Themes</asp:HyperLink></li>
-                <li id="ListItemUser" runat="server"><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">User Management</asp:HyperLink></li>
+                <li id="ListItemUser" runat="server"><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">Manage Users</asp:HyperLink></li>
                 <li id="ListItemStaging" runat="server"><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>                
             </ul>
         </div>
