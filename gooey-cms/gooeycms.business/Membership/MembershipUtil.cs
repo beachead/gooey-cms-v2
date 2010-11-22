@@ -279,5 +279,33 @@ namespace Gooeycms.Business.Membership
                 bool result = user.ChangePassword(temp, password);
             }
         }
+
+        public static bool IsRolesConfigured 
+        {
+            get
+            {
+                Boolean result = true;
+                //Check if all the roles exist
+                foreach (String role in SecurityConstants.Roles.AllSiteRoles)
+                {
+                    if (!Roles.RoleExists(role))
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        public static void ConfigureRoles()
+        {
+            foreach (String role in SecurityConstants.Roles.AllSiteRoles)
+            {
+                if (!Roles.RoleExists(role))
+                    Roles.CreateRole(role);
+            }
+        }
     }
 }

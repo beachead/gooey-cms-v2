@@ -13,6 +13,13 @@ namespace Gooeycms.Business
     {
         private static String DefaultSitePackageTos = @"I certify that I am the creator of this website, and agree that Gooey CMS and its users may use, copy, display and store this website on other Gooey CMS powered websites, according to Gooey CMS's <a href=""#"" onclick=""window.open('/tos.aspx#site','','width=500,height=450'); return false;"">Terms of Service</a>.";
         private static String DefaultThemePackageTos = @"I certify that I am the creator of this theme, and agree that Gooey CMS and its users may use, copy, display and store this theme on other Gooey CMS powered websites, according to Gooey CMS's <a href=""#"" onclick=""window.open('/tos.aspx#themes','','width=500,height=450'); return false;"">Terms of Service</a>.";
+        private static String DefaultFlashCrossDomainFile =
+@"<?xml version=""1.0"" ?>
+<cross-domain-policy>
+  <site-control permitted-cross-domain-policies=""master-only""/>
+  <allow-access-from domain=""*""/>
+  <allow-http-request-headers-from domain=""*"" headers=""*""/>
+</cross-domain-policy>";
 
         private static Dictionary<String, object> cache = new Dictionary<string, object>();
 
@@ -342,6 +349,14 @@ This is your home page.
             }
         }
 
+        public static String FlashCrossDomainFile
+        {
+            get
+            {
+                return GetCachedValue(ConfigConstants.DefaultFlashCrossDomainFile, DefaultFlashCrossDomainFile);
+            }
+        }
+
         public static class EmailAddresses
         {
             public static String SiteAdmin
@@ -352,5 +367,6 @@ This is your home page.
                 }
             }
         }
+
     }
 }

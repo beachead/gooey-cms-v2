@@ -10,6 +10,10 @@ namespace Gooeycms.Constants
     {
         public static class Roles
         {
+            public static IList<String> AllSiteRoles = new List<String>() { GLOBAL_ADMINISTRATOR, SITE_ADMINISTRATOR,
+                                                                            SITE_STANDARD_USER, SITE_PAGE_EDITOR, 
+                                                                            SITE_CONTENT_EDITOR, SITE_CAMPAIGNS};
+
             public const String GLOBAL_ADMINISTRATOR = "global-administrator";
             public const String SITE_ADMINISTRATOR = "site-administrator";
             public const String SITE_STANDARD_USER = "site-user";

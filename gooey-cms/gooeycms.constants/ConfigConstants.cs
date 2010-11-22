@@ -30,5 +30,8 @@ namespace Gooeycms.Constants
         public const String DefaultHomepage = "default-homepage";
         public const String EmailAddressesSiteAdmin = "emailaddresses-siteadmin";
         public const String SitePackageTos = "sitepackage-tos";
+        public const String DefaultFlashCrossDomainFile = "default-flash-css";
+
+        public const String FlashCrossDomainFilename = "cross-domain.xml";
     }
 }
