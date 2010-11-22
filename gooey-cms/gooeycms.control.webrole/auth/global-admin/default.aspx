@@ -52,6 +52,16 @@
                     </telerik:RadToolTip>
                 </td>
             </tr>
+            <tr>
+                <td>Default Homepage:</td>
+                <td><asp:Image ID="DefaultHomepageImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="LnkDefaultHomepage" runat="server" />
+                    <telerik:RadToolTip ID="TooltipDefaultHomepage" Skin="Default" Width="250" TargetControlID="LnkDefaultHomepage" runat="server">
+                        <asp:Literal ID="LtlDefaultHomepage" runat="server" />
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
         </table>
         </telerik:RadAjaxPanel>
     </div>

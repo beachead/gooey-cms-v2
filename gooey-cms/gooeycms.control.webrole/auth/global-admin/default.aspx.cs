@@ -81,6 +81,20 @@ namespace Gooeycms.Webrole.Control.auth.global_admin
             this.TooltipDefaultTemplate.Text = Server.HtmlEncode(GooeyConfigManager.DefaultTemplate).Replace("\n", "<br />");
             this.LnkDefaultTemplate.NavigateUrl = "#";
             this.LnkDefaultTemplate.Attributes["onclick"] = "window.radopen('Configuration.aspx?c=" + ConfigConstants.DefaultTemplate + "&d=DefaultTemplate'); return false;";
+
+            if (GooeyStatus.IsDefaultTemplate())
+            {
+                this.DefaultTemplateImage.ImageUrl = "~/images/green-ball.gif";
+                this.LnkDefaultTemplate.Text = "Modify Template";
+            }
+            else
+            {
+                this.DefaultTemplateImage.ImageUrl = "~/images/yellow-ball.gif";
+                this.LnkDefaultTemplate.Text = "Setup Template (currently using default template)";
+            }
+            this.TooltipDefaultTemplate.Text = Server.HtmlEncode(GooeyConfigManager.DefaultTemplate).Replace("\n", "<br />");
+            this.LnkDefaultTemplate.NavigateUrl = "#";
+            this.LnkDefaultTemplate.Attributes["onclick"] = "window.radopen('Configuration.aspx?c=" + ConfigConstants.DefaultTemplate + "&d=DefaultTemplate'); return false;";
         }
 
         protected void BtnSetupMembership_Click(Object sender, EventArgs e)

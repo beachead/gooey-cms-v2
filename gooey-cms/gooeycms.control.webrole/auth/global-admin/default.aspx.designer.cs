@@ -148,6 +148,42 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::System.Web.UI.WebControls.Literal LtlDefaultTemplate;
         
         /// <summary>
+        /// DefaultHomepageImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DefaultHomepageImage;
+        
+        /// <summary>
+        /// LnkDefaultHomepage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LnkDefaultHomepage;
+        
+        /// <summary>
+        /// TooltipDefaultHomepage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip TooltipDefaultHomepage;
+        
+        /// <summary>
+        /// LtlDefaultHomepage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LtlDefaultHomepage;
+        
+        /// <summary>
         /// Singleton control.
         /// </summary>
         /// <remarks>
