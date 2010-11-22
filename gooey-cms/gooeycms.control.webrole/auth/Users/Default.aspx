@@ -69,9 +69,8 @@
                     <MasterTableView Width="100%" CommandItemDisplay="TopAndBottom" DataKeyNames="Guid" AutoGenerateColumns="false" EditMode="InPlace">
                         <CommandItemSettings ShowRefreshButton="false" ShowAddNewRecordButton="false" />
                         <Columns>
-                            <telerik:GridBoundColumn DataField="Guid" HeaderText="ID" UniqueName="Guid" SortExpression="Guid" ReadOnly="true" ColumnEditorID="Readonly" />
-                            <telerik:GridBoundColumn DataField="Email" HeaderText="Username/Email" SortExpression="Email" UniqueName="Email" ColumnEditorID="GridEmailEditor" />
-                            <telerik:GridBoundColumn DataField="Password" HeaderText="Password" UniqueName="Password" EmptyDataText="[stored]" ItemStyle-Font-Italic="true" ColumnEditorID="GridPasswordEditor" />
+                            <telerik:GridBoundColumn DataField="Email" HeaderText="Username/Email" SortExpression="Email" UniqueName="Email" ReadOnly="true" ColumnEditorID="Readonly" />
+                            <telerik:GridBoundColumn DataField="Password" HeaderText="Password" UniqueName="Password" EmptyDataText="****" ItemStyle-Font-Italic="true" ColumnEditorID="GridPasswordEditor" />
                             <telerik:GridBoundColumn DataField="Firstname" HeaderText="Firstname" UniqueName="Firstname" ColumnEditorID="GridTextEditor" />
                             <telerik:GridBoundColumn DataField="Lastname" HeaderText="Lastname" UniqueName="Lastname" ColumnEditorID="GridTextEditor"  />
                             <telerik:GridTemplateColumn ItemStyle-Width="125">

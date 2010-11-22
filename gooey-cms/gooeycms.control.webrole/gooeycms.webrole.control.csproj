@@ -111,7 +111,7 @@
     <Content Include="auth\Developer\Settings.aspx" />
     <Content Include="auth\Developer\Site.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
-    <Content Include="auth\global-admin\default.aspx" />
+    <Content Include="auth\global-admin\Default.aspx" />
     <Content Include="auth\global-admin\Developer\Default.aspx" />
     <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
@@ -138,10 +138,12 @@
     <Content Include="images\drag_arrow.png" />
     <Content Include="images\bg_theme_panel.png" />
     <Content Include="images\bullet_features.gif" />
+    <Content Include="images\green-ball.gif" />
     <Content Include="images\loading3.gif" />
     <Content Include="images\logo_gooey-login.png" />
     <Content Include="images\logo_gooey_internal.png" />
     <Content Include="images\progress_green.gif" />
+    <Content Include="images\red-ball.gif" />
     <Content Include="images\Vista\12.gif" />
     <Content Include="images\Vista\7.gif" />
     <Content Include="images\Vista\9.gif" />
@@ -304,12 +306,12 @@
     <Compile Include="auth\global-admin\Controls\Cache.aspx.designer.cs">
       <DependentUpon>Cache.aspx</DependentUpon>
     </Compile>
-    <Compile Include="auth\global-admin\default.aspx.cs">
-      <DependentUpon>default.aspx</DependentUpon>
+    <Compile Include="auth\global-admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="auth\global-admin\default.aspx.designer.cs">
-      <DependentUpon>default.aspx</DependentUpon>
+    <Compile Include="auth\global-admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Developer\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

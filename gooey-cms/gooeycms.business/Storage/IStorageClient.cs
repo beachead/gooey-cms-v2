@@ -13,6 +13,7 @@ namespace Gooeycms.Business.Storage
     public static class StorageClientConst
     {
         public const String RootFolder = null;
+        public const String RootContainerIdentifier = "$root";
     }
 
     public interface IStorageClient
@@ -32,6 +33,9 @@ namespace Gooeycms.Business.Storage
         Boolean ContainsSnapshots(String containerName, String directoryName, String filename);
         Boolean ContainsSnapshots(String containerName, String directoryName);
         void DeleteSnapshots(String containerName, String directoryName);
+
+        Boolean Exists(String containerName);
+        Boolean Exists(String containerName, String directoryName, String filename);
 
         byte[] Open(String containerName, String directoryName, String filename);
         String OpenAsString(String containerName, String directoryName, String filename);

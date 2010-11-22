@@ -58,6 +58,15 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.HtmlControls.HtmlForm aspnetform;
         
         /// <summary>
+        /// ListItemContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemContent;
+        
+        /// <summary>
         /// NavContent control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace Gooeycms.Webrole.Control {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink NavContent;
+        
+        /// <summary>
+        /// ListItemPages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemPages;
         
         /// <summary>
         /// NavPages control.
@@ -76,6 +94,15 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.WebControls.HyperLink NavPages;
         
         /// <summary>
+        /// ListItemCampaigns control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemCampaigns;
+        
+        /// <summary>
         /// NavCampaigns control.
         /// </summary>
         /// <remarks>
@@ -83,6 +110,15 @@ namespace Gooeycms.Webrole.Control {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink NavCampaigns;
+        
+        /// <summary>
+        /// ListItemPromotion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemPromotion;
         
         /// <summary>
         /// NavPromotion control.
@@ -94,6 +130,15 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.WebControls.HyperLink NavPromotion;
         
         /// <summary>
+        /// ListItemSite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemSite;
+        
+        /// <summary>
         /// NavSite control.
         /// </summary>
         /// <remarks>
@@ -101,6 +146,15 @@ namespace Gooeycms.Webrole.Control {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink NavSite;
+        
+        /// <summary>
+        /// ListItemThemes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemThemes;
         
         /// <summary>
         /// NavThemes control.
@@ -112,6 +166,15 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.WebControls.HyperLink NavThemes;
         
         /// <summary>
+        /// ListItemUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemUser;
+        
+        /// <summary>
         /// NavUsers control.
         /// </summary>
         /// <remarks>
@@ -119,6 +182,15 @@ namespace Gooeycms.Webrole.Control {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink NavUsers;
+        
+        /// <summary>
+        /// ListItemStaging control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ListItemStaging;
         
         /// <summary>
         /// StagingLink control.

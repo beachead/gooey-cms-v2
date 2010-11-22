@@ -59,9 +59,19 @@ namespace Gooeycms.Business.Membership
             }
         }
 
-        public static Boolean IsInRole(String rolename)
+        public static Boolean IsInRole(params String [] rolenames)
         {
-            return System.Web.Security.Roles.IsUserInRole(rolename);
+            Boolean result = false;
+            if (rolenames.Length > 0)
+            {
+                foreach (String role in rolenames)
+                {
+                    result = System.Web.Security.Roles.IsUserInRole(role);
+                    if (result)
+                        break;
+                }
+            }
+            return result;
         }
     }
 }

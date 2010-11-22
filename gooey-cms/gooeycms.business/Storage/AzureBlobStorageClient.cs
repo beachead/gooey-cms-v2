@@ -191,6 +191,27 @@ namespace Gooeycms.Business.Storage
             }
         }
 
+
+        public Boolean Exists(String containerName)
+        {
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            return (container.Exists());
+        }
+
+        public Boolean Exists(String containerName, String directoryName, String filename)
+        {
+            Boolean result = false;
+
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            if (container.Exists())
+            {
+                CloudBlob blob = GetCloudBlob(container, directoryName, filename);
+                result = (blob.Exists());
+            }
+
+            return result;
+        }
+
         public byte[] Open(String containerName, String directoryName, string filename)
         {
             filename = filename.Replace(" ","");

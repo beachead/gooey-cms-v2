@@ -20,11 +20,13 @@
         </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <div>
+    <div style="padding-left:15px;padding-top:15px;">
         Manage Roles:
-        <br />
-        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" Skin="Windows7" runat="server" />
-        <telerik:RadListBox ID="LstRoles" CheckBoxes="true" Width="300" OnItemCheck="LstRoles_Checked" AutoPostBack="true" Skin="Windows7" runat="server"></telerik:RadListBox>
+        
+        <div style="padding:10px;">
+        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" Skin="Default" runat="server" />
+        <telerik:RadListBox ID="LstRoles" CheckBoxes="true" Width="300" OnItemCheck="LstRoles_Checked" AutoPostBack="true" Skin="Default" runat="server"></telerik:RadListBox>
+        </div>
     </div>
     </form>
 </body>
