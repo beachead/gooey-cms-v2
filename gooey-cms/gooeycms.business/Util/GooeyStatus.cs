@@ -31,6 +31,11 @@ namespace Gooeycms.Business.Util
             return GooeyConfigManager.IsPaypalSandbox;
         }
 
+        public static Boolean IsDefaultTemplate()
+        {
+            return (!String.IsNullOrEmpty(GooeyConfigManager.GetAsString(ConfigConstants.DefaultTemplate)));
+        }
+
         public static void SetupFlash()
         {
             byte [] data = Encoding.UTF8.GetBytes(GooeyConfigManager.FlashCrossDomainFile);
