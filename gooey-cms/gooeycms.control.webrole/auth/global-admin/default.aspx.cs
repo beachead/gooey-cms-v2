@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business.Util;
+using Gooeycms.Constants;
+using Gooeycms.Business;
 
 namespace Gooeycms.Webrole.Control.auth.global_admin
 {
@@ -66,6 +68,19 @@ namespace Gooeycms.Webrole.Control.auth.global_admin
                 this.BtnTogglePaypal.OnClientClick = "return confirm('Are you sure you want to DISABLE live paypal payments and begin using the sandbox?');";
             }
 
+            if (GooeyStatus.IsDefaultTemplate())
+            {
+                this.DefaultTemplateImage.ImageUrl = "~/images/green-ball.gif";
+                this.LnkDefaultTemplate.Text = "Modify Template";
+            }
+            else
+            {
+                this.DefaultTemplateImage.ImageUrl = "~/images/yellow-ball.gif";
+                this.LnkDefaultTemplate.Text = "Setup Template (currently using default template)";
+            }
+            this.TooltipDefaultTemplate.Text = Server.HtmlEncode(GooeyConfigManager.DefaultTemplate).Replace("\n", "<br />");
+            this.LnkDefaultTemplate.NavigateUrl = "#";
+            this.LnkDefaultTemplate.Attributes["onclick"] = "window.radopen('Configuration.aspx?c=" + ConfigConstants.DefaultTemplate + "&d=DefaultTemplate'); return false;";
         }
 
         protected void BtnSetupMembership_Click(Object sender, EventArgs e)

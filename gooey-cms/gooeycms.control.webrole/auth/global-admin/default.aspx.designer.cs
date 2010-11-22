@@ -110,5 +110,50 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton BtnTogglePaypal;
+        
+        /// <summary>
+        /// DefaultTemplateImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DefaultTemplateImage;
+        
+        /// <summary>
+        /// LnkDefaultTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LnkDefaultTemplate;
+        
+        /// <summary>
+        /// TooltipDefaultTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip TooltipDefaultTemplate;
+        
+        /// <summary>
+        /// LtlDefaultTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LtlDefaultTemplate;
+        
+        /// <summary>
+        /// Singleton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager Singleton;
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Gooeycms.Business.Util;
 using Gooeycms.Extensions;
 using Beachead.Persistence.Hibernate;
+using System.Reflection;
 
 namespace Gooeycms.Business
 {
@@ -82,6 +83,35 @@ namespace Gooeycms.Business
             return result;
         }
 
+        public static String GetValueOrDefault(String key)
+        {
+            String result = GetAsString(key);
+            if (String.IsNullOrWhiteSpace(result))
+            {
+                result = GetCachedValue(key);
+            }
+            return result;
+        }
+
+        public static String GetValueByReflection(String propertyName)
+        {
+            String result = "";
+            PropertyInfo info = typeof(GooeyConfigManager).GetProperty(propertyName, BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
+            if (info != null)
+            {
+                Object temp = info.GetValue(null, null);
+                if (temp != null)
+                    result = temp.ToString();
+            }
+            return result;
+        }
+
+        public static void SetValueAndUpdateCache(String configKey, String value)
+        {
+            Persist(configKey, value);
+            cache[configKey] = value;
+        }
+
         public static void Persist(String key, String value)
         {
             ConfigurationDao dao = new ConfigurationDao();
@@ -145,7 +175,7 @@ This is your home page.
             {
                 Nullable<Double> result = GooeyConfigManager.GetAsDouble(ConfigConstants.CampaignOptionPrice);
                 if (!result.HasValue)
-                    throw new ApplicationException("The sales force price has not been configured in the configuration table (key=" + ConfigConstants.SalesForcePrice + "). This is a required field for the application to function properly.");
+                    throw new ApplicationException("The campaign option price has not been configured in the configuration table (key=" + ConfigConstants.SalesForcePrice + "). This is a required field for the application to function properly.");
 
                 return result.Value;
             }

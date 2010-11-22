@@ -42,8 +42,20 @@
                 <td><asp:Image ID="PaypalStatusImage" runat="server" /></td>
                 <td><asp:LinkButton ID="BtnTogglePaypal" OnClick="BtnTogglePaypal_Click" Text="" runat="server" /></td>
             </tr>
+            <tr>
+                <td>Default Template:</td>
+                <td><asp:Image ID="DefaultTemplateImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="LnkDefaultTemplate" runat="server" />
+                    <telerik:RadToolTip ID="TooltipDefaultTemplate" Skin="Default" Width="250" TargetControlID="LnkDefaultTemplate" runat="server">
+                        <asp:Literal ID="LtlDefaultTemplate" runat="server" />
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
         </table>
         </telerik:RadAjaxPanel>
     </div>
 
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Height="500" Width="600" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize" runat="server" EnableShadow="true">
+    </telerik:RadWindowManager>
 </asp:Content>
