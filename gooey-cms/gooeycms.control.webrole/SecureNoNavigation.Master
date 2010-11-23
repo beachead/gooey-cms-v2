@@ -61,6 +61,16 @@
                                         </ul>
                                     </div>                                
                                 </li>
+                                <li><asp:HyperLink ID="accountLink" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><a href="#" runat="server">Subscriptions</a></li>
+                                            <li><a href="#" runat="server">Billing</a></li>
+                                            <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change Password</a></li>
+                                            <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink>
                                     <div class="menu">
                                         <ul>
