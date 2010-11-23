@@ -113,6 +113,7 @@
     <Content Include="auth\global-admin\Configuration.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\Default.aspx" />
+    <Content Include="auth\global-admin\Developer\Categories.aspx" />
     <Content Include="auth\global-admin\Developer\Default.aspx" />
     <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
@@ -320,6 +321,13 @@
     </Compile>
     <Compile Include="auth\global-admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Developer\Categories.aspx.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Developer\Categories.aspx.designer.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Developer\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

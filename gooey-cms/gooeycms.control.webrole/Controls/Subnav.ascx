@@ -76,8 +76,8 @@
 
     <asp:View ID="global_admin_developer" runat="server">
         <ul>
-            <li><asp:HyperLink ID="HyperLink1" NavigateUrl="~/auth/global-admin/Default.aspx" Text="Dashboard / General Settings" runat="server" /></li>
             <li><asp:HyperLink ID="global_admin_developer_approval" NavigateUrl="~/auth/global-admin/Developer/Default.aspx" Text="Approve Packages" runat="server" /></li>
+            <li><asp:HyperLink ID="global_admin_developer_categories" NavigateUrl="~/auth/global-admin/Developer/Categories.aspx" Text="Manage Categories" runat="server" /></li>
         </ul>
     </asp:View>
 

@@ -337,15 +337,6 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.View global_admin_developer;
         
         /// <summary>
-        /// HyperLink1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
-        
-        /// <summary>
         /// global_admin_developer_approval control.
         /// </summary>
         /// <remarks>
@@ -353,5 +344,14 @@ namespace Gooeycms.Webrole.Control.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink global_admin_developer_approval;
+        
+        /// <summary>
+        /// global_admin_developer_categories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink global_admin_developer_categories;
     }
 }

@@ -346,13 +346,50 @@ This is your home page.
         {
             get
             {
-                IList<String> categories = new List<String>();
+                List<String> categories = new List<String>();
 
                 String result = GetCachedValue(ConfigConstants.StorePackageCategories);
                 if (result != null)
-                    categories = result.SplitAsList(TextConstants.CommaSeparator);
+                    categories = new List<String>(result.SplitAsList(TextConstants.CommaSeparator));
 
+                categories.Sort();
                 return categories;
+            }
+        }
+
+        public static void AddStorePackageCategory(String category)
+        {
+            Boolean valid = true;
+            IList<String> items = StorePackageCategories;
+            foreach (String item in items)
+            {
+                if (item.ToLower().Equals(category.ToLower()))
+                {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (valid)
+            {
+                items.Add(category);
+                String result = items.AsString<String>(TextConstants.CommaSeparator.ToString());
+
+                Persist(ConfigConstants.StorePackageCategories, result);
+                cache[ConfigConstants.StorePackageCategories] = result;
+            }
+        }
+
+        public static void RemoveStorePackageCategory(String category)
+        {
+            IList<String> items = StorePackageCategories;
+            Boolean removed = items.Remove(category);
+            if (removed)
+            {
+                String result = items.AsString<String>(TextConstants.CommaSeparator.ToString());
+
+                Persist(ConfigConstants.StorePackageCategories, result);
+                cache[ConfigConstants.StorePackageCategories] = result;
             }
         }
 
