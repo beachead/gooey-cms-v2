@@ -28,10 +28,16 @@
 <body class="claro">
 <form id="aspnetform" clientidmode="Static" runat="server">
 
+    <!-- START: header-region -->
     <div id="header-region">
-        <ul class="menu">
-        </ul>
+        <!-- START: primary-nav -->
+        <div id="primary-nav">
+            <ul class="menu">
+            </ul>
+        </div>
+        <!-- END: primary-nav -->
     </div>
+    <!-- END: header-region -->
 
     <div id="main">
         <table class="content" cellpadding="0" cellspacing="0">
@@ -46,8 +52,24 @@
                         <div class="subnav-inner">
                             <ul>
                                 <li class="welcome">Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
-                                <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink></li>
-                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><a href="#">Website 1</a></li>
+                                            <li><a href="#">Website 2</a></li>
+                                            <li><a href="#">Website 3</a></li>
+                                        </ul>
+                                    </div>                                
+                                </li>
+                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><a href="#">Create a site</a></li>
+                                            <li><a href="#">Create a Theme</a></li>
+                                            <li><a href="#">Developer Extras</a></li>
+                                        </ul>
+                                    </div>                                
+                                </li>
                             </ul>              
                         </div>
                     </div>

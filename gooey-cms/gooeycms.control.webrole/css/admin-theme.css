@@ -79,6 +79,7 @@ a:hover     { color: #004bc7; }
 #primary-nav {
     background-color: #4395f1;
     border-top: 2px solid #000;
+    min-height: 32px;
 }
 
 #logo {
