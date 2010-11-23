@@ -208,7 +208,7 @@ div.subnav div.subnav-inner {
     float: none;
     height: auto;
     margin: 0;
-    padding: 0 0 0 10px;
+    padding: 6px 0 0 10px;
 }
 
 #utility-nav ul ul li a {
@@ -216,7 +216,7 @@ div.subnav div.subnav-inner {
     color: #000;
     display: block;
     float: none;
-    padding: 3px 5px;
+    padding: 0 5px;
     text-decoration: none;
     text-align: right;
 }
@@ -315,7 +315,7 @@ ul.menu {
 	list-style-position:outside;
 	list-style-type:none;
 	text-align:left;	
-	padding: 9px 0 6px 15px;
+	padding: 6px 0 6px 15px;
 	margin:0px; 
 
 }
@@ -323,7 +323,7 @@ ul.menu {
 ul.menu li {
 	background:transparent none repeat scroll 0 0;
 	font-size: 11px;
-	margin:0 1em;
+	margin: 0 1em;
 	padding:0;
 	display: inline;	
 	list-style-image:none;
