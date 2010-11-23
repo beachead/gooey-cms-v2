@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
     public partial class Site {
         
         /// <summary>
+        /// Subnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        
+        /// <summary>
         /// RadScriptManager1 control.
         /// </summary>
         /// <remarks>

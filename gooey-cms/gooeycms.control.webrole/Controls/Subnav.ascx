@@ -1,11 +1,30 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Subnav.ascx.cs" Inherits="Gooeycms.Webrole.Control.Controls.Subnav" %>
 
 <asp:MultiView ID="mvSubnav" runat="server">
+
     <asp:View ID="globaladmin" runat="server">
         <ul>
             <li><asp:HyperLink ID="globaladmin_default" NavigateUrl="~/auth/global-admin/default.aspx" Text="General Settings" runat="server" /></li>
         </ul>
     </asp:View>
+
+    <!-- Dashboard -->
+    <asp:View ID="dashboard" runat="server">
+        <ul>
+            <li><asp:HyperLink ID="dashboard_home" navigateUrl="~/auth/dashboard.aspx" Text="Dashboard" runat="server" /></li>
+            <li><asp:HyperLink ID="dashboard_new" NavigateUrl="http://store.gooeycms.net/signup/" Text="Register New Site" runat="server"/></li>
+            <li><asp:HyperLink ID="dashboard_purchase" NavigateUrl="http://store.gooeycms.net/" Text="Purchase Sites or Themes" runat="server" /></li> 
+        </ul>    
+    </asp:View>
+
+    <!-- Developers -->
+    <asp:View ID="developer" runat="server">
+        <ul>
+            <li><asp:HyperLink ID="developer_home" NavigateUrl="~/auth/developer/default.aspx" Text="Developers Home" runat="server" /></li>
+            <li><asp:HyperLink ID="developer_new" NavigateUrl="~/auth/developer/site.aspx" Text="Package a New Site" runat="server" OnPreRender="AppendGUID" /></li>
+            <li><asp:HyperLink ID="developer_settings" NavigateUrl="~/auth/developer/settings.aspx" Text="Developer Settings" runat="server" /></li>
+        </ul>    
+    </asp:View>    
 
     <!-- Manage Content -->
     <asp:View ID="content" runat="server">
