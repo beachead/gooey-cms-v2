@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
     public partial class Default {
         
         /// <summary>
+        /// Subnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        
+        /// <summary>
         /// RadScriptManager control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,33 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::System.Web.UI.WebControls.LinkButton BtnTogglePaypal;
         
         /// <summary>
+        /// PaypalPdtTokenImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image PaypalPdtTokenImage;
+        
+        /// <summary>
+        /// PaypalPdtTokenLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink PaypalPdtTokenLink;
+        
+        /// <summary>
+        /// PaypalPdtTokenTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip PaypalPdtTokenTooltip;
+        
+        /// <summary>
         /// DefaultTemplateImage control.
         /// </summary>
         /// <remarks>
@@ -139,13 +175,85 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::Telerik.Web.UI.RadToolTip TooltipDefaultTemplate;
         
         /// <summary>
-        /// LtlDefaultTemplate control.
+        /// DefaultTemplateNameImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LtlDefaultTemplate;
+        protected global::System.Web.UI.WebControls.Image DefaultTemplateNameImage;
+        
+        /// <summary>
+        /// DefaultTemplateNameLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DefaultTemplateNameLink;
+        
+        /// <summary>
+        /// DefaultTemplateNameTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip DefaultTemplateNameTooltip;
+        
+        /// <summary>
+        /// DefaultThemeNameImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DefaultThemeNameImage;
+        
+        /// <summary>
+        /// DefaultThemeNameLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DefaultThemeNameLink;
+        
+        /// <summary>
+        /// DefaultThemeNameTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip DefaultThemeNameTooltip;
+        
+        /// <summary>
+        /// DefaultThemeDescriptionImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DefaultThemeDescriptionImage;
+        
+        /// <summary>
+        /// DefaultThemeDescriptionLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DefaultThemeDescriptionLink;
+        
+        /// <summary>
+        /// DefaultThemeDescriptionTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip DefaultThemeDescriptionTooltip;
         
         /// <summary>
         /// DefaultHomepageImage control.
@@ -175,13 +283,139 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::Telerik.Web.UI.RadToolTip TooltipDefaultHomepage;
         
         /// <summary>
-        /// LtlDefaultHomepage control.
+        /// DefaultCmsDomainImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LtlDefaultHomepage;
+        protected global::System.Web.UI.WebControls.Image DefaultCmsDomainImage;
+        
+        /// <summary>
+        /// DefaultCmsDomainLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DefaultCmsDomainLink;
+        
+        /// <summary>
+        /// DefaultCmsDomainTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip DefaultCmsDomainTooltip;
+        
+        /// <summary>
+        /// AdminSiteHostImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image AdminSiteHostImage;
+        
+        /// <summary>
+        /// AdminSiteHostLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink AdminSiteHostLink;
+        
+        /// <summary>
+        /// AdminSiteHostTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip AdminSiteHostTooltip;
+        
+        /// <summary>
+        /// DefaultPageNameImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DefaultPageNameImage;
+        
+        /// <summary>
+        /// DefaultPageNameLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DefaultPageNameLink;
+        
+        /// <summary>
+        /// DefaultPageNameTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip DefaultPageNameTooltip;
+        
+        /// <summary>
+        /// DefaultStaingPrefixImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DefaultStaingPrefixImage;
+        
+        /// <summary>
+        /// DefaultStaingPrefixLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DefaultStaingPrefixLink;
+        
+        /// <summary>
+        /// DefaultStaingPrefixTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip DefaultStaingPrefixTooltip;
+        
+        /// <summary>
+        /// DefaultAsyncTimeoutImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image DefaultAsyncTimeoutImage;
+        
+        /// <summary>
+        /// DefaultAsyncTimeoutLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DefaultAsyncTimeoutLink;
+        
+        /// <summary>
+        /// DefaultAsyncTimeoutTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip DefaultAsyncTimeoutTooltip;
         
         /// <summary>
         /// Singleton control.

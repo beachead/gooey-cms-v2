@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureGlobalAdmin.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Default" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -8,6 +8,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Subnavigation" runat="server">
+    <beachead:Subnav ID="Subnav" runat="server" NavSection="GlobalAdmin" NavItem="default" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
@@ -43,12 +44,47 @@
                 <td><asp:LinkButton ID="BtnTogglePaypal" OnClick="BtnTogglePaypal_Click" Text="" runat="server" /></td>
             </tr>
             <tr>
+                <td>Paypal PDT Token:</td>
+                <td><asp:Image ID="PaypalPdtTokenImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="PaypalPdtTokenLink" runat="server" />
+                    <telerik:RadToolTip ID="PaypalPdtTokenTooltip" Skin="Default" Width="250" TargetControlID="PaypalPdtTokenLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
                 <td>Default Template:</td>
                 <td><asp:Image ID="DefaultTemplateImage" runat="server" /></td>
                 <td>
                     <asp:Hyperlink ID="LnkDefaultTemplate" runat="server" />
                     <telerik:RadToolTip ID="TooltipDefaultTemplate" Skin="Default" Width="250" TargetControlID="LnkDefaultTemplate" runat="server">
-                        <asp:Literal ID="LtlDefaultTemplate" runat="server" />
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
+                <td>Default Template Name:</td>
+                <td><asp:Image ID="DefaultTemplateNameImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="DefaultTemplateNameLink" runat="server" />
+                    <telerik:RadToolTip ID="DefaultTemplateNameTooltip" Skin="Default" Width="250" TargetControlID="DefaultTemplateNameLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
+                <td>Default Theme Name:</td>
+                <td><asp:Image ID="DefaultThemeNameImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="DefaultThemeNameLink" runat="server" />
+                    <telerik:RadToolTip ID="DefaultThemeNameTooltip" Skin="Default" Width="250" TargetControlID="DefaultThemeNameLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
+                <td>Default Theme Description:</td>
+                <td><asp:Image ID="DefaultThemeDescriptionImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="DefaultThemeDescriptionLink" runat="server" />
+                    <telerik:RadToolTip ID="DefaultThemeDescriptionTooltip" Skin="Default" Width="250" TargetControlID="DefaultThemeDescriptionLink" runat="server">
                     </telerik:RadToolTip>
                 </td>
             </tr>
@@ -58,8 +94,48 @@
                 <td>
                     <asp:Hyperlink ID="LnkDefaultHomepage" runat="server" />
                     <telerik:RadToolTip ID="TooltipDefaultHomepage" Skin="Default" Width="250" TargetControlID="LnkDefaultHomepage" runat="server">
-                        <asp:Literal ID="LtlDefaultHomepage" runat="server" />
                     </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
+                <td>Default CMS Domain:</td>
+                <td><asp:Image ID="DefaultCmsDomainImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="DefaultCmsDomainLink" runat="server" />
+                    <telerik:RadToolTip ID="DefaultCmsDomainTooltip" Skin="Default" Width="250" TargetControlID="DefaultCmsDomainLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
+                <td>Admin Site Domain:</td>
+                <td><asp:Image ID="AdminSiteHostImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="AdminSiteHostLink" runat="server" />
+                    <telerik:RadToolTip ID="AdminSiteHostTooltip" Skin="Default" Width="250" TargetControlID="AdminSiteHostLink" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>Default Page Name:</td>
+                <td><asp:Image ID="DefaultPageNameImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="DefaultPageNameLink" runat="server" />
+                    <telerik:RadToolTip ID="DefaultPageNameTooltip" Skin="Default" Width="250" TargetControlID="DefaultPageNameLink" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>Default Staging Prefix:</td>
+                <td><asp:Image ID="DefaultStaingPrefixImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="DefaultStaingPrefixLink" runat="server" />
+                    <telerik:RadToolTip ID="DefaultStaingPrefixTooltip" Skin="Default" Width="250" TargetControlID="DefaultStaingPrefixLink" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>Default Async Timeout:</td>
+                <td><asp:Image ID="DefaultAsyncTimeoutImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="DefaultAsyncTimeoutLink" runat="server" />
+                    <telerik:RadToolTip ID="DefaultAsyncTimeoutTooltip" Skin="Default" Width="250" TargetControlID="DefaultAsyncTimeoutLink" runat="server" />
                 </td>
             </tr>
         </table>

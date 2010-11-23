@@ -8,6 +8,7 @@ using Gooeycms.Business.Membership;
 using Gooeycms.Business.Util;
 using Gooeycms.Constants;
 using Gooeycms.Business;
+using Telerik.Web.UI;
 
 namespace Gooeycms.Webrole.Control.auth.global_admin
 {
@@ -20,81 +21,78 @@ namespace Gooeycms.Webrole.Control.auth.global_admin
 
         private void CheckSetupStatus()
         {
-            if (GooeyStatus.IsMembershipConfigured())
-            {
-                this.MembershipStatusImage.ImageUrl = "~/images/green-ball.gif";
-                this.BtnSetupMembership.Enabled = false;
-                this.BtnSetupMembership.Text = "Configured";
-            }
-            else
-            {
-                this.MembershipStatusImage.ImageUrl = "~/images/red-ball.gif";
-                this.BtnSetupMembership.Enabled = true;
-            }
+            DisplayButtonStatus(GooeyStatus.IsMembershipConfigured(), "red", "Configured", "Setup", this.MembershipStatusImage, null, this.BtnSetupMembership, "The membership system is already configured. Are you sure you want to reconfigure the membership system?", null);
+            DisplayButtonStatus(GooeyStatus.IsFlashConfigured(), "red", "Configured", "Setup", this.FlashStatusImage, null, this.BtnSetupFlash, "Flash is already configured. Are you sure you want to reconfigure flash support?", null);
+            DisplayButtonStatus(!GooeyStatus.IsDevelopmentMode(), "yellow", "Running within Windows Azure (PRODUCTION MODE)", "Running outside of Windows Azure (DEVELOPMENT MODE)", this.DevModeStatusImage, this.LblDevMode);
+            DisplayButtonStatus(!GooeyStatus.IsPaypalSandbox(), "yellow", "Enable Paypal SANDBOX mode", "Enable Paypal LIVE mode",this.PaypalStatusImage, null, this.BtnTogglePaypal, "Are you sure you want to DISABLE live paypal payments?","Are you sure you want to ENABLE live paypal payments?");
 
-            if (GooeyStatus.IsFlashConfigured())
-            {
-                this.FlashStatusImage.ImageUrl = "~/images/green-ball.gif";
-                this.BtnSetupFlash.Enabled = false;
-                this.BtnSetupFlash.Text = "Configured";
-            }
-            else
-            {
-                this.FlashStatusImage.ImageUrl = "~/images/red-ball.gif";
-                this.BtnSetupFlash.Enabled = true;
-            }
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultHomepage), "yellow", "Modify Default Homepage Template", "Setup Default Homepage Template (currently using default template)", this.DefaultTemplateImage, this.LnkDefaultTemplate, this.TooltipDefaultTemplate, GooeyConfigManager.DefaultTemplate, ConfigConstants.DefaultTemplate, "DefaultTemplate");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultTemplate), "yellow", "Modify Default Theme Template", "Setup Defaulte Theme Template (currently using default template)", this.DefaultHomepageImage, this.LnkDefaultHomepage, this.TooltipDefaultHomepage, GooeyConfigManager.DefaultHomepage, ConfigConstants.DefaultHomepage, "DefaultHomepage");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultCmsDomain), "red", GooeyConfigManager.DefaultCmsDomain, "Configure Domain", this.DefaultCmsDomainImage, this.DefaultCmsDomainLink, this.DefaultCmsDomainTooltip, GooeyConfigManager.DefaultCmsDomain, ConfigConstants.DefaultCmsDomain, "DefaultCmsDomain");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.PaypalPdt), "red", GooeyConfigManager.PaypalPdtToken, "Configure Token (currently using default sandbox token)", this.PaypalPdtTokenImage, this.PaypalPdtTokenLink, this.PaypalPdtTokenTooltip, GooeyConfigManager.PaypalPdtToken, ConfigConstants.PaypalPdt, "PaypalPdtToken");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultAdminDomain), "yellow", GooeyConfigManager.AdminSiteHost, "Configure Admin Domain (Currently using default: " + GooeyConfigManager.AdminSiteHost + ")", this.AdminSiteHostImage, this.AdminSiteHostLink, this.AdminSiteHostTooltip, GooeyConfigManager.AdminSiteHost, ConfigConstants.DefaultAdminDomain, "AdminSiteHost");
 
-            if (GooeyStatus.IsDevelopmentMode())
-            {
-                this.DevModeStatusImage.ImageUrl = "~/images/yellow-ball.gif";
-                this.LblDevMode.Text = "Running outside of Windows Azure (DEVELOPMENT MODE)";
-            }
-            else
-            {
-                this.FlashStatusImage.ImageUrl = "~/images/green-ball.gif";
-                this.LblDevMode.Text = "Running within Windows Azure (PRODUCTION MODE)";
-            }
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultStagingPrefix), "yellow", GooeyConfigManager.DefaultStagingPrefix, "Configure Staging Prefix (Currently using default: " + GooeyConfigManager.DefaultStagingPrefix + ")", this.DefaultStaingPrefixImage, this.DefaultStaingPrefixLink, this.DefaultStaingPrefixTooltip, GooeyConfigManager.DefaultStagingPrefix, ConfigConstants.DefaultStagingPrefix, "DefaultStagingPrefix");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultPageName), "yellow", GooeyConfigManager.DefaultPageName, "Configure Default Page Name (Currently using default: " + GooeyConfigManager.DefaultPageName + ")", this.DefaultPageNameImage, this.DefaultPageNameLink, this.DefaultPageNameTooltip, GooeyConfigManager.DefaultPageName, ConfigConstants.DefaultPageName, "DefaultPageName");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultAsyncTimeout), "green", GooeyConfigManager.DefaultAsyncTimeout.ToString() + " seconds", "Configure Async Timeout (Default: " + GooeyConfigManager.DefaultAsyncTimeout + " seconds) [advanced]", this.DefaultAsyncTimeoutImage, this.DefaultAsyncTimeoutLink, this.DefaultAsyncTimeoutTooltip, GooeyConfigManager.DefaultAsyncTimeout.ToString(), ConfigConstants.DefaultAsyncTimeout, "DefaultAsyncTimeout");
 
-            if (GooeyStatus.IsPaypalSandbox())
-            {
-                this.PaypalStatusImage.ImageUrl = "~/images/yellow-ball.gif";
-                this.BtnTogglePaypal.Text = "Enable Paypal LIVE mode";
-                this.BtnTogglePaypal.OnClientClick = "return confirm('Are you sure you want to ENABLE live paypal payments?');";
-            }
-            else
-            {
-                this.PaypalStatusImage.ImageUrl = "~/images/green-ball.gif";
-                this.BtnTogglePaypal.Text = "Enable Paypal SANDBOX mode";
-                this.BtnTogglePaypal.OnClientClick = "return confirm('Are you sure you want to DISABLE live paypal payments and begin using the sandbox?');";
-            }
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultTemplateName), "yellow", GooeyConfigManager.DefaultTemplateName, "Configure Default Template Name (Default: " + GooeyConfigManager.DefaultTemplateName + ")", this.DefaultTemplateNameImage, this.DefaultTemplateNameLink, this.DefaultTemplateNameTooltip, GooeyConfigManager.DefaultTemplateName, ConfigConstants.DefaultTemplateName, "DefaultTemplateName");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultThemeName), "yellow", GooeyConfigManager.DefaultThemeName, "Configure Default Theme Name (Default: " + GooeyConfigManager.DefaultThemeName + ")", this.DefaultThemeNameImage, this.DefaultThemeNameLink, this.DefaultThemeNameTooltip, GooeyConfigManager.DefaultThemeName, ConfigConstants.DefaultThemeName, "DefaultThemeName");
+            DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultThemeDescription), "yellow", GooeyConfigManager.DefaultThemeDescription, "Configure Default Theme Description (Default: " + GooeyConfigManager.DefaultThemeDescription + ")", this.DefaultThemeDescriptionImage, this.DefaultThemeDescriptionLink, this.DefaultThemeDescriptionTooltip, GooeyConfigManager.DefaultThemeDescription, ConfigConstants.DefaultThemeDescription, "DefaultThemeDescription");
 
-            if (GooeyStatus.IsDefaultTemplate())
-            {
-                this.DefaultTemplateImage.ImageUrl = "~/images/green-ball.gif";
-                this.LnkDefaultTemplate.Text = "Modify Template";
-            }
-            else
-            {
-                this.DefaultTemplateImage.ImageUrl = "~/images/yellow-ball.gif";
-                this.LnkDefaultTemplate.Text = "Setup Template (currently using default template)";
-            }
-            this.TooltipDefaultTemplate.Text = Server.HtmlEncode(GooeyConfigManager.DefaultTemplate).Replace("\n", "<br />");
-            this.LnkDefaultTemplate.NavigateUrl = "#";
-            this.LnkDefaultTemplate.Attributes["onclick"] = "window.radopen('Configuration.aspx?c=" + ConfigConstants.DefaultTemplate + "&d=DefaultTemplate'); return false;";
+        }
 
-            if (GooeyStatus.IsDefaultTemplate())
+        private void DisplayButtonStatus(Boolean isValidStatus, String invalidBallColor, 
+                                         String validLinkText, String invalidLinkText, 
+                                         Image linkImage, Label statusLabel = null,
+                                         LinkButton linkButton = null,
+                                         String onClientClickValidText = null, String onClientClickInvalidText = null)
+        {
+            if (isValidStatus)
             {
-                this.DefaultTemplateImage.ImageUrl = "~/images/green-ball.gif";
-                this.LnkDefaultTemplate.Text = "Modify Template";
+                linkImage.ImageUrl = "~/images/green-ball.gif";
+                if (linkButton != null)
+                {
+                    linkButton.Text = validLinkText;
+                    if (onClientClickValidText != null)
+                        linkButton.OnClientClick = "return confirm('" + onClientClickValidText + "');";
+                }
+                if (statusLabel != null)
+                    statusLabel.Text = validLinkText;
             }
             else
             {
-                this.DefaultTemplateImage.ImageUrl = "~/images/yellow-ball.gif";
-                this.LnkDefaultTemplate.Text = "Setup Template (currently using default template)";
+                linkImage.ImageUrl = "~/images/" + invalidBallColor + "-ball.gif";
+                if (linkButton != null)
+                {
+                    linkButton.Text = invalidLinkText;
+                    if (onClientClickInvalidText != null) 
+                        linkButton.OnClientClick = "return confirm('" + onClientClickInvalidText + "');";
+                }
+
+                if (statusLabel != null)
+                    statusLabel.Text = invalidLinkText;
             }
-            this.TooltipDefaultTemplate.Text = Server.HtmlEncode(GooeyConfigManager.DefaultTemplate).Replace("\n", "<br />");
-            this.LnkDefaultTemplate.NavigateUrl = "#";
-            this.LnkDefaultTemplate.Attributes["onclick"] = "window.radopen('Configuration.aspx?c=" + ConfigConstants.DefaultTemplate + "&d=DefaultTemplate'); return false;";
+        }
+
+
+
+        private void DisplayLinkStatus(Boolean isValidStatus, String invalidBallColor, String validLinkText, String invalidLinkText, Image statusImage, HyperLink statusLink, RadToolTip statusTooltip, String statusTooltipText, String configurationName, String methodName)
+        {
+            if (isValidStatus)
+            {
+                statusImage.ImageUrl = "~/images/green-ball.gif";
+                statusLink.Text = validLinkText;
+            }
+            else
+            {
+                statusImage.ImageUrl = "~/images/" + invalidBallColor + "-ball.gif";
+                statusLink.Text = invalidLinkText;
+            }
+            if (statusTooltip != null)
+                statusTooltip.Text = Server.HtmlEncode(statusTooltipText).Replace("\n", "<br />");
+            statusLink.NavigateUrl = "#";
+            statusLink.Attributes["onclick"] = "window.radopen('Configuration.aspx?c=" + configurationName + "&d=" + methodName + "'); return false;";
         }
 
         protected void BtnSetupMembership_Click(Object sender, EventArgs e)

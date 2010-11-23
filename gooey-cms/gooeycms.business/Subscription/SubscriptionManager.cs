@@ -109,14 +109,14 @@ namespace Gooeycms.Business.Subscription
             }
 
             //Create a default template for this site.
-            CmsTheme theme = ThemeManager.Instance.Add(subscription.Guid,"Gooey Default Theme", "A bare-bones default theme");
+            CmsTheme theme = ThemeManager.Instance.Add(subscription.Guid,GooeyConfigManager.DefaultThemeName, GooeyConfigManager.DefaultThemeDescription);
             theme.IsEnabled = true;
             ThemeManager.Instance.Save(theme);
 
             CmsTemplate template = new CmsTemplate();
             template.Content = GooeyConfigManager.DefaultTemplate;
             template.IsGlobalTemplateType = false;
-            template.Name = "Gooey Default Page Template";
+            template.Name = GooeyConfigManager.DefaultTemplateName;
             template.SubscriptionGuid = subscription.Guid;
             template.LastSaved = DateTime.Now;
             template.Theme = theme;

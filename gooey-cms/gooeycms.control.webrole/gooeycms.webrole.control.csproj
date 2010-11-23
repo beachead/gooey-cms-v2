@@ -520,6 +520,13 @@
     <Compile Include="Controls\Subnav.ascx.designer.cs">
       <DependentUpon>Subnav.ascx</DependentUpon>
     </Compile>
+    <Compile Include="SecureGlobalAdmin.Master.cs">
+      <DependentUpon>SecureGlobalAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecureGlobalAdmin.Master.designer.cs">
+      <DependentUpon>SecureGlobalAdmin.Master</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -686,6 +693,7 @@
     <Content Include="auth\Pages\Web.config" />
     <Content Include="auth\Promotion\Web.config" />
     <Content Include="auth\Themes\Web.config" />
+    <Content Include="SecureGlobalAdmin.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

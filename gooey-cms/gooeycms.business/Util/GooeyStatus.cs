@@ -31,9 +31,9 @@ namespace Gooeycms.Business.Util
             return GooeyConfigManager.IsPaypalSandbox;
         }
 
-        public static Boolean IsDefaultTemplate()
+        public static Boolean IsValueConfigured(String key)
         {
-            return (!String.IsNullOrEmpty(GooeyConfigManager.GetAsString(ConfigConstants.DefaultTemplate)));
+            return (!String.IsNullOrEmpty(GooeyConfigManager.GetAsString(key)));
         }
 
         public static void SetupFlash()
@@ -55,6 +55,5 @@ namespace Gooeycms.Business.Util
                 GooeyConfigManager.PaypalPostUrl = ConfigConstants.PaypalSandboxUrl;
             }
         }
-
     }
 }

@@ -1,0 +1,140 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SecureGlobalAdmin.Master.cs" Inherits="Gooeycms.Webrole.Control.SecureGlobalAdmin" %>
+<%@ Import Namespace="Gooeycms.Business.Membership" %>
+<%@ Import Namespace="Gooeycms.Constants" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" profile="http://control.gooeycms.net" runat="server">
+    <title>Gooey CMS Management | {0}</title>
+    <link href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="localCSS" runat="server"></asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
+    <script src="<%# ResolveUrl("~/scripts/functions.js") %>" type="text/javascript" language="javascript"></script> 
+    <script src="<%# ResolveUrl("~/scripts/mootools-core.js") %>" type="text/javascript" language="javascript"></script>    
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        dojo.require("dojo.parser");
+        dojo.require("dojo.window");
+        dojo.require("dojo._base.html");
+        dojo.require("dijit.TitlePane");
+        dojo.require("dijit.dijit");
+        dojo.require("dijit.Dialog");
+        dojo.require("dijit.layout.TabContainer");
+        dojo.require("dijit.layout.ContentPane");
+        dojo.require("dijit.form.ValidationTextBox");
+        dojo.require("dijit.Tooltip");
+    </script>
+    <asp:ContentPlaceHolder ID="localJS" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body class="claro">
+
+<form id="aspnetform" clientidmode="Static" runat="server">
+    
+    <!-- START: header-region -->
+    <div id="header-region">
+        <!-- START: primary-nav -->
+        <div id="primary-nav">
+            <ul class="menu">
+                <li><asp:HyperLink id="NavDefault" NavigateUrl="~/auth/global-admin/default.aspx" runat="server" onprerender="SetActive">General Settings</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavDeveloper" NavigateUrl="~/auth/global-admin/developer/default.aspx" runat="server" onprerender="SetActive">Package Management</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavControls" NavigateUrl="~/auth/global-admin/controls/cache.aspx" runat="server" onprerender="SetActive">Cache Management</asp:HyperLink></li>
+                <li><asp:HyperLink id="NavHelp" NavigateUrl="~/auth/global-admin/help/default.aspx" runat="server" onprerender="SetActive">Help System</asp:HyperLink></li>
+            </ul>
+        </div>
+        <!-- END: primary-nav -->
+    </div>
+    <!-- END: header-region -->
+
+    <!-- START: main -->
+    <div id="main">
+        <table class="content" cellpadding="0" cellspacing="0">
+        <tr>
+        <td class="center-column">
+
+            <!-- START: navigation -->
+            <div id="navigation">
+
+                <!-- START: utility-nav -->
+                <div id="utility-nav">
+                    <div class="subnav">
+                        <div class="subnav-inner">
+                            <ul>
+                                <li class="welcome">Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
+                                <% if (!LoggedInUser.IsDemoAccount) { %>
+                                <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><a href="#">Website 1</a></li>
+                                            <li><a href="#">Website 2</a></li>
+                                            <li><a href="#">Website 3</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><asp:HyperLink ID="accountLink" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><a href="#" runat="server">Subscriptions</a></li>
+                                            <li><a href="#" runat="server">Billing</a></li>
+                                            <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change Password</a></li>
+                                            <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><a href="#">Create a site</a></li>
+                                            <li><a href="#">Create a Theme</a></li>
+                                            <li><a href="#">Developer Extras</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <% } else { %>
+                                <li><asp:HyperLink ID="HyperLink1" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <% } %>
+                            </ul>                                
+                        </div>
+                    </div>
+                </div>
+                <!-- END: utility-nav -->
+
+                <!-- START: secondary-nav -->
+                <div id="secondary-nav">
+
+                    <div class="subnav">
+                        <div class="subnav-inner">
+                            <asp:ContentPlaceHolder ID="Subnavigation" runat="server"></asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: secondary-nav -->
+                        
+            </div>
+            <!-- END: navigation -->
+
+            <div id="instructions-area">
+                <asp:ContentPlaceHolder ID="Instructions" runat="server"></asp:ContentPlaceHolder>
+            </div>
+
+            <div id="editor-area">
+                <asp:ContentPlaceHolder ID="Editor" runat="server"></asp:ContentPlaceHolder>          
+            </div>
+        </td>
+        </tr>
+        </table>
+    </div>
+    <!-- END: main -->
+    
+</form>
+</body>
+</html>

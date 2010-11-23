@@ -16,6 +16,9 @@ namespace Gooeycms.Constants
         public const String SubscriptionProcessor = "subscription-processor";
         public const String IsLogginedEnabled = "logging-enabled";
         public const String DefaultPageName = "default-pagename";
+        public const String DefaultTemplateName = "default-template-name";
+        public const String DefaultThemeName = "default-theme-name";
+        public const String DefaultThemeDescription = "default-theme-description";
         public const String TokenEncyrptionKey = "token-encryption-key";
         public const String DefaultSystemFormFields = "default-form-fields";
         public const String StorePackageCategories = "package.categories";
@@ -24,7 +27,6 @@ namespace Gooeycms.Constants
         public const String DefaultTemplate = "default-template";
         public const String PaypalPdt = "paypal-pdt";
         public const String PaypalUrl = "paypal-posturl";
-        public const String GooeyAdminUrl = "gooey-admin-url";
         public const String InviteEmailTemplate = "invite-email-template";
         public const String ApprovedEmailTemplate = "approved-email-template";
         public const String DefaultHomepage = "default-homepage";

@@ -131,6 +131,21 @@ namespace Gooeycms.Business
             }
         }
 
+        public static String DefaultTemplateName
+        {
+            get { return GetCachedValue(ConfigConstants.DefaultTemplateName,"Gooey Default Page Template"); }
+        }
+
+        public static String DefaultThemeName
+        {
+            get { return GetCachedValue(ConfigConstants.DefaultThemeName, "Gooey Default Theme"); }
+        }
+
+        public static String DefaultThemeDescription
+        {
+            get { return GetCachedValue(ConfigConstants.DefaultThemeDescription, "A bare-bones default theme"); }
+        }
+
         public static String DefaultTemplate
         {
             get

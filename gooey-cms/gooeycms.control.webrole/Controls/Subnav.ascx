@@ -1,6 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Subnav.ascx.cs" Inherits="Gooeycms.Webrole.Control.Controls.Subnav" %>
 
 <asp:MultiView ID="mvSubnav" runat="server">
+    <asp:View ID="globaladmin" runat="server">
+        <ul>
+            <li><asp:HyperLink ID="globaladmin_default" NavigateUrl="~/auth/global-admin/default.aspx" Text="General Settings" runat="server" /></li>
+        </ul>
+    </asp:View>
 
     <!-- Manage Content -->
     <asp:View ID="content" runat="server">
@@ -71,6 +76,7 @@
 
     <asp:View ID="global_admin_developer" runat="server">
         <ul>
+            <li><asp:HyperLink ID="HyperLink1" NavigateUrl="~/auth/global-admin/Default.aspx" Text="Dashboard / General Settings" runat="server" /></li>
             <li><asp:HyperLink ID="global_admin_developer_approval" NavigateUrl="~/auth/global-admin/Developer/Default.aspx" Text="Approve Packages" runat="server" /></li>
         </ul>
     </asp:View>
