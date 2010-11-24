@@ -1,11 +1,14 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SecureNoNavigation.master.cs" Inherits="Gooeycms.Webrole.Control.SecureNoNavigation" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SecureNoNavigation.Master.cs" Inherits="Gooeycms.Webrole.Control.SecureNoNavigation" %>
+<%@ Import Namespace="Gooeycms.Business.Membership" %>
+<%@ Import Namespace="Gooeycms.Constants" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" profile="http://control.gooeycms.net" runat="server">
     <title>Gooey CMS Management | {0}</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <link id="Link1" href="~/css/admin-theme.css" media="all" rel="Stylesheet" type="text/css" runat="server" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="localCSS" runat="server"></asp:ContentPlaceHolder>
@@ -15,6 +18,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
         dojo.require("dojo.parser");
+        dojo.require("dojo.window");
+        dojo.require("dojo._base.html");
         dojo.require("dijit.TitlePane");
         dojo.require("dijit.dijit");
         dojo.require("dijit.Dialog");
@@ -26,23 +31,27 @@
     <asp:ContentPlaceHolder ID="localJS" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body class="claro">
-<form id="aspnetform" clientidmode="Static" runat="server">
 
+<form id="aspnetform" clientidmode="Static" runat="server">
+    
     <!-- START: header-region -->
     <div id="header-region">
         <!-- START: primary-nav -->
         <div id="primary-nav">
             <ul class="menu">
+                <asp:ContentPlaceHolder ID="PrimaryNavigation" runat="server" />
             </ul>
         </div>
         <!-- END: primary-nav -->
     </div>
     <!-- END: header-region -->
 
+    <!-- START: main -->
     <div id="main">
         <table class="content" cellpadding="0" cellspacing="0">
         <tr>
         <td class="center-column">
+
             <!-- START: navigation -->
             <div id="navigation">
 
@@ -52,20 +61,17 @@
                         <div class="subnav-inner">
                             <ul>
                                 <li class="welcome">Welcome, <asp:Label ID="LoggedInUsername" runat="server" /></li>
+                                <% if (!LoggedInUser.IsDemoAccount) { %>
                                 <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink>
                                     <div class="menu">
-                                        <ul>
-                                            <li><a href="#">Website 1</a></li>
-                                            <li><a href="#">Website 2</a></li>
-                                            <li><a href="#">Website 3</a></li>
-                                        </ul>
-                                    </div>                                
+                                        <asp:BulletedList ID="LstWebsites" BulletStyle="NotSet" DisplayMode="LinkButton" OnClick="LstWebsites_Click" runat="server" />
+                                    </div>
                                 </li>
                                 <li><asp:HyperLink ID="accountLink" NavigateUrl="#" runat="server">Account</asp:HyperLink>
                                     <div class="menu">
                                         <ul>
-                                            <li><a href="#" runat="server">Subscriptions</a></li>
-                                            <li><a href="#" runat="server">Billing</a></li>
+                                            <li><a id="A1" href="#" runat="server">Subscriptions</a></li>
+                                            <li><a id="A2" href="#" runat="server">Billing</a></li>
                                             <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change Password</a></li>
                                             <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
                                         </ul>
@@ -78,9 +84,18 @@
                                             <li><a href="#">Create a Theme</a></li>
                                             <li><a href="#">Developer Extras</a></li>
                                         </ul>
-                                    </div>                                
+                                    </div>
                                 </li>
-                            </ul>              
+                                <% } else { %>
+                                <li><asp:HyperLink ID="HyperLink1" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                    <div class="menu">
+                                        <ul>
+                                            <li><asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <% } %>
+                            </ul>                                
                         </div>
                     </div>
                 </div>
@@ -99,20 +114,24 @@
                         
             </div>
             <!-- END: navigation -->
+
             <div id="instructions-area">
                 <asp:ContentPlaceHolder ID="Instructions" runat="server"></asp:ContentPlaceHolder>
             </div>
+
             <div id="editor-area">
                 <asp:ContentPlaceHolder ID="Editor" runat="server"></asp:ContentPlaceHolder>          
             </div>
-
         </td>
         </tr>
         </table>
-
     </div>
     <!-- END: main -->
     
 </form>
+
+<asp:ContentPlaceHolder ID="Olark" runat="server">
+    <!-- begin olark code --> <script type='text/javascript'>/*<![CDATA[*/ (function(d,u,o){window.olark={__k:o};var h=d.location.protocol=='https:'?'https://':'http://'; d.write(unescape("%3Cscript src='"+h+u+"' type='text/javascript'%3E%3C/script%3E")); })(document,'static.olark.com/javascript/olark.js', '9163-624-10-8802'); /*]]>*/</script> <!-- end olark code -->
+</asp:ContentPlaceHolder>
 </body>
 </html>

@@ -13,51 +13,26 @@ using Gooeycms.Business.Subscription;
 
 namespace Gooeycms.Webrole.Control
 {
-    public partial class Secure : System.Web.UI.MasterPage
+    public partial class Secure : SecureNoNavigation
     {
-        protected static String Root = null;
-
-        protected void Page_Load(object sender, EventArgs e)
+        protected new void Page_Load(Object sender, EventArgs e)
         {
             if (!CurrentSite.IsSet)
                 Response.Redirect("~/auth/dashboard.aspx");
 
-            Page.Header.DataBind();
+            if (CurrentSite.IsAvailable)
+            {
+                if (this.StagingLink != null)
+                    this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
 
-            this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
-            this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
-
-            if (!CurrentSite.Subscription.IsCampaignEnabled)
-                this.NavCampaigns.Visible = false;
+                if ((!CurrentSite.Subscription.IsCampaignEnabled) && (this.NavCampaigns != null))
+                    this.NavCampaigns.Visible = false;
+            }
 
             if (!Page.IsPostBack)
             {
-                LoadWebsites();
                 SetMenuDisplay();
             }
-        }
-
-        private void LoadWebsites()
-        {
-            MembershipUserWrapper wrapper = LoggedInUser.Wrapper;
-            IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
-            foreach (CmsSubscription subscription in subscriptions)
-            {
-                ListItem item = new ListItem(subscription.DefaultDisplayName,subscription.Guid);
-                if (subscription.Guid.Equals(CurrentSite.Guid.Value))
-                    item.Attributes["style"] = "font-weight:bold;";
-
-                this.LstWebsites.Items.Add(item);
-            }
-        }
-
-        protected void LstWebsites_Click(Object sender, BulletedListEventArgs e)
-        {
-            ListItem item = this.LstWebsites.Items[e.Index];
-            SiteHelper.SetActiveSiteCookie(item.Value);
-            SiteHelper.Configure(Data.Guid.New(item.Value));
-
-            Response.Redirect("~/auth/Default.aspx");
         }
 
         protected void SetMenuDisplay()
@@ -77,19 +52,13 @@ namespace Gooeycms.Webrole.Control
             this.ListItemPromotion.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
                                                                    SecurityConstants.Roles.SITE_ADMINISTRATOR,
                                                                    SecurityConstants.Roles.SITE_PROMOTION);
-  
+
             this.ListItemThemes.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
                                                                 SecurityConstants.Roles.SITE_ADMINISTRATOR);
 
             this.ListItemUser.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
                                                                 SecurityConstants.Roles.SITE_ADMINISTRATOR);
 
-
-        }
-
-        protected void OnLogout_Click(Object sender, EventArgs e)
-        {
-            Response.Redirect("~/login.aspx");
         }
 
         public void SetTitle(String title)
@@ -101,7 +70,7 @@ namespace Gooeycms.Webrole.Control
         {
             HyperLink A = (HyperLink)sender;
             String Url = Request.Url.ToString();
-            if (Url.Contains("/" + A.ID.Replace("Nav","").ToLower() + "/"))
+            if (Url.Contains("/" + A.ID.Replace("Nav", "").ToLower() + "/"))
             {
                 A.Attributes.Add("class", "active");
             }
