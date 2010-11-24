@@ -28,9 +28,8 @@ namespace Gooeycms.Webrole.Control.auth.Developer
 
         private void DoDataBind()
         {
-            CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
             UserInfo user = LoggedInUser.Wrapper.UserInfo;
-            this.LogoSrc.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
+            this.LogoSrc.ImageUrl = Logos.GetImageSrc(user.Logo);
 
         }
 
@@ -42,11 +41,12 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             {
                 FileInfo info = new FileInfo(LogoFile.FileName);
 
-                String name = subscription.LogoName;
+                UserInfo user = LoggedInUser.Wrapper.UserInfo;
+                String name = user.Logo;
                 if (name.IsEmpty())
                     name = System.Guid.NewGuid().ToString() + info.Extension;
 
-                Logos.SaveLogoFile(subscription, name, LogoFile.FileBytes);
+                Logos.SaveLogoFile(user, name, LogoFile.FileBytes);
                 this.LogoSrc.ImageUrl = Logos.GetImageSrc(name);
                 this.LblStatus.Text = "Successfully updated logo. All of your packages will now use this new logo.";
             }

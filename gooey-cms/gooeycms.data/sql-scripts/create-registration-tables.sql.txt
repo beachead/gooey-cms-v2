@@ -60,7 +60,6 @@ CREATE TABLE [Subscriptions] (
 [campaign_addon] BIT DEFAULT(0),
 [generic_addon] BIT DEFAULT(0),
 [is_demo] BIT DEFAULT(0),
-[logo_name] NVARCHAR(128),
 PRIMARY KEY CLUSTERED([id]),
 );
 CREATE UNIQUE INDEX uq_subscriptions_guid ON [Subscriptions](guid);
@@ -82,7 +81,8 @@ CREATE TABLE [Users] (
 [city] NVARCHAR(128),
 [state] NVARCHAR(10),
 [zipcode] NVARCHAR(10),
-[country] NVARCHAR(10)
+[country] NVARCHAR(10),
+[logo] VARCHAR(128)
 PRIMARY KEY CLUSTERED ([id])
 );
 CREATE INDEX idx_users_guid ON [Users](guid);

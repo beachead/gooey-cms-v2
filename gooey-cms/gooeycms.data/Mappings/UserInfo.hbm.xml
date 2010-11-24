@@ -16,6 +16,7 @@
     <property column="city" name="City" type="String" />
     <property column="state" name="State" type="String" />
     <property column="zipcode" name="Zipcode" type="String" />
+    <property column="logo" name="Logo" type="String" />  
   </class>
 
   <sql-query name="UserInfoBySite">

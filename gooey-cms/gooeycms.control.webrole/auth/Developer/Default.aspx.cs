@@ -71,17 +71,13 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             if ((item.ItemType == ListItemType.Item) || (item.ItemType == ListItemType.AlternatingItem))
             {
                 Package package = (Package)item.DataItem;
-                CmsSubscription subscription = SubscriptionManager.GetSubscription(package.OwnerSubscriptionId);
-                if (subscription == null)
-                    throw new ArgumentException("Could not find the owner's subscription for this package. Subscription ID: " + package.OwnerSubscriptionId);
-
 
                 Repeater thumbnails = (Repeater)item.FindControl("ThumbnailImages");
                 Repeater features = (Repeater)item.FindControl("FeatureList");
                 Label approvalStatus = (Label)item.FindControl("LblApprovalStatus");
                 Image logo = (Image)item.FindControl("Logo");
                 if (logo != null)
-                    logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
+                    logo.ImageUrl = Logos.GetImageSrc(LoggedInUser.Wrapper.UserInfo.Logo);
 
                 IList<Gooeycms.Business.Store.SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
                 thumbnails.DataSource = thumbnailsrc;

@@ -10,6 +10,7 @@ using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control.auth.global_admin.Developer
 {
@@ -70,8 +71,13 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Developer
                 Label approvalStatus = (Label)item.FindControl("LblApprovalStatus");
                 Image logo = (Image)item.FindControl("Logo");
                 if (logo != null)
-                    logo.ImageUrl = Logos.GetImageSrc(subscription.LogoName);
-                
+                {
+                    CmsSubscription ownerSubscription = SubscriptionManager.GetSubscription(package.OwnerSubscriptionId);
+                    MembershipUserWrapper wrapper = MembershipUtil.FindByUserGuid(ownerSubscription.PrimaryUserGuid);
+                    if (wrapper != null)
+                        logo.ImageUrl = Logos.GetImageSrc(wrapper.UserInfo.Logo);
+                }
+
                 String demourl = "http://" + subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
                 HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
                 demolink.NavigateUrl = demourl;

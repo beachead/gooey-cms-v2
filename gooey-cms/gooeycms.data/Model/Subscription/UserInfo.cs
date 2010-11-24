@@ -20,5 +20,6 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual String City { get; set; }
         public virtual String State { get; set; }
         public virtual String Zipcode { get; set; }
+        public virtual String Logo { get; set; }
     }
 }

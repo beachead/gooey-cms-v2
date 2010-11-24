@@ -31,16 +31,16 @@ namespace Gooeycms.Business.Util
             return result;
         }
 
-        public static void SaveLogoFile(CmsSubscription subscription, String logoname, byte [] data) 
+        public static void SaveLogoFile(UserInfo user, String logoname, byte [] data) 
         {
             if (logoname.IsEmpty())
                 logoname = System.Guid.NewGuid().ToString();
 
-            subscription.LogoName = logoname;
-            CmsSubscriptionDao dao = new CmsSubscriptionDao();
+            user.Logo = logoname;
+            UserInfoDao dao = new UserInfoDao();
             using (Transaction tx = new Transaction())
             {
-                dao.Save<CmsSubscription>(subscription);
+                dao.Save<UserInfo>(user);
                 tx.Commit();
             }
 
