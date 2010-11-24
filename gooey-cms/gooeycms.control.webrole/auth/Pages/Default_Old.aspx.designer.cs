@@ -10,7 +10,7 @@
 namespace Gooeycms.Webrole.Control.auth.Pages {
     
     
-    public partial class Default {
+    public partial class DefaultOld {
         
         /// <summary>
         /// Subnav control.
@@ -22,57 +22,51 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
         
         /// <summary>
-        /// RadScriptManager1 control.
+        /// Status control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadScriptManager RadScriptManager1;
+        protected global::System.Web.UI.WebControls.Label Status;
         
         /// <summary>
-        /// UpdatePanel control.
+        /// Filter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxPanel UpdatePanel;
+        protected global::Anthem.HiddenField Filter;
         
         /// <summary>
-        /// PageTreeView control.
+        /// PageListing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTreeView PageTreeView;
+        protected global::Anthem.GridView PageListing;
         
         /// <summary>
-        /// DirectoryContextMenu control.
+        /// PageListDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTreeViewContextMenu DirectoryContextMenu;
+        protected global::System.Web.UI.WebControls.ObjectDataSource PageListDataSource;
         
         /// <summary>
-        /// PageContextMenu control.
+        /// Master property.
         /// </summary>
         /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// Auto-generated property.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTreeViewContextMenu PageContextMenu;
-        
-        /// <summary>
-        /// Singleton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadWindowManager Singleton;
+        public new Gooeycms.Webrole.Control.Secure Master {
+            get {
+                return ((Gooeycms.Webrole.Control.Secure)(base.Master));
+            }
+        }
     }
 }

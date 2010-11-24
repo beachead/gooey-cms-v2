@@ -10,114 +10,87 @@
 namespace Gooeycms.Webrole.Control.auth.Pages {
     
     
-    public partial class Default2 {
+    public partial class Metatags {
         
         /// <summary>
-        /// Subnav control.
+        /// Status control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        protected global::System.Web.UI.WebControls.Label Status;
         
         /// <summary>
-        /// RadScriptManager1 control.
+        /// PageTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadScriptManager RadScriptManager1;
+        protected global::System.Web.UI.WebControls.TextBox PageTitle;
         
         /// <summary>
-        /// RadSplitter1 control.
+        /// PageTitleRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadSplitter RadSplitter1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PageTitleRequired;
         
         /// <summary>
-        /// LeftPane control.
+        /// PageDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadPane LeftPane;
+        protected global::System.Web.UI.WebControls.TextBox PageDescription;
         
         /// <summary>
-        /// SlidingZone1 control.
+        /// PageDescriptionRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadSlidingZone SlidingZone1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PageDescriptionRequired;
         
         /// <summary>
-        /// PageListingPane control.
+        /// PageKeywords control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadSlidingPane PageListingPane;
+        protected global::System.Web.UI.WebControls.TextBox PageKeywords;
         
         /// <summary>
-        /// UpdatePanel control.
+        /// PageKeywordsRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxPanel UpdatePanel;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PageKeywordsRequired;
         
         /// <summary>
-        /// PageTreeView control.
+        /// BodyLoadOptions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTreeView PageTreeView;
+        protected global::System.Web.UI.WebControls.TextBox BodyLoadOptions;
         
         /// <summary>
-        /// DirectoryContextMenu control.
+        /// BtnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTreeViewContextMenu DirectoryContextMenu;
-        
-        /// <summary>
-        /// PageContextMenu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadTreeViewContextMenu PageContextMenu;
-        
-        /// <summary>
-        /// RadSplitbar1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadSplitBar RadSplitbar1;
-        
-        /// <summary>
-        /// MainPane control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadPane MainPane;
+        protected global::System.Web.UI.WebControls.Button BtnSave;
     }
 }

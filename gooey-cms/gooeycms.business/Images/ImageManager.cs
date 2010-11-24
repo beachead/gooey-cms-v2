@@ -14,7 +14,7 @@ namespace Gooeycms.Business.Images
 {
     public class ImageManager
     {
-        public static List<String> ValidImageExtensions = new List<String>() { "png", "gif", "jpg", "jpeg" };
+        public static List<String> ValidImageExtensions = new List<String>() { "png", "gif", "jpg", "jpeg", "swf" };
         public static Boolean IsValidImageType(String imagename)
         {
             Boolean result = false;
@@ -70,16 +70,18 @@ namespace Gooeycms.Business.Images
             }
 
             //Generate thumbnails
+            /*
             IList<StorageFile> results = new List<StorageFile>(images);
             foreach(StorageFile file in images) {
                 if ((file.Filename.Length > 0) && (file.Data.Length > 0))
                     GenerateThumbnail(file, results);
             }
             images = null;
+            */
 
             IStorageClient client = StorageHelper.GetStorageClient();
             String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
-            foreach (StorageFile file in results)
+            foreach (StorageFile file in images)
             {
                 if ((file.Filename.Length > 0) && (file.Data.Length > 0))
                 {

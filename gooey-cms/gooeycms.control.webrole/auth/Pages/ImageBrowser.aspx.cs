@@ -18,21 +18,8 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         private void LoadExistingImages()
         {
             IList<StorageFile> images = ImageManager.Instance.GetAllImagePaths(StorageClientConst.RootFolder);
-            if (images.Count < 50)
-            {
-                this.AvailableImages.DataSource = images;
-                this.AvailableImages.DataBind();
-                this.AvailableImages.Visible = true;
-                this.AvailableImageList.Visible = false;
-            }
-            else
-            {
-                this.AvailableImageList.DataSource = images;
-                this.AvailableImageList.DataBind();
-
-                this.AvailableImages.Visible = false;
-                this.AvailableImageList.Visible = true;
-            }
+            this.AvailableImageList.DataSource = images;
+            this.AvailableImageList.DataBind();
         }
 
         public void BtnUpload_Click(Object sender, EventArgs e)

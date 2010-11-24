@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gooey CMS Page Help Manager" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Help.Default" %>
+﻿<%@ Page Title="Gooey CMS Page Help Manager" Language="C#" MasterPageFile="~/SecureGlobalAdmin.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Help.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">

@@ -21,7 +21,6 @@
     <asp:View ID="pages" runat="server">
         <ul>
             <li><asp:HyperLink ID="pages_home" NavigateUrl="~/auth/Pages/Default.aspx" Text="Manage Pages" runat="server" /></li>
-            <li><asp:HyperLink ID="pages_new" NavigateUrl="~/auth/Pages/Edit.aspx" Text="Add New Page" runat="server" /></li>
             <li><asp:HyperLink ID="pages_promotion" NavigateUrl="~/auth/Promotion/Default.aspx" Text="Promotion" runat="server" /></li>
             <li class="last"><asp:HyperLink ID="pages_manageredirects" NavigateUrl="~/auth/Pages/Redirects.aspx" Text="Manage Redirects" runat="server" /></li>
         </ul>

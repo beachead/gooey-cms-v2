@@ -1,96 +1,181 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Pages.Default" %>
-<%@ MasterType VirtualPath="~/Secure.Master" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
     <gooey:Subnav ID="Subnav" runat="server" NavSection="pages" NavItem="" />
 </asp:Content>
 
-<asp:Content ID="ContentLocalJs" ContentPlaceHolderID="localJS" runat="server">
+<asp:Content ID="localCSS" ContentPlaceHolderID="localCSS" runat="server">
+<style type="text/css">
+.rtDropAbove, 
+.rtDropBelow {
+    border-width: 3px !important;
+}
+</style>
 </asp:Content>
 
-<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <h1>Manage Pages</h1>
-    <p>Pages on your site can be added, edited and managed from this area. Use the below filter to quickly find your existing pages.</p>
+<asp:Content ID="ContentLocalJs" ContentPlaceHolderID="localJS" runat="server">
+<script type="text/javascript" language="javascript">
+    //<!--
+    function onClientContextMenuShowing(sender, args) {
+        var treeNode = args.get_node();
+        treeNode.set_selected(true);
+        //enable/disable menu items
+        setMenuItemsState(args.get_menu(), treeNode);
+    }
 
-    <a href="./Edit.aspx">Add New Page</a><br /><br />
-    Filter: <input id="filter_searchbox" type="text" value="*" onkeypress="return performFilter(this);" title="Use * for wildcard character"/>&nbsp;
-    <a href="#" onclick="filter_clear(); return false;">clear</a>&nbsp;
-    <a href="#" onclick="filter_search('*'); return false;">all</a>
- 
-    <asp:Label ID="Status" runat="server" /><br />
-    <anthem:HiddenField ID="Filter" runat="server" />        
-    <span id="refreshing"><br /></span>
-    <anthem:GridView ID="PageListing" AutoUpdateAfterCallBack="True" 
-            DataSourceID="PageListDataSource" AutoGenerateColumns="False" PageSize="25" 
-            ForeColor="#333333" GridLines="None" runat="server" 
-            UpdateAfterCallBack="True" CssClass="data">
-        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-        <EditRowStyle BackColor="#999999" />
-        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-        <Columns>
-            <asp:TemplateField HeaderText="Pages">
-                <ItemTemplate>
-                    <asp:Label ID="Path" Text='<%# Eval("Page.Url") %>' runat="server" />
-                </ItemTemplate>
-                <HeaderStyle HorizontalAlign="Left" />
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Actions">
-                <ItemTemplate>
-                    <a href="./Edit.aspx?a=edit&pid=<%# Server.UrlEncode(Eval("Page.Url").ToString()) %>">Edit</a>
-                </ItemTemplate>
-                <HeaderStyle HorizontalAlign="Left" />
-            </asp:TemplateField>        
-        </Columns>
-        <EmptyDataTemplate>
-            No pages found matching search criteria.<br />
-            <a href="./Edit.aspx">Create New Page</a>
-        </EmptyDataTemplate>
-        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-    </anthem:GridView>
-    <asp:ObjectDataSource ID="PageListDataSource" runat="server" 
-        SelectMethod="GetFilteredPages" 
-        TypeName="Gooeycms.Business.Adapters.PageAdapter">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="Filter" DefaultValue="*" Name="filter" 
-                PropertyName="Value" Type="String" />
-        </SelectParameters>
-    </asp:ObjectDataSource>
-    <script language="javascript" type="text/javascript">
-        function DoLoadData() {
-            Anthem_InvokePageMethod('LoadPageData', [document.getElementById('<%=Filter.ClientID %>').value],
-                function (result) {
-                    var lbl = document.getElementById("refreshing");
-                    lbl.innerHTML = "<br />";
+    //this method disables the appropriate context menu items
+    function setMenuItemsState(menu, treeNode) {
+        if (treeNode.get_value() == '/') {
+            var item = menu.findItemByValue('DeleteDirectory');
+            item.set_enabled(false);
+        }
+    }
+
+
+    function onClientContextMenuItemClicking(sender, args) {
+        var menuItem = args.get_menuItem();
+        var treeNode = args.get_node();
+        menuItem.get_menu().hide();
+
+        switch (menuItem.get_value()) {
+            case "NewPage":
+                if (treeNode.get_text() == '--New Folder--') {
+                    alert('You must rename the directory from its default value before creating sub-pages');
+                    treeNode.startEdit();
+                    args.set_cancel(true);
                 }
-            );
+                break;
+            case "Edit":
+                openEditWindow(treeNode.get_value());
+                break;
+            case "ManageCss":
+                var wnd = window.radopen("Stylesheet.aspx?a=edit&pid=" + treeNode.get_value(), null);
+                var width = 925;
+                wnd.set_title("CSS: " + treeNode.get_value());
+                wnd.set_width(width);
+                wnd.moveTo(10, 10);
+                break;
+            case "ManageJavascript":
+                var wnd = window.radopen("Javascript.aspx?a=edit&pid=" + treeNode.get_value(), null);
+                var width = 925;
+                wnd.set_title("Javascript: " + treeNode.get_value());
+                wnd.set_width(width);
+                wnd.moveTo(10, 10);
+                break;
+            case "EditMeta":
+                var wnd = window.radopen("Metatags.aspx?a=edit&pid=" + treeNode.get_value(), null);
+                var width = 700;
+                var height = 400;
+                wnd.set_title("Meta Tags: " + treeNode.get_value());
+                wnd.set_width(width);
+                wnd.set_height(height);
+                wnd.moveTo(10, 10);
+                break;
+            case "Rename":
+                var result = confirm('Warning: Renaming this page will break any links, redirects, or registrations you have that reference this page.\n\nWould you like to continue?');
+                if (result)
+                    treeNode.startEdit();
+                else
+                    args.set_cancel(true);
+                break;
+            case "NewFolder":
+                break;
+            case "DeleteDirectory":
+                if (treeNode.get_value() != '/') {
+                    var result = confirm("Are you sure you want to delete " + treeNode.get_text() + " and all subfolders and pages?\n\nWARNING: This action can not be undone!");
+                    if (result) {
+                        result = confirm("Please re-confirm that you would like to delete " + treeNode.get_text() + " and all subfolders and pages?\n\nWARNING: This action can not be undone!");
+                        args.set_cancel(!result);
+                    }
+                } else {
+                    alert('You can not delete the root folder');
+                    args.set_cancel(true);
+                }
+                break;
+            case "DeletePage":
+                var result = confirm("Are you sure you want to delete " + treeNode.get_text() + "?\n\nWARNING: This action can not be undone!");
+                args.set_cancel(!result);
+                break;
         }
+    }
 
-        function filter_clear() {
-            document.getElementById('filter_searchbox').value = '';
+    function onClientDoubleClick(sender, args) {
+        var node = args.get_node();
+        var category = node.get_category();
+        switch (category) {
+            case "page":
+                openEditWindow(node.get_value());
+                break;
         }
+    }
 
-        function filter_search(val) {
-            var obj = document.getElementById('filter_searchbox');
-            obj.value = val;
-            performFilter(obj);
-        }
+    function onClientNodeDropping(sender, args) {
+        var destination = args.get_destNode();
+        var source = args.get_sourceNode();
+    }
 
-        function keypressHandler(obj) {
-            if (window.mytimeout) window.clearTimeout(window.mytimeout);
-            var lbl = document.getElementById("refreshing");
-            lbl.innerHTML = "Refreshing...";
-            document.getElementById('<%=Filter.ClientID %>').value = obj.value;
-            DoLoadData();
-        }
+    function openEditWindow(page) {
+        var wnd = window.radopen("Editor.aspx?a=edit&pid=" + page, null);
+        var width = window.document.body.clientWidth - 50;
+        wnd.set_title(page);
+        wnd.set_width(width);
+        wnd.moveTo(10, 10);
+    
+    }
 
-        function performFilter(obj) {
-            if (window.mytimeout) window.clearTimeout(window.mytimeout);
-            window.mytimeout = window.setTimeout(function () { keypressHandler(obj) }, 500);
-            return true;
-        }
+    //-->
     </script>
+</asp:Content>
+
+<asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
+    <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+    </telerik:RadScriptManager>
+
+
+    <telerik:RadAjaxPanel ID="UpdatePanel" runat="server">
+    <a href="#" onclick="alert('I haven't figured out how to get this to work yet...still working on it'); return false;">Add New Page</a>
+    <br /><br />
+    <telerik:RadTreeView ID="PageTreeView" Skin="Default" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="true" 
+                            OnNodeDataBound="PageTreeview_NodeDataBound"  
+                            OnClientContextMenuItemClicking="onClientContextMenuItemClicking"
+                            OnClientDoubleClick="onClientDoubleClick"
+                            OnClientNodeDropping="onClientNodeDropping"
+                            OnContextMenuItemClick="PageTreeView_ContextMenuItemClick"
+                            OnClientContextMenuShowing="onClientContextMenuShowing"
+                            OnNodeEdit="PageTreeView_NodeEdit"
+                            OnNodeDrop="PageTreeView_NodeDrop"
+                            runat="server">
+        <ContextMenus>
+            <telerik:RadTreeViewContextMenu ID="DirectoryContextMenu" runat="server">
+                <Items>
+                    <telerik:RadMenuItem Value="NewPage" Text="New Page" ImageUrl="~/Images/Vista/notes.gif"></telerik:RadMenuItem>
+                    <telerik:RadMenuItem Value="NewFolder" Text="New Folder" ImageUrl="~/Images/Vista/12.gif"></telerik:RadMenuItem>
+                    <telerik:RadMenuItem IsSeparator="true" />
+                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
+                    <telerik:RadMenuItem IsSeparator="true" />
+                    <telerik:RadMenuItem Value="DeleteDirectory" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
+                </Items>
+            </telerik:RadTreeViewContextMenu>
+
+            <telerik:RadTreeViewContextMenu ID="PageContextMenu" runat="server">
+                <Items>
+                    <telerik:RadMenuItem Value="Edit" Text="Edit ..." ImageUrl="~/Images/Vista/9.gif"></telerik:RadMenuItem>
+                    <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
+                    <telerik:RadMenuItem IsSeparator="true" />
+                    <telerik:RadMenuItem Value="ManageCss" Text="Manage CSS" ImageUrl="~/Images/Vista/9.gif" ></telerik:RadMenuItem>
+                    <telerik:RadMenuItem Value="ManageJavascript" Text="Manage Javascript" ImageUrl="~/Images/Vista/9.gif" ></telerik:RadMenuItem>
+                    <telerik:RadMenuItem IsSeparator="true" />
+                    <telerik:RadMenuItem Value="EditMeta" Text="Edit Header Tags" ImageUrl="~/Images/Vista/9.gif" ></telerik:RadMenuItem>
+                    <telerik:RadMenuItem IsSeparator="true" />
+                    <telerik:RadMenuItem Value="DeletePage" Text="Delete" ImageUrl="~/Images/Vista/7.gif" ></telerik:RadMenuItem>
+                </Items>
+            </telerik:RadTreeViewContextMenu>
+        </ContextMenus>
+    </telerik:RadTreeView>
+    </telerik:RadAjaxPanel>
+
+<telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="650" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
+</telerik:RadWindowManager>
 </asp:Content>

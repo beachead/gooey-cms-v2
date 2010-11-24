@@ -118,10 +118,12 @@
     <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\Package-Mgmt\apply.aspx" />
-    <Content Include="auth\Pages\Default2.aspx" />
+    <Content Include="auth\Pages\Default.aspx" />
     <Content Include="auth\Pages\EditInline.aspx" />
+    <Content Include="auth\Pages\Editor.aspx" />
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
+    <Content Include="auth\Pages\Metatags.aspx" />
     <Content Include="auth\Pages\Stylesheet.aspx" />
     <Content Include="auth\Promotion\Default.aspx" />
     <Content Include="auth\Themes\Footer.aspx" />
@@ -357,19 +359,19 @@
     <Compile Include="auth\Package-Mgmt\apply.aspx.designer.cs">
       <DependentUpon>apply.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auth\Pages\Default_Old.aspx.cs">
+      <DependentUpon>Default_Old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Default_Old.aspx.designer.cs">
+      <DependentUpon>Default_Old.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\Pages\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\Pages\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="auth\Pages\Default2.aspx.cs">
-      <DependentUpon>Default2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="auth\Pages\Default2.aspx.designer.cs">
-      <DependentUpon>Default2.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Pages\Edit.aspx.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
@@ -385,6 +387,13 @@
     <Compile Include="auth\Pages\EditInline.aspx.designer.cs">
       <DependentUpon>EditInline.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auth\Pages\Editor.aspx.cs">
+      <DependentUpon>Editor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Editor.aspx.designer.cs">
+      <DependentUpon>Editor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\Pages\ImageBrowser.aspx.cs">
       <DependentUpon>ImageBrowser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -398,6 +407,13 @@
     </Compile>
     <Compile Include="auth\Pages\Javascript.aspx.designer.cs">
       <DependentUpon>Javascript.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Pages\Metatags.aspx.cs">
+      <DependentUpon>Metatags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Metatags.aspx.designer.cs">
+      <DependentUpon>Metatags.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Pages\Stylesheet.aspx.cs">
       <DependentUpon>Stylesheet.aspx</DependentUpon>
@@ -528,6 +544,13 @@
     <Compile Include="Controls\Subnav.ascx.designer.cs">
       <DependentUpon>Subnav.ascx</DependentUpon>
     </Compile>
+    <Compile Include="PopupWindow.Master.cs">
+      <DependentUpon>PopupWindow.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupWindow.Master.designer.cs">
+      <DependentUpon>PopupWindow.Master</DependentUpon>
+    </Compile>
     <Compile Include="SecureGlobalAdmin.Master.cs">
       <DependentUpon>SecureGlobalAdmin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -622,7 +645,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="auth\Pages\Default.aspx" />
+    <Content Include="auth\Pages\Default_Old.aspx" />
     <Content Include="auth\Pages\Edit.aspx" />
     <Content Include="auth\Themes\Templates.aspx" />
     <Content Include="Controls\ContentEditor\contenteditor.css" />
@@ -702,6 +725,7 @@
     <Content Include="auth\Promotion\Web.config" />
     <Content Include="auth\Themes\Web.config" />
     <Content Include="SecureGlobalAdmin.Master" />
+    <Content Include="PopupWindow.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

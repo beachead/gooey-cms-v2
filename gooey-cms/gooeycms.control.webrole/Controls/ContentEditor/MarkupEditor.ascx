@@ -54,19 +54,10 @@
         Please wait while your preview is generated.
     </div>
     
-    <div dojoType="dijit.Dialog" id="fulleditor" style="width:90%;height:90%;" closeable="true" draggable="true" title="Pop-up Markup Editor">
-        <div style="padding-bottom:7px;">
-        <button onclick="savePopup();return false;">Save &amp; Close</button>&nbsp;
-        <input type="checkbox" id="chkwrap" name="chkwrap" onclick="popup_wrap();" /> wrap text 
-        </div>
-        <textarea id="popupeditor" style="background: none repeat scroll 0% 0% rgb(248, 248, 248); border: 1px solid rgb(2, 2, 2);" wrap="off"></textarea>
-    </div>
-
     <% if (ShowPreviewWindow) { %>
-    <div dojoType="dijit.Dialog" id="preview-panel" style="width:90%;height:90%;border:0px;"  title="Page Preview" closeable="true">
+    <div dojoType="dijit.Dialog" id="preview-panel" style="width:90%;height:90%;border:0px;overflow:auto;"  title="Page Preview" closeable="true">
             <iframe id="preview-frame" src=""></iframe>
     </div>
-    <div dojoType="dijit.TitlePane" title="Markup Editor" style="position: relative;">
     <% } %>
         <asp:Panel ID="ToolbarPanel" runat="server">
             <ul id="FormatUl">
@@ -81,10 +72,8 @@
                 <li><a href="#" onclick="javascript:window.open('ImageBrowser.aspx?<%=ImageBrowserQuerystring %>','','width=700,height=500,left=400,top=400,titlebar=no,toolbar=no,resizable=no,modal=yes,centerscreen=yes;scroll=no;status=no,menubar=no,location=no'); return false;" title="Image Browser" class="formatlink" id="ImageLink"></a></li>
                 <li><a href="#" onclick="javascript:showFormEditor(); return false;" title="Form Editor" class="formatlink" id="FormLink"></a></li>             
                 <% if (ShowPreviewWindow) { %><li><anthem:LinkButton ID="PreviewLink" class="PreviewLink" runat="server" OnClientClick="keypressHandler(null); return false;" ToolTip="Page Preview" CssClass="formatlink PreviewLink" /></li><% } %>
-                <li><a href="#" onclick="javascript:showEditor(); return false;" title="Popup Editor" class="formatlink" id="PopupEditor"></a></li>
                 <li><a href="#" onclick="javascript:showHelpPanel(); return false;" title="Show Markup Help" id="HelpLink">Help</a></li>
             </ul>
-
         </asp:Panel>
         <!-- START: helpPanel -->
         <div id="helpPanel" style="display: none;">
@@ -296,12 +285,9 @@
             <!-- END: helpContents -->
         </div>
         <!-- END: helpPanel -->
-        <div> 
+        <div style="max-height:430px; overflow:auto;"> 
             <uc:ResizableTextBox ID="PageMarkupText" runat="server" />
         </div>
-    <% if (ShowPreviewWindow) { %>
-    </div>
-    <% } %>
 
 <script language="javascript" type="text/javascript">
     var parent = null;
@@ -340,51 +326,6 @@
         __Insert(text,'<%=PageMarkupText.TextboxId %>');
     }
 
-    function showFormEditor() {
-        var inline = dojo.byId('<%=PageMarkupText.TextboxId  %>');
-        var container = dijit.byId('formeditor-container');
-        var editor = dojo.byId('formeditor');
-        if (container) {
-            if (editor) {
-                editor.style.width = 630 + "px";
-                editor.style.height = 350  + "px";
-            }
-            if (typeof(onSavedFormOpen) == 'function') {
-                onSavedFormOpen();
-            }
-
-            container.show();
-        } else {
-            alert('The form editor is not available from within this page context.');
-        }
-    }
-
-    function showEditor() {
-        var inline = dojo.byId('<%=PageMarkupText.TextboxId %>');
-        var popup = dojo.byId('popupeditor');
-
-        var container = dijit.byId('fulleditor');
-
-        popup.style.width = (screen.width - 200) + "px";
-        popup.style.height = (screen.height - 360) + "px";
-
-        popup.value = inline.value;
-
-        container.show();
-    }
-
-    function savePopup() {
-        var inline = dojo.byId('<%=PageMarkupText.TextboxId %>');
-        var popup = dojo.byId('popupeditor');
-
-        inline.value = popup.value;
-
-        dijit.byId('fulleditor').hide();
-        
-        var form = dojo.byId("aspnetform");
-        if (typeof(onPopupSave) == 'function')
-            onPopupSave();
-    }
 
     function onimage_selected(imageName) {
     <% if (UseStandardImageTags) { %>
