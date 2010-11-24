@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business.Util;
 using Gooeycms.Constants;
+using Gooeycms.Data.Model.Subscription;
+using System.Web.Security;
+using Gooeycms.Business.Subscription;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -29,8 +32,32 @@ namespace Gooeycms.Webrole.Control
 
             if (!Page.IsPostBack)
             {
+                LoadWebsites();
                 SetMenuDisplay();
             }
+        }
+
+        private void LoadWebsites()
+        {
+            MembershipUserWrapper wrapper = LoggedInUser.Wrapper;
+            IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
+            foreach (CmsSubscription subscription in subscriptions)
+            {
+                ListItem item = new ListItem(subscription.DefaultDisplayName,subscription.Guid);
+                if (subscription.Guid.Equals(CurrentSite.Guid.Value))
+                    item.Attributes["style"] = "font-weight:bold;";
+
+                this.LstWebsites.Items.Add(item);
+            }
+        }
+
+        protected void LstWebsites_Click(Object sender, BulletedListEventArgs e)
+        {
+            ListItem item = this.LstWebsites.Items[e.Index];
+            SiteHelper.SetActiveSiteCookie(item.Value);
+            SiteHelper.Configure(Data.Guid.New(item.Value));
+
+            Response.Redirect("~/auth/Default.aspx");
         }
 
         protected void SetMenuDisplay()

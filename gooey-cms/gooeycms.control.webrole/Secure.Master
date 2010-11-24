@@ -71,11 +71,7 @@
                                 <% if (!LoggedInUser.IsDemoAccount) { %>
                                 <li><asp:HyperLink ID="dashboardLink" NavigateUrl="/auth/dashboard.aspx" runat="server">Dashboard</asp:HyperLink>
                                     <div class="menu">
-                                        <ul>
-                                            <li><a href="#">Website 1</a></li>
-                                            <li><a href="#">Website 2</a></li>
-                                            <li><a href="#">Website 3</a></li>
-                                        </ul>
+                                        <asp:BulletedList ID="LstWebsites" BulletStyle="NotSet" DisplayMode="LinkButton" OnClick="LstWebsites_Click" runat="server" />
                                     </div>
                                 </li>
                                 <li><asp:HyperLink ID="accountLink" NavigateUrl="#" runat="server">Account</asp:HyperLink>

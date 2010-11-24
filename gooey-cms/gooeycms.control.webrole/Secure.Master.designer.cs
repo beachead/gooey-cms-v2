@@ -220,6 +220,15 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.WebControls.HyperLink dashboardLink;
         
         /// <summary>
+        /// LstWebsites control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList LstWebsites;
+        
+        /// <summary>
         /// accountLink control.
         /// </summary>
         /// <remarks>
