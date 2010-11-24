@@ -36,5 +36,11 @@ namespace Gooeycms.Webrole.Control.Controls
                 A.NavigateUrl = A.NavigateUrl + "?" + Request.QueryString.ToString();
             }
         }
+
+        protected void AppendGUID(object sender, EventArgs e)
+        {
+            HyperLink A = (HyperLink)sender;
+            A.NavigateUrl = A.NavigateUrl + "?g=" + System.Guid.NewGuid().ToString();
+        }
     }
 }

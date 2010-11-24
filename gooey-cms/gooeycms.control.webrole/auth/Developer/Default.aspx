@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Default" %>
-
+<%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
 <asp:Content ID="localJS" ContentPlaceHolderID="localJS" runat="server">
 	<script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
@@ -9,12 +9,10 @@
 <asp:Content id="localCSS" ContentPlaceHolderID="localCSS" runat="server">
     <link rel="stylesheet" type="text/css" href="../../css/store.css" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Subnavigation" runat="server">
-    <ul>
-        <li class="on">DEVELOPERS HOME</a></li>
-        <li><a href="./site.aspx?g=<%=System.Guid.NewGuid().ToString() %>">PACKAGE A NEW SITE</a></li>
-        <li class="last"><a href="Settings.aspx">DEVELOPER SETTINGS</a></li> 
-    </ul>    
+
+
+<asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
+    <gooey:Subnav ID="Subnav" runat="server" navSection="developer" navItem="home" />
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
