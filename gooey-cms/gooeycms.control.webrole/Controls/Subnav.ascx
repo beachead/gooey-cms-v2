@@ -13,7 +13,7 @@
         <ul>
             <li><asp:HyperLink ID="dashboard_home" navigateUrl="~/auth/dashboard.aspx" Text="Dashboard" runat="server" /></li>
             <li><asp:HyperLink ID="dashboard_new" NavigateUrl="http://store.gooeycms.net/signup/" Text="Register New Site" runat="server"/></li>
-            <li><asp:HyperLink ID="dashboard_purchase" NavigateUrl="http://store.gooeycms.net/" Text="Purchase Sites or Themes" runat="server" /></li> 
+            <li class="last"><asp:HyperLink ID="dashboard_purchase" NavigateUrl="http://store.gooeycms.net/" Text="Purchase Sites or Themes" runat="server" /></li> 
         </ul>    
     </asp:View>
 
@@ -22,7 +22,7 @@
         <ul>
             <li><asp:HyperLink ID="developer_home" NavigateUrl="~/auth/developer/default.aspx" Text="Developers Home" runat="server" /></li>
             <li><asp:HyperLink ID="developer_new" NavigateUrl="~/auth/developer/site.aspx" Text="Package a New Site" runat="server" OnPreRender="AppendGUID" /></li>
-            <li><asp:HyperLink ID="developer_settings" NavigateUrl="~/auth/developer/settings.aspx" Text="Developer Settings" runat="server" /></li>
+            <li class="last"><asp:HyperLink ID="developer_settings" NavigateUrl="~/auth/developer/settings.aspx" Text="Developer Settings" runat="server" /></li>
         </ul>    
     </asp:View>    
 
@@ -48,15 +48,16 @@
 
     <asp:View ID="users" runat="server">
         <ul>
-            <li><asp:HyperLink ID="users_default" NavigateUrl="~/auth/Users/Default.aspx" Text="Manage Users" runat="server" /></li>
+            <li class="last"><asp:HyperLink ID="users_default" NavigateUrl="~/auth/Users/Default.aspx" Text="Manage Users" runat="server" /></li>
         </ul>
     </asp:View>
 
+    <!-- Manage  Promotion -->
     <asp:View ID="promotion" runat="server">
         <ul>
             <li><asp:HyperLink ID="promotion_promotion" NavigateUrl="~/auth/Promotion/Default.aspx" Text="Promotion" runat="server" /></li>
             <li><asp:HyperLink ID="promotion_managepages" NavigateUrl="~/auth/Pages/Default.aspx" Text="Manage Pages" runat="server" /></li>
-            <li><asp:HyperLink ID="promotion_managecontent" NavigateUrl="~/auth/Content/Default.aspx" Text="Manage Content" runat="server" /></li>
+            <li class="last"><asp:HyperLink ID="promotion_managecontent" NavigateUrl="~/auth/Content/Default.aspx" Text="Manage Content" runat="server" /></li>
         </ul>
     </asp:View>
 
@@ -96,7 +97,7 @@
     <asp:View ID="global_admin_developer" runat="server">
         <ul>
             <li><asp:HyperLink ID="global_admin_developer_approval" NavigateUrl="~/auth/global-admin/Developer/Default.aspx" Text="Approve Packages" runat="server" /></li>
-            <li><asp:HyperLink ID="global_admin_developer_categories" NavigateUrl="~/auth/global-admin/Developer/Categories.aspx" Text="Manage Categories" runat="server" /></li>
+            <li class="last"><asp:HyperLink ID="global_admin_developer_categories" NavigateUrl="~/auth/global-admin/Developer/Categories.aspx" Text="Manage Categories" runat="server" /></li>
         </ul>
     </asp:View>
 
