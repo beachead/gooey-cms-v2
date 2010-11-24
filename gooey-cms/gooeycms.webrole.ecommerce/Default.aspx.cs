@@ -10,6 +10,7 @@ using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -61,7 +62,9 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 HyperLink demolink = (HyperLink)item.FindControl("DemoLink");
                 HyperLink adminLink = (HyperLink)item.FindControl("AdminDemoLink");
 
-                logo.ImageUrl = Logos.GetImageSrc(owner.LogoName);
+                MembershipUserWrapper user = MembershipUtil.FindByUserGuid(owner.PrimaryUserGuid);
+                if (user != null)
+                    logo.ImageUrl = Logos.GetImageSrc(user.UserInfo.Logo);
 
                 IList<SitePackageManager.PackageScreenshot> thumbnailsrc = SitePackageManager.NewInstance.GetScreenshotUrls(package);
                 thumbnails.DataSource = thumbnailsrc;
