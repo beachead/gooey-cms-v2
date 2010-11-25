@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using Gooeycms.Constants;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -38,6 +39,11 @@ namespace Gooeycms.Webrole.Control
                 {
                     Response.Write("Failed to find user: " + username);
                 }
+            }
+            else if ("setupdemo".Equals(action))
+            {
+                if (!Roles.IsUserInRole(MembershipUtil.DemoAccountUsername, SecurityConstants.Roles.SITE_ADMINISTRATOR))
+                    Roles.AddUserToRole(MembershipUtil.DemoAccountUsername, SecurityConstants.Roles.SITE_ADMINISTRATOR);
             }
             else
             {
