@@ -52,7 +52,7 @@ namespace Gooeycms.Business.Storage
             if ((data != null) && (data.Length > 0))
             {
                 CloudBlobContainer container = GetBlobContainer(containerName);
-                bool created = container.CreateIfNotExist();
+                bool created = container.CreateIfNotExist(true);
                 if (created)
                 {
                     BlobContainerPermissions perms = new BlobContainerPermissions();
@@ -294,7 +294,7 @@ namespace Gooeycms.Business.Storage
             CloudBlobContainer copyFromContainer = GetBlobContainer(copyFromContainerName);
             CloudBlobContainer copyToContainer = GetBlobContainer(copyToContainerName);
 
-            Boolean containerCreated = copyToContainer.CreateIfNotExist();
+            Boolean containerCreated = copyToContainer.CreateIfNotExist(true);
             if (containerCreated)
             {
                 BlobContainerPermissions perms = new BlobContainerPermissions();
@@ -429,7 +429,7 @@ namespace Gooeycms.Business.Storage
             CloudBlobContainer sourceBlobContainer = GetBlobContainer(sourceContainer);
             CloudBlobContainer destinationBlobContainer = GetBlobContainer(destinationContainer);
             
-            destinationBlobContainer.CreateIfNotExist();
+            destinationBlobContainer.CreateIfNotExist(true);
 
             IList<StorageFile> files = List(sourceContainer, sourceDirectory);
             foreach (StorageFile file in files)
