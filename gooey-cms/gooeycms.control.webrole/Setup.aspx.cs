@@ -45,6 +45,32 @@ namespace Gooeycms.Webrole.Control
                 if (!Roles.IsUserInRole(MembershipUtil.DemoAccountUsername, SecurityConstants.Roles.SITE_ADMINISTRATOR))
                     Roles.AddUserToRole(MembershipUtil.DemoAccountUsername, SecurityConstants.Roles.SITE_ADMINISTRATOR);
             }
+            else if ("display".Equals(action))
+            {
+                String username = Request.QueryString["user"];
+                String [] roles = Roles.GetRolesForUser(username);
+                foreach (String role in roles)
+                {
+                    Response.Write(role + "<br />");
+                }
+            }
+            else if ("addrole".Equals(action))
+            {
+                String username = Request.QueryString["user"];
+                String role = Request.QueryString["role"];
+                Roles.AddUserToRole(username, role);
+
+                Response.Write("Successfully added " + username + " to role " + role);
+            }
+            else if ("removerole".Equals(action))
+            {
+                String username = Request.QueryString["user"];
+                String role = Request.QueryString["role"];
+                if (Roles.IsUserInRole(role))
+                    Roles.RemoveUserFromRole(username, role);
+
+                Response.Write("Successfully removed " + username + " from role " + role);
+            }
             else
             {
                 //Setup the ASP.NET Membership roles
