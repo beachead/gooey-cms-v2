@@ -188,6 +188,7 @@
     <Compile Include="Store\SitePackage.cs" />
     <Compile Include="Store\SitePackageManager.cs" />
     <Compile Include="Subscription\InviteManager.cs" />
+    <Compile Include="Subscription\SubscriptionAdapter.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Membership\MembershipProfile.cs" />
@@ -251,12 +252,6 @@
     <EmbeddedResource Include="Pages\HtmlTemplate.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
