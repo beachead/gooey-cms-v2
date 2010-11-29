@@ -16,6 +16,7 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual String StagingDomain { get; set; }
         public virtual DateTime Created { get; set; }
         public virtual DateTime Expires { get; set; }
+        public virtual String PaypalProfileId { get; set; }
         public virtual Boolean IsDisabled { get; set; }
         public virtual Boolean IsSalesforceEnabled { get; set; }
         public virtual Boolean IsCampaignEnabled { get; set; }

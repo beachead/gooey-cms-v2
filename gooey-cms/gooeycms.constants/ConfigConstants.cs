@@ -27,12 +27,20 @@ namespace Gooeycms.Constants
         public const String DefaultTemplate = "default-template";
         public const String PaypalPdt = "paypal-pdt";
         public const String PaypalUrl = "paypal-posturl";
+        public const String PaypalUsername = "paypal-username";
+        public const String PaypalPassword = "paypal-password";
+        public const String PaypalSignature = "paypal-signature";
+        public const String PaypalApiVersion = "paypal-apiversion";
+        public const String PaypalReturnUrl = "paypal-returnurl";
+        public const String PaypalCancelUrl = "paypal-cancelurl";
+        public const String PaypalMaxFailedPayments = "paypal-maxfailedpayments";
         public const String InviteEmailTemplate = "invite-email-template";
         public const String ApprovedEmailTemplate = "approved-email-template";
         public const String DefaultHomepage = "default-homepage";
         public const String EmailAddressesSiteAdmin = "emailaddresses-siteadmin";
         public const String SitePackageTos = "sitepackage-tos";
         public const String DefaultFlashCrossDomainFile = "default-flash-css";
+        public const String FreeTrialLength = "default-freetrial-length";
 
         public const String FlashCrossDomainFilename = "cross-domain.xml";
         public const String PaypalSandboxUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr";

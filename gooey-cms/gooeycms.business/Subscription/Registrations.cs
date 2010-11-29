@@ -10,6 +10,8 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Crypto;
 using System.Web.Security;
 using Gooeycms.Business.Membership;
+using Encore.PayPal.Nvp;
+using Gooeycms.Business.Paypal;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -76,7 +78,7 @@ namespace Gooeycms.Business.Subscription
         /// accessible to the cms system and control panel.
         /// </summary>
         /// <param name="registration"></param>
-        public static void ConvertToAccount(Registration registration, String subscriberId)
+        public static void ConvertToAccount(Registration registration)
         {
             MembershipUserWrapper wrapper = MembershipUtil.CreateFromRegistration(registration);
             if (wrapper == null)

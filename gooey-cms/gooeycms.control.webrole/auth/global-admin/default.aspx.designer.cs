@@ -148,6 +148,87 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::Telerik.Web.UI.RadToolTip PaypalPdtTokenTooltip;
         
         /// <summary>
+        /// PaypalApiUsernameImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image PaypalApiUsernameImage;
+        
+        /// <summary>
+        /// PaypalApiUsernameLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink PaypalApiUsernameLink;
+        
+        /// <summary>
+        /// PaypalApiUsernameTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip PaypalApiUsernameTooltip;
+        
+        /// <summary>
+        /// PaypalApiPasswordImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image PaypalApiPasswordImage;
+        
+        /// <summary>
+        /// PaypalApiPasswordLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink PaypalApiPasswordLink;
+        
+        /// <summary>
+        /// PaypalApiPasswordTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip PaypalApiPasswordTooltip;
+        
+        /// <summary>
+        /// PaypalApiSignatureImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image PaypalApiSignatureImage;
+        
+        /// <summary>
+        /// PaypalApiSignatureLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink PaypalApiSignatureLink;
+        
+        /// <summary>
+        /// PaypalApiSignatureTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip PaypalApiSignatureTooltip;
+        
+        /// <summary>
         /// DefaultTemplateImage control.
         /// </summary>
         /// <remarks>

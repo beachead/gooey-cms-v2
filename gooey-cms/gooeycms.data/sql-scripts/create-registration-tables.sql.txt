@@ -56,6 +56,7 @@ CREATE TABLE [Subscriptions] (
 [signup_date] DATETIME DEFAULT(GETDATE()),
 [expires] DATETIME,
 [disabled] BIT DEFAULT(0),
+[paypal_profileid] VARCHAR(128),
 [salesforce_addon] BIT DEFAULT(0),
 [campaign_addon] BIT DEFAULT(0),
 [generic_addon] BIT DEFAULT(0),

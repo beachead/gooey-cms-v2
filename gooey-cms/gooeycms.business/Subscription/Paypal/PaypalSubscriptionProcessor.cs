@@ -145,16 +145,6 @@ namespace Gooeycms.Business.Subscription
 
         protected virtual void ProcessSignup()
         {
-            Registration registration = Registrations.FindExisting(Guid, false);
-            if (registration != null)
-            {
-                Registrations.ConvertToAccount(registration, SubscriberId);
-            }
-            else
-            {
-                Logging.Warn("Could not find a valid registration for guid:" + Guid);
-                throw new SubscriptionSecurityConstraint("Registration does not exist in the database for guid " + Guid);
-            }
         }
     }
 }

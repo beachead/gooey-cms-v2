@@ -24,6 +24,8 @@ namespace Gooeycms.Business.Membership
 
         public static MembershipUserWrapper CreateFromRegistration(Registration registration)
         {
+            Boolean exists = (System.Web.Security.Membership.GetUser(registration.Email) != null);
+
             MembershipUserWrapper wrapper = new MembershipUserWrapper();
             if (String.IsNullOrEmpty(registration.ExistingAccountGuid))
             {
@@ -44,18 +46,25 @@ namespace Gooeycms.Business.Membership
                 info.Created = DateTime.Now;
 
                 UserInfoDao dao = new UserInfoDao();
-                using (Transaction tx = new Transaction())
+                if (!exists)
                 {
-                    dao.SaveObject(info);
-                    tx.Commit();
+                    using (Transaction tx = new Transaction())
+                    {
+                        dao.SaveObject(info);
+                        tx.Commit();
+                    }
+
                 }
 
                 //Create the account in the asp.net membership system
                 String password = Decrypt(registration.EncryptedPassword);
                 try
                 {
-                    user = System.Web.Security.Membership.CreateUser(registration.Email, password, registration.Email);
-                    System.Web.Security.Roles.AddUserToRole(registration.Email, SecurityConstants.Roles.SITE_ADMINISTRATOR);
+                    if (!exists)
+                        user = System.Web.Security.Membership.CreateUser(registration.Email, password, registration.Email);
+
+                    if (!System.Web.Security.Roles.IsUserInRole(registration.Email, SecurityConstants.Roles.SITE_ADMINISTRATOR))
+                        System.Web.Security.Roles.AddUserToRole(registration.Email, SecurityConstants.Roles.SITE_ADMINISTRATOR);
                 }
                 catch (MembershipCreateUserException e)
                 {

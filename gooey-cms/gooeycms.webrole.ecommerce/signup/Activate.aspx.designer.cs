@@ -7,72 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.Webrole.Ecommerce {
+namespace Gooeycms.Webrole.Ecommerce.signup {
     
     
-    public partial class SignupReview {
+    public partial class Activate {
         
         /// <summary>
-        /// Firstname control.
+        /// ActivateViews control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Firstname;
+        protected global::System.Web.UI.WebControls.MultiView ActivateViews;
         
         /// <summary>
-        /// Lastname control.
+        /// SuccessView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Lastname;
+        protected global::System.Web.UI.WebControls.View SuccessView;
         
         /// <summary>
-        /// Email control.
+        /// PaypalProfileId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Email;
+        protected global::System.Web.UI.WebControls.Label PaypalProfileId;
         
         /// <summary>
-        /// Company control.
+        /// FailureView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Company;
+        protected global::System.Web.UI.WebControls.View FailureView;
         
         /// <summary>
-        /// Subdomain control.
+        /// LblErrorReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Subdomain;
-        
-        /// <summary>
-        /// SubscriptionPlan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SubscriptionPlan;
-        
-        /// <summary>
-        /// BtnSubscribe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton BtnSubscribe;
+        protected global::System.Web.UI.WebControls.Label LblErrorReason;
     }
 }

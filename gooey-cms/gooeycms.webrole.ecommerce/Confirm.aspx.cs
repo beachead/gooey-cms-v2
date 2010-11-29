@@ -24,6 +24,14 @@ namespace Gooeycms.Webrole.Ecommerce.store
             if (!LoggedInUser.IsLoggedIn)
                 Response.Redirect("./Purchase.aspx?g=" + Request.QueryString["g"], true);
 
+            String userGuid = LoggedInUser.Wrapper.UserInfo.Guid;
+            String packageGuid = Request.QueryString["g"];
+
+            //Make sure the user hasn't already purchased this package
+            Boolean exists = SitePackageManager.NewInstance.IsPackageValidForUser(userGuid, packageGuid);
+            if (exists)
+                Response.Redirect("http://" + GooeyConfigManager.AdminSiteHost + "/auth/dashboard.aspx?msg=" + Server.UrlEncode("You have previously purchased the chosen site and may apply it from your dashboard."));
+
             if (!Page.IsPostBack)
                 DoDataBind();
         }

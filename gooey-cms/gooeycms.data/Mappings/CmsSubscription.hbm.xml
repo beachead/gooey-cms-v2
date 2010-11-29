@@ -28,6 +28,7 @@
     <property column="staging_domain" name="StagingDomain" type="String" />
     <property column="expires" name="Expires" type="DateTime" />
     <property column="disabled" name="IsDisabled" type="Boolean" />
+    <property column="paypal_profileid" name="PaypalProfileId" type="String" />
     <property column="salesforce_addon" name="IsSalesforceEnabled" type="Boolean" />
     <property column="campaign_addon" name="IsCampaignEnabled" type="Boolean" />
     <property column="generic_addon" name="IsGenericOptionsEnabled" type="Boolean" />

@@ -53,6 +53,33 @@
                 </td>
             </tr>
             <tr>
+                <td>Paypal API Username:</td>
+                <td><asp:Image ID="PaypalApiUsernameImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="PaypalApiUsernameLink" runat="server" />
+                    <telerik:RadToolTip ID="PaypalApiUsernameTooltip" Skin="Default" Width="250" TargetControlID="PaypalApiUsernameLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
+                <td>Paypal API Password:</td>
+                <td><asp:Image ID="PaypalApiPasswordImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="PaypalApiPasswordLink" runat="server" />
+                    <telerik:RadToolTip ID="PaypalApiPasswordTooltip" Skin="Default" Width="250" TargetControlID="PaypalApiPasswordLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
+                <td>Paypal API Signature:</td>
+                <td><asp:Image ID="PaypalApiSignatureImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="PaypalApiSignatureLink" runat="server" />
+                    <telerik:RadToolTip ID="PaypalApiSignatureTooltip" Skin="Default" Width="250" TargetControlID="PaypalApiSignatureLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
                 <td>Default Template:</td>
                 <td><asp:Image ID="DefaultTemplateImage" runat="server" /></td>
                 <td>

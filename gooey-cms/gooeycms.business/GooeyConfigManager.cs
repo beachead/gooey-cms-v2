@@ -36,7 +36,7 @@ namespace Gooeycms.Business
                         throw new ArgumentException("The configuration value for " + key + " has not been specified and is a required field.");
 
                     result = defaultValue;
-                    cache.Add(key, result);
+                    cache[key] = result;
                 }
                 cache[key] = result;
             }
@@ -240,6 +240,36 @@ This is your home page.
             }
         }
 
+        public static String PaypalUsername
+        {
+            get { return GetCachedValue(ConfigConstants.PaypalUsername); }
+        }
+
+        public static String PaypalPassword
+        {
+            get { return GetCachedValue(ConfigConstants.PaypalPassword); }
+        }
+
+        public static String PaypalSignature
+        {
+            get { return GetCachedValue(ConfigConstants.PaypalSignature); }
+        }
+
+        public static String PaypalApiVersion
+        {
+            get { return GetCachedValue(ConfigConstants.PaypalApiVersion, defaultValue: "54.0"); }
+        }
+
+        public static String PaypalReturnUrl
+        {
+            get { return GetCachedValue(ConfigConstants.PaypalReturnUrl, defaultValue: "http://store.gooeycms.net/signup/activate.aspx"); }
+        }
+
+        public static String PaypalCancelUrl
+        {
+            get { return GetCachedValue(ConfigConstants.PaypalCancelUrl, defaultValue: "http://store.gooeycms.net/signup/cancel.aspx"); }
+        }
+    
         public static String PaypalPdtToken
         {
             get
@@ -260,6 +290,14 @@ This is your home page.
             {
                 Persist(ConfigConstants.PaypalUrl, value);
                 cache[ConfigConstants.PaypalUrl] = value;
+            }
+        }
+
+        public static Int32 PaypalMaxFailedPayments
+        {
+            get
+            {
+                return Int32.Parse(GetCachedValue(ConfigConstants.PaypalMaxFailedPayments, defaultValue: "2"));
             }
         }
 
@@ -441,6 +479,14 @@ This is your home page.
             get
             {
                 return GetCachedValue(ConfigConstants.DefaultFlashCrossDomainFile, DefaultFlashCrossDomainFile);
+            }
+        }
+
+        public static Int32 FreeTrialLength
+        {
+            get
+            {
+                return Int32.Parse(GetCachedValue(ConfigConstants.FreeTrialLength,defaultValue: "30"));
             }
         }
 

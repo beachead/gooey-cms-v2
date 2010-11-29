@@ -111,6 +111,7 @@
     <Content Include="auth\Developer\Settings.aspx" />
     <Content Include="auth\Developer\Site.aspx" />
     <Content Include="auth\global-admin\Configuration.aspx" />
+    <Content Include="auth\global-admin\ContentTypes\Default.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
     <Content Include="auth\global-admin\Default.aspx" />
     <Content Include="auth\global-admin\Developer\Categories.aspx" />
@@ -309,6 +310,13 @@
     </Compile>
     <Compile Include="auth\global-admin\Configuration.aspx.designer.cs">
       <DependentUpon>Configuration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\ContentTypes\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\ContentTypes\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Controls\Cache.aspx.cs">
       <DependentUpon>Cache.aspx</DependentUpon>

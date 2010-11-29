@@ -9,6 +9,7 @@ using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Constants;
 using Gooeycms.Business;
 using System.Text;
+using Gooeycms.Business.Paypal;
 
 namespace Gooeycms.Webrole.Ecommerce
 {
@@ -34,38 +35,24 @@ namespace Gooeycms.Webrole.Ecommerce
             this.Subdomain.Text = registration.Sitename + GooeyConfigManager.DefaultCmsDomain;
             this.SubscriptionPlan.Text = SubscriptionManager.GetDescription(registration);
 
-            if (plan.Price > 0)
-            {
-                PaypalDescription = SubscriptionManager.GetShortDescription("Gooey CMS -", registration);
-                PaypalCost = SubscriptionManager.CalculateCost(registration);
-                this.PaypayPanel.Visible = true;
-                this.FreePanel.Visible = false;
-            }
-            else
-            {
-                this.PaypayPanel.Visible = false;
-                this.FreePanel.Visible = true;
-            }
+            PaypalDescription = SubscriptionManager.GetShortDescription("Gooey CMS -", registration);
+            PaypalCost = SubscriptionManager.CalculateCost(registration);
 
-            if (SubscriptionProcessorFactory.Instance.GetSubscriptionProcessor().IsDebug)
-            {
-                StringBuilder builder = new StringBuilder();
-                builder.Append("custom=" + registration.Guid);
-                builder.Append("&txn_id=" + new Random().Next(0, 100));
-                builder.Append("&txn_type=subscr_signup");
-                builder.Append("&subscr_id=" + new Random().Next(2000, 3000));
-
-                this.SkipPaypal.NavigateUrl = "subscription.handler?" + builder.ToString();
-                this.DebugPanel.Visible = true;
-            }
-
-            BtnPaypalPurchase.PostBackUrl = GooeyConfigManager.PaypalPostUrl;
             if (GooeyConfigManager.IsPaypalSandbox)
-                BtnPaypalPurchase.OnClientClick = "alert('This purchase is using the paypal sandbox environment. No actual funds will be transferred.')";
+                BtnSubscribe.OnClientClick = "alert('This purchase is using the paypal sandbox environment. No actual funds will be transferred.')";
         }
 
-        protected void BtnSubscribe_Click(object sender, EventArgs e)
+        protected void BtnSubscribe_Click(Object sender, EventArgs e)
         {
+            Registration registration = Registrations.Load(this.Guid);
+
+            //Create all of the billing agreements
+            PaypalExpressCheckout checkout = new PaypalExpressCheckout();
+            checkout.AddBillingAgreement(registration);
+            
+            String redirect = checkout.SetExpressCheckout(registration.Email, registration.Guid);
+            Response.Redirect(redirect, true);
         }
+
     }
 }

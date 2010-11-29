@@ -128,6 +128,16 @@ namespace Gooeycms.Business.Subscription
             return subscription;
         }
 
+        public static void Save(CmsSubscription subscription)
+        {
+            CmsSubscriptionDao dao = new CmsSubscriptionDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<CmsSubscription>(subscription);
+                tx.Commit();
+            }
+        }
+
         public static string GetDescription(Registration registration)
         {
             CmsSubscriptionPlan plan = GetSubscriptionPlan(registration);

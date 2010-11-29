@@ -42,6 +42,9 @@
     <Reference Include="BasicFrame.WebControls.BasicDatePicker">
       <HintPath>..\..\lib\BasicFrame.WebControls.BasicDatePicker.dll</HintPath>
     </Reference>
+    <Reference Include="Encore.PayPal.Nvp">
+      <HintPath>..\..\lib\Encore.PayPal.Nvp.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\lib\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -69,6 +72,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -165,6 +169,8 @@
     <Compile Include="Pages\PreviewDto.cs" />
     <Compile Include="Pages\ResourceControl.cs" />
     <Compile Include="Pages\VariableControl.cs" />
+    <Compile Include="Paypal\PaypalException.cs" />
+    <Compile Include="Paypal\PaypalExpressCheckout.cs" />
     <Compile Include="Paypal\PaypalManager.cs" />
     <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
@@ -245,6 +251,12 @@
     <EmbeddedResource Include="Pages\HtmlTemplate.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

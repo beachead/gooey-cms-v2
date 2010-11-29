@@ -39,6 +39,10 @@
     <Reference Include="Anthem">
       <HintPath>..\..\lib\Anthem.dll</HintPath>
     </Reference>
+    <Reference Include="Encore.PayPal.Nvp, Version=2.2.1.0, Culture=neutral, PublicKeyToken=73a687039e541cb6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Encore.PayPal.Nvp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -80,6 +84,13 @@
       <DependentUpon>ContentPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="signup\Activate.aspx.cs">
+      <DependentUpon>Activate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="signup\Activate.aspx.designer.cs">
+      <DependentUpon>Activate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="signup\Signup-Review.aspx.cs">
       <DependentUpon>Signup-Review.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -375,6 +386,7 @@
     <Content Include="js\jquery-1.4.2.min.js" />
     <Content Include="js\jquery.cycle.all.min.js" />
     <Content Include="js\store.js" />
+    <Content Include="signup\Activate.aspx" />
     <Content Include="signup\Signup-Review.aspx" />
     <Content Include="signup\Default.aspx" />
   </ItemGroup>
