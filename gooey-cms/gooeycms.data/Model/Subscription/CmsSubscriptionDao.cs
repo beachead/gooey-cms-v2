@@ -42,5 +42,10 @@ namespace Gooeycms.Data.Model.Subscription
             String hql = "select subscription from CmsSubscription subscription where subscription.Subdomain = :subdomain or subscription.Domain = :domain or subscription.StagingDomain = :staging";
             return base.NewHqlQuery(hql).SetString("subdomain", subdomain).SetString("domain", host).SetString("staging", host).UniqueResult<CmsSubscription>();
         }
+
+        public IList<CmsSubscription> FindUpcomingRenewals(Int32 timeframe)
+        {
+            return base.Session.GetNamedQuery("CmsSubscriptionUpcomingRenewals").SetParameter("timeframe", timeframe).List<CmsSubscription>();
+        }
     }
 }

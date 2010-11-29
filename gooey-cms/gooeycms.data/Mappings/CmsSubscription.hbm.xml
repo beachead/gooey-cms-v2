@@ -45,4 +45,22 @@
     WHERE us.user_id = :userId
     ]]>
   </sql-query>
+
+  <sql-query name="CmsSubscriptionUpcomingRenewals">
+    <return alias="subscription"
+            class="Gooeycms.Data.Model.Subscription.CmsSubscription,gooeycms.data"/>
+    <![CDATA[  
+    select {subscription.*}
+    from Subscriptions {subscription}
+    where
+    dateadd(mm,datediff(mm,signup_date,getdate()),signup_date)
+    between
+    dateadd(dd,-1,getdate()) and dateadd(dd,:timeframe,getdate())
+    or
+    dateadd(mm,datediff(mm,signup_date,getdate()) + 1,signup_date)
+    between
+    dateadd(dd,-1,getdate()) and dateadd(dd,:timeframe,getdate())
+    order by datepart(dd,signup_date) desc;
+    ]]>
+  </sql-query>
 </hibernate-mapping>

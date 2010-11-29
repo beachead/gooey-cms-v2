@@ -118,6 +118,7 @@
     <Content Include="auth\global-admin\Developer\Default.aspx" />
     <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
+    <Content Include="auth\global-admin\Subscriptions\Default.aspx" />
     <Content Include="auth\Package-Mgmt\apply.aspx" />
     <Content Include="auth\Pages\Default.aspx" />
     <Content Include="auth\Pages\EditInline.aspx" />
@@ -358,6 +359,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\global-admin\Help\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Package-Mgmt\apply.aspx.cs">
