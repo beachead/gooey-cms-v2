@@ -39,6 +39,10 @@
     <Reference Include="Anthem">
       <HintPath>..\..\lib\Anthem.dll</HintPath>
     </Reference>
+    <Reference Include="Encore.Licensing, Version=1.0.1.0, Culture=neutral, PublicKeyToken=75630f11c0fa5f17, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Encore.Licensing.dll</HintPath>
+    </Reference>
     <Reference Include="Encore.PayPal.Nvp, Version=2.2.1.0, Culture=neutral, PublicKeyToken=73a687039e541cb6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Encore.PayPal.Nvp.dll</HintPath>

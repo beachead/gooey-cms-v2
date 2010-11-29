@@ -42,6 +42,10 @@
     <Reference Include="BasicFrame.WebControls.BasicDatePicker">
       <HintPath>..\..\lib\BasicFrame.WebControls.BasicDatePicker.dll</HintPath>
     </Reference>
+    <Reference Include="Encore.Licensing, Version=1.0.1.0, Culture=neutral, PublicKeyToken=75630f11c0fa5f17, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Encore.Licensing.dll</HintPath>
+    </Reference>
     <Reference Include="Encore.PayPal.Nvp">
       <HintPath>..\..\lib\Encore.PayPal.Nvp.dll</HintPath>
     </Reference>
