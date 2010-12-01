@@ -37,6 +37,7 @@ CREATE TABLE [Subscription_Plans] (
 [name] VARCHAR(128) NOT NULL,
 [price] DECIMAL(18,2) NOT NULL,
 [available] BIT DEFAULT(0),
+[is_system_plan] BIT DEFAULT(0),
 [allowed_pages] INT DEFAULT(500),
 [is_javascript_allowed] BIT DEFAULT(1),
 [is_images_allowed] BIT DEFAULT(1),

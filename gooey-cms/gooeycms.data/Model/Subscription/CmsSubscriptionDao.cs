@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Gooeycms.Data.Model.Subscription
 {
@@ -41,6 +42,12 @@ namespace Gooeycms.Data.Model.Subscription
         {
             String hql = "select subscription from CmsSubscription subscription where subscription.Subdomain = :subdomain or subscription.Domain = :domain or subscription.StagingDomain = :staging";
             return base.NewHqlQuery(hql).SetString("subdomain", subdomain).SetString("domain", host).SetString("staging", host).UniqueResult<CmsSubscription>();
+        }
+
+        public IList<CmsSubscription> FindUserSubscriptions()
+        {
+            String hql = "select subscription from CmsSubscription subscription where subscription.SubscriptionPlan.IsSystemPlan = 0 order by subscription.Created desc";
+            return base.NewHqlQuery(hql).List<CmsSubscription>();
         }
 
         public IList<CmsSubscription> FindUpcomingRenewals(Int32 timeframe)

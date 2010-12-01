@@ -183,5 +183,20 @@ namespace Gooeycms.Business.Paypal
 
             return status;
         }
+
+        public PaypalProfileInfo GetProfileInfo(string profileId)
+        {
+            NvpGetRecurringPaymentsProfileDetails action = new NvpGetRecurringPaymentsProfileDetails();
+            SetDefaults(action);
+
+            action.Add(NvpGetRecurringPaymentsProfileDetails.Request.PROFILEID, profileId);
+            Boolean result = action.Post();
+            if (!result)
+                throw PaypalException.GenerateException(action);
+
+            PaypalProfileInfo info = new PaypalProfileInfo(action);
+
+            return info;
+        }
     }
 }

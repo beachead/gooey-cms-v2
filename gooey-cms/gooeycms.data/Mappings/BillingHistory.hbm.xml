@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Billing.BillingHistory, gooeycms.data" table="Billing_History">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="guid" name="Guid" type="String" />
+    <property column="subscription_id" name="SubscriptionId" type="String" />
+    <property column="paypal_profile" name="PaypalProfileId" type="String" />
+    <property column="tx_type" name="TxType" type="String" />
+    <property column="tx_description" name="TxDescription" type="String" />
+    <property column="tx_id" name="TxId" type="String" />
+    <property column="tx_date" name="TxDate" type="DateTime" />
+    <property column="tx_amount" name="TxAmount" type="Double" />
+  </class>
+</hibernate-mapping>

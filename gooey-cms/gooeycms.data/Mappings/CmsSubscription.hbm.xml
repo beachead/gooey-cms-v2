@@ -8,6 +8,7 @@
     <property column="name" name="Name" type="String" />
     <property column="price" name="Price" type="Decimal" />
     <property column="available" name="IsAvailable" type="Boolean" />
+    <property column="is_system_plan" name="IsSystemPlan" type="Boolean" />    
     <property column="allowed_pages" name="MaxAllowedPages" type="Int32" />
     <property column="is_javascript_allowed" name="IsJavascriptAllowed" type="Boolean" />
     <property column="is_images_allowed" name="IsExternalImagesAllowed" type="Boolean" />
@@ -33,6 +34,8 @@
     <property column="campaign_addon" name="IsCampaignEnabled" type="Boolean" />
     <property column="generic_addon" name="IsGenericOptionsEnabled" type="Boolean" />
     <property column="is_demo" name="IsDemo" type="Boolean" />
+    <many-to-one column="primary_user_guid" property-ref="Guid" name="PrimaryUser" class="Gooeycms.Data.Model.Subscription.UserInfo, gooeycms.data" />
+    <many-to-one column="subscription_plan_sku" property-ref="SKU" name="SubscriptionPlan" class="Gooeycms.Data.Model.Subscription.CmsSubscriptionPlan, gooeycms.data" />    
   </class>
 
 
@@ -55,11 +58,11 @@
     where
     dateadd(mm,datediff(mm,signup_date,getdate()),signup_date)
     between
-    dateadd(dd,-1,getdate()) and dateadd(dd,:timeframe,getdate())
+    DATEADD(d, DATEDIFF(d, 0, getdate()), 0) and dateadd(dd,:timeframe,getdate())
     or
     dateadd(mm,datediff(mm,signup_date,getdate()) + 1,signup_date)
     between
-    dateadd(dd,-1,getdate()) and dateadd(dd,:timeframe,getdate())
+    DATEADD(d, DATEDIFF(d, 0, getdate()), 0) and dateadd(dd,:timeframe,getdate())
     order by datepart(dd,signup_date) desc;
     ]]>
   </sql-query>

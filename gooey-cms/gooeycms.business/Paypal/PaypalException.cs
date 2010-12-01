@@ -6,7 +6,7 @@ using Encore.PayPal.Nvp;
 
 namespace Gooeycms.Business.Paypal
 {
-    class PaypalException : Exception
+    public class PaypalException : Exception
     {
         private String errorCode;
 

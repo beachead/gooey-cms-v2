@@ -35,5 +35,16 @@ namespace Gooeycms.Business.Paypal
 
             return (result.Contains("SUCCESS"));
         }
+
+        public PaypalProfileInfo GetProfileInfo(string profileId)
+        {
+            PaypalProfileInfo info = null;
+            if (!String.IsNullOrEmpty(profileId))
+            {
+                PaypalExpressCheckout paypal = new PaypalExpressCheckout();
+                info = paypal.GetProfileInfo(profileId);
+            }
+            return info;
+        }
     }
 }

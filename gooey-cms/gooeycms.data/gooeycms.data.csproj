@@ -63,6 +63,8 @@
     <Compile Include="Guid.cs" />
     <Compile Include="Model\BaseDao.cs" />
     <Compile Include="Model\BasePersistedItem.cs" />
+    <Compile Include="Model\Billing\BillingHistory.cs" />
+    <Compile Include="Model\Billing\BillingHistoryDao.cs" />
     <Compile Include="Model\Campaign\CmsCampaign.cs" />
     <Compile Include="Model\Campaign\CmsCampaignDao.cs" />
     <Compile Include="Model\Configuration.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Model\Form\CmsSavedFormDao.cs" />
     <Compile Include="Model\Help\HelpPage.cs" />
     <Compile Include="Model\Help\HelpPageDao.cs" />
+    <Compile Include="Model\Logging.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />
     <Compile Include="Model\Page\CmsPageDao.cs" />
     <Compile Include="Model\SecurityToken.cs" />
@@ -119,8 +122,12 @@
     <EmbeddedResource Include="Mappings\UserPackages.hbm.xml" />
     <EmbeddedResource Include="Mappings\CmsCampaigns.hbm.xml" />
     <EmbeddedResource Include="Mappings\CmsInvite.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Logging.hbm.xml" />
+    <EmbeddedResource Include="Mappings\BillingHistory.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\add-foreign-keys.sql.txt" />
+    <Content Include="sql-scripts\create-billing.sql.txt" />
+    <Content Include="sql-scripts\create-logging-tables.sql.txt" />
     <Content Include="sql-scripts\create-invite-tables.sql.txt" />
     <Content Include="sql-scripts\create-campaigns.sql.txt" />
     <Content Include="sql-scripts\create-store-tables.sql.txt" />

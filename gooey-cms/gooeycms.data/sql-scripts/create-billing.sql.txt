@@ -1,0 +1,20 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Billing_History]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Billing_History];
+END
+
+
+CREATE TABLE [dbo].[Billing_History](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36),
+	[subscription_id] VARCHAR(36),
+	[paypal_profile] VARCHAR(36),
+	[tx_type] VARCHAR(36),
+	[tx_description] VARCHAR(255),
+	[tx_amount] DECIMAL(18,2),
+	[tx_id] VARCHAR(64),
+	[tx_date] DATETIME,
+	PRIMARY KEY CLUSTERED([id]),
+);
+
+CREATE INDEX idx_billing_subscription ON [Billing_History](subscription_id);

@@ -94,6 +94,7 @@
     <Compile Include="Adapters\ThemeAdapter.cs" />
     <Compile Include="Azure\InstanceCommunication.cs" />
     <Compile Include="Azure\WebroleMessage.cs" />
+    <Compile Include="Billing\BillingManager.cs" />
     <Compile Include="Cache\CacheInstance.cs" />
     <Compile Include="Cache\CacheManager.cs" />
     <Compile Include="Cache\CacheRefreshHandler.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Paypal\PaypalException.cs" />
     <Compile Include="Paypal\PaypalExpressCheckout.cs" />
     <Compile Include="Paypal\PaypalManager.cs" />
+    <Compile Include="Paypal\PaypalProfileInfo.cs" />
     <Compile Include="Site\CmsSiteMap.cs" />
     <Compile Include="GooeyConfigManager.cs" />
     <Compile Include="Handler\BaseHttpHandler.cs" />

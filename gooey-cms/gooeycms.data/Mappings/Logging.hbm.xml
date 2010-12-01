@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Logging, gooeycms.data" table="Logging">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="inserted" name="Inserted" type="DateTime" />
+    <property column="event_type" name="EventType" type="String" />
+    <property column="event_message" name="EventMessage" type="String" />
+    <property column="error_code" name="ErrorCode" type="String" />
+    <property column="exception" name="Exception" type="String" />    
+  </class>
+  </hibernate-mapping>

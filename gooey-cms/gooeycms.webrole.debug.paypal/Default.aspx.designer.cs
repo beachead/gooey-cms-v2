@@ -7,45 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
+namespace gooeycms.webrole.debug.paypal {
     
     
     public partial class Default {
         
         /// <summary>
-        /// RadScriptManager control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadScriptManager RadScriptManager;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// LblTimeframe control.
+        /// BtnCreateSubscription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblTimeframe;
+        protected global::System.Web.UI.WebControls.Button BtnCreateSubscription;
         
         /// <summary>
-        /// PendingSubscriptions control.
+        /// LblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid PendingSubscriptions;
-        
-        /// <summary>
-        /// PendingSubscriptionsDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource PendingSubscriptionsDataSource;
+        protected global::System.Web.UI.WebControls.Label LblStatus;
     }
 }

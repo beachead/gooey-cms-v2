@@ -10,7 +10,7 @@
 namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
     
     
-    public partial class Default {
+    public partial class AllSubscriptions {
         
         /// <summary>
         /// RadScriptManager control.
@@ -22,30 +22,30 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
         protected global::Telerik.Web.UI.RadScriptManager RadScriptManager;
         
         /// <summary>
-        /// LblTimeframe control.
+        /// AllSubscriptionsTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblTimeframe;
+        protected global::Telerik.Web.UI.RadGrid AllSubscriptionsTable;
         
         /// <summary>
-        /// PendingSubscriptions control.
+        /// AllSubscriptionsDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid PendingSubscriptions;
+        protected global::System.Web.UI.WebControls.ObjectDataSource AllSubscriptionsDataSource;
         
         /// <summary>
-        /// PendingSubscriptionsDataSource control.
+        /// Singleton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource PendingSubscriptionsDataSource;
+        protected global::Telerik.Web.UI.RadWindowManager Singleton;
     }
 }

@@ -51,7 +51,7 @@ namespace Gooeycms.Business.Util
                 CmsSubscriptionPlan plan = Cache.Get<CmsSubscriptionPlan>("subscription-plan");
                 if ((plan == null) || (GooeyConfigManager.IsDevelopmentEnvironment))
                 {
-                    plan = SubscriptionManager.GetSubscriptionPlan(Subscription.SubscriptionPlan);
+                    plan = SubscriptionManager.GetSubscriptionPlan(Subscription.SubscriptionPlanEnum);
                     Cache.Add("subscription-plan",plan);
                 }
                 return plan;

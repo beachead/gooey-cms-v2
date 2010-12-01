@@ -1,0 +1,14 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Logging]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Logging];
+END
+
+CREATE TABLE [dbo].[Logging](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[inserted] DATETIME,
+	[event_type] VARCHAR(256),
+	[event_message] TEXT,
+	[error_code] VARCHAR(64),
+	[exception] TEXT,
+	PRIMARY KEY CLUSTERED([id]),
+);

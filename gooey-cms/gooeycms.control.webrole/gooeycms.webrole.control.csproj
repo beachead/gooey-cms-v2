@@ -118,7 +118,9 @@
     <Content Include="auth\global-admin\Developer\Default.aspx" />
     <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
+    <Content Include="auth\global-admin\Subscriptions\AllSubscriptions.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Default.aspx" />
+    <Content Include="auth\global-admin\Subscriptions\Modify.aspx" />
     <Content Include="auth\Package-Mgmt\apply.aspx" />
     <Content Include="auth\Pages\Default.aspx" />
     <Content Include="auth\Pages\EditInline.aspx" />
@@ -361,12 +363,26 @@
     <Compile Include="auth\global-admin\Help\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\AllSubscriptions.aspx.cs">
+      <DependentUpon>AllSubscriptions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\AllSubscriptions.aspx.designer.cs">
+      <DependentUpon>AllSubscriptions.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\global-admin\Subscriptions\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\global-admin\Subscriptions\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Package-Mgmt\apply.aspx.cs">
       <DependentUpon>apply.aspx</DependentUpon>

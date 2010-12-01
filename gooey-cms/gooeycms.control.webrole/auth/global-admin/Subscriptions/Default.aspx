@@ -21,7 +21,7 @@
     <telerik:RadScriptManager ID="RadScriptManager"  runat="server"></telerik:RadScriptManager>
 
     <div>
-        Upcoming Renewals (next 7 days) <br />
+        Upcoming Renewals (next <asp:Label ID="LblTimeframe" Text="14" runat="server" /> days) <br />
         <telerik:RadGrid ID="PendingSubscriptions" DataSourceID="PendingSubscriptionsDataSource" runat="server"  AutoGenerateColumns="False" GridLines="None">
             <MasterTableView Width="100%" CommandItemDisplay="TopAndBottom" EditMode="InPlace">
                 <CommandItemSettings ShowAddNewRecordButton="false" ExportToPdfText="Export to Pdf"></CommandItemSettings>
@@ -38,12 +38,9 @@
             SelectMethod="GetUpcomingRenewals" 
             TypeName="Gooeycms.Business.Subscription.SubscriptionAdapter" >
             <SelectParameters>
-                <asp:QueryStringParameter DefaultValue="7" Name="timeframeInDays" 
+                <asp:QueryStringParameter DefaultValue="14" Name="timeframeInDays" 
                     QueryStringField="timeframe" Type="Int32" />
             </SelectParameters>
         </asp:ObjectDataSource>
-    </div>
-    <div style="padding-top:15px;">
-        Manage All Subscriptions:
     </div>
 </asp:Content>
