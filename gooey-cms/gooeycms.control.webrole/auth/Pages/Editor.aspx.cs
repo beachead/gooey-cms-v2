@@ -30,6 +30,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                 CmsPage page = PageManager.Instance.GetLatestPage(url);
                 this.PageMarkupText.Text = page.Content;
+                this.PageTemplate.SelectedValue = page.Template;
             }
         }
 
