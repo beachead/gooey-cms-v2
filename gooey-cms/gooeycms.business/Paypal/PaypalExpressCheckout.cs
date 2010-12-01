@@ -186,17 +186,91 @@ namespace Gooeycms.Business.Paypal
 
         public PaypalProfileInfo GetProfileInfo(string profileId)
         {
-            NvpGetRecurringPaymentsProfileDetails action = new NvpGetRecurringPaymentsProfileDetails();
-            SetDefaults(action);
+            PaypalProfileInfo info = null;
+            if (!String.IsNullOrEmpty(profileId))
+            {
+                NvpGetRecurringPaymentsProfileDetails action = new NvpGetRecurringPaymentsProfileDetails();
+                SetDefaults(action);
 
-            action.Add(NvpGetRecurringPaymentsProfileDetails.Request.PROFILEID, profileId);
-            Boolean result = action.Post();
-            if (!result)
-                throw PaypalException.GenerateException(action);
+                action.Add(NvpGetRecurringPaymentsProfileDetails.Request.PROFILEID, profileId);
+                Boolean result = action.Post();
+                if (!result)
+                    throw PaypalException.GenerateException(action);
 
-            PaypalProfileInfo info = new PaypalProfileInfo(action);
+                info = new PaypalProfileInfo(action);
+            }
 
             return info;
+        }
+
+        public Boolean Suspend(string profileId)
+        {
+            Boolean result = false;
+            if (!String.IsNullOrEmpty(profileId))
+            {
+                NvpManageRecurringPaymentsProfileStatus action = new NvpManageRecurringPaymentsProfileStatus();
+                SetDefaults(action);
+
+                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.PROFILEID, profileId);
+                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.ACTION, NvpStatusChangeActionType.Suspend);
+                result = action.Post();
+                if (!result)
+                    throw PaypalException.GenerateException(action);
+            }
+
+            return result;
+        }
+
+        public Boolean Reactivate(string profileId)
+        {
+            Boolean result = false;
+            if (!String.IsNullOrEmpty(profileId))
+            {
+                NvpManageRecurringPaymentsProfileStatus action = new NvpManageRecurringPaymentsProfileStatus();
+                SetDefaults(action);
+
+                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.PROFILEID, profileId);
+                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.ACTION, NvpStatusChangeActionType.Reactivate);
+                result = action.Post();
+                if (!result)
+                    throw PaypalException.GenerateException(action);
+            }
+
+            return result;
+        }
+
+        public Boolean Cancel(string profileId)
+        {
+            Boolean result = false;
+            if (!String.IsNullOrEmpty(profileId))
+            {
+                NvpManageRecurringPaymentsProfileStatus action = new NvpManageRecurringPaymentsProfileStatus();
+                SetDefaults(action);
+
+                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.PROFILEID, profileId);
+                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.ACTION, NvpStatusChangeActionType.Cancel);
+                result = action.Post();
+                if (!result)
+                    throw PaypalException.GenerateException(action);
+            }
+
+            return result;            
+        }
+
+        internal void ExtendTrialPeriod(string profileId, Int32 numberOfCycles)
+        {
+            if (!String.IsNullOrEmpty(profileId))
+            {
+                NvpUpdateRecurringPaymentsProfile action = new NvpUpdateRecurringPaymentsProfile();
+                SetDefaults(action);
+
+                action.Add(NvpUpdateRecurringPaymentsProfile.Request._PROFILEID, profileId);
+                action.Add(NvpUpdateRecurringPaymentsProfile.Request.ADDITIONALBILLINGCYCLES, numberOfCycles.ToString());
+
+                Boolean result = action.Post();
+                if (!result)
+                    throw PaypalException.GenerateException(action);
+            }
         }
     }
 }

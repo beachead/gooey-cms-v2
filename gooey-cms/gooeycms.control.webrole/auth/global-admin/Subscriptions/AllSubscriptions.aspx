@@ -14,16 +14,35 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Subnavigation" runat="server">
+    <beachead:Subnav ID="Subnav" runat="server" NavSection="global_admin_subscriptions" NavItem="all" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
     <telerik:RadScriptManager ID="RadScriptManager"  runat="server"></telerik:RadScriptManager>
+    <telerik:RadAjaxManager ID="RadAjaxManager" runat="server" OnAjaxRequest="RadAjaxManager_AjaxRequest">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadAjaxManager">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="AllSubscriptionsTable" LoadingPanelID="LoadingPanel" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="AllSubscriptionsTable">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="AllSubscriptionsTable" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+
     All Subscriptions <br />
+
+    <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
     <telerik:RadGrid ID="AllSubscriptionsTable" 
         DataSourceID="AllSubscriptionsDataSource" runat="server" 
                      AutoGenerateColumns="False" GridLines="None" 
-                     OnItemDataBound="AllSubscriptionsTable_ItemDataBound">
+                     OnItemDataBound="AllSubscriptionsTable_ItemDataBound"
+                     OnItemCommand="AllSubscriptionsTable_ItemCommand">
         <MasterTableView Width="100%" CommandItemDisplay="TopAndBottom" EditMode="InPlace">
             <CommandItemSettings ShowAddNewRecordButton="false" ExportToPdfText="Export to Pdf"></CommandItemSettings>
             <Columns>
@@ -40,11 +59,6 @@
                         <asp:LinkButton ID="LnkToggleSubscription" Text="" CommandName="EnableDisable" runat="server" />&nbsp;&nbsp;
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-                <telerik:GridButtonColumn ConfirmText="Are you sure you want to delete this subscription?\r\nWARNING:This will delete ALL of the data associated with this subscription." ConfirmDialogType="Classic"
-                    ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                    UniqueName="DeleteUser">
-                    <ItemStyle HorizontalAlign="Center" />
-                </telerik:GridButtonColumn>
             </Columns>
         </MasterTableView>
     </telerik:RadGrid>    
@@ -52,13 +66,23 @@
         SelectMethod="GetAllSubscriptions" 
         TypeName="Gooeycms.Business.Subscription.SubscriptionAdapter" >
     </asp:ObjectDataSource>
-
-    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="800" Height="370" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+     
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="800" Height="370" OnClientClose="window_close" ShowContentDuringLoad="false" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
     
-    <script type="text/javascript" language="javascript">
-        function display_modify(guid) {
-            window.radopen('./Modify.aspx?g=' + guid, null);
-        }
-    </script> 
+    <telerik:RadScriptBlock ID="RadScriptBlock" runat="server">
+        <script type="text/javascript" language="javascript">
+            function display_modify(guid) {
+                window.radopen('./Modify.aspx?g=' + guid, null);
+            }
+
+            function window_close(sender, eventArgs) {
+                if (sender) {
+                    var manager = $find("<%= RadAjaxManager.ClientID %>");
+                    if (manager)
+                        manager.ajaxRequest();
+                }
+            }
+        </script> 
+    </telerik:RadScriptBlock>
 </asp:Content>

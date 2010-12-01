@@ -13,15 +13,6 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Developer {
     public partial class Categories {
         
         /// <summary>
-        /// Subnav control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
-        
-        /// <summary>
         /// ScriptManager control.
         /// </summary>
         /// <remarks>

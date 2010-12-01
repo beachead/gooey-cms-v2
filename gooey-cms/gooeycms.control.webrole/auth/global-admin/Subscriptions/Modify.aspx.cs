@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Paypal;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
 {
@@ -46,6 +47,8 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
                 this.BtnExtendTrialPeriod.Visible = profile.IsTrialPeriod;
                 this.LblTrialPeriodRemaining.Text = profile.IsTrialPeriod + " (" + profile.TrialCyclesRemaining.ToString() + " month" + s + " remaining)";
                 this.LblCreated.Text = profile.Created.ToString("MM/dd/yyyy hh:mm:ss");
+                this.LblProfileStatus.Text = profile.Status;
+                this.LblNormalAmt.Text = profile.NormalPaymentAmt.Value.ToString("c");
 
                 if (profile.NextBillDate.HasValue)
                     this.LblNextBilling.Text = profile.NextBillDate.Value.ToString("MM/dd/yyyy");
@@ -57,6 +60,10 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
                 if (profile.LastBillAmount.HasValue)
                     this.LblLastBillingAmount.Text = profile.LastBillAmount.Value.ToString("c");
             }
+            else
+            {
+                this.LblProfileStatus.Text = subscription.IsDisabled ? "Disabled (No Paypal Profile)" : "Enabled (No Paypal Profile)";
+            }
 
             this.LblGuid.Text = guid;
             this.ChkCampaigns.Checked = subscription.IsCampaignEnabled;
@@ -65,6 +72,94 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
             this.LstSubscriptionPlans.SelectedValue = subscription.SubscriptionPlanSku;
             this.LblProductionDomain.Text = subscription.Domain;
             this.LblStagingDomain.Text = subscription.StagingDomain;
+
+            this.BtnEnableDisable.Text = (subscription.IsDisabled) ? "Enable" : "Disable";
+            this.BtnEnableDisable.OnClientClick = (subscription.IsDisabled) ? "" : "return confirm('Are you sure you want to disable this subscription?');";
+        }
+
+        protected void BtnUpdatePaypalProfile_Click(Object sender, EventArgs e)
+        {
+            String guid = Request.QueryString["g"];
+            
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(guid);
+            subscription.PaypalProfileId = this.TxtPaypalProfile.Text;
+            SubscriptionManager.Save(subscription);
+
+            this.LoadExisting();
+        }
+
+        protected void BtnUpdateSubscriptionPlan_Click(Object sender, EventArgs e)
+        {
+            String guid = Request.QueryString["g"];
+
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(guid);
+            subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(this.LstSubscriptionPlans.SelectedValue);
+            subscription.IsSalesforceEnabled = this.ChkSalesforceOption.Checked;
+            subscription.IsCampaignEnabled = this.ChkCampaigns.Checked;
+
+            SubscriptionManager.Save(subscription);
+
+            this.LoadExisting();
+        }
+
+        protected void BtnEnableDisable_Click(Object sender, EventArgs e)
+        {
+            String guid = Request.QueryString["g"];
+
+            String action;
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(guid);
+            if (subscription.IsDisabled)
+            {
+                SubscriptionManager.EnableSubscription(subscription);
+                action = "enabled";
+            }
+            else
+            {
+                SubscriptionManager.DisableSubscription(subscription);
+                action = "disabled";
+            }
+
+            this.LoadExisting();
+            this.LblStatus.Text = "This subscription has been successfully " + action;
+        }
+
+        protected void BtnExtendTrialPeriod_Click(Object sender, EventArgs e)
+        {
+            String guid = Request.QueryString["g"];
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(guid);
+
+            String message;
+            try
+            {
+                SubscriptionManager.ExtendTrialPeriod(subscription,1);
+                message = "Successfully extended the trial period for the subscription";
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+            }
+            this.LoadExisting();
+            this.LblStatus.Text = message;
+        }
+
+        protected void BtnDelete_Click(Object sender, EventArgs e)
+        {
+            String guid = Request.QueryString["g"];
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(guid);
+
+            String profileId = subscription.PaypalProfileId;
+            SubscriptionManager.CancelSubscription(subscription);
+
+            PaypalExpressCheckout paypal = new PaypalExpressCheckout();
+            PaypalProfileInfo info = paypal.GetProfileInfo(profileId);
+
+            if (info != null)
+                this.LblProfileStatus.Text = info.Status;
+            else
+                this.LblProfileStatus.Text = "DELETED";
+
+            this.EditPanel.Enabled = false;
+            this.LblStatus.Text = "This subscription has been successfully deleted.";
         }
     }
 }

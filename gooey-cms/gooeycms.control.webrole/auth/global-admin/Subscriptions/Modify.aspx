@@ -31,15 +31,18 @@
         font-size: 12px;
         font-weight: bold;}     
     </style>
+
+    <asp:Panel ID="EditPanel" runat="server">
     <table class="stats">
         <tr>
-            <td class="hed" colspan="4">Subscription General</td>
+            <td class="hed" colspan="3">Subscription General</td>
+            <td class="hed" style="text-align:right;padding-right:5px;">Status: <b><asp:Label ID="LblProfileStatus" runat="server" /></b></td>
         </tr>
         <tr>
             <td>Subscription Id</td>
             <td><asp:Label ID="LblGuid" runat="server" /></td>
             <td>Paypal Profile</td>
-            <td><asp:TextBox ID="TxtPaypalProfile" runat="server" />&nbsp;<asp:Button ID="BtnUpdatePayalProfile" Text="Update Profile" OnClientClick="return confirm('Are you sure want to update the paypal profile id?\r\n\r\nWARNING: Incorrectly modifying this value can cause the subscription to be no longer associated with the paypal recurring payment profile');" runat="server" /></td>
+            <td><asp:TextBox ID="TxtPaypalProfile" runat="server" />&nbsp;<asp:Button ID="BtnUpdatePayalProfile" Text="Update Profile" OnClick="BtnUpdatePaypalProfile_Click" OnClientClick="return confirm('Are you sure want to update the paypal profile id?\r\n\r\nWARNING: Incorrectly modifying this value can cause the subscription to be no longer associated with the paypal recurring payment profile');" runat="server" /></td>
         </tr>
         <tr>
             <td>Subscription Plan</td>
@@ -49,7 +52,7 @@
             <td colspan="2">
                 <asp:CheckBox ID="ChkSalesforceOption" Text="Salesforce" runat="server" />&nbsp;
                 <asp:CheckBox ID="ChkCampaigns" Text="Campaigns" runat="server" />&nbsp;
-                <asp:Button ID="BtnUpdateSubscriptionPlan" Text="Update Plan" OnClientClick="return confirm('Are you sure you want to update the subscription plan and options?\r\nNOTE: This will not change the monthly subscription price.');" runat="server" />
+                <asp:Button ID="BtnUpdateSubscriptionPlan" Text="Update Plan" OnClick="BtnUpdateSubscriptionPlan_Click" OnClientClick="return confirm('Are you sure you want to update the subscription plan and options?\r\nNOTE: This will not change the monthly subscription price.');" runat="server" />
             </td>
         </tr>
         <tr>
@@ -69,7 +72,7 @@
             <td colspan="3">
                 <asp:Label ID="LblTrialPeriodRemaining" runat="server" />
                 &nbsp;&nbsp;
-                <asp:Button ID="BtnExtendTrialPeriod" Text="Extend Trial Period" Visible="false" OnClientClick="return confirm('Are you sure you want to extend this trial period by one month?');" runat="server" />
+                <asp:Button ID="BtnExtendTrialPeriod" Text="Extend Trial Period" Visible="false" OnClick="BtnExtendTrialPeriod_Click" OnClientClick="return confirm('Are you sure you want to extend this trial period by one month?');" runat="server" />
             </td>
         </tr>
         <tr>
@@ -82,20 +85,22 @@
             <td>Next Billing</td>
             <td><asp:Label ID="LblNextBilling" runat="server" /></td>
             <td>Amount</td>
-            <td><asp:Label ID="LblNextBillingAmount" runat="server" /></td>
+            <td><asp:Label ID="LblNextBillingAmount" runat="server" /> (<asp:Label ID="LblNormalAmt" runat="server" /> recurring amount)</td>
         </tr>
         <tr>
             <td class="hed" colspan="4">Subscription Actions</td>
         </tr>
         <tr>
             <td colspan="4">
-                <asp:Button ID="BtnEnableDisable" Text="Disable" runat="server" />
+                <asp:Button ID="BtnEnableDisable" Text="" OnClick="BtnEnableDisable_Click" runat="server" />
 
                 <div style="float:right;">
-                <asp:Button ID="BtnDelete" Text="Delete" OnClientClick="return confirm('Are you sure you want to delete this subscription?\r\n\r\nWARNING: This will ERASE all of the data and users associated with this subscription!');" runat="server" />
+                <asp:Button ID="BtnDelete" Text="Delete" OnClick="BtnDelete_Click" OnClientClick="return confirm('Are you sure you want to delete this subscription?\r\n\r\nWARNING: This will ERASE all of the data and users associated with this subscription!');" runat="server" />
                 </div>
             </td>
         </tr>
     </table>
-
+    </asp:Panel>
+    <br />
+    <asp:Label ID="LblStatus" runat="server" />
 </asp:Content>

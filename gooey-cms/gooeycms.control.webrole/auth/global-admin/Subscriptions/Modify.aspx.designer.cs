@@ -13,6 +13,24 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
     public partial class Modify {
         
         /// <summary>
+        /// EditPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel EditPanel;
+        
+        /// <summary>
+        /// LblProfileStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblProfileStatus;
+        
+        /// <summary>
         /// LblGuid control.
         /// </summary>
         /// <remarks>
@@ -157,6 +175,15 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
         protected global::System.Web.UI.WebControls.Label LblNextBillingAmount;
         
         /// <summary>
+        /// LblNormalAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblNormalAmt;
+        
+        /// <summary>
         /// BtnEnableDisable control.
         /// </summary>
         /// <remarks>
@@ -173,5 +200,14 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnDelete;
+        
+        /// <summary>
+        /// LblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStatus;
     }
 }

@@ -19,6 +19,14 @@ namespace Gooeycms.Data.Model.Subscription
                 .ExecuteUpdate();
         }
 
+        public void RemoveUserFromSubscription(Int32 userId, Int32 subscriptionId)
+        {
+            base.Session.CreateSQLQuery("delete from User_Subscriptions where user_id = :userId and subscription_id = :subscriptionId")
+                .SetParameter("userId", userId)
+                .SetParameter("subscriptionId", subscriptionId)
+                .ExecuteUpdate();
+        }
+
         public CmsSubscription FindBySubdomain(string subdomain)
         {
             String hql = "select subscription from CmsSubscription subscription where subscription.Subdomain = :domain";

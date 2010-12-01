@@ -316,5 +316,17 @@ namespace Gooeycms.Business.Membership
                     Roles.CreateRole(role);
             }
         }
+
+        public static void DeleteAllAccounts(CmsSubscription subscription)
+        {
+            if (subscription != null)
+            {
+                IList<UserInfo> users = GetUsersBySite(subscription.Id);
+                foreach (UserInfo user in users)
+                {
+                    DeleteUser(user);
+                }
+            }
+        }
     }
 }

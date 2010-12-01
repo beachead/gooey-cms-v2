@@ -14,6 +14,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="localJS" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Subnavigation" runat="server">
+    <beachead:Subnav ID="Subnav" runat="server" NavSection="global_admin_subscriptions" NavItem="pending" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>

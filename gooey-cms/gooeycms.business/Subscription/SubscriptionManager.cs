@@ -15,6 +15,7 @@ using Gooeycms.Business.Web;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Data.Model.Content;
 using Gooeycms.Data.Model.Site;
+using Gooeycms.Business.Paypal;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -197,6 +198,24 @@ namespace Gooeycms.Business.Subscription
             return dao.FindByDomains(subdomain, host);
         }
 
+        public static void RemoveUserFromSubscription(CmsSubscription subscription, UserInfo user)
+        {
+            if (subscription != null)
+            {
+                CmsSubscriptionDao dao = new CmsSubscriptionDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.RemoveUserFromSubscription(user.Id, subscription.Id);
+                    tx.Commit();
+                }
+
+                //Check if this user is associated to any other subscriptions, if not, clean up the membership system
+                IList<CmsSubscription> subscriptions = GetSubscriptionsByUserId(user.Id);
+                if (subscriptions.Count == 0)
+                    MembershipUtil.DeleteUser(user);
+            }
+        }
+
         public static void AddUserToSubscription(Data.Guid siteGuid, UserInfo user)
         {
             CmsSubscription subscription = GetSubscription(siteGuid);
@@ -288,6 +307,68 @@ namespace Gooeycms.Business.Subscription
             client.Delete(javascriptContainer);
             client.Delete(cssContainer);
             client.Delete(imagesContainer);
+        }
+
+        public static Boolean EnableSubscription(CmsSubscription subscription)
+        {
+            subscription.IsDisabled = false;
+            Save(subscription);
+
+            //Reactivate the billing within paypal
+            PaypalExpressCheckout action = new PaypalExpressCheckout();
+            return action.Reactivate(subscription.PaypalProfileId);
+        }
+
+        public static Boolean DisableSubscription(CmsSubscription subscription)
+        {
+            subscription.IsDisabled = true;
+            Save(subscription);
+
+            //Reactivate the billing within paypal
+            PaypalExpressCheckout action = new PaypalExpressCheckout();
+            return action.Suspend(subscription.PaypalProfileId);
+        }
+
+        public static void CancelSubscription(CmsSubscription subscription)
+        {
+            PaypalExpressCheckout checkout = new PaypalExpressCheckout();
+            checkout.Cancel(subscription.PaypalProfileId);
+
+            try
+            {
+                //Remove the users from this site
+                IList<UserInfo> users = MembershipUtil.GetUsersBySite(subscription.Id);
+                foreach (UserInfo user in users)
+                {
+                    SubscriptionManager.RemoveUserFromSubscription(subscription,user);
+                }
+
+                SubscriptionManager.Delete(subscription);
+            }
+            catch (Exception e)
+            {
+                CmsSubscription stillexists = GetSubscription(subscription.Guid);
+                if (stillexists != null)
+                {
+                    stillexists.IsDisabled = true;
+                    Save(stillexists);
+                }
+                throw e;
+            }
+        }
+
+        public static void ExtendTrialPeriod(CmsSubscription subscription, Int32 numberOfCyclesToAdd)
+        {
+            PaypalExpressCheckout checkout = new PaypalExpressCheckout();
+            PaypalProfileInfo info = checkout.GetProfileInfo(subscription.PaypalProfileId);
+            if (info != null)
+            {
+                if (!info.IsTrialPeriod)
+                    throw new PaypalException("This subscription's trial period can not be extended. Reason: Trial period has already expired");
+
+                int numberOfCycles = info.TrialCyclesRemaining + numberOfCyclesToAdd;
+                checkout.ExtendTrialPeriod(subscription.PaypalProfileId, numberOfCycles);
+            }
         }
     }
 }

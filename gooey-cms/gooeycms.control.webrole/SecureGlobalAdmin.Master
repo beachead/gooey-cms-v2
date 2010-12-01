@@ -11,6 +11,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="PrimaryNavigation" runat="server">
     <ul class="menu">
         <li><asp:HyperLink id="NavDefault" NavigateUrl="~/auth/global-admin/default.aspx" runat="server" onprerender="SetActive">General Settings</asp:HyperLink></li>
+        <li><asp:HyperLink id="HyperLink1" NavigateUrl="~/auth/global-admin/subscriptions/default.aspx" runat="server" onprerender="SetActive">Subscription Management</asp:HyperLink></li>
         <li><asp:HyperLink id="NavDeveloper" NavigateUrl="~/auth/global-admin/developer/default.aspx" runat="server" onprerender="SetActive">Package Management</asp:HyperLink></li>
         <li><asp:HyperLink id="NavControls" NavigateUrl="~/auth/global-admin/controls/cache.aspx" runat="server" onprerender="SetActive">Cache Management</asp:HyperLink></li>
         <li><asp:HyperLink id="NavHelp" NavigateUrl="~/auth/global-admin/help/default.aspx" runat="server" onprerender="SetActive">Help System</asp:HyperLink></li>              

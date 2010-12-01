@@ -25,6 +25,11 @@ namespace Gooeycms.Business.Paypal
             get { return DateTime.Parse(action.Get(NvpGetRecurringPaymentsProfileDetails.Response.PROFILESTARTDATE)); }
         }
 
+        public String Status
+        {
+            get { return action.Get(NvpGetRecurringPaymentsProfileDetails.Response.STATUS); }
+        }
+
         public DateTime? LastBillDate
         {
             get
@@ -83,7 +88,11 @@ namespace Gooeycms.Business.Paypal
                 Double? amount = null;
 
                 Double item = Double.NaN;
-                String temp = action.Get(NvpGetRecurringPaymentsProfileDetails.Response.AMT);
+                String temp;
+                if (IsTrialPeriod)
+                    temp = action.Get("TRIALAMT");
+                else
+                    temp = action.Get(NvpGetRecurringPaymentsProfileDetails.Response.AMT);
                 Double.TryParse(temp, out item);
 
                 if (item != Double.NaN)
@@ -119,6 +128,23 @@ namespace Gooeycms.Business.Paypal
                     result = (int)cycles;
 
                 return result;
+            }
+        }
+
+        public Double? NormalPaymentAmt
+        {
+            get
+            {
+                Double? amount = null;
+
+                Double item = Double.NaN;
+                String temp = action.Get(NvpGetRecurringPaymentsProfileDetails.Response.AMT);
+                Double.TryParse(temp, out item);
+
+                if (item != Double.NaN)
+                    amount = new Double?(item);
+
+                return amount;
             }
         }
     }
