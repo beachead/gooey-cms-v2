@@ -347,8 +347,8 @@ namespace Gooeycms.Business.Store
                 subscription.Created = DateTime.Now;
                 subscription.Subdomain = subdomain;
                 subscription.StagingDomain = subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
-                subscription.SubscriptionPlanSku = SubscriptionPlans.Demo.ToString();
-                subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
+                subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(SubscriptionPlans.Demo);
+                subscription.PrimaryUser= wrapper.UserInfo;
                 subscription.IsDemo = true;
                 subscription.IsCampaignEnabled = true;
                 subscription.Expires = DateTime.MaxValue;

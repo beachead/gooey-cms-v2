@@ -87,10 +87,10 @@ namespace Gooeycms.Business.Subscription
             else
                 subscription.StagingDomain = registration.Staging;
 
-            subscription.SubscriptionPlanSku = registration.SubscriptionPlanSku;
+            subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(registration);
             subscription.Expires = DateTime.Now.AddYears(100);
             subscription.IsDisabled = false;
-            subscription.PrimaryUserGuid = wrapper.UserInfo.Guid;
+            subscription.PrimaryUser = wrapper.UserInfo;
             subscription.IsSalesforceEnabled = registration.IsSalesforceEnabled;
             subscription.IsCampaignEnabled = registration.IsCampaignEnabled;
             subscription.IsGenericOptionsEnabled = registration.IsGenericOptionEnabled;

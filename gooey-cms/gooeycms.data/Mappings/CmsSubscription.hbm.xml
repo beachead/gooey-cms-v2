@@ -20,10 +20,8 @@
     <id name="Id" column="id" type="Int32" unsaved-value="0">
       <generator class="native" />
     </id>
-    <property column="subscription_plan_sku" name="SubscriptionPlanSku" type="String" />
     <property column="guid" name="Guid" type="String" />    
     <property column="signup_date" name="Created" type="DateTime" />
-    <property column="primary_user_guid" name="PrimaryUserGuid" type="String" />
     <property column="subdomain" name="Subdomain" type="String" />
     <property column="custom_domain" name="Domain" type="String" />
     <property column="staging_domain" name="StagingDomain" type="String" />
