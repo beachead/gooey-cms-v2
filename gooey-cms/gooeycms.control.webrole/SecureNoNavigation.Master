@@ -28,6 +28,9 @@
         dojo.require("dijit.form.ValidationTextBox");
         dojo.require("dijit.Tooltip");
     </script>
+    <script type="text/javascript" src="http://use.typekit.com/urs6qyt.js"></script>
+    <script type="text/javascript">        try { Typekit.load(); } catch (e) { }</script>
+ 
     <asp:ContentPlaceHolder ID="localJS" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body class="claro">
