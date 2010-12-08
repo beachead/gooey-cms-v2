@@ -73,15 +73,21 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             //Get the original order of the items
             IList<JavascriptFile> files = JavascriptManager.Instance.List(this.GetSelectedPage());
+            IList<JavascriptFile> enabledFiles = new List<JavascriptFile>();
+            foreach (JavascriptFile file in files)
+            {
+                if (file.IsEnabled)
+                    enabledFiles.Add(file);
+            }
 
             //Reorder the item
-            JavascriptFile movedFile = files[e.OldIndex];
-            files.RemoveAt(e.OldIndex);
-            files.Insert(e.NewIndex, movedFile);
+            JavascriptFile movedFile = enabledFiles[e.OldIndex];
+            enabledFiles.RemoveAt(e.OldIndex);
+            enabledFiles.Insert(e.NewIndex, movedFile);
 
             //Update the ordering of all the items
             int i = 0;
-            foreach (JavascriptFile file in files)
+            foreach (JavascriptFile file in enabledFiles)
             {
                 file.SortOrder = i++;
                 JavascriptManager.Instance.UpdateSortInfo(theme, file.Name, i++);

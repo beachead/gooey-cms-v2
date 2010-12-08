@@ -285,37 +285,41 @@
             <!-- END: helpContents -->
         </div>
         <!-- END: helpPanel -->
+
+        <script type="text/javascript" language="javascript">
+            function editor_wrap() {
+                var chk = dojo.byId('chkwrap');
+                var popup = dojo.byId('<%= PageMarkupText.TextboxId %>');
+                if (chk.checked) {
+                    if (popup.wrap) {
+                        popup.wrap = "soft";
+                    } else {
+                        popup.setAttribute("wrap", "soft");
+                        var newpopup = popup.cloneNode(true);
+                        newpopup.value = popup.value;
+                        popup.parentNode.replaceChild(newpopup, popup);
+                    }
+                } else {
+                    if (popup.wrap) {
+                        popup.wrap = "off";
+                    } else {
+                        popup.setAttribute("wrap", "off");
+                        var newpopup = popup.cloneNode(true);
+                        newpopup.value = popup.value;
+                        popup.parentNode.replaceChild(newpopup, popup);
+                    }
+
+                }
+            }
+        </script>
+
+        <input type="checkbox" id="chkwrap" onclick="editor_wrap();" />wrap
         <div style="max-height:430px; overflow:auto;"> 
             <uc:ResizableTextBox ID="PageMarkupText" runat="server" />
         </div>
 
 <script language="javascript" type="text/javascript">
     var parent = null;
-
-    function popup_wrap() {
-        var chk = dojo.byId('chkwrap');
-        var popup = dojo.byId('popupeditor');
-        if (chk.checked) {
-            if (popup.wrap) {
-                popup.wrap = "soft";
-            } else {
-                popup.setAttribute("wrap","soft");
-                var newpopup =  popup.cloneNode(true);
-                newpopup.value = popup.value;
-                popup.parentNode.replaceChild(newpopup,popup);
-            }
-        } else {
-            if (popup.wrap) {
-                popup.wrap = "off";
-            } else {
-                popup.setAttribute("wrap","off");
-                var newpopup =  popup.cloneNode(true);
-                newpopup.value = popup.value;
-                popup.parentNode.replaceChild(newpopup,popup);
-            }
-
-        }
-    }
 
     function getCurrentEditorText() {
         var inline = dojo.byId('<%= PageMarkupText.TextboxId  %>');

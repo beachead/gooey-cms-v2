@@ -73,15 +73,21 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
             //Get the original order of the items
             IList<CssFile> files = CssManager.Instance.List(this.GetSelectedTheme());
+            IList<CssFile> enabledFiles = new List<CssFile>();
+            foreach (CssFile file in files)
+            {
+                if (file.IsEnabled)
+                    enabledFiles.Add(file);
+            }
 
             //Reorder the item
-            CssFile movedFile = files[e.OldIndex];
-            files.RemoveAt(e.OldIndex);
-            files.Insert(e.NewIndex, movedFile);
+            CssFile movedFile = enabledFiles[e.OldIndex];
+            enabledFiles.RemoveAt(e.OldIndex);
+            enabledFiles.Insert(e.NewIndex, movedFile);
 
             //Update the ordering of all the items
             int i = 0;
-            foreach (CssFile file in files)
+            foreach (CssFile file in enabledFiles)
             {
                 CssManager.Instance.UpdateSortInfo(theme, file.Name, i++);
             }
