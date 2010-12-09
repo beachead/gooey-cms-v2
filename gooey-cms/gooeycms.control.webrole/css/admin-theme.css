@@ -19,12 +19,9 @@ body {
 	padding:0;	
 }
 
-h1 {
-    font-weight:600;
-    font-size:20px;
-    color: #4395f1;
-    letter-spacing:-1px;
-    font-family:myriad-pro-1;
+h1 
+{
+    border-bottom: 1px solid #eee;    
     padding-bottom: 3px;
 }
 

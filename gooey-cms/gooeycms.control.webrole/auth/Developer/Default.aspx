@@ -71,7 +71,7 @@
                                 <ul class="thumb-nav"></ul>
 				        
 				                <div class="theme-add-screenshot">
-                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="add screenshot" runat="server" />
+                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="add screenshot" runat="server" />
                                 </div>
                                
 				                <div class="features">

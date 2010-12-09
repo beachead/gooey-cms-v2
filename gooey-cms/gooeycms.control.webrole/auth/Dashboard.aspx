@@ -1,87 +1,108 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Dashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true"
+    CodeBehind="Dashboard.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Dashboard" %>
+
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-	<script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
-	<script type="text/javascript" src="../../scripts/store.js"></script>
-   <link rel="stylesheet" type="text/css" href="../../css/store.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript" src="../../scripts/store.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/store.css" />
 </asp:Content>
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
     <gooey:Subnav ID="Subnav" runat="server" navSection="dashboard" navItem="home" />
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-
-    <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
-
-    <table border=0>
-    <tr><td style="font-weight:600; font-size:40px; color: #4395f1; letter-spacing:-2px; font-family:myriad-pro-1">dashboard</td><td style="padding-left:80px;"></td><td style="font-weight:600; font-size:40px; color: #4395f1; letter-spacing:-2px; font-family:myriad-pro-1">purchases</td>
-    </tr>
-    <tr><td style="padding-top:10px;" colspan="3"><hr /></td></tr>
-    <tr>        <td style="vertical-align:top; padding-left:10px;">
-                <p style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1">Select a site to manage:</p><asp:DropDownList style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" ID="AvailableSites" runat="server" />&nbsp;
-                <asp:Button ID="BtnManageSite" style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" Text="Manage Site" OnClick="BtnManageSite_Click" runat="server" />                
-            </td>
-            <td style="padding-left:80px;"></td>
+    <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+    </telerik:RadScriptManager>
+    <table border="0">
+        <tr>
             <td>
-		    <ul id="themes-panel">
-                <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" OnItemCommand="SitePackages_OnItemCommand" runat="server">
-                    <ItemTemplate>
-			            <li class="theme">    
-
-                            <!-- start: theme-header -->
-                            <div class="theme-header">
-				                <div class="title"><%# Eval("Title") %></div>
-				                <div class="logo"><asp:Image ID="Logo" runat="server" /></div>
-                            </div>
-                            <!-- end: theme-header -->
-
-                            <!-- start: preview -->
-                            <div class="preview">
-                                <ul class="thumbs">
-                                    <asp:Repeater ID="ThumbnailImages" OnItemCommand="SitePackages_OnItemCommand" runat="server">
-                                        <ItemTemplate>
-                                            <li>
-                                                <img src='<%# DataBinder.Eval(Container.DataItem,"Url") %>' width="344" height="167" alt="" />
-                                            </li>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-				                </ul>
-                                <div style="padding-left:20px;padding-top:5px;padding-bottom:10px;">
-                                    <asp:Button ID="BtnApplyPackage" style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" CommandName="ApplyPackage" CommandArgument='<%# Eval("Guid") %>' Text="apply to site" runat="server" />&nbsp;<asp:DropDownList ID="LstSites" runat="server" />
+                <img src="../images/dashboard.png" width="362px" height="45px" border="0" />
+            </td>
+            <td style="padding-left: 80px;">
+            </td>
+            <td>
+                <img src="../images/purchases.png" width="201px" height="61px" border="0" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: top; padding-left: 10px;">
+                <br />
+                Select a site to manage:<br />
+                <asp:DropDownList ID="AvailableSites" runat="server" />
+                &nbsp;
+                <asp:Button ID="BtnManageSite" Text="Manage Site" OnClick="BtnManageSite_Click" runat="server" />
+            </td>
+            <td style="padding-left: 80px;">
+            </td>
+            <td>
+                <ul id="themes-panel">
+                    <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" OnItemCommand="SitePackages_OnItemCommand"
+                        runat="server">
+                        <ItemTemplate>
+                            <li class="theme">
+                                <!-- start: theme-header -->
+                                <div class="theme-header">
+                                    <div class="title">
+                                        <%# Eval("Title") %></div>
+                                    <div class="logo">
+                                        <asp:Image ID="Logo" runat="server" /></div>
                                 </div>
-                                <ul class="thumb-nav"></ul>
-				        
-				                <div class="features">
-                                    <a href="#" class="showFeatures">Features</a>
-				                    <ul>
-                                        <asp:Repeater ID="FeatureList" runat="server">
+                                <!-- end: theme-header -->
+                                <!-- start: preview -->
+                                <div class="preview">
+                                    <ul class="thumbs">
+                                        <asp:Repeater ID="ThumbnailImages" OnItemCommand="SitePackages_OnItemCommand" runat="server">
                                             <ItemTemplate>
-                                                <li><%# Container.DataItem %></li>
+                                                <li>
+                                                    <img src='<%# DataBinder.Eval(Container.DataItem,"Url") %>' width="344" height="167"
+                                                        alt="" />
+                                                </li>
                                             </ItemTemplate>
                                         </asp:Repeater>
-				                    </ul>
+                                    </ul>
+                                    <div style="padding-left: 20px; padding-top: 5px; padding-bottom: 10px;">
+                                        <b>Apply To Site</b>:
+                                        <asp:DropDownList ID="LstSites" runat="server" />
+                                        &nbsp;<asp:Button ID="BtnApplyPackage" CommandName="ApplyPackage" CommandArgument='<%# Eval("Guid") %>'
+                                            Text="Apply" runat="server" />
+                                    </div>
+                                    <ul class="thumb-nav">
+                                    </ul>
+                                    <div class="features">
+                                        <a href="#" class="showFeatures">Features</a>
+                                        <ul>
+                                            <asp:Repeater ID="FeatureList" runat="server">
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <%# Container.DataItem %></li>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- end: preview -->
-
-			            </li>                                        
-                    </ItemTemplate>
-                </asp:Repeater>
-            </ul>                                                  
+                                <!-- end: preview -->
+                            </li>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </ul>
             </td>
         </tr>
     </table>
-
-    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="495" Height="260" ShowContentDuringLoad="false" DestroyOnClose="true" VisibleStatusbar="false" Behaviors="Move" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="495"
+        Height="260" ShowContentDuringLoad="false" DestroyOnClose="true" VisibleStatusbar="false"
+        Behaviors="Move" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
-
     <script language="javascript" type="text/javascript">
-        function showApplyPackage(siteGuid,packageGuid) {
+        function showApplyPackage(siteGuid, packageGuid) {
             window.radopen('./Package-Mgmt/apply.aspx?s=' + siteGuid + '&g=' + packageGuid, null);
         }
 

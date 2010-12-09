@@ -191,8 +191,8 @@ namespace Gooeycms.Business.Paypal
             action.Add(NvpCreateRecurringPaymentsProfile.Request._BILLINGPERIOD, NvpBillingPeriodType.Month);
 
             action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALBILLINGPERIOD, NvpBillingPeriodType.Day);
-            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALBILLINGFREQUENCY, GooeyConfigManager.FreeTrialLength.ToString());
-            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALTOTALBILLINGCYCLES, "1");
+            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALBILLINGFREQUENCY, "1"); //bill once a day for "freetriallength" days
+            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALTOTALBILLINGCYCLES, GooeyConfigManager.FreeTrialLength.ToString());
             action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALAMT, Double.Parse("0").ToString("f"));
 
             action.Add(NvpCreateRecurringPaymentsProfile.Request.MAXFAILEDPAYMENTS, GooeyConfigManager.PaypalMaxFailedPayments.ToString());
@@ -293,7 +293,7 @@ namespace Gooeycms.Business.Paypal
                 SetDefaults(action);
 
                 action.Add(NvpUpdateRecurringPaymentsProfile.Request._PROFILEID, profileId);
-                action.Add(NvpUpdateRecurringPaymentsProfile.Request.ADDITIONALBILLINGCYCLES, numberOfCycles.ToString());
+                action.Add("TRIALTOTALBILLINGCYCLES", numberOfCycles.ToString());
 
                 Boolean result = action.Post();
                 if (!result)

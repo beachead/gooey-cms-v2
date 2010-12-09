@@ -72,7 +72,7 @@
             <td colspan="3">
                 <asp:Label ID="LblTrialPeriodRemaining" runat="server" />
                 &nbsp;&nbsp;
-                <asp:Button ID="BtnExtendTrialPeriod" Text="Extend Trial Period" Visible="false" OnClick="BtnExtendTrialPeriod_Click" OnClientClick="alert('Paypal does not seem to currently support extending the trial period through the API.'); return false;" runat="server" />
+                <asp:Button ID="BtnExtendTrialPeriod" Text="Extend Trial Period" Visible="false" OnClick="BtnExtendTrialPeriod_Click" OnClientClick="return confirm('Are you sure you wish to extend the trial period 30 days?');" runat="server" />
             </td>
         </tr>
         <tr>
