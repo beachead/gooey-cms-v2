@@ -53,8 +53,7 @@
 				<tr>
 				<td class="label"><label for="company">Company</label></td>
                 <td>
-                    <asp:TextBox ID="Company" runat="server" />&nbsp;
-                    <asp:RequiredFieldValidator ID="CompanyRequired" Text="*" ControlToValidate="Company" runat="server" />                    
+                    <asp:TextBox ID="Company" runat="server" />                   
                 </td>
 				</tr>
 				</table>

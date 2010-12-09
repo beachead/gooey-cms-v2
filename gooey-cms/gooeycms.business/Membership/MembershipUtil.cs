@@ -114,6 +114,13 @@ namespace Gooeycms.Business.Membership
             MembershipUser user = System.Web.Security.Membership.GetUser(username);
             UserInfo info = new UserInfoDao().FindByUsername(username);
 
+            //Check if the asp.net membership account is orphaned, if so, delete it
+            if ((user != null) && (info == null))
+            {
+                System.Web.Security.Membership.DeleteUser(user.UserName);
+                user = null;
+            }
+
             MembershipUserWrapper wrapper = new MembershipUserWrapper();
             wrapper.MembershipUser = user;
             wrapper.UserInfo = info;

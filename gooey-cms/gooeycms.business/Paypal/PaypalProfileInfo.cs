@@ -8,6 +8,12 @@ namespace Gooeycms.Business.Paypal
 {
     public class PaypalProfileInfo
     {
+        public enum ProfileStatusEnum
+        {
+            Cancelled,
+            Active
+        }
+
         private NvpGetRecurringPaymentsProfileDetails action;
 
         public PaypalProfileInfo(Encore.PayPal.Nvp.NvpGetRecurringPaymentsProfileDetails action)
@@ -28,6 +34,11 @@ namespace Gooeycms.Business.Paypal
         public String Status
         {
             get { return action.Get(NvpGetRecurringPaymentsProfileDetails.Response.STATUS); }
+        }
+
+        public ProfileStatusEnum ProfileStatus
+        {
+            get { return (ProfileStatusEnum)Enum.Parse(typeof(ProfileStatusEnum), Status, true); }
         }
 
         public DateTime? LastBillDate

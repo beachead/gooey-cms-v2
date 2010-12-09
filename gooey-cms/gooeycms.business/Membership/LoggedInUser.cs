@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Security;
+using Gooeycms.Constants;
 
 namespace Gooeycms.Business.Membership
 {
@@ -72,6 +73,11 @@ namespace Gooeycms.Business.Membership
                 }
             }
             return result;
+        }
+
+        public static bool IsGlobalAdmin
+        {
+            get { return IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR); }
         }
     }
 }

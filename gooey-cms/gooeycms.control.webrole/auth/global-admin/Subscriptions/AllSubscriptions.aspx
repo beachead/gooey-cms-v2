@@ -53,10 +53,11 @@
                 <telerik:GridBoundColumn DataField="StagingDomain" HeaderText="Staging Domain" SortExpression="StagingDomain" UniqueName="StagingDomain" />
                 <telerik:GridBoundColumn DataField="Created" HeaderText="Created" SortExpression="Created" UniqueName="Created" />
                 <telerik:GridBoundColumn DataField="PaypalProfileId" HeaderText="Paypal Customer ID" SortExpression="PaypalProfileId" UniqueName="PaypalProfileId" />
-                <telerik:GridTemplateColumn ItemStyle-Width="125">
+                <telerik:GridTemplateColumn ItemStyle-Width="250">
                     <ItemTemplate>
                         <asp:LinkButton ID="LnkEdit" Text="Modify Subscription" OnClientClick='<%# DataBinder.Eval(Container.DataItem, "Guid", "display_modify(\"{0}\"); return false;") %>' runat="server" />
-                        <asp:LinkButton ID="LnkToggleSubscription" Text="" CommandName="EnableDisable" runat="server" />&nbsp;&nbsp;
+                        &nbsp;&nbsp;
+                        <asp:LinkButton ID="LinkButton1" Text="Manage Users" OnClientClick='<%# DataBinder.Eval(Container.DataItem, "Guid", "display_users(\"{0}\"); return false;") %>' runat="server" />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
             </Columns>
@@ -67,13 +68,17 @@
         TypeName="Gooeycms.Business.Subscription.SubscriptionAdapter" >
     </asp:ObjectDataSource>
      
-    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="800" Height="370" OnClientClose="window_close" ShowContentDuringLoad="false" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="975" Height="370" OnClientClose="window_close" ShowContentDuringLoad="false" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
     
     <telerik:RadScriptBlock ID="RadScriptBlock" runat="server">
         <script type="text/javascript" language="javascript">
             function display_modify(guid) {
                 window.radopen('./Modify.aspx?g=' + guid, null);
+            }
+
+            function display_users(guid) {
+                window.radopen('./Users.aspx?g=' + guid, null);
             }
 
             function window_close(sender, eventArgs) {

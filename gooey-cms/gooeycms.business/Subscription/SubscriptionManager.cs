@@ -16,6 +16,7 @@ using Gooeycms.Business.Crypto;
 using Gooeycms.Data.Model.Content;
 using Gooeycms.Data.Model.Site;
 using Gooeycms.Business.Paypal;
+using Gooeycms.Business.Billing;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -174,6 +175,21 @@ namespace Gooeycms.Business.Subscription
             Double total = (double)plan.Price;
             if (registration.IsSalesforceEnabled)
                 total += GooeyConfigManager.SalesForcePrice;
+            if (registration.IsCampaignEnabled)
+                total += GooeyConfigManager.CampaignOptionPrice;
+
+            return total;
+        }
+
+        public static Double CalculateCost(CmsSubscription subscription)
+        {
+            CmsSubscriptionPlan plan = subscription.SubscriptionPlan;
+
+            Double total = (double)plan.Price;
+            if (subscription.IsSalesforceEnabled)
+                total += GooeyConfigManager.SalesForcePrice;
+            if (subscription.IsCampaignEnabled)
+                total += GooeyConfigManager.CampaignOptionPrice;
 
             return total;
         }
@@ -369,6 +385,48 @@ namespace Gooeycms.Business.Subscription
                 int numberOfCycles = info.TrialCyclesRemaining + numberOfCyclesToAdd;
                 checkout.ExtendTrialPeriod(subscription.PaypalProfileId, numberOfCycles);
             }
+        }
+
+        public static void UpdateBillingAgreement(double originalCost, CmsSubscription subscription)
+        {
+            //Check if the subscription plan is now free, if so, cancel the paypal profile
+            PaypalExpressCheckout checkout = new PaypalExpressCheckout();
+
+            if (subscription.SubscriptionPlan.Price <= 0)
+            {
+                checkout.Cancel(subscription.PaypalProfileId);
+                BillingManager.Instance.AddHistory(subscription.Guid, subscription.PaypalProfileId, BillingManager.NotApplicable, BillingManager.SubscriptionModification, 0d, "Gooeycms administrator modified subscription plan to " + subscription.SubscriptionPlan.Name);
+            }
+            else
+            {
+                Double newCost = CalculateCost(subscription);
+
+                //If it's more, than update the billing agreement
+                if (originalCost > newCost)
+                {
+                    StringBuilder description = new StringBuilder();
+                    description.AppendFormat("{0} / {1:c} ", subscription.SubscriptionPlan.Name, subscription.SubscriptionPlan.Price);
+                    if (subscription.IsCampaignEnabled)
+                        description.AppendFormat(" +Campaigns / {0:c} ", GooeyConfigManager.CampaignOptionPrice);
+
+                    if (subscription.IsSalesforceEnabled)
+                        description.AppendFormat(" +Salesforce / {0:c} ", GooeyConfigManager.SalesForcePrice);
+
+                    description.AppendFormat(". Total: {0:c} / month.", newCost);
+
+                    String desc = description.ToString();
+                    checkout.UpdateBillingAgreement(subscription.PaypalProfileId, newCost, desc);
+
+                    BillingManager.Instance.AddHistory(subscription.Guid, subscription.PaypalProfileId, BillingManager.NotApplicable, BillingManager.SubscriptionModification, newCost, "Gooeycms administrator modified subscription: " + desc);
+                }
+                else
+                {
+                    BillingManager.Instance.AddHistory(subscription.Guid, subscription.PaypalProfileId, BillingManager.NotApplicable, BillingManager.SubscriptionModification, originalCost, "Gooeycms administrator modified subscription plan options. Salesforce enabled: " + subscription.IsSalesforceEnabled + ", Campaigns enabled: " + subscription.IsCampaignEnabled);
+                }
+            }
+
+            //If there weren't any problems update the subscription in our database
+            Save(subscription);
         }
     }
 }

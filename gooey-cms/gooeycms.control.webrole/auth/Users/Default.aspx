@@ -117,11 +117,8 @@
     </script>    
     <asp:ObjectDataSource ID="UserDataSource" runat="server" 
         DataObjectTypeName="Gooeycms.Data.Model.Subscription.UserInfo" 
-        DeleteMethod="DeleteUser" InsertMethod="InsertUser" SelectMethod="GetUsers" 
+        DeleteMethod="RemoveUserFromSite" InsertMethod="InsertUser" SelectMethod="GetUsers" 
         TypeName="Gooeycms.Business.Membership.MembershipDataSource" 
         UpdateMethod="UpdateUser">
-        <SelectParameters>
-            <asp:CookieParameter CookieName="selected-site" Name="encryptedSiteGuid" Type="String" />
-        </SelectParameters>
     </asp:ObjectDataSource>
 </asp:Content>

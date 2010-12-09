@@ -36,7 +36,7 @@
     <table class="stats">
         <tr>
             <td class="hed" colspan="3">Subscription General</td>
-            <td class="hed" style="text-align:right;padding-right:5px;">Status: <b><asp:Label ID="LblProfileStatus" runat="server" /></b></td>
+            <td class="hed" style="text-align:right;padding-right:5px;"><b><asp:Label ID="LblProfileStatus" runat="server" /></b></td>
         </tr>
         <tr>
             <td>Subscription Id</td>
@@ -72,7 +72,7 @@
             <td colspan="3">
                 <asp:Label ID="LblTrialPeriodRemaining" runat="server" />
                 &nbsp;&nbsp;
-                <asp:Button ID="BtnExtendTrialPeriod" Text="Extend Trial Period" Visible="false" OnClick="BtnExtendTrialPeriod_Click" OnClientClick="return confirm('Are you sure you want to extend this trial period by one month?');" runat="server" />
+                <asp:Button ID="BtnExtendTrialPeriod" Text="Extend Trial Period" Visible="false" OnClick="BtnExtendTrialPeriod_Click" OnClientClick="alert('Paypal does not seem to currently support extending the trial period through the API.'); return false;" runat="server" />
             </td>
         </tr>
         <tr>
