@@ -348,7 +348,12 @@ namespace Gooeycms.Business.Subscription
         public static void CancelSubscription(CmsSubscription subscription)
         {
             PaypalExpressCheckout checkout = new PaypalExpressCheckout();
-            checkout.Cancel(subscription.PaypalProfileId);
+            PaypalProfileInfo info = checkout.GetProfileInfo(subscription.PaypalProfileId);
+            if (info != null)
+            {
+                if (info.ProfileStatus != PaypalProfileInfo.ProfileStatusEnum.Cancelled)
+                    checkout.Cancel(subscription.PaypalProfileId);
+            }
 
             try
             {
