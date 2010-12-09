@@ -20,8 +20,8 @@
         <table>
             <tr>
                 <td style="vertical-align:top; width:70%; padding-right:20px;">
-                    <h1><img src="/images/build_your_biz.png" width="495px" height="37px" border="0" /></h1>
-                    <p>View the sites you have purchased, apply them to your subscriptions or your clients and create new sites or themes to sell.</p>                
+                    <h1>build your business one website at a time</h1>
+                    <p>View the sites you have purchased<br />apply them to your subscriptions or your clients<br />create new sites or themes to sell.</p>                
                 </td>
                 <td>
                     <ul class="check">
@@ -71,9 +71,9 @@
                                 <ul class="thumb-nav"></ul>
 				        
 				                <div class="theme-add-screenshot">
-                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="Add Screenshot" runat="server" />
+                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="add screenshot" runat="server" />
                                 </div>
-
+                               
 				                <div class="features">
                                     <a href="#" class="showFeatures">Features</a>
 				                    <ul>
@@ -84,6 +84,7 @@
                                         </asp:Repeater>
 				                    </ul>
                                 </div>
+                                
                             </div>
                             <!-- end: preview -->
 
