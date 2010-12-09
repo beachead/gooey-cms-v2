@@ -236,11 +236,12 @@
 
         Gooey.Util.addLoadEvent(
             function () {
-                var frm = document.getElementsByTagName('form')[0];
-                frm.onsubmit = function () {
-                    return Gooey.Validate.validate();
+                var frm = null;
+                if ((frm = document.getElementsByTagName('form')[0]) != null) {
+                    frm.onsubmit = function () {
+                        return Gooey.Validate.validate();
+                    }
                 }
-
                 var aRequiredFields = document.getElementsByClassName('required');
                 for (var i = 0, l = aRequiredFields.length; i < l; i++) {
                     Gooey.Dom.wrapRequired(aRequiredFields[i]);
