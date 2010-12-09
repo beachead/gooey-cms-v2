@@ -141,6 +141,34 @@ namespace Gooeycms.Business.Paypal
             return PaypalExpressCheckout.GetBillingAgreement(registration.Guid, description.ToString());
         }
 
+        /// <summary>
+        /// Gets all of the billing agreements for the specified registration
+        /// </summary>
+        /// <param name="registration"></param>
+        /// <returns></returns>
+        public static NvpBaItem GetBillingAgreement(CmsSubscription subscription)
+        {
+            StringBuilder description = new StringBuilder();
+            CmsSubscriptionPlan plan = subscription.SubscriptionPlan;
+            Double totalPrice = (Double)plan.Price;
+
+            description.AppendFormat("{0} / {1:c} ", plan.Name, plan.Price);
+            if (subscription.IsCampaignEnabled)
+            {
+                description.AppendFormat(" +Campaigns / {0:c} ", GooeyConfigManager.CampaignOptionPrice);
+                totalPrice += GooeyConfigManager.CampaignOptionPrice;
+            }
+
+            if (subscription.IsSalesforceEnabled)
+            {
+                description.AppendFormat(" +Salesforce / {0:c} ", GooeyConfigManager.SalesForcePrice);
+                totalPrice += GooeyConfigManager.SalesForcePrice;
+            }
+            description.AppendFormat(". Total: {0:c} / month after {1} days free.", totalPrice, GooeyConfigManager.FreeTrialLength);
+
+            return PaypalExpressCheckout.GetBillingAgreement(subscription.Guid, description.ToString());
+        }
+
         public ProfileResultStatus CreateRecurringPayment(Registration registration)
         {
             CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(registration);
@@ -266,6 +294,23 @@ namespace Gooeycms.Business.Paypal
 
                 action.Add(NvpUpdateRecurringPaymentsProfile.Request._PROFILEID, profileId);
                 action.Add(NvpUpdateRecurringPaymentsProfile.Request.ADDITIONALBILLINGCYCLES, numberOfCycles.ToString());
+
+                Boolean result = action.Post();
+                if (!result)
+                    throw PaypalException.GenerateException(action);
+            }
+        }
+
+        internal void UpdateBillingAgreement(string profileId, double newCost, string desc)
+        {
+            if (!String.IsNullOrEmpty(profileId))
+            {
+                NvpUpdateRecurringPaymentsProfile action = new NvpUpdateRecurringPaymentsProfile();
+                SetDefaults(action);
+
+                action.Add(NvpUpdateRecurringPaymentsProfile.Request._PROFILEID, profileId);
+                action.Add(NvpUpdateRecurringPaymentsProfile.Request.DESC, desc);
+                action.Add(NvpUpdateRecurringPaymentsProfile.Request.AMT, newCost.ToString("f"));
 
                 Boolean result = action.Post();
                 if (!result)

@@ -6,8 +6,7 @@
 	<script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
 	<script type="text/javascript" src="../../scripts/store.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="../../css/store.css" />
+   <link rel="stylesheet" type="text/css" href="../../css/store.css" />
 </asp:Content>
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
     <gooey:Subnav ID="Subnav" runat="server" navSection="dashboard" navItem="home" />
@@ -20,11 +19,12 @@
     <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
 
     <table border=0>
-    <tr><td><img src="../images/dashboard.png" width="362px" height="45px" border="0" /></td><td style="padding-left:80px;"></td><td> <img src="../images/purchases.png" width="201px" height="61px" border="0" /></td></tr>
-    <tr><td colspan="3"><hr /></td></tr>
+    <tr><td style="font-weight:600; font-size:40px; color: #4395f1; letter-spacing:-2px; font-family:myriad-pro-1">dashboard</td><td style="padding-left:80px;"></td><td style="font-weight:600; font-size:40px; color: #4395f1; letter-spacing:-2px; font-family:myriad-pro-1">purchases</td>
+    </tr>
+    <tr><td style="padding-top:10px;" colspan="3"><hr /></td></tr>
     <tr>        <td style="vertical-align:top; padding-left:10px;">
-                <br />Select a site to manage:<br /><asp:DropDownList ID="AvailableSites" runat="server" />&nbsp;
-                <asp:Button ID="BtnManageSite" Text="Manage Site" OnClick="BtnManageSite_Click" runat="server" />                
+                <p style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1">Select a site to manage:</p><asp:DropDownList style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" ID="AvailableSites" runat="server" />&nbsp;
+                <asp:Button ID="BtnManageSite" style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" Text="Manage Site" OnClick="BtnManageSite_Click" runat="server" />                
             </td>
             <td style="padding-left:80px;"></td>
             <td>
@@ -52,7 +52,7 @@
                                     </asp:Repeater>
 				                </ul>
                                 <div style="padding-left:20px;padding-top:5px;padding-bottom:10px;">
-                                    <b>Apply To Site</b>: <asp:DropDownList ID="LstSites" runat="server" />&nbsp;<asp:Button ID="BtnApplyPackage" CommandName="ApplyPackage" CommandArgument='<%# Eval("Guid") %>' Text="Apply" runat="server" />
+                                    <asp:Button ID="BtnApplyPackage" style="font-weight:600; font-size:20px; color: #4395f1; letter-spacing:-1px; font-family:myriad-pro-1" CommandName="ApplyPackage" CommandArgument='<%# Eval("Guid") %>' Text="apply to site" runat="server" />&nbsp;<asp:DropDownList ID="LstSites" runat="server" />
                                 </div>
                                 <ul class="thumb-nav"></ul>
 				        

@@ -54,6 +54,9 @@
     select {subscription.*}
     from Subscriptions {subscription}
     where
+    is_demo = 0
+    and
+    (
     dateadd(mm,datediff(mm,signup_date,getdate()),signup_date)
     between
     DATEADD(d, DATEDIFF(d, 0, getdate()), 0) and dateadd(dd,:timeframe,getdate())
@@ -61,6 +64,7 @@
     dateadd(mm,datediff(mm,signup_date,getdate()) + 1,signup_date)
     between
     DATEADD(d, DATEDIFF(d, 0, getdate()), 0) and dateadd(dd,:timeframe,getdate())
+    )
     order by datepart(dd,signup_date) desc;
     ]]>
   </sql-query>

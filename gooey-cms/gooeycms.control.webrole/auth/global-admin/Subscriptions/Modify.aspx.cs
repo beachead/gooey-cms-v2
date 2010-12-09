@@ -8,6 +8,7 @@ using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Paypal;
 using Gooeycms.Business.Membership;
+using System.Text;
 
 namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
 {
@@ -47,7 +48,7 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
                 this.BtnExtendTrialPeriod.Visible = profile.IsTrialPeriod;
                 this.LblTrialPeriodRemaining.Text = profile.IsTrialPeriod + " (" + profile.TrialCyclesRemaining.ToString() + " month" + s + " remaining)";
                 this.LblCreated.Text = profile.Created.ToString("MM/dd/yyyy hh:mm:ss");
-                this.LblProfileStatus.Text = profile.Status;
+                this.LblProfileStatus.Text = "Subscription Active: " + !subscription.IsDisabled + "&nbsp;&nbsp;&nbsp;&nbsp;Paypal Profile: " + profile.Status;
                 this.LblNormalAmt.Text = profile.NormalPaymentAmt.Value.ToString("c");
 
                 if (profile.NextBillDate.HasValue)
@@ -93,11 +94,13 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
             String guid = Request.QueryString["g"];
 
             CmsSubscription subscription = SubscriptionManager.GetSubscription(guid);
+            double originalCost = SubscriptionManager.CalculateCost(subscription);
+
             subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(this.LstSubscriptionPlans.SelectedValue);
             subscription.IsSalesforceEnabled = this.ChkSalesforceOption.Checked;
             subscription.IsCampaignEnabled = this.ChkCampaigns.Checked;
 
-            SubscriptionManager.Save(subscription);
+            SubscriptionManager.UpdateBillingAgreement(originalCost, subscription);
 
             this.LoadExisting();
         }
