@@ -119,7 +119,9 @@ namespace Gooeycms.Business.Paypal
             {
                 Boolean result = false;
                 String temp = action.Get(NvpGetRecurringPaymentsProfileDetails.Response.NUMCYCLESREMAINING);
-                if (temp.Length < 3)
+
+                //check the LENGTH of the STRING instead of risking overflowing with a huge number
+                if (temp.Length < 3) 
                     result = true;
 
                 return result;
@@ -134,10 +136,7 @@ namespace Gooeycms.Business.Paypal
                 String temp = action.Get(NvpGetRecurringPaymentsProfileDetails.Response.NUMCYCLESREMAINING);
                 long.TryParse(temp, out cycles);
 
-                int result = 0;
-                if (cycles < 6)
-                    result = (int)cycles;
-
+                int result = (int)cycles;
                 return result;
             }
         }
@@ -149,7 +148,7 @@ namespace Gooeycms.Business.Paypal
                 Double? amount = null;
 
                 Double item = Double.NaN;
-                String temp = action.Get(NvpGetRecurringPaymentsProfileDetails.Response.AMT);
+                String temp = action.Get("REGULARAMT");
                 Double.TryParse(temp, out item);
 
                 if (item != Double.NaN)

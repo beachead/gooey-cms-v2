@@ -46,7 +46,7 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
 
                 this.TxtPaypalProfile.Text = profile.ProfileId;
                 this.BtnExtendTrialPeriod.Visible = profile.IsTrialPeriod;
-                this.LblTrialPeriodRemaining.Text = profile.IsTrialPeriod + " (" + profile.TrialCyclesRemaining.ToString() + " month" + s + " remaining)";
+                this.LblTrialPeriodRemaining.Text = profile.IsTrialPeriod + " (" + profile.TrialCyclesRemaining.ToString() + " day" + s + " remaining)";
                 this.LblCreated.Text = profile.Created.ToString("MM/dd/yyyy hh:mm:ss");
                 this.LblProfileStatus.Text = "Subscription Active: " + !subscription.IsDisabled + "&nbsp;&nbsp;&nbsp;&nbsp;Paypal Profile: " + profile.Status;
                 this.LblNormalAmt.Text = profile.NormalPaymentAmt.Value.ToString("c");
@@ -134,7 +134,7 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
             String message;
             try
             {
-                SubscriptionManager.ExtendTrialPeriod(subscription,1);
+                SubscriptionManager.ExtendTrialPeriod(subscription,30);
                 message = "Successfully extended the trial period for the subscription";
             }
             catch(Exception ex)
