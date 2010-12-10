@@ -22,13 +22,13 @@ namespace Gooeycms.Webrole.Ecommerce.signup {
         protected global::System.Web.UI.WebControls.MultiView ActivateViews;
         
         /// <summary>
-        /// SuccessView control.
+        /// SuccessPaypalView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View SuccessView;
+        protected global::System.Web.UI.WebControls.View SuccessPaypalView;
         
         /// <summary>
         /// PaypalProfileId control.
@@ -38,6 +38,15 @@ namespace Gooeycms.Webrole.Ecommerce.signup {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label PaypalProfileId;
+        
+        /// <summary>
+        /// SuccessFreeView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View SuccessFreeView;
         
         /// <summary>
         /// FailureView control.
