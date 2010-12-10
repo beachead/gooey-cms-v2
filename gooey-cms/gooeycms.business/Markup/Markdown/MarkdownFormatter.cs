@@ -11,6 +11,7 @@ namespace Gooeycms.Business.Markup.Markdown
     public class MarkdownFormatter : BaseFormatter
     {
         private static Regex ImageHtml = new Regex(@"<img\s+.*?src\=([\x27\x22])?(?<Url>[^\x27\x22|\s|\\|>]*)(?=[\x27\x22])?.*?>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex ImageInputHtml = new Regex(@"<input\s+.*?src\=([\x27\x22])?(?<Url>[^\x27\x22|\s|\\|>]*)(?=[\x27\x22])?.*?>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private MarkdownSharp.Markdown formatter = new MarkdownSharp.Markdown();
         private String imageContainerUrl;
@@ -29,6 +30,7 @@ namespace Gooeycms.Business.Markup.Markdown
 
             //rewrite all <img> urls to the container
             html = ImageHtml.Replace(html,new MatchEvaluator(ImageReferenceEvaluator));
+            html = ImageInputHtml.Replace(html, new MatchEvaluator(ImageReferenceEvaluator));
 
             return new StringBuilder(html);
         }
