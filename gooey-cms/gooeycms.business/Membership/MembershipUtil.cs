@@ -121,6 +121,18 @@ namespace Gooeycms.Business.Membership
                 user = null;
             }
 
+            //Check if the gooeycms account is orphaned, if so, delete it
+            if ((user == null) && (info != null))
+            {
+                UserInfoDao dao = new UserInfoDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<UserInfo>(info);
+                    tx.Commit();
+                }
+                info = null;
+            }
+
             MembershipUserWrapper wrapper = new MembershipUserWrapper();
             wrapper.MembershipUser = user;
             wrapper.UserInfo = info;

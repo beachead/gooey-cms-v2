@@ -68,7 +68,7 @@
         TypeName="Gooeycms.Business.Subscription.SubscriptionAdapter" >
     </asp:ObjectDataSource>
      
-    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="975" Height="370" OnClientClose="window_close" ShowContentDuringLoad="false" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="975" Height="600" OnClientClose="window_close" ShowContentDuringLoad="false" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
     
     <telerik:RadScriptBlock ID="RadScriptBlock" runat="server">

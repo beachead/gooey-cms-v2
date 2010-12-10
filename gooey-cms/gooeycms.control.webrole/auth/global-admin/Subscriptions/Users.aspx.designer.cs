@@ -40,6 +40,15 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
         protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
         
         /// <summary>
+        /// LblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStatus;
+        
+        /// <summary>
         /// UserGridView control.
         /// </summary>
         /// <remarks>
@@ -92,5 +101,14 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LnkAddUser;
+        
+        /// <summary>
+        /// Singleton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager Singleton;
     }
 }

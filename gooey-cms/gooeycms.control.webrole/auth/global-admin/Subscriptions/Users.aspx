@@ -18,6 +18,7 @@
             <UpdatedControls>
                 <telerik:AjaxUpdatedControl ControlID="UserGridView" LoadingPanelID="RadAjaxLoadingPanel1" />
                 <telerik:AjaxUpdatedControl ControlID="RolesUpdatePanel" LoadingPanelID="RadAjaxLoadingPanel1" />
+                <telerik:AjaxUpdatedControl ControlID="LblStatus" />
             </UpdatedControls>
         </telerik:AjaxSetting>
         <telerik:AjaxSetting AjaxControlID="LnkAddUser">
@@ -32,6 +33,8 @@
     <b>Existing Users</b>
 
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" Skin="Default" runat="server" />
+
+    <asp:Label ID="LblStatus" runat="server" />
     <telerik:RadGrid ID="UserGridView" Width="98%"
                         AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" 
                         AllowPaging="True" AutoGenerateColumns="False"
@@ -67,9 +70,6 @@
                 </telerik:GridButtonColumn>
             </Columns>
         </MasterTableView>
-        <ClientSettings>
-            <ClientEvents OnRowDblClick="RowDblClick" />
-        </ClientSettings>
     </telerik:RadGrid>
     <telerik:GridTextBoxColumnEditor ID="GridEmailEditor" TextBoxStyle-Width="200px" runat="server" />
     <telerik:GridTextBoxColumnEditor ID="GridTextEditor" TextBoxStyle-Width="150px" runat="server" />   
@@ -88,5 +88,14 @@
             <td><asp:LinkButton ID="LnkAddUser" OnClick="LnkAddUser_Click" Text="Add New User" runat="server" /></td>
         </tr>
     </table>
+
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="500" Height="525" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+    </telerik:RadWindowManager>
+    
+    <script type="text/javascript" language="javascript">
+        function display_roles(userguid) {
+            window.radopen('./edit-roles.aspx?g=' + userguid, null);
+        }
+    </script> 
 </div>
 </asp:Content>
