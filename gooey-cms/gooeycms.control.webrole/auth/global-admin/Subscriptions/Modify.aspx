@@ -52,7 +52,7 @@
             <td colspan="2">
                 <asp:CheckBox ID="ChkSalesforceOption" Text="Salesforce" runat="server" />&nbsp;
                 <asp:CheckBox ID="ChkCampaigns" Text="Campaigns" runat="server" />&nbsp;
-                <asp:Button ID="BtnUpdateSubscriptionPlan" Text="Update Plan" OnClick="BtnUpdateSubscriptionPlan_Click" OnClientClick="return confirm('Are you sure you want to update the subscription plan and options?\r\nNOTE: This will not change the monthly subscription price.');" runat="server" />
+                <asp:Button ID="BtnUpdateSubscriptionPlan" Text="Update Plan" OnClick="BtnUpdateSubscriptionPlan_Click" OnClientClick="return confirm('Are you sure you want to update the subscription plan and options?');" runat="server" />
             </td>
         </tr>
         <tr>

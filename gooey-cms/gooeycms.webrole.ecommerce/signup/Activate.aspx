@@ -6,11 +6,17 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 <div id="content">
     <asp:MultiView ID="ActivateViews" runat="server">
-        <asp:View ID="SuccessView" runat="server">
+        <asp:View ID="SuccessPaypalView" runat="server">
                 Congratulations, Your subscription has been successfully activated!
                 <br /><br />
 
                 For your reference your paypal profile id is: <asp:Label ID="PaypalProfileId" runat="server" />
+                <br /><br />
+
+                To start managing your site, <a href="http://control.gooeycms.net">login</a> to your management console now.        
+        </asp:View>
+        <asp:View ID="SuccessFreeView" runat="server">
+                Congratulations, Your subscription has been successfully activated!
                 <br /><br />
 
                 To start managing your site, <a href="http://control.gooeycms.net">login</a> to your management console now.        

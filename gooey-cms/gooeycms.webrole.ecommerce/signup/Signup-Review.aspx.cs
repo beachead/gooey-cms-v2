@@ -10,6 +10,7 @@ using Gooeycms.Constants;
 using Gooeycms.Business;
 using System.Text;
 using Gooeycms.Business.Paypal;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Webrole.Ecommerce
 {
@@ -45,13 +46,22 @@ namespace Gooeycms.Webrole.Ecommerce
         protected void BtnSubscribe_Click(Object sender, EventArgs e)
         {
             Registration registration = Registrations.Load(this.Guid);
+            CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(registration);
 
-            //Create all of the billing agreements
-            PaypalExpressCheckout checkout = new PaypalExpressCheckout();
-            checkout.AddBillingAgreement(registration);
-            
-            String redirect = checkout.SetExpressCheckout(registration.Email, registration.Guid);
-            Response.Redirect(redirect, true);
+            if (plan.Price > 0)
+            {
+                //Create all of the billing agreements
+                PaypalExpressCheckout checkout = new PaypalExpressCheckout();
+                checkout.AddBillingAgreement(registration);
+
+                String redirect = checkout.SetExpressCheckout(registration.Email, registration.Guid);
+                Response.Redirect(redirect, true);
+            }
+            else
+            {
+                String encrypted = TextEncryption.Encode(registration.Guid);
+                Response.Redirect("Activate.aspx?_ftoken=" + Server.UrlEncode(encrypted));
+            }
         }
 
     }

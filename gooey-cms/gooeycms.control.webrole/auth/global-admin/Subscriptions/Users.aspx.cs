@@ -30,24 +30,29 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
         {
             GridDataInsertItem item = (GridDataInsertItem)e.Item;
 
-            try
-            {
-                UserInfo info = new UserInfo();
-                info.Email = (item["Email"].Controls[0] as TextBox).Text;
-                info.Password = (item["Password"].Controls[0] as TextBox).Text;
-                info.Firstname = (item["Firstname"].Controls[0] as TextBox).Text;
-                info.Lastname = (item["Lastname"].Controls[0] as TextBox).Text;
+            UserInfo info = new UserInfo();
+            info.Email = (item["Email"].Controls[0] as TextBox).Text;
+            info.Password = (item["Password"].Controls[0] as TextBox).Text;
+            info.Firstname = (item["Firstname"].Controls[0] as TextBox).Text;
+            info.Lastname = (item["Lastname"].Controls[0] as TextBox).Text;
 
-                MembershipDataSource ds = new MembershipDataSource();
-                ds.InsertUser(Request.QueryString["g"], info);
-            }
-            catch (Exception ex)
+            MembershipDataSource ds = new MembershipDataSource();
+            MembershipDataSource.MembershipInsertResult result = ds.InsertUser(Request.QueryString["g"], info);
+
+            if (result.IsSuccess)
             {
-                UserGridView.Controls.Add(new LiteralControl("Unable to add user to subscription. Reason: " + ex.Message));
+                if (result.IsExistingUser)
+                    this.LblStatus.Text = "Successfully associated existing user " + info.Email + ", using the user's existing password, to the subscription.";
+                else
+                    this.LblStatus.Text = "Successfully created new user " + info.Email + " and associated user to the subscription";
+            }
+            else
+            {
+                String message = (result.HasException) ? result.Exception.Message : "";
+                this.LblStatus.Text = "There was a problem associating this user to the subscription. Reason: " + message;
             }
 
             this.UserGridView.DataBind();
-            e.Canceled = true;
         }
 
         protected void UserGridView_DeleteItemCommand(object sender, GridCommandEventArgs e)
@@ -65,6 +70,8 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions
 
             this.UserGridView.DataBind();
             e.Canceled = true;
+
+            this.LblStatus.Text = "Successfully removed user " + info.Email + " from subscription";
         }
     }
 }

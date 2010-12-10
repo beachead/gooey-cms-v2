@@ -13,6 +13,14 @@ namespace Gooeycms.Business.Membership
 {
     public class MembershipDataSource
     {
+        public struct MembershipInsertResult
+        {
+            public Boolean IsSuccess;
+            public Boolean IsExistingUser;
+            public Boolean HasException;
+            public Exception @Exception;
+        }
+
         /// <summary>
         /// Deletes the specified user from the system
         /// </summary>
@@ -23,8 +31,6 @@ namespace Gooeycms.Business.Membership
 
             if (CurrentSite.IsAvailable)
                 guid = CurrentSite.Guid.Value;
-            else if (LoggedInUser.IsGlobalAdmin)
-                guid = WebRequestContext.Instance.Request.QueryString["g"];
 
             if (String.IsNullOrEmpty(guid))
                 throw new ArgumentException("The site guid has not been specified and is required to remove a user from a site");
@@ -66,8 +72,6 @@ namespace Gooeycms.Business.Membership
             
             if (CurrentSite.IsAvailable)
                 guid = CurrentSite.Guid.Value;
-            else if (LoggedInUser.IsGlobalAdmin)
-                guid = WebRequestContext.Instance.Request.QueryString["g"];
 
             if (String.IsNullOrEmpty(guid))
                 throw new ArgumentException("The site guid has not been specified and is required to associate a user to a site");
@@ -75,16 +79,38 @@ namespace Gooeycms.Business.Membership
             InsertUser(CurrentSite.Guid.Value, userAdapter);
         }
 
-        public void InsertUser(String siteGuid, UserInfo userAdapter)
+        public MembershipInsertResult InsertUser(String siteGuid, UserInfo userAdapter)
         {
-            userAdapter.Username = userAdapter.Email;
+            MembershipInsertResult result = new MembershipInsertResult();
 
-            //Check if this user already exists, if so, just add them to the subscription
-            MembershipUserWrapper existing = MembershipUtil.FindByUsername(userAdapter.Username);
-            if (!existing.IsValid())
-                existing = MembershipUtil.AddUser(userAdapter.Username, userAdapter.Password, userAdapter.Username, userAdapter.Firstname, userAdapter.Lastname);
+            try
+            {
+                userAdapter.Username = userAdapter.Email;
+                //Check if this user already exists, if so, just add them to the subscription
+                MembershipUserWrapper existing = MembershipUtil.FindByUsername(userAdapter.Username);
+                if (!existing.IsValid())
+                {
+                    result.IsExistingUser = false;
+                    existing = MembershipUtil.AddUser(userAdapter.Username, userAdapter.Password, userAdapter.Username, userAdapter.Firstname, userAdapter.Lastname);
+                }
+                else
+                {
+                    result.IsExistingUser = true;
+                }
 
-            SubscriptionManager.AddUserToSubscription(siteGuid, existing.UserInfo);
+                SubscriptionManager.AddUserToSubscription(siteGuid, existing.UserInfo);
+
+                result.HasException = false;
+                result.IsSuccess = true;
+            }
+            catch (Exception e)
+            {
+                result.HasException = true;
+                result.Exception = e;
+                result.IsSuccess = false;
+            }
+
+            return result;
         }
 
         public IList<UserInfo> GetUsers(String siteGuid)

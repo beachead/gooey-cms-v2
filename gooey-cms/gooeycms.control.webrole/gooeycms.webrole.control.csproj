@@ -120,6 +120,7 @@
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\global-admin\Subscriptions\AllSubscriptions.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Default.aspx" />
+    <Content Include="auth\global-admin\Subscriptions\edit-roles.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Modify.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Users.aspx" />
     <Content Include="auth\Package-Mgmt\apply.aspx" />
@@ -377,6 +378,13 @@
     </Compile>
     <Compile Include="auth\global-admin\Subscriptions\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\edit-roles.aspx.cs">
+      <DependentUpon>edit-roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Subscriptions\edit-roles.aspx.designer.cs">
+      <DependentUpon>edit-roles.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Subscriptions\Modify.aspx.cs">
       <DependentUpon>Modify.aspx</DependentUpon>
