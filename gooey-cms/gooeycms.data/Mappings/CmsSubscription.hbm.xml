@@ -56,6 +56,8 @@
     where
     is_demo = 0
     and
+    DATEADD(d, DATEDIFF(d, 0, signup_date), 0) < DATEADD(d, DATEDIFF(d, 0, getdate()), 0)
+    and
     (
     dateadd(mm,datediff(mm,signup_date,getdate()),signup_date)
     between
@@ -65,7 +67,7 @@
     between
     DATEADD(d, DATEDIFF(d, 0, getdate()), 0) and dateadd(dd,:timeframe,getdate())
     )
-    order by datepart(dd,signup_date) desc;
+    order by datepart(dd,signup_date) desc;    
     ]]>
   </sql-query>
 </hibernate-mapping>
