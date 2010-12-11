@@ -418,6 +418,24 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.HyperLink global_admin_developer_categories;
         
         /// <summary>
+        /// global_admin_contenttypes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View global_admin_contenttypes;
+        
+        /// <summary>
+        /// global_admin_contenttypes_default control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink global_admin_contenttypes_default;
+        
+        /// <summary>
         /// global_admin_subscriptions control.
         /// </summary>
         /// <remarks>

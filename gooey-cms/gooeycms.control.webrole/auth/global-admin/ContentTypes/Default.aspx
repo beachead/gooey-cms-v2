@@ -14,5 +14,79 @@
     This page will allow you to manage the global content types available to all users.
     <br /><br />
 
+    Existing Content Types:
+    <asp:GridView ID="ExistingContentTypes" runat="server" AutoGenerateColumns="False" 
+            ForeColor="#333333" 
+            DataSourceID="ContentTypeDataSource"
+            GridLines="None" OnRowCommand="OnRowCommand" CssClass="data">
+        <EmptyDataTemplate>
+            There are no global content types defined. You can create a new 
+            custom content type below.
+        </EmptyDataTemplate>
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        <Columns>
+            <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                <HeaderStyle HorizontalAlign="Left" />
+            </asp:BoundField>
+            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name">
+                <HeaderStyle HorizontalAlign="Left" />
+            </asp:BoundField>
+            <asp:BoundField DataField="Description" HeaderText="Description" 
+                SortExpression="Description">
+                <HeaderStyle HorizontalAlign="Left" />
+            </asp:BoundField>
+            <asp:CheckBoxField DataField="IsFileType" HeaderText="File" 
+                SortExpression="IsFile">
+                <HeaderStyle HorizontalAlign="Left" />
+            </asp:CheckBoxField>
+            <asp:TemplateField HeaderText="Actions">
+                <ItemTemplate>
+                    <asp:HiddenField ID="ContentTypeId" Value='<%# Eval("Guid") %>' runat="server" />
+                    <asp:HyperLink ID="LinkFields" NavigateUrl='<%# Eval("Guid","./ContentTypeFields.aspx?tid={0}") %>' Text="Manage Fields" runat="server" />
+                    <asp:LinkButton ID="DeleteType" Text="Delete" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this content type?');" runat="server" />                
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <EditRowStyle BackColor="#999999" />
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+    </asp:GridView>
+    <asp:ObjectDataSource ID="ContentTypeDataSource" runat="server" 
+        SelectMethod="GetGlobalContentTypes" 
+        TypeName="Gooeycms.Business.Content.ContentManagerDataAdapter"></asp:ObjectDataSource>
 
+    <asp:Label ID="Status" runat="server" />
+    <asp:HiddenField ID="GlobalTypeToken" runat="server" />
+    <table class="form">
+        <tr>
+            <td class="label">Name:</td>
+            <td><asp:TextBox ID="ContentName" runat="server" /></td>
+        </tr>
+        <tr>
+            <td class="label">Description:</td>
+            <td><asp:TextBox ID="ContentDescription" runat="server" /></td>
+        </tr>
+        <tr>
+            <td class="label">Supports File Uploads?</td>
+            <td>
+                <asp:RadioButton ID="ContentFileYes" GroupName="Files" Text="Yes" runat="server" />
+                <asp:RadioButton ID="ContentFileNo" GroupName="Files" Checked="true" Text="No" runat="server" />                    
+            </td>
+        </tr> 
+        <tr>
+            <td class="label">Show Content Editor?</td>
+            <td>
+                <asp:RadioButton ID="ContentEditorYes" GroupName="Editor" Checked="true" Text="Yes" runat="server" />
+                <asp:RadioButton ID="ContentEditorNo" GroupName="Editor" Text="No" runat="server" />                    
+            </td>
+        </tr>             
+        <tr class="controls">
+            <td colspan="2">
+                <asp:Button ID="AddContentType" OnClick="AddContentType_Click" Text="Add" runat="server" />
+            </td>
+        </tr>
+    </table>
 </asp:Content>

@@ -19,6 +19,11 @@ namespace Gooeycms.Business.Content
     /// </summary>
     public class ContentManagerDataAdapter
     {
+        public IList<CmsContentType> GetGlobalContentTypes()
+        {
+            return ContentManager.Instance.GetGlobalContentTypes();
+        }
+
         public IList<CmsContentType>  GetContentTypes()
         {
             return ContentManager.Instance.GetContentTypes();
@@ -91,6 +96,12 @@ namespace Gooeycms.Business.Content
             return defaultFields;
         }
          * */
+
+        public IList<CmsContentType> GetGlobalContentTypes()
+        {
+            CmsContentTypeDao dao = new CmsContentTypeDao();
+            return dao.FindGlobalContentTypes();
+        }
 
         public IList<CmsContentType> GetContentTypes()
         {

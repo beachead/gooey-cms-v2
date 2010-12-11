@@ -100,6 +100,12 @@
         </ul>
     </asp:View>
 
+    <asp:View ID="global_admin_contenttypes" runat="server">
+        <ul>
+            <li><asp:HyperLink ID="global_admin_contenttypes_default" NavigateUrl="~/auth/global-admin/ContentTypes/Default.aspx" Text="Content Types" runat="server" /></li>
+        </ul>
+    </asp:View>
+
     <asp:View ID="global_admin_subscriptions" runat="server">
         <ul>
             <li><asp:HyperLink ID="global_admin_subscriptions_pending" NavigateUrl="~/auth/global-admin/Subscriptions/default.aspx" Text="Pending Renewals" runat="server" /></li>
