@@ -13,18 +13,18 @@
                 For your reference your paypal profile id is: <asp:Label ID="PaypalProfileId" runat="server" />
                 <br /><br />
 
-                To start managing your site, <a href="http://control.gooeycms.net">login</a> to your management console now.        
+                To start managing your site, <b><a href="http://control.gooeycms.net">login</a> to your dashboard.</b>        
         </asp:View>
         <asp:View ID="SuccessFreeView" runat="server">
                 Congratulations, Your subscription has been successfully activated!
                 <br /><br />
 
-                To start managing your site, <a href="http://control.gooeycms.net">login</a> to your management console now.        
+                To start managing your site, <b><a href="http://control.gooeycms.net">login</a> to your dashboard.</b>        
         </asp:View>
         <asp:View ID="FailureView" runat="server">
                 There was a problem activating your subscription.
-                <br />
-                Reason: <asp:Label ID="LblErrorReason" runat="server" />
+                <br /><br />
+                Reason: <b><asp:Label ID="LblErrorReason" runat="server" /></b>
                 <br /><br />
                 Please contact customer support for further help.
         </asp:View>
