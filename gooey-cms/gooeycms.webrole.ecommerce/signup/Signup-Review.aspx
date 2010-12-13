@@ -2,40 +2,47 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 <div id="content">
     <ol id="signup-steps">
-	    <li>
-		    <h2><img src="../images/h2_create_gooey_acct.png" width="435" height="35" alt="create your gooey cms account" /> [NEED IMAGE]</h2>
+		    <h2><img src="../images/order_review.png" width="272" height="39" alt="Order Review" /></h2>
             <table cellspacing="0" class="form">		    
                 <tr>
-                    <td class="label"><label for="first-name">First Name</label></td>
-                    <td><asp:Label ID="Firstname" runat="server" /></td>
+                    <td class="label"></td>
+                    <td><b><asp:Label ID="Firstname" runat="server" />&nbsp;<asp:Label ID="Lastname" runat="server" /></b></td>
                 </tr>
-                <tr>
-                    <td class="label"><label for="last-name">Last Name</label></td>
-                    <td><asp:Label ID="Lastname" runat="server" /></td>
-                </tr>
-                <tr>
-                    <td class="label"><label for="email">Email / Username</label></td>
+               <tr>
+                    <td class="label"><label for="email">Username:</label></td>
                     <td><asp:Label ID="Email" runat="server" /></td>
                 </tr>                                
                 <tr>
-                    <td class="label"><label for="company">Company</label></td>
+                    <td class="label"><label for="company">Company:</label></td>
                     <td><asp:Label ID="Company" runat="server" /></td>
                 </tr>                  
                 <tr>
-                    <td class="label"><label for="email">Subdomain</label></td>
+                    <td class="label"><label for="email">Website:</label></td>
                     <td><asp:Label ID="Subdomain" runat="server" /></td>
                 </tr>       
                 <tr>
-                    <td class="label"><label for="subscription-plan">Subscription Plan</label></td>
+                    <td class="label"></td>
+                    <td></td>
+                </tr>                                  
+                 <tr>
+                    <td class="label"></td>
+                    <td><b>Subscription Details:</b></td>
+                </tr>       
+                <tr>
+                    <td class="label"></td>
                     <td><asp:Label ID="SubscriptionPlan" runat="server" /></td>
                 </tr>                                  
+                   <tr>
+                    <td class="label"></td>
+                    <td></td>
+                </tr>   
                 <tr>
-                    <td colspan="2" style="padding-top:10px;">
+                     <td class="label"></td>
+                     <td>
                         <asp:ImageButton ID="BtnSubscribe" ImageUrl="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" OnClick="BtnSubscribe_Click" runat="server" />                    
                     </td>
                 </tr>
             </table>
-        </li>
     </ol>
 </div>
 </asp:Content>

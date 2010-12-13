@@ -144,12 +144,21 @@ namespace Gooeycms.Business.Subscription
         {
             CmsSubscriptionPlan plan = GetSubscriptionPlan(registration);
 
+            double total = (double)plan.Price;
             StringBuilder desc = new StringBuilder();
-            desc.Append(plan.Name + " @ $" + plan.Price + " / month");
+            desc.Append("<b>" + plan.Name + "</b> @ $" + plan.Price + " / month<br />");
             if (registration.IsCampaignEnabled)
-                desc.Append(" + Campaign Option @ $" + GooeyConfigManager.CampaignOptionPrice + " / month");
+            {
+                desc.Append("<b>Campaign Option</b> @ " + String.Format("{0:c}", GooeyConfigManager.CampaignOptionPrice) + " / month<br />");
+                total += GooeyConfigManager.CampaignOptionPrice;
+            }
             if (registration.IsSalesforceEnabled)
-                desc.Append(" + Salesforce Option @ $" + GooeyConfigManager.SalesForcePrice + " / month");
+            {
+                desc.Append("<b>Salesforce Option</b> @ " + String.Format("{0:c}", GooeyConfigManager.SalesForcePrice + " / month<br />"));
+                total += GooeyConfigManager.SalesForcePrice;
+            }
+            desc.Append("<br /><b>Order Total:</b> " + String.Format("{0:c}", total) + " / month<br />");
+          
 
             return desc.ToString();
         }
