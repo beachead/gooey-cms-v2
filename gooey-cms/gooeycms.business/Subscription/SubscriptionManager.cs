@@ -22,7 +22,7 @@ namespace Gooeycms.Business.Subscription
 {
     public static class SubscriptionManager
     {
-        public static List<String> InvalidSubdomainPrefixes = new List<String>() { "demo-","staging-" };
+        public static List<String> InvalidSubdomainPrefixes = new List<String>() { "demo-","staging-", "gooeycdn" };
 
         public static bool IsSubdomainValid(String subdomain)
         {
