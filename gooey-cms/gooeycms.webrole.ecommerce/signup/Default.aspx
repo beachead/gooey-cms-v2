@@ -1,9 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ContentPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Ecommerce.Signup" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
 <asp:Content ContentPlaceHolderID="localCSS" runat="server">
-	<link rel="stylesheet" type="text/css" href="/css/signup.css" />
+    <link rel="stylesheet" type="text/css" href="/css/signup.css" />
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+    <telerik:RadScriptManager ID="ScriptManager" runat="server" />
+
 	<!-- START: content -->
 	<div id="content">
 		<h1><img src="../images/h1_minute_away2.png" width="720" height="28" alt="you're a minute away from a great relationship!" /></h1>
@@ -77,8 +81,7 @@
                 <asp:Panel ID="PnlNoPassword" runat="server">
                 Uses your existing GooeyCMS password
                 </asp:Panel>
-			</li>
-            <asp:ScriptManager ID="ScriptManager" runat="server" />       
+			</li> 
 			<li>
 				<h2><img src="../images/h2_create_gooey_address.png" width="435" height="35" alt="create your cms address" /></h2>
 				<p>Every Gooey CMS has its own web address.  You can change it to a<br />custom DNS address at any time (for example, MyWebsite.com).</p>
@@ -114,13 +117,32 @@
 				<p>
 				    <asp:DropDownList ID="SelectedPlan" OnSelectedIndexChanged="SelectedPlan_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
 				</p>
-				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
+				<p><asp:ImageButton ID="Create" OnClientClick="get_invite_code(); return false;" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
 				<p id="disclaimer">by clicking the button above, you agree to our <a href="">terms of service</a>, <a href="">privacy policy</a>, and <a href="">refund policy</a>.</p>
 			</li>
 		</ol>
  
 		<!-- START: signup-form -->
- 
+        <telerik:RadWindowManager ID="WindowManager" runat="server" />
+        <telerik:RadWindow ID="Window" Title="Invite Code" Width="600" Height="350" Modal="true" VisibleOnPageLoad="false" Behaviors="Resize,Move,Close" Skin="Default" runat="server">
+            <ContentTemplate>
+                <div style="padding:10px;">
+                    During the beta period an invite code is required to sign-up for GooeyCMS. If you do not have an invite code you may request one <a href="http://invite.gooeycms.net">here</a>
+                    <br /><br />
+                    Invite Code:<br />
+                    <asp:TextBox ID="InviteCode" Width="500px" TextMode="MultiLine" Rows="3" runat="server" ValidationGroup="InviteGroup" />
+                    <asp:RequiredFieldValidator ID="InviteRequired" runat="server" ControlToValidate="InviteCode" Display="None" />
+                    <p><asp:ImageButton ID="ImageButton1" OnClick="CreateAccount_Click" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
+                </div>
+            </ContentTemplate>
+        </telerik:RadWindow>
+
+        <script language="javascript" type="text/javascript">
+            function get_invite_code() {
+                var rad = $find('<%= Window.ClientID %>');
+                rad.show();
+            }
+        </script>
 	</div>
 	<!-- END: content -->
 </asp:Content>
