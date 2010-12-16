@@ -17,21 +17,20 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
     <div style="overflow: auto;">
-        <table>
+        <table border="0">
             <tr>
-                <td style="vertical-align:top; width:70%; padding-right:20px;">
-                    <h1>build your business one website at a time</h1>
-                    <p>View the sites you have purchased<br />apply them to your subscriptions or your clients<br />create new sites or themes to sell.</p>                
+                <td style="vertical-align:top; padding: 20px 20px 0 0">
+                    <div id="head-line" class="main">BUILD YOUR BUSINESS ONE WEBSITE AT A TIME</div>
+                    <p>create new websites to sell and keep 70% of each sale<br />add a logo or mulitple screenshots to your site package<br />view or edit the site package you created</p>                
                 </td>
-                <td>
+                <td style="vertical-align:top; padding: 45px 20px 0 0">
                     <ul class="check">
 	                    <li class="alt">You pick the price</li>
-	                    <li>You get 70% of sales revenue</li>
+	                    <li>You get 70% of every sale</li>
 	                    <li class="alt">Receive revenue checks quarterly</li>
 	                    <li>No charge for free sites</li>
 	                    <li class="alt">No credit card fees</li>
-	                    <li>No hosting fees</li>
-	                    <li class="alt">No marketing fees</li>
+	                    <li>No hosting fees in store</li>
                     </ul>                
                 </td>
             </tr>

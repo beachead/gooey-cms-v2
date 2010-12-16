@@ -44,12 +44,12 @@
 	<!-- START: footer -->
 	<div id="footer">
 		<ul class="adjacent">
-			<li><a href="">About</a></li>
-			<li><a href="">Contact Us</a></li>
-			<li><a href="">Terms &amp; Conditions</a></li>
-			<li class="last"><a href="">Help</a></li>
-		</ul>
-		<p>&copy; 2010 Beachead Technologies Inc.</p>
+			<li><a href="contact_us">Contact Us</a></li>
+			<li><a href="help#refund">Refunds</a></li>
+			<li><a href="privacy">Privacy</a></li>
+			<li class="last"><a href="terms_of_use">Terms of Use</a></li>
+        </ul>
+        <p>&copy; 2008 - 2011 Beachead Technologies Inc.</p>
 	</div>
 	<!-- END: footer -->
 </div>

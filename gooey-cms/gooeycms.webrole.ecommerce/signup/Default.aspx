@@ -21,7 +21,7 @@
 
 		<div class="callout" id="callout">
 			<p>Your 30 day trial lasts until <br /><% Response.Write(TrialExpires); %>. If you don’t want to continue using Gooey CMS, please cancel before <% Response.Write(TrialExpires); %>.</p>
-			<p class="x-3">For additional details, <a href="">click here</a>.</p>
+			<p class="x-3" style="padding-left:25px;">You can cancel anytime, but we hope you'll stay.</p>
 		</div>
  
 		<!-- START: signup-form -->
@@ -70,7 +70,7 @@
 				<td class="label"><label for="confirm-password">Confirm Password</label></td>
 				<td>                    
 				    <asp:TextBox ID="Password2" TextMode="Password" runat="server" />
-                    <asp:CompareValidator id="PasswordValidate" runat="server" ErrorMessage="Passwords do not match!" ControlToValidate="Password1" ControlToCompare="Password2"></asp:CompareValidator></td>
+                    <asp:CompareValidator id="PasswordValidate" runat="server" ErrorMessage="Passwords do not match!" ControlToValidate="Password2" ControlToCompare="Password1"></asp:CompareValidator></td>
 				</tr>
 				</table>
                 </asp:Panel>
@@ -115,7 +115,7 @@
 				    <asp:DropDownList ID="SelectedPlan" OnSelectedIndexChanged="SelectedPlan_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
 				</p>
 				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
-				<p id="disclaimer">by clicking the button above, you agree to our <a href="">terms of service</a>, <a href="">privacy policy</a>, and <a href="">refund policy</a>.</p>
+				<p id="disclaimer">by clicking the button above, you agree to our <a href="http://corp.gooeycms.net/terms_of_use">terms of service</a>, <a href="http://corp.gooeycms.net/privacy">privacy policy</a>, and <a href="http://corp.gooeycms.net/help#refund">refund policy</a>.</p>
 			</li>
 		</ol>
  

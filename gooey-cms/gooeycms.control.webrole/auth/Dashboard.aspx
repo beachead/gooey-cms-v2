@@ -20,13 +20,13 @@
     <table border="0">
         <tr>
             <td>
-                <img src="../images/dashboard.png" width="362px" height="45px" border="0" />
-            </td>
-            <td style="padding-left: 80px;">
+              <div id="head-line" class="main">DASHBOARD</div>
             </td>
             <td>
-                <img src="../images/purchases.png" width="201px" height="61px" border="0" />
             </td>
+            <td>
+              <div id="head-line" class="main">PURCHASES</div>
+             </td>
         </tr>
         <tr>
             <td colspan="3">

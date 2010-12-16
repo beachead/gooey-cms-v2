@@ -15,7 +15,7 @@ namespace Gooeycms.Webrole.Ecommerce
 {
     public partial class Signup : System.Web.UI.Page
     {
-        protected String TrialExpires = DateTime.Now.AddDays(GooeyConfigManager.FreeTrialLength).ToString("MMMM dd,yyyy");
+        protected String TrialExpires = DateTime.Now.AddDays(GooeyConfigManager.FreeTrialLength).ToString("MMMM dd, yyyy");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -96,7 +96,7 @@ namespace Gooeycms.Webrole.Ecommerce
         protected void Subdomain_TextChanged(Object sender, EventArgs e)
         {
             bool isAvailable = SubscriptionManager.IsSubdomainAvailable(this.Subdomain.Text);
-            this.IsAvailableImage.ImageUrl = (isAvailable) ? "../images/icon_available.png" : "missingimage.jpg";
+            this.IsAvailableImage.ImageUrl = (isAvailable) ? "../images/icon_available.png" : "../images/icon_unavailable.png";
             this.IsAvailableImage.Visible = true;
         }
 
