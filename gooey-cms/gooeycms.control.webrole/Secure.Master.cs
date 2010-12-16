@@ -25,8 +25,7 @@ namespace Gooeycms.Webrole.Control
                 if (this.StagingLink != null)
                     this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
 
-                if ((!CurrentSite.Subscription.IsCampaignEnabled) && (this.NavCampaigns != null))
-                    this.NavCampaigns.Visible = false;
+                   
             }
 
             if (!Page.IsPostBack)
@@ -45,10 +44,19 @@ namespace Gooeycms.Webrole.Control
                                                                SecurityConstants.Roles.SITE_ADMINISTRATOR,
                                                                SecurityConstants.Roles.SITE_PAGE_EDITOR);
 
-            this.ListItemCampaigns.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
-                                                                   SecurityConstants.Roles.SITE_ADMINISTRATOR,
-                                                                   SecurityConstants.Roles.SITE_CAMPAIGNS);
+            if ((!CurrentSite.Subscription.IsCampaignEnabled) && (this.NavCampaigns != null))
+                {
+                    this.ListItemCampaigns.Visible = false;
+                    this.NavCampaigns.Visible = false;
+                }
+            else  /*  Added if else as annoying li spacing issue was showing up in nav bar when campaigns was not displayed.  */
 
+                {
+                this.ListItemCampaigns.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
+                                                                           SecurityConstants.Roles.SITE_ADMINISTRATOR,
+                                                                           SecurityConstants.Roles.SITE_CAMPAIGNS);
+                }
+ 
             this.ListItemPromotion.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
                                                                    SecurityConstants.Roles.SITE_ADMINISTRATOR,
                                                                    SecurityConstants.Roles.SITE_PROMOTION);

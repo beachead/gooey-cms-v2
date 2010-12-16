@@ -17,7 +17,7 @@
 
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <h1>Site Administration</h1>
+    <h1>SITE ADMINISTRATION</h1>
 
     <p>This management area allows you to manage your global site configurations and available content types.</p>
     

@@ -72,7 +72,7 @@
                                         <ul>
                                             <li><a id="A1" href="#" runat="server">Subscriptions</a></li>
                                             <li><a id="A2" href="#" runat="server">Billing</a></li>
-                                            <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change Password</a></li>
+                                            <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change&nbsp;Password</a></li>
                                             <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
                                         </ul>
                                     </div>
@@ -82,7 +82,7 @@
                                         <ul>
                                             <li><a href="#">Create a site</a></li>
                                             <li><a href="#">Create a Theme</a></li>
-                                            <li><a href="#">Developer Extras</a></li>
+                                            <li><a href="#">Developer&nbsp;Extras</a></li>
                                         </ul>
                                     </div>
                                 </li>

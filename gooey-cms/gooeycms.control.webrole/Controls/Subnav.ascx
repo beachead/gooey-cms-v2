@@ -13,7 +13,7 @@
         <ul>
             <li><asp:HyperLink ID="dashboard_home" navigateUrl="~/auth/dashboard.aspx" Text="Dashboard" runat="server" /></li>
             <li><asp:HyperLink ID="dashboard_new" NavigateUrl="http://store.gooeycms.net/signup/" Text="Register New Site" runat="server"/></li>
-            <li class="last"><asp:HyperLink ID="dashboard_purchase" NavigateUrl="http://store.gooeycms.net/" Text="Purchase Sites or Themes" runat="server" /></li> 
+            <li class="last"><asp:HyperLink ID="dashboard_purchase" NavigateUrl="http://store.gooeycms.net/" Text="Purchase Sites" runat="server" /></li> 
         </ul>    
     </asp:View>
 
