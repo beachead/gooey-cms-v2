@@ -20,6 +20,9 @@ namespace Gooeycms.Webrole.Ecommerce
         {
             if (!Page.IsPostBack)
             {
+                if (GooeyConfigManager.IsInviteEnabled)
+                    this.Create.OnClientClick = "get_invite_code(); return false;";
+
                 HyperLink lnk = (HyperLink)LoginView.FindControl("LnkSignIn");
                 if (lnk != null)
                     lnk.NavigateUrl = "http://" + GooeyConfigManager.AdminSiteHost + "/login.aspx?ReturnUrl=" + Server.UrlEncode("http://store.gooeycms.net/signup/");
@@ -102,42 +105,56 @@ namespace Gooeycms.Webrole.Ecommerce
 
         protected void CreateAccount_Click(Object sender, EventArgs e)
         {
-            if (SubscriptionManager.IsSubdomainAvailable(this.Subdomain.Text))
+            try
             {
-                SubscriptionPlans selectedPlan;
-                try
+                if (GooeyConfigManager.IsInviteEnabled)
                 {
-                    selectedPlan = (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), this.SelectedPlan.SelectedValue, true);
-                }
-                catch (Exception)
-                {
-                    throw new ApplicationException("Could not find a mapping for the selected subscription plan: " + this.SelectedPlan.SelectedValue + ". The subscription plan SKU must match one of the following: " + String.Join(" ", Enum.GetNames(typeof(SubscriptionPlans))));
+                    //Make sure the invite code is valid
+                    InviteManager.Instance.Validate(this.InviteCode.Text);
                 }
 
-                Registration registration = new Registration();
-                registration.Created = DateTime.Now;
-                registration.Guid = System.Guid.NewGuid().ToString();
-                registration.Firstname = this.Firstname.Text;
-                registration.Lastname = this.Lastname.Text;
-                registration.Email = this.Email.Text;
-                registration.Company = this.Company.Text;
-                registration.Sitename = this.Subdomain.Text;
-                registration.EncryptedPassword = Registrations.Encrypt(this.Password1.Text);
-                registration.SubscriptionPlanSku = selectedPlan.ToString().ToLower();
-                registration.IsSalesforceEnabled = this.SalesForceOption.Checked;
-                registration.IsCampaignEnabled = this.CampaignOption.Checked;
-                if (LoggedInUser.IsLoggedIn)
-                    registration.ExistingAccountGuid = LoggedInUser.Wrapper.UserInfo.Guid;
+                if (SubscriptionManager.IsSubdomainAvailable(this.Subdomain.Text))
+                {
+                    SubscriptionPlans selectedPlan;
+                    try
+                    {
+                        selectedPlan = (SubscriptionPlans)Enum.Parse(typeof(SubscriptionPlans), this.SelectedPlan.SelectedValue, true);
+                    }
+                    catch (Exception)
+                    {
+                        throw new ApplicationException("Could not find a mapping for the selected subscription plan: " + this.SelectedPlan.SelectedValue + ". The subscription plan SKU must match one of the following: " + String.Join(" ", Enum.GetNames(typeof(SubscriptionPlans))));
+                    }
 
-                Registrations.Save(registration);
-                Response.Redirect("Signup-Review.aspx?g=" + registration.Guid, true);
-            }
-            else
-            {
-                if (SubscriptionManager.IsSubdomainValid(this.Subdomain.Text))
-                    throw new ApplicationException("The subdomain " + this.Subdomain.Text + " is already in use and may not be used again.");
+                    Registration registration = new Registration();
+                    registration.Created = DateTime.Now;
+                    registration.Guid = System.Guid.NewGuid().ToString();
+                    registration.Firstname = this.Firstname.Text;
+                    registration.Lastname = this.Lastname.Text;
+                    registration.Email = this.Email.Text;
+                    registration.Company = this.Company.Text;
+                    registration.Sitename = this.Subdomain.Text;
+                    registration.EncryptedPassword = Registrations.Encrypt(this.Password1.Text);
+                    registration.SubscriptionPlanSku = selectedPlan.ToString().ToLower();
+                    registration.IsSalesforceEnabled = this.SalesForceOption.Checked;
+                    registration.IsCampaignEnabled = this.CampaignOption.Checked;
+                    if (LoggedInUser.IsLoggedIn)
+                        registration.ExistingAccountGuid = LoggedInUser.Wrapper.UserInfo.Guid;
+
+                    Registrations.Save(registration);
+                    Response.Redirect("Signup-Review.aspx?g=" + registration.Guid, true);
+                }
                 else
-                    throw new ArgumentException("Subdomains may not start with " + SubscriptionManager.InvalidSubdomainPrefixes.AsString(","));
+                {
+                    if (SubscriptionManager.IsSubdomainValid(this.Subdomain.Text))
+                        throw new ApplicationException("The subdomain " + this.Subdomain.Text + " is already in use and may not be used again.");
+                    else
+                        throw new ArgumentException("Subdomains may not start with " + SubscriptionManager.InvalidSubdomainPrefixes.AsString(","));
+                }
+            }
+            catch (Exception ex)
+            {
+                this.LblStatus.Text = ex.Message;
+                this.LblStatus.ForeColor = System.Drawing.Color.Red;
             }
         }
     }

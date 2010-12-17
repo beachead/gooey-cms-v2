@@ -22,7 +22,7 @@ namespace Gooeycms.Business.Crypto
             DateTime issued = DateTime.Now;
             DateTime expires = issued.Add(validFor);
 
-            data = Guid.NewGuid().ToString() + "," + data + "," + expires.ToLongTimeString();
+            data = Guid.NewGuid().ToString() + "," + data + "," + expires.ToLongDateString();
             
             TextEncryption crypto = new TextEncryption(GooeyConfigManager.TokenEncyrptionKey);
             String result = crypto.Encrypt(data);
@@ -61,9 +61,9 @@ namespace Gooeycms.Business.Crypto
 
                     if (expectedData.EqualsCaseInsensitive(original))
                     {
-                        DateTime dt = DateTime.Parse(timestamp);
-                        if (dt > DateTime.Now)
-                        {
+                        //DateTime dt = DateTime.Parse(timestamp);
+                        //if (dt > DateTime.Now)
+                        //{
                             //check the database to make sure this token hasn't been used
                             SecurityToken temp = GetFromDatabase(encryptedData);
                             if (temp != null)
@@ -78,7 +78,7 @@ namespace Gooeycms.Business.Crypto
                                     result = true;
                                 }
                             }
-                        }
+                        //}
                     }
                 }
             }

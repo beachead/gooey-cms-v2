@@ -1,0 +1,15 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Images]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Images];
+END
+
+CREATE TABLE [dbo].[Images](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[guid] [varchar](36) NOT NULL,
+	[site_guid] VARCHAR(36),
+	[date_created] DATETIME,
+	[file_name] VARCHAR(255) NOT NULL,
+	[content_type] VARCHAR(64) NULL,
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE INDEX idx_site_guid ON [Images]([site_guid]);

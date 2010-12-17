@@ -41,6 +41,7 @@ namespace Gooeycms.Constants
         public const String SitePackageTos = "sitepackage-tos";
         public const String DefaultFlashCrossDomainFile = "default-flash-css";
         public const String FreeTrialLength = "default-freetrial-length";
+        public const String InviteEnabled = "invite-enabled";
 
         public const String FlashCrossDomainFilename = "cross-domain.xml";
         public const String PaypalSandboxUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr";

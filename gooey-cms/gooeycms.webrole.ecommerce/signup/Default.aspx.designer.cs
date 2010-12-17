@@ -31,6 +31,15 @@ namespace Gooeycms.Webrole.Ecommerce {
         protected global::System.Web.UI.WebControls.LoginView LoginView;
         
         /// <summary>
+        /// LblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStatus;
+        
+        /// <summary>
         /// Firstname control.
         /// </summary>
         /// <remarks>
@@ -274,12 +283,12 @@ namespace Gooeycms.Webrole.Ecommerce {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator InviteRequired;
         
         /// <summary>
-        /// ImageButton1 control.
+        /// BtnCreateAccount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.ImageButton BtnCreateAccount;
     }
 }

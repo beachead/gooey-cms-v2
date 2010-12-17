@@ -23,11 +23,6 @@
         </asp:LoginView>
         </div>
 
-        <div style="">
-            <br />
-            <asp:Label ID="LblStatus" runat="server" />
-        </div>
-
 		<div class="callout" id="callout">
 			<p>Your 30 day trial lasts until <br /><% Response.Write(TrialExpires); %>. If you don’t want to continue using Gooey CMS, please cancel before <% Response.Write(TrialExpires); %>.</p>
 			<p class="x-3" style="padding-left:25px;">You can cancel anytime, but we hope you'll stay.</p>
@@ -122,8 +117,13 @@
 				<p>
 				    <asp:DropDownList ID="SelectedPlan" OnSelectedIndexChanged="SelectedPlan_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
 				</p>
-				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" OnClientClick="" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
+<<<<<<< HEAD
+				<p><asp:ImageButton ID="Create" OnClientClick="get_invite_code(); return false;" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
+				<p id="disclaimer">by clicking the button above, you agree to our <a href="">terms of service</a>, <a href="">privacy policy</a>, and <a href="">refund policy</a>.</p>
+=======
+				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
 				<p id="disclaimer">by clicking the button above, you agree to our <a href="http://corp.gooeycms.net/terms_of_use">terms of service</a>, <a href="http://corp.gooeycms.net/privacy">privacy policy</a>, and <a href="http://corp.gooeycms.net/help#refund">refund policy</a>.</p>
+>>>>>>> 350936988f8ffda04864599bc459748af64ba776
 			</li>
 		</ol>
  
@@ -137,7 +137,7 @@
                     Invite Code:<br />
                     <asp:TextBox ID="InviteCode" Width="500px" TextMode="MultiLine" Rows="3" runat="server" ValidationGroup="InviteGroup" />
                     <asp:RequiredFieldValidator ID="InviteRequired" runat="server" ControlToValidate="InviteCode" Display="None" />
-                    <p><asp:ImageButton ID="BtnCreateAccount" OnClick="CreateAccount_Click" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
+                    <p><asp:ImageButton ID="ImageButton1" OnClick="CreateAccount_Click" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
                 </div>
             </ContentTemplate>
         </telerik:RadWindow>

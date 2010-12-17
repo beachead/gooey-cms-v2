@@ -39,6 +39,21 @@ namespace Gooeycms.Business.Subscription
             }
         }
 
+        public void Validate(String token)
+        {
+            CmsInviteDao dao = new CmsInviteDao();
+            CmsInvite invite = dao.FindByToken(token);
+            if (invite == null)
+                throw new ArgumentException("This invite token is not valid and may not be used.");
+
+            if (invite.Responded < DateTime.Now)
+                throw new ArgumentException("This invite token has already been used and may not be used again");
+
+            //Make sure the token is still valid
+            if (!TokenManager.IsValid(invite.Guid, token))
+                throw new ArgumentException("The invite token is not valid, has already been used or is expired.");
+        }
+
         public void Approve(Data.Guid guid)
         {
             CmsInviteDao dao = new CmsInviteDao();

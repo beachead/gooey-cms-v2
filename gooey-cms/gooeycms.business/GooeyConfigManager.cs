@@ -490,6 +490,14 @@ This is your home page.
             }
         }
 
+        public static Boolean IsInviteEnabled
+        {
+            get
+            {
+                return Boolean.Parse(GetCachedValue(ConfigConstants.InviteEnabled, defaultValue: "true"));
+            }
+        }
+
         public static class EmailAddresses
         {
             public static String SiteAdmin

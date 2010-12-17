@@ -24,5 +24,11 @@ namespace Gooeycms.Data.Model.Subscription
             String hql = "select invite from CmsInvite invite order by invite.Issued desc, invite.Responded, invite.Created asc";
             return base.NewHqlQuery(hql).List<CmsInvite>();
         }
+
+        public CmsInvite FindByToken(string token)
+        {
+            String hql = "select invite from CmsInvite invite where invite.Token = :token";
+            return base.NewHqlQuery(hql).SetString("token", token).UniqueResult<CmsInvite>();
+        }
     }
 }

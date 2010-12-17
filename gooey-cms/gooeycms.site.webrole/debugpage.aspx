@@ -13,6 +13,8 @@
         <asp:Label ID="Token" runat="server" />
 
         <asp:HyperLink ID="HyperLink" OnPreRender="AppendQuerystring" NavigateUrl="./debugpas.aspx" Text="Click Here" runat="server" />
+
+        <img src="./image.aspx" />
     </div>
     </form>
 </body>
