@@ -15,6 +15,7 @@ namespace Gooeycms.Business.Markup.Dynamic
         private String loadedContentType = null;
 
         private static Regex WriteIfPageBlock = new Regex(@"<%\s*writeifpage\s*\(\s*[""']?(?<pagename>.*?)[""']?\s*,\s*[""']?(?<text>.*?)[""']?\s*\)\s*%>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static Regex WriteUrlNameBlock = new Regex(@"<%\s*writeurlname\s*%>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         private static Regex ForEachBlock = new Regex(@"<%\s*foreach\s+(?<id>\w+)\s*(where(?<where>.*?))?\s*(orderby(?<orderby>.*?))?\s*(limit(?<limit>.*?))?\s*%>(?<block>.*?)<%\s*next\s*%>", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
         private static Regex Field = new Regex(@"{(?<id>\w+)\.(?<key>\w+)}", RegexOptions.Compiled);
         private static Regex OrderBy = new Regex(@"(?<field>\w+)\s*(?<direction>asc|desc)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -26,6 +27,9 @@ namespace Gooeycms.Business.Markup.Dynamic
 
             //Replace any write-if page blocks
             content = WriteIfPageBlock.Replace(content, new MatchEvaluator(WriteIfPageEvaluator));
+
+            content = WriteUrlNameBlock.Replace(content, new MatchEvaluator(WriteUrlName));
+
 
             //Find any blocks of dynamic code
             content = ForEachBlock.Replace(content, new MatchEvaluator(BlockMatchEvaluator));
@@ -69,6 +73,14 @@ namespace Gooeycms.Business.Markup.Dynamic
             else
                 return "";
         }
+
+
+        private String WriteUrlName(Match match)
+        {
+            CmsUrl url = WebRequestContext.CurrentPage();
+            return url;
+        }
+
 
         private string BlockMatchEvaluator(Match match)
         {
