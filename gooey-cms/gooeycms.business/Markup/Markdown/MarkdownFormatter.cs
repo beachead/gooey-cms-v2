@@ -12,6 +12,7 @@ namespace Gooeycms.Business.Markup.Markdown
     {
         private static Regex ImageHtml = new Regex(@"<img\s+.*?src\=([\x27\x22])?(?<Url>[^\x27\x22|\s|\\|>]*)(?=[\x27\x22])?.*?>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex ImageInputHtml = new Regex(@"<input\s+.*?src\=([\x27\x22])?(?<Url>[^\x27\x22|\s|\\|>]*)(?=[\x27\x22])?.*?>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex FlashHtml = new Regex(@"~/(\w+)\.swf", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private MarkdownSharp.Markdown formatter = new MarkdownSharp.Markdown();
         private String imageContainerUrl;
@@ -32,7 +33,17 @@ namespace Gooeycms.Business.Markup.Markdown
             html = ImageHtml.Replace(html,new MatchEvaluator(ImageReferenceEvaluator));
             html = ImageInputHtml.Replace(html, new MatchEvaluator(ImageReferenceEvaluator));
 
+            //rewrite all of the flash urls to the container
+            html = FlashHtml.Replace(html, new MatchEvaluator(FlashReferenceEvaluator));
+
             return new StringBuilder(html);
+        }
+
+        private string FlashReferenceEvaluator(Match match)
+        {
+            String fullurl = match.Groups[0].Value;
+
+            return fullurl.Replace("~", imageContainerUrl);
         }
 
         private string ImageReferenceEvaluator(Match match)

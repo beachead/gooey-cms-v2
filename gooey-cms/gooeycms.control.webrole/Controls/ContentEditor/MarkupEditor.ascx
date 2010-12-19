@@ -332,11 +332,16 @@
 
 
     function onimage_selected(imageName) {
-    <% if (UseStandardImageTags) { %>
-        __Insert('../images/' + imageName,'<%=PageMarkupText.TextboxId %>');
-    <% } else { %>
-        __Insert('[[image:~/' + imageName + ']]{BR}','<%=PageMarkupText.TextboxId %>');
-    <% } %>
+        if (imageName.substr(-3) === 'swf') {
+            __Insert('~/' + imageName,'<%=PageMarkupText.TextboxId %>');
+        }
+        else {
+        <% if (UseStandardImageTags) { %>
+            __Insert('../images/' + imageName,'<%=PageMarkupText.TextboxId %>');
+        <% } else { %>
+            __Insert('[[image:~/' + imageName + ']]{BR}','<%=PageMarkupText.TextboxId %>');
+        <% } %>
+        }
     }
 
     function keypressHandler(obj) {
