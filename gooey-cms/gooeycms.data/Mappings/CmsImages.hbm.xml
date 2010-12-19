@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Page.CmsImage, gooeycms.data" table="Images">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="guid" name="Guid" type="String" />
+    <property column="site_guid" name="SubscriptionId" type="String" />
+    <property column="cloud_url" name="CloudUrl" type="String" />    
+    <property column="date_created" name="Created" type="DateTime" />
+    <property column="directory" name="Directory" type="String" />
+    <property column="file_name" name="Filename" type="String" />
+    <property column="length" name="Length" type="long" />
+    <property column="content_type" name="ContentType" type="String" />
+  </class>
+
+  <sql-query name="CmsImagesPaging">
+    <return alias="images"
+            class="Gooeycms.Data.Model.Page.CmsImage,gooeycms.data"/>
+    <![CDATA[  
+      select {images.*} from 
+	      (select *,ROW_NUMBER() OVER(ORDER BY file_name asc) as row from Images e where site_guid = :guid and content_type like 'image/%') as Images
+      where (row between :start and :end)
+      order by file_name asc;
+    ]]>
+  </sql-query>
+</hibernate-mapping>

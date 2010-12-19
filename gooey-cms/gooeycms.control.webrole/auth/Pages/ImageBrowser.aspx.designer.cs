@@ -22,13 +22,31 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadScriptManager ScriptManager;
+        
+        /// <summary>
+        /// AjaxScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxManager AjaxScriptManager;
+        
+        /// <summary>
         /// LblUploadStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Label LblUploadStatus;
+        protected global::System.Web.UI.WebControls.Label LblUploadStatus;
         
         /// <summary>
         /// FileUpload control.
@@ -46,7 +64,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Button BtnUpload;
+        protected global::System.Web.UI.WebControls.Button BtnUpload;
         
         /// <summary>
         /// LblUploadedFiles control.
@@ -55,24 +73,60 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Label LblUploadedFiles;
+        protected global::System.Web.UI.WebControls.Label LblUploadedFiles;
         
         /// <summary>
-        /// PanelImageList control.
+        /// LoadingPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Anthem.Panel PanelImageList;
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel LoadingPanel;
         
         /// <summary>
-        /// AvailableImageList control.
+        /// AjaxPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList AvailableImageList;
+        protected global::Telerik.Web.UI.RadAjaxPanel AjaxPanel;
+        
+        /// <summary>
+        /// BtnRefreshImages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton BtnRefreshImages;
+        
+        /// <summary>
+        /// GridExistingImages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadGrid GridExistingImages;
+        
+        /// <summary>
+        /// ImagePreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadBinaryImage ImagePreview;
+        
+        /// <summary>
+        /// ImageDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ImageDataSource;
     }
 }

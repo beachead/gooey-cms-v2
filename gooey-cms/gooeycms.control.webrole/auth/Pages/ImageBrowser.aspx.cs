@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Gooeycms.Business.Images;
 using Gooeycms.Business.Storage;
+using Gooeycms.Data.Model.Page;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Pages
 {
@@ -11,15 +13,12 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         {
             if (!Page.IsPostBack)
             {
-                this.LoadExistingImages();
             }
         }
 
-        private void LoadExistingImages()
+        public void BtnRefreshImages_Click(Object sender, EventArgs e)
         {
-            IList<StorageFile> images = ImageManager.Instance.GetAllImagePaths(StorageClientConst.RootFolder);
-            this.AvailableImageList.DataSource = images;
-            this.AvailableImageList.DataBind();
+            this.GridExistingImages.DataBind();
         }
 
         public void BtnUpload_Click(Object sender, EventArgs e)
@@ -41,7 +40,8 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                     LblUploadStatus.Text = status;
                     LblUploadedFiles.Text = files;
-                    LoadExistingImages();
+
+                    this.GridExistingImages.DataBind();
                 }
                 catch (ArgumentException ex)
                 {
@@ -52,9 +52,17 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             {
                 errorMessage = "You must specify an image file or zip file to upload.";
             }
+        }
 
-            if (!String.IsNullOrEmpty(errorMessage))
-                Anthem.Manager.AddScriptForClientSideEval(String.Format("showErrorMessage('{0}');", errorMessage));
+        protected void GridExistingImages_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("RowClick"))
+            {
+                String guid = (String)e.Item.OwnerTableView.DataKeyValues[e.Item.ItemIndex]["Guid"];
+                CmsImage image = ImageManager.Instance.GetImageByGuid(CurrentSite.Guid, guid,false);
+
+                this.ImagePreview.ImageUrl = image.CloudUrl;
+            }
         }
     }
 }

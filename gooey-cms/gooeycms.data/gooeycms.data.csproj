@@ -84,7 +84,8 @@
     <Compile Include="Model\Logging.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />
     <Compile Include="Model\Page\CmsPageDao.cs" />
-    <Compile Include="Model\Page\Image.cs" />
+    <Compile Include="Model\Page\CmsImage.cs" />
+    <Compile Include="Model\Page\CmsImageDao.cs" />
     <Compile Include="Model\SecurityToken.cs" />
     <Compile Include="Model\Site\CmsSitePath.cs" />
     <Compile Include="Model\Site\CmsSitePathDao.cs" />
@@ -125,7 +126,7 @@
     <EmbeddedResource Include="Mappings\CmsInvite.hbm.xml" />
     <EmbeddedResource Include="Mappings\Logging.hbm.xml" />
     <EmbeddedResource Include="Mappings\BillingHistory.hbm.xml" />
-    <EmbeddedResource Include="Mappings\Images.hbm.xml" />
+    <EmbeddedResource Include="Mappings\CmsImages.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\add-foreign-keys.sql.txt" />
     <Content Include="sql-scripts\create-images.sql.txt" />

@@ -50,6 +50,14 @@
             case "Edit":
                 openEditWindow(treeNode.get_value());
                 break;
+            case "ManageImages":
+                var wnd = window.radopen("ImageBrowser.aspx?pid=" + treeNode.get_value(), null);
+                var width = 715;
+                wnd.set_title("Image Manager");
+                wnd.set_width(width);
+                wnd.set_height(500);
+                wnd.moveTo(10, 10);
+                break;
             case "ManageCss":
                 var wnd = window.radopen("Stylesheet.aspx?a=edit&pid=" + treeNode.get_value(), null);
                 var width = 925;
@@ -164,6 +172,7 @@
                     <telerik:RadMenuItem Value="Edit" Text="Edit ..." ImageUrl="~/Images/Vista/9.gif"></telerik:RadMenuItem>
                     <telerik:RadMenuItem Value="Rename" Text="Rename ..." ImageUrl="~/Images/Vista/rename.gif" PostBack="false"></telerik:RadMenuItem>
                     <telerik:RadMenuItem IsSeparator="true" />
+                    <telerik:RadMenuItem Value="ManageImages" Text="Manage Images" ImageUrl="~/Images/Vista/9.gif" ></telerik:RadMenuItem>
                     <telerik:RadMenuItem Value="ManageCss" Text="Manage CSS" ImageUrl="~/Images/Vista/9.gif" ></telerik:RadMenuItem>
                     <telerik:RadMenuItem Value="ManageJavascript" Text="Manage Javascript" ImageUrl="~/Images/Vista/9.gif" ></telerik:RadMenuItem>
                     <telerik:RadMenuItem IsSeparator="true" />
@@ -176,6 +185,6 @@
     </telerik:RadTreeView>
     </telerik:RadAjaxPanel>
 
-<telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="650" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
+<telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="600" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
 </telerik:RadWindowManager>
 </asp:Content>

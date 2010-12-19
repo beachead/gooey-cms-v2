@@ -155,6 +155,7 @@
     <Content Include="images\logo_gooey_internal.png" />
     <Content Include="images\progress_green.gif" />
     <Content Include="images\red-ball.gif" />
+    <Content Include="images\Refresh.gif" />
     <Content Include="images\Vista\12.gif" />
     <Content Include="images\Vista\7.gif" />
     <Content Include="images\Vista\9.gif" />

@@ -126,6 +126,7 @@
     <Compile Include="Forms\Plugins\LeadEmailPlugin.cs" />
     <Compile Include="Forms\Plugins\SalesForcePlugin.cs" />
     <Compile Include="Help\HelpManager.cs" />
+    <Compile Include="Images\ImageDataSource.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Javascript\JavascriptFile.cs" />
     <Compile Include="Javascript\JavascriptHandler.cs" />

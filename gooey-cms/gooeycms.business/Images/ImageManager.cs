@@ -9,12 +9,25 @@ using Kaliko.ImageLibrary;
 using System.Text;
 using System.Text.RegularExpressions;
 using Gooeycms.Extensions;
+using Gooeycms.Data.Model.Page;
+using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Business.Images
 {
     public class ImageManager
     {
         public static List<String> ValidImageExtensions = new List<String>() { "png", "gif", "jpg", "jpeg", "swf" };
+        public static IDictionary<String, String> ImageMimeTypes = new Dictionary<String, String>();
+
+        static ImageManager()
+        {
+            ImageMimeTypes.Add(".png", "image/png");
+            ImageMimeTypes.Add(".gif", "image/gif");
+            ImageMimeTypes.Add(".jpg", "image/jpeg");
+            ImageMimeTypes.Add(".jpeg", "image/jpeg");
+            ImageMimeTypes.Add(".swf", "application/x-shockwave-flash");
+        }
+
         public static Boolean IsValidImageType(String imagename)
         {
             Boolean result = false;
@@ -69,28 +82,55 @@ namespace Gooeycms.Business.Images
                 images.Add(file);
             }
 
-            //Generate thumbnails
-            /*
-            IList<StorageFile> results = new List<StorageFile>(images);
-            foreach(StorageFile file in images) {
-                if ((file.Filename.Length > 0) && (file.Data.Length > 0))
-                    GenerateThumbnail(file, results);
-            }
-            images = null;
-            */
-
             IStorageClient client = StorageHelper.GetStorageClient();
-            String imageDirectory = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
+            String container = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
             foreach (StorageFile file in images)
             {
                 if ((file.Filename.Length > 0) && (file.Data.Length > 0))
                 {
-                    client.Save(imageDirectory, folder, file.Filename, file.Data, Permissions.Public);
+                    client.Save(container, folder, file.Filename, file.Data, Permissions.Public);
                 }
             }
 
+            IList<StorageFile> results = new List<StorageFile>();
 
-            return GetAllImagePaths(siteGuid,folder);
+            //Add any new images to the database
+            CmsImageDao dao = new CmsImageDao();
+            using (Transaction tx = new Transaction())
+            {
+                foreach (StorageFile file in images)
+                {
+                    //We need to find the actual cloud file so we can get the url to the file itself
+                    StorageFile actualFile = client.GetInfo(container, folder, file.Filename);
+
+                    CmsImage temp = dao.FindByUrl(actualFile.Url);
+                    if (temp == null)
+                    {
+                        FileInfo info = new FileInfo(actualFile.Filename);
+
+                        String mimetype = "image/png";
+                        if (ImageMimeTypes.ContainsKey(info.Extension))
+                            mimetype = ImageMimeTypes[info.Extension];
+
+                        temp = new CmsImage();
+                        temp.CloudUrl = actualFile.Url;
+                        temp.ContentType = mimetype;
+                        temp.Created = DateTime.Now;
+                        temp.Directory = folder;
+                        temp.Filename = actualFile.Filename;
+                        temp.Guid = System.Guid.NewGuid().ToString();
+                        temp.SubscriptionId = siteGuid.Value;
+                        temp.Length = actualFile.Size;
+
+                        dao.Save<CmsImage>(temp);
+                    }
+
+                    results.Add(actualFile);
+                }
+                tx.Commit();
+            }
+
+            return results;
         }
 
         private void GenerateThumbnail(StorageFile file, IList<StorageFile> results)
@@ -203,6 +243,28 @@ namespace Gooeycms.Business.Images
             IStorageClient client = StorageHelper.GetStorageClient();
 
             return (client.ContainsSnapshots(imageDirectory, folder));
+        }
+
+        public CmsImage GetImageByGuid(Data.Guid siteGuid, Data.Guid guid)
+        {
+            return GetImageByGuid(siteGuid, guid, false);
+        }
+
+        public CmsImage GetImageByGuid(Data.Guid siteGuid, Data.Guid guid, bool loadImageData)
+        {
+            CmsImageDao dao = new CmsImageDao();
+            CmsImage image = dao.FindBySiteAndGuid(siteGuid, guid);
+
+            if (image != null)
+            {
+                String container = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
+
+                IStorageClient client = StorageHelper.GetStorageClient();
+                byte [] data = client.Open(container, image.Directory, image.Filename);
+                image.Data = data;
+            }
+
+            return image;
         }
     }
 }
