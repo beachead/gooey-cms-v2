@@ -1,13 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ImageBrowser.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Themes.ImageBrowser" %>
 
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
-
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djconfig="parseOnLoad: true"
+        type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
         dojo.require("dojo.parser");
         dojo.require("dijit.dijit");
@@ -19,71 +19,101 @@
 </head>
 <body class="claro">
     <form id="form1" runat="server">
-        <script language="javascript" type="text/javascript">
-            function showErrorMessage(text) {
-                dojo.byId('lblErrorMessage').innerHTML = text;
-                dijit.byId('dialogErrorMessage').show();
-            }
-        </script>
-        <div id="dialogErrorMessage" dojoType="dijit.Dialog" title="Error" style="display:none;width:200px;height:100px;overflow:auto;">
-            <span id="lblErrorMessage"></span>
+    <script language="javascript" type="text/javascript">
+        function showErrorMessage(text) {
+            dojo.byId('lblErrorMessage').innerHTML = text;
+            dijit.byId('dialogErrorMessage').show();
+        }
+    </script>
+
+    <telerik:RadScriptManager ID="ScriptManager" runat="server" />
+    <telerik:RadAjaxManager ID="AjaxScriptManager" runat="server">
+    </telerik:RadAjaxManager>
+
+    <div id="dialogErrorMessage" dojotype="dijit.Dialog" title="Error" style="display: none;
+        width: 200px; height: 100px; overflow: auto;">
+        <span id="lblErrorMessage"></span>
+    </div>
+    <div dojotype="dijit.layout.TabContainer" style="width: 675px; height: 395px; overflow: auto;">
+        <div dojotype="dijit.layout.ContentPane" title="Image Upload">
+            <asp:Label ID="LblUploadStatus" AutoUpdateAfterCallBack="true" runat="server" />
+            <table style="width: 100%;">
+                <tr>
+                    <td colspan="2">
+                        <asp:FileUpload ID="FileUpload" runat="server" /><br />
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="BtnUpload" OnClick="BtnUpload_Click" Text="Upload" runat="server" />
+                    </td>
+                </tr>
+            </table>
+            <asp:Label ID="LblUploadedFiles" runat="server" />
         </div>
+        <div dojotype="dijit.layout.ContentPane" title="Image Library">
+            <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
+            <telerik:RadAjaxPanel ID="AjaxPanel" LoadingPanelID="LoadingPanel" runat="server">
+            <table style="width: 100%;">
+                <tr>
+                    <td colspan="2">
+                        <asp:ImageButton ID="BtnRefreshImages" ImageUrl="~/images/Refresh.gif" OnClick="BtnRefreshImages_Click" runat="server" />&nbsp;Refresh
+                        Images
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:top;padding-top:7px;width:75%;">
+                        <telerik:RadGrid ID="GridExistingImages" runat="server" AllowPaging="true" 
+                            Skin="Default" DataSourceID="ImageDataSource" 
+                            onitemcommand="GridExistingImages_ItemCommand">
+                            <MasterTableView AutoGenerateColumns="false" AllowPaging="true" DataKeyNames="Guid" Width="100%" Height="100%" 
+                            PageSize="10" DataSourceID="ImageDataSource">
+                                <Columns>
+                                    <telerik:GridBoundColumn DataField="Filename" ReadOnly="true" HeaderText="Filename" />
+                                    <telerik:GridBoundColumn DataField="Length" ReadOnly="true" HeaderText="Length" />
+                                    <telerik:GridTemplateColumn HeaderText="Actions">
+                                        <ItemTemplate>
+                                        <a href="#" onclick="<%# DataBinder.Eval(Container.DataItem, "Filename", "_imageclick(\'{0}\'); return false;") %>">select</a>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                </Columns>
+                            </MasterTableView>
+                            <ClientSettings EnableRowHoverStyle="true" EnablePostBackOnRowClick="true">
+                                <Selecting AllowRowSelect="true" />
+                            </ClientSettings>
+                            <PagerStyle Mode="Slider" />
+                        </telerik:RadGrid>
+                    </td>
+                    <td style="vertical-align:top;">
+                        <fieldset style="width: 230px; height: 220px">
+                            <legend>Preview</legend>
+                            <telerik:RadBinaryImage ID="ImagePreview" ResizeMode="Fit" AutoAdjustImageControlSize="true" Width="230" runat="server" />
+                        </fieldset>                    
+                    </td>
+                </tr>
+                <asp:ObjectDataSource ID="ImageDataSource" runat="server" 
+                    EnablePaging="true"
+                    TypeName="Gooeycms.Business.Images.ImageDataSource"
+                    SelectMethod="GetThemeImages"
+                    SelectCountMethod="GetThemeImageCount"
+                    >
+                </asp:ObjectDataSource>
 
-         <div dojoType="dijit.layout.TabContainer" style="width:675px;height:395px;overflow:auto;">
-            <div dojoType="dijit.layout.ContentPane" title="Image Upload">
-                <anthem:Label ID="LblUploadStatus" AutoUpdateAfterCallBack="true" runat="server" />
-                <table style="width:100%;">
-                    <tr>
-                        <td colspan="2"><asp:FileUpload ID="FileUpload" runat="server" /><br /><hr /></td>
-                    </tr>
-                    <tr>
-                        <td><anthem:Button ID="BtnUpload" OnClick="BtnUpload_Click" Text="Upload" runat="server" /></td>
-                    </tr>
-                </table>
-                <anthem:Label ID="LblUploadedFiles" AutoUpdateAfterCallBack="true" runat="server" />
-            </div>
-
-             <div dojoType="dijit.layout.ContentPane" title="Theme Image Library">
-                <table style="width:100%;">
-                    <tr>
-                        <td colspan="2"><b>Or Choose Existing Image:</b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <anthem:Panel ID="PanelImages" AutoUpdateAfterCallBack="true" runat="server">
-                                <asp:DataList ID="AvailableImages" RepeatDirection="Horizontal" BackColor="#F7F6F3" 
-                                    RepeatColumns="4" runat="server" CellPadding="6" CellSpacing="6">
-                                    <ItemTemplate>
-                                        <div style="width:125px;padding-bottom:5px;text-align:center;">
-                                        <a href="<%# DataBinder.Eval(Container,"DataItem.Url") %>" dojoType="dojox.image.Lightbox">
-                                            <img src="<%# DataBinder.Eval(Container,"DataItem.ThumbnailUrl") %>" alt="<%# DataBinder.Eval(Container,"DataItem.Filename") %>" style="border:0px;" />
-                                        </a>
-                                        <br />
-                                        <span style="font-size:8px;"><%# DataBinder.Eval(Container,"DataItem.Filename") %></span>
-                                        <br />
-                                        <a href="#" onclick="javascript:_imageclick('<%# DataBinder.Eval(Container,"DataItem.Filename") %>'); return false;">Select</a>
-                                        <a href="#" onclick="javascript:_imagedelete('<%# DataBinder.Eval(Container,"DataItem.Filename") %>'); return false;">Delete</a>
-                                        </div>
-                                    </ItemTemplate>
-                                    <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                                </asp:DataList>
-                            </anthem:Panel>
-                        </td>
-                    </tr>
-
-                    <script language="javascript" type="text/javascript">
-                        function _imageclick(name) {
-                            window.opener.onimage_selected(name);
+                <script language="javascript" type="text/javascript">
+                    function _imageclick(name) {
+                        window.opener.onimage_selected(name);
+                    }
+                    function _imagedelete(name) {
+                        if (confirm('Are you sure you want to delete this image?')) {
+                            alert('TODO: Implement delete functionality. Deleting ' + name);
                         }
-                        function _imagedelete(name) {
-                            if (confirm('Are you sure you want to delete this image?')) {
-                                alert('TODO: Implement delete functionality. Deleting ' + name);
-                            }
-                        }
-                    </script>
-                </table>
-             </div>
-         </div>
+                    }
+                </script>
+            </table>
+            </telerik:RadAjaxPanel>
+        </div>
+    </div>
     </form>
 </body>
 </html>
