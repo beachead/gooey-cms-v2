@@ -117,6 +117,7 @@
     <Compile Include="Crypto\TokenManager.cs" />
     <Compile Include="Css\CssFile.cs" />
     <Compile Include="Css\CssHandler.cs" />
+    <Compile Include="Email\EmailManager.cs" />
     <Compile Include="Forms\FormManager.cs" />
     <Compile Include="Forms\FormPluginFactory.cs" />
     <Compile Include="Forms\FormProcessingHandler.cs" />

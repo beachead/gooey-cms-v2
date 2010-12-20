@@ -13,7 +13,7 @@ namespace Gooeycms.Data.Model.Site
 
         public int FindNextPosition(Guid siteGuid, int depth)
         {
-            string hql = "select max(path.Position) from CmsSitePath path where path.SubscriptionGuid = :guid and page.IsRedirect = 0 and path.Depth = :depth";
+            string hql = "select max(path.Position) from CmsSitePath path where path.SubscriptionGuid = :guid and path.IsRedirect = 0 and path.Depth = :depth";
             int pos = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetInt32("depth", depth).UniqueResult<int>();
             return pos + 1;
         }

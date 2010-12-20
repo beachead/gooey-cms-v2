@@ -114,13 +114,3 @@
         </ul>
     </asp:View>
 </asp:MultiView>
-
-<script type="text/javascript" language="javascript">
-    function open_popup(url, width, height) {
-        var wnd = window.radopen(url, null);
-        wnd.set_width(width);
-        wnd.set_height(height);
-    }
-</script>
-<telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="600" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
-</telerik:RadWindowManager>

@@ -52,7 +52,7 @@ namespace Gooeycms.Business.Paypal
 
         public String SetExpressCheckout(String email, String subscriptionId)
         {
-            return SetExpressCheckout(GooeyConfigManager.PaypalReturnUrl, GooeyConfigManager.PaypalCancelUrl);
+            return SetExpressCheckout(email, subscriptionId, GooeyConfigManager.PaypalReturnUrl, GooeyConfigManager.PaypalCancelUrl);
         }
 
         public String SetExpressCheckout(String email, String subscriptionId, String returnUrl, String cancelUrl)

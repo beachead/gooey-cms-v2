@@ -498,6 +498,16 @@ This is your home page.
             }
         }
 
+        public static String GetEmailTemplate(String templateType)
+        {
+            return GetCachedValue("email-template-" + templateType);
+        }
+
+        public static void SetEmailTemplate(String templateType, String content)
+        {
+            SetValueAndUpdateCache("email-template-" + templateType, content);
+        }
+
         public static class EmailAddresses
         {
             public static String SiteAdmin

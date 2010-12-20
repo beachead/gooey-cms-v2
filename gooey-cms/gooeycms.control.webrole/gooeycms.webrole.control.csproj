@@ -126,6 +126,8 @@
     <Content Include="auth\global-admin\Developer\Categories.aspx" />
     <Content Include="auth\global-admin\Developer\Default.aspx" />
     <Content Include="auth\global-admin\Developer\SendEmail.aspx" />
+    <Content Include="auth\global-admin\Email-Templates\Default.aspx" />
+    <Content Include="auth\global-admin\Email-Templates\Template.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
     <Content Include="auth\global-admin\Subscriptions\AllSubscriptions.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Default.aspx" />
@@ -376,6 +378,20 @@
     </Compile>
     <Compile Include="auth\global-admin\Developer\SendEmail.aspx.designer.cs">
       <DependentUpon>SendEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Email-Templates\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Email-Templates\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Email-Templates\Template.aspx.cs">
+      <DependentUpon>Template.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Email-Templates\Template.aspx.designer.cs">
+      <DependentUpon>Template.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Help\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

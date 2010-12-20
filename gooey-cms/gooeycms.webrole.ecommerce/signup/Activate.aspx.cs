@@ -9,6 +9,7 @@ using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Billing;
+using Gooeycms.Business.Email;
 
 namespace Gooeycms.Webrole.Ecommerce.signup
 {
@@ -58,7 +59,7 @@ namespace Gooeycms.Webrole.Ecommerce.signup
                 Registration registration = Registrations.Load(subscriptionId);
 
                 PaypalExpressCheckout.ProfileResultStatus status = checkout.CreateRecurringPayment(registration);
-                CmsSubscription subscription = CreateSubscription(registration,status.ProfileId);
+                CmsSubscription subscription = CreateSubscription(registration, status.ProfileId);
 
                 PaypalProfileId.Text = subscription.PaypalProfileId;
                 this.ActivateViews.SetActiveView(this.SuccessPaypalView);
@@ -87,7 +88,8 @@ namespace Gooeycms.Webrole.Ecommerce.signup
                 SubscriptionManager.Save(subscription);
 
                 double totalCost = SubscriptionManager.CalculateCost(subscription);
-                BillingManager.Instance.AddHistory(subscription.Guid, paypalProfileId, BillingManager.NotApplicable, BillingManager.Signup, totalCost, "Initial signup for " + subscription.SubscriptionPlan.Name); 
+                BillingManager.Instance.AddHistory(subscription.Guid, paypalProfileId, BillingManager.NotApplicable, BillingManager.Signup, totalCost, "Initial signup for " + subscription.SubscriptionPlan.Name);
+                EmailManager.Instance.SendRegistrationEmail(subscription);
             }
 
             return subscription;

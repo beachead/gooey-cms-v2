@@ -93,7 +93,7 @@
                 
 				<asp:UpdatePanel ID="UpdatePanelAvailable" runat="server">                
 				<ContentTemplate>				
-				<p>http://<asp:TextBox ID="Subdomain" OnTextChanged="Subdomain_TextChanged" CssClass="cms-address std clear-on-focus" runat="server" CausesValidation="true" Text="letters and numbers only" AutoPostBack="true" /><asp:Label ID="DefaultCmsDomain" runat="server" /> 
+				<p>http://<asp:TextBox ID="Subdomain" OnTextChanged="Subdomain_TextChanged" CssClass="cms-address std clear-on-focus" runat="server" CausesValidation="false" Text="letters and numbers only" AutoPostBack="true" /><asp:Label ID="DefaultCmsDomain" runat="server" /> 
 				    <span id="availability">
 				            <asp:Image ID="IsAvailableImage" Visible="false" runat="server" />						    
 				    </span>

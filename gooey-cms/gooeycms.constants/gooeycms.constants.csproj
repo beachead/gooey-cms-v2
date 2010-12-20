@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigConstants.cs" />
+    <Compile Include="EmailTemplates.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="SecurityConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
