@@ -22,6 +22,24 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Email_Templates {
         protected global::System.Web.UI.WebControls.LinkButton LnkModifyEmail;
         
         /// <summary>
+        /// LnkCancelEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkCancelEmail;
+        
+        /// <summary>
+        /// LnkPurchaseEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkPurchaseEmail;
+        
+        /// <summary>
         /// TxtTemplate control.
         /// </summary>
         /// <remarks>

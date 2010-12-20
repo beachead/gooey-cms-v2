@@ -13,6 +13,7 @@ using Gooeycms.Business.Billing;
 using System.Text;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business;
+using Gooeycms.Business.Email;
 
 namespace Gooeycms.Webrole.Control.auth
 {
@@ -141,7 +142,9 @@ namespace Gooeycms.Webrole.Control.auth
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
             SubscriptionManager.DisableSubscription(subscription);
 
-            Response.Redirect("~/dashboard.aspx?g=" + subscription.Guid + "&disabled=true",true);
+            EmailManager.Instance.SendCancellationEmail(subscription);
+
+            Response.Redirect("~/auth/dashboard.aspx?g=" + subscription.Guid + "&disabled=true",true);
         }
 
         protected void BtnUpdateOptions_Click(Object sender, EventArgs e)

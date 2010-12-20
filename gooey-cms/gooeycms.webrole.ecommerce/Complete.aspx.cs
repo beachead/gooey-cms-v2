@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Gooeycms.Business.Store;
 using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Paypal;
+using Gooeycms.Business.Email;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -46,6 +47,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 receipt.Processed = DateTime.Now;
                 receipt.TransactionId = txid;
                 ReceiptManager.Instance.Update(receipt);
+                EmailManager.Instance.SendPurchaseEmail(receipt);
             }
         }
     }

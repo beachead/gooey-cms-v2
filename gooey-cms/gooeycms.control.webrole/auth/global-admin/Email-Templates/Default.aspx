@@ -16,11 +16,11 @@
     </div>
 
     <div>
-    <a href="#" onclick="open_popup('template.aspx?type=cancel','800','550');">Modify Cancellation Email Template</a>
+    <asp:LinkButton ID="LnkCancelEmail" OnCommand="LnkModifyTemplate_Click" CommandArgument="cancel" Text="Modify Cancellation Email Template" runat="server" />
     </div>
 
     <div>
-    <a href="#" onclick="open_popup('template.aspx?type=purchase','800','600');">Modify Purchase Email Template</a>
+    <asp:LinkButton ID="LnkPurchaseEmail" OnCommand="LnkModifyTemplate_Click" CommandArgument="purchase" Text="Modify Purchase Email Template" runat="server" />
     </div>
 
     <div>

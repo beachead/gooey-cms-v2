@@ -8,6 +8,8 @@ using Gooeycms.Business.Subscription;
 using System.Text.RegularExpressions;
 using Gooeycms.Constants;
 using Gooeycms.Business.Web;
+using Gooeycms.Data.Model.Store;
+using Gooeycms.Business.Store;
 
 namespace Gooeycms.Business.Email
 {
@@ -30,9 +32,28 @@ namespace Gooeycms.Business.Email
         public void SendRegistrationEmail(CmsSubscription subscription)
         {
             String template = GooeyConfigManager.GetEmailTemplate(EmailTemplates.Signup);
-            String body = PerformReplacements(subscription, template);
+            String body = PerformReplacements(template,subscription);
 
-            EmailInfo info = GetEmailInfo(body, subscription);
+            EmailInfo info = GetEmailInfo(body, subscription.PrimaryUser.Email);
+            SendEmail(info);
+        }
+
+        public void SendCancellationEmail(CmsSubscription subscription)
+        {
+            String template = GooeyConfigManager.GetEmailTemplate(EmailTemplates.Cancel);
+            String body = PerformReplacements(template,subscription);
+
+            EmailInfo info = GetEmailInfo(body, subscription.PrimaryUser.Email);
+            SendEmail(info);
+        }
+
+        public void SendPurchaseEmail(Receipt receipt)
+        {
+            String template = GooeyConfigManager.GetEmailTemplate(EmailTemplates.Cancel);
+            String body = PerformReplacements(template, receipt: receipt);
+
+            UserInfo user = MembershipUtil.FindByUserGuid(receipt.UserGuid).UserInfo;
+            EmailInfo info = GetEmailInfo(body,user.Email);
             SendEmail(info);
         }
 
@@ -44,7 +65,7 @@ namespace Gooeycms.Business.Email
             client.Send(info.Subject, info.Body);
         }
 
-        private EmailInfo GetEmailInfo(String body, CmsSubscription subscription)
+        private EmailInfo GetEmailInfo(String body, String emailTo)
         {
             EmailInfo info = new EmailInfo();
             
@@ -59,25 +80,54 @@ namespace Gooeycms.Business.Email
             }
 
             info.Body = body.Trim();
-            info.To = subscription.PrimaryUser.Email;
+            info.To = emailTo;
             info.From = GooeyConfigManager.EmailAddresses.SiteAdmin;
 
             return info;
         }
 
-        private String PerformReplacements(CmsSubscription subscription, String body)
+        private String PerformReplacements(String body, CmsSubscription subscription = null, Receipt receipt = null)
         {
-            Double totalCost = SubscriptionManager.CalculateCost(subscription);
+            UserInfo user = null;
+            if (receipt == null)
+                user = MembershipUtil.FindByUserGuid(subscription.PrimaryUserGuid).UserInfo;
+            else
+                user = MembershipUtil.FindByUserGuid(receipt.UserGuid).UserInfo;
 
-            body = body.Replace("{email}", subscription.PrimaryUser.Email);
-            body = body.Replace("{firstname}", subscription.PrimaryUser.Firstname);
-            body = body.Replace("{username}", subscription.PrimaryUser.Username);
-            body = body.Replace("{domain}", subscription.Domain);
-            body = body.Replace("{staging}", subscription.StagingDomain);
-            body = body.Replace("{subscription-cost}", String.Format("{0:c}",totalCost));
-            body = body.Replace("{subscription-description}",SubscriptionManager.GetSubscriptionDescription(subscription).ToString());
-            body = body.Replace("{paypal-id}", subscription.PaypalProfileId);
-            body = body.Replace("{date}",DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+            body = body.Replace("{email}", user.Email);
+            body = body.Replace("{firstname}", user.Firstname);
+            body = body.Replace("{username}", user.Username);
+            body = body.Replace("{date}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+
+            if (subscription != null)
+            {
+                Double totalCost = SubscriptionManager.CalculateCost(subscription);
+                body = body.Replace("{domain}", subscription.Domain);
+                body = body.Replace("{staging}", subscription.StagingDomain);
+                body = body.Replace("{subscription-cost}", String.Format("{0:c}", totalCost));
+                body = body.Replace("{subscription-description}", SubscriptionManager.GetSubscriptionDescription(subscription).ToString());
+                body = body.Replace("{paypal-id}", subscription.PaypalProfileId);
+            }
+            else
+            {
+                body = body.Replace("{domain}", String.Empty);
+                body = body.Replace("{staging}", String.Empty);
+                body = body.Replace("{subscription-cost}", String.Empty);
+                body = body.Replace("{subscription-description}", String.Empty);
+                body = body.Replace("{paypal-id}", String.Empty);
+            }
+
+            if (receipt != null)
+            {
+                String packageGuid = receipt.PackageGuid;
+                Package package = SitePackageManager.NewInstance.GetPackage(packageGuid);
+
+                body = body.Replace("{purchase-type}", package.PackageType.ToString());
+                body = body.Replace("{purchase-date}", receipt.Created.ToString("MM/dd/yyyy"));
+                body = body.Replace("{purchase-amount}", String.Format("{0:c}",receipt.Amount));
+                body = body.Replace("{purchase-name}", package.Title);
+                body = body.Replace("{purchase-txid}", receipt.TransactionId);
+            }
 
             return body.Trim();
         }
