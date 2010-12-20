@@ -24,6 +24,7 @@
             dijit.byId('dialogErrorMessage').show();
         }
     </script>
+    <telerik:RadScriptManager ID="ScriptManager" runat="server" />
     <telerik:RadAjaxManager ID="AjaxScriptManager" runat="server">
     </telerik:RadAjaxManager>
 

@@ -8,6 +8,7 @@ using Gooeycms.Business.Store;
 using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Paypal;
 using Gooeycms.Business.Email;
+using Gooeycms.Business.Billing;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -47,6 +48,8 @@ namespace Gooeycms.Webrole.Ecommerce.store
                 receipt.Processed = DateTime.Now;
                 receipt.TransactionId = txid;
                 ReceiptManager.Instance.Update(receipt);
+
+                BillingManager.Instance.AddHistory(receipt.UserGuid, receipt.Guid, txid, BillingManager.Purchase, amountPaid, "Purchased site package for " + String.Format("{0:c}", amountPaid));
                 EmailManager.Instance.SendPurchaseEmail(receipt);
             }
         }

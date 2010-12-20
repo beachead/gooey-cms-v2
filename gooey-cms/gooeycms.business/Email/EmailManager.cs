@@ -50,7 +50,7 @@ namespace Gooeycms.Business.Email
 
         public void SendPurchaseEmail(Receipt receipt)
         {
-            String template = GooeyConfigManager.GetEmailTemplate(EmailTemplates.Cancel);
+            String template = GooeyConfigManager.GetEmailTemplate(EmailTemplates.Purchase);
             String body = PerformReplacements(template, receipt: receipt);
 
             UserInfo user = MembershipUtil.FindByUserGuid(receipt.UserGuid).UserInfo;

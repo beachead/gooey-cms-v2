@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <telerik:RadScriptManager ID="ScriptManager" runat="server" />
         <telerik:RadAjaxManager id="RadAjaxManager1" runat="server" OnAjaxRequest="AjaxManager_OnRequest" ClientEvents-OnResponseEnd="closeWindow();">
           <AjaxSettings>
              <telerik:AjaxSetting AjaxControlID="RadAjaxManager1">
