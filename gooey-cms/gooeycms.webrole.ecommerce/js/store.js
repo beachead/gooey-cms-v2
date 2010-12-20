@@ -1,5 +1,6 @@
 $(function () {
 
+    /*
     var jPriceList = $('<ul/>');
     for (var i = 0; i < prices.length; i++) {
         var jItem = $('<li><a href="#">' + prices[i] + '</a></li>');
@@ -7,6 +8,7 @@ $(function () {
     }
 
     $('#price-filter div.menu').append(jPriceList);
+    */
 
     var jThumbs = $('ul.thumbs');
     var jPager = jThumbs.parent().find('ul.thumb-nav');

@@ -20,11 +20,27 @@ namespace Gooeycms.Webrole.Ecommerce.store
         {
             if (!Page.IsPostBack)
             {
-                DoDataBind();
+                DoDataBind(0,50000);
             }
         }
 
-        private void DoDataBind()
+        protected void LnkFilterPrice_Click(Object sender, CommandEventArgs e)
+        {
+            String str = (String)e.CommandArgument;
+            String [] temp = str.Split(',');
+
+            double min = 0;
+            double max = 50000;
+            if (temp.Length == 2)
+            {
+                Double.TryParse(temp[0], out min);
+                Double.TryParse(temp[1], out max);
+            }
+
+            DoDataBind(min, max);
+        }
+
+        private void DoDataBind(double minPrice, double maxPrice)
         {
             String packageType = null;
 
@@ -33,7 +49,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
             if (!String.IsNullOrEmpty(tempPos))
                 lastMaxPos = Int32.Parse(tempPos);
 
-            IList<Package> packages = SitePackageManager.NewInstance.GetApprovedPackages(packageType,lastMaxPos);
+            IList<Package> packages = SitePackageManager.NewInstance.GetApprovedPackages(packageType,lastMaxPos,minPrice,maxPrice);
 
             SitePackages.DataSource = packages;
             SitePackages.DataBind();

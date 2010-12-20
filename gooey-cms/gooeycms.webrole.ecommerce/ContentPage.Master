@@ -8,9 +8,6 @@
 	<title>gooey cms</title>
 	<link rel="stylesheet" type="text/css" href="/css/global.css" />
     <asp:ContentPlaceHolder ID="localCSS" runat="server"></asp:ContentPlaceHolder>
-	<script type="text/javascript">
-	    var prices = ["under $500", "$500 - $1000", "$1000 - $5,000", "$5,000 - $10,000"];
-	</script>
 	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.cycle.all.min.js"></script>
 	<script type="text/javascript" src="/js/global.js"></script>

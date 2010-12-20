@@ -13,6 +13,33 @@ namespace Gooeycms.Webrole.Ecommerce.store {
     public partial class Default {
         
         /// <summary>
+        /// ScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadScriptManager ScriptManager;
+        
+        /// <summary>
+        /// LoadingPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel LoadingPanel;
+        
+        /// <summary>
+        /// AjaxPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxPanel AjaxPanel;
+        
+        /// <summary>
         /// LastMaxPos control.
         /// </summary>
         /// <remarks>
@@ -20,6 +47,42 @@ namespace Gooeycms.Webrole.Ecommerce.store {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Anthem.HiddenField LastMaxPos;
+        
+        /// <summary>
+        /// LnkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkButton1;
+        
+        /// <summary>
+        /// LnkButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkButton2;
+        
+        /// <summary>
+        /// LnkButton3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkButton3;
+        
+        /// <summary>
+        /// LnkButton4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkButton4;
         
         /// <summary>
         /// SitePackages control.

@@ -125,6 +125,17 @@ namespace Gooeycms.Business.Store
             return package.Guid;
         }
 
+        private void DoNotify(IPackageStatusNotifier notifier, String eventName, bool doNotStep)
+        {
+            if (notifier != null)
+            {
+                if (doNotStep)
+                    notifier.OnNotify(this.guid, eventName, currentStepCount, maxSteps);
+                else
+                    DoNotify(notifier, eventName);
+            }
+        }
+
         private void DoNotify(IPackageStatusNotifier notifier, String eventName)
         {
             if (notifier != null)
@@ -297,10 +308,10 @@ namespace Gooeycms.Business.Store
             return results;
         }
 
-        public IList<Package> GetApprovedPackages(string packageType, int lastMaxPos)
+        public IList<Package> GetApprovedPackages(string packageType, int lastMaxPos, double minPrice, double maxPrice)
         {
             PackageDao dao = new PackageDao();
-            IList<Package> packages = dao.FindByPackageType(packageType, PackageDao.ApprovalStatus.Approved);
+            IList<Package> packages = dao.FindByPackageTypeAndPrice(packageType, PackageDao.ApprovalStatus.Approved, minPrice,maxPrice);
 
             int end = (lastMaxPos + 8);
             if (end > packages.Count)
@@ -469,12 +480,26 @@ namespace Gooeycms.Business.Store
             }
 
             DoNotify(notifier, "Copying Page Images to Site (please wait...) ");
+
             //Save all the page-level images for this site
             String copyFromImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, sitepackage.OriginalSiteGuid.Value);
             String copyToImageContainer = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, guid.Value);
 
             IStorageClient client = StorageHelper.GetStorageClient();
             client.CopyFromSnapshots(sitepackage.PageImages, copyFromImageContainer, copyToImageContainer, StorageClientConst.RootFolder, Permissions.Public);
+
+            //Save the page images to the database
+            SaveImagesToDatabase(notifier, guid, copyToImageContainer, StorageClientConst.RootFolder);
+        }
+
+        private void SaveImagesToDatabase(IPackageStatusNotifier notifier, Data.Guid siteGuid, String container, String directory)
+        {
+            IStorageClient client = StorageHelper.GetStorageClient();
+
+            DoNotify(notifier, "Saving the image metadata to the database", true);
+            IList<StorageFile> images = client.List(container, directory);
+
+            ImageManager.SaveImagesToDatabase(siteGuid, client, container, directory, images, null);
         }
 
         private void DeployThemes(SitePackage sitepackage, Data.Guid guid, IPackageStatusNotifier notifier)
@@ -525,6 +550,8 @@ namespace Gooeycms.Business.Store
 
                 IStorageClient client = StorageHelper.GetStorageClient();
                 client.CopyFromSnapshots(themeWrapper.Images, copyFromImageContainer, copyToImageContainer, theme.ThemeGuid, Permissions.Public);
+
+                SaveImagesToDatabase(notifier, guid, copyToImageContainer, theme.ThemeGuid);
             }
         }
 

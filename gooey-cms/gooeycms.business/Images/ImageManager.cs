@@ -95,13 +95,24 @@ namespace Gooeycms.Business.Images
             IList<StorageFile> results = new List<StorageFile>();
 
             //Add any new images to the database
+            SaveImagesToDatabase(siteGuid, client, container, folder, images, results);
+
+            return results;
+        }
+
+        public static void SaveImagesToDatabase(Data.Guid siteGuid, IStorageClient client, String container, String folder, IList<StorageFile> images, IList<StorageFile> results)
+        {
             CmsImageDao dao = new CmsImageDao();
             using (Transaction tx = new Transaction())
             {
                 foreach (StorageFile file in images)
                 {
-                    //We need to find the actual cloud file so we can get the url to the file itself
-                    StorageFile actualFile = client.GetInfo(container, folder, file.Filename);
+                    StorageFile actualFile;
+
+                    if (results != null)
+                        actualFile = client.GetInfo(container, folder, file.Filename);
+                    else
+                        actualFile = file;
 
                     CmsImage temp = dao.FindByUrl(actualFile.Url);
                     if (temp == null)
@@ -125,12 +136,11 @@ namespace Gooeycms.Business.Images
                         dao.Save<CmsImage>(temp);
                     }
 
-                    results.Add(actualFile);
+                    if (results != null)
+                        results.Add(actualFile);
                 }
                 tx.Commit();
             }
-
-            return results;
         }
 
         private void GenerateThumbnail(StorageFile file, IList<StorageFile> results)

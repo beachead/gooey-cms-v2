@@ -43,6 +43,7 @@ namespace Gooeycms.Business.Storage
 
         StorageFile GetFile(String containerName, String directoryName, String filename);
         StorageFile GetInfo(String containerName, String directoryName, String filename);
+        StorageFile GetInfo(String url);
         StorageContainer GetContainerInfo(String container);
 
         IList<StorageFile> List(String containerName, String directoryName);

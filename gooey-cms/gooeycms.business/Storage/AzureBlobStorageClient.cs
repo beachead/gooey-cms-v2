@@ -34,9 +34,17 @@ namespace Gooeycms.Business.Storage
             name = name.Replace(" ", "");
             CloudStorageAccount account = CloudStorageAccount.FromConfigurationSetting("ActiveStorageConnectionString");
             CloudBlobClient client = account.CreateCloudBlobClient();
-
+            
             CloudBlobContainer container = client.GetContainerReference(name);
             return container;
+        }
+
+        private CloudBlob GetBlobReference(String url)
+        {
+            CloudStorageAccount account = CloudStorageAccount.FromConfigurationSetting("ActiveStorageConnectionString");
+            CloudBlobClient client = account.CreateCloudBlobClient();
+
+            return client.GetBlobReference(url);
         }
 
         public void Save(String containerName, String directoryName, String filename, String contents, Permissions permissions)
@@ -443,6 +451,22 @@ namespace Gooeycms.Business.Storage
         private static string GetBlobFilename(CloudBlob blob)
         {
             return blob.Uri.ToString().Substring(blob.Uri.ToString().LastIndexOf("/") + 1);
+        }
+
+        public StorageFile GetInfo(String url)
+        {
+            CloudBlob blob = this.GetBlobReference(url);
+
+            StorageFile file = new StorageFile();
+            if (blob.Exists())
+            {
+                file.Filename = GetBlobFilename(blob);
+                file.Uri = blob.Uri;
+                file.Metadata = blob.Metadata;
+                file.Size = blob.Properties.Length;
+            }
+
+            return file;
         }
 
         public StorageFile GetInfo(String containerName, String directoryName, String filename)
