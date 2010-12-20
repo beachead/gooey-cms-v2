@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[Images](
 	[directory] VARCHAR(128),
 	[file_name] VARCHAR(255) NOT NULL,
 	[content_type] VARCHAR(64) NULL,
+	[length],
 	PRIMARY KEY CLUSTERED([id]),
 );
 CREATE INDEX idx_site_guid ON [Images]([site_guid]);

@@ -7,207 +7,189 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.Webrole.Control {
+namespace Gooeycms.Webrole.Control.auth {
     
     
-    public partial class SecureNoNavigation {
+    public partial class Manage {
         
         /// <summary>
-        /// Head1 control.
+        /// LblDomain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        protected global::System.Web.UI.WebControls.Label LblDomain;
         
         /// <summary>
-        /// Link1 control.
+        /// LblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink Link1;
+        protected global::System.Web.UI.WebControls.Label LblStatus;
         
         /// <summary>
-        /// head control.
+        /// LblCurrentPlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Label LblCurrentPlan;
         
         /// <summary>
-        /// localCSS control.
+        /// LblPlanCost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder localCSS;
+        protected global::System.Web.UI.WebControls.Label LblPlanCost;
         
         /// <summary>
-        /// localJS control.
+        /// BtnUpgradePlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder localJS;
+        protected global::System.Web.UI.WebControls.LinkButton BtnUpgradePlan;
         
         /// <summary>
-        /// aspnetform control.
+        /// BtnDowngradePlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm aspnetform;
+        protected global::System.Web.UI.WebControls.LinkButton BtnDowngradePlan;
         
         /// <summary>
-        /// PrimaryNavigation control.
+        /// BtnCancelPlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder PrimaryNavigation;
+        protected global::System.Web.UI.WebControls.LinkButton BtnCancelPlan;
         
         /// <summary>
-        /// LoggedInUsername control.
+        /// PanelBusinessPlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LoggedInUsername;
+        protected global::System.Web.UI.WebControls.Panel PanelBusinessPlan;
         
         /// <summary>
-        /// dashboardLink control.
+        /// LblPaypalBillingId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink dashboardLink;
+        protected global::System.Web.UI.WebControls.Label LblPaypalBillingId;
         
         /// <summary>
-        /// LstWebsites control.
+        /// LblPaypalStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList LstWebsites;
+        protected global::System.Web.UI.WebControls.Label LblPaypalStatus;
         
         /// <summary>
-        /// accountLink control.
+        /// LblNextBillingDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink accountLink;
+        protected global::System.Web.UI.WebControls.Label LblNextBillingDate;
         
         /// <summary>
-        /// LnkManageSubscription control.
+        /// ChkCampaigns control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LnkManageSubscription;
+        protected global::System.Web.UI.WebControls.CheckBox ChkCampaigns;
         
         /// <summary>
-        /// LnkManageAccount control.
+        /// LblCampaignCost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LnkManageAccount;
+        protected global::System.Web.UI.WebControls.Label LblCampaignCost;
         
         /// <summary>
-        /// LnkChangePassword control.
+        /// ChkSalesforce control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LnkChangePassword;
+        protected global::System.Web.UI.WebControls.CheckBox ChkSalesforce;
         
         /// <summary>
-        /// LoginStatus control.
+        /// LblSalesforceCost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginStatus LoginStatus;
+        protected global::System.Web.UI.WebControls.Label LblSalesforceCost;
         
         /// <summary>
-        /// developersLink control.
+        /// BtnUpdateOptions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink developersLink;
+        protected global::System.Web.UI.WebControls.LinkButton BtnUpdateOptions;
         
         /// <summary>
-        /// HyperLink1 control.
+        /// LblSiteName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::System.Web.UI.WebControls.Label LblSiteName;
         
         /// <summary>
-        /// LoginStatus1 control.
+        /// TxtProductionDomain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginStatus LoginStatus1;
+        protected global::System.Web.UI.WebControls.TextBox TxtProductionDomain;
         
         /// <summary>
-        /// Subnavigation control.
+        /// TxtCustomStagingDomain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Subnavigation;
+        protected global::System.Web.UI.WebControls.TextBox TxtCustomStagingDomain;
         
         /// <summary>
-        /// Instructions control.
+        /// LnkUpdateDomain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Instructions;
-        
-        /// <summary>
-        /// Editor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Editor;
-        
-        /// <summary>
-        /// Olark control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Olark;
+        protected global::System.Web.UI.WebControls.LinkButton LnkUpdateDomain;
     }
 }

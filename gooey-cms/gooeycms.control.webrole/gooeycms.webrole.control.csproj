@@ -54,6 +54,14 @@
     <Reference Include="CuteWebUI.AjaxUploader">
       <HintPath>..\..\lib\CuteWebUI.AjaxUploader.dll</HintPath>
     </Reference>
+    <Reference Include="Encore.Licensing, Version=1.0.1.0, Culture=neutral, PublicKeyToken=75630f11c0fa5f17, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Encore.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Encore.PayPal.Nvp, Version=2.2.1.0, Culture=neutral, PublicKeyToken=73a687039e541cb6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Encore.PayPal.Nvp.dll</HintPath>
+    </Reference>
     <Reference Include="FredCK.FCKeditorV2, Version=2.6.3.22451, Culture=neutral, PublicKeyToken=4f86767c9b519a06, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FredCK.FCKeditorV2.dll</HintPath>
@@ -124,6 +132,7 @@
     <Content Include="auth\global-admin\Subscriptions\edit-roles.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Modify.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Users.aspx" />
+    <Content Include="auth\Manage.aspx" />
     <Content Include="auth\Package-Mgmt\apply.aspx" />
     <Content Include="auth\Pages\Default.aspx" />
     <Content Include="auth\Pages\EditInline.aspx" />
@@ -408,6 +417,13 @@
     </Compile>
     <Compile Include="auth\global-admin\Subscriptions\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Manage.aspx.cs">
+      <DependentUpon>Manage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Manage.aspx.designer.cs">
+      <DependentUpon>Manage.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Package-Mgmt\apply.aspx.cs">
       <DependentUpon>apply.aspx</DependentUpon>

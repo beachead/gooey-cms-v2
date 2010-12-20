@@ -22,6 +22,14 @@ namespace Gooeycms.Webrole.Control
             this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
             if (!Page.IsPostBack)
             {
+                if (CurrentSite.IsAvailable)
+                    this.LnkManageSubscription.NavigateUrl = "~/auth/Manage.aspx?g=" + CurrentSite.Guid.Value;
+                else
+                    this.LnkManageSubscription.Enabled = false;
+
+                this.LnkManageAccount.NavigateUrl = "~/auth/ManageAccount.aspx?u=" + LoggedInUser.Wrapper.UserInfo.Guid;
+                this.LnkChangePassword.NavigateUrl = "~/auth/ManageAccount.aspx?u=" + LoggedInUser.Wrapper.UserInfo.Guid + "&v=pwd";
+                
                 LoadWebsites();
             }
         }

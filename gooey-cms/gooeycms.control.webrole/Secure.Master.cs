@@ -25,7 +25,8 @@ namespace Gooeycms.Webrole.Control
                 if (this.StagingLink != null)
                     this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
 
-                   
+                if (CurrentSite.Subscription.IsDisabled)
+                    Response.Redirect("http://store.gooeycms.net/reactivate.aspx?g=" + CurrentSite.Subscription.Guid, true);
             }
 
             if (!Page.IsPostBack)

@@ -418,15 +418,7 @@ namespace Gooeycms.Business.Subscription
                 //If it's more, than update the billing agreement
                 if (originalCost > newCost)
                 {
-                    StringBuilder description = new StringBuilder();
-                    description.AppendFormat("{0} / {1:c} ", subscription.SubscriptionPlan.Name, subscription.SubscriptionPlan.Price);
-                    if (subscription.IsCampaignEnabled)
-                        description.AppendFormat(" +Campaigns / {0:c} ", GooeyConfigManager.CampaignOptionPrice);
-
-                    if (subscription.IsSalesforceEnabled)
-                        description.AppendFormat(" +Salesforce / {0:c} ", GooeyConfigManager.SalesForcePrice);
-
-                    description.AppendFormat(". Total: {0:c} / month.", newCost);
+                    StringBuilder description = GetSubscriptionDescription(subscription);
 
                     String desc = description.ToString();
                     checkout.UpdateBillingAgreement(subscription.PaypalProfileId, newCost, desc);
@@ -441,6 +433,98 @@ namespace Gooeycms.Business.Subscription
 
             //If there weren't any problems update the subscription in our database
             Save(subscription);
+        }
+
+        public static StringBuilder GetSubscriptionDescription(CmsSubscription subscription)
+        {
+            StringBuilder description = new StringBuilder();
+            description.AppendFormat("{0} / {1:c} ", subscription.SubscriptionPlan.Name, subscription.SubscriptionPlan.Price);
+            if (subscription.IsCampaignEnabled)
+                description.AppendFormat(" +Campaigns / {0:c} ", GooeyConfigManager.CampaignOptionPrice);
+
+            if (subscription.IsSalesforceEnabled)
+                description.AppendFormat(" +Salesforce / {0:c} ", GooeyConfigManager.SalesForcePrice);
+
+            double cost = CalculateCost(subscription);
+            description.AppendFormat(". Total: {0:c} / month.", cost);
+            return description;
+        }
+
+        public static void UpdateDomains(CmsSubscription subscription, String productionDomain, String stagingDomain, bool validateDomain)
+        {
+            //Validate that the domains are valid
+            if (validateDomain)
+            {
+                ValidateDomain(subscription.Subdomain,productionDomain);
+
+                String stagingAssignedName = GooeyConfigManager.DefaultStagingPrefix + subscription.Subdomain;
+                ValidateDomain(stagingAssignedName, stagingDomain);
+            }
+
+            subscription.Domain = productionDomain;
+            subscription.StagingDomain = stagingDomain;
+
+            Save(subscription);
+        }
+
+        public static void ValidateDomain(String assignedName, String domain)
+        {
+            
+            if (String.IsNullOrEmpty(domain))
+                throw new ArgumentException("You must specify a domain");
+
+            int pos = domain.IndexOf('.');
+            String subdomain = domain.Substring(0, pos);
+            String assignedDomain = assignedName + GooeyConfigManager.DefaultCmsDomain;
+
+            //Make sure that if they're using the gooey default domain, that it matches their assigned name
+            if (domain.ToLower().EndsWith(GooeyConfigManager.DefaultCmsDomain))
+            {
+                if (!subdomain.Equals(assignedName, StringComparison.CurrentCultureIgnoreCase))
+                    throw new ArgumentException("The domain " + domain + " is not valid. You must use your assigned domain " + assignedDomain + " or a custom domain.");
+            }
+
+            //Make sure the domain is actually valid
+            Boolean result = Uri.IsWellFormedUriString("http://" + domain,UriKind.Absolute);
+            if (!result)
+                throw new ArgumentException("The domain " + domain + " is not a valid domain and may not be used.");
+        }
+
+        public static void UpdateSubscriptionOptions(CmsSubscription subscription, bool campaignsEnabled, bool salesforceEnabled)
+        {
+            Double currentCost = CalculateCost(subscription);
+
+            //Get the new cost
+            subscription.IsCampaignEnabled = campaignsEnabled;
+            subscription.IsSalesforceEnabled = salesforceEnabled;
+            Double newCost = CalculateCost(subscription);
+
+            String newDescription = GetSubscriptionDescription(subscription).ToString();
+            PaypalExpressCheckout checkout = new PaypalExpressCheckout();
+
+            PaypalProfileInfo info = checkout.GetProfileInfo(subscription.PaypalProfileId);
+            //If the cost is less, we can just update Paypal directly. So do so
+            if (newCost < currentCost)
+            {
+                if (info.IsTrialPeriod)
+                    throw new ArgumentException("Due to Paypal billing limitations you may not remove options associated with this subscription during your 30-day trial period."); 
+
+                checkout.UpdateBillingAgreement(subscription.PaypalProfileId, newCost, newDescription);
+            }
+            else
+            {
+                //We need to send the user to paypal to confirm the billing agreement. So, first, cancel the current agreement
+                String returnurl = "http://" + GooeyConfigManager.AdminSiteHost + "/auth/Manager.aspx";
+                String cancelurl = returnurl;
+
+                checkout.Cancel(subscription.PaypalProfileId);
+                BillingManager.Instance.AddHistory(subscription.Guid, subscription.PaypalProfileId, null, BillingManager.Cancel, 0, "Successfully cancelled existing paypal billing profile, will re-establish billing profile at a new rate of " + String.Format("{0:c}",newCost));
+
+                checkout.AddBillingAgreement(PaypalExpressCheckout.GetBillingAgreement(subscription));
+                String redirect = checkout.SetExpressCheckout(LoggedInUser.Email, subscription.Guid, returnurl, cancelurl);
+
+                WebRequestContext.Instance.CurrentHttpContext.Response.Redirect(redirect, true);
+            }
         }
     }
 }

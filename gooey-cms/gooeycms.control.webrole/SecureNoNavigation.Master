@@ -70,9 +70,9 @@
                                 <li><asp:HyperLink ID="accountLink" NavigateUrl="#" runat="server">Account</asp:HyperLink>
                                     <div class="menu">
                                         <ul>
-                                            <li><a id="A1" href="#" runat="server">Subscriptions</a></li>
-                                            <li><a id="A2" href="#" runat="server">Billing</a></li>
-                                            <li><a id="change_password" href="~/secure/ChangePassword.aspx" runat="server">Change&nbsp;Password</a></li>
+                                            <li><asp:HyperLink ID="LnkManageSubscription" runat="server">Manage Domain</asp:HyperLink></li>
+                                            <li><asp:HyperLink ID="LnkManageAccount" runat="server">Billing Info</asp:HyperLink></li>
+                                            <li><asp:HyperLink ID="LnkChangePassword" runat="server">Change&nbsp;Password</asp:HyperLink></li>
                                             <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
                                         </ul>
                                     </div>

@@ -157,5 +157,10 @@ namespace Gooeycms.Business.Paypal
                 return amount;
             }
         }
+
+        public Boolean IsCancelled
+        {
+            get { return Status.Equals("Cancelled"); }
+        }
     }
 }

@@ -52,11 +52,16 @@ namespace Gooeycms.Business.Paypal
 
         public String SetExpressCheckout(String email, String subscriptionId)
         {
+            return SetExpressCheckout(GooeyConfigManager.PaypalReturnUrl, GooeyConfigManager.PaypalCancelUrl);
+        }
+
+        public String SetExpressCheckout(String email, String subscriptionId, String returnUrl, String cancelUrl)
+        {
             NvpSetExpressCheckout checkout = new NvpSetExpressCheckout();
             SetDefaults(checkout);
 
-            checkout.Add(NvpSetExpressCheckout.Request._RETURNURL, GooeyConfigManager.PaypalReturnUrl);
-            checkout.Add(NvpSetExpressCheckout.Request._CANCELURL, GooeyConfigManager.PaypalCancelUrl);
+            checkout.Add(NvpSetExpressCheckout.Request._RETURNURL, returnUrl);
+            checkout.Add(NvpSetExpressCheckout.Request._CANCELURL, cancelUrl);
             checkout.Add(NvpSetExpressCheckout.Request.NOSHIPPING, Enabled);
             if (!String.IsNullOrWhiteSpace(email))
                 checkout.Add(NvpSetExpressCheckout.Request.EMAIL, email);
@@ -171,15 +176,22 @@ namespace Gooeycms.Business.Paypal
 
         public ProfileResultStatus CreateRecurringPayment(Registration registration)
         {
-            CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(registration);
-            Double total = (Double)plan.Price;
-            if (registration.IsCampaignEnabled)
-                total += GooeyConfigManager.CampaignOptionPrice;
-            if (registration.IsSalesforceEnabled)
-                total += GooeyConfigManager.SalesForcePrice;
-
             NvpBaItem agreement = GetBillingAgreement(registration);
-            
+            Double total = SubscriptionManager.CalculateCost(registration);
+
+            return CreateRecurringPayment(agreement, total);
+        }
+
+        public ProfileResultStatus CreateRecurringPayment(CmsSubscription subscription)
+        {
+            NvpBaItem agreement = GetBillingAgreement(subscription);
+            Double total = SubscriptionManager.CalculateCost(subscription);
+
+            return CreateRecurringPayment(agreement, total);
+        }
+
+        public ProfileResultStatus CreateRecurringPayment(NvpBaItem agreement, Double total)
+        {            
             NvpCreateRecurringPaymentsProfile action = new NvpCreateRecurringPaymentsProfile();
             SetDefaults(action);
 
@@ -269,17 +281,22 @@ namespace Gooeycms.Business.Paypal
 
         public Boolean Cancel(string profileId)
         {
-            Boolean result = false;
+            Boolean result = true;
             if (!String.IsNullOrEmpty(profileId))
             {
-                NvpManageRecurringPaymentsProfileStatus action = new NvpManageRecurringPaymentsProfileStatus();
-                SetDefaults(action);
+                //Make sure the profile isn't already cancelled...
+                PaypalProfileInfo info = GetProfileInfo(profileId);
+                if (!info.IsCancelled)
+                {
+                    NvpManageRecurringPaymentsProfileStatus action = new NvpManageRecurringPaymentsProfileStatus();
+                    SetDefaults(action);
 
-                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.PROFILEID, profileId);
-                action.Add(NvpManageRecurringPaymentsProfileStatus.Request.ACTION, NvpStatusChangeActionType.Cancel);
-                result = action.Post();
-                if (!result)
-                    throw PaypalException.GenerateException(action);
+                    action.Add(NvpManageRecurringPaymentsProfileStatus.Request.PROFILEID, profileId);
+                    action.Add(NvpManageRecurringPaymentsProfileStatus.Request.ACTION, NvpStatusChangeActionType.Cancel);
+                    result = action.Post();
+                    if (!result)
+                        throw PaypalException.GenerateException(action);
+                }
             }
 
             return result;            
