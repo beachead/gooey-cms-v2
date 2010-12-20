@@ -15,15 +15,6 @@ namespace Gooeycms.Webrole.Control.auth.Users
         {
         }
 
-        protected void RadScriptManager_OnAjaxError(Object sender, AsyncPostBackErrorEventArgs e)
-        {
-            String message = e.Exception.Message;
-            if (e.Exception.InnerException != null)
-                message = e.Exception.InnerException.Message;
-
-            RadScriptManager.AsyncPostBackErrorMessage = message;
-        }
-
         protected void LnkAddUser_Click(Object sender, EventArgs e)
         {
             this.UserGridView.MasterTableView.InsertItem();

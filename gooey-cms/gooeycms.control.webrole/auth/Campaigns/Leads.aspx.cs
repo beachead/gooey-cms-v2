@@ -20,7 +20,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 Response.Redirect("~/auth/default.aspx?addon=campaigns", true);
 
             Master.SetTitle("Lead Report");
-            RadScriptManager.RegisterPostBackControl(this.BtnGenerateReport);
+            Master.RegisterPostBackControl(this.BtnGenerateReport);
         }
 
         protected void BtnFilterDate_Click(object sender, EventArgs e)
@@ -39,11 +39,6 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             int rows = (forms.Count < 15) ? forms.Count + 1 : 15;
             this.LstSelectPages.Rows = rows;
             this.SelectPagesPanel.Visible = true;
-        }
-
-        protected void RadScriptManager_OnError(object sender, AsyncPostBackErrorEventArgs e)
-        {
-            this.RadScriptManager.AsyncPostBackErrorMessage = e.Exception.Message;
         }
 
         protected void BtnGenerateReport_Click(object sender, EventArgs e)

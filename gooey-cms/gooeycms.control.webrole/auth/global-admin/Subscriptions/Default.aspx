@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureGlobalAdmin.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Subscriptions.Default" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -19,8 +18,6 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager"  runat="server"></telerik:RadScriptManager>
-
     <div>
         Upcoming Renewals (next <asp:Label ID="LblTimeframe" Text="14" runat="server" /> days) <br />
         <telerik:RadGrid ID="PendingSubscriptions" DataSourceID="PendingSubscriptionsDataSource" runat="server"  AutoGenerateColumns="False" GridLines="None">

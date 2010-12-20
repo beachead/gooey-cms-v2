@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PopupWindow.Master" AutoEventWireup="true" CodeBehind="Redirects.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Pages.Redirects" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
@@ -10,8 +9,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnAjaxError" runat="server"></telerik:RadScriptManager>
-
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(onEndAjaxRequest);

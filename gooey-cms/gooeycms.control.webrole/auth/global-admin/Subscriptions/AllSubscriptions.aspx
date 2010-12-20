@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureGlobalAdmin.Master" AutoEventWireup="true" CodeBehind="AllSubscriptions.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Subscriptions.AllSubscriptions" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -19,7 +18,6 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager"  runat="server"></telerik:RadScriptManager>
     <telerik:RadAjaxManager ID="RadAjaxManager" runat="server" OnAjaxRequest="RadAjaxManager_AjaxRequest">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadAjaxManager">

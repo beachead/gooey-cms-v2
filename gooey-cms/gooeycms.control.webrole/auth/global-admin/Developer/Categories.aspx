@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureGlobalAdmin.Master" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Developer.Categories" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -14,7 +13,6 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
     Manage the categories which are available on the developer package page:
     <br /><br />
-    <telerik:RadScriptManager ID="ScriptManager" runat="server" />
     
     <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
     <telerik:RadAjaxPanel ID="AjaxPanel" LoadingPanelID="LoadingPanel"  runat="server">

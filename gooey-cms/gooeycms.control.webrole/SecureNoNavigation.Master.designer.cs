@@ -67,6 +67,15 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.HtmlControls.HtmlForm aspnetform;
         
         /// <summary>
+        /// RadScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadScriptManager RadScriptManager;
+        
+        /// <summary>
         /// PrimaryNavigation control.
         /// </summary>
         /// <remarks>

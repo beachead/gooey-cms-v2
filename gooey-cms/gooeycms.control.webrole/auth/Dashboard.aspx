@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true"
     CodeBehind="Dashboard.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Dashboard" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
@@ -15,8 +14,6 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
-    </telerik:RadScriptManager>
     <table border="0">
         <tr>
             <td>

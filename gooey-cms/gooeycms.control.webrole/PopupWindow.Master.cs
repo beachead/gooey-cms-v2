@@ -11,7 +11,11 @@ namespace Gooeycms.Webrole.Control
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+        }
 
+        protected void RadScriptManager_OnError(object sender, AsyncPostBackErrorEventArgs e)
+        {
+            this.RadScriptManager.AsyncPostBackErrorMessage = e.Exception.Message;
         }
     }
 }

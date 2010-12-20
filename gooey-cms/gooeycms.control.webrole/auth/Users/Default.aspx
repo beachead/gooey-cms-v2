@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Users.Default" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -19,8 +18,6 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnAjaxError" runat="server"></telerik:RadScriptManager>
-
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(onEndAjaxRequest);
@@ -107,12 +104,14 @@
     <br />
      <asp:LinkButton ID="LnkAddUser" OnClick="LnkAddUser_Click" Text="Add New User" runat="server" />
 
-    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="500" Height="570" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="680" Height="420" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
     
     <script type="text/javascript" language="javascript">
         function display_roles(userguid) {
-            window.radopen('./edit-roles.aspx?g=' + userguid,null);
+            var wnd = window.radopen('./edit-roles.aspx?g=' + userguid, null);
+            wnd.set_width(500);
+            wnd.set_height(575);
         }
     </script>    
     <asp:ObjectDataSource ID="UserDataSource" runat="server" 

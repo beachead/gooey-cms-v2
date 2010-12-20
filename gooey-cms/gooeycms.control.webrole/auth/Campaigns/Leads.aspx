@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Leads.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Leads" %>
 <%@ MasterType VirtualPath="~/Secure.master" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
-<%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -16,20 +15,6 @@
 This page allows you to export your leads to Excel.
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnError" runat="server" />
-
-    <script type="text/javascript" language="javascript">
-        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-
-        function EndRequestHandler(sender, args) {
-            if (args.get_error() != undefined && args.get_error().httpStatusCode == '500') {
-                alert(args.get_error().message);
-                args.set_errorHandled(true);
-            }
-        }
-
-    </script>
-
     <telerik:RadAjaxPanel ID="SelectDatePanel" LoadingPanelID="RadAjaxFilterLoadingPanel" runat="server">
         Search for leads within the following dates:
         <br />

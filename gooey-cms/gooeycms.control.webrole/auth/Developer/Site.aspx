@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Site.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Site" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
 <asp:Content ID="localJS" ContentPlaceHolderID="localJS" runat="server">
@@ -19,9 +18,6 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-
-    <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
-
     <table cellspacing="0" class="form" style="width:90%;">
         <tr>
             <td style="vertical-align:top;width:40%;">

@@ -28,6 +28,18 @@
 <body class="claro">
     <form id="form1" runat="server">
     <div>
+        <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnError" runat="server" />
+        <script type="text/javascript" language="javascript">
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+
+            function EndRequestHandler(sender, args) {
+                if (args.get_error() != undefined && args.get_error().httpStatusCode == '500') {
+                    alert(args.get_error().message);
+                    args.set_errorHandled(true);
+                }
+            }
+        </script>
+
         <script language="javascript" type="text/javascript">
             function close_window() {
                 var win = window.frameElement.radWindow;

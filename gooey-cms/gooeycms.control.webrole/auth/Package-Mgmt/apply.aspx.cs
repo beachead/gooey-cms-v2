@@ -15,7 +15,6 @@ namespace Gooeycms.Webrole.Control.auth.Package_Mgmt
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScriptManager.AsyncPostBackTimeout = GooeyConfigManager.DefaultAsyncTimeout;
             if (!Page.IsPostBack)
             {
                 this.ProgressArea.ProgressIndicators &= ~Telerik.Web.UI.Upload.ProgressIndicators.SelectedFilesCount;

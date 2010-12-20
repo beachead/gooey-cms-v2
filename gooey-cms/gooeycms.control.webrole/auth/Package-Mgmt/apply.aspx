@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="apply.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Package_Mgmt.apply" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,7 +9,6 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <telerik:RadScriptManager ID="ScriptManager" AsyncPostBackTimeout="600" runat="server" />
         <telerik:RadAjaxManager id="RadAjaxManager1" runat="server" OnAjaxRequest="AjaxManager_OnRequest" ClientEvents-OnResponseEnd="closeWindow();">
           <AjaxSettings>
              <telerik:AjaxSetting AjaxControlID="RadAjaxManager1">

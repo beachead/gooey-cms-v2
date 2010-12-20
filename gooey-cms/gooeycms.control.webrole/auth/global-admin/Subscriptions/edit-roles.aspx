@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="edit-roles.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Subscriptions.edit_roles" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,7 +9,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager" runat="server" />
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
         <telerik:AjaxSetting AjaxControlID="LstRoles">

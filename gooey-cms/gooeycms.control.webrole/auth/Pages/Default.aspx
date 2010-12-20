@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Pages.Default" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
@@ -138,10 +137,6 @@
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
-    </telerik:RadScriptManager>
-
-
     <telerik:RadAjaxPanel ID="UpdatePanel" runat="server">
     <a href="#" onclick="alert('I haven't figured out how to get this to work yet...still working on it'); return false;">Add New Page</a>
     <br /><br />

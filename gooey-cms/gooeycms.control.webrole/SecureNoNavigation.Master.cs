@@ -8,6 +8,7 @@ using Gooeycms.Business.Membership;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Subscription;
 using Gooeycms.Business.Subscription;
+using Gooeycms.Business;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -17,6 +18,8 @@ namespace Gooeycms.Webrole.Control
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            RadScriptManager.AsyncPostBackTimeout = GooeyConfigManager.DefaultAsyncTimeout;
+
             Page.Header.DataBind();
 
             this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
@@ -32,6 +35,16 @@ namespace Gooeycms.Webrole.Control
                 
                 LoadWebsites();
             }
+        }
+
+        public void RegisterPostBackControl(System.Web.UI.Control control)
+        {
+            RadScriptManager.RegisterPostBackControl(control);
+        }
+
+        protected void RadScriptManager_OnError(object sender, AsyncPostBackErrorEventArgs e)
+        {
+            this.RadScriptManager.AsyncPostBackErrorMessage = e.Exception.Message;
         }
 
         private void LoadWebsites()

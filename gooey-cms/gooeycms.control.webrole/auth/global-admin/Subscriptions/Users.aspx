@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="User Management" Language="C#" MasterPageFile="~/PopupWindow.Master" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.global_admin.Subscriptions.Users" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
@@ -10,8 +9,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-<telerik:RadScriptManager ID="ScriptManager" runat="server" />
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
         <telerik:AjaxSetting AjaxControlID="UserGridView">

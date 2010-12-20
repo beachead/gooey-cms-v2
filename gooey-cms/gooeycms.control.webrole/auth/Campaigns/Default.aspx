@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Default" %>
 <%@ MasterType VirtualPath="~/Secure.master" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
     <gooey:Subnav ID="Subnav" runat="server" NavSection="campaigns" NavItem="listing" />
@@ -10,9 +9,6 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <h1>Create Campaign</h1>
     <p>This page allows you to manage and generate links for campaigns that are currently running on the site.</p>
-
-    <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
-    </telerik:RadScriptManager>
 
     <asp:Label ID="Status" ForeColor="Green" runat="server" /><br />
     <a href="./create.aspx">Create New Campaign</a><br /><br />

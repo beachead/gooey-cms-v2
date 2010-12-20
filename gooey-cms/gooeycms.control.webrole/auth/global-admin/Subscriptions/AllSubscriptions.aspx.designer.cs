@@ -22,15 +22,6 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
         protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
         
         /// <summary>
-        /// RadScriptManager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadScriptManager RadScriptManager;
-        
-        /// <summary>
         /// RadAjaxManager control.
         /// </summary>
         /// <remarks>

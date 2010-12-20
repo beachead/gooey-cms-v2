@@ -13,15 +13,6 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Developer {
     public partial class Categories {
         
         /// <summary>
-        /// ScriptManager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadScriptManager ScriptManager;
-        
-        /// <summary>
         /// LoadingPanel control.
         /// </summary>
         /// <remarks>

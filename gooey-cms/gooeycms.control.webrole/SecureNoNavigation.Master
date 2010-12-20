@@ -33,6 +33,18 @@
 <body class="claro">
 
 <form id="aspnetform" clientidmode="Static" runat="server">
+    <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnError" runat="server"></telerik:RadScriptManager>
+
+    <script type="text/javascript" language="javascript">
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+
+        function EndRequestHandler(sender, args) {
+            if (args.get_error() != undefined && args.get_error().httpStatusCode == '500') {
+                alert(args.get_error().message);
+                args.set_errorHandled(true);
+            }
+        }
+    </script>
     
     <!-- START: header-region -->
     <div id="header-region">
