@@ -49,6 +49,24 @@ namespace Gooeycms.Webrole.Control.auth {
         protected global::System.Web.UI.WebControls.Label LblPlanCost;
         
         /// <summary>
+        /// UpgradeOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView UpgradeOptions;
+        
+        /// <summary>
+        /// UpgradeAvailable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View UpgradeAvailable;
+        
+        /// <summary>
         /// BtnUpgradePlan control.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,24 @@ namespace Gooeycms.Webrole.Control.auth {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton BtnUpgradePlan;
+        
+        /// <summary>
+        /// BtnCancelPlan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnCancelPlan;
+        
+        /// <summary>
+        /// DowngradeAvailable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View DowngradeAvailable;
         
         /// <summary>
         /// BtnDowngradePlan control.
@@ -67,13 +103,13 @@ namespace Gooeycms.Webrole.Control.auth {
         protected global::System.Web.UI.WebControls.LinkButton BtnDowngradePlan;
         
         /// <summary>
-        /// BtnCancelPlan control.
+        /// BtnCancelPlan2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BtnCancelPlan;
+        protected global::System.Web.UI.WebControls.LinkButton BtnCancelPlan2;
         
         /// <summary>
         /// PanelBusinessPlan control.
@@ -101,6 +137,42 @@ namespace Gooeycms.Webrole.Control.auth {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblPaypalStatus;
+        
+        /// <summary>
+        /// PaypalTrialView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView PaypalTrialView;
+        
+        /// <summary>
+        /// InTrialPeriodView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View InTrialPeriodView;
+        
+        /// <summary>
+        /// LblTrialRemaining control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTrialRemaining;
+        
+        /// <summary>
+        /// OutOfTrialPeriodView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View OutOfTrialPeriodView;
         
         /// <summary>
         /// LblNextBillingDate control.

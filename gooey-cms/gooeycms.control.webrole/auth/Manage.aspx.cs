@@ -59,15 +59,9 @@ namespace Gooeycms.Webrole.Control.auth
             this.LblDomain.Text = subscription.DefaultDisplayName;
 
             if (subscription.SubscriptionPlanEnum == Constants.SubscriptionPlans.Free)
-            {
-                this.BtnDowngradePlan.Visible = false;
-                this.BtnUpgradePlan.Enabled = true;
-            }
+                this.UpgradeOptions.SetActiveView(this.UpgradeAvailable);
             else
-            {
-                this.BtnDowngradePlan.Enabled = true;
-                this.BtnUpgradePlan.Visible = false;
-            }
+                this.UpgradeOptions.SetActiveView(this.DowngradeAvailable);
 
             CmsSubscriptionPlan currentPlan = subscription.SubscriptionPlan;
 
@@ -78,15 +72,15 @@ namespace Gooeycms.Webrole.Control.auth
             this.BtnUpgradePlan.OnClientClick = "return confirm('" + msg + "\\r\\n\\r\\nYou will be redirected to Paypal\\'s website to complete the upgrade transaction.\\r\\n\\r\\n(You will be able to modify your subscription options after your account has been upgraded.)');";
 
             subscription.SubscriptionPlan = currentPlan;
+
             if (!String.IsNullOrEmpty(subscription.PaypalProfileId))
             {
                 PaypalProfileInfo paypal = PaypalManager.Instance.GetProfileInfo(subscription.PaypalProfileId);
-                this.LblCurrentPlan.Text = subscription.SubscriptionPlan.Name;
                 if (paypal.NextBillDate.HasValue)
                     this.LblNextBillingDate.Text = paypal.NextBillDate.Value.ToLongDateString();
                 this.LblPaypalBillingId.Text = paypal.ProfileId;
                 this.LblPaypalStatus.Text = paypal.Status;
-                this.LblPlanCost.Text = String.Format("{0:c}",paypal.NormalPaymentAmt);
+                this.LblPlanCost.Text = String.Format("{0:c}", paypal.NormalPaymentAmt);
 
                 if (subscription.IsCampaignEnabled)
                     this.ChkCampaigns.Checked = true;
@@ -95,6 +89,13 @@ namespace Gooeycms.Webrole.Control.auth
                 this.PanelBusinessPlan.Visible = true;
 
                 this.BtnUpdateOptions.Visible = true;
+                this.LblTrialRemaining.Text = paypal.TrialCyclesRemaining.ToString();
+
+                if (paypal.IsTrialPeriod)
+                    this.PaypalTrialView.SetActiveView(this.InTrialPeriodView);
+                else
+                    this.PaypalTrialView.SetActiveView(this.OutOfTrialPeriodView);
+
                 if (paypal.IsCancelled)
                 {
                     this.PanelBusinessPlan.Enabled = false;
@@ -104,8 +105,10 @@ namespace Gooeycms.Webrole.Control.auth
             else
             {
                 this.PanelBusinessPlan.Visible = false;
+                this.LblPlanCost.Text = String.Format("{0:c}", 0);
             }
 
+            this.LblCurrentPlan.Text = subscription.SubscriptionPlan.Name;
             this.LblSiteName.Text = subscription.Subdomain;
             this.TxtProductionDomain.Text = subscription.Domain;
             this.TxtCustomStagingDomain.Text = subscription.StagingDomain;
@@ -167,7 +170,7 @@ namespace Gooeycms.Webrole.Control.auth
 
         protected void BtnUpgradePlan_Click(Object sender, EventArgs e)
         {
-            String returnurl = "http://" + GooeyConfigManager.AdminSiteHost + "/auth/Manager.aspx";
+            String returnurl = "http://" + GooeyConfigManager.AdminSiteHost + "/auth/Manage.aspx";
             String cancelurl = returnurl;
 
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);

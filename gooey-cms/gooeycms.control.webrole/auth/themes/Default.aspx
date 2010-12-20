@@ -54,7 +54,7 @@
                             NavigateUrl='<%# Eval("Theme.ThemeGuid","Javascript.aspx?tid={0}") %>' />
                         <% } else { %>
                         <asp:HyperLink ID="UpgradeJavascript" Text="Javascript (requires upgrade)" runat="server"
-                            NavigateUrl='http://store.gooeycms.net/signup/upgrade.aspx' />
+                            NavigateUrl='~/auth/Manage.aspx?msg=You+must+upgrade+your+account+to+complete+this+action' />
                         <% } %>
                         &nbsp;|&nbsp;
                         <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=600,height=500,left=150');">Images</a>&nbsp;|&nbsp;

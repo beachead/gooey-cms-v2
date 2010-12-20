@@ -22,10 +22,18 @@
             </tr>
             <tr>
                 <td>
-                    <asp:LinkButton ID="BtnUpgradePlan" OnClick="BtnUpgradePlan_Click" Text="Upgrade to Business Plan&nbsp;&nbsp;&nbsp;&nbsp;" runat="server" />
-                    <asp:LinkButton ID="BtnDowngradePlan" OnClick="BtnDowngradePlan_Click" Text="Downgrade to Free Plan" OnClientClick="return confirm('Are you sure you want to immediately downgrade your subscription?');" runat="server" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="BtnCancelPlan" OnClick="BtnCancelPlan_Click" Text="Cancel Account" OnClientClick="return confirm('Are you sure you want to cancel this subscription?');" runat="server" />
+                    <asp:MultiView ID="UpgradeOptions" runat="server">
+                        <asp:View ID="UpgradeAvailable" runat="server">
+                            <asp:LinkButton ID="BtnUpgradePlan" OnClick="BtnUpgradePlan_Click" Text="Upgrade to Business Plan" runat="server" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:LinkButton ID="BtnCancelPlan" OnClick="BtnCancelPlan_Click" Text="Cancel Account" OnClientClick="return confirm('Are you sure you want to cancel this subscription?');" runat="server" />                            
+                        </asp:View>
+                        <asp:View ID="DowngradeAvailable" runat="server">
+                            <asp:LinkButton ID="BtnDowngradePlan" OnClick="BtnDowngradePlan_Click" Text="Downgrade to Free Plan" OnClientClick="return confirm('Are you sure you want to immediately downgrade your subscription?');" runat="server" />                        
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:LinkButton ID="BtnCancelPlan2" OnClick="BtnCancelPlan_Click" Text="Cancel Account" OnClientClick="return confirm('Are you sure you want to cancel this subscription?');" runat="server" />                            
+                        </asp:View>
+                    </asp:MultiView>
                 </td>
             </tr>
         </table>
@@ -38,10 +46,21 @@
                 <td>Paypal Status:&nbsp;<asp:Label ID="LblPaypalStatus" runat="server" /></td>
             </tr>
             <tr>
-                <td>
-                    <label>Next Billing Date:</label>
-                    <asp:Label ID="LblNextBillingDate" runat="server" />                
-                </td>
+            <asp:MultiView ID="PaypalTrialView" runat="server">
+                <asp:View ID="InTrialPeriodView" runat="server">
+                    <td colspan="2">
+                        <label>Currently In Trial Period: </label>
+                        <asp:Label ID="LblTrialRemaining" runat="server" /> days remaining
+                    </td>
+                </asp:View>
+
+                <asp:View ID="OutOfTrialPeriodView" runat="server">
+                    <td colspan="2">
+                        <label>Next Billing Date:</label>
+                        <asp:Label ID="LblNextBillingDate" runat="server" />                
+                    </td>                
+                </asp:View>
+            </asp:MultiView>
             </tr>
         </table>
         </div>
