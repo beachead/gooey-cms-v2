@@ -22,7 +22,7 @@ namespace Gooeycms.Business.Crypto
             DateTime issued = DateTime.Now;
             DateTime expires = issued.Add(validFor);
 
-            data = Guid.NewGuid().ToString() + "," + data + "," + expires.ToLongDateString();
+            data = Guid.NewGuid().ToString() + "," + data + "," + expires.Ticks;
             
             TextEncryption crypto = new TextEncryption(GooeyConfigManager.TokenEncyrptionKey);
             String result = crypto.Encrypt(data);
