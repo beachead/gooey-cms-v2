@@ -80,7 +80,11 @@ namespace Gooeycms.Webrole.Control.auth
                     this.LblNextBillingDate.Text = paypal.NextBillDate.Value.ToLongDateString();
                 this.LblPaypalBillingId.Text = paypal.ProfileId;
                 this.LblPaypalStatus.Text = paypal.Status;
-                this.LblPlanCost.Text = String.Format("{0:c}", paypal.NormalPaymentAmt);
+
+                if (!paypal.IsCancelled)
+                    this.LblPlanCost.Text = String.Format("{0:c}", paypal.NormalPaymentAmt);
+                else
+                    this.LblPlanCost.Text = String.Format("{0:c}", 0);
 
                 if (subscription.IsCampaignEnabled)
                     this.ChkCampaigns.Checked = true;

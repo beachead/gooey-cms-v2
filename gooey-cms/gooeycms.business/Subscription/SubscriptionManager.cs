@@ -514,7 +514,7 @@ namespace Gooeycms.Business.Subscription
             else
             {
                 //We need to send the user to paypal to confirm the billing agreement. So, first, cancel the current agreement
-                String returnurl = "http://" + GooeyConfigManager.AdminSiteHost + "/auth/Manager.aspx";
+                String returnurl = "http://" + GooeyConfigManager.AdminSiteHost + "/auth/Manage.aspx";
                 String cancelurl = returnurl;
 
                 checkout.Cancel(subscription.PaypalProfileId);
