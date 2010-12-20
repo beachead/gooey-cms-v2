@@ -89,7 +89,7 @@ namespace Gooeycms.Webrole.Ecommerce.signup
 
                 double totalCost = SubscriptionManager.CalculateCost(subscription);
                 BillingManager.Instance.AddHistory(subscription.Guid, paypalProfileId, BillingManager.NotApplicable, BillingManager.Signup, totalCost, "Initial signup for " + subscription.SubscriptionPlan.Name);
-                EmailManager.Instance.SendRegistrationEmail(subscription);
+                EmailManager.Instance.SendRegistrationEmail(subscription,registration);
             }
 
             return subscription;

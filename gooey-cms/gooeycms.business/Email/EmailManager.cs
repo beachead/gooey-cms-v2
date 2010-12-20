@@ -10,6 +10,7 @@ using Gooeycms.Constants;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Business.Email
 {
@@ -29,10 +30,10 @@ namespace Gooeycms.Business.Email
             public String From { get; set; }
         }
 
-        public void SendRegistrationEmail(CmsSubscription subscription)
+        public void SendRegistrationEmail(CmsSubscription subscription, Registration registration)
         {
             String template = GooeyConfigManager.GetEmailTemplate(EmailTemplates.Signup);
-            String body = PerformReplacements(template,subscription);
+            String body = PerformReplacements(template,subscription: subscription, registration: registration);
 
             EmailInfo info = GetEmailInfo(body, subscription.PrimaryUser.Email);
             SendEmail(info);
@@ -86,7 +87,7 @@ namespace Gooeycms.Business.Email
             return info;
         }
 
-        private String PerformReplacements(String body, CmsSubscription subscription = null, Receipt receipt = null)
+        private String PerformReplacements(String body, CmsSubscription subscription = null, Registration registration = null, Receipt receipt = null)
         {
             UserInfo user = null;
             if (receipt == null)
@@ -96,14 +97,15 @@ namespace Gooeycms.Business.Email
 
             body = body.Replace("{email}", user.Email);
             body = body.Replace("{firstname}", user.Firstname);
+            body = body.Replace("{lastname}", user.Lastname);
             body = body.Replace("{username}", user.Username);
-            body = body.Replace("{date}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+            body = body.Replace("{current-date}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
 
             if (subscription != null)
             {
                 Double totalCost = SubscriptionManager.CalculateCost(subscription);
                 body = body.Replace("{domain}", subscription.Domain);
-                body = body.Replace("{staging}", subscription.StagingDomain);
+                body = body.Replace("{staging-domain}", subscription.StagingDomain);
                 body = body.Replace("{subscription-cost}", String.Format("{0:c}", totalCost));
                 body = body.Replace("{subscription-description}", SubscriptionManager.GetSubscriptionDescription(subscription).ToString());
                 body = body.Replace("{paypal-id}", subscription.PaypalProfileId);
@@ -115,6 +117,16 @@ namespace Gooeycms.Business.Email
                 body = body.Replace("{subscription-cost}", String.Empty);
                 body = body.Replace("{subscription-description}", String.Empty);
                 body = body.Replace("{paypal-id}", String.Empty);
+            }
+
+            if (registration != null)
+            {
+                String password = TextEncryption.Decode(registration.EncryptedPassword);
+                body = body.Replace("{password}", password);
+            }
+            else
+            {
+                body = body.Replace("{password}", String.Empty);
             }
 
             if (receipt != null)
