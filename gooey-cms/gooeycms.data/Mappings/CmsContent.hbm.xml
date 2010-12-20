@@ -7,8 +7,10 @@
     <property column="guid" name="Guid" type="String" />
     <property column="site_guid" name="SubscriptionId" type="String" />
     <property column="is_global" name="IsGlobalType" type="Boolean" />
+    <property column="display_name" name="DisplayName" type="String" />
     <property column="name" name="Name" type="String" />
     <property column="description" name="Description" type="String" />
+    <property column="title_field" name="TitleFieldName" type="String" />    
     <property column="is_file" name="IsFileType" type="Boolean" />
     <property column="show_editor" name="IsEditorVisible" type="Boolean" />
   </class>

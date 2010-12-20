@@ -29,8 +29,10 @@ CREATE TABLE [dbo].[Content_Types](
 	[guid] [varchar](36) NOT NULL,
 	[is_global] [bit] NOT NULL DEFAULT(0),
 	[site_guid] VARCHAR(36),
+	[display_name] VARCHAR(64),
 	[name] [varchar](50) NOT NULL,
 	[description] [varchar](256) NULL,
+	[title_field] VARCHAR(64),
 	[is_file] [bit] NULL,
 	[show_editor] [bit] NULL,
 	PRIMARY KEY CLUSTERED([id]),
@@ -51,6 +53,7 @@ CREATE TABLE [dbo].[ContentType_Fields](
 	[field_rows] [int] NULL,
 	PRIMARY KEY CLUSTERED([id])
 );
+CREATE UNIQUE INDEX unq_contenttype_fields_name ON [ContentType_Fields]([contenttype_id],[field_name]);
 
 CREATE TABLE [dbo].[Content](
 	[id] [int] IDENTITY(1,1) NOT NULL,

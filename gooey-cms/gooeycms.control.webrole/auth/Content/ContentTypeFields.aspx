@@ -14,6 +14,7 @@
 </div>
 
 <div dojoType="dijit.TitlePane" title="Manage Existing Fields">
+Default Display Field: <asp:DropDownList ID="LstDefaultDisplayField" runat="server" />&nbsp;&nbsp;<asp:LinkButton ID="BtnUpdateDefaultDisplayField" OnClick="BtnUpdateDefaultDisplayField_Click" Text="Update" CausesValidation="false" runat="server" />
 <asp:GridView ID="FieldTable" runat="server" AutoGenerateColumns="False" 
         CssClass="data" ForeColor="#333333" 
         GridLines="None" OnRowCommand="OnRowCommand" 

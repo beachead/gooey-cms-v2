@@ -9,9 +9,7 @@
 
     <h1>Manage Content Types</h1>
     
-    <div dojoType="dijit.TitlePane" title="Existing Custom Content Types">
-
-
+<div dojoType="dijit.TitlePane" title="Existing Custom Content Types">
     <asp:GridView ID="ExistingContentTypes" runat="server" AutoGenerateColumns="False" 
             ForeColor="#333333" 
             DataSourceID="ContentTypeDataSource"
@@ -26,7 +24,10 @@
             <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
-            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name">
+            <asp:BoundField DataField="DisplayName" HeaderText="Display Name" SortExpression="Name">
+                <HeaderStyle HorizontalAlign="Left" />
+            </asp:BoundField>
+            <asp:BoundField DataField="Name" HeaderText="System Name" SortExpression="Name">
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
             <asp:BoundField DataField="Description" HeaderText="Description" 
@@ -40,7 +41,8 @@
             <asp:TemplateField HeaderText="Actions">
                 <ItemTemplate>
                     <asp:HiddenField ID="ContentTypeId" Value='<%# Eval("Guid") %>' runat="server" />
-                    <asp:HyperLink ID="LinkFields" NavigateUrl='<%# Eval("Guid","./ContentTypeFields.aspx?tid={0}") %>' Text="Manage Fields" runat="server" />
+                    <asp:LinkButton ID="LnkEditType" CommandName="editid" Text="Edit" runat="server" />&nbsp;&nbsp;
+                    <asp:HyperLink ID="LinkFields" NavigateUrl='<%# Eval("Guid","./ContentTypeFields.aspx?tid={0}") %>' Text="Manage Fields" runat="server" />&nbsp;&nbsp;&nbsp;
                     <asp:LinkButton ID="DeleteType" Text="Delete" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this content type?');" runat="server" />                
                 </ItemTemplate>
             </asp:TemplateField>
@@ -58,33 +60,50 @@
 <br />
 <div dojoType="dijit.TitlePane" title="Define Custom Content Type">
     <asp:Label ID="Status" runat="server" />
-    <asp:HiddenField ID="GlobalTypeToken" runat="server" />
-    <table class="form">
+    
+    <asp:LinkButton ID="LnkAddNewType" OnClick="LnkAddNewType_Click" Text="Add New Content Type" runat="server" />
+    <table>
         <tr>
-            <td class="label">Name:</td>
-            <td><asp:TextBox ID="ContentName" runat="server" /></td>
-        </tr>
-        <tr>
-            <td class="label">Description:</td>
-            <td><asp:TextBox ID="ContentDescription" runat="server" /></td>
-        </tr>
-        <tr>
-            <td class="label">Supports File Uploads?</td>
             <td>
-                <asp:RadioButton ID="ContentFileYes" GroupName="Files" Text="Yes" runat="server" />
-                <asp:RadioButton ID="ContentFileNo" GroupName="Files" Checked="true" Text="No" runat="server" />                    
+                <asp:HiddenField ID="ExistingContentTypeGuid" runat="server" />
+                <table class="form">
+                    <tr>
+                        <td class="label">Display Name:</td>
+                        <td><asp:TextBox ID="ContentDispayName" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td class="label">System Name (no spaces allowed):</td>
+                        <td><asp:TextBox ID="ContentSystemName" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td class="label">Description:</td>
+                        <td><asp:TextBox ID="ContentDescription" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td class="label">Supports File Uploads?</td>
+                        <td>
+                            <asp:RadioButton ID="ContentFileYes" GroupName="Files" Text="Yes" runat="server" />
+                            <asp:RadioButton ID="ContentFileNo" GroupName="Files" Checked="true" Text="No" runat="server" />                    
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td class="label">Show Content Editor?</td>
+                        <td>
+                            <asp:RadioButton ID="ContentEditorYes" GroupName="Editor" Checked="true" Text="Yes" runat="server" />
+                            <asp:RadioButton ID="ContentEditorNo" GroupName="Editor" Text="No" runat="server" />                    
+                        </td>
+                    </tr>             
+                    <tr class="controls">
+                        <td colspan="2">
+                            <asp:Button ID="BtnAddContent" OnClick="AddContentType_Click" Text="Add" runat="server" />
+                        </td>
+                    </tr>
+                </table>            
             </td>
-        </tr> 
-        <tr>
-            <td class="label">Show Content Editor?</td>
-            <td>
-                <asp:RadioButton ID="ContentEditorYes" GroupName="Editor" Checked="true" Text="Yes" runat="server" />
-                <asp:RadioButton ID="ContentEditorNo" GroupName="Editor" Text="No" runat="server" />                    
-            </td>
-        </tr>             
-        <tr class="controls">
-            <td colspan="2">
-                <asp:Button ID="AddContent" OnClick="AddContentType_Click" Text="Add" runat="server" />
+            <td style="vertical-align:top;">or duplicate and customize a global type:</td>
+            <td style="vertical-align:top;">
+                <asp:DropDownList ID="LstGlobalTypes" runat="server" />&nbsp;
+                <asp:LinkButton ID="BtnDuplicate" OnClick="BtnDuplicate_Click" Text="Duplicate" runat="server" />  
             </td>
         </tr>
     </table>

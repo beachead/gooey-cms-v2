@@ -50,7 +50,28 @@ namespace Gooeycms.Data.Model.Content
             get
             {
                 String titleField = ContentType.TitleFieldName;
-                return FindField(titleField).Value;
+                if (titleField == null)
+                    titleField = "title";
+
+                CmsContentField field = FindField(titleField);
+                if (field == null)
+                {
+                    //If it's null, attempt to find the first string based field
+                    foreach (CmsContentField item in this.fields)
+                    {
+                        if (item.ObjectType.Equals("System.String"))
+                        {
+                            titleField = field.Name;
+                            break;
+                        }
+                    }
+
+                    field = FindField(titleField);
+                    if (field == null)
+                        throw new ArgumentException("A display field has not been setup for this content type. Please either choose a display field or create a field named 'title'");
+                }
+
+                return field.Value;
             }
         }
 

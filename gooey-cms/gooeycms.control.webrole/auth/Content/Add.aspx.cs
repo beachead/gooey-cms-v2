@@ -29,7 +29,7 @@ namespace Gooeycms.Webrole.Control.auth.Content
 
         private void LoadContentTypes()
         {
-            IList<CmsContentType> types = ContentManager.Instance.GetContentTypes(ContentTypeFilter.IncludeGlobalTypes);
+            IList<CmsContentType> types = ContentManager.Instance.GetContentTypes(ContentTypeFilter.DoNotIncludeGlobalTypes);
 
             this.LstContentTypes.Items.Clear();
             foreach (CmsContentType type in types)

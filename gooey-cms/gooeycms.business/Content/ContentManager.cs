@@ -396,6 +396,16 @@ namespace Gooeycms.Business.Content
             Save(item);
         }
 
+        public void Save(CmsContentType type)
+        {
+            CmsContentTypeDao dao = new CmsContentTypeDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<CmsContentType>(type);
+                tx.Commit();
+            }
+        }
+
         public void Save(CmsContent item)
         {
             CmsContentDao dao = new CmsContentDao();
@@ -460,6 +470,57 @@ namespace Gooeycms.Business.Content
         public void Approve(Data.Guid guid, string approvedBy)
         {
             Approve(CurrentSite.Guid, guid, approvedBy);
+        }
+
+        /// <summary>
+        /// Creates a duplicate of the specified content type. Adjusting the names as necessary to avoid conflicts.
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <param name="systemType"></param>
+        public void Duplicate(Data.Guid siteGuid, CmsContentType typeToCopy)
+        {
+            String systemName = typeToCopy.Name;
+
+            //Make sure that this system name doesn't already exist
+            CmsContentTypeDao dao = new CmsContentTypeDao();
+            CmsContentType existing = dao.FindBySiteAndName(siteGuid.Value, systemName);
+
+            if (existing != null)
+                systemName = systemName + "_c";
+
+            CmsContentType type = new CmsContentType();
+            type.Guid = System.Guid.NewGuid().ToString();
+            type.DisplayName = typeToCopy.DisplayName;
+            type.Description = type.Description;
+            type.IsEditorVisible = type.IsEditorVisible;
+            type.IsFileType = type.IsFileType;
+            type.IsGlobalType = false;
+            type.Name = systemName;
+            type.SubscriptionId = siteGuid.Value;
+            type.TitleFieldName = typeToCopy.TitleFieldName;
+
+            AddContentType(siteGuid,type);
+
+            //Copy all of the fields
+            IList<CmsContentTypeField> fieldsToCopy = GetContentTypeFields(typeToCopy.Guid);
+            foreach (CmsContentTypeField fieldToCopy in fieldsToCopy)
+            {
+                CmsContentTypeField field = new CmsContentTypeField();
+                field._SelectOptions = fieldToCopy._SelectOptions;
+                field.Columns = fieldToCopy.Columns;
+                field.Description = fieldToCopy.Description;
+                field.FieldType = fieldToCopy.FieldType;
+                field.IsRequired = fieldToCopy.IsRequired;
+                field.IsSystemDefault = fieldToCopy.IsSystemDefault;
+                field.Name = fieldToCopy.Name;
+                field.ObjectType = fieldToCopy.ObjectType;
+                field.Parent = fieldToCopy.Parent;
+                field.Position = fieldToCopy.Position;
+                field.Rows = fieldToCopy.Rows;
+                field.SystemName = fieldToCopy.SystemName;
+
+                AddContentTypeField(type, field);
+            }
         }
     }
 }

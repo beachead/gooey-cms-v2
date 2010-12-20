@@ -19,6 +19,17 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.ContentTypes
                 String guid = Request.QueryString["tid"];
                 CmsContentType type = ContentManager.Instance.GetContentType(guid);
                 this.LblContentTypeName.Text = type.Name + " (" + type.Description + ")";
+
+                IList<CmsContentTypeField> fields = ContentManager.Instance.GetContentTypeFields(guid);
+
+                ListItem defaultItem = new ListItem("...select...", "");
+                this.LstDefaultDisplayField.Items.Add(defaultItem);
+                foreach (CmsContentTypeField field in fields)
+                {
+                    ListItem item = new ListItem(field.Name, field.SystemName);
+                    this.LstDefaultDisplayField.Items.Add(item);
+                    this.LstDefaultDisplayField.SelectedValue = type.TitleFieldName;
+                }
             }
         }
 
@@ -34,6 +45,18 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.ContentTypes
                 case "dropdown":
                     this.DropdownFields.Visible = true;
                     break;
+            }
+        }
+
+        protected void BtnUpdateDefaultDisplayField_Click(Object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.LstDefaultDisplayField.SelectedValue))
+            {
+                String guid = Request.QueryString["tid"];
+                CmsContentType type = ContentManager.Instance.GetContentType(guid);
+                type.TitleFieldName = this.LstDefaultDisplayField.SelectedValue;
+
+                ContentManager.Instance.Save(type);
             }
         }
 

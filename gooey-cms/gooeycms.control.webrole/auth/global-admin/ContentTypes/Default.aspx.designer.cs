@@ -49,6 +49,15 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.ContentTypes {
         protected global::System.Web.UI.WebControls.Label Status;
         
         /// <summary>
+        /// LnkAddNewType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LnkAddNewType;
+        
+        /// <summary>
         /// GlobalTypeToken control.
         /// </summary>
         /// <remarks>
@@ -58,13 +67,31 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.ContentTypes {
         protected global::System.Web.UI.WebControls.HiddenField GlobalTypeToken;
         
         /// <summary>
-        /// ContentName control.
+        /// ExistingContentTypeGuid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ContentName;
+        protected global::System.Web.UI.WebControls.HiddenField ExistingContentTypeGuid;
+        
+        /// <summary>
+        /// ContentDispayName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContentDispayName;
+        
+        /// <summary>
+        /// ContentSystemName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContentSystemName;
         
         /// <summary>
         /// ContentDescription control.
@@ -112,12 +139,12 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.ContentTypes {
         protected global::System.Web.UI.WebControls.RadioButton ContentEditorNo;
         
         /// <summary>
-        /// AddContentType control.
+        /// BtnAddContentType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddContentType;
+        protected global::System.Web.UI.WebControls.Button BtnAddContentType;
     }
 }

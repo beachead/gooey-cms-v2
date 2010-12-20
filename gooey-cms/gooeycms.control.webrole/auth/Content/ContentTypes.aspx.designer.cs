@@ -49,22 +49,40 @@ namespace Gooeycms.Webrole.Control.auth.Content {
         protected global::System.Web.UI.WebControls.Label Status;
         
         /// <summary>
-        /// GlobalTypeToken control.
+        /// LnkAddNewType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField GlobalTypeToken;
+        protected global::System.Web.UI.WebControls.LinkButton LnkAddNewType;
         
         /// <summary>
-        /// ContentName control.
+        /// ExistingContentTypeGuid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ContentName;
+        protected global::System.Web.UI.WebControls.HiddenField ExistingContentTypeGuid;
+        
+        /// <summary>
+        /// ContentDispayName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContentDispayName;
+        
+        /// <summary>
+        /// ContentSystemName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContentSystemName;
         
         /// <summary>
         /// ContentDescription control.
@@ -112,12 +130,30 @@ namespace Gooeycms.Webrole.Control.auth.Content {
         protected global::System.Web.UI.WebControls.RadioButton ContentEditorNo;
         
         /// <summary>
-        /// AddContent control.
+        /// BtnAddContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddContent;
+        protected global::System.Web.UI.WebControls.Button BtnAddContent;
+        
+        /// <summary>
+        /// LstGlobalTypes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList LstGlobalTypes;
+        
+        /// <summary>
+        /// BtnDuplicate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnDuplicate;
     }
 }
