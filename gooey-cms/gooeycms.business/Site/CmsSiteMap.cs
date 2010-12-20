@@ -148,6 +148,46 @@ namespace Gooeycms.Business.Web
             return AddChildDirectory(CurrentSite.Guid, parentPath, newDirectory);
         }
 
+        public CmsSitePath AddRedirect(Data.Guid siteGuid, String redirectFrom, String redirectTo)
+        {
+            if ((!redirectFrom.StartsWith("http")) && (!redirectFrom.StartsWith("~/")))
+            {
+                if (redirectFrom.StartsWith("/"))
+                    redirectFrom = "~" + redirectFrom;
+                else if (!redirectFrom.StartsWith("/"))
+                    redirectFrom = "~/" + redirectFrom;
+            }
+
+            if ((!redirectTo.StartsWith("http")) && (!redirectTo.StartsWith("~/")))
+            {
+                if (redirectTo.StartsWith("/"))
+                    redirectTo = "~" + redirectTo;
+                else if (!redirectTo.StartsWith("/"))
+                    redirectTo = "~/" + redirectTo;
+            }
+
+            CmsSitePath path = GetPath(siteGuid, redirectFrom);
+            if (path == null)
+            {
+                path = new CmsSitePath();
+            }
+
+            path.SubscriptionGuid = siteGuid.Value;
+            path.Url = redirectFrom;
+            path.UrlHash = TextHash.MD5(path.Url).Value;
+            path.RedirectTo = redirectTo;
+            path.IsRedirect = true;
+
+            CmsSitePathDao dao = new CmsSitePathDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<CmsSitePath>(path);
+                tx.Commit();
+            }
+
+            return path;
+        }
+
         public CmsSitePath AddNewPage(Data.Guid siteGuid, String parentPath, String newPage)
         {
             CmsSitePath parent = GetPath(siteGuid, parentPath);
@@ -240,6 +280,12 @@ namespace Gooeycms.Business.Web
         {
             CmsSitePathDao dao = new CmsSitePathDao();
             return dao.FindAllBySiteGuid(siteGuid);
+        }
+
+        public IList<CmsSitePath> GetRedirects(Data.Guid siteGuid)
+        {
+            CmsSitePathDao dao = new CmsSitePathDao();
+            return dao.FindRedirectsBySiteGuid(siteGuid);
         }
 
         /// <summary>

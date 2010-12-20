@@ -140,6 +140,7 @@
     <Content Include="auth\Pages\ImageBrowser.aspx" />
     <Content Include="auth\Pages\Javascript.aspx" />
     <Content Include="auth\Pages\Metatags.aspx" />
+    <Content Include="auth\Pages\Redirects.aspx" />
     <Content Include="auth\Pages\Stylesheet.aspx" />
     <Content Include="auth\Promotion\Default.aspx" />
     <Content Include="auth\Themes\Footer.aspx" />
@@ -487,6 +488,13 @@
     </Compile>
     <Compile Include="auth\Pages\Metatags.aspx.designer.cs">
       <DependentUpon>Metatags.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Pages\Redirects.aspx.cs">
+      <DependentUpon>Redirects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Pages\Redirects.aspx.designer.cs">
+      <DependentUpon>Redirects.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Pages\Stylesheet.aspx.cs">
       <DependentUpon>Stylesheet.aspx</DependentUpon>

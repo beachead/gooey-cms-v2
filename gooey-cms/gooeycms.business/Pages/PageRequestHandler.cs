@@ -19,6 +19,7 @@ using Gooeycms.Business.Storage;
 using Gooeycms.Business.Cache;
 using Gooeycms.Business.Markup.Dynamic;
 using Gooeycms.Business.Campaigns;
+using Gooeycms.Data.Model.Site;
 
 namespace Gooeycms.Business.Pages
 {
@@ -60,6 +61,22 @@ namespace Gooeycms.Business.Pages
 
             if (String.IsNullOrEmpty(preview))
             {
+                if (!this.isInCache)
+                {
+                    //Check if this page is a redirect
+                    String path = "~" + url.Path;
+                    CmsSitePath sitepath = CmsSiteMap.Instance.GetPath(path);
+                    if (sitepath != null)
+                    {
+                        if (sitepath.IsRedirect)
+                        {
+                            Control resolver = new Control();
+                            String redirectTo = resolver.ResolveClientUrl(sitepath.RedirectTo);
+                            Response.Redirect(redirectTo, true);
+                        }
+                    }
+                }
+
                 CampaignManager.Instance.TrackCampaigns();
 
                 //If the page is in the cache, return immediately

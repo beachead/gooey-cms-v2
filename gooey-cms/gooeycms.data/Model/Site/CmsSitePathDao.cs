@@ -13,7 +13,7 @@ namespace Gooeycms.Data.Model.Site
 
         public int FindNextPosition(Guid siteGuid, int depth)
         {
-            string hql = "select max(path.Position) from CmsSitePath path where path.SubscriptionGuid = :guid and path.Depth = :depth";
+            string hql = "select max(path.Position) from CmsSitePath path where path.SubscriptionGuid = :guid and page.IsRedirect = 0 and path.Depth = :depth";
             int pos = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).SetInt32("depth", depth).UniqueResult<int>();
             return pos + 1;
         }
@@ -26,7 +26,7 @@ namespace Gooeycms.Data.Model.Site
 
         public System.Collections.Generic.IList<CmsSitePath> FindAllBySiteGuid(Guid siteGuid)
         {
-            string hql = "select paths from CmsSitePath paths where paths.SubscriptionGuid = :guid order by depth asc, position asc";
+            string hql = "select paths from CmsSitePath paths where paths.SubscriptionGuid = :guid and paths.IsRedirect = 0 order by depth asc, position asc";
             return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsSitePath>();
         }
 
@@ -47,6 +47,12 @@ namespace Gooeycms.Data.Model.Site
             IList<CmsSitePath> results = base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsSitePath>();
             foreach (CmsSitePath result in results)
                 base.Delete<CmsSitePath>(result);
+        }
+
+        public IList<CmsSitePath> FindRedirectsBySiteGuid(Guid siteGuid)
+        {
+            String hql = "select path from CmsSitePath path where path.SubscriptionGuid = :guid and path.IsRedirect = 1";
+            return base.NewHqlQuery(hql).SetString("guid", siteGuid.Value).List<CmsSitePath>();
         }
     }
 }
