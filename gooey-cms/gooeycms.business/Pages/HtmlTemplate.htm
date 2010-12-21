@@ -236,12 +236,16 @@
 
         Gooey.Util.addLoadEvent(
             function () {
-                var frm = null;
-                if ((frm = document.getElementsByTagName('form')[0]) != null) {
-                    frm.onsubmit = function () {
-                        return Gooey.Validate.validate();
+                // attach validate to submit
+                var gooeyForms = document.getElementsByClassName('gooeycms-form');
+                if (gooeyForms.length > 0) {
+                    for (var i = 0; i < gooeyForms.length; i++) {
+                        gooeyForms[i].onsubmit = function () {
+                            return Gooey.Validate.validate();
+                        }
                     }
                 }
+                // insert error containers
                 var aRequiredFields = document.getElementsByClassName('required');
                 for (var i = 0, l = aRequiredFields.length; i < l; i++) {
                     Gooey.Dom.wrapRequired(aRequiredFields[i]);

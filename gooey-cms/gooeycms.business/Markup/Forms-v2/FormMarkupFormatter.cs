@@ -56,7 +56,7 @@ namespace Gooeycms.Business.Markup.Forms_v2
             if (error == null)
             {
                 StringBuilder formhtml = new StringBuilder();
-                formhtml.Append(@"<form action=""/gooeyforms/formprocess.handler?&pagename=" + AntiXss.UrlEncode(pagename) + @""" method=""post"">").AppendLine();
+                formhtml.Append(@"<form class=""gooeycms-form"" action=""/gooeyforms/formprocess.handler?&pagename=" + AntiXss.UrlEncode(pagename) + @""" method=""post"">").AppendLine();
                 formhtml.AppendLine(metainfo.ToString());
                 formhtml.Append(content);
                 formhtml.Append(@"</form>").AppendLine();
