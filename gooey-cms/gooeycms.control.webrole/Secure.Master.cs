@@ -70,6 +70,11 @@ namespace Gooeycms.Webrole.Control
 
         }
 
+        public new Telerik.Web.UI.RadScriptManager ScriptManager
+        {
+            get { return Master.ScriptManager; }
+        }
+
         public void SetTitle(String title)
         {
             Page.Header.Title = String.Format(Page.Header.Title, title);

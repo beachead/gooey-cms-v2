@@ -20,7 +20,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 Response.Redirect("~/auth/default.aspx?addon=campaigns", true);
 
             Master.SetTitle("Lead Report");
-            Master.RegisterPostBackControl(this.BtnGenerateReport);
+            Master.ScriptManager.RegisterPostBackControl(this.BtnGenerateReport);
         }
 
         protected void BtnFilterDate_Click(object sender, EventArgs e)
