@@ -17,7 +17,7 @@
             win.close();            
         }
     </script>
-
+    <telerik:RadScriptManager ID="ScriptManager" runat="server" />
     <telerik:RadAjaxPanel ClientEvents-OnResponseEnd="close_window();" EnableAJAX="true" runat="server">
     <div>
         <table>
