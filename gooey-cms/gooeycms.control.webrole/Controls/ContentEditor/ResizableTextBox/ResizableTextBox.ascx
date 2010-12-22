@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<% Response.Write(CssPath); %>" type="text/css" media="screen" />
 <style type="text/css">
 #<%=ResizableTextArea.ClientID %> {
-    width: 90%;
+    width: 99%;
     height: 100px;
     min-height: 150px;
     padding: 0;

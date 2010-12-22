@@ -38,7 +38,7 @@ namespace Beachead.Core.Markup.Forms
                 String token = AntiXss.UrlEncode(TokenManager.Issue(pagename, TimeSpan.FromMinutes(2)));
 
                 html.Append(@"<div class=""webscript-form"">").AppendLine();
-                html.Append(@"<form action=""/gooeyforms/formprocess.handler?token=" + token + @"&pagename=" + AntiXss.UrlEncode(pagename) + @""" method=""post"">").AppendLine();
+                html.Append(@"<form class=""gooeycms-form"" action=""/gooeyforms/formprocess.handler?token=" + token + @"&pagename=" + AntiXss.UrlEncode(pagename) + @""" method=""post"">").AppendLine();
                 html = metainfo.Convert(html, content);
                 html = fields.Convert(html, content);
                 html.AppendFormat(SubmitFormat, id, "submit", metainfo.SubmitButtonText).AppendLine();
