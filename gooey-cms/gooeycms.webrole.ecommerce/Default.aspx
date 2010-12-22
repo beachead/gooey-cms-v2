@@ -31,9 +31,7 @@
 				<div class="menu">
 					<ul>
 
-						<li><a href="">sites and themes</a></li>
 						<li><a href="">sites</a></li>
-						<li><a href="">themes</a></li>
 					</ul>
 				</div>
 			</li>
@@ -42,10 +40,10 @@
 			<li id="price-filter"><a href="">Any Price</a>
 				<div class="menu">
                     <ul>
-                        <li><asp:LinkButton ID="LnkButton1" OnCommand="LnkFilterPrice_Click" CommandArgument="500" Text="under $500" runat="server" /></li>
+                        <li><asp:LinkButton ID="LnkButton1" OnCommand="LnkFilterPrice_Click" CommandArgument="0, 499" Text="under $500" runat="server" /></li>
                         <li><asp:LinkButton ID="LnkButton2" OnCommand="LnkFilterPrice_Click" CommandArgument="500,1000" Text="$500 - $1,000" runat="server" /></li>
-                        <li><asp:LinkButton ID="LnkButton3" OnCommand="LnkFilterPrice_Click" CommandArgument="1000,5000" Text="$1,000 - $5,000" runat="server" /></li>
-                        <li><asp:LinkButton ID="LnkButton4" OnCommand="LnkFilterPrice_Click" CommandArgument="5000,10000" Text="$5,000 - $10,000" runat="server" /></li>
+                        <li><asp:LinkButton ID="LnkButton3" OnCommand="LnkFilterPrice_Click" CommandArgument="1000,2000" Text="$1,000 - $2,000" runat="server" /></li>
+                        <li><asp:LinkButton ID="LnkButton4" OnCommand="LnkFilterPrice_Click" CommandArgument="2000,50000" Text="$2,000 +" runat="server" /></li>
                     </ul>
                 </div>
 			</li>
