@@ -155,5 +155,17 @@ namespace Gooeycms.Webrole.Control {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink StagingLink;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new Gooeycms.Webrole.Control.SecureNoNavigation Master {
+            get {
+                return ((Gooeycms.Webrole.Control.SecureNoNavigation)(base.Master));
+            }
+        }
     }
 }

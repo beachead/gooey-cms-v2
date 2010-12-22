@@ -21,8 +21,8 @@ namespace Gooeycms.Webrole.Control
             RadScriptManager.AsyncPostBackTimeout = GooeyConfigManager.DefaultAsyncTimeout;
 
             Page.Header.DataBind();
-
             this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
+
             if (!Page.IsPostBack)
             {
                 if (CurrentSite.IsAvailable)
@@ -37,9 +37,9 @@ namespace Gooeycms.Webrole.Control
             }
         }
 
-        public void RegisterPostBackControl(System.Web.UI.Control control)
+        public Telerik.Web.UI.RadScriptManager ScriptManager
         {
-            RadScriptManager.RegisterPostBackControl(control);
+            get { return this.RadScriptManager; }
         }
 
         protected void RadScriptManager_OnError(object sender, AsyncPostBackErrorEventArgs e)
