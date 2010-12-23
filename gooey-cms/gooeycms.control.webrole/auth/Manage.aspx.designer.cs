@@ -31,6 +31,51 @@ namespace Gooeycms.Webrole.Control.auth {
         protected global::System.Web.UI.WebControls.Label LblStatus;
         
         /// <summary>
+        /// LblUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblUsername;
+        
+        /// <summary>
+        /// TxtFirstname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtFirstname;
+        
+        /// <summary>
+        /// TxtLastname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtLastname;
+        
+        /// <summary>
+        /// TxtCompany control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtCompany;
+        
+        /// <summary>
+        /// BtnUpdateUserInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnUpdateUserInfo;
+        
+        /// <summary>
         /// LblCurrentPlan control.
         /// </summary>
         /// <remarks>

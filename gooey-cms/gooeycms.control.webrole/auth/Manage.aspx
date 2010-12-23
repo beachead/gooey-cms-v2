@@ -15,6 +15,40 @@
     <asp:Label ID="LblStatus" runat="server" />
 
     <fieldset>
+        <legend>User Information</legend>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <label>Username</label><br />
+                    <asp:Label ID="LblUsername" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>First Name</label><br />
+                    <asp:TextBox ID="TxtFirstname" runat="server" />
+                </td>
+                <td>
+                    <label>Last Name</label><br />
+                    <asp:TextBox ID="TxtLastname" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>Company</label><br />
+                    <asp:TextBox ID="TxtCompany" Width="300px" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:LinkButton ID="BtnUpdateUserInfo" OnClick="BtnUpdateUserInfo_Click" Text="Update Information" runat="server" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <div style="padding-top:10px;">
+    <fieldset>
         <legend>Subscription Information</legend>
         <table>
             <tr>
@@ -73,6 +107,7 @@
         </div>
         </asp:Panel>
     </fieldset>
+    </div>
 
     <div style="padding-top:10px;">
     <fieldset>
