@@ -134,11 +134,13 @@
     </fieldset>
     </div>
 
+    <telerik:RadScriptBlock ID="ScriptBlock" runat="server">
     <script language="javascript" type="text/javascript">
         function set_default(name, txt) {
             var obj = document.getElementById(txt);
             obj.value = name;
         }
     </script>
+    </telerik:RadScriptBlock>
 </div>
 </asp:Content>
