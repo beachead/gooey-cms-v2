@@ -78,6 +78,8 @@
 			        bFieldValid = true,
 					bFormValid = true;
 
+                alert(cRequiredFields.length);
+
                 // sort through the required fields and group them by name
                 for (var i = 0, len = cRequiredFields.length; i < len; i++) {
                     eField = cRequiredFields[i];
@@ -126,6 +128,13 @@
                         break;
 
                     case 'text':
+                        if (oField.className.indexOf('email') != -1) {
+                            bValid = this.isValidEmail(oField);
+                        } else {
+                            bValid = this.isValidText(oField);
+                        }
+                        break;
+
                     case 'textarea':
                         bIsValid = this.isValidText(oField);
                         break;
@@ -175,6 +184,10 @@
 
             isValidText: function (oField) {
                 return oField.value != '';
+            },
+
+            isValidEmail: function (oField) {
+                return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(oField.value.test);
             },
 
             isChecked: function (oField) {
