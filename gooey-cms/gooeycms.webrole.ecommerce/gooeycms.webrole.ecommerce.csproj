@@ -47,6 +47,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Encore.PayPal.Nvp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -90,6 +102,13 @@
     </Compile>
     <Compile Include="ContentPage.Master.designer.cs">
       <DependentUpon>ContentPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="embedded.aspx.cs">
+      <DependentUpon>embedded.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="embedded.aspx.designer.cs">
+      <DependentUpon>embedded.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="signup\Activate.aspx.cs">
@@ -147,6 +166,13 @@
     </Compile>
     <Compile Include="signup\Upgrade.aspx.designer.cs">
       <DependentUpon>Upgrade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test-embed.aspx.cs">
+      <DependentUpon>test-embed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test-embed.aspx.designer.cs">
+      <DependentUpon>test-embed.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
@@ -358,6 +384,7 @@
     <Content Include="css\pricing.css" />
     <Content Include="css\signup.css" />
     <Content Include="css\store.css" />
+    <Content Include="embedded.aspx" />
     <Content Include="images\home\bg_features.png" />
     <Content Include="images\home\h2_built_for_speed.png" />
     <Content Include="images\home\h2_over_200_features.png" />
@@ -404,6 +431,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Purchase.aspx" />
     <Content Include="signup\Upgrade.aspx" />
+    <Content Include="test-embed.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

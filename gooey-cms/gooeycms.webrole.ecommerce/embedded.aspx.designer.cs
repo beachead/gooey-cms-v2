@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.Webrole.Control.auth.Developer {
+namespace Gooeycms.Webrole.Ecommerce {
     
     
-    public partial class Default {
+    public partial class embedded {
         
         /// <summary>
-        /// Subnav control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// SitePackages control.
@@ -29,14 +29,5 @@ namespace Gooeycms.Webrole.Control.auth.Developer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater SitePackages;
-        
-        /// <summary>
-        /// EmbedWindow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadWindow EmbedWindow;
     }
 }

@@ -49,7 +49,7 @@
 				                <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c0}") %></div>
 				                <div class="logo"><asp:Image ID="Logo" runat="server" /></div>
 				                <ul class="options-links">
-                                    <li><a href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a></li>
+                                    <li>(<a href="#" onclick="embed_display('<%# DataBinder.Eval(Container.DataItem,"Guid") %>'); return false;">Embed</a>)&nbsp;<a href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a></li>
                                     <li><asp:LinkButton ID="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton></li>
                                 </ul>
                             </div>
@@ -90,5 +90,27 @@
 			            </li>                                        
                     </ItemTemplate>
                 </asp:Repeater>
-            </ul>                        
+            </ul>             
+            
+            <telerik:RadWindow ID="EmbedWindow" Width="600" Height="200" Modal="true" Behaviors="Close" runat="server">
+                <ContentTemplate>
+                    Copy-and-paste the below code to embed this site package into your website<br /><br />
+                    <fieldset>
+                        <legend>Code</legend>
+                        <div style="width:560px;overflow:auto;">
+                        <xmp id="lblembed"></xmp>
+                        </div>
+                    </fieldset>
+                </ContentTemplate>
+            </telerik:RadWindow>
+            
+            <script type="text/javascript" language="javascript">
+                function embed_display(guid) {
+                    var lbl = $get('lblembed');
+                    lbl.innerHTML = "<iframe src=\"http://store.gooeycms.net/embedded.aspx?g=" + guid + "\" width=\"400\" height=\"350\" frameborder=\"0\" />";
+
+                    var wnd = $find('<%= EmbedWindow.ClientID %>');
+                    wnd.show();
+                }
+            </script>    
 </asp:Content>
