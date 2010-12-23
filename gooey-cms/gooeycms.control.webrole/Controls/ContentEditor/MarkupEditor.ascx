@@ -6,6 +6,8 @@
         dojo.addOnLoad(function () {
             dojo.connect(dojo.byId("preview-frame"), "onload", "endPreview");
 
+            editor_wrap();
+
             var oHelpPanel = dojo.query("#helpPanel"),
                 oHelpTopics = dojo.query("#helpTopics a"),
                 oHelpContentItems = dojo.query('#helpContents li.help-content-item'),
@@ -313,7 +315,7 @@
             }
         </script>
 
-        <input type="checkbox" id="chkwrap" onclick="editor_wrap();" />wrap
+        <input type="checkbox" id="chkwrap" onclick="editor_wrap();" checked="checked" />wrap
         <div style="max-height:430px; overflow:auto;"> 
             <uc:ResizableTextBox ID="PageMarkupText" runat="server" />
         </div>
