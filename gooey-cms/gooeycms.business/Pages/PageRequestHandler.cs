@@ -57,7 +57,21 @@ namespace Gooeycms.Business.Pages
             String culture = CurrentSite.Culture;
 
             if (Request.QueryString["nocache"] == null)
+            {
                 this.isInCache = SitePageCache.Instance.GetIfExists(url, ref output);
+                
+                //if it's the staging server, check if the site is dirty
+                //if so, we need to wait till the page is saved prior to displaying it
+                if (CurrentSite.IsStagingHost)
+                {
+                    int count = 0;
+                    while ((CurrentSite.IsDirty) && (count++ < 7))
+                    {
+                        this.isInCache = false;
+                        System.Threading.Thread.Sleep(500);
+                    }
+                }
+            }
 
             if (String.IsNullOrEmpty(preview))
             {
@@ -85,6 +99,7 @@ namespace Gooeycms.Business.Pages
 
                 ValidateSite();
 
+                TimeSpan diff;
                 this.page = PageManager.Instance.GetLatestPage(url);
             }
             else

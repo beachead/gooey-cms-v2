@@ -24,6 +24,7 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual Boolean IsDemo { get; set; }
         public virtual UserInfo PrimaryUser { get; set; }
         public virtual CmsSubscriptionPlan SubscriptionPlan { get; set; }
+        public virtual Boolean IsDirty { get; set; }
 
         public virtual SubscriptionPlans SubscriptionPlanEnum
         {

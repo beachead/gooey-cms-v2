@@ -62,6 +62,7 @@ CREATE TABLE [Subscriptions] (
 [campaign_addon] BIT DEFAULT(0),
 [generic_addon] BIT DEFAULT(0),
 [is_demo] BIT DEFAULT(0),
+[is_dirty] BIT DEFAULT(0),
 PRIMARY KEY CLUSTERED([id]),
 );
 CREATE UNIQUE INDEX uq_subscriptions_guid ON [Subscriptions](guid);
