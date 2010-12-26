@@ -65,6 +65,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                 PageManager.Validate(page,isNewPage);
                 PageManager.PublishToWorker(page, PageTaskMessage.Actions.Save);
+                CurrentSite.GetAndSetIsDirty(true);
 
                 this.Status.Text = "The page has been successfully saved.";
                 this.Status.ForeColor = System.Drawing.Color.Green;

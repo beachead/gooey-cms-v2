@@ -201,6 +201,11 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             src.TreeView.UnselectAllNodes();
         }
 
+        protected void BtnAddNewPage_Click(Object sender, EventArgs e)
+        {
+            InsertNewClientNode(this.PageTreeView.Nodes[0], "--New Page--", "~/Images/Vista/aspx.png", false, "PageContextMenu", CmsSiteMap.NodeTypes.Page);
+        }
+
         protected void PageTreeView_ContextMenuItemClick(object sender, Telerik.Web.UI.RadTreeViewContextMenuEventArgs e)
         {
             switch (e.MenuItem.Value)

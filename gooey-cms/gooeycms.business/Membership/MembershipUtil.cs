@@ -164,18 +164,28 @@ namespace Gooeycms.Business.Membership
 
         public static void ProcessLogin(string username)
         {
-            //Immediately expire any existing cookies
-            try
-            {
-                HttpContext.Current.Response.Cookies["selected-site"].Expires = DateTime.Now.Subtract(TimeSpan.FromDays(1));
-                HttpContext.Current.Request.Cookies.Remove("selected-site");
-            }
-            catch (Exception) { }
-
             MembershipUserWrapper wrapper = FindByUsername(username);
             IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
 
-            SiteHelper.SetActiveSiteCookie(subscriptions);
+            //Check if there is a current site active
+            Boolean isValidSubscription = false;
+            if (CurrentSite.IsAvailable)
+            {
+                String expectedGuid = CurrentSite.Guid.Value;
+
+                //Make sure that the site is valid for this subscription
+                isValidSubscription = subscriptions.Any(s => s.Guid.Equals(expectedGuid));
+            }
+
+            //Find a valid subscription
+            if (!isValidSubscription)
+            {
+                if (subscriptions.Count > 0)
+                {
+                    CmsSubscription defaultSubscription = subscriptions[0];
+                    SiteHelper.SetActiveSiteCookie(defaultSubscription.Guid);
+                }
+            }
         }
 
         public static MembershipUserWrapper CreateDemoAccount()

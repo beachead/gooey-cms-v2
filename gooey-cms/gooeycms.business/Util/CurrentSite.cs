@@ -484,5 +484,35 @@ namespace Gooeycms.Business.Util
                 return result;
             }
         }
+
+        public static bool GetAndSetIsDirty(Boolean setToValue)
+        {
+            Boolean result = false;
+            if (CurrentSite.IsAvailable)
+            {
+                CmsSubscription subscription = CurrentSite.Subscription;
+                result = subscription.IsDirty;
+                subscription.IsDirty = setToValue;
+
+                SubscriptionManager.Save(subscription);
+            }
+
+            return result;
+        }
+
+        public static bool IsDirty
+        {
+            get
+            {
+                Boolean result = false;
+                if (CurrentSite.IsAvailable)
+                {
+                    CmsSubscription subscription = CurrentSite.Subscription;
+                    result = subscription.IsDirty;
+                }
+
+                return result;
+            }
+        }
     }
 }

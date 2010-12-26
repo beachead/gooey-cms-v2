@@ -55,6 +55,11 @@ namespace Gooeycms.Webrole.Control.auth
 
         private void LoadInfo()
         {
+            this.LblUsername.Text = LoggedInUser.Username;
+            this.TxtFirstname.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
+            this.TxtLastname.Text = LoggedInUser.Wrapper.UserInfo.Lastname;
+            this.TxtCompany.Text = LoggedInUser.Wrapper.UserInfo.Company;
+
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
             this.LblDomain.Text = subscription.DefaultDisplayName;
 
@@ -116,6 +121,19 @@ namespace Gooeycms.Webrole.Control.auth
             this.LblSiteName.Text = subscription.Subdomain;
             this.TxtProductionDomain.Text = subscription.Domain;
             this.TxtCustomStagingDomain.Text = subscription.StagingDomain;
+        }
+
+        protected void BtnUpdateUserInfo_Click(Object sender, EventArgs e)
+        {
+            UserInfo info = LoggedInUser.Wrapper.UserInfo;
+            info.Firstname = this.TxtFirstname.Text;
+            info.Lastname = this.TxtLastname.Text;
+            info.Company = this.TxtCompany.Text;
+
+            MembershipUtil.UpdateUserInfo(info);
+
+            this.LblStatus.Text = "Successfully updated account information";
+            this.LblStatus.ForeColor = System.Drawing.Color.Green;
         }
 
         protected void LnkUpdateDomain_Click(Object sender, EventArgs e)

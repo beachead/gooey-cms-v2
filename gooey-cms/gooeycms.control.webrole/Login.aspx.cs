@@ -21,9 +21,11 @@ namespace Gooeycms.Webrole.Control
                     return;
             }
 
-            Data.Guid guid = SiteHelper.GetActiveSiteGuid();
-            if (!guid.IsEmpty())
-                SiteHelper.Configure(guid);
+            //Set the first site active
+            
+
+            if (CurrentSite.IsAvailable)
+                SiteHelper.Configure(CurrentSite.Guid);
             else
                 Response.Redirect("~/auth/dashboard.aspx", true);
         }

@@ -8,6 +8,8 @@ using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Site;
 using Gooeycms.Business.Web;
 using Gooeycms.Business.Cache;
+using Gooeycms.Data.Model.Subscription;
+using Gooeycms.Business.Subscription;
 
 namespace Gooeycms.Business.Pages
 {
@@ -50,6 +52,11 @@ namespace Gooeycms.Business.Pages
 
             PageManager.Instance.AddNewPage(path.Parent,path.Name,page);
             PageManager.Instance.RemoveObsoletePages(page);
+
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(page.SubscriptionId);
+            subscription.IsDirty = false;
+            SubscriptionManager.Save(subscription);
+
             SitePageCacheRefreshInvoker.InvokeRefresh(page.SubscriptionId, SitePageRefreshRequest.PageRefreshType.Staging);
         }
     }
