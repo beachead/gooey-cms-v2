@@ -126,6 +126,13 @@
                         break;
 
                     case 'text':
+                        if (oField.className.indexOf('email') != -1) {
+                            bValid = this.isValidEmail(oField);
+                        } else {
+                            bValid = this.isValidText(oField);
+                        }
+                        break;
+
                     case 'textarea':
                         bIsValid = this.isValidText(oField);
                         break;
@@ -175,6 +182,10 @@
 
             isValidText: function (oField) {
                 return oField.value != '';
+            },
+
+            isValidEmail: function (oField) {
+                return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(oField.value.test);
             },
 
             isChecked: function (oField) {
