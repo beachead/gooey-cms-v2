@@ -41,25 +41,24 @@ namespace Gooeycms.Business.Subscription
 
         public void Validate(String token)
         {
-            if (!GooeyConfigManager.IsDevelopmentEnvironment)
+            //BACKDOOR: Check if we're in the development environment and the hard-coded token is specified
+            if (GooeyConfigManager.IsDevelopmentEnvironment)
             {
-                CmsInviteDao dao = new CmsInviteDao();
-                CmsInvite invite = dao.FindByToken(token);
-                if (invite == null)
-                    throw new ArgumentException("This invite token is not valid and may not be used.");
-
-                if (invite.Responded < DateTime.Now)
-                    throw new ArgumentException("This invite token has already been used and may not be used again");
-
-                //Make sure the token is still valid
-                if (!TokenManager.IsValid(invite.Guid, token))
-                    throw new ArgumentException("The invite token is not valid, has already been used or is expired.");
+                if (token.Equals("gooeycmsdev", StringComparison.InvariantCultureIgnoreCase))
+                    return;
             }
-            else
-            {
-                if (!token.Equals("gooeycmsdev"))
-                    throw new ArgumentException("The invite token is not valid. You can use 'gooeycmsdev' as the token within the development environment.");
-            }
+
+            CmsInviteDao dao = new CmsInviteDao();
+            CmsInvite invite = dao.FindByToken(token);
+            if (invite == null)
+                throw new ArgumentException("This invite token is not valid and may not be used.");
+
+            if (invite.Responded < DateTime.Now)
+                throw new ArgumentException("This invite token has already been used and may not be used again");
+
+            //Make sure the token is still valid
+            if (!TokenManager.IsValid(invite.Guid, token))
+                throw new ArgumentException("The invite token is not valid, has already been used or is expired.");
         }
 
         public void Approve(Data.Guid guid)
