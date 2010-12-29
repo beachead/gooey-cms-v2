@@ -80,7 +80,7 @@
 				<td>                    
 				    <asp:TextBox ID="Password2" TextMode="Password" runat="server" />
                     <asp:CompareValidator id="PasswordValidate" runat="server" ErrorMessage="Passwords do not match!" ControlToValidate="Password2" ControlToCompare="Password1"></asp:CompareValidator></td>
-				</tr>
+               </tr>
 				</table>
                 </asp:Panel>
                 <asp:Panel ID="PnlNoPassword" runat="server">
@@ -132,9 +132,9 @@
         <telerik:RadWindow ID="Window" Title="Invite Code" Width="600" Height="350" Modal="true" VisibleOnPageLoad="false" Behaviors="Resize,Move,Close" Skin="Default" runat="server">
             <ContentTemplate>
                 <div style="padding:10px;">
-                    During the beta period an invite code is required to sign-up for GooeyCMS. If you do not have an invite code you may request one <a href="http://invite.gooeycms.net">here</a>
-                    <br /><br />
-                    Invite Code:<br />
+                    During our private launch an invite code is required to sign-up for GooeyCMS.<br />If you do not have an invite code you may request one <a href="http://invite.gooeycms.com">here</a>.
+                    <br /><br /><b>Note:</b><br />Your email address must be the same as the email address with which you received your invitation.<br /><br />
+                    <b>Invite Code:</b><br />
                     <asp:TextBox ID="InviteCode" Width="500px" TextMode="MultiLine" Rows="3" runat="server" ValidationGroup="InviteGroup" />
                     <asp:RequiredFieldValidator ID="InviteRequired" runat="server" ControlToValidate="InviteCode" Display="None" />
                     <p><asp:ImageButton ID="BtnCreateAccount" OnClick="CreateAccount_Click" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
