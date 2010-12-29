@@ -37,8 +37,8 @@
 				            <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c}") %></div>
 				            <div class="logo"><asp:Image ID="LogoSrc" Width="115" Height="60" runat="server" /></div>
 				            <ul class="options-links">
-                                <li>view <asp:HyperLink ID="DemoLink" runat="server">live</asp:HyperLink> or <asp:HyperLink ID="AdminDemoLink" runat="server">admin</asp:HyperLink> demo site</li>
-                                <li><a href='./purchase.aspx?g=<%# Eval("Guid") %>'>purchase site</a></li>
+                                <li>view <asp:HyperLink ID="DemoLink" target="_parent" runat="server">live</asp:HyperLink> or <asp:HyperLink ID="AdminDemoLink" target="_parent" runat="server">admin</asp:HyperLink> demo site</li>
+                                <li><a target="_parent" href='./purchase.aspx?g=<%# Eval("Guid") %>'>purchase site</a></li>
                             </ul>
                         </div>
                         <!-- start: preview -->
