@@ -316,7 +316,7 @@
         </script>
 
         <input type="checkbox" id="chkwrap" onclick="editor_wrap();" checked="checked" />wrap
-        <div style="max-height:430px; overflow:auto;"> 
+        <div id="editor-div" style="max-height:360px; overflow:auto;"> 
             <uc:ResizableTextBox ID="PageMarkupText" runat="server" />
         </div>
 

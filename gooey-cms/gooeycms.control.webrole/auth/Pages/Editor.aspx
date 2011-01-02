@@ -7,6 +7,10 @@
     <div style="padding-left:5px;">
         <p><asp:Label ID="Status" runat="server" /></p>
 
+        <div style="padding-top:7px;">
+        <asp:Button ID="BtnSaveTop" OnClick="BtnSave_Click" Text="Save" runat="server" />   
+        </div>
+
         <div class="page-group">
             <strong>Template:</strong><br />
             <asp:DropDownList ID="PageTemplate" runat="server" />
@@ -14,7 +18,7 @@
         <beachead:Editor ID="PageMarkupText" TabIndex="5" runat="server" />
     
         <div style="padding-top:7px;">
-        <asp:Button ID="BtnSave" OnClick="BtnSave_Click" Text="Save" runat="server" />   
+        <asp:Button ID="BtnSaveBottom" OnClick="BtnSave_Click" Text="Save" runat="server" />   
         </div>
     </div>
     <script type="text/javascript" language="javascript">

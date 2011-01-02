@@ -22,6 +22,15 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.WebControls.Label Status;
         
         /// <summary>
+        /// BtnSaveTop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnSaveTop;
+        
+        /// <summary>
         /// PageTemplate control.
         /// </summary>
         /// <remarks>
@@ -40,12 +49,12 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::Beachead.Web.CMS.controls.MarkupEditor PageMarkupText;
         
         /// <summary>
-        /// BtnSave control.
+        /// BtnSaveBottom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSave;
+        protected global::System.Web.UI.WebControls.Button BtnSaveBottom;
     }
 }

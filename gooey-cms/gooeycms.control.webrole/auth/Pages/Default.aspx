@@ -126,10 +126,12 @@
     function openEditWindow(page) {
         var wnd = window.radopen("Editor.aspx?a=edit&pid=" + page, null);
         var width = window.document.body.clientWidth - 50;
+        var height = window.document.body.clientHeight - 10;
         wnd.set_title(page);
-        wnd.set_width(width);
+//        wnd.set_width(width);
+//        wnd.set_height(height);
         wnd.moveTo(10, 10);
-    
+        wnd.maximize();
     }
 
     //-->
