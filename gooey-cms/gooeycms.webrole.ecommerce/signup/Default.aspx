@@ -42,21 +42,21 @@
 				<td class="label"><label for="first-name">First Name</label></td>
                 <td>
                     <asp:TextBox ID="Firstname" runat="server" />&nbsp;
-                    <asp:RequiredFieldValidator ID="FirstnameRequired" Text="*" ControlToValidate="Firstname" runat="server" />                    
+                    <asp:RequiredFieldValidator ID="FirstnameRequired" Text="*" ControlToValidate="Firstname" ValidationGroup="MainGroup" runat="server" />                    
                 </td>				
 				</tr>
 				<tr>
 				<td class="label"><label for="last-name">Last Name</label></td>
                 <td>
                     <asp:TextBox ID="Lastname" runat="server" />&nbsp;
-                    <asp:RequiredFieldValidator ID="LastnameRequired" Text="*" ControlToValidate="Lastname" runat="server" />                    
+                    <asp:RequiredFieldValidator ID="LastnameRequired" Text="*" ControlToValidate="Lastname" ValidationGroup="MainGroup" runat="server" />                    
                 </td>
 				</tr>
 				<tr>
 				<td class="label"><label for="email">Email</label></td>
                 <td>
                     <asp:TextBox ID="Email" runat="server" />&nbsp;
-                    <asp:RequiredFieldValidator ID="EmailRequired" Text="*" ControlToValidate="Email" runat="server" />                    
+                    <asp:RequiredFieldValidator ID="EmailRequired" Text="*" ControlToValidate="Email" ValidationGroup="MainGroup" runat="server" />                    
                 </td>
 				</tr>
 				<tr>
@@ -73,12 +73,15 @@
 				<table cellspacing="0" class="form">
 				<tr>
 				<td class="label"><label for="password">Password</label></td>
-				<td><asp:TextBox ID="Password1" TextMode="Password" runat="server" /></td>
+				<td><asp:TextBox ID="Password1" TextMode="Password" runat="server" />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ErrorMessage="* Required" ControlToValidate="Password1" ValidationGroup="MainGroup" runat="server" />
+                </td>
 				</tr>
 				<tr>
 				<td class="label"><label for="confirm-password">Confirm Password</label></td>
 				<td>                    
 				    <asp:TextBox ID="Password2" TextMode="Password" runat="server" />
+                    <asp:RequiredFieldValidator ID="PasswordRequired" ErrorMessage="* Required" ControlToValidate="Password2" ValidationGroup="MainGroup" runat="server" />
                     <asp:CompareValidator id="PasswordValidate" runat="server" ErrorMessage="Passwords do not match!" ControlToValidate="Password2" ControlToCompare="Password1"></asp:CompareValidator></td>
                </tr>
 				</table>
@@ -144,8 +147,11 @@
 
         <script language="javascript" type="text/javascript">
             function get_invite_code() {
-                var rad = $find('<%= Window.ClientID %>');
-                rad.show();
+                var result = Page_ClientValidate("MainGroup");
+                if (result) {
+                    var rad = $find('<%= Window.ClientID %>');
+                    rad.show();
+                } 
             }
         </script>
 	</div>
