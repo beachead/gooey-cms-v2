@@ -44,6 +44,16 @@
             <li><asp:HyperLink ID="pages_promotion" NavigateUrl="~/auth/Promotion/Default.aspx" Text="Promotion" runat="server" /></li>
             <li class="last"><a href="#" onclick="open_popup('/auth/Pages/Redirects.aspx','800','500'); return false;">Manage Redirects</a></li>
         </ul>
+
+        <script type="text/javascript" language="javascript">
+            function open_popup(url, width, height) {
+                var wnd = window.radopen(url, null);
+                wnd.set_width(width);
+                wnd.set_height(height);
+            }
+        </script>
+        <telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="600" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
+        </telerik:RadWindowManager>
     </asp:View>
 
     <asp:View ID="users" runat="server">
@@ -114,13 +124,3 @@
         </ul>
     </asp:View>
 </asp:MultiView>
-
-<script type="text/javascript" language="javascript">
-    function open_popup(url, width, height) {
-        var wnd = window.radopen(url, null);
-        wnd.set_width(width);
-        wnd.set_height(height);
-    }
-</script>
-<telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="600" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
-</telerik:RadWindowManager>

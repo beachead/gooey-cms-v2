@@ -11,6 +11,27 @@
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
 <div id="head-line" class="main">MANAGE SUBSCRIPTION (<asp:Label ID="LblDomain" runat="server" />)</div>
+
+<asp:Panel ID="ManageEnablePanel" runat="server">
+    <div style="padding:10px;">
+        <b style="color:red;">This subscription is currently disabled.</b><br /><br />
+        <asp:MultiView ID="EnableStatusView" runat="server">
+            <asp:View ID="SuspendedView" runat="server">
+                Your paypal billing agreement is currently inactive and can be reactivated simply by clicking the enable button below.
+            </asp:View>
+            <asp:View ID="CancelledView" runat="server">
+                Your paypal billing agreement has been cancelled. Clicking enable will redirect you to Paypal to re-establish your monthly billing agreement
+            </asp:View>
+            <asp:View ID="FreeView" runat="server">
+                You may immediately reactivate your free subscription by clicking the enable button below.
+            </asp:View>
+        </asp:MultiView>
+        <br />
+        <asp:Button ID="BtnEnableSubscription" OnClick="BtnEnableSubscription_Click" Text="Re-Enable Subscription" runat="server" />
+    </div>
+</asp:Panel>
+
+<asp:Panel ID="ManagePanel" runat="server">
 <div style="width:50%;">
     <asp:Label ID="LblStatus" runat="server" />
 
@@ -143,4 +164,5 @@
     </script>
     </telerik:RadScriptBlock>
 </div>
+</asp:Panel>
 </asp:Content>

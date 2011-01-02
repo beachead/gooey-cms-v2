@@ -10,6 +10,7 @@ using Gooeycms.Constants;
 using Gooeycms.Data.Model.Subscription;
 using System.Web.Security;
 using Gooeycms.Business.Subscription;
+using Gooeycms.Business.Web;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -26,7 +27,10 @@ namespace Gooeycms.Webrole.Control
                     this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
 
                 if (CurrentSite.Subscription.IsDisabled)
-                    Response.Redirect("http://store.gooeycms.net/reactivate.aspx?g=" + CurrentSite.Subscription.Guid, true);
+                {
+                    if (!WebRequestContext.CurrentPage().Path.ToLower().Contains("manage.aspx"))
+                        Response.Redirect("~/auth/Manage.aspx?g=" + CurrentSite.Subscription.Guid, true);
+                }
             }
 
             if (!Page.IsPostBack)

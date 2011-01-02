@@ -35,6 +35,7 @@ namespace Gooeycms.Webrole.Control.auth
 
                 Gooeycms.Business.Paypal.PaypalExpressCheckout.ProfileResultStatus status = checkout.CreateRecurringPayment(subscription);
                 subscription.PaypalProfileId = status.ProfileId;
+                subscription.IsDisabled = false; //Always make sure to reenable the subscription
                 SubscriptionManager.Save(subscription);
 
                 BillingManager.Instance.AddHistory(subscription.Guid, subscription.PaypalProfileId, null, BillingManager.Upgrade,0,"Successfully upgrade subscription or modified subscription options and created paypal recurring payment profile: " + subscription.PaypalProfileId);
@@ -61,6 +62,8 @@ namespace Gooeycms.Webrole.Control.auth
             this.TxtCompany.Text = LoggedInUser.Wrapper.UserInfo.Company;
 
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
+
+
             this.LblDomain.Text = subscription.DefaultDisplayName;
 
             if (subscription.SubscriptionPlanEnum == Constants.SubscriptionPlans.Free)
@@ -78,9 +81,10 @@ namespace Gooeycms.Webrole.Control.auth
 
             subscription.SubscriptionPlan = currentPlan;
 
+            PaypalProfileInfo paypal = null;
             if (!String.IsNullOrEmpty(subscription.PaypalProfileId))
             {
-                PaypalProfileInfo paypal = PaypalManager.Instance.GetProfileInfo(subscription.PaypalProfileId);
+                paypal = PaypalManager.Instance.GetProfileInfo(subscription.PaypalProfileId);
                 if (paypal.NextBillDate.HasValue)
                     this.LblNextBillingDate.Text = paypal.NextBillDate.Value.ToLongDateString();
                 this.LblPaypalBillingId.Text = paypal.ProfileId;
@@ -115,6 +119,29 @@ namespace Gooeycms.Webrole.Control.auth
             {
                 this.PanelBusinessPlan.Visible = false;
                 this.LblPlanCost.Text = String.Format("{0:c}", 0);
+            }
+
+            if (subscription.IsDisabled)
+            {
+                this.ManagePanel.Enabled = false;
+                this.ManageEnablePanel.Visible = true;
+
+                if (paypal != null)
+                {
+                    if (paypal.IsCancelled)
+                        this.EnableStatusView.SetActiveView(CancelledView);
+                    else
+                        this.EnableStatusView.SetActiveView(SuspendedView);
+                }
+                else
+                {
+                    this.EnableStatusView.SetActiveView(FreeView);
+                }
+            }
+            else
+            {
+                this.ManagePanel.Enabled = true;
+                this.ManageEnablePanel.Visible = false;
             }
 
             this.LblCurrentPlan.Text = subscription.SubscriptionPlan.Name;
@@ -188,6 +215,35 @@ namespace Gooeycms.Webrole.Control.auth
                 this.LblStatus.Text = ex.Message;
                 this.LblStatus.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        protected void BtnEnableSubscription_Click(Object sender, EventArgs e)
+        {
+            String returnurl = "http://" + GooeyConfigManager.AdminSiteHost + "/auth/Manage.aspx";
+            String cancelurl = returnurl;
+
+            CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
+            
+            if (subscription.SubscriptionPlanEnum == Constants.SubscriptionPlans.Business) 
+            {
+                PaypalExpressCheckout checkout = new PaypalExpressCheckout();
+                PaypalProfileInfo paypal = PaypalManager.Instance.GetProfileInfo(subscription.PaypalProfileId);
+                if (paypal.IsSuspended)
+                {
+                    //Simply re-enable the suspended profile
+                    checkout.Reactivate(subscription.PaypalProfileId);
+                }
+                else if (paypal.IsCancelled)
+                {
+                    //Send the user to paypal to reestablish the billing profile
+                    BtnUpgradePlan_Click(sender, e);
+                }
+            }
+
+            subscription.IsDisabled = false;
+            SubscriptionManager.Save(subscription);
+
+            Response.Redirect("~/auth/Manage.aspx");
         }
 
         protected void BtnUpgradePlan_Click(Object sender, EventArgs e)

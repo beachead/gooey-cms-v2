@@ -158,6 +158,11 @@ namespace Gooeycms.Business.Paypal
             }
         }
 
+        public Boolean IsSuspended
+        {
+            get { return Status.Equals("Suspended"); }
+        }
+
         public Boolean IsCancelled
         {
             get { return Status.Equals("Cancelled"); }

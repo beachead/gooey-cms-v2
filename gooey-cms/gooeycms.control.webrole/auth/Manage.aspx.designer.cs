@@ -22,6 +22,69 @@ namespace Gooeycms.Webrole.Control.auth {
         protected global::System.Web.UI.WebControls.Label LblDomain;
         
         /// <summary>
+        /// ManageEnablePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ManageEnablePanel;
+        
+        /// <summary>
+        /// EnableStatusView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView EnableStatusView;
+        
+        /// <summary>
+        /// SuspendedView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View SuspendedView;
+        
+        /// <summary>
+        /// CancelledView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View CancelledView;
+        
+        /// <summary>
+        /// FreeView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View FreeView;
+        
+        /// <summary>
+        /// BtnEnableSubscription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEnableSubscription;
+        
+        /// <summary>
+        /// ManagePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ManagePanel;
+        
+        /// <summary>
         /// LblStatus control.
         /// </summary>
         /// <remarks>
