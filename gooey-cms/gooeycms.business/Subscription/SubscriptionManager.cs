@@ -349,9 +349,15 @@ namespace Gooeycms.Business.Subscription
             subscription.IsDisabled = true;
             Save(subscription);
 
-            //Reactivate the billing within paypal
+            //Disable the billing within paypal
             PaypalExpressCheckout action = new PaypalExpressCheckout();
-            return action.Suspend(subscription.PaypalProfileId);
+            PaypalProfileInfo info = action.GetProfileInfo(subscription.PaypalProfileId);
+
+            Boolean result = true;
+            if (info.IsActive)
+                result = action.Suspend(subscription.PaypalProfileId);
+
+            return result;
         }
 
         public static void CancelSubscription(CmsSubscription subscription)
