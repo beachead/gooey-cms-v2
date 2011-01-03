@@ -111,9 +111,15 @@ namespace Gooeycms.Business.Markup.Forms_v2
 
         private String TextFieldEvaluator(Match match)
         {
-            String id = "{form_id}_" + match.Groups[1].Value;
+            String name = match.Groups[1].Value;
+            String id = "{form_id}_" + name;
             String isrequired = (String.IsNullOrWhiteSpace(match.Groups[2].Value)) ? "" : "required";
-            String textbox = String.Format(@"<input type=""text"" id=""{0}"" name=""{0}"" class=""form-textbox persistable {1}"" />", id, isrequired);
+            
+            String emailFieldCss = "";
+            if (name.StartsWith("email", StringComparison.InvariantCultureIgnoreCase))
+                emailFieldCss = " email";
+
+            String textbox = String.Format(@"<input type=""text"" id=""{0}"" name=""{0}"" class=""form-textbox persistable {1}{2}"" />", id, isrequired,emailFieldCss);
 
             return textbox;
         }
