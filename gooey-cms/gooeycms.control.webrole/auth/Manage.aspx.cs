@@ -38,6 +38,9 @@ namespace Gooeycms.Webrole.Control.auth
                 subscription.IsDisabled = false; //Always make sure to reenable the subscription
                 SubscriptionManager.Save(subscription);
 
+                //Clear the site cache
+                CurrentSite.Cache.Clear();
+
                 BillingManager.Instance.AddHistory(subscription.Guid, subscription.PaypalProfileId, null, BillingManager.Upgrade,0,"Successfully upgrade subscription or modified subscription options and created paypal recurring payment profile: " + subscription.PaypalProfileId);
                 Response.Redirect("Manage.aspx?upgrade=success", true);
             }
@@ -179,6 +182,10 @@ namespace Gooeycms.Webrole.Control.auth
 
                 SubscriptionManager.UpdateDomains(subscription, production, staging, true);
 
+                //Clear the site cache
+                CurrentSite.Cache.Clear();
+
+
                 this.LblStatus.Text = "Successfully updated domains";
                 this.LblStatus.ForeColor = System.Drawing.Color.Green;
             }
@@ -193,6 +200,9 @@ namespace Gooeycms.Webrole.Control.auth
         {
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
             SubscriptionManager.DisableSubscription(subscription);
+
+            //Clear the site cache
+            CurrentSite.Cache.Clear();
 
             EmailManager.Instance.SendCancellationEmail(subscription);
 
@@ -209,6 +219,9 @@ namespace Gooeycms.Webrole.Control.auth
                 Boolean salesforceEnabled = this.ChkSalesforce.Checked;
 
                 SubscriptionManager.UpdateSubscriptionOptions(subscription, campaignsEnabled, salesforceEnabled);
+
+                //Clear the site cache
+                CurrentSite.Cache.Clear();
             }
             catch (Exception ex)
             {
@@ -243,6 +256,9 @@ namespace Gooeycms.Webrole.Control.auth
             subscription.IsDisabled = false;
             SubscriptionManager.Save(subscription);
 
+            //Clear the site cache
+            CurrentSite.Cache.Clear();
+
             Response.Redirect("~/auth/Manage.aspx");
         }
 
@@ -272,6 +288,9 @@ namespace Gooeycms.Webrole.Control.auth
             String paypalId = subscription.PaypalProfileId;
             subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(Constants.SubscriptionPlans.Free);
             SubscriptionManager.Save(subscription);
+
+            //Clear the site cache
+            CurrentSite.Cache.Clear();
 
             BillingManager.Instance.AddHistory(subscription.Guid, paypalId, null, BillingManager.Downgrade, 0, "Paypal billing profile successfully cancelled and subscription downgraded to 'free'");
 

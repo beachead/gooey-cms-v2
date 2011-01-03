@@ -354,7 +354,7 @@ namespace Gooeycms.Business.Subscription
             PaypalProfileInfo info = action.GetProfileInfo(subscription.PaypalProfileId);
 
             Boolean result = true;
-            if (info.IsActive)
+            if ((info != null) && (info.IsActive))
                 result = action.Suspend(subscription.PaypalProfileId);
 
             return result;

@@ -26,9 +26,13 @@
 
     //this method disables the appropriate context menu items
     function setMenuItemsState(menu, treeNode) {
-        if (treeNode.get_value() == '/') {
-            var item = menu.findItemByValue('DeleteDirectory');
-            item.set_enabled(false);
+        var item = menu.findItemByValue('DeleteDirectory');
+        if (item) {
+            item.set_enabled(true);
+
+            if (treeNode.get_value() == '/') {
+                item.set_enabled(false);
+            }
         }
     }
 

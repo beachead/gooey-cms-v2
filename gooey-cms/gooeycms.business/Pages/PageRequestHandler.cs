@@ -76,6 +76,10 @@ namespace Gooeycms.Business.Pages
 
             if (String.IsNullOrEmpty(preview))
             {
+                //Make sure the subscription is still active
+                if (CurrentSite.Subscription.IsDisabled)
+                    Response.Redirect(GooeyConfigManager.SiteDisabledRedirect + "?" + Server.UrlEncode("The requested site is not currently active"), true);
+
                 if (!this.isInCache)
                 {
                     //Check if this page is a redirect

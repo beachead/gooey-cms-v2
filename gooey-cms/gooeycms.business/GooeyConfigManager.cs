@@ -490,6 +490,14 @@ This is your home page.
             }
         }
 
+        public static String SiteDisabledRedirect
+        {
+            get
+            {
+                return GetCachedValue(ConfigConstants.SiteDisabledRedirect, defaultValue: "http://www.gooeycms.com");
+            }
+        }
+
         public static Boolean IsInviteEnabled
         {
             get
