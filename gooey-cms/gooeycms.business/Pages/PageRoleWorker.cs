@@ -34,13 +34,13 @@ namespace Gooeycms.Business.Pages
                 try
                 {
                     if (message.Action == PageTaskMessage.Actions.Save)
-                        SavePage(message.Page);
+                        PageRoleWorker.SavePage(message.Page);
                 }
                 catch (Exception) { }
             }
         }
 
-        private void SavePage(CmsPage page)
+        public static void SavePage(CmsPage page)
         {
             Data.Guid guid = Data.Guid.New(page.SubscriptionId);
             CmsSitePath path = CmsSiteMap.Instance.GetPath(guid,page.Url);

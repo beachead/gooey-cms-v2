@@ -22,6 +22,15 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
         
         /// <summary>
+        /// LoadingPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel LoadingPanel;
+        
+        /// <summary>
         /// UpdatePanel control.
         /// </summary>
         /// <remarks>

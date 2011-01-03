@@ -139,7 +139,8 @@
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadAjaxPanel ID="UpdatePanel" runat="server">
+    <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
+    <telerik:RadAjaxPanel ID="UpdatePanel" LoadingPanelID="LoadingPanel" runat="server">
     <asp:LinkButton ID="BtnAddNewPage" OnClick="BtnAddNewPage_Click" Text="Add New Page" runat="server" />
     <br /><br />
     <telerik:RadTreeView ID="PageTreeView" Skin="Default" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="true" 

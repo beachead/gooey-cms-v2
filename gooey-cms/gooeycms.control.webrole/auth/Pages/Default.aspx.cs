@@ -127,7 +127,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             page.Template = CurrentSite.GetDefaultTemplateName();
             page.OnBodyLoad = "";
 
-            PageManager.PublishToWorker(page, PageTaskMessage.Actions.Save);
+            PageRoleWorker.SavePage(page);
         }
 
         private String GetNodeUrl(RadTreeNode node)
