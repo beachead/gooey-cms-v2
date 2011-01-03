@@ -261,6 +261,7 @@ namespace Gooeycms.Business.Pages
             }
             else
             {
+                Logging.Database.Write("Unhandled Exception", Logging.FormatException(ex));
                 Response.Redirect("/gooeycms/errors/500.aspx", true);
             }
         }

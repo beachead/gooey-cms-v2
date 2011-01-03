@@ -43,6 +43,7 @@ namespace Gooeycms.Constants
         public const String FreeTrialLength = "default-freetrial-length";
         public const String InviteEnabled = "invite-enabled";
         public const String SiteDisabledRedirect = "site-disabled-redirect";
+        public const String StaticResourceUrl = "static-resource-url";
 
         public const String FlashCrossDomainFilename = "cross-domain.xml";
         public const String PaypalSandboxUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr";
