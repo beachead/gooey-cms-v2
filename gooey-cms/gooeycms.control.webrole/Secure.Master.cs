@@ -24,7 +24,8 @@ namespace Gooeycms.Webrole.Control
             if (CurrentSite.IsAvailable)
             {
                 if (this.StagingLink != null)
-                    this.StagingLink.NavigateUrl = "http://" + CurrentSite.StagingDomain;
+                    this.StagingLink.NavigateUrl = "http://" + CurrentSite.Subscription.StagingDomain;
+                    this.ProdLink.NavigateUrl = "http://" + CurrentSite.Subscription.Domain;
 
                 if (CurrentSite.Subscription.IsDisabled)
                 {
