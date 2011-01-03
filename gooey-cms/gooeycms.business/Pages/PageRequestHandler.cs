@@ -20,6 +20,7 @@ using Gooeycms.Business.Cache;
 using Gooeycms.Business.Markup.Dynamic;
 using Gooeycms.Business.Campaigns;
 using Gooeycms.Data.Model.Site;
+using System.Web;
 
 namespace Gooeycms.Business.Pages
 {
@@ -235,6 +236,30 @@ namespace Gooeycms.Business.Pages
             base.Render(writer);
         }
 
+        protected void Page_Error(Object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+
+            if (ex is PageNotFoundException)
+            {
+                PageNotFoundException notfound = (PageNotFoundException)ex;
+                if (notfound.NotFoundPath.Contains("404.aspx"))
+                {
+                    Response.Redirect("/gooeycms/errors/404.aspx", true);
+                }
+                else
+                {
+                    Control resolver = new Control();
+                    String path = resolver.ResolveUrl("~/");
+
+                    Response.Redirect(path + "404.aspx?path=" + Server.UrlEncode(notfound.NotFoundPath), true);
+                }
+            }
+            else
+            {
+                Response.Redirect("/gooeycms/errors/500.aspx", true);
+            }
+        }
 
         private void ValidateSite()
         {
