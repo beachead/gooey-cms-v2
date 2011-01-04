@@ -33,7 +33,7 @@
 <body class="claro">
 
 <form id="aspnetform" clientidmode="Static" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnError" runat="server"></telerik:RadScriptManager>
+    <telerik:RadScriptManager ID="RadScriptManager" OnAsyncPostBackError="RadScriptManager_OnError" EnablePageMethods="true" EnableCdn="true" runat="server"></telerik:RadScriptManager>
 
     <script type="text/javascript" language="javascript">
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);

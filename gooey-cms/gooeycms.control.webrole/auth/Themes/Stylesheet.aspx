@@ -25,8 +25,6 @@
     <h1>Template CSS</h1>
     <p>This page allows you to associate css files from your global library with your theme.</p>
 
-    <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
-
     <beachead:StatusPanel ID="ErrorPanel" runat="server" />
     <div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:500px;overflow:auto;">
         <div id="modifypanel" dojoType="dijit.layout.ContentPane" title="Enable/Disable Stylesheets">
