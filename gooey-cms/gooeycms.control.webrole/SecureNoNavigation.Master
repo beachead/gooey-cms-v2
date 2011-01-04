@@ -141,7 +141,22 @@
 </form>
 
 <asp:ContentPlaceHolder ID="Olark" runat="server">
-    <!-- begin olark code --> <script type='text/javascript'>/*<![CDATA[*/ (function(d,u,o){window.olark={__k:o};var h=d.location.protocol=='https:'?'https://':'http://'; d.write(unescape("%3Cscript src='"+h+u+"' type='text/javascript'%3E%3C/script%3E")); })(document,'static.olark.com/javascript/olark.js', '9163-624-10-8802'); /*]]>*/</script> <!-- end olark code -->
+<!-- OggChat Tab Button -->
+<div id="oggchat"></div>
+<script type="text/javascript" src="https://oggchat.icoa.com/js/button.js"></script>
+<script type="text/javascript">
+    var page = {
+        'cid': 'c094a3a22d512fb9012d519504e90030',
+        'bg_color': '#cacaca',
+        'hover_color': '0066cc',
+        'website': 'www.gooeycms.com',
+        'top_margin': '170px',
+        'window_height': '400px',
+        'window_width': '330px',
+        'align': 'right'
+    }
+    button(page);
+</script>
 </asp:ContentPlaceHolder>
 </body>
 </html>
