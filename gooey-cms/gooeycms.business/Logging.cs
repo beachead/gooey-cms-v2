@@ -52,5 +52,15 @@ namespace Gooeycms.Business
                 }
             }
         }
+
+        internal static string FormatException(Exception ex)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("Source: " + ex.Source);
+            builder.AppendLine("Message: " + ex.Message);
+            builder.AppendLine("Stack: " + ex.StackTrace);
+
+            return builder.ToString();
+        }
     }
 }

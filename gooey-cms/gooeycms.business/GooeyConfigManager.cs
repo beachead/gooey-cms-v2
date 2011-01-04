@@ -498,6 +498,14 @@ This is your home page.
             }
         }
 
+        public static String StaticResourceUrl
+        {
+            get
+            {
+                return GetCachedValue(ConfigConstants.StaticResourceUrl, defaultValue: "http://www.gooeycms.com");
+            }
+        }
+
         public static Boolean IsInviteEnabled
         {
             get
