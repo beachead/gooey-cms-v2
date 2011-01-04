@@ -28,16 +28,26 @@ $j(function () {
 		}
 	).css('overflow', 'visible'); // so that the "delete" button can be positioned beyond the boundary of its container
 
-	$j('#themes-panel').delegate('a.showFeatures', 'hover', function () {
-		var jTrigger = $j(this),
+    $j('#themes-panel').delegate('a.showFeatures', 'hover', function () {
+        var jTrigger = $j(this),
         jFeature = jTrigger.parent(),
         jList = jFeature.find('ul');
-		if (jList.is(':visible')) {
-		    jList.slideUp();
-		} else {
-		    jList.slideDown();
-		}
-	});
+        if (jList.is(':visible')) {
+            jList.slideUp();
+        } else {
+            jList.slideDown();
+        }
+    });
 
+
+    $j('#themes-panel').delegate('a.addScreenshot', 'click', function () {
+        $j('#ss_' + $j(this).attr('href')).slideDown('fast');
+        return false;
+    });
+
+    $j('.ss_cancel').bind('click', function () {
+        $j(this).parent().slideUp('fast');
+        return false;
+    });
 
 });

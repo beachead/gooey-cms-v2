@@ -27,9 +27,9 @@ li.theme div.theme-header {
 }
 
 li.theme .logo {
-	margin: 8px 0 0 20px;
+	margin: 1px 0 5px 20px;
 	width:150px;
-	float: left;
+	float: right;
 }
 
 li.theme .logo img {
@@ -38,24 +38,25 @@ li.theme .logo img {
 }
 
 li.theme .title {
-	float: right;
-	margin: 8px 20px 0 20px;
+	float: left;
+	margin: 13px 20px 0 20px;
 	color: #4395F1;
 	font-size: 1.1em;
 	font-weight: bold;
 }
 
 li.theme ul.options-links {
-    margin-right: 20px;
-    float: right;
+    overflow:auto;
+    clear:both;
+    border-top: 1px solid #ccc;
+    margin: 5px 20px;
+    text-align: right;
 }
 
 li.theme ul.options-links li {
     list-style: none;
-    background: transparent url(../images/icon_arrow.png) center right no-repeat;
-    padding-right: 20px;
-    padding-left: 0;
-    text-align: right;
+    display: inline;
+    padding-left: 5px;
 }
 
 /* theme slideshow */
@@ -70,6 +71,10 @@ li.theme ul.thumbs {
 li.theme ul.thumbs li {
 	list-style: none;
 	position: relative;
+}
+
+li.theme ul.thumbs li img {
+    border: 1px solid #ccc;
 }
 
 li.theme ul.thumbs li a.delete-screenshot {
@@ -126,6 +131,7 @@ div.next {
 li.theme div.theme-add-screenshot {
     padding: 5px 0 0 20px;
     clear: both;
+    display: none;
 }
 
 li.theme div.theme-add-screenshot input {
@@ -134,7 +140,7 @@ li.theme div.theme-add-screenshot input {
 
 
 li.theme div.features {
-    bottom: 25px;
+    top: 67px;
     left: 19px;
     position: absolute;
 }
