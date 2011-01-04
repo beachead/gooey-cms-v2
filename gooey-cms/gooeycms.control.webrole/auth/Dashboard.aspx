@@ -8,7 +8,7 @@
     <script type="text/javascript" src="../../scripts/store.js"></script>
     <link rel="stylesheet" type="text/css" href="../../css/store.css" />
     <style type="text/css">
-    .features {
+    li.theme div.features {
         top: auto;
         bottom: 25px;
     }
