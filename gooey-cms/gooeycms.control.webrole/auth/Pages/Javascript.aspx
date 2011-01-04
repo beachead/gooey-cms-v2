@@ -21,7 +21,6 @@
 </head>
 <body class="claro">
     <form id="form1" runat="server">
-        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" EnableCdn="true" EnablePageMethods="true" runat="server" />
         <script language="javascript" type="text/javascript">
             function showErrorMessage(text) {
                 dojo.byId('lblErrorMessage').innerHTML = text;
