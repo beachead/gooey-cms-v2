@@ -13,7 +13,7 @@
 <script language="javascript" type="text/javascript">
     var ResizableTextEditor = {
         editor: null,
-        lineHeight: 17,
+        lineHeight: 20,
 
         init: function (id) {
             this.editor = dojo.byId(id);
@@ -22,7 +22,7 @@
             dojo.connect(this.editor, 'onkeyup', function () {
                 that.setEditorHeight();
             });
-           this.editor.style.height = this.getAdjustedHeight() + "px";
+            this.editor.style.height = this.getAdjustedHeight() + "px";
         },
 
         getCurrentHeight: function () {
@@ -30,7 +30,21 @@
         },
 
         getAdjustedHeight: function () {
-            return this.editor.value.split('\n').length * this.lineHeight;
+            var lines = this.editor.value.split('\n'),
+                nCharWidth = 5,
+                nEditorOffset = this.editor.offsetWidth - 30,
+                nMaxCharsPerLine = nEditorOffset / nCharWidth,
+                nExtraLines = 0;
+
+            // when line wrapping is enabled, a line feed isn't a reliable method for line counting.  in this count, add 
+            // extra space for any line which is longer than nMaxCharsPerLine
+            for (var i = 0, l = lines.length; i < l; i++) {
+                if (lines[i].length >= nMaxCharsPerLine) {
+                    nExtraLines += Math.floor((lines[i].length - nMaxCharsPerLine) / nMaxCharsPerLine);
+                }
+            }
+
+            return (this.editor.value.split('\n').length + nExtraLines) * this.lineHeight;
         },
 
         setEditorHeight: function () {

@@ -2,6 +2,16 @@
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<style>
+body { 
+    overflow: hidden;
+    padding-bottom: 25px;
+}
+
+textarea {
+    margin-bottom: 25px;
+}
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="padding-left:5px;">
