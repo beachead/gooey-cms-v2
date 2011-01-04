@@ -7,6 +7,12 @@
     <script type="text/javascript" src="../../scripts/jquery.cycle.all.min.js"></script>
     <script type="text/javascript" src="../../scripts/store.js"></script>
     <link rel="stylesheet" type="text/css" href="../../css/store.css" />
+    <style type="text/css">
+    .features {
+        top: auto;
+        bottom: 25px;
+    }
+    </style>
 </asp:Content>
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">
     <gooey:Subnav ID="Subnav" runat="server" navSection="dashboard" navItem="home" />
