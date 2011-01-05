@@ -61,6 +61,7 @@
                 wnd.set_width(width);
                 wnd.set_height(500);
                 wnd.moveTo(10, 10);
+                args.set_cancel(true);
                 break;
             case "ManageCss":
                 var wnd = window.radopen("Stylesheet.aspx?a=edit&pid=" + treeNode.get_value(), null);
@@ -68,6 +69,7 @@
                 wnd.set_title("CSS: " + treeNode.get_value());
                 wnd.set_width(width);
                 wnd.moveTo(10, 10);
+                args.set_cancel(true);
                 break;
             case "ManageJavascript":
                 var wnd = window.radopen("Javascript.aspx?a=edit&pid=" + treeNode.get_value(), null);
@@ -75,6 +77,7 @@
                 wnd.set_title("Javascript: " + treeNode.get_value());
                 wnd.set_width(width);
                 wnd.moveTo(10, 10);
+                args.set_cancel(true);
                 break;
             case "EditMeta":
                 var wnd = window.radopen("Metatags.aspx?a=edit&pid=" + treeNode.get_value(), null);
@@ -84,6 +87,7 @@
                 wnd.set_width(width);
                 wnd.set_height(height);
                 wnd.moveTo(10, 10);
+                args.set_cancel(true);
                 break;
             case "Rename":
                 var result = confirm('Warning: Renaming this page will break any links, redirects, or registrations you have that reference this page.\n\nWould you like to continue?');
