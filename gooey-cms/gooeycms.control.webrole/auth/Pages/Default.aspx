@@ -52,6 +52,7 @@
                 break;
             case "Edit":
                 openEditWindow(treeNode.get_value());
+                args.set_cancel(true);
                 break;
             case "ManageImages":
                 var wnd = window.radopen("ImageBrowser.aspx?pid=" + treeNode.get_value(), null);
@@ -144,7 +145,6 @@
 
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
     <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
-    <telerik:RadAjaxPanel ID="UpdatePanel" LoadingPanelID="LoadingPanel" runat="server">
     <asp:LinkButton ID="BtnAddNewPage" OnClick="BtnAddNewPage_Click" Text="Add New Page" runat="server" />
     <br /><br />
     <telerik:RadTreeView ID="PageTreeView" Skin="Default" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="true" 
@@ -185,7 +185,6 @@
             </telerik:RadTreeViewContextMenu>
         </ContextMenus>
     </telerik:RadTreeView>
-    </telerik:RadAjaxPanel>
 
 <telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="600" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
 </telerik:RadWindowManager>
