@@ -21,8 +21,10 @@ $j(function () {
 		        pagerClick: function (zeroBasedSlideIndex, slideElement) { },
 		        pagerEvent: 'click.cycle',
 		        next: jNext,
-		        prev: jPrev
-
+		        prev: jPrev,
+		        after: function (currSlideElement, nextSlideElement, options, forwardFlag) {
+		            currSlideElement.parentNode.style.overflow = 'visible';
+		        }
 		    });
 
 		}
