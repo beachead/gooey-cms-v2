@@ -1,15 +1,8 @@
 $(function () {
+    initSitePanels();
+});
 
-    /*
-    var jPriceList = $('<ul/>');
-    for (var i = 0; i < prices.length; i++) {
-        var jItem = $('<li><a href="#">' + prices[i] + '</a></li>');
-        jPriceList.append(jItem);
-    }
-
-    $('#price-filter div.menu').append(jPriceList);
-    */
-
+var initSitePanels = function () {
     var jThumbs = $('ul.thumbs');
     var jPager = jThumbs.parent().find('ul.thumb-nav');
     jThumbs.each(
@@ -47,5 +40,4 @@ $(function () {
             jList.slideDown();
         }
     });
-
-});
+}
