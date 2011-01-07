@@ -83,8 +83,6 @@ namespace Gooeycms.Webrole.Control.auth.Content
             this.TxtTags.Text = item.TagsAsString();
             this.PublishDate.SelectedDate = item.PublishDate;
             this.ExpireDate.SelectedDate = item.ExpireDate;
-            this.PublishTime.SelectedTime = item.PublishDate.TimeOfDay;
-            this.ExpireTime.SelectedTime = item.ExpireDate.TimeOfDay;
 
             this.RequireRegistration.SelectedValue = (item.RequiresRegistration) ? "True" : "False";
             if (item.RequiresRegistration)
