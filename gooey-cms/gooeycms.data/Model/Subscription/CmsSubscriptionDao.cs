@@ -62,5 +62,11 @@ namespace Gooeycms.Data.Model.Subscription
         {
             return base.Session.GetNamedQuery("CmsSubscriptionUpcomingRenewals").SetParameter("timeframe", timeframe).List<CmsSubscription>();
         }
+
+        public CmsSubscription FindByProfileId(string profileId)
+        {
+            String hql = "select subscription from CmsSubscription subscription where subscription.PaypalProfileId = :profileId";
+            return base.NewHqlQuery(hql).SetString("profileId", profileId).UniqueResult<CmsSubscription>();
+        }
     }
 }

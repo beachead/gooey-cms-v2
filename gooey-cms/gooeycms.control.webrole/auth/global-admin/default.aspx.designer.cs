@@ -112,6 +112,15 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::System.Web.UI.WebControls.LinkButton BtnTogglePaypal;
         
         /// <summary>
+        /// LblSubscriptionProcessor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSubscriptionProcessor;
+        
+        /// <summary>
         /// PaypalPdtTokenImage control.
         /// </summary>
         /// <remarks>

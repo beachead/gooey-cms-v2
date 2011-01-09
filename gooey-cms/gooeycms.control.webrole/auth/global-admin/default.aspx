@@ -37,7 +37,10 @@
             <tr>
                 <td>Paypal Payment Mode:</td>
                 <td><asp:Image ID="PaypalStatusImage" runat="server" /></td>
-                <td><asp:LinkButton ID="BtnTogglePaypal" OnClick="BtnTogglePaypal_Click" Text="" runat="server" /></td>
+                <td>
+                    <asp:LinkButton ID="BtnTogglePaypal" OnClick="BtnTogglePaypal_Click" Text="" runat="server" />
+                    <asp:Label ID="LblSubscriptionProcessor" runat="server" />
+                </td>
             </tr>
             <tr>
                 <td>Paypal PDT Token:</td>

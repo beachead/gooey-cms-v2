@@ -9,6 +9,11 @@ using System.IO;
 
 namespace Gooeycms.Business.Subscription
 {
+    /// <summary>
+    /// OBSOLETE >> REPLACED BY THE EXPRESSCHECKOUT PROCESSOR.
+    /// 
+    /// THIS CLASS WILL GO AWAY AT SOME POINT
+    /// </summary>
     public class PaypalSubscriptionProcessor : ISubscriptionProcessor
     {
         public enum TransactionTypes

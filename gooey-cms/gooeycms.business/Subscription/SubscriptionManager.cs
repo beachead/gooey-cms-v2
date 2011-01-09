@@ -474,6 +474,12 @@ namespace Gooeycms.Business.Subscription
             Save(subscription);
         }
 
+        public static CmsSubscription GetSubscriptionByProfileId(string profileId)
+        {
+            CmsSubscriptionDao dao = new CmsSubscriptionDao();
+            return dao.FindByProfileId(profileId);
+        }
+
         public static void ValidateDomain(String assignedName, String domain)
         {
             

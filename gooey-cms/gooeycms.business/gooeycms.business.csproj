@@ -197,6 +197,7 @@
     <Compile Include="Store\SitePackage.cs" />
     <Compile Include="Store\SitePackageManager.cs" />
     <Compile Include="Subscription\InviteManager.cs" />
+    <Compile Include="Subscription\Paypal\PaypalExpressCheckoutIpnProcessor.cs" />
     <Compile Include="Subscription\SubscriptionAdapter.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Logging.cs" />

@@ -49,10 +49,12 @@ namespace Gooeycms.Business.Util
             if (GooeyConfigManager.IsPaypalSandbox)
             {
                 GooeyConfigManager.PaypalPostUrl = ConfigConstants.PaypalProductionUrl;
+                GooeyConfigManager.SetValueAndUpdateCache(ConfigConstants.SubscriptionProcessor, "Gooeycms.Business.Subscription.Paypal.PaypalExpressCheckoutIpnProcessor");
             }
             else
             {
                 GooeyConfigManager.PaypalPostUrl = ConfigConstants.PaypalSandboxUrl;
+                GooeyConfigManager.SetValueAndUpdateCache(ConfigConstants.SubscriptionProcessor, "Gooeycms.Business.Subscription.Paypal.DebugSubscriptionProcessor");
             }
         }
     }

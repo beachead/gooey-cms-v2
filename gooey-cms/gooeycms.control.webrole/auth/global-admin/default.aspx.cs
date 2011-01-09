@@ -44,6 +44,7 @@ namespace Gooeycms.Webrole.Control.auth.global_admin
             DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultThemeName), "yellow", GooeyConfigManager.DefaultThemeName, "Define Default Theme Name (Default: " + GooeyConfigManager.DefaultThemeName + ")", this.DefaultThemeNameImage, this.DefaultThemeNameLink, this.DefaultThemeNameTooltip, GooeyConfigManager.DefaultThemeName, ConfigConstants.DefaultThemeName, "DefaultThemeName");
             DisplayLinkStatus(GooeyStatus.IsValueConfigured(ConfigConstants.DefaultThemeDescription), "yellow", GooeyConfigManager.DefaultThemeDescription, "Define Default Theme Description (Default: " + GooeyConfigManager.DefaultThemeDescription + ")", this.DefaultThemeDescriptionImage, this.DefaultThemeDescriptionLink, this.DefaultThemeDescriptionTooltip, GooeyConfigManager.DefaultThemeDescription, ConfigConstants.DefaultThemeDescription, "DefaultThemeDescription");
 
+            this.LblSubscriptionProcessor.Text = GooeyConfigManager.SubscriptionProcessorClassType.FullName;
         }
 
         private void DisplayButtonStatus(Boolean isValidStatus, String invalidBallColor, 
