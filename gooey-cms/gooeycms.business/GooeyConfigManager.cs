@@ -262,12 +262,12 @@ This is your home page.
 
         public static String PaypalReturnUrl
         {
-            get { return GetCachedValue(ConfigConstants.PaypalReturnUrl, defaultValue: "http://store.gooeycms.net/signup/activate.aspx"); }
+            get { return GetCachedValue(ConfigConstants.PaypalReturnUrl, defaultValue: SignupSiteHost + "/activate.aspx"); }
         }
 
         public static String PaypalCancelUrl
         {
-            get { return GetCachedValue(ConfigConstants.PaypalCancelUrl, defaultValue: "http://store.gooeycms.net/signup/cancel.aspx"); }
+            get { return GetCachedValue(ConfigConstants.PaypalCancelUrl, defaultValue: SignupSiteHost + "/cancel.aspx"); }
         }
     
         public static String PaypalPdtToken
@@ -312,6 +312,22 @@ This is your home page.
             {
                 String result = GetCachedValue(ConfigConstants.DefaultAdminDomain, "control.gooeycms.net");
                 return result;
+            }
+        }
+
+        public static String StoreSiteHost
+        {
+            get
+            {
+                return GetCachedValue(ConfigConstants.DefaultSiteDomain, "http://store.gooeycms.com");
+            }
+        }
+
+        public static String SignupSiteHost
+        {
+            get
+            {
+                return GetCachedValue(ConfigConstants.DefaultSignupDomain, "http://secure.gooeycms.com/signup");
             }
         }
 

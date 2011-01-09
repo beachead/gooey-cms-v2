@@ -8,6 +8,7 @@ using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
 using AjaxControlToolkit;
 using Gooeycms.Business.Util;
+using Gooeycms.Business;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
@@ -19,7 +20,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
         protected override void OnPageLoad(object sender, EventArgs e)
         {
             if (!CurrentSite.Restrictions.IsJavascriptAllowed)
-                Response.Redirect("http://store.gooeycms.net/upgrade.aspx");
+                Response.Redirect("/auth/Manager.aspx?msg=Upgrade+required&feature=js");
 
             Master.SetTitle("Manage Javascript");
             if (!Page.IsPostBack)

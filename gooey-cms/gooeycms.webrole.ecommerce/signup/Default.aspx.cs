@@ -25,7 +25,7 @@ namespace Gooeycms.Webrole.Ecommerce
 
                 HyperLink lnk = (HyperLink)LoginView.FindControl("LnkSignIn");
                 if (lnk != null)
-                    lnk.NavigateUrl = "http://" + GooeyConfigManager.AdminSiteHost + "/login.aspx?ReturnUrl=" + Server.UrlEncode("http://store.gooeycms.net/signup/");
+                    lnk.NavigateUrl = "http://" + GooeyConfigManager.AdminSiteHost + "/login.aspx?ReturnUrl=" + Server.UrlEncode(GooeyConfigManager.SignupSiteHost);
 
                 this.SalesForceCost.Text = GooeyConfigManager.SalesForcePrice.ToString();
                 this.CampaignOptionCost.Text = GooeyConfigManager.CampaignOptionPrice.ToString();

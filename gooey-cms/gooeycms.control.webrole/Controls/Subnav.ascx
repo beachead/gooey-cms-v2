@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Subnav.ascx.cs" Inherits="Gooeycms.Webrole.Control.Controls.Subnav" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ Import Namespace="Gooeycms.Business" %>
 
 <asp:MultiView ID="mvSubnav" runat="server">
 
@@ -13,8 +14,8 @@
     <asp:View ID="dashboard" runat="server">
         <ul>
             <li><asp:HyperLink ID="dashboard_home" navigateUrl="~/auth/dashboard.aspx" Text="Dashboard" runat="server" /></li>
-            <li><asp:HyperLink ID="dashboard_new" NavigateUrl="http://store.gooeycms.net/signup/" Text="Register New Site" runat="server"/></li>
-            <li class="last"><asp:HyperLink ID="dashboard_purchase" NavigateUrl="http://store.gooeycms.net/" Text="Purchase Sites" runat="server" /></li> 
+            <li><asp:HyperLink ID="dashboard_new" NavigateUrl="<% Response.Write(GooeyConfigManager.SignupSiteHost); %>" Text="Register New Site" runat="server"/></li>
+            <li class="last"><asp:HyperLink ID="dashboard_purchase" NavigateUrl="<% Response.Write(GooeyConfigManager.StoreSiteHost); %>" Text="Purchase Sites" runat="server" /></li> 
         </ul>    
     </asp:View>
 

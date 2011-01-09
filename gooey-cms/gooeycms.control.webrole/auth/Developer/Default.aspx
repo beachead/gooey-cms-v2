@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Default" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+<%@ Import Namespace="Gooeycms.Business" %>
 
 <asp:Content ID="localJS" ContentPlaceHolderID="localJS" runat="server">
 	<script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
@@ -121,7 +122,7 @@
             <script type="text/javascript" language="javascript">
                 function embed_display(guid) {
                     var lbl = $get('lblembed');
-                    lbl.innerHTML = "<iframe src=\"http://store.gooeycms.net/embedded.aspx?g=" + guid + "\" width=\"400\" height=\"350\" frameborder=\"0\" />";
+                    lbl.innerHTML = "<iframe src=\"<% Response.Write(GooeyConfigManager.StoreSiteHost); %>/embedded.aspx?g=" + guid + "\" width=\"400\" height=\"350\" frameborder=\"0\" />";
 
                     var wnd = $find('<%= EmbedWindow.ClientID %>');
                     wnd.show();

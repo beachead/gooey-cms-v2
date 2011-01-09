@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true"
     CodeBehind="Dashboard.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Dashboard" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+<%@ Import Namespace="Gooeycms.Business" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../../scripts/jquery-1.4.2.min.js"></script>
@@ -115,7 +116,7 @@
                 var siteGuid = box.options[box.selectedIndex].value;
                 if (siteGuid == "") {
                     alert('You will now be redirected to the gooey store to create your new subscription. Afterwards you can then come back and apply this site.');
-                    window.location = 'http://store.gooeycms.net/signup/';
+                    window.location = '<% Response.Write(GooeyConfigManager.SignupSiteHost); %>';
                     return false;
                 } else if (type == "Site") {
                     var result = confirm('WARNING: Applying this site will overwrite ALL of your existing data.\r\nAre you sure you want to continue?');
