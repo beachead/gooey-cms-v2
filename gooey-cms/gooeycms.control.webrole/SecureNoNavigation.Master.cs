@@ -15,6 +15,9 @@ namespace Gooeycms.Webrole.Control
     public partial class SecureNoNavigation : System.Web.UI.MasterPage
     {
         protected static String Root = null;
+        protected String LoggedinFullName = "";
+        protected String LoggedinEmail = "";
+        protected String LoggedinSite = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +25,9 @@ namespace Gooeycms.Webrole.Control
 
             Page.Header.DataBind();
             this.LoggedInUsername.Text = LoggedInUser.Wrapper.UserInfo.Firstname;
+            LoggedinFullName = LoggedInUser.Wrapper.UserInfo.Firstname + " " + LoggedInUser.Wrapper.UserInfo.Lastname;
+            LoggedinEmail = LoggedInUser.Wrapper.UserInfo.Email + " (" + LoggedInUser.Wrapper.UserInfo.Company + ")";
+            LoggedinSite = CurrentSite.StagingDomain;
 
             if (!Page.IsPostBack)
             {

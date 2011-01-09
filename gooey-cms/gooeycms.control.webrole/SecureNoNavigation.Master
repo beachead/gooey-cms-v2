@@ -152,7 +152,7 @@
 
 <asp:ContentPlaceHolder ID="Olark" runat="server">
 <!-- OggChat Tab Button -->
-<div id="oggchat"></div>
+<div id="oggchat">
 <script type="text/javascript" src="https://oggchat.icoa.com/js/button.js"></script>
 <script type="text/javascript">
     var page = {
@@ -162,11 +162,12 @@
         'website': 'www.gooeycms.com',
         'top_margin': '170px',
         'window_height': '400px',
-        'window_width': '330px',
+        'window_width': '330px&k1=Name&v1=<% Response.Write (LoggedinFullName); %>&k2=Email&v2=<% Response.Write (LoggedinEmail); %>&k3=Site&v3=http://<% Response.Write (LoggedinSite); %>',
         'align': 'right'
     }
     button(page);
 </script>
+</div>
 </asp:ContentPlaceHolder>
 </body>
 </html>

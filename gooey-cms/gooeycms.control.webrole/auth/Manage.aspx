@@ -10,8 +10,11 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-<div id="head-line" class="main">MANAGE SUBSCRIPTION (<asp:Label ID="LblDomain" runat="server" />)</div>
 
+<h1>MANAGE SITE: <asp:Label ID="LblDomain" runat="server" /></h1>
+
+<p>This page allows you to upgrade your account and user settings and update the domain settings for your website.</p>
+<br />
 <asp:Panel ID="ManageEnablePanel" runat="server">
     <div style="padding:10px;">
         <b style="color:red;">This subscription is currently disabled.</b><br /><br />
@@ -37,15 +40,12 @@
 
     <fieldset>
         <legend>User Information</legend>
-        <table>
-            <tr>
-                <td colspan="2">
-                    <label>Username</label><br />
-                    <asp:Label ID="LblUsername" runat="server" />
-                </td>
-            </tr>
-            <tr>
-                <td>
+         <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
+                <label>Username: </label> <asp:Label ID="LblUsername" runat="server" />
+             </div>
+              <table>
+                 <tr>
+                 <td>
                     <label>First Name</label><br />
                     <asp:TextBox ID="TxtFirstname" runat="server" />
                 </td>
@@ -54,30 +54,27 @@
                     <asp:TextBox ID="TxtLastname" runat="server" />
                 </td>
             </tr>
-            <tr>
-                <td colspan="2">
+            </table>
+                    <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
                     <label>Company</label><br />
                     <asp:TextBox ID="TxtCompany" Width="300px" runat="server" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
+                    </div>
+          <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
                     <asp:LinkButton ID="BtnUpdateUserInfo" OnClick="BtnUpdateUserInfo_Click" Text="Update Information" runat="server" />
-                </td>
-            </tr>
-        </table>
+              </div>
     </fieldset>
 
-    <div style="padding-top:10px;">
+    <div style="padding-top:20px;">
     <fieldset>
         <legend>Subscription Information</legend>
-        <table>
+       <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
+       <table>
             <tr>
-                <td colspan="2" style="padding-right:10px;">Current Gooey Plan: <asp:Label ID="LblCurrentPlan" runat="server" /> (<asp:Label ID="LblPlanCost" runat="server" />)</td>
+                <td colspan="2">Current Gooey Plan: <asp:Label ID="LblCurrentPlan" runat="server" /> (<asp:Label ID="LblPlanCost" runat="server" />)</td>
             </tr>
-            <tr>
-                <td>
-                    <asp:MultiView ID="UpgradeOptions" runat="server">
+        </table>
+        <div style="padding-top:10px; padding-left:3px;">
+                <asp:MultiView ID="UpgradeOptions" runat="server">
                         <asp:View ID="UpgradeAvailable" runat="server">
                             <asp:LinkButton ID="BtnUpgradePlan" OnClick="BtnUpgradePlan_Click" Text="Upgrade to Business Plan" runat="server" />
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -89,12 +86,12 @@
                             <asp:LinkButton ID="BtnCancelPlan2" OnClick="BtnCancelPlan_Click" Text="Cancel Account" OnClientClick="return confirm('Are you sure you want to cancel this subscription?');" runat="server" />                            
                         </asp:View>
                     </asp:MultiView>
-                </td>
-            </tr>
-        </table>
+          </div>       
+            </div>
+       
 
         <asp:Panel ID="PanelBusinessPlan" runat="server">
-        <div style="padding-top:10px;">
+        <div style="padding-top:10px; padding-left:3px;">
         <table style="width:100%;">
             <tr>
                 <td>Paypal Billing Id:&nbsp;<asp:Label ID="LblPaypalBillingId" runat="server" /></td>
@@ -120,41 +117,43 @@
         </table>
         </div>
 
-        <div style="padding-top:10px;">
-            <label>Subscription Options:</label><br />
+        <div style="padding-top:10px; padding-left:3px;">
+            <label>Subscription Options:</label>
+        </div>
+        <div style="padding-top:5px; padding-bottom:5px; padding-left:15px;">
             <asp:CheckBox ID="ChkCampaigns" Text="Campaign Integration" runat="server" /><asp:Label ID="LblCampaignCost" runat="server" /><br />
             <asp:CheckBox ID="ChkSalesforce" Text="Salesforce Integration" runat="server" /><asp:Label ID="LblSalesforceCost" runat="server" /><br />
+        </div>
+        <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
             <asp:LinkButton ID="BtnUpdateOptions" OnClick="BtnUpdateOptions_Click" Text="Update Options" runat="server" />
         </div>
         </asp:Panel>
     </fieldset>
     </div>
 
-    <div style="padding-top:10px;">
+    <div style="padding-top:20px; padding-bottom:10px;">
     <fieldset>
         <legend>Domain Settings</legend>
+
+        <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
+            <label>Site Name: </label><asp:Label ID="LblSiteName" runat="server" />.gooeycms.net
+        </div>
 
         <div>
             <label>Site Language</label><br />
             <asp:DropDownList ID="LstSiteCulture" runat="server" />
         </div>
-
-        <div style="padding-top:10px;">
-            <label>Site Name</label><br />
-            <asp:Label ID="LblSiteName" runat="server" />
-        </div>
         
-        <div style="padding-top:10px;">
+        <div style="padding-top:10px; padding-left:3px;">
         <label>Production Domain</label> <br />
         <asp:TextBox ID="TxtProductionDomain" Width="300px" runat="server" />
         </div>
 
-        <div style="padding-top:10px;">
+        <div style="padding-top:10px; padding-left:3px;">
         <label>Staging Domain</label><br />
         <asp:TextBox ID="TxtCustomStagingDomain" Width="300px" runat="server" />
         </div>
-
-        <div>
+       <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
         <asp:LinkButton ID="LnkUpdateDomain" OnClick="LnkUpdateDomain_Click" Text="Update Domain Settings" runat="server" />
         </div>
     </fieldset>
@@ -170,4 +169,5 @@
     </telerik:RadScriptBlock>
 </div>
 </asp:Panel>
+<br /><br /><br /><br />
 </asp:Content>
