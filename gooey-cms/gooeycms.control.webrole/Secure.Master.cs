@@ -36,7 +36,7 @@ namespace Gooeycms.Webrole.Control
 
                 Boolean containsValue = false;
                 HttpCookie cookie = Request.Cookies["trial_remaining"];
-                if (cookie.HasKeys)
+                if ((cookie != null) && (cookie.HasKeys))
                     containsValue = (cookie.Values[CurrentSite.Guid.Value] != null);
 
                 int trialDaysRemaining = 0;
