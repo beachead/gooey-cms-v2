@@ -40,11 +40,11 @@
 
         <div style="padding-bottom:10px;">
             <b>Publish On:</b>(leave blank for immediately)<br />
-            <bdp:BDPLite ID="PublishDate" runat="server" /> at <bdp:TimePicker ID="PublishTime" runat="server" />
+            <bdp:BDPLite ID="PublishDate" runat="server" />
             <br /><br />
             
             <b>Expire On:</b>(leave blank for no expiration)<br />
-            <bdp:BDPLite ID="ExpireDate" runat="server" /> at <bdp:TimePicker ID="ExpireTime" runat="server" /><br />
+            <bdp:BDPLite ID="ExpireDate" runat="server" /><br />
         </div>      
     </div>
 
