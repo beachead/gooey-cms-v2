@@ -411,6 +411,8 @@ namespace Gooeycms.Business.Pages
             page.Url = fullurl;
             page.UrlHash = TextHash.MD5(page.Url).Value;
             page.Guid = System.Guid.NewGuid().ToString();
+            page.IsApproved = true;
+            page.ApprovedBy = "System";
             PageManager.Instance.AddNewPage("/", GooeyConfigManager.DefaultPageName, page);
         }
 
