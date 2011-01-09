@@ -11,6 +11,7 @@ using Gooeycms.Data.Model.Subscription;
 using System.Web.Security;
 using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Paypal;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -32,6 +33,28 @@ namespace Gooeycms.Webrole.Control
                     if (!WebRequestContext.CurrentPage().Path.ToLower().Contains("manage.aspx"))
                         Response.Redirect("~/auth/Manage.aspx?g=" + CurrentSite.Subscription.Guid, true);
                 }
+
+                HttpCookie cookie = Request.Cookies["trial_remaining"];
+                int trialDaysRemaining = 0;
+                if (cookie == null)
+                {
+                    PaypalProfileInfo info = PaypalManager.Instance.GetProfileInfo(CurrentSite.Subscription.PaypalProfileId);
+                    if (info.IsTrialPeriod)
+                        trialDaysRemaining = info.TrialCyclesRemaining;
+
+                    cookie = new HttpCookie("trial_remaining");
+                    cookie.Value = trialDaysRemaining.ToString();
+
+                    Response.Cookies.Add(cookie);
+                }
+                else
+                    trialDaysRemaining = Int32.Parse(cookie.Value);
+
+                if (trialDaysRemaining > 0)
+                    this.LblTrialDaysRemaining.Text = "(Trial: " + trialDaysRemaining.ToString() + " days remaining)" ;
+                else
+                    this.LblTrialDaysRemaining.Visible = false;
+
             }
 
             if (!Page.IsPostBack)
