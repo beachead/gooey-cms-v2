@@ -214,6 +214,7 @@ div.subnav div.subnav-inner {
     right: 9px;
     display: none;
     background: transparent url(../images/bg_utilnav_menu_right.png) bottom right no-repeat;
+    z-index: 1;
 }
 
 #utility-nav ul ul {
