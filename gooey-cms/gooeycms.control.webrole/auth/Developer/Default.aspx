@@ -8,6 +8,13 @@
 </asp:Content>
 <asp:Content id="localCSS" ContentPlaceHolderID="localCSS" runat="server">
     <link rel="stylesheet" type="text/css" href="../../css/store.css" />
+    <style type="text/css">
+    #themes-panel {
+        padding-left: 0;
+        margin-left: 0;
+    }
+    
+    </style>
 </asp:Content>
 
 
@@ -46,14 +53,36 @@
 
                             <!-- start: theme-header -->
                             <div class="theme-header">
-				                <div class="title"><%# Eval("Title") %> - <%# DataBinder.Eval(Container.DataItem,"Price","{0:c0}") %></div>
+				                <div class="title">
+                                    <%# Eval("Title") %><br />
+                                    <%# DataBinder.Eval(Container.DataItem,"Price","{0:c0}") %>
+                                </div>
 				                <div class="logo"><asp:Image ID="Logo" runat="server" /></div>
-				                <ul class="options-links">
-                                    <li>(<a href="#" onclick="embed_display('<%# DataBinder.Eval(Container.DataItem,"Guid") %>'); return false;">Embed</a>)&nbsp;<a href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a></li>
+				                
+				                <div class="features">
+                                    <a href="#" class="showFeatures">Features</a>
+				                    <ul>
+                                        <asp:Repeater ID="FeatureList" runat="server">
+                                            <ItemTemplate>
+                                                <li><%# Container.DataItem %></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+				                    </ul>
+                                </div>                                
+                                
+                                <ul class="options-links">
+                                    <li><a href="#" onclick="embed_display('<%# DataBinder.Eval(Container.DataItem,"Guid") %>'); return false;">Embed</a></li>
+                                    <li><a href="<%# Eval("Guid") %>" class="addScreenshot">Add Screenshot</a></li>
+                                    <li><a href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a></li>
                                     <li><asp:LinkButton ID="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton></li>
                                 </ul>
                             </div>
                             <!-- end: theme-header -->
+
+				            <div class="theme-add-screenshot" id="ss_<%# Eval("Guid") %>">
+                                <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="Add" runat="server" />
+                                <a href="#" class="ss_cancel">Cancel</a>
+                            </div>
 
                             <!-- start: preview -->
                             <div class="preview">
@@ -69,21 +98,6 @@
 				                </ul>
                                 <ul class="thumb-nav"></ul>
 				        
-				                <div class="theme-add-screenshot">
-                                    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;<asp:Button ID="BtnAddScreenshot" CommandName="AddScreenshot" CommandArgument='<%# Eval("Guid") %>' Text="add screenshot" runat="server" />
-                                </div>
-                               
-				                <div class="features">
-                                    <a href="#" class="showFeatures">Features</a>
-				                    <ul>
-                                        <asp:Repeater ID="FeatureList" runat="server">
-                                            <ItemTemplate>
-                                                <li><%# Container.DataItem %></li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-				                    </ul>
-                                </div>
-                                
                             </div>
                             <!-- end: preview -->
 
