@@ -11,6 +11,7 @@ using Gooeycms.Business.Subscription;
 using Gooeycms.Business;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Membership;
+using Telerik.Web.UI;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -38,6 +39,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
             }
 
             DoDataBind(min, max);
+            RadScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "updatejs", "initSitePanels();", true);
         }
 
         private void DoDataBind(double minPrice, double maxPrice)
