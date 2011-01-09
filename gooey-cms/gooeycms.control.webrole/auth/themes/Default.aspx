@@ -23,6 +23,7 @@
                 <asp:TemplateField HeaderText="Name">
                      <HeaderStyle HorizontalAlign="Left" />
                     <ItemTemplate>
+                        <asp:HiddenField ID="HiddenId" Value='<%# Eval("Theme.ThemeGuid") %>' runat="server" />
                         <asp:Label ID="Name" Text='<%# Eval("Theme.Name") %>' runat="server" />
                     </ItemTemplate>               
                 </asp:TemplateField>
