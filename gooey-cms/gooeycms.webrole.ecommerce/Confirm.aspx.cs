@@ -64,7 +64,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
             PackageTitle = package.Title;
             PackageGuid = package.Guid;
             ReceiptGuid = receipt.Guid;
-            ReturnUrl = "http://store.gooeycms.net/complete.aspx";
+            ReturnUrl = GooeyConfigManager.StoreSiteHost + "/complete.aspx";
 
             BtnPaypalPurchase.PostBackUrl = GooeyConfigManager.PaypalPostUrl;
             if (GooeyConfigManager.IsPaypalSandbox)
