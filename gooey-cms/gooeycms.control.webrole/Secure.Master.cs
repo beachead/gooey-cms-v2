@@ -34,21 +34,27 @@ namespace Gooeycms.Webrole.Control
                         Response.Redirect("~/auth/Manage.aspx?g=" + CurrentSite.Subscription.Guid, true);
                 }
 
+                Boolean containsValue = false;
                 HttpCookie cookie = Request.Cookies["trial_remaining"];
+                if (cookie.HasKeys)
+                    containsValue = (cookie.Values[CurrentSite.Guid.Value] != null);
+
                 int trialDaysRemaining = 0;
-                if (cookie == null)
+                if (!containsValue)
                 {
                     PaypalProfileInfo info = PaypalManager.Instance.GetProfileInfo(CurrentSite.Subscription.PaypalProfileId);
-                    if (info.IsTrialPeriod)
-                        trialDaysRemaining = info.TrialCyclesRemaining;
+                    if (info != null)
+                    {
+                        if (info.IsTrialPeriod)
+                            trialDaysRemaining = info.TrialCyclesRemaining;
+                    }
 
                     cookie = new HttpCookie("trial_remaining");
-                    cookie.Value = trialDaysRemaining.ToString();
-
+                    cookie.Values.Add(CurrentSite.Guid.Value,trialDaysRemaining.ToString());
                     Response.Cookies.Add(cookie);
                 }
                 else
-                    trialDaysRemaining = Int32.Parse(cookie.Value);
+                    trialDaysRemaining = Int32.Parse(cookie.Values[CurrentSite.Guid.Value]);
 
                 if (trialDaysRemaining > 0)
                     this.LblTrialDaysRemaining.Text = "(Trial: " + trialDaysRemaining.ToString() + " days remaining)" ;
@@ -117,5 +123,7 @@ namespace Gooeycms.Webrole.Control
                 A.Attributes.Add("class", "active");
             }
         }
+
+        public string CurrentSiteValue { get; set; }
     }
 }
