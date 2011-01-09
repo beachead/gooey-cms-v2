@@ -437,7 +437,7 @@ namespace Gooeycms.Business.Util
 
         public static string Culture 
         {
-            get { return "en-us"; } 
+            get { return Subscription.Culture; } 
         }
 
         public static string Protocol

@@ -14,6 +14,7 @@ using System.Text;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business;
 using Gooeycms.Business.Email;
+using System.Globalization;
 
 namespace Gooeycms.Webrole.Control.auth
 {
@@ -66,6 +67,12 @@ namespace Gooeycms.Webrole.Control.auth
 
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
 
+            List<CultureInfo> cultures = new List<CultureInfo>(System.Globalization.CultureInfo.GetCultures(CultureTypes.SpecificCultures));
+            foreach (CultureInfo culture in cultures.OrderBy(c => c.EnglishName))
+            {
+                this.LstSiteCulture.Items.Add(new ListItem(culture.EnglishName, culture.Name.ToLower()));
+            }
+            this.LstSiteCulture.SelectedValue = subscription.Culture;
 
             this.LblDomain.Text = subscription.DefaultDisplayName;
 

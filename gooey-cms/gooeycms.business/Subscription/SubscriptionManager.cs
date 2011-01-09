@@ -77,6 +77,7 @@ namespace Gooeycms.Business.Subscription
             CmsSubscription subscription = new CmsSubscription();
             subscription.Guid = registration.Guid;
             subscription.Created = DateTime.Now;
+            subscription.Culture = "en-us";
             subscription.Subdomain = registration.Sitename;
             
             if (String.IsNullOrEmpty(registration.Domain))

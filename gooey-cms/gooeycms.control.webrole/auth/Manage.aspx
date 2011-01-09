@@ -135,6 +135,11 @@
         <legend>Domain Settings</legend>
 
         <div>
+            <label>Site Language</label><br />
+            <asp:DropDownList ID="LstSiteCulture" runat="server" />
+        </div>
+
+        <div style="padding-top:10px;">
             <label>Site Name</label><br />
             <asp:Label ID="LblSiteName" runat="server" />
         </div>

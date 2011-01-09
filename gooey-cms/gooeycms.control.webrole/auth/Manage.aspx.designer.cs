@@ -337,6 +337,15 @@ namespace Gooeycms.Webrole.Control.auth {
         protected global::System.Web.UI.WebControls.LinkButton BtnUpdateOptions;
         
         /// <summary>
+        /// LstSiteCulture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList LstSiteCulture;
+        
+        /// <summary>
         /// LblSiteName control.
         /// </summary>
         /// <remarks>

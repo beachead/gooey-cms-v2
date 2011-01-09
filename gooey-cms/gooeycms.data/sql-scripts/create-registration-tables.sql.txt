@@ -51,6 +51,7 @@ CREATE TABLE [Subscriptions] (
 [subscription_plan_sku] VARCHAR(36) NOT NULL,
 [guid] VARCHAR(36) NOT NULL,
 [primary_user_guid] VARCHAR(36) NOT NULL,
+[culture] VARCHAR(10),
 [subdomain] VARCHAR(256),
 [custom_domain] VARCHAR(256),
 [staging_domain] VARCHAR(256),

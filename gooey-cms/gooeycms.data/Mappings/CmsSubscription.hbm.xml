@@ -22,6 +22,7 @@
     </id>
     <property column="guid" name="Guid" type="String" />    
     <property column="signup_date" name="Created" type="DateTime" />
+    <property column="culture" name="Culture" type="String" />    
     <property column="subdomain" name="Subdomain" type="String" />
     <property column="custom_domain" name="Domain" type="String" />
     <property column="staging_domain" name="StagingDomain" type="String" />
