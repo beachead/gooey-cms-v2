@@ -27,7 +27,7 @@
     <asp:TextBox ID="TxtTags" dojoType="dijit.form.ValidationTextBox" required="false" Width="350px" runat="server" />
     </div>  
 
-    <div dojoType="dijit.TitlePane" title="Advanced Options" open="false"> 
+    <div dojoType="dijit.TitlePane" style="width:450px;height:400px;"  title="Advanced Options" open="false"> 
         <div style="padding-bottom:10px;">
         <b>Require Registration:</b><br />
         <anthem:DropDownList ID="RequireRegistration" AutoCallBack="true" OnSelectedIndexChanged="RequireRegistration_Change" runat="server">
@@ -40,11 +40,11 @@
 
         <div style="padding-bottom:10px;">
             <b>Publish On:</b>(leave blank for immediately)<br />
-            <bdp:BDPLite ID="PublishDate" runat="server" />
+            <bdp:BDPLite ID="PublishDate" runat="server" /> at <bdp:TimePicker ID="PublishTime" runat="server" />
             <br /><br />
             
             <b>Expire On:</b>(leave blank for no expiration)<br />
-            <bdp:BDPLite ID="ExpireDate" runat="server" /><br />
+            <bdp:BDPLite ID="ExpireDate" runat="server" /> at <bdp:TimePicker ID="ExpireTime" runat="server" /><br />
         </div>      
     </div>
 

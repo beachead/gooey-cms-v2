@@ -9,14 +9,12 @@
 
     <h1>Manage Content</h1>
     <p>Content Types such as news and events can be edited and managed from this area. To add new content types, click Manage Content Types above.</p>
+    <br /><br />
 
-   <a href="./Add.aspx">Add New Content</a>
+   <strong>Filter Content Type:</strong> <asp:DropDownList ID="LstContentTypes" runat="server" />&nbsp;<asp:Button ID="BtnFilter" Text="Filter" runat="server" />
    <br /><br />
 
-   <strong>Filter</strong>: Content Type&nbsp;<asp:DropDownList ID="LstContentTypes" runat="server" />&nbsp;<asp:Button ID="BtnFilter" Text="Filter" runat="server" />
-   <br />
-
-   <div dojoType="dijit.TitlePane" title="Manage Existing Content">
+  
         <asp:GridView ID="ContentTable" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" DataSourceID="ExistingContent" ForeColor="#333333" 
             GridLines="None" OnRowCommand="OnRowCommand" CssClass="data">
@@ -64,5 +62,7 @@
                     PropertyName="SelectedValue" Type="String" />
             </SelectParameters>
         </asp:ObjectDataSource>
-   </div>
+  <br />
+   <a href="./Add.aspx">Add New Content</a>
+
 </asp:Content>

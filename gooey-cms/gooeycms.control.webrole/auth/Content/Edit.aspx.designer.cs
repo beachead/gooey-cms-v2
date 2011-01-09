@@ -76,6 +76,15 @@ namespace Gooeycms.Webrole.Control.auth.Content {
         protected global::BasicFrame.WebControls.BDPLite PublishDate;
         
         /// <summary>
+        /// PublishTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BasicFrame.WebControls.TimePicker PublishTime;
+        
+        /// <summary>
         /// ExpireDate control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace Gooeycms.Webrole.Control.auth.Content {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::BasicFrame.WebControls.BDPLite ExpireDate;
+        
+        /// <summary>
+        /// ExpireTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BasicFrame.WebControls.TimePicker ExpireTime;
         
         /// <summary>
         /// BtnSaveContent control.

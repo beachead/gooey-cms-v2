@@ -20,7 +20,7 @@
         <li id="ListItemUser" runat="server"><asp:HyperLink id="NavUsers" NavigateUrl="~/auth/users/default.aspx" runat="server" onprerender="SetActive">Manage Users</asp:HyperLink></li>
         <li id="ListItemStaging" runat="server"><asp:HyperLink ID="StagingLink" runat="server">Staging Server</asp:HyperLink></li>
         <li id="ListItemProd" runat="server"><asp:HyperLink ID="ProdLink" runat="server"><% Response.Write(Gooeycms.Business.Util.CurrentSite.Subscription.Domain); %></asp:HyperLink></li>                
-        <li id="ListItemTrialRemainig" runat="server"><asp:Label ID="LblTrialDaysRemaining" runat="server" /></li>
+        <li id="ListItemTrialRemaining" runat="server"><asp:Label ID="LblTrialDaysRemaining" runat="server" /></li>
     </ul>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Subnavigation" runat="server">

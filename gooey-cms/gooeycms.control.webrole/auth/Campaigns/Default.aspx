@@ -54,6 +54,7 @@
         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
         <EditRowStyle BackColor="#999999" />
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <EmptyDataRowStyle CssClass="margin-right:200px;"/>
         <EmptyDataTemplate>
             There are currently no campaigns created.
         </EmptyDataTemplate>
@@ -63,6 +64,6 @@
         TypeName="Gooeycms.Business.Campaigns.CampaignManager">
     </asp:ObjectDataSource>   
 
-    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Height="350" Width="700" ShowContentDuringLoad="false"  VisibleStatusbar="false" Behaviors="Close,Move,Resize" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Height="350" Width="700" ShowContentDuringLoad="false"  VisibleStatusbar="false" Behaviors="Close,Move,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
 </asp:Content>
