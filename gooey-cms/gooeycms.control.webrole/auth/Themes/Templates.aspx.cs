@@ -10,7 +10,7 @@ using Gooeycms.Webrole.Control.App_Code;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
-    public partial class Templates : ValidatedPage
+    public partial class Templates : ValidatedHelpPage
     {
         private CmsTheme theme;
         protected override void OnPageLoad(object sender, EventArgs e)

@@ -11,9 +11,9 @@ using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Content
 {
-    public partial class ContentTypes : System.Web.UI.Page
+    public partial class ContentTypes : App_Code.ValidatedHelpPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {

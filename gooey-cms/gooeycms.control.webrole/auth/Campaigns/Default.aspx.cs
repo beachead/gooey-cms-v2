@@ -11,11 +11,11 @@ using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : App_Code.ValidatedHelpPage
     {
         protected String ExistingCampaignGuid = "";
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             if (!CurrentSite.Subscription.IsCampaignEnabled)
                 Response.Redirect("~/auth/default.aspx?addon=campaigns", true);

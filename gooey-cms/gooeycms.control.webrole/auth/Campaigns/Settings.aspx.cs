@@ -9,11 +9,11 @@ using gooeycms.business.salesforce;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
-    public partial class Settings : System.Web.UI.Page
+    public partial class Settings : App_Code.ValidatedHelpPage
     {
         protected String SelectedPanel = "analytics-panel";
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             if (!CurrentSite.Subscription.IsCampaignEnabled)
                 Response.Redirect("~/auth/default.aspx?addon=campaigns", true);

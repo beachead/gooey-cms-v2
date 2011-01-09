@@ -12,12 +12,12 @@ using Gooeycms.Business.Content;
 
 namespace Gooeycms.Webrole.Control.auth.Promotion
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : App_Code.ValidatedHelpPage
     {
         protected String SelectedPanel = "pagepanel";
-        protected void Page_Load(object sender, EventArgs e)
-        {
 
+        protected override void OnPageLoad(object sender, EventArgs e)
+        {
         }
 
         protected void OnItemDataBound(Object sender, GridViewRowEventArgs e)

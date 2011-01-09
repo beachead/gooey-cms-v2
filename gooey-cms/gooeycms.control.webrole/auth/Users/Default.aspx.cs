@@ -9,9 +9,9 @@ using Gooeycms.Data.Model.Subscription;
 
 namespace Gooeycms.Webrole.Control.auth.Users
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : App_Code.ValidatedHelpPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
         }
 

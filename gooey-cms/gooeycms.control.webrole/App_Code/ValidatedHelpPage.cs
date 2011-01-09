@@ -23,8 +23,8 @@ namespace Gooeycms.Webrole.Control.App_Code
 
             if (showHelp)
             {
-                ContentPlaceHolder holder = (ContentPlaceHolder)this.Page.Master.FindControl("Editor");
-                ContentPlaceHolder instructions = (ContentPlaceHolder)this.Page.Master.FindControl("Instructions");
+                ContentPlaceHolder holder = (ContentPlaceHolder)this.Page.Master.FindControlRecursive("Editor");
+                ContentPlaceHolder instructions = (ContentPlaceHolder)this.Page.Master.FindControlRecursive("Instructions");
 
                 if (holder == null)
                     throw new ApplicationException("Could not find the 'Editor' control to replace with the help content. This is a critical progamming error and must be corrected before this page can be displayed.");
@@ -45,10 +45,8 @@ namespace Gooeycms.Webrole.Control.App_Code
 
                 instructions.Controls.Add(helpControl);
             }
-            else
-            {
-                base.OnPreRender(e);
-            }
+
+            base.OnPreRender(e);
         }
     }
 }

@@ -29,11 +29,11 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         }
     }
 
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : App_Code.ValidatedHelpPage
     {
         protected const String RootNodeValue = "&lt;root&gt;";
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {

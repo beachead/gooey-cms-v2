@@ -9,7 +9,7 @@ using Gooeycms.Business.Images;
 
 namespace Gooeycms.Webrole.Control.Auth.Themes
 {
-    public partial class Default : ValidatedPage
+    public partial class Default : ValidatedHelpPage
     {
         protected override void OnPageLoad(object sender, EventArgs e)
         {

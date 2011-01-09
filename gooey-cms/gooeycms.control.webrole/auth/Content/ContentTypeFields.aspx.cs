@@ -10,9 +10,9 @@ using Gooeycms.Business.Web.Microsoft;
 
 namespace Gooeycms.Webrole.Control.auth.Content
 {
-    public partial class ContentTypeFields : System.Web.UI.Page
+    public partial class ContentTypeFields : App_Code.ValidatedHelpPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {

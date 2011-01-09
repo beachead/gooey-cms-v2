@@ -8,7 +8,7 @@ using Gooeycms.Webrole.Controls;
 
 namespace Gooeycms.Webrole.Control.Auth.Themes
 {
-    public partial class Add : ValidatedPage
+    public partial class Add : ValidatedHelpPage
     {
         protected String PageAction = "Add";
         protected override void OnPageLoad(object sender, EventArgs e)

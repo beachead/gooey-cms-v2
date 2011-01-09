@@ -10,9 +10,9 @@ using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
-    public partial class Create : System.Web.UI.Page
+    public partial class Create : App_Code.ValidatedHelpPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnPageLoad(object sender, EventArgs e)
         {
             if (!CurrentSite.Subscription.IsCampaignEnabled)
                 Response.Redirect("~/auth/default.aspx?addon=campaigns", true);

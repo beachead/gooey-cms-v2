@@ -649,6 +649,7 @@
     <Compile Include="Controls\Subnav.ascx.designer.cs">
       <DependentUpon>Subnav.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="PopupWindow.Master.cs">
       <DependentUpon>PopupWindow.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
