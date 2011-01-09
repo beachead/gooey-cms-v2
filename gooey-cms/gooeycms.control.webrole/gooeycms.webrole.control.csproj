@@ -107,6 +107,7 @@
     <Content Include="auth\Campaigns\Leads.aspx" />
     <Content Include="auth\Campaigns\Links.aspx" />
     <Content Include="auth\Campaigns\Settings.aspx" />
+    <Content Include="auth\ChangePassword.aspx" />
     <Content Include="auth\cleanup.aspx" />
     <Content Include="auth\Content\Add.aspx" />
     <Content Include="auth\Content\ContentTypeFields.aspx" />
@@ -245,6 +246,13 @@
     </Compile>
     <Compile Include="auth\Campaigns\Settings.aspx.designer.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\cleanup.aspx.cs">
       <DependentUpon>cleanup.aspx</DependentUpon>

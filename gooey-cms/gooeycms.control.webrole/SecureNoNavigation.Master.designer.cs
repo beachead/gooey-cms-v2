@@ -130,15 +130,6 @@ namespace Gooeycms.Webrole.Control {
         protected global::System.Web.UI.WebControls.HyperLink LnkManageSubscription;
         
         /// <summary>
-        /// LnkChangePassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LnkChangePassword;
-        
-        /// <summary>
         /// LoginStatus control.
         /// </summary>
         /// <remarks>
@@ -200,6 +191,15 @@ namespace Gooeycms.Webrole.Control {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Editor;
+        
+        /// <summary>
+        /// Singleton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager Singleton;
         
         /// <summary>
         /// Olark control.

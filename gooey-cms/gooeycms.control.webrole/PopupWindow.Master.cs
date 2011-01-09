@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 namespace Gooeycms.Webrole.Control
 {
@@ -16,6 +17,11 @@ namespace Gooeycms.Webrole.Control
         protected void RadScriptManager_OnError(object sender, AsyncPostBackErrorEventArgs e)
         {
             this.RadScriptManager.AsyncPostBackErrorMessage = e.Exception.Message;
+        }
+
+        public RadScriptManager AjaxScriptManager
+        {
+            get { return this.RadScriptManager; }
         }
     }
 }

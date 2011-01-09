@@ -28,9 +28,7 @@ namespace Gooeycms.Webrole.Control
                 if (CurrentSite.IsAvailable)
                     this.LnkManageSubscription.NavigateUrl = "~/auth/Manage.aspx?g=" + CurrentSite.Guid.Value;
                 else
-                    this.LnkManageSubscription.Enabled = false;
-                this.LnkChangePassword.NavigateUrl = "~/auth/Manage.aspx?u=" + LoggedInUser.Wrapper.UserInfo.Guid + "&v=pwd";
-                
+                    this.LnkManageSubscription.Enabled = false;                
                 LoadWebsites();
             }
         }

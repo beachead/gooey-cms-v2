@@ -46,6 +46,7 @@
         }
     </script>
     
+
     <!-- START: header-region -->
     <div id="header-region">
         <!-- START: primary-nav -->
@@ -83,7 +84,7 @@
                                     <div class="menu">
                                         <ul>
                                             <li><asp:HyperLink ID="LnkManageSubscription" runat="server">Manage Domain</asp:HyperLink></li>
-                                            <li><asp:HyperLink ID="LnkChangePassword" runat="server">Change&nbsp;Password</asp:HyperLink></li>
+                                            <li><a href="#" onclick="change_password(); return false;">Change&nbsp;Password</a></li>
                                             <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
                                         </ul>
                                     </div>
@@ -138,6 +139,15 @@
         </table>
     </div>
     <!-- END: main -->    
+
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Title="Change Password" Width="350" Height="250" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+    </telerik:RadWindowManager>
+    
+    <script type="text/javascript" language="javascript">
+        function change_password() {
+            window.radopen('/auth/ChangePassword.aspx', null);
+        }
+    </script> 
 </form>
 
 <asp:ContentPlaceHolder ID="Olark" runat="server">
