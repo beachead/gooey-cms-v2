@@ -20,6 +20,8 @@ namespace Gooeycms.Webrole.Control.auth.Developer
     {
         protected override void OnPageLoad(object sender, EventArgs e)
         {
+            Master.SetTitle("Developer");
+
             if (LoggedInUser.IsDemoAccount)
                 Response.Redirect("~/auth/default.aspx");
 

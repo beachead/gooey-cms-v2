@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Default" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
+<%@ MasterType VirtualPath="~/Secure.Master" %>
 <%@ Import Namespace="Gooeycms.Business" %>
 
 <asp:Content ID="localJS" ContentPlaceHolderID="localJS" runat="server">
