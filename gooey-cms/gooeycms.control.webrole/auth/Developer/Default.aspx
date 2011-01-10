@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecureNoNavigation.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Developer.Default" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 <%@ Import Namespace="Gooeycms.Business" %>
 
@@ -23,30 +23,15 @@
     <gooey:Subnav ID="Subnav" runat="server" navSection="developer" navItem="home" />
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-    <div style="overflow: auto;">
-        <table border="0">
-            <tr>
-                <td style="vertical-align:top; padding: 20px 20px 0 0">
-                    <div id="head-line" class="main">BUILD YOUR BUSINESS ONE WEBSITE AT A TIME</div>
-                    <p>create new websites to sell and keep 70% of each sale<br />add a logo or mulitple screenshots to your site package<br />view or edit the site package you created</p>                
-                </td>
-                <td style="vertical-align:top; padding: 45px 20px 0 0">
-                    <ul class="check">
-	                    <li class="alt">You pick the price</li>
-	                    <li>You get 70% of every sale</li>
-	                    <li class="alt">Receive revenue checks quarterly</li>
-	                    <li>No charge for free sites</li>
-	                    <li class="alt">No credit card fees</li>
-	                    <li>No hosting fees in store</li>
-                    </ul>                
-                </td>
-            </tr>
-        </table>
-    </div>
+<asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
+  
+       <h1>DEVELOPERS HOME</h1>
+       <p>Create new websites to sell and keep 70% of each sale. Click <a href="site.aspx">package a new site</a> to begin.<br />
+       You can add a logo to be used across all the websites you're selling under <a href="settings.aspx">Developer Settings</a>.</p>
+       <br /><br />
 
-<asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
 		    <ul id="themes-panel">
                 <asp:Repeater ID="SitePackages" OnItemDataBound="SitePackages_OnItemDataBound" OnItemCommand="SitePackages_OnItemCommand" runat="server">
                     <ItemTemplate>
