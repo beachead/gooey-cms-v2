@@ -80,10 +80,9 @@
                                         <asp:BulletedList ID="LstWebsites" BulletStyle="NotSet" DisplayMode="LinkButton" OnClick="LstWebsites_Click" runat="server" />
                                     </div>
                                 </li>
-                                <li><asp:HyperLink ID="accountLink" NavigateUrl="#" runat="server">Account</asp:HyperLink>
+                                <li><asp:HyperLink ID="LnkManageSubscription" runat="server">Account</asp:HyperLink>
                                     <div class="menu">
                                         <ul>
-                                            <li><asp:HyperLink ID="LnkManageSubscription" runat="server">Manage Domain</asp:HyperLink></li>
                                             <li><a href="#" onclick="change_password(); return false;">Change&nbsp;Password</a></li>
                                             <li><asp:LoginStatus ID="LoginStatus" runat="server" LogoutText="Logout" OnLoggedOut="OnLogout_Click" /></li>
                                         </ul>
@@ -92,9 +91,8 @@
                                 <li class="last"><asp:HyperLink ID="developersLink" NavigateUrl="/auth/developer" runat="server">Developers</asp:HyperLink>
                                     <div class="menu">
                                         <ul>
-                                            <li><a href="#">Create a site</a></li>
-                                            <li><a href="#">Create a Theme</a></li>
-                                            <li><a href="#">Developer&nbsp;Extras</a></li>
+                                            <li><a href="/auth/developer/site.aspx">Create a site</a></li>                         
+                                            <li><a href="/auth/developer/settings.aspx">Developer&nbsp;Extras</a></li>
                                         </ul>
                                     </div>
                                 </li>
