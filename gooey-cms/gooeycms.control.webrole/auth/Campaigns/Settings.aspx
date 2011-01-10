@@ -15,10 +15,10 @@
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <h1>Campaign Settings</h1>
-    <p>Configure your campaign settings below.</hp>
+    <h1>CAMPAIGN SETTINGS</h1>
+    <p>Configure your settings for Google Analytics and Salesforce below.</hp>
 
-<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:600px;overflow:auto;">
+<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:600px;width:800px;">
     <div id="analytics-panel" dojoType="dijit.layout.ContentPane" title="Google Analytics Setup" style="display:none;">
         <table>
             <tr>

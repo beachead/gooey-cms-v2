@@ -13,6 +13,8 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
+    <h1>PROMOTION</h1>
+    <p>Click promote to promote pages you have been editing on <asp:Label ID="LblSiteStagingName" runat="server" /> to <asp:Label ID="LblSiteProductionName" runat="server" />.</hp>
 
     <script type="text/javascript">
         dojo.addOnLoad(function () { dijit.byId('mainTabContainer').selectChild('<% Response.Write(SelectedPanel); %>'); });
@@ -58,8 +60,8 @@
                         </asp:TemplateField>   
                     </Columns>
                     <EmptyDataTemplate>
-                        No pages found matching search criteria.<br />
-                        <a href="./Edit.aspx">Create New Page</a>
+                        <p>No pages to promote.</p>
+                        
                     </EmptyDataTemplate>
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 </asp:GridView>
@@ -68,7 +70,7 @@
                     TypeName="Gooeycms.Business.Adapters.PageAdapter">
                 </asp:ObjectDataSource>
                 
-                <div style="text-align:right;padding-top:5px;">
+                <div style="text-align:left;padding-top:5px;">
                 <asp:Button ID="Promote" Text="Promote" OnClick="PromotePages_Click" runat="server" />&nbsp;&nbsp;
                 <asp:Button ID="Delete" Text="Delete" OnClick="DeletePages_Click" OnClientClick="return confirm('Are you sure you want to delete the selected page versions?')" runat="server" />
                 </div>
@@ -121,8 +123,8 @@
                         </asp:TemplateField>   
                     </Columns>
                     <EmptyDataTemplate>
-                        No pages found matching search criteria.<br />
-                        <a href="./Edit.aspx">Create New Page</a>
+                        <p>No content to promote.</p>
+                       
                     </EmptyDataTemplate>
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 </asp:GridView>
@@ -131,7 +133,7 @@
                     TypeName="Gooeycms.Business.Content.ContentManagerDataAdapter">
                 </asp:ObjectDataSource>
                 
-                <div style="text-align:right;padding-top:5px;">
+                <div style="text-align:left;padding-top:5px;">
                 <asp:Button ID="Button1" Text="Promote" OnClick="PromoteContent_Click" runat="server" />&nbsp;&nbsp;
                 </div>
             </div>

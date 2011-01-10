@@ -40,15 +40,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::Telerik.Web.UI.RadAjaxPanel UpdatePanel;
         
         /// <summary>
-        /// BtnAddNewPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BtnAddNewPage;
-        
-        /// <summary>
         /// PageTreeView control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTreeViewContextMenu PageContextMenu;
+        
+        /// <summary>
+        /// BtnAddNewPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnAddNewPage;
         
         /// <summary>
         /// Singleton control.

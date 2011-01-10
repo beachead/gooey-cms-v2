@@ -22,6 +22,24 @@ namespace Gooeycms.Webrole.Control.auth.Promotion {
         protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
         
         /// <summary>
+        /// LblSiteStagingName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSiteStagingName;
+        
+        /// <summary>
+        /// LblSiteProductionName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSiteProductionName;
+        
+        /// <summary>
         /// LblPageStatus control.
         /// </summary>
         /// <remarks>
