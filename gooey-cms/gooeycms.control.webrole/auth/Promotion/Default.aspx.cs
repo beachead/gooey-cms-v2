@@ -9,6 +9,7 @@ using Gooeycms.Business.Membership;
 using Gooeycms.Business.Pages;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Content;
+using Gooeycms.Data.Model.Subscription;
 
 namespace Gooeycms.Webrole.Control.auth.Promotion
 {
@@ -18,6 +19,10 @@ namespace Gooeycms.Webrole.Control.auth.Promotion
 
         protected override void OnPageLoad(object sender, EventArgs e)
         {
+            CmsSubscription subscription = Gooeycms.Business.Subscription.SubscriptionManager.GetSubscription(CurrentSite.Guid);
+            this.LblSiteStagingName.Text = subscription.StagingDomain;
+            this.LblSiteProductionName.Text = subscription.Domain;
+ 
         }
 
         protected void OnItemDataBound(Object sender, GridViewRowEventArgs e)

@@ -148,11 +148,14 @@
 </asp:Content>
 
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-    <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
+    <h1>MANAGE PAGES</h1>
+    <p>Click to add a new page, or right-click on a folder to add a new folder. Edit a page simply by right-clicking on the page and clicking edit.</p>
+ 
+     <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
 
     <telerik:RadAjaxPanel ID="UpdatePanel" LoadingPanelID="LoadingPanel" runat="server">
-    <asp:LinkButton ID="BtnAddNewPage" OnClick="BtnAddNewPage_Click" Text="Add New Page" runat="server" />
-    <br /><br />
+    
+    <br />
     <telerik:RadTreeView ID="PageTreeView" Skin="Default" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="true" 
                             OnNodeDataBound="PageTreeview_NodeDataBound"  
                             OnClientContextMenuItemClicking="onClientContextMenuItemClicking"
@@ -191,6 +194,8 @@
             </telerik:RadTreeViewContextMenu>
         </ContextMenus>
     </telerik:RadTreeView>
+    <br />
+    <asp:LinkButton ID="BtnAddNewPage" OnClick="BtnAddNewPage_Click" Text="Add New Page" runat="server" />
     </telerik:RadAjaxPanel>
 
 <telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="600" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">

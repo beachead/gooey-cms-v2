@@ -12,12 +12,15 @@
     <gooey:Subnav ID="Subnav" runat="server" NavSection="campaigns" NavItem="leadreport" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
-This page allows you to export your leads to Excel.
+
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
+    <h1>LEAD REPORT</h1>
+    <p>This page allows you to export your leads into Excel.</p>
     <telerik:RadAjaxPanel ID="SelectDatePanel" LoadingPanelID="RadAjaxFilterLoadingPanel" runat="server">
-        Search for leads within the following dates:
-        <br />
+    <br />
+    Search for leads within the following dates:
+    <br /><br />
         <table>
             <tr>
                 <td>Start Date:</td>
@@ -36,7 +39,7 @@ This page allows you to export your leads to Excel.
 
         <asp:Panel ID="SelectPagesPanel" Visible="false" runat="server">
             Select which pages to include in the lead report:
-            <br />
+            <br /><br />
             <table>
                 <tr>
                     <td><asp:ListBox ID="LstSelectPages" SelectionMode="Multiple" Width="225px" Rows="20" runat="server" /></td>

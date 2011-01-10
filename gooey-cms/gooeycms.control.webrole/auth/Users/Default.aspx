@@ -50,9 +50,8 @@
         </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-
-    Select a user to edit or add a new user. Make sure to apply the appropriate roles to each user.
-    <br /><br />
+    <h1>MANAGE USERS</h1>
+    <p>Select a user to edit, or add a new user below. Make sure to apply the appropriate roles to each user.</p>
 
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" Skin="Default" runat="server" />
     <table style="width:100%;">
