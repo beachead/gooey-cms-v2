@@ -13,10 +13,12 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Instructions" runat="server">
-Upload your organization's logo.
+
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-<div style="width:900px;">
+       <h1>DEVELOPER SETTINGS</h1>
+       <p>Add a logo below and all of the site's you are selling in the <a href="http://store.gooeycms.com">Gooey CMS Store</a> will be updated.</p>
+       <br /><br /><div style="width:900px;">
    <table>
         <tr>
             <td><asp:Label ID="LblStatus" runat="server" /></td>

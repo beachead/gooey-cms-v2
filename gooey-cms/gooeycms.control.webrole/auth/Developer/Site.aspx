@@ -18,6 +18,7 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
+<h1>PACKAGE A NEW SITE</h1>
     <table cellspacing="0" class="form" style="width:90%;">
         <tr>
             <td style="vertical-align:top;width:40%;">
@@ -55,7 +56,7 @@
                             <td><asp:Label ID="ChkTosText" runat="server" /></td>
                         </tr>
                     </table>
-                    <anthem:Button ID="BtnSave" Text="Package &amp; Deploy" OnClick="BtnSave_Click" PreCallBackFunction="validate_site" PostCallBackFunction="deploy_site" runat="server" />
+                    <anthem:Button ID="BtnSave" Text="Package for Review" OnClick="BtnSave_Click" PreCallBackFunction="validate_site" PostCallBackFunction="deploy_site" runat="server" />
                     <anthem:HiddenField ID="SavedPackageGuid" AutoUpdateAfterCallBack="true" runat="server" />
                 </div>
             </td>
@@ -71,22 +72,20 @@
                 <div class="nice-box">
                     <ol id="distribute-perks">
                         <li>Choose the site you want to package.</li>
-                        <li>Name your site<br />
-                            (Examples: Real Estate Site, Preschool site).</li>
-                        <li>Set a price (Examples: 450.00, 1000.00)</li>
-                        <li>Enter a list of key features (click for example).</li>
+                        <li>Name your site <span style="font-size:9px;">(Examples: Real Estate Site, Preschool site).</span></li>
+                        <li>Set a price <span style="font-size:9px;">(Examples: 450.00, 1000.00).</span></li>
+                        <li>Enter a list of key features <span style="font-size:9px;">(total pages, content types, & lead gen pages).</span></li>
                         <li>Choose a category that best descibes your site.</li>
-                        <li>Choose a category that best descibes your site.</li>
-                        <li>Click package & deploy and your site will be packaged up for review.</li>
-                        <li>Once your site has been reviewed, you will receive an with requested or changes
-                            or it will be available on the store.</li>
+                        <li>Click package for review to begin the package and site review process.<span style="font-size:9px;"> (standard sites take less than 24 hours to review).</span></li>
+                        <li>Once your site has been reviewed, you will receive an email with requested changes
+                            or notified that it is live in the <a href="http://store.gooeycms.com">Gooey CMS Store</a>.</li>
                     </ol>
                 </div>
             </td>
         </tr>
     </table>
 
-    <telerik:RadWindowManager ID="Singleton" Skin="Windows7" Modal="true" Width="463" Height="237" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Width="463" Height="237" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
 
     <script language="javascript" type="text/javascript">
