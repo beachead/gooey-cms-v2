@@ -14,8 +14,8 @@
     <asp:View ID="dashboard" runat="server">
         <ul>
             <li><asp:HyperLink ID="dashboard_home" navigateUrl="~/auth/dashboard.aspx" Text="Dashboard" runat="server" /></li>
-            <li><asp:HyperLink ID="dashboard_new" NavigateUrl="<% Response.Write(GooeyConfigManager.SignupSiteHost); %>" Text="Register New Site" runat="server"/></li>
-            <li class="last"><asp:HyperLink ID="dashboard_purchase" NavigateUrl="<% Response.Write(GooeyConfigManager.StoreSiteHost); %>" Text="Purchase Sites" runat="server" /></li> 
+            <li><asp:HyperLink ID="dashboard_new" NavigateUrl='<%# GooeyConfigManager.SignupSiteHost %>' Text="Register New Site" runat="server"/></li>
+            <li class="last"><asp:HyperLink ID="dashboard_purchase" NavigateUrl='<%# GooeyConfigManager.StoreSiteHost %>' Text="Purchase Sites" runat="server" /></li> 
         </ul>    
     </asp:View>
 

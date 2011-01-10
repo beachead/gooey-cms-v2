@@ -14,6 +14,9 @@ namespace Gooeycms.Webrole.Control.Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            dashboard_new.DataBind();
+            dashboard_purchase.DataBind();
+
             NavSection = NavSection.ToLower();
             View activeSetion = (View) FindControl(NavSection);
             mvSubnav.SetActiveView(activeSetion);
