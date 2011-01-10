@@ -6,6 +6,7 @@
     </InputEndpoints>
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
+      <Setting name="ActiveStorageConnectionString" />
     </ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>

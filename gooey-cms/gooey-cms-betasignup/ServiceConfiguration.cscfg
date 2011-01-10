@@ -3,7 +3,7 @@
   <Role name="gooeycms.webrole.betasignup">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DiagnosticsConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmslogs;AccountKey=KCCDTPam0lL8a55yQHBjYb4sri1MLUt91ElM/uyZxIp4YPFIH/p2krdQVshis1e15KGq7QBZ6xGqHn65DjtY0g==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

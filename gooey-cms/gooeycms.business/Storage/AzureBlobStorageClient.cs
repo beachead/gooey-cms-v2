@@ -32,7 +32,7 @@ namespace Gooeycms.Business.Storage
         private CloudBlobContainer GetBlobContainer(String name)
         {
             name = name.Replace(" ", "");
-            CloudStorageAccount account = CloudStorageAccount.FromConfigurationSetting("ActiveStorageConnectionString");
+            CloudStorageAccount account = CloudStorageAccount.FromConfigurationSetting(StorageHelper.StorageConfigName);
             CloudBlobClient client = account.CreateCloudBlobClient();
             
             CloudBlobContainer container = client.GetContainerReference(name);
@@ -41,7 +41,7 @@ namespace Gooeycms.Business.Storage
 
         private CloudBlob GetBlobReference(String url)
         {
-            CloudStorageAccount account = CloudStorageAccount.FromConfigurationSetting("ActiveStorageConnectionString");
+            CloudStorageAccount account = CloudStorageAccount.FromConfigurationSetting(StorageHelper.StorageConfigName);
             CloudBlobClient client = account.CreateCloudBlobClient();
 
             return client.GetBlobReference(url);

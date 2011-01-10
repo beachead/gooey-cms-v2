@@ -3,8 +3,8 @@
   <Role name="gooeycms.webrole.control">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmsdevlogs;AccountKey=SVw/cG9nLJ3Jcx8sWZdFK2opPRbSh/WEkV8Q4emQzjZ/dCpaawsceG0mvf/CKftPcTr5VRCRsr7+fDaMQYZxLg==" />
-      <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmsdevstorage;AccountKey=uGsrBnwh4zgNP8HE5GS51kFLNyDY7xBthv+ty6noPPvZrXuck6krgMRt583VeNS15/hvnJ3hlpdBPnpybeXfgA==" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmslogs;AccountKey=KCCDTPam0lL8a55yQHBjYb4sri1MLUt91ElM/uyZxIp4YPFIH/p2krdQVshis1e15KGq7QBZ6xGqHn65DjtY0g==" />
+      <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmstorage;AccountKey=WV0ZhoZbKn29rRP3GaoJyjLdA9uFqUO259hzeTOZp3igobNVCa1XI6X8If28jwtAi2kkgF6Ay1sy9gACN2vhkw==" />
     </ConfigurationSettings>
   </Role>
   <Role name="gooeycms.worker.control">

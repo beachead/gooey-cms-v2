@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ContentPage.Master" AutoEventWireup="true" CodeBehind="Activate.aspx.cs" Inherits="Gooeycms.Webrole.Ecommerce.signup.Activate" %>
+<%@ Import Namespace="Gooeycms.Business" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="localCSS" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="localJS" runat="server">
@@ -13,13 +14,13 @@
                 For your reference your paypal profile id is: <asp:Label ID="PaypalProfileId" runat="server" />
                 <br /><br />
 
-                To start managing your site, <b><a href="http://control.gooeycms.net">login</a> to your dashboard.</b>        
+                To start managing your site, <b><a href="<% Response.Write("http://" + GooeyConfigManager.AdminSiteHost); %>">login</a> to your dashboard.</b>        
         </asp:View>
         <asp:View ID="SuccessFreeView" runat="server">
                 Congratulations, Your subscription has been successfully activated!
                 <br /><br />
 
-                To start managing your site, <b><a href="http://control.gooeycms.net">login</a> to your dashboard.</b>        
+                To start managing your site, <b><a href="<% Response.Write("http://" + GooeyConfigManager.AdminSiteHost); %>">login</a> to your dashboard.</b>        
         </asp:View>
         <asp:View ID="FailureView" runat="server">
                 There was a problem activating your subscription.

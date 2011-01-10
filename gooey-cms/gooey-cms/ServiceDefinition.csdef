@@ -7,8 +7,6 @@
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="ActiveStorageConnectionString" />
-      <Setting name="ProductionStorageAccount" />
-      <Setting name="DevelopmentStorageAccount" />      
     </ConfigurationSettings>
     <LocalResources>
     </LocalResources>
