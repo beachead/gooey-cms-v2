@@ -56,10 +56,10 @@
                 break;
             case "ManageImages":
                 var wnd = window.radopen("ImageBrowser.aspx?pid=" + treeNode.get_value(), null);
-                var width = 715;
+                var width = 750;
                 wnd.set_title("Image Manager");
                 wnd.set_width(width);
-                wnd.set_height(500);
+                wnd.set_height(550);
                 wnd.moveTo(10, 10);
                 args.set_cancel(true);
                 break;

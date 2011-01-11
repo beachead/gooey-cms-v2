@@ -32,20 +32,21 @@
         width: 200px; height: 100px; overflow: auto;">
         <span id="lblErrorMessage"></span>
     </div>
-    <div dojotype="dijit.layout.TabContainer" style="width: 675px; height: 395px; overflow: auto;">
-        <div dojotype="dijit.layout.ContentPane" title="Image Upload">
-            <asp:Label ID="LblUploadStatus" AutoUpdateAfterCallBack="true" runat="server" />
+    <div dojotype="dijit.layout" style="width: 700px; height: 450px;">
+        <div dojotype="dijit.layout.ContentPane">
+            
+            <br />
             <table style="width: 100%;">
                 <tr>
-                    <td colspan="2">
-                        <asp:FileUpload ID="FileUpload" runat="server" /><br />
-                        <hr />
+                    <td colspan="2"><b>Upload Images</b><br />
+                        <asp:FileUpload ID="FileUpload" size="50"  CssClass="dijitTextBox" runat="server" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="BtnUpload" OnClick="BtnUpload_Click" Text="Upload" runat="server" />
-                    </td>
+                        <asp:Button ID="BtnUpload" OnClick="BtnUpload_Click" Text="Upload"  runat="server" />
+                     <hr />
+                     </td>
                 </tr>
             </table>
             <asp:Label ID="LblUploadedFiles" runat="server" />
@@ -69,7 +70,7 @@
                             PageSize="10" DataSourceID="ImageDataSource">
                                 <Columns>
                                     <telerik:GridBoundColumn DataField="Filename" ReadOnly="true" HeaderText="Filename" />
-                                    <telerik:GridBoundColumn DataField="Length" ReadOnly="true" HeaderText="Length" />
+                                    <telerik:GridBoundColumn DataField="Length" ReadOnly="true" HeaderText="Size" />
                                     <telerik:GridTemplateColumn HeaderText="Actions">
                                         <ItemTemplate>
                                         <a href="#" onclick="<%# DataBinder.Eval(Container.DataItem, "Filename", "_imageclick(\'{0}\'); return false;") %>">select</a>
@@ -108,6 +109,8 @@
                         }
                     }
                 </script>
+  
+  <asp:Label ID="LblUploadStatus" AutoUpdateAfterCallBack="true" runat="server" />
             </table>
             </telerik:RadAjaxPanel>
         </div>
