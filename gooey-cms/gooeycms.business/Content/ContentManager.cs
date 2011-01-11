@@ -37,7 +37,7 @@ namespace Gooeycms.Business.Content
         public IList<CmsContent> GetExistingContent(String contentTypeFilter)
         {
             CmsContentType type = null;
-            if (String.IsNullOrEmpty(contentTypeFilter))
+            if (!String.IsNullOrEmpty(contentTypeFilter))
                 type = ContentManager.Instance.GetContentType(contentTypeFilter);
 
             return ContentManager.Instance.GetExistingContent(type);

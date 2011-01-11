@@ -16,6 +16,9 @@ namespace Gooeycms.Webrole.Control.auth.Content
         {
             if (!Page.IsPostBack)
             {
+                ListItem all = new ListItem("All Content", "");
+                this.LstContentTypes.Items.Add(all);
+
                 IList<CmsContentType> types = ContentManager.Instance.GetContentTypes();
                 foreach (CmsContentType type in types)
                 {
