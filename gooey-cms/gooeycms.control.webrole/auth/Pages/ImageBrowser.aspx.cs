@@ -30,8 +30,8 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 try
                 {
                     IList<StorageFile> results = ImageManager.Instance.AddImage(StorageClientConst.RootFolder, this.FileUpload.FileName, this.FileUpload.PostedFile.ContentType, this.FileUpload.FileBytes);
-                    String status = "Successfully uploaded " + results.Count + " images.<br /><br />";
-                    files = "Uploaded Files:<br />";
+                    String status = "<br />Successfully uploaded " + results.Count + " images.<br /><br />";
+                    files = "<br /><b>Uploaded Files:</b><br />";
                     foreach (StorageFile file in results)
                     {
                         if (!file.Name.Contains("-thumb"))
