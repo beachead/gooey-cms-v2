@@ -64,10 +64,16 @@
                 <td>Link Type:</td>
                 <td>
                     <asp:DropDownList ID="Type" runat="server">
+                        <asp:ListItem Value="Facebook" Text="Facebook" />                        
+                        <asp:ListItem Value="Twitter" Text="Twitter" />                        
+                        <asp:ListItem Value="Banner" Text="Banner Ad" />                        
+                        <asp:ListItem Value="Email" Text="Email" />
+                        <asp:ListItem Value="CPC" Text="Cost-Per-Click" />
                         <asp:ListItem Value="Internal" Text="Internal Link" />
-                        <asp:ListItem Value="Internal" Text="Email" />
-                        <asp:ListItem Value="Internal" Text="Cost-Per-Click" />
-                        <asp:ListItem Value="Internal" Text="Banner Ad" />                        
+                        <asp:ListItem Value="LocalSearch" Text="Local Search" />
+                        <asp:ListItem Value="Android" Text="Android" />
+                        <asp:ListItem Value="iPhone" Text="iPhone" />
+                        <asp:ListItem Value="Blackberry" Text="Blackberry" />
                     </asp:DropDownList>
                 </td>
             </tr>
