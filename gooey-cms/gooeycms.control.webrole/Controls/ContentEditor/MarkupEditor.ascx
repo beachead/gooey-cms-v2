@@ -340,8 +340,8 @@
         else {
         <% if (UseStandardImageTags) { %>
             __Insert('../images/' + imageName,'<%=PageMarkupText.TextboxId %>');
-        <% } else { %>
-            __Insert('[[image:~/' + imageName + ']]{BR}','<%=PageMarkupText.TextboxId %>');
+        <% } else { %> 
+            __Insert('![alt text](~/' + imageName + '){BR}','<%=PageMarkupText.TextboxId %>');
         <% } %>
         }
     }
