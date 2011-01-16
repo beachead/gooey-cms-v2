@@ -642,6 +642,12 @@ namespace Gooeycms.Business.Store
             }
         }
 
+        public IList<Package> GetAllApprovedPackages()
+        {
+            PackageDao dao = new PackageDao();
+            return dao.FindByApprovalStatus(true);
+        }
+
         public IList<Package> GetUnapprovedPackages()
         {
             PackageDao dao = new PackageDao();
@@ -711,6 +717,22 @@ namespace Gooeycms.Business.Store
 
                 DoNotify(notifier, "Deploying Package Content To Site");
                 DeployContent(sitepackage, guid);
+            }
+        }
+
+        public void UnapprovePackage(Data.Guid guid)
+        {
+            Package package = this.GetPackage(guid);
+            if (package != null)
+            {
+                package.IsApproved = false;
+
+                PackageDao dao = new PackageDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Save<Package>(package);
+                    tx.Commit();
+                }
             }
         }
     }

@@ -117,17 +117,21 @@ namespace Gooeycms.Business.Storage
 
             ResultContinuation continuation = null;
             CloudBlobContainer container = GetBlobContainer(containerName);
-            do
-            {
-                ResultSegment<IListBlobItem> blobPages = container.ListBlobsSegmented(0, continuation, options);
-                continuation = blobPages.ContinuationToken;
 
-                foreach (CloudBlob blob in blobPages.Results)
+            if (container.Exists())
+            {
+                do
                 {
-                    if (blob.SnapshotTime.HasValue)
-                        blob.DeleteIfExists();
-                }
-            } while (continuation != null);
+                    ResultSegment<IListBlobItem> blobPages = container.ListBlobsSegmented(0, continuation, options);
+                    continuation = blobPages.ContinuationToken;
+
+                    foreach (CloudBlob blob in blobPages.Results)
+                    {
+                        if (blob.SnapshotTime.HasValue)
+                            blob.DeleteIfExists();
+                    }
+                } while (continuation != null);
+            }
 
         }
 
@@ -340,36 +344,40 @@ namespace Gooeycms.Business.Storage
 
             ResultContinuation continuation = null;
             CloudBlobContainer container = GetBlobContainer(containerFolder);
-            do
+
+            if (container.Exists())
             {
-                ResultSegment<IListBlobItem> blobPages;
-                if (directoryName != null)
+                do
                 {
-                    CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
-                    blobPages = directory.ListBlobsSegmented(0, continuation, options);
-                }
-                else
-                    blobPages = container.ListBlobsSegmented(0, continuation, options);
-
-                continuation = blobPages.ContinuationToken;
-                foreach (IListBlobItem item in blobPages.Results)
-                {
-                    if (item is CloudBlob)
+                    ResultSegment<IListBlobItem> blobPages;
+                    if (directoryName != null)
                     {
-                        CloudBlob blob = (CloudBlob)item;
-
-                        //Create a snapshot of this blob
-                        CloudBlob snapshot = blob.CreateSnapshot();
-
-                        BlobSnapshot temp = new BlobSnapshot();
-                        temp.SnapshotTime = snapshot.SnapshotTime;
-                        temp.Uri = new Uri(snapshot.Attributes.Uri.AbsoluteUri);
-                        temp.Filename = GetBlobFilename(snapshot);
-
-                        snapshotNames.Add(temp);
+                        CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
+                        blobPages = directory.ListBlobsSegmented(0, continuation, options);
                     }
-                }
-            } while (continuation != null);
+                    else
+                        blobPages = container.ListBlobsSegmented(0, continuation, options);
+
+                    continuation = blobPages.ContinuationToken;
+                    foreach (IListBlobItem item in blobPages.Results)
+                    {
+                        if (item is CloudBlob)
+                        {
+                            CloudBlob blob = (CloudBlob)item;
+
+                            //Create a snapshot of this blob
+                            CloudBlob snapshot = blob.CreateSnapshot();
+
+                            BlobSnapshot temp = new BlobSnapshot();
+                            temp.SnapshotTime = snapshot.SnapshotTime;
+                            temp.Uri = new Uri(snapshot.Attributes.Uri.AbsoluteUri);
+                            temp.Filename = GetBlobFilename(snapshot);
+
+                            snapshotNames.Add(temp);
+                        }
+                    }
+                } while (continuation != null);
+            }
 
             return snapshotNames;
         }

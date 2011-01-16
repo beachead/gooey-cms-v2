@@ -22,6 +22,9 @@ namespace Gooeycms.Webrole.Control.auth.Developer
             if (LoggedInUser.IsDemoAccount)
                 Response.Redirect("~/auth/default.aspx");
 
+            if (Request.QueryString["g"] == null)
+                Response.Redirect("./Site.aspx?g=" + System.Guid.NewGuid().ToString(), true);
+
             if (!Page.IsPostBack)
             {
                 this.ChkTosText.Text = GooeyConfigManager.SitePackageTos;

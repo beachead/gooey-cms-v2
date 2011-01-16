@@ -409,6 +409,15 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.HyperLink global_admin_developer_approval;
         
         /// <summary>
+        /// global_admin_developer_unapprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink global_admin_developer_unapprove;
+        
+        /// <summary>
         /// global_admin_developer_categories control.
         /// </summary>
         /// <remarks>

@@ -23,7 +23,7 @@
     <asp:View ID="developer" runat="server">
         <ul>
             <li><asp:HyperLink ID="developer_home" NavigateUrl="~/auth/developer/default.aspx" Text="Developers Home" runat="server" /></li>
-            <li><asp:HyperLink ID="developer_new" NavigateUrl="~/auth/developer/site.aspx" Text="Package a New Site" runat="server" OnPreRender="AppendGUID" /></li>
+            <li><asp:HyperLink ID="developer_new" NavigateUrl="~/auth/developer/site.aspx" Text="Package a New Site" runat="server"  /></li>
             <li class="last"><asp:HyperLink ID="developer_settings" NavigateUrl="~/auth/developer/settings.aspx" Text="Developer Settings" runat="server" /></li>
         </ul>    
     </asp:View>    
@@ -108,6 +108,7 @@
     <asp:View ID="global_admin_developer" runat="server">
         <ul>
             <li><asp:HyperLink ID="global_admin_developer_approval" NavigateUrl="~/auth/global-admin/Developer/Default.aspx" Text="Approve Packages" runat="server" /></li>
+            <li><asp:HyperLink ID="global_admin_developer_unapprove" NavigateUrl="~/auth/global-admin/Developer/Existing.aspx" Text="Unapprove Packages" runat="server" /></li>
             <li class="last"><asp:HyperLink ID="global_admin_developer_categories" NavigateUrl="~/auth/global-admin/Developer/Categories.aspx" Text="Manage Categories" runat="server" /></li>
         </ul>
     </asp:View>
