@@ -156,7 +156,7 @@
     var page = {
         'cid': 'c094a3a22d512fb9012d519504e90030',
         'bg_color': '#cacaca',
-        'hover_color': '0066cc',
+        'hover_color': '#0066cc',
         'website': 'www.gooeycms.com',
         'top_margin': '170px',
         'window_height': '400px',
