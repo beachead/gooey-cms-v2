@@ -26,10 +26,13 @@
     <br /><hr />
     <asp:Panel ID="ManageTemplatePanel" Visible="false" runat="server">
     <asp:HiddenField ID="ExistingTemplateId" runat="server" />
-    <br /><br />
-    <table>
+    <br />
+    <table style="width:100%;">
         <tr>
-            <td>Template</td>
+            <td colspan="2" style="padding-bottom:10px;"><asp:Label ID="LblStatus" runat="server" /></td>
+        </tr>
+        <tr>
+            <td style="width:70px;">Template</td>
             <td>
                 <asp:Label ID="ExistingTemplateName" Visible="false" Font-Bold="true" runat="server" />
                 <asp:DropDownList ID="TemplateType" runat="server" />
@@ -44,7 +47,7 @@
         <table style="width:800px;">
             <tr>
                 <td colspan="2">
-                    <beachead:Editor ID="TemplateContent" runat="server" />
+                    <beachead:Editor ID="TemplateContent" ShowToolbar="false" runat="server" />
                 </td>
             </tr>
         </table>

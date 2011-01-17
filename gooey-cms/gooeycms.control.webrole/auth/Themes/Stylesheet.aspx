@@ -86,6 +86,10 @@
                     <asp:RegularExpressionValidator ID="NewPatternValidator" ControlToValidate="TxtNewFileName" Display="None" ValidationExpression="[\w\d]+\.css" ValidationGroup="FileName" ErrorMessage="The file name may not contain spaces or special characters and must end in .css" runat="server" />
                 </div>
                 <div id="editpanel" dojoType="dijit.layout.ContentPane" title="Edit Stylesheets">
+                    <div style="padding-bottom:10px;">
+                        <asp:Label ID="LblStatus" runat="server" />
+                    </div>
+
                     From this page you can edit or delete any of the css files in your styles library.
                     <br /><br />
 

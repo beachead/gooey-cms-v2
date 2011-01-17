@@ -8,6 +8,8 @@ using Gooeycms.Business.Themes;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
 using AjaxControlToolkit;
+using Gooeycms.Business.Images;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
@@ -121,10 +123,23 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
         protected void BtnSaveEdit_Click(object sender, EventArgs e)
         {
+            CmsTheme theme = GetSelectedTheme();
+
+            IList<String> missing = ImageManager.Instance.ValidateAndMove(this.Editor.Text, theme.SubscriptionGuid, theme.ThemeGuid, true);
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Successfully saved stylesheet.");
+            if (missing.Count > 0)
+            {
+                builder.Append(" The following images could not be found and may need to be uploaded: ");
+                builder.Append(String.Join(",", missing));
+            }
+            this.LblStatus.Text = builder.ToString();
+
+
             String filename = this.LstExistingFile.SelectedValue;
             byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
 
-            CmsTheme theme = GetSelectedTheme();
+
             CssManager.Instance.Save(theme, filename, data);
 
             OutsideSelectedPanel = "mylibrarypanel";

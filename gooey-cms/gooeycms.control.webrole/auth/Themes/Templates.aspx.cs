@@ -7,6 +7,7 @@ using Gooeycms.Business.Themes;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Webrole.Control.App_Code;
+using System.Text;
 
 namespace Gooeycms.Webrole.Control.auth.Themes
 {
@@ -119,7 +120,18 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             template.Content = this.TemplateContent.Text;
             template.LastSaved = DateTime.Now;
 
-            TemplateManager.Instance.Save(template);
+            IList<String> missingImages = new List<String>();
+            TemplateManager.Instance.Save(template, missingImages);
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Successfully saved template.");
+            if (missingImages.Count > 0)
+            {
+                builder.Append(" The following images could not be found and may need to be uploaded: ");
+                builder.Append(String.Join(",", missingImages));
+            }
+
+            this.LblStatus.Text = builder.ToString();
         }
     }
 }

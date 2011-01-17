@@ -94,6 +94,15 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         protected global::System.Web.UI.WebControls.HiddenField ExistingTemplateId;
         
         /// <summary>
+        /// LblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStatus;
+        
+        /// <summary>
         /// ExistingTemplateName control.
         /// </summary>
         /// <remarks>

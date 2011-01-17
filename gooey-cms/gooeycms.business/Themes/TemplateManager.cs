@@ -5,6 +5,7 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Business.Images;
 
 namespace Gooeycms.Business.Themes
 {
@@ -55,10 +56,18 @@ namespace Gooeycms.Business.Themes
             return new List<String>(available);
         }
 
-        public void Save(CmsTemplate template)
+        public void Save(CmsTemplate template, IList<String> missingImages = null)
         {
             if (CurrentSite.IsAvailable)
                 CurrentSite.Cache.Clear();
+
+            //Attempt to validate any images and move images if necessary
+            IList<String> missing = ImageManager.Instance.ValidateAndMove(template.Content,template.SubscriptionGuid, template.Theme.ThemeGuid, true);
+            if (missingImages != null)
+            {
+                foreach (String item in missing)
+                    missingImages.Add(item);
+            }
 
             using (Transaction tx = new Transaction())
             {

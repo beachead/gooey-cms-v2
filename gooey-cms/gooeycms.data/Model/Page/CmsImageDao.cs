@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using NHibernate;
 
 namespace Gooeycms.Data.Model.Page
 {
@@ -34,6 +35,21 @@ namespace Gooeycms.Data.Model.Page
             String hql = "select image from CmsImage image where image.SubscriptionId = :siteGuid and image.Guid = :guid";
 
             return base.NewHqlQuery(hql).SetString("siteGuid", siteGuid.Value).SetString("guid", guid.Value).UniqueResult<CmsImage>();
+        }
+
+        public CmsImage FindByNameAndDirectory(Guid siteGuid, string filename, string directory)
+        {
+            String hql;
+            if (directory != null)
+                hql = "select image from CmsImage image where image.SubscriptionId = :siteGuid and image.Filename = :filename and image.Directory = :directory";
+            else
+                hql = "select image from CmsImage image where image.SubscriptionId = :siteGuid and image.Filename = :filename and image.Directory is null";
+
+            IQuery query = base.NewHqlQuery(hql).SetString("siteGuid", siteGuid.Value).SetString("filename", filename);
+            if (directory != null)
+                query.SetString("directory",directory);
+
+            return query.UniqueResult<CmsImage>();
         }
     }
 }

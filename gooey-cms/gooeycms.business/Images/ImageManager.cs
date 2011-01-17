@@ -16,6 +16,8 @@ namespace Gooeycms.Business.Images
 {
     public class ImageManager
     {
+        private static Regex BasicImagePattern = new Regex(@"[\w\d-_]+\.\w{3}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
         public static List<String> ValidImageExtensions = new List<String>() { "png", "gif", "jpg", "jpeg", "swf" };
         public static IDictionary<String, String> ImageMimeTypes = new Dictionary<String, String>();
 
@@ -266,15 +268,67 @@ namespace Gooeycms.Business.Images
             CmsImage image = dao.FindBySiteAndGuid(siteGuid, guid);
 
             if (image != null)
-            {
-                String container = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
-
-                IStorageClient client = StorageHelper.GetStorageClient();
-                byte [] data = client.Open(container, image.Directory, image.Filename);
-                image.Data = data;
-            }
+                SetImageData(siteGuid, image);
 
             return image;
+        }
+
+        public CmsImage GetImageByNameAndDirectory(Data.Guid siteGuid, String filename, String directory, Boolean includeData)
+        {
+            CmsImageDao dao = new CmsImageDao();
+            CmsImage image = dao.FindByNameAndDirectory(siteGuid, filename, directory);
+
+            if ((image != null) && (includeData))
+                SetImageData(siteGuid, image);
+
+            return image;
+        }
+
+        private void SetImageData(Data.Guid siteGuid, CmsImage image)
+        {
+            String container = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
+
+            IStorageClient client = StorageHelper.GetStorageClient();
+            byte[] data = client.Open(container, image.Directory, image.Filename);
+            image.Data = data;
+        }
+
+        /// <summary>
+        /// This method will check if the image found in the markup are actually
+        /// already stored in the theme. If not, it will then check the page
+        /// image area and copy the images from the page to the theme area.
+        /// </summary>
+        /// <param name="themeGuid">The theme to validate against</param>
+        /// <param name="moveImagesToTheme"></param>
+        /// <returns>List of invalid images which could not be found or moved</returns>
+        public IList<String> ValidateAndMove(String content, Data.Guid siteGuid, Data.Guid themeGuid, bool moveImagesToTheme)
+        {
+            IList<String> missingImages = new List<String>();
+
+            MatchCollection matches = BasicImagePattern.Matches(content);
+            foreach (Match match in matches)
+            {
+                String imagename = match.Value;
+                Boolean isImageExist = (ImageManager.Instance.GetImageByNameAndDirectory(siteGuid, imagename, themeGuid.Value, false) != null);
+
+                //If the image doesn't exist in the themes directory, check the page directory
+                if (!isImageExist)
+                {
+                    CmsImage image = ImageManager.Instance.GetImageByNameAndDirectory(siteGuid, imagename, null, true);
+
+                    //Found the image in the page directory, copy it to the themes
+                    if (image != null)
+                    {
+                        ImageManager.Instance.AddImage(themeGuid.Value, imagename, image.ContentType, image.Data);
+                    }
+                    else
+                    {
+                        missingImages.Add(imagename);
+                    }
+                }
+            }
+
+            return missingImages;
         }
     }
 }
