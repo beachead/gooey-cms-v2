@@ -53,7 +53,8 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 this.RdoTollFreeType.Checked = true;
 
             this.TxtAreaCode.Text = CurrentSite.Configuration.PhoneSettings.DefaultAreaCode;
-            this.TxtForwardNumber.Text = AvailablePhoneNumber.Parse(CurrentSite.Configuration.PhoneSettings.DefaultForwardNumber).WebDisplay;
+            if (CurrentSite.Configuration.PhoneSettings.IsActive)
+                this.TxtForwardNumber.Text = AvailablePhoneNumber.Parse(CurrentSite.Configuration.PhoneSettings.DefaultForwardNumber).WebDisplay;
 
             this.LblRemainingPhoneNumbers.Text = CurrentSite.Configuration.PhoneSettings.RemainingPhoneNumbers.ToString();
             this.TxtPhoneFormat.Text = CurrentSite.Configuration.PhoneSettings.DefaultPhoneFormat;
