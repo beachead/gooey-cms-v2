@@ -13,5 +13,7 @@ ALTER TABLE Site_Saved_Forms ADD CONSTRAINT fk_savedform_subscription_guid FOREI
 ALTER TABLE Subscription_Plans ADD CONSTRAINT unq_subscriptionplans_sku UNIQUE (sku);
 ALTER TABLE Subscriptions ADD CONSTRAINT fk_subscriptionplans_subscription FOREIGN KEY(subscription_plan_sku) REFERENCES subscription_Plans(sku);
 ALTER TABLE Images ADD CONSTRAINT fk_images_subscription_guid FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Subscription_Phone_Numbers ADD CONSTRAINT fk_phone_subscription_guid FOREIGN KEY(subscription_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
+ALTER TABLE Campaigns ADD CONSTRAINT fk_phone_number FOREIGN KEY (phone_number) REFERENCES Subscription_Phone_Numbers(phone_number);
 
 

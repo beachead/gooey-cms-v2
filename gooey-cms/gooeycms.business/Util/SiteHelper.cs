@@ -62,7 +62,8 @@ namespace Gooeycms.Business.Util
 
             //Check if we're running outside the admin... if so, base the active site upon the domain
             String host = HttpContext.Current.Request.Url.Host;
-            if (GooeyConfigManager.AdminSiteHost.EqualsCaseInsensitive(host))
+            String path = HttpContext.Current.Request.Url.PathAndQuery;
+            if ((GooeyConfigManager.AdminSiteHost.EqualsCaseInsensitive(host)) || (path.Contains("forward-init.mxl")))
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["selected-site"];
                 String guid = (cookie != null) ? (cookie.Value) : "";

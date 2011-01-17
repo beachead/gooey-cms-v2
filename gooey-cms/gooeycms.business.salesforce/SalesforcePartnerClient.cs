@@ -151,8 +151,11 @@ namespace gooeycms.business.salesforce
 
                 if (validFields.ContainsKey(actualKey))
                 {
-                    elements.Add(GetNewXmlElement(validFields[actualKey].ApiName, values[key]));
-                    associatedFields[validFields[actualKey].ApiName] = true;
+                    if (!String.IsNullOrWhiteSpace(values[key]))
+                    {
+                        elements.Add(GetNewXmlElement(validFields[actualKey].ApiName, values[key]));
+                        associatedFields[validFields[actualKey].ApiName] = true;
+                    }
                 }
             }
 

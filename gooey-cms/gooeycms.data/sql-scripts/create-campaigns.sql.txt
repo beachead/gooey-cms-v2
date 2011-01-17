@@ -11,8 +11,13 @@ CREATE TABLE [dbo].[Campaigns](
 	[tracking_code] NVARCHAR(64),
 	[start_date] DATETIME,
 	[end_date] DATETIME,
+	[phone_number] VARCHAR(15),
 	PRIMARY KEY CLUSTERED([id]),
 );
 ALTER TABLE Campaigns ADD CONSTRAINT fk_campaigns_subscription FOREIGN KEY(site_guid) REFERENCES Subscriptions(guid) ON DELETE CASCADE;
 CREATE INDEX idx_site_guid ON Campaigns(site_guid);
 CREATE INDEX idx_siteguid ON Campaigns(guid,site_guid);
+CREATE INDEX idx_phone_number ON Campaigns(phone_number);
+
+CREATE UNIQUE INDEX unq_phone_number ON Subscription_Phone_Numbers(phone_number) ON DELETE SET NULL;
+

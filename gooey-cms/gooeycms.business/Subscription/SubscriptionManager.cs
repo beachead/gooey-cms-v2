@@ -17,6 +17,7 @@ using Gooeycms.Data.Model.Content;
 using Gooeycms.Data.Model.Site;
 using Gooeycms.Business.Paypal;
 using Gooeycms.Business.Billing;
+using Gooeycms.Business.Twilio;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -202,6 +203,12 @@ namespace Gooeycms.Business.Subscription
                 total += GooeyConfigManager.CampaignOptionPrice;
 
             return total;
+        }
+
+        public static IList<CmsSubscriptionPhoneNumber> GetActivePhoneNumbers(Data.Guid siteGuid)
+        {
+            CmsSubscriptionPhoneDao dao = new CmsSubscriptionPhoneDao();
+            return dao.FindBySiteGuid(siteGuid);
         }
 
         public static IList<CmsSubscription> GetSubscriptionsByUserId(int userId)
@@ -537,6 +544,40 @@ namespace Gooeycms.Business.Subscription
                 String redirect = checkout.SetExpressCheckout(LoggedInUser.Email, subscription.Guid, returnurl, cancelurl);
 
                 WebRequestContext.Instance.CurrentHttpContext.Response.Redirect(redirect, true);
+            }
+        }
+
+        public static void AddPhoneToSubscription(CmsSubscriptionPhoneNumber phone)
+        {
+            if (phone.SubscriptionId == null)
+                throw new ArgumentException("You must set the subscription guid prior to calling this method");
+
+            CmsSubscriptionPhoneDao dao = new CmsSubscriptionPhoneDao();
+            using (Transaction tx = new Transaction())
+            {
+                dao.Save<CmsSubscriptionPhoneNumber>(phone);
+                tx.Commit();
+            }
+        }
+
+        public static CmsSubscriptionPhoneNumber GetPhoneNumber(String phone)
+        {
+            CmsSubscriptionPhoneDao dao = new CmsSubscriptionPhoneDao();
+            return dao.FindByPhoneNumber(phone);
+        }
+
+        public static void RemovePhoneFromSubscription(Data.Guid guid, string phone)
+        {
+            CmsSubscriptionPhoneDao dao = new CmsSubscriptionPhoneDao();
+            CmsSubscriptionPhoneNumber number = dao.FindByPhoneNumber(phone);
+
+            if (!number.SubscriptionId.Equals(guid.Value))
+                throw new ArgumentException("This phone number does not belong to this subscription");
+
+            using (Transaction tx = new Transaction())
+            {
+                dao.Delete<CmsSubscriptionPhoneNumber>(number);
+                tx.Commit();
             }
         }
     }

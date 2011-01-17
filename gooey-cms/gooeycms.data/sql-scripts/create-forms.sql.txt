@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[Form](
 	[ipaddress] VARCHAR(255),
 	[email] NVARCHAR(255),
 	[campaigns] VARCHAR(256),
+	[is_phone] BIT DEFAULT(0).
 	[download_file] VARCHAR(256),
 	[form_keys] NVARCHAR(2048),
 	[form_values] NTEXT,

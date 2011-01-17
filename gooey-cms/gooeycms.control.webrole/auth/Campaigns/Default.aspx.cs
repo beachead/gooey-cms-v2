@@ -24,6 +24,9 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             if (!Page.IsPostBack)
             {
                 this.Status.Text = Server.HtmlEncode(Request.QueryString["msg"]);
+
+                if (CurrentSite.Configuration.PhoneSettings.IsActive)
+                    this.PanelEnablePhoneIntegration.Visible = false;
             }
         }
 

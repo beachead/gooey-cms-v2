@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gooeycms.Business.Util;
 using gooeycms.business.salesforce;
+using Gooeycms.Business.Twilio;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
@@ -21,6 +22,9 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             Master.SetTitle("Campaign Settings");
             if (!Page.IsPostBack)
             {
+                if (Request.QueryString["pid"] != null)
+                    SelectedPanel = Request.QueryString["pid"];
+
                 if (CurrentSite.Configuration.IsGoogleAnalyticsEnabled)
                 {
                     this.RdoGoogleEnabledNo.Checked = false;
@@ -34,7 +38,28 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 this.TxtGoogleAccountId.Text = CurrentSite.Configuration.GoogleAccountId;
 
                 LoadSalesforceInfo();
+                LoadPhoneInfo();
             }
+        }
+
+        protected void LoadPhoneInfo()
+        {
+            this.RdoTollFreeType.Checked = false;
+            this.RdoLocalType.Checked = false;
+
+            if (CurrentSite.Configuration.PhoneSettings.NumberType == CurrentSite.Configuration.PhoneSettings.PhoneNumberType.Local)
+                this.RdoLocalType.Checked = true;
+            else if (CurrentSite.Configuration.PhoneSettings.NumberType == CurrentSite.Configuration.PhoneSettings.PhoneNumberType.TollFree)
+                this.RdoTollFreeType.Checked = true;
+
+            this.TxtAreaCode.Text = CurrentSite.Configuration.PhoneSettings.DefaultAreaCode;
+            this.TxtForwardNumber.Text = AvailablePhoneNumber.Parse(CurrentSite.Configuration.PhoneSettings.DefaultForwardNumber).WebDisplay;
+
+            this.LblRemainingPhoneNumbers.Text = CurrentSite.Configuration.PhoneSettings.RemainingPhoneNumbers.ToString();
+            this.TxtPhoneFormat.Text = CurrentSite.Configuration.PhoneSettings.DefaultPhoneFormat;
+
+            this.AssignedPhoneNumbers.DataSource = CurrentSite.Configuration.PhoneSettings.GetActivePhoneNumbers();
+            this.AssignedPhoneNumbers.DataBind();
         }
 
         protected void LoadSalesforceInfo()
@@ -140,6 +165,48 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             CurrentSite.Configuration.IsGoogleAnalyticsEnabled = isEnabled;
 
             SelectedPanel = "analytics-panel";
+        }
+
+        protected void BtnPhoneSettings_Click(Object sender, EventArgs e)
+        {
+            if (this.RdoLocalType.Checked)
+                CurrentSite.Configuration.PhoneSettings.NumberType = CurrentSite.Configuration.PhoneSettings.PhoneNumberType.Local;
+            else if (this.RdoTollFreeType.Checked)
+                CurrentSite.Configuration.PhoneSettings.NumberType = CurrentSite.Configuration.PhoneSettings.PhoneNumberType.TollFree;
+
+            CurrentSite.Configuration.PhoneSettings.DefaultPhoneFormat = this.TxtPhoneFormat.Text;
+
+            String status = "Successfully updated phone settings for this subscription";
+
+            this.LblPhoneStatus.ForeColor = System.Drawing.Color.Green;
+            String areacode = this.TxtAreaCode.Text;
+            if (!String.IsNullOrWhiteSpace(areacode))
+            {
+                int results = CurrentSite.Configuration.PhoneSettings.GetLocalTwilioClient().SearchAvailableLocalNumbers(areacode).Count;
+                if (results > 0)
+                {
+                    CurrentSite.Configuration.PhoneSettings.DefaultAreaCode = areacode;
+                }
+                else
+                {
+                    status = "We're sorry, but there are not currently any phone numbers available in the " + areacode + " area code.";
+                    this.LblPhoneStatus.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(this.TxtForwardNumber.Text))
+            {
+                CurrentSite.Configuration.PhoneSettings.DefaultForwardNumber = AvailablePhoneNumber.Parse(this.TxtForwardNumber.Text).PhoneNumber;
+            }
+            else
+            {
+                status = "You must assign a default forwarding number to activate campaign-specific phone functionality.";
+                this.LblPhoneStatus.ForeColor = System.Drawing.Color.Red;
+            }
+
+            this.LblPhoneStatus.Text = status;
+
+            SelectedPanel = "phone-panel";
         }
     }
 }

@@ -190,5 +190,45 @@ namespace Gooeycms.Business.Campaigns
             HashSet<String> campaigns = GetCurrentCampaignTrail();
             return Combine(campaigns, "|");
         }
+
+        /// <summary>
+        /// Gets the latest campaign that is active for the current user.
+        /// </summary>
+        /// <returns></returns>
+        public CmsCampaign GetLastActiveCampaign()
+        {
+            CmsCampaign campaign = null;
+
+            IList<String> campaigns = new List<String>(GetCurrentCampaignTrail());
+            if (campaigns.Count > 0)
+            {
+                String last = campaigns[campaigns.Count - 1];
+                campaign = this.GetByTrackingCode(CurrentSite.Guid, last);
+            }
+
+            return campaign;
+        }
+
+        public string GetActivePhoneNumber()
+        {
+            String result = "";
+
+            CmsCampaign campaign = GetLastActiveCampaign();
+
+            if (campaign != null)
+                result = campaign.PhoneNumber;
+
+            String format = CurrentSite.Configuration.PhoneSettings.DefaultPhoneFormat;
+            if (String.IsNullOrWhiteSpace(result))
+                result = CurrentSite.Configuration.PhoneSettings.DefaultForwardNumber;
+
+            if (!String.IsNullOrWhiteSpace(result))
+            {
+                Twilio.AvailablePhoneNumber number = Twilio.AvailablePhoneNumber.Parse(result);
+                result = String.Format(format, number.AreaCode, number.Exchange, number.LineNumber);
+            }
+
+            return result;
+        }
     }
 }

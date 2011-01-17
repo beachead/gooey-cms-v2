@@ -64,12 +64,25 @@ CREATE TABLE [Subscriptions] (
 [generic_addon] BIT DEFAULT(0),
 [is_demo] BIT DEFAULT(0),
 [is_dirty] BIT DEFAULT(0),
+[max_phone_numbers] INT,
 PRIMARY KEY CLUSTERED([id]),
 );
 CREATE UNIQUE INDEX uq_subscriptions_guid ON [Subscriptions](guid);
 CREATE UNIQUE INDEX uq_subscriptions_subdomain ON [Subscriptions](subdomain);
 CREATE INDEX uq_subscriptions_customdomain ON [Subscriptions](custom_domain);
 CREATE INDEX uq_subscriptions_stagingdomain ON [Subscriptions](staging_domain);
+
+CREATE TABLE [dbo].[Subscription_Phone_Numbers](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[subscription_guid] VARCHAR(36),
+	[phone_number] VARCHAR(64),
+	[friendly_phone_number] VARCHAR(64),
+	[sid] VARCHAR(64),
+	[account_sid] VARCHAR(64),
+	[twilio_info_url] VARCHAR(256),
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE INDEX idx_phonenumber ON Subscription_Phone_Numbers(subscription_guid, phone_number);
 
 CREATE TABLE [Users] (
 [id] INT IDENTITY(1,1) NOT NULL,

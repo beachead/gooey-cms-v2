@@ -40,6 +40,15 @@ namespace Gooeycms.Webrole.Control
                     Response.Write("Failed to find user: " + username);
                 }
             }
+            else if ("unlock".Equals(action))
+            {
+                String username = Request.QueryString["user"];
+                MembershipUser user = Membership.GetUser(username);
+                if (user != null)
+                    user.UnlockUser();
+
+                Response.Write("Successfully unlocked user");
+            }
             else if ("setupdemo".Equals(action))
             {
                 if (!Roles.IsUserInRole(MembershipUtil.DemoAccountUsername, SecurityConstants.Roles.SITE_ADMINISTRATOR))
@@ -48,7 +57,7 @@ namespace Gooeycms.Webrole.Control
             else if ("display".Equals(action))
             {
                 String username = Request.QueryString["user"];
-                String [] roles = Roles.GetRolesForUser(username);
+                String[] roles = Roles.GetRolesForUser(username);
                 foreach (String role in roles)
                 {
                     Response.Write(role + "<br />");

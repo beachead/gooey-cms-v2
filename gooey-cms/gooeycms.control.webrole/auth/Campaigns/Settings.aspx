@@ -144,5 +144,88 @@
             </table>
         </div>
     </div>
+
+    <div id="phone-panel" dojoType="dijit.layout.ContentPane" title="Phone Settings" style="display:none;">
+        <table>
+            <tr>
+                <td colspan="2">
+                    <b>Phone Integration</b><br />
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><asp:Label ID="LblPhoneStatus" runat="server" /></td>
+            </tr>
+            <tr>
+                <td style="vertical-align:top;padding-top:4px;">Would you prefer a local or toll-free number?</td>
+                <td>
+                    <asp:RadioButton ID="RdoLocalType" GroupName="NumberType" Text="Local Number" runat="server" />&nbsp; 
+                    <asp:RadioButton ID="RdoTollFreeType" GroupName="NumberType" Text="Toll-Free Number" runat="server" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>Default Area Code (<i>applies to local numbers only</i>)</td>
+                <td>
+                    <asp:TextBox ID="TxtAreaCode" Width="75px" MaxLength="3" dojoType="dijit.form.ValidationTextBox" ValidationGroup="AreaCode" promptMessage="Input the area code used for your local campaign phone numbers." regExp="\d{3}" invalidMessage="Area codes must contain exactly three digits" runat="server" />
+                    <asp:RegularExpressionValidator ControlToValidate="TxtAreaCode" ValidationGroup="AreaCode" ValidationExpression="\d{3}" Display="None" runat="server" />
+            </tr>
+            <tr>
+                <td>Default Forwarding Number</td>
+                <td>
+                    <asp:TextBox ID="TxtForwardNumber" Width="150px" MaxLength="12" dojoType="dijit.form.ValidationTextBox" ValidationGroup="AreaCode" promptMessage="Input the default forwarding number for your company." regExp="\d{3}-\d{3}-\d{4}" invalidMessage="Forwarding numbers must be in the following format: 555-555-5555" runat="server" />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="TxtForwardNumber" ValidationGroup="AreaCode" ValidationExpression="\d{3}-\d{3}-\d{4}" Display="None" runat="server" />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator" ControlToValidate="TxtForwardNumber" ValidationGroup="AreaCode" Text="*" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Site Phone Number Format
+                    <div style="font-size:9px;padding-right:5px;">
+                        Use the following tags to specify the fields in your phone number<br />
+                        {0} - Area code <br />
+                        {1} - Prefix <br />
+                        {2} - Line Number <br />
+                        (example: ({0} {1}-{2}) products (555) 555-5555)                    
+                    </div>
+                </td>
+                <td style="vertical-align:top;">
+                    <asp:TextBox ID="TxtPhoneFormat" Width="150px" dojoType="dijit.form.ValidationTextBox" ValidationGroup="AreaCode" promptMessage="Input the format to use when displaying phone numbers of your webiste." regExp=".*" invalidMessage="Input the format to use when displaying phone numbers on your website" runat="server" />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="TxtForwardNumber" ValidationGroup="AreaCode" Text="*" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right;">
+                    <asp:Button ID="BtnPhoneSettings" OnClick="BtnPhoneSettings_Click" Text="Save" ValidationGroup="AreaCode" runat="server" />
+                </td>
+            </tr>
+        </table>
+
+        <fieldset>
+            <legend>Phone Account Status</legend>
+            <b>Remaining Phone Numbers:</b>&nbsp;<asp:Label ID="LblRemainingPhoneNumbers" runat="server" />
+            <br /><br />
+
+            <b>All Assigned Phone Numbers:</b>
+            <table>
+                <asp:Repeater ID="AssignedPhoneNumbers" runat="server">
+                    <HeaderTemplate>
+                        <tr visible='<%# ((ICollection)AssignedPhoneNumbers.DataSource).Count == 0 ? true : false %>' runat="server">
+                            <td>
+                                There currently are no phone numbers assigned to this subscription.<br />
+                                You may assign a phone number to individual campaigns from the <a href="Default.aspx">Manage Campaigns</a> page.
+                            </td>
+                        </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td><%# DataBinder.Eval(Container.DataItem,"FriendlyPhoneNumber") %></td>
+                        </tr>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </table>
+
+        </fieldset>
+    </div>
 </div>
 </asp:Content>

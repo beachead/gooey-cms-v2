@@ -17,6 +17,7 @@ using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Constants;
 using System.Text;
+using Gooeycms.Business.Twilio;
 
 namespace Gooeycms.Business.Util
 {
@@ -178,6 +179,115 @@ namespace Gooeycms.Business.Util
                 {
                     String result = GetSiteConfiguration("markup-engine-name", null, false);
                     return result;
+                }
+            }
+
+            public static class PhoneSettings
+            {
+                public enum PhoneNumberType
+                {
+                    NotSet,
+                    Local,
+                    TollFree
+                }
+
+                public static PhoneNumberType NumberType
+                {
+                    get
+                    {
+                        return (PhoneNumberType)Enum.Parse(typeof(PhoneNumberType),Configuration.GetSiteConfiguration("phone-type","NotSet",false),true);
+                    }
+                    set
+                    {
+                        Configuration.SetSiteConfiguration("phone-type", value.ToString());
+                    }
+                }
+
+                public static String DefaultPhoneFormat
+                {
+                    get { return Configuration.GetSiteConfiguration("phone-format", "({0}) {1}-{2}", false); }
+                    set { Configuration.SetSiteConfiguration("phone-format", value); }
+                }
+
+                public static String DefaultAreaCode
+                {
+                    get { return Configuration.GetSiteConfiguration("phone-areacode", null, false); }
+                    set { Configuration.SetSiteConfiguration("phone-areacode", value); }
+                }
+
+                public static String DefaultForwardNumber
+                {
+                    get { return Configuration.GetSiteConfiguration("phone-forward", null, false);}
+                    set { Configuration.SetSiteConfiguration("phone-forward", value); }
+                }
+
+                public static Boolean IsActive
+                {
+                    get
+                    {
+                        return ((NumberType != PhoneNumberType.NotSet) && (!String.IsNullOrWhiteSpace(DefaultForwardNumber)));
+                    }
+                }
+
+                public static String TwilioAccountSid
+                {
+                    get
+                    {
+                        String sid = Configuration.GetEncryptedSiteConfiguration("twilio-accountsid");
+                        if (sid == null)
+                            sid = GooeyConfigManager.TwilioAccountSid;
+
+                        return sid;
+                    }
+                    set { Configuration.SetEncryptedSiteConfiguration("twilio-accountsid", value); }
+                }
+
+                public static String TwilioAccountToken
+                {
+                    get
+                    {
+                        String token = Configuration.GetEncryptedSiteConfiguration("twilio-accounttoken");
+                        if (token == null)
+                            token = GooeyConfigManager.TwilioAccountToken;
+
+                        return token;
+                    }
+                    set { Configuration.SetEncryptedSiteConfiguration("twilio-accounttoken", value); }
+                }
+
+                public static Int32 MaxAllowedPhoneNumbers
+                {
+                    get
+                    {
+                        int value = Subscription.MaxPhoneNumbers;
+                        if (value < 0)
+                            value = GooeyConfigManager.CampaignMaxPhoneNumbers;
+
+                        return value;
+                    }
+                }
+
+                public static IList<CmsSubscriptionPhoneNumber> GetActivePhoneNumbers()
+                {
+                    return SubscriptionManager.GetActivePhoneNumbers(CurrentSite.Guid);
+                }
+
+                public static Int32 RemainingPhoneNumbers
+                {
+                    get
+                    {
+                        return (MaxAllowedPhoneNumbers - GetActivePhoneNumbers().Count);
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves an account specific twilio client with the correct tokens set
+                /// </summary>
+                /// <returns></returns>
+                public static TwilioClient GetLocalTwilioClient()
+                {
+                    TwilioClient client = new TwilioClient(TwilioAccountSid, TwilioAccountToken);
+                    return client;
                 }
             }
 

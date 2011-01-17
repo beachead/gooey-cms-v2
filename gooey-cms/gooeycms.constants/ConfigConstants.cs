@@ -51,5 +51,9 @@ namespace Gooeycms.Constants
 
         public const String DefaultSiteDomain = "http://store.gooeycms.com";
         public const String DefaultSignupDomain = "http://secure.gooeycms.com";
+
+        public const String TwilioAccountSid = "twilio-accountsid";
+        public const String TwilioAccountToken = "twilio-accounttoken";
+        public const String CampaignMaxPhoneNumbers = "campaign-max-phonenumbers";
     }
 }

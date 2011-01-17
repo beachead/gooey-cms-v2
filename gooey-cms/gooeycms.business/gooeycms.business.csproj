@@ -108,6 +108,12 @@
     <Compile Include="Campaigns\Engine\GoogleAnalytics.cs" />
     <Compile Include="Campaigns\ICampaignEngine.cs" />
     <Compile Include="Campaigns\LeadManager.cs" />
+    <Compile Include="Twilio\AssignedPhoneNumber.cs" />
+    <Compile Include="Twilio\AvailablePhoneNumber.cs" />
+    <Compile Include="Twilio\Handlers\BaseTwilioHandler.cs" />
+    <Compile Include="Twilio\Handlers\ForwardInitHandler.cs" />
+    <Compile Include="Twilio\TwilioClient.cs" />
+    <Compile Include="Twilio\TwilioRest.cs" />
     <Compile Include="Compression\ZipHandler.cs" />
     <Compile Include="Content\ContentFileUploadHandler.cs" />
     <Compile Include="Content\ContentManager.cs" />

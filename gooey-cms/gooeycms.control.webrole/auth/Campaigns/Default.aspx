@@ -10,6 +10,11 @@
     <h1>Create Campaign</h1>
     <p>This page allows you to manage and generate links for campaigns that are currently running on the site.</p>
 
+    <asp:Panel ID="PanelEnablePhoneIntegration" runat="server">
+    <b>Enable phone integration for your campaigns!</b><br />
+    To enable phone integration, simply go to the <a href="Settings.aspx?pid=phone-panel">settings</a> page.
+    </asp:Panel>
+
     <asp:Label ID="Status" ForeColor="Green" runat="server" /><br />
     <a href="./create.aspx">Create New Campaign</a><br /><br />
     <asp:GridView ID="CampaignTable" runat="server" 
@@ -29,12 +34,16 @@
                 SortExpression="TrackingCode" >
             <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
-            <asp:BoundField DataField="StartDate" HeaderText="Start Date" 
+            <asp:BoundField DataField="StartDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Start Date" 
                 SortExpression="StartDate" >
             <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
-            <asp:BoundField DataField="EndDate" HeaderText="End Date" 
+            <asp:BoundField DataField="EndDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="End Date" 
                 SortExpression="EndDate" >
+            <HeaderStyle HorizontalAlign="Left" />
+            </asp:BoundField>
+            <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" 
+                SortExpression="PhoneNumber" >
             <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
             <asp:TemplateField HeaderText="Actions">
@@ -43,6 +52,7 @@
                     <a href="./Create.aspx?id=<%# Eval("Guid") %>">Edit</a>&nbsp;
                     <!--<a href="./Elements.aspx?id=<%# Eval("Guid") %>">Elements</a>&nbsp;  -->
                     <a href="#" onclick="window.radopen('./Links.aspx?id=<%# Eval("Guid") %>');">Build Links</a>&nbsp;
+                    <a href="#" onclick="window.radopen('./ActivatePhone.aspx?id=<%# Eval("Guid") %>');">Activate Phone</a>&nbsp;
                     <asp:LinkButton ID="DeleteItem" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this campaign?');" Text="Delete" runat="server" />
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />

@@ -24,5 +24,11 @@ namespace Gooeycms.Data.Model.Campaign
             String hql = "select campaign from CmsCampaign campaign where campaign.SubscriptionId = :siteGuid and campaign.Guid = :guid";
             return base.NewHqlQuery(hql).SetString("siteGuid",siteGuid.Value).SetString("guid", campaignGuid.Value).UniqueResult<CmsCampaign>();
         }
+
+        public CmsCampaign FindByPhoneNumber(string phone)
+        {
+            String hql = "select campaign from CmsCampaign campaign where campaign.PhoneNumber = :phone";
+            return base.NewHqlQuery(hql).SetString("phone", phone).UniqueResult<CmsCampaign>();
+        }
     }
 }

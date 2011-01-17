@@ -98,6 +98,8 @@
     <Compile Include="Model\Subscription\CmsInvite.cs" />
     <Compile Include="Model\Subscription\CmsInviteDao.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionDao.cs" />
+    <Compile Include="Model\Subscription\CmsSubscriptionPhoneDao.cs" />
+    <Compile Include="Model\Subscription\CmsSubscriptionPhoneNumber.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlan.cs" />
     <Compile Include="Model\Subscription\CmsSubscriptionPlanDao.cs" />
     <Compile Include="Model\Subscription\Registration.cs" />

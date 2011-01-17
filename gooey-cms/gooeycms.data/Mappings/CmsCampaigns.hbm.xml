@@ -10,5 +10,6 @@
     <property column="tracking_code" name="TrackingCode" type="String" />
     <property column="start_date" name="StartDate" type="DateTime" />
     <property column="end_date" name="EndDate" type="DateTime" />
+    <property column="phone_number" name="PhoneNumber" type="String" />
   </class>
   </hibernate-mapping>

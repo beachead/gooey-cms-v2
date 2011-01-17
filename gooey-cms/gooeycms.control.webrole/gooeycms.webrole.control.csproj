@@ -102,6 +102,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="auth\Campaigns\ActivatePhone.aspx" />
     <Content Include="auth\Campaigns\Create.aspx" />
     <Content Include="auth\Campaigns\Default.aspx" />
     <Content Include="auth\Campaigns\Leads.aspx" />
@@ -212,6 +213,13 @@
   <ItemGroup>
     <Compile Include="App_Code\ValidatedHelpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\ActivatePhone.aspx.cs">
+      <DependentUpon>ActivatePhone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\ActivatePhone.aspx.designer.cs">
+      <DependentUpon>ActivatePhone.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Campaigns\Create.aspx.cs">
       <DependentUpon>Create.aspx</DependentUpon>

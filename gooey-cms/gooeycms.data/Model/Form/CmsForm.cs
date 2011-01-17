@@ -20,6 +20,7 @@ namespace Gooeycms.Data.Model.Form
         public virtual String DownloadedFile { get; set; }
         public virtual String _FormKeys { get; set; }
         public virtual String _FormValues { get; set; }
+        public virtual Boolean IsPhoneLead { get; set; }
 
         private Dictionary<String, String> _parsedFormFields = null;
         public virtual Dictionary<String, String> FormFields

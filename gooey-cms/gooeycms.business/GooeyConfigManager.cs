@@ -530,6 +530,26 @@ This is your home page.
             }
         }
 
+        public static String TwilioAccountSid
+        {
+            get { return GetCachedValue(ConfigConstants.TwilioAccountSid); }
+        }
+
+        public static String TwilioAccountToken
+        {
+            get { return GetCachedValue(ConfigConstants.TwilioAccountToken); }
+        }
+
+        public static String TwilioPhoneHandlerUrl
+        {
+            get { return "http://" + GooeyConfigManager.AdminSiteHost + "/twilio/forward-init.mxl"; }
+        }
+
+        public static Int32 CampaignMaxPhoneNumbers
+        {
+            get { return Int32.Parse(GetCachedValue(ConfigConstants.CampaignMaxPhoneNumbers, defaultValue: "5")); }
+        }
+
         public static String GetEmailTemplate(String templateType)
         {
             return GetCachedValue("email-template-" + templateType);
@@ -550,6 +570,5 @@ This is your home page.
                 }
             }
         }
-
     }
 }

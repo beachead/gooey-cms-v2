@@ -236,7 +236,14 @@ namespace Gooeycms.Business.Pages
                 CmsUrl url = CmsUrl.Parse(Request.RawUrl);
                 SitePageCache.Instance.AddToCache(url, output);
             }
-            writer.Write(output.ToString());
+
+            //Replace the phone number after any caching has already been done (dynamic per-user)
+            String local = output.ToString();
+
+            String phone = CampaignManager.Instance.GetActivePhoneNumber();
+            local = local.Replace("{phone}", phone);
+
+            writer.Write(local);
             base.Render(writer);
         }
 

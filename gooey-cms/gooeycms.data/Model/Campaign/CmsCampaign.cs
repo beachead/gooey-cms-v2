@@ -13,5 +13,6 @@ namespace Gooeycms.Data.Model.Campaign
         public virtual String TrackingCode { get; set; }
         public virtual DateTime StartDate { get; set; }
         public virtual DateTime EndDate { get; set; }
+        public virtual String PhoneNumber { get; set; }
     }
 }

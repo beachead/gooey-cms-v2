@@ -14,6 +14,7 @@
     <property column="download_file" name="DownloadedFile" type="String" />
     <property column="form_keys" name="_FormKeys" type="String" />
     <property column="form_values" name="_FormValues" type="String" />
+    <property column="is_phone" name="IsPhoneLead" type="Boolean" />
   </class>
   <class name="Gooeycms.Data.Model.Form.CmsSavedForm, gooeycms.data" table="Site_Saved_Forms">
     <id name="Id" column="id" type="Int32" unsaved-value="0">
