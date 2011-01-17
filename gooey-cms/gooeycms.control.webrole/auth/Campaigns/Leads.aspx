@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Leads.aspx.cs" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Leads" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Secure.Master" AutoEventWireup="true" CodeBehind="Leads.aspx.cs" ValidateRequest="false" Inherits="Gooeycms.Webrole.Control.auth.Campaigns.Leads" %>
 <%@ MasterType VirtualPath="~/Secure.master" %>
 <%@ Register TagPrefix="gooey" Src="~/Controls/Subnav.ascx" TagName="Subnav" %>
 
