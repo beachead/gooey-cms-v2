@@ -32,8 +32,7 @@
                     {phone}
                 </code>
                 <br /><br />
-                GooeyCMS automatically inserts the appropriate phone number based upon the activate campaign. <br />
-                <b>No Coding.</b>&nbsp;<b>No Worries.</b>
+                GooeyCMS automatically inserts the appropriate phone number based upon the active campaign. <br />
             </div>
         </asp:View>
         <asp:View ID="MaxAllowedView" runat="server">
