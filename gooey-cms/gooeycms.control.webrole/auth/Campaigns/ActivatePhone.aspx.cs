@@ -31,30 +31,35 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                 String guid = Request.QueryString["id"];
                 CmsCampaign campaign = CampaignManager.Instance.GetCampaign(guid);
                 if (campaign == null)
-                    this.LblStatus.Text = "The campaign guid is not valid and may not be used";
-                else if (CurrentSite.Configuration.PhoneSettings.RemainingPhoneNumbers == 0)
                 {
-                    PhoneNumberViews.SetActiveView(MaxAllowedView);
+                    this.LblStatus.Text = "The campaign guid is not valid and may not be used";
                 }
                 else
                 {
                     if (String.IsNullOrWhiteSpace(campaign.PhoneNumber))
                     {
-                        //Find the available phone numbers
-                        IList<AvailablePhoneNumber> numbers;
-
-                        TwilioClient client = CurrentSite.Configuration.PhoneSettings.GetLocalTwilioClient();
-                        if (CurrentSite.Configuration.PhoneSettings.NumberType == CurrentSite.Configuration.PhoneSettings.PhoneNumberType.Local)
-                            numbers = client.SearchAvailableLocalNumbers(CurrentSite.Configuration.PhoneSettings.DefaultAreaCode);
-                        else
-                            numbers = client.SearchAvailableTollFreeNumbers();
-
-                        foreach (AvailablePhoneNumber number in numbers)
+                        if (CurrentSite.Configuration.PhoneSettings.RemainingPhoneNumbers > 0)
                         {
-                            ListItem item = new ListItem(number.FriendlyName, number.PhoneNumber);
-                            this.LstAvailablePhoneNumbers.Items.Add(item);
+                            //Find the available phone numbers
+                            IList<AvailablePhoneNumber> numbers;
+
+                            TwilioClient client = CurrentSite.Configuration.PhoneSettings.GetLocalTwilioClient();
+                            if (CurrentSite.Configuration.PhoneSettings.NumberType == CurrentSite.Configuration.PhoneSettings.PhoneNumberType.Local)
+                                numbers = client.SearchAvailableLocalNumbers(CurrentSite.Configuration.PhoneSettings.DefaultAreaCode);
+                            else
+                                numbers = client.SearchAvailableTollFreeNumbers();
+
+                            foreach (AvailablePhoneNumber number in numbers)
+                            {
+                                ListItem item = new ListItem(number.FriendlyName, number.PhoneNumber);
+                                this.LstAvailablePhoneNumbers.Items.Add(item);
+                            }
+                            PhoneNumberViews.SetActiveView(ConfigureView);
                         }
-                        PhoneNumberViews.SetActiveView(ConfigureView);
+                        else
+                        {
+                            PhoneNumberViews.SetActiveView(MaxAllowedView);
+                        }
                     }
                     else
                     {
