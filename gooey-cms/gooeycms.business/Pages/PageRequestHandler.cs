@@ -21,6 +21,8 @@ using Gooeycms.Business.Markup.Dynamic;
 using Gooeycms.Business.Campaigns;
 using Gooeycms.Data.Model.Site;
 using System.Web;
+using System.Collections.Generic;
+using Gooeycms.Data.Model.Campaign;
 
 namespace Gooeycms.Business.Pages
 {
@@ -166,25 +168,21 @@ namespace Gooeycms.Business.Pages
 
             //Insert the page template
             CmsTemplate cmsTemplate = TemplateManager.Instance.GetTemplate(this.page.Template);
+            StringBuilder template = new StringBuilder(cmsTemplate.Content);
+
+            //Get all of the campaign elements and put them into the page/template
+            IDictionary<String, String> elements = CampaignManager.Instance.Elements.GetElementsForPage(this.page);
+            template = template.Replace("{campaign-top}", elements["top"]);
+            template = template.Replace("{campaign-middle}", elements["middle"]);
+            template = template.Replace("{campaign-bottom}", elements["bottom"]);
+
+            //Replace the page campaign placeholders
+            this.page.Content = this.page.Content.Replace("{campaign-top}", elements["top"]);
+            this.page.Content = this.page.Content.Replace("{campaign-middle}", elements["middle"]);
+            this.page.Content = this.page.Content.Replace("{campaign-bottom}", elements["bottom"]);
 
             DynamicContentFormatter engine = new DynamicContentFormatter();
-            StringBuilder template = engine.Convert(new StringBuilder(cmsTemplate.Content));
-
-            //Add any campaign elements into the template
-            /* TODO Code the campaign functionality
-            CampaignManager campaignManager = new CampaignManager();
-            IList<Element> top = campaignManager.GetCampaignElementsForPage(CampaignManager.ElementPosition.Top, this.page);
-            IList<Element> middle = campaignManager.GetCampaignElementsForPage(CampaignManager.ElementPosition.Middle, this.page);
-            IList<Element> bottom = campaignManager.GetCampaignElementsForPage(CampaignManager.ElementPosition.Bottom, this.page);
-            */
-
-            StringBuilder topElements = new StringBuilder();//CampaignMarkupFormatter.Format(top);
-            StringBuilder middleElements = new StringBuilder();//CampaignMarkupFormatter.Format(middle);
-            StringBuilder bottomElements = new StringBuilder();//CampaignMarkupFormatter.Format(bottom);
-
-            template = template.Replace("{campaign-top}", topElements.ToString());
-            template = template.Replace("{campaign-middle}", middleElements.ToString());
-            template = template.Replace("{campaign-bottom}", bottomElements.ToString());
+            template = engine.Convert(template);
 
             output = output.Replace("{page.html}", template.ToString());
             output = output.Replace("{analytics.tracking}", CampaignManager.Instance.GetCampaignEngine().GetTrackingScript());

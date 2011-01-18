@@ -52,7 +52,8 @@
                     <a href="./Create.aspx?id=<%# Eval("Guid") %>">Edit</a>&nbsp;
                     <!--<a href="./Elements.aspx?id=<%# Eval("Guid") %>">Elements</a>&nbsp;  -->
                     <a href="#" onclick="window.radopen('./Links.aspx?id=<%# Eval("Guid") %>');">Build Links</a>&nbsp;
-                    <a href="#" onclick="window.radopen('./ActivatePhone.aspx?id=<%# Eval("Guid") %>');">Activate Phone</a>&nbsp;
+                    <a href="#" onclick="open_window('./Elements.aspx?id=<%# Eval("Guid") %>',570,900); return false;">Elements</a>&nbsp;
+                    <a href="#" onclick="window.radopen('./ActivatePhone.aspx?id=<%# Eval("Guid") %>'); return false;">Activate Phone</a>&nbsp;
                     <asp:LinkButton ID="DeleteItem" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this campaign?');" Text="Delete" runat="server" />
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
@@ -76,4 +77,13 @@
 
     <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Height="350" Width="700" ShowContentDuringLoad="false"  VisibleStatusbar="false" Behaviors="Close,Move,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
+
+    <script language="javascript" type="text/javascript">
+        function open_window(path, height, width) {
+            var wnd = window.radopen(path);
+            wnd.set_height(height);
+            wnd.set_width(width);
+            wnd.moveTo(150, 10);
+        }
+    </script>
 </asp:Content>

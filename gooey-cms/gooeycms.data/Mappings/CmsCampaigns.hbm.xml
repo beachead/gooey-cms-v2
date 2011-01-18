@@ -12,4 +12,17 @@
     <property column="end_date" name="EndDate" type="DateTime" />
     <property column="phone_number" name="PhoneNumber" type="String" />
   </class>
+
+  <class name="Gooeycms.Data.Model.Campaign.CmsCampaignElement, gooeycms.data" table="Campaign_Elements">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="guid" name="Guid" type="String" />
+    <many-to-one column="campaign_guid" property-ref="Guid" name="Campaign" class="Gooeycms.Data.Model.Campaign.CmsCampaign,gooeycms.data" />
+    <property column="name" name="Name" type="String" />
+    <property column="placement" name="Placement" type="String" />
+    <property column="priority" name="Priority" type="Int32" />
+    <property column="pages" name="_Pages" type="String" />
+    <property column="element_code" name="Content" type="String" />
+  </class>
   </hibernate-mapping>
