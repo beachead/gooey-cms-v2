@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <td class="label">Tracking Code:</td>
-        <td><asp:TextBox ID="Tracking" dojoType="dijit.form.ValidationTextBox" required="true" promptMessage="Input the tracking code you would like to associate with this campaign." regExp="[a-zA-Z_]+" invalidMessage="The tracking code may not contain any spaces or numbers." runat="server" /></td>
+        <td><asp:TextBox ID="Tracking" dojoType="dijit.form.ValidationTextBox" required="true" promptMessage="Input the tracking code you would like to associate with this campaign." regExp="[a-zA-Z_0-9]+" invalidMessage="The tracking code may not contain any spaces or special characters." runat="server" /></td>
         <td class="label">End Date:</td>
         <td><bdp:BDPLite ID="EndDate" runat="server" /></td>        
     </tr>
