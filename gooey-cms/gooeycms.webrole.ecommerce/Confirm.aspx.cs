@@ -17,10 +17,14 @@ namespace Gooeycms.Webrole.Ecommerce.store
         protected String PackageTitle;
         protected String PackageGuid;
         protected String ReturnUrl;
+        protected String PaypalAccount = GooeyConfigManager.PaypalEmail;
         protected String ReceiptGuid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(PaypalAccount))
+                throw new ApplicationException("The paypal web checkout email has not been configured. This must be configured prior to checkout being enabled.");
+
             if (!LoggedInUser.IsLoggedIn)
                 Response.Redirect("./Purchase.aspx?g=" + Request.QueryString["g"], true);
 

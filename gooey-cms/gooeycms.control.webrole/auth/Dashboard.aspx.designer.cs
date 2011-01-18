@@ -22,6 +22,15 @@ namespace Gooeycms.Webrole.Control.auth {
         protected global::Gooeycms.Webrole.Control.Controls.Subnav Subnav;
         
         /// <summary>
+        /// LblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStatus;
+        
+        /// <summary>
         /// AvailableSites control.
         /// </summary>
         /// <remarks>

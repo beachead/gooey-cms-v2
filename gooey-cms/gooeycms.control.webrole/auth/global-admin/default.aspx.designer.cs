@@ -121,6 +121,33 @@ namespace Gooeycms.Webrole.Control.auth.global_admin {
         protected global::System.Web.UI.WebControls.Label LblSubscriptionProcessor;
         
         /// <summary>
+        /// PaypalEmailImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image PaypalEmailImage;
+        
+        /// <summary>
+        /// PaypalEmailLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink PaypalEmailLink;
+        
+        /// <summary>
+        /// PaypalEmailTooltip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadToolTip PaypalEmailTooltip;
+        
+        /// <summary>
         /// PaypalPdtTokenImage control.
         /// </summary>
         /// <remarks>

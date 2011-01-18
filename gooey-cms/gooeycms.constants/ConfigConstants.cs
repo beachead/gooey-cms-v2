@@ -27,6 +27,7 @@ namespace Gooeycms.Constants
         public const String DefaultTemplate = "default-template";
         public const String PaypalPdt = "paypal-pdt";
         public const String PaypalUrl = "paypal-posturl";
+        public const String PaypalEmail = "paypal-email";
         public const String PaypalUsername = "paypal-username";
         public const String PaypalPassword = "paypal-password";
         public const String PaypalSignature = "paypal-signature";

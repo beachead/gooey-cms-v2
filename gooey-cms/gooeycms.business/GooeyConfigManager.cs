@@ -240,6 +240,11 @@ This is your home page.
             }
         }
 
+        public static String PaypalEmail
+        {
+            get { return GetCachedValue(ConfigConstants.PaypalEmail); }
+        }
+
         public static String PaypalUsername
         {
             get { return GetCachedValue(ConfigConstants.PaypalUsername); }

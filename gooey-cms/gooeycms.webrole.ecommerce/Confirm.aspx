@@ -85,7 +85,7 @@
                 <tr class="controls">
                 <td colspan="2" class="controls">
                     <input type="hidden" name="cmd" value="_xclick">
-                    <input type="hidden" name="business" value="seller_1272749312_biz@gmail.com" />
+                    <input type="hidden" name="business" value="<%= PaypalAccount %>" />
                     <input type="hidden" name="amount" value="<%= Amount %>" />
                     <input type="hidden" name="item_name" value="<%= PackageTitle %>" />
                     <input type="hidden" name="item_number" value="<%= PackageGuid %>" />

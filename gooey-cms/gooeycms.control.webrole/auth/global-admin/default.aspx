@@ -43,6 +43,15 @@
                 </td>
             </tr>
             <tr>
+                <td>Paypal Web Email:</td>
+                <td><asp:Image ID="PaypalEmailImage" runat="server" /></td>
+                <td>
+                    <asp:Hyperlink ID="PaypalEmailLink" runat="server" />
+                    <telerik:RadToolTip ID="PaypalEmailTooltip" Skin="Default" Width="250" TargetControlID="PaypalEmailLink" runat="server">
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+            <tr>
                 <td>Paypal PDT Token:</td>
                 <td><asp:Image ID="PaypalPdtTokenImage" runat="server" /></td>
                 <td>

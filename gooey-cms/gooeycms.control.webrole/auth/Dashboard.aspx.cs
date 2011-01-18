@@ -20,11 +20,16 @@ namespace Gooeycms.Webrole.Control.auth
             if (LoggedInUser.IsDemoAccount)
                 Response.Redirect("~/auth/default.aspx");
 
+            String msg = Server.HtmlEncode(Request.QueryString["msg"]);
+
             MembershipUserWrapper wrapper = MembershipUtil.FindByUsername(Membership.GetUser().UserName);
             subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
 
             if (!Page.IsPostBack)
             {
+                LblStatus.Text = msg;
+                LblStatus.ForeColor = System.Drawing.Color.Green;
+
                 foreach (CmsSubscription subscription in subscriptions)
                 {
                     ListItem item = new ListItem(subscription.DefaultDisplayName, subscription.Guid);
