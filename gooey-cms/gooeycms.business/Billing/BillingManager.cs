@@ -21,6 +21,7 @@ namespace Gooeycms.Business.Billing
         public const String Purchase = "Purchase";
         public const String Signup = "Signup";
         public const String Cancel = "Cancel";
+        public const String Transfer = "Transfer";
 
         public void AddHistory(Data.Guid subscriptionId, String paypalProfileId, String transactionId, String transactionType, Double amount, String description)
         {

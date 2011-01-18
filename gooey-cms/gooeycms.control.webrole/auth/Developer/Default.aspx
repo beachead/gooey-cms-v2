@@ -44,7 +44,7 @@
                                     <%# Eval("Title") %><br />
                                     <%# DataBinder.Eval(Container.DataItem,"Price","{0:c0}") %>
                                 </div>
-				                <div class="logo"><asp:Image ID="Logo" runat="server" /></div>
+				                <div class="logo" style="padding-top:5px;"><asp:Image ID="Logo" runat="server" /></div>
 				                
 				                <div class="features">
                                     <a href="#" class="showFeatures">Features</a>
@@ -59,6 +59,7 @@
                                 
                                 <ul class="options-links">
                                     <li><a href="#" onclick="embed_display('<%# DataBinder.Eval(Container.DataItem,"Guid") %>'); return false;">Embed</a></li>
+                                    <li><a href="#" onclick="transfer_display('<%# DataBinder.Eval(Container.DataItem,"Guid") %>'); return false;">Transfer</a></li>
                                     <li><a href="<%# Eval("Guid") %>" class="addScreenshot">Add Screenshot</a></li>
                                     <li><a href='./Edit.aspx?e=<%# Eval("Guid") %>'>Edit</a></li>
                                     <li><asp:LinkButton ID="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete this site package? \n\n WARNING: This will immediately remove your site from the GooeyCMS Store.');" CommandName="DeletePackage" CommandArgument='<%# Eval("Guid") %>' runat="server">Delete</asp:LinkButton></li>
@@ -112,6 +113,12 @@
 
                     var wnd = $find('<%= EmbedWindow.ClientID %>');
                     wnd.show();
+                }
+
+                function transfer_display(guid) {
+                    var wnd = window.radopen('./Transfer.aspx?id=' + guid);
+                    wnd.set_height(350);
+                    wnd.set_width(650);
                 }
             </script>    
 </asp:Content>

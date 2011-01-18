@@ -138,7 +138,7 @@
     </div>
     <!-- END: main -->    
 
-    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Title="Change Password" Width="350" Height="250" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
+    <telerik:RadWindowManager ID="Singleton" Skin="Default" Modal="true" Title="" Width="350" Height="250" ShowContentDuringLoad="false" DestroyOnClose="true" Opacity="100" VisibleStatusbar="false" Behaviors="Move,Close,Resize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
     
     <script type="text/javascript" language="javascript">

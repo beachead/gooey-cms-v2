@@ -120,6 +120,7 @@
     <Content Include="auth\Developer\DoPackage.aspx" />
     <Content Include="auth\Developer\Settings.aspx" />
     <Content Include="auth\Developer\Site.aspx" />
+    <Content Include="auth\Developer\Transfer.aspx" />
     <Content Include="auth\global-admin\Configuration.aspx" />
     <Content Include="auth\global-admin\ContentTypes\ContentTypeFields.aspx" />
     <Content Include="auth\global-admin\ContentTypes\Default.aspx" />
@@ -339,6 +340,13 @@
     </Compile>
     <Compile Include="auth\Developer\Site.aspx.designer.cs">
       <DependentUpon>Site.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Developer\Transfer.aspx.cs">
+      <DependentUpon>Transfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Developer\Transfer.aspx.designer.cs">
+      <DependentUpon>Transfer.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Configuration.aspx.cs">
       <DependentUpon>Configuration.aspx</DependentUpon>
