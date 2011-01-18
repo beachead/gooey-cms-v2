@@ -46,10 +46,11 @@ li.theme .title {
 }
 
 li.theme ul.options-links {
-    overflow:auto;
-    clear:both;
     border-top: 1px solid #ccc;
+    clear:both;
+    font-size: .85em;
     margin: 5px 20px;
+    overflow:auto;
     text-align: right;
 }
 
@@ -140,9 +141,10 @@ li.theme div.theme-add-screenshot input {
 
 
 li.theme div.features {
-    top: 67px;
+    font-size: .85em;
     left: 19px;
     position: absolute;
+    top: 70px;
 }
 
 li.theme div.features ul {
