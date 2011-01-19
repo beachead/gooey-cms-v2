@@ -23,6 +23,8 @@ using Gooeycms.Data.Model.Site;
 using System.Web;
 using System.Collections.Generic;
 using Gooeycms.Data.Model.Campaign;
+using Gooeycms.Business.Markup.Markdown;
+using Gooeycms.Business.Images;
 
 namespace Gooeycms.Business.Pages
 {
@@ -175,6 +177,8 @@ namespace Gooeycms.Business.Pages
             template = template.Replace("{campaign-top}", elements["top"]);
             template = template.Replace("{campaign-middle}", elements["middle"]);
             template = template.Replace("{campaign-bottom}", elements["bottom"]);
+
+            template = ImageRewriter.ThemesImageRewriter.Rewrite(template);
 
             //Replace the page campaign placeholders
             this.page.Content = this.page.Content.Replace("{campaign-top}", elements["top"]);
