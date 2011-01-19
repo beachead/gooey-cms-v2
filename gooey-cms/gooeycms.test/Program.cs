@@ -4,6 +4,9 @@ using System;
 using System.IO;
 using gooeycms.business.salesforce;
 using System.Collections.Generic;
+using Gooeycms.Business.Import;
+using Gooeycms.Business.Twilio;
+
 
 namespace Gooeycms.test
 {
@@ -11,25 +14,42 @@ namespace Gooeycms.test
     {
         static void Main(string[] args)
         {
-            SalesforcePartnerClient client = new SalesforcePartnerClient();
-            client.Login("cadams@prayer-warrior.net", "3Becca135ZWjDhWUzSjs8cJaiBWGX2H6v");
-            
-            IList<SalesforcePartnerClient.LeadField> results = client.GetAvailableLeadFields();
-            foreach (SalesforcePartnerClient.LeadField result in results)
-                Console.WriteLine(result.ApiName + " " + result.Label + " " + result.IsRequired);
+            TwilioClient client = new TwilioClient("ACe6a95690dcdee460400d44ae94e4e637", "707b003f01b09e45d998a487828c8625");
+            client.SearchAvailableLocalNumbers("123");
 
-            //Create a lead
-            Dictionary<String, String> values = new Dictionary<string, string>();
-            values["email"] = "mynewlead@testing.com";
-            values["FirstName"] = "Chris";
-            values["LastName"] = "Adams";
-            values["Company"] = "My Company";
+            /*
+            client.PurchasePhoneNumber("816", "http://control.gooeycms.com/twilio-handler.aspx");
+            */
 
-            client.AddLead(values, null);
+            /*
+            IList<AvailablePhoneNumber> numbers = client.SearchAvailableLocalNumbers("816");
+            foreach (AvailablePhoneNumber number in numbers)
+            {
+                System.Console.WriteLine(number.FriendName);
+            }
 
-            client.Logout();
+            IList<AvailablePhoneNumber> numbers2 = client.SearchAvailableTollFreeNumbers();
+            foreach (AvailablePhoneNumber number in numbers2)
+            {
+                System.Console.WriteLine(number.FriendName);
+            }
+            System.Console.ReadLine();
+            */
 
-            Console.ReadLine();
+            /*
+            GooeyCrawler crawler = new GooeyCrawler(new Uri("http://www.emaildatasource.com/"));
+            crawler.GetSiteMap();
+            */
+
+            /*
+            WebSiteDownloaderOptions options = new WebSiteDownloaderOptions();
+            options.DownloadUri = new Uri("http://www.firstmgt.com");
+            options.MaximumLinkDepth = 3;
+            options.StayOnSite = true;
+
+            WebSiteDownloader downloader = new WebSiteDownloader(options);
+            downloader.Process();
+             */
 
             /*
             String test = "\u001FTESTING\u001FTESTING1\u001FTESTING2";

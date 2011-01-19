@@ -22,15 +22,15 @@
     <!-- START: masthead -->
     <div id="masthead">
         <div id="login"><a href="http://control.gooeycms.net/login.aspx"><img src="images/btn_login.png" width="104" height="28" alt="" runat="server" /></a></div>
-        <div id="logo"><a href="http://corp.gooeycms.net"><img src="images/logo_gooey_internal.png" width="225" height="75" alt="" runat="server" /></a></div>
+        <div id="logo"><a href="http://www.gooeycms.com"><img src="images/logo_gooey_internal.png" width="225" height="75" alt="" runat="server" /></a></div>
         <div id="nav">
             <ul class="adjacent rollover">
-                <li><a href="http://corp.gooeycms.net"><img src="images/nav_home.gif" width="56" height="22" alt="Home" runat="server" /></a></li>
-                <li><a href="http://corp.gooeycms.net/tour"><img src="images/nav_tour.gif" width="53" height="22" alt="Feature Tour" runat="server" /></a></li>
+                <li><a href="http://www.gooeycms.com"><img src="images/nav_home.gif" width="56" height="22" alt="Home" runat="server" /></a></li>
+                <li><a href="http://www.gooeycms.com/tour"><img src="images/nav_tour.gif" width="53" height="22" alt="Feature Tour" runat="server" /></a></li>
                 <li><a href="/"><img src="images/nav_store.gif" width="61" height="22" alt="Store" runat="server" /></a></li>
-                <li><a href="http://corp.gooeycms.net/pricing"><img src="images/nav_pricing.gif" width="72" height="22" alt="Pricing" runat="server" /></a></li>
-                <li><a href="http://corp.gooeycms.net/help"><img src="images/nav_help.gif" width="43" height="22" alt="Help" runat="server" /></a></li>
-                <li id="signup"><a href="http://secure.gooeycms.net/signup/default.aspx"><img src="images/nav_signup_on.gif" width="50" height="30" alt="Signup" class="active" runat="server" /></a></li>
+                <li><a href="http://www.gooeycms.com/pricing"><img src="images/nav_pricing.gif" width="72" height="22" alt="Pricing" runat="server" /></a></li>
+                <li><a href="http://www.gooeycms.com/help"><img src="images/nav_help.gif" width="43" height="22" alt="Help" runat="server" /></a></li>
+                <li id="signup"><a href="http://secure.gooeycms.com/signup/default.aspx"><img src="images/nav_signup_on.gif" width="50" height="30" alt="Signup" class="active" runat="server" /></a></li>
             </ul>
         </div>
     </div>

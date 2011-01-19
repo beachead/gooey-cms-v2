@@ -6,6 +6,8 @@
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmslogs;AccountKey=KCCDTPam0lL8a55yQHBjYb4sri1MLUt91ElM/uyZxIp4YPFIH/p2krdQVshis1e15KGq7QBZ6xGqHn65DjtY0g==" />
       <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmstorage;AccountKey=WV0ZhoZbKn29rRP3GaoJyjLdA9uFqUO259hzeTOZp3igobNVCa1XI6X8If28jwtAi2kkgF6Ay1sy9gACN2vhkw==" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </Role>
   <Role name="gooeycms.worker.control">
     <Instances count="1" />
@@ -13,5 +15,7 @@
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmslogs;AccountKey=KCCDTPam0lL8a55yQHBjYb4sri1MLUt91ElM/uyZxIp4YPFIH/p2krdQVshis1e15KGq7QBZ6xGqHn65DjtY0g==" />
       <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmstorage;AccountKey=WV0ZhoZbKn29rRP3GaoJyjLdA9uFqUO259hzeTOZp3igobNVCa1XI6X8If28jwtAi2kkgF6Ay1sy9gACN2vhkw==" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </Role>
 </ServiceConfiguration>

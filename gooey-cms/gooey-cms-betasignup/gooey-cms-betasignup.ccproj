@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>1.0.0</ProductVersion>
+    <ProductVersion>1.3.0</ProductVersion>
     <ProjectGuid>{c5e33ec7-841e-46ee-9bd0-b36bfec67442}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>

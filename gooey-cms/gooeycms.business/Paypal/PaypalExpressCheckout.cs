@@ -24,7 +24,7 @@ namespace Gooeycms.Business.Paypal
 
         public PaypalExpressCheckout()
         {
-            NvpConfig.Settings.Version = "54.0";
+            //NvpConfig.Settings.Version = "54.0";
         }
 
         public PaypalExpressCheckout(string token)

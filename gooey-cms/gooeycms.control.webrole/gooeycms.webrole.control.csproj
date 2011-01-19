@@ -73,15 +73,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -163,16 +157,34 @@
     <Content Include="default.aspx" />
     <Content Include="demo.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\bg_subnav_left1.gif" />
+    <Content Include="images\bg_subnav_right1.gif" />
+    <Content Include="images\bg_utilnav_left.png" />
+    <Content Include="images\bg_utilnav_menu.png" />
+    <Content Include="images\bg_utilnav_menu_left.png" />
+    <Content Include="images\bg_utilnav_menu_right.png" />
+    <Content Include="images\bg_utilnav_right.png" />
+    <Content Include="images\build_your_biz.png" />
+    <Content Include="images\check.png" />
+    <Content Include="images\dashboard.png" />
     <Content Include="images\drag_arrow.png" />
     <Content Include="images\bg_theme_panel.png" />
     <Content Include="images\bullet_features.gif" />
+    <Content Include="images\favicon.ico" />
     <Content Include="images\green-ball.gif" />
+    <Content Include="images\icon_arrow.png" />
+    <Content Include="images\icon_delete.png" />
     <Content Include="images\loading3.gif" />
     <Content Include="images\logo_gooey-login.png" />
     <Content Include="images\logo_gooey_internal.png" />
     <Content Include="images\progress_green.gif" />
+    <Content Include="images\purchases.png" />
     <Content Include="images\red-ball.gif" />
     <Content Include="images\Refresh.gif" />
+    <Content Include="images\small_arrow.png" />
+    <Content Include="images\spinner.gif" />
+    <Content Include="images\spr_editor_icons.png" />
+    <Content Include="images\steps_to_sell.png" />
     <Content Include="images\Vista\12.gif" />
     <Content Include="images\Vista\7.gif" />
     <Content Include="images\Vista\9.gif" />
@@ -203,6 +215,7 @@
     <Content Include="images\Vista\unknown.png" />
     <Content Include="images\Vista\vb.png" />
     <Content Include="images\Vista\xml.png" />
+    <Content Include="images\yellow-ball.gif" />
     <Content Include="images\___placeholder_logo.png" />
     <Content Include="scripts\global.js" />
     <Content Include="scripts\jquery-1.4.2.min.js" />
