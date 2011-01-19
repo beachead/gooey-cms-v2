@@ -58,6 +58,10 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business.import\gooeycms.business.import.csproj">
+      <Project>{15D61462-6336-4672-828E-071F728E0400}</Project>
+      <Name>gooeycms.business.import</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gooeycms.business.salesforce\gooeycms.business.salesforce.csproj">
       <Project>{6C6A2B71-C39A-4D38-A0F6-EF672670C57B}</Project>
       <Name>gooeycms.business.salesforce</Name>
