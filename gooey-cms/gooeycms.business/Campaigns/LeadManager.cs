@@ -32,9 +32,12 @@ namespace Gooeycms.Business.Campaigns
             {
                 CmsFormDao dao = new CmsFormDao();
 
+                DateTime end = enddate.Value;
+                end = end.AddDays(1);
+
                 if (mode == FormDataMode.ExcludeFormatData)
                 {
-                    IList<String> forms = dao.FindUniqueForms(siteGuid, startdate.Value, enddate.Value);
+                    IList<String> forms = dao.FindUniqueForms(siteGuid, startdate.Value, end);
                     foreach (String form in forms)
                     {
                         CmsForm temp = new CmsForm();
@@ -45,7 +48,7 @@ namespace Gooeycms.Business.Campaigns
                 }
                 else if (mode == FormDataMode.IncludeFormData)
                 {
-                    results = dao.FindUniqueResponses(siteGuid, startdate.Value, enddate.Value, null);
+                    results = dao.FindUniqueResponses(siteGuid, startdate.Value, end, null);
                 }
             }
             return results;
