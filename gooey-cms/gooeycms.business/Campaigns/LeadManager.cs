@@ -61,8 +61,14 @@ namespace Gooeycms.Business.Campaigns
 
         public string GenerateCsvReport(Data.Guid siteGuid, DateTime? startdate, DateTime? enddate, IList<String> filterPages)
         {
+            DateTime end;
+            if (enddate.HasValue)
+                end = enddate.Value.AddDays(1);
+            else
+                end = DateTime.Now.AddDays(1);
+
             CmsFormDao dao = new CmsFormDao();
-            IList<CmsForm> forms = dao.FindUniqueResponses(siteGuid, startdate.Value, enddate.Value, filterPages);
+            IList<CmsForm> forms = dao.FindUniqueResponses(siteGuid, startdate.Value, end, filterPages);
 
             HashSet<String> headerKeys = new HashSet<string>();
             foreach (CmsForm form in forms)
