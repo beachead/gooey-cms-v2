@@ -69,9 +69,7 @@ namespace Gooeycms.Webrole.Ecommerce
             foreach (CmsSubscriptionPlan plan in plans)
             {
                 ListItem item = new ListItem(plan.Name + " - $" + plan.Price, plan.SKU);
-                if ((plan.Price == 0) && (isFree))
-                    this.SelectedPlan.Items.Add(item);
-                else if (plan.Price > 0)
+                if (!plan.IsSystemPlan)
                     this.SelectedPlan.Items.Add(item);
             }
 
