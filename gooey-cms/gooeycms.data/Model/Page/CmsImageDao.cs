@@ -22,6 +22,12 @@ namespace Gooeycms.Data.Model.Page
             return base.Session.GetNamedQuery("CmsImagesPaging").SetParameter("guid",siteGuid.Value).SetInt32("start",start).SetInt32("end",end).List<CmsImage>();
         }
 
+        public IList<CmsImage> FindBySiteWithPagingAndDirectory(Guid siteGuid, String directory, int start, int end)
+        {
+
+            return base.Session.GetNamedQuery("CmsImagesPagingByDirectory").SetParameter("guid", siteGuid.Value).SetString("directory",directory).SetInt32("start", start).SetInt32("end", end).List<CmsImage>();
+        }
+
         public int FindImageCount(Guid guid)
         {
             String hql = "select count(image) from CmsImage image where image.SubscriptionId = :guid";

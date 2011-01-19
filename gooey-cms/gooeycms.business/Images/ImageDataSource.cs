@@ -23,22 +23,10 @@ namespace Gooeycms.Business.Images
 
             end = end - 1; //0-based
 
-            CmsImageDao dao = new CmsImageDao();
-            IList<CmsImage> images = dao.FindBySiteWithPaging(CurrentSite.Guid, start, end);
-
             String themeId = WebRequestContext.Instance.Request.QueryString["tid"];
 
-            IList<CmsImage> results = new List<CmsImage>();
-            foreach (CmsImage image in images)
-            {
-                if (image.Directory != null)
-                {
-                    if (image.Directory.Equals(themeId))
-                        results.Add(image);
-                }
-            }
-
-            return results;
+            CmsImageDao dao = new CmsImageDao();
+            return dao.FindBySiteWithPagingAndDirectory(CurrentSite.Guid, themeId, start, end);
         }
 
         public int GetThemeImageCount()
