@@ -32,12 +32,21 @@ namespace Gooeycms.Business.Campaigns
             {
                 CmsFormDao dao = new CmsFormDao();
 
-                DateTime end = enddate.Value;
-                end = end.AddDays(1);
+                DateTime start;
+                DateTime end;
+                if (startdate.HasValue)
+                    start = new DateTime(startdate.Value.Year, startdate.Value.Month, startdate.Value.Day, 0, 0, 0);
+                else
+                    start = DateTime.Now.AddDays(-7);
+
+                if (enddate.HasValue)
+                    end = new DateTime(enddate.Value.Year, enddate.Value.Month, enddate.Value.Day, 23, 59, 59);
+                else
+                    end = DateTime.Now.AddDays(1);
 
                 if (mode == FormDataMode.ExcludeFormatData)
                 {
-                    IList<String> forms = dao.FindUniqueForms(siteGuid, startdate.Value, end);
+                    IList<String> forms = dao.FindUniqueForms(siteGuid, start, end);
                     foreach (String form in forms)
                     {
                         CmsForm temp = new CmsForm();
@@ -48,7 +57,7 @@ namespace Gooeycms.Business.Campaigns
                 }
                 else if (mode == FormDataMode.IncludeFormData)
                 {
-                    results = dao.FindUniqueResponses(siteGuid, startdate.Value, end, null);
+                    results = dao.FindUniqueResponses(siteGuid, start, end, null);
                 }
             }
             return results;
@@ -61,14 +70,20 @@ namespace Gooeycms.Business.Campaigns
 
         public string GenerateCsvReport(Data.Guid siteGuid, DateTime? startdate, DateTime? enddate, IList<String> filterPages)
         {
+            DateTime start;
             DateTime end;
+            if (startdate.HasValue)
+                start = new DateTime(startdate.Value.Year,startdate.Value.Month, startdate.Value.Day,0,0,0);
+            else
+                start = DateTime.Now.AddDays(-7);
+
             if (enddate.HasValue)
-                end = enddate.Value.AddDays(1);
+                end = new DateTime(enddate.Value.Year, enddate.Value.Month, enddate.Value.Day,23,59,59);
             else
                 end = DateTime.Now.AddDays(1);
 
             CmsFormDao dao = new CmsFormDao();
-            IList<CmsForm> forms = dao.FindUniqueResponses(siteGuid, startdate.Value, end, filterPages);
+            IList<CmsForm> forms = dao.FindUniqueResponses(siteGuid, start, end, filterPages);
 
             HashSet<String> headerKeys = new HashSet<string>();
             foreach (CmsForm form in forms)
