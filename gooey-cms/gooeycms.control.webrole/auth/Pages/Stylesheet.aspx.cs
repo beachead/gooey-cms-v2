@@ -14,8 +14,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 {
     public partial class Stylesheet : System.Web.UI.Page
     {
-        protected String SelectedPanel = "enablepanel";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -46,11 +44,12 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             this.LstEnabledFilesOrderable.DataSource = enabledFiles;
             this.LstEnabledFilesOrderable.DataBind();
-
+            /*
             if (files.Count == enabledFiles.Count)
                 this.DisablePanel.Visible = false;
             else
                 this.DisablePanel.Visible = true;
+            */
         }
 
         protected void LstEnabledFiles_ItemCommand(object sender, AjaxControlToolkit.ReorderListCommandEventArgs e)
@@ -121,7 +120,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 CssManager.Instance.Save(page, filename, data);
             }
 
-            SelectedPanel = "managepanel";
             LoadTabData();
         }
 
@@ -134,7 +132,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             CmsPage page = GetSelectedPage();
             CssManager.Instance.Save(page, filename, data);
 
-            SelectedPanel = "managepanel";
             LoadTabData();
 
             this.LstExistingFile.SelectedValue = filename;
@@ -148,8 +145,11 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             CmsPage page = GetSelectedPage();
             CssManager.Instance.Save(page, filename, data);
+            
+            addStylesheet.Visible = true;
+            manageStylesheets.Visible = true;
+            editStylesheetContent.Visible = false;
 
-            SelectedPanel = "managepanel";
             LoadTabData();
         }
 
@@ -159,7 +159,17 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             CssFile file = CssManager.Instance.Get(this.GetSelectedPage(), name);
 
             this.Editor.Text = file.Content;
-            SelectedPanel = "managepanel";
+
+            addStylesheet.Visible = false;
+            manageStylesheets.Visible = false;
+            editStylesheetContent.Visible = true;
+        }
+
+        protected void BtnCancel_Click(object sender, EventArgs e)
+        {
+            addStylesheet.Visible = true;
+            manageStylesheets.Visible = true;
+            editStylesheetContent.Visible = false;
         }
 
         private CmsPage GetSelectedPage()
