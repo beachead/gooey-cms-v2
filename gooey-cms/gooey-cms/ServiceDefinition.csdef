@@ -12,9 +12,12 @@
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="ActiveStorageConnectionString" />
     </ConfigurationSettings>
-    <LocalResources></LocalResources>
+    <LocalResources>
+    </LocalResources>
     <Endpoints>
       <InputEndpoint name="HttpIn" protocol="http" port="80" />
     </Endpoints>
+    <Imports>
+    </Imports>
   </WebRole>
 </ServiceDefinition>

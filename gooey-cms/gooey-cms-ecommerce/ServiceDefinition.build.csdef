@@ -24,5 +24,6 @@
     <Endpoints>
       <InputEndpoint name="HttpIn" protocol="http" port="80" />
     </Endpoints>
+    <Imports></Imports>
   </WebRole>
 </ServiceDefinition>
