@@ -330,5 +330,35 @@ namespace Gooeycms.Business.Images
 
             return missingImages;
         }
+
+        public void DeleteImage(Data.Guid siteGuid, Data.Guid imageGuid)
+        {
+            //Find the image based upon the guid
+            CmsImageDao dao = new CmsImageDao();
+            CmsImage image = dao.FindBySiteAndGuid(siteGuid, imageGuid);
+            if (image != null)
+            {
+                String container = SiteHelper.GetStorageKey(SiteHelper.ImagesContainerKey, siteGuid.Value);
+
+                //Attempt to delete from cloud storage first
+                IStorageClient client = StorageHelper.GetStorageClient();
+                if (client.ContainsSnapshots(container, image.Directory, image.Filename))
+                    throw new ArgumentException("Unable to delete the image because it is currently being used by a site package");
+
+                try
+                {
+                    client.Delete(container, image.Directory, image.Filename);
+                    using (Transaction tx = new Transaction())
+                    {
+                        dao.Delete<CmsImage>(image);
+                        tx.Commit();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("There was a problem deleting the image: " + e.Message);
+                }
+            }
+        }
     }
 }
