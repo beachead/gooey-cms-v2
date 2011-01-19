@@ -105,6 +105,7 @@
     <Content Include="auth\Campaigns\ActivatePhone.aspx" />
     <Content Include="auth\Campaigns\Create.aspx" />
     <Content Include="auth\Campaigns\Default.aspx" />
+    <Content Include="auth\Campaigns\Elements.aspx" />
     <Content Include="auth\Campaigns\Leads.aspx" />
     <Content Include="auth\Campaigns\Links.aspx" />
     <Content Include="auth\Campaigns\Settings.aspx" />
@@ -235,6 +236,13 @@
     </Compile>
     <Compile Include="auth\Campaigns\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Campaigns\Elements.aspx.cs">
+      <DependentUpon>Elements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Campaigns\Elements.aspx.designer.cs">
+      <DependentUpon>Elements.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\Campaigns\Leads.aspx.cs">
       <DependentUpon>Leads.aspx</DependentUpon>

@@ -17,6 +17,97 @@ namespace Gooeycms.Business.Campaigns
         private static CampaignManager instance = new CampaignManager();
         public CampaignManager() { }
         public static CampaignManager Instance { get { return CampaignManager.instance; } }
+        private Lazy<ElementsManager> elementManager = new Lazy<ElementsManager>();
+
+        public ElementsManager Elements
+        {
+            get { return elementManager.Value; }
+        }
+
+        public class ElementsManager
+        {
+            public void Save(CmsCampaignElement element)
+            {
+                CmsCampaignElementDao dao = new CmsCampaignElementDao();
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Save<CmsCampaignElement>(element);
+                    tx.Commit();
+                }
+            }
+
+            public CmsCampaignElement GetElement(Data.Guid elementGuid, Data.Guid expectedCampaignGuid = new Data.Guid())
+            {
+                CmsCampaignElementDao dao = new CmsCampaignElementDao();
+                CmsCampaignElement element = dao.FindByElementGuid(elementGuid);
+                if ((element != null) && (!expectedCampaignGuid.IsEmpty()))
+                {
+                    if (!element.Campaign.Guid.Equals(expectedCampaignGuid.Value))
+                        throw new ArgumentException("There was a problem retrieving the campaign element: Element belongs to campaign " + element.Campaign.Guid + ", but attempted retrieval for " + expectedCampaignGuid.Value);
+                }
+
+                return element;
+            }
+
+            public IList<CmsCampaignElement> GetElements(Data.Guid campaignGuid)
+            {
+                CmsCampaignElementDao dao = new CmsCampaignElementDao();
+                return dao.FindByCampaignGuid(campaignGuid);
+            }
+
+            /// <summary>
+            /// Gets all of the campaign elements for the specified page
+            /// </summary>
+            /// <param name="cmsPage"></param>
+            /// <returns></returns>
+            public IDictionary<String,String> GetElementsForPage(Data.Model.Page.CmsPage cmsPage)
+            {
+                CmsCampaignElementDao dao = new CmsCampaignElementDao();
+                IList<CmsCampaignElement> elements = dao.FindByPageUrl(cmsPage.Url);
+
+                Dictionary<String, IList<CmsCampaignElement>> groupings = new Dictionary<string, IList<CmsCampaignElement>>();
+                groupings["top"] = new List<CmsCampaignElement>();
+                groupings["middle"] = new List<CmsCampaignElement>();
+                groupings["bottom"] = new List<CmsCampaignElement>();
+
+                foreach (CmsCampaignElement element in elements)
+                    groupings[element.Placement].Add(element);
+
+                Dictionary<String, String> results = new Dictionary<string, string>();
+
+                //Loop through each "group" and build up the elements
+                foreach (String key in groupings.Keys)
+                {
+                    StringBuilder builder = new StringBuilder();
+
+                    IList<CmsCampaignElement> temp = groupings[key];
+                    foreach (CmsCampaignElement item in temp)
+                    {
+                        builder.Append(@"<div class=""gooey-campaign-element"">").AppendLine();
+                        builder.AppendLine(item.Content);
+                        builder.AppendFormat("</div>");
+                    }
+
+                    results[key] = builder.ToString();
+                }
+
+                return results;
+            }
+
+            public void Delete(CmsCampaignElement element)
+            {
+                if (element != null)
+                {
+                    CmsCampaignElementDao dao = new CmsCampaignElementDao();
+                    using (Transaction tx = new Transaction())
+                    {
+                        dao.Delete<CmsCampaignElement>(element);
+                        tx.Commit();
+                    }
+                }
+            }
+        }
+
 
         public void Add(CmsCampaign campaign)
         {

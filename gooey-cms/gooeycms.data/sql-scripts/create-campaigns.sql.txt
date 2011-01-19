@@ -21,3 +21,17 @@ CREATE INDEX idx_phone_number ON Campaigns(phone_number);
 
 CREATE UNIQUE INDEX unq_phone_number ON Subscription_Phone_Numbers(phone_number) ON DELETE SET NULL;
 
+CREATE TABLE [dbo].[Campaign_Elements](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[guid] VARCHAR(36),
+	[campaign_guid] VARCHAR(36),
+	[name] VARCHAR(255),
+	[placement] VARCHAR(15),
+	[priority] INT,
+	[pages] VARCHAR(MAX),
+	[element_code] NTEXT,
+	PRIMARY KEY CLUSTERED([id]),
+);
+CREATE INDEX idx_element_campaign ON Campaign_Elements(campaign_guid);
+CREATE UNIQUE INDEX uqn_campaign_guid ON Campaigns(guid);
+ALTER TABLE Campaign_Elements ADD CONSTRAINT fk_campaigns_elements FOREIGN KEY(campaign_guid) REFERENCES Campaigns(guid) ON DELETE CASCADE;

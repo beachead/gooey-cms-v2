@@ -67,6 +67,8 @@
     <Compile Include="Model\Billing\BillingHistoryDao.cs" />
     <Compile Include="Model\Campaign\CmsCampaign.cs" />
     <Compile Include="Model\Campaign\CmsCampaignDao.cs" />
+    <Compile Include="Model\Campaign\CmsCampaignElement.cs" />
+    <Compile Include="Model\Campaign\CmsCampaignElementDao.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Content\CmsContent.cs" />
     <Compile Include="Model\Content\CmsContentDao.cs" />
