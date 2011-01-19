@@ -63,6 +63,19 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
                 this.ImagePreview.ImageUrl = image.CloudUrl;
             }
+            else if (e.CommandName.Equals("DeleteImage"))
+            {
+                try
+                {
+                    ImageManager.Instance.DeleteImage(CurrentSite.Guid,(String)e.CommandArgument);
+                    this.BtnRefreshImages_Click(null, null);
+                }
+                catch (Exception ex)
+                {
+                    this.LblStatus.Text = ex.Message;
+                    this.LblStatus.ForeColor = System.Drawing.Color.Red;
+                }
+            }
         }
     }
 }

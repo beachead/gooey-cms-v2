@@ -58,7 +58,7 @@
                 <tr>
                     <td colspan="2">
                         <asp:ImageButton ID="BtnRefreshImages" ImageUrl="~/images/Refresh.gif" OnClick="BtnRefreshImages_Click" runat="server" />&nbsp;Refresh
-                        Images
+                        Images&nbsp;<asp:Label ID="LblStatus" runat="server" />
                     </td>
                 </tr>
                 <tr>
@@ -73,7 +73,8 @@
                                     <telerik:GridBoundColumn DataField="Length" ReadOnly="true" HeaderText="Size" />
                                     <telerik:GridTemplateColumn HeaderText="Actions">
                                         <ItemTemplate>
-                                        <a href="#" onclick="<%# DataBinder.Eval(Container.DataItem, "Filename", "_imageclick(\'{0}\'); return false;") %>">select</a>
+                                        <a href="#" onclick="<%# DataBinder.Eval(Container.DataItem, "Filename", "_imageclick(\'{0}\'); return false;") %>">select</a>&nbsp;
+                                        <asp:LinkButton ID="BtnDelete" CommandName="DeleteImage" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Guid") %>' OnClientClick="return confirm('Are you sure you want to delete this image?');" Text="delete" runat="server" />
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                 </Columns>

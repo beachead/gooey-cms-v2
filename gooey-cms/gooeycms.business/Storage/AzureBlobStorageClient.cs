@@ -139,6 +139,8 @@ namespace Gooeycms.Business.Storage
         {
             Boolean result = false;
             CloudBlobContainer container = GetBlobContainer(containerName);
+
+            filename = GetRelativeFilename(directoryName, filename);
             CloudBlob blob = container.GetBlobReference(filename);
             if (blob.Exists())
             {
@@ -182,7 +184,7 @@ namespace Gooeycms.Business.Storage
             CloudBlobDirectory dir = container.GetDirectoryReference(directoryName);
             foreach (CloudBlob blob in dir.ListBlobs()) 
             {
-                if (!blob.SnapshotTime.HasValue)
+                if ((blob.Exists()) && (!blob.SnapshotTime.HasValue))
                 {
                     blob.DeleteIfExists();
                 }
@@ -198,8 +200,11 @@ namespace Gooeycms.Business.Storage
             {
                 filename = GetRelativeFilename(directoryName, filename);
                 CloudBlob blob = container.GetBlobReference(filename);
-                if (!blob.SnapshotTime.HasValue)
-                    blob.DeleteIfExists();
+                if (blob.Exists())
+                {
+                    if (!blob.SnapshotTime.HasValue)
+                        blob.DeleteIfExists();
+                }
             }
         }
 
