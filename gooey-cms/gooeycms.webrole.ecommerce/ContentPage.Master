@@ -41,10 +41,10 @@
 	<!-- START: footer -->
 	<div id="footer">
 		<ul class="adjacent">
-			<li><a href="contact_us">Contact Us</a></li>
-			<li><a href="help#refund">Refunds</a></li>
-			<li><a href="privacy">Privacy</a></li>
-			<li class="last"><a href="terms_of_use">Terms of Use</a></li>
+			<li><a href="http://www.gooeycms.com/contact_us">Contact Us</a></li>
+			<li><a href="http://www.gooeycms.com/help#refund">Refunds</a></li>
+			<li><a href="http://www.gooeycms.com/privacy">Privacy</a></li>
+			<li class="last"><a href="http://www.gooeycms.com/terms_of_use">Terms of Use</a></li>
         </ul>
         <p>&copy; 2008 - 2011 Beachead Technologies Inc.</p>
 	</div>
