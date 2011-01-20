@@ -4,8 +4,12 @@
 
 #callout{
 	top: 100px;
-	left: 410px;;
+	left: 410px;
 }
+#callout div {
+    font-size:.9em;
+    }
+    
 
 #signup-steps {
 	list-style: none;
@@ -43,6 +47,8 @@ input.cms-address {
 
 #salesforce-disclaimer {
 	margin-left: 20px;
+	margin-top:-12px;
+	padding-bottom:10px;
 }
 
 #plan {

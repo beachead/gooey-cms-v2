@@ -15,7 +15,7 @@
         <div style="padding-left:70px;">
         <asp:LoginView ID="LoginView" runat="server">
             <AnonymousTemplate>
-            Are you an existing client? <asp:HyperLink ID="LnkSignIn" runat="server">Sign In Now</asp:HyperLink>.                
+            Are you an existing client? <asp:HyperLink ID="LnkSignIn" runat="server">Sign In Now</asp:HyperLink>.         
             </AnonymousTemplate>
             <LoggedInTemplate>
                 You are currently logged in as <asp:LoginName runat="server" />&nbsp;<asp:LoginStatus ID="LoggedInStatus" LogoutText="Logout" runat="server" />
@@ -27,9 +27,8 @@
             <br />
             <asp:Label ID="LblStatus" runat="server" />
         </div>
-
 		<div class="callout" id="callout">
-			<p>Your 30 day trial lasts until <br /><% Response.Write(TrialExpires); %>. If you don’t want to continue using Gooey CMS, please cancel before <% Response.Write(TrialExpires); %>.</p>
+			<p style="margin-bottom:10px;">Try Gooey CMS without a credit card, sign&nbsp;up for our <a href="Default.aspx?free">FREE</a> program.</p><p class="x-3" style="padding-left:25px; margin-bottom:10px;">You can upgrade to our Pro Plan anytime for FREE during your 30&nbsp;day trial which expires on <% Response.Write(TrialExpires); %>.</p>
 			<p class="x-3" style="padding-left:25px;">You can cancel anytime, but we hope you'll stay.</p>
 		</div>
  
@@ -92,7 +91,7 @@
 			</li> 
 			<li>
 				<h2><img src="../images/h2_create_gooey_address.png" width="435" height="35" alt="create your cms address" /></h2>
-				<p>Every Gooey CMS has its own web address.  You can change it to a<br />custom DNS address at any time (for example, MyWebsite.com).</p>
+				<p>Every Gooey CMS website has its own web address. You can change<br />to a custom DNS address at any time (for example, MyWebsite.com).</p>
                 
 				<asp:UpdatePanel ID="UpdatePanelAvailable" runat="server">                
 				<ContentTemplate>				
@@ -104,19 +103,23 @@
                 </ContentTemplate>					
                 </asp:UpdatePanel> 						
 			</li>		
-			<asp:Panel ID="OptionsPanel" Visible="true" runat="server">
-			<li>
+			<li style="padding-bottom:0px;">
 				<h2><img src="../images/h2_choose_options.png" width="435" height="35" alt="choose your options" /></h2>
-				<p>We offer a few options for some customers who may need to<br />integrate Gooey CMS with their CRM or Analytics system.</p>
+				<p>Add the power of an integrated demand-gen system and see how easy it is to increase your website's revenue.</p>
 				<p>
                     <anthem:CheckBox ID="CampaignOption" AutoUpdateAfterCallBack="true" runat="server" />
-					<label id="lbl-campaign-integration" class="option-item" for="salesforce-integration">campaign integration - $<asp:Label ID="CampaignOptionCost" runat="server" /> / month</label>
+					<label id="lbl-campaign-integration" class="option-item" for="salesforce-integration">Campaign integration - $<asp:Label ID="CampaignOptionCost" runat="server" /> / month</label>
+				<div id="salesforce-disclaimer">Campaign integration allows you to track your customers offline and online activity.<br />Imagine understanding just how many phone calls your company received and whitepapers were downloaded from your latest email blast or PPC campaign.</div>
 				</p>
-				<p>
+            </li>
+			<asp:Panel ID="OptionsPanel" Visible="true" runat="server">
+			<li>
+            	<p>
                     <anthem:CheckBox ID="SalesForceOption" OnCheckedChanged="SalesForceOption_Checked" AutoCallBack="true"  runat="server" />
-					<label id="lbl-salesforce-integration" class="option-item" for="salesforce-integration">salesforce integration - $<asp:Label ID="SalesForceCost" runat="server" /> / month</label>
+					<label id="lbl-salesforce-integration" class="option-item" for="salesforce-integration">Salesforce integration - $<asp:Label ID="SalesForceCost" runat="server" /> / month</label>
+				<div id="salesforce-disclaimer">Salesforce integration allows you to send sales leads from any of your forms directly into Salesforce<br />(requires <a href="http://www.salesforce.com/crm/editions-pricing.jsp">Salesforce Professional with API, Enterprise or Unlimited account</a>).<br />
+                Setup takes minutes, as Salesforce fields (including custom fields) are supported with no programming.</div>
 				</p>
-				<p id="salesforce-disclaimer">Salesforce Integration allows you to send sales leads from any of your<br />forms directly into Salesforce (requires <a href="#">Salesforce Enterprise account</a>).</p>
 			</li>
             </asp:Panel>			
             
@@ -125,8 +128,8 @@
 				<p>
 				    <asp:DropDownList ID="SelectedPlan" OnSelectedIndexChanged="SelectedPlan_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
 				</p>
+				<p id="disclaimer" style="color:#000000;">by clicking the button below, you agree to our <a href="http://www.gooeycms.com/terms_of_use">terms of service</a>, <a href="http://www.gooeycms.com/privacy">privacy policy</a>, and <a href="http://www.gooeycms.com/help#refund">refund policy</a>.</p>
 				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" OnClientClick="" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
-				<p id="disclaimer">by clicking the button above, you agree to our <a href="http://corp.gooeycms.net/terms_of_use">terms of service</a>, <a href="http://corp.gooeycms.net/privacy">privacy policy</a>, and <a href="http://corp.gooeycms.net/help#refund">refund policy</a>.</p>
 			</li>
 		</ol>
  
@@ -136,7 +139,7 @@
             <ContentTemplate>
                 <div style="padding:10px;">
                     During our private launch an invite code is required to sign-up for GooeyCMS.<br />If you do not have an invite code you may request one <a href="http://invite.gooeycms.com">here</a>.
-                    <br /><br /><b>Note:</b><br />Your email address must be the same as the email address with which you received your invitation.<br /><br />
+                    <br /><br />
                     <b>Invite Code:</b><br />
                     <asp:TextBox ID="InviteCode" Width="500px" TextMode="MultiLine" Rows="3" runat="server" ValidationGroup="InviteGroup" />
                     <asp:RequiredFieldValidator ID="InviteRequired" runat="server" ControlToValidate="InviteCode" Display="None" />
