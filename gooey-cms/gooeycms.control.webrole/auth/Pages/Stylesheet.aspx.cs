@@ -127,6 +127,9 @@ namespace Gooeycms.Webrole.Control.auth.Pages
         {
             String text = "/* Replace with your stylesheet content */";
             String filename = this.TxtFileName.Text;
+            if (!filename.EndsWith(".css"))
+                filename = filename + ".css";
+
             byte[] data = Encoding.UTF8.GetBytes(text);
 
             CmsPage page = GetSelectedPage();
@@ -163,6 +166,14 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             addStylesheet.Visible = false;
             manageStylesheets.Visible = false;
             editStylesheetContent.Visible = true;
+        }
+
+        protected void BtnDelete_Click(Object sender, EventArgs e)
+        {
+            String name = this.LstExistingFile.SelectedValue;
+            CssManager.Instance.Delete(this.GetSelectedPage(), name);
+
+            LoadTabData();
         }
 
         protected void BtnCancel_Click(object sender, EventArgs e)

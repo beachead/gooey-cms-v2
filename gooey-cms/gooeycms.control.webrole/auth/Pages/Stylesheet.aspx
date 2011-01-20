@@ -53,6 +53,7 @@
 <body class="claro">
 
 <form id="form1" runat="server">
+    <telerik:RadScriptManager ID="ScriptManager" EnableCdn="true" runat="server" />
 
     <div id="dialogErrorMessage" dojoType="dijit.Dialog" title="Error" style="display:none;width:200px;height:100px;overflow:auto;">
         <span id="lblErrorMessage"></span>
@@ -70,7 +71,8 @@
             <div class="column last" style="width: 350px;">
                 <h3>Create File</h3>
                 <asp:TextBox ID="TxtFileName" ValidationGroup="FilName" Width="250px" ToolTip="Input a name for this stylesheet file" runat="server" />&nbsp;
-                <asp:Button ID="BtnCreateNew" OnClick="BtnCreate_Click" Text="Create" runat="server" />
+                <asp:RequiredFieldValidator ID="RequiredField1" ValidationGroup="Filename" ControlToValidate="TxtFileName" Text="*" runat="server" />
+                <asp:Button ID="BtnCreateNew" OnClick="BtnCreate_Click" ValidationGroup="Filename" Text="Create" runat="server" />
             </div>
         </div>
     </fieldset>
@@ -83,7 +85,7 @@
                 <h3>Enable</h3>
                 <asp:ListBox ID="LstDisabledFiles" SelectionMode="Multiple" Rows="5" Width="200px" runat="server" />
                 <br />
-                <asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" Text="Enable" runat="server" />
+                <asp:Button ID="BtnEnableScripts" OnClick="BtnEnableScripts_Click" CausesValidation="false" Text="Enable" runat="server" />
             </div>
 
             <div class="column" style="width:250px;">
@@ -96,7 +98,7 @@
                     <ItemTemplate>
                         <div class="<%# ((Container.DisplayIndex % 2) == 0) ? "" : "alt" %>">
                             <%# Eval("Name") %>&nbsp;
-                            <asp:LinkButton ID="LnkDisableScript" CssClass="normal" CommandName="Disable" CommandArgument='<%# Eval("Name") %>' Text="Disable" runat="server" />
+                            <asp:LinkButton ID="LnkDisableScript" CssClass="normal" CommandName="Disable" CausesValidation="false" CommandArgument='<%# Eval("Name") %>' Text="Disable" runat="server" />
                         </div>
                     </ItemTemplate>
                     <DragHandleTemplate>
@@ -113,7 +115,8 @@
             <div class="column last" style="width: 250px;">
                 <h3>Edit an existing stylesheet</h3>
                 <asp:DropDownList ID="LstExistingFile" runat="server" />
-                <asp:Button ID="BtnEdit" OnClick="BtnEdit_Click" Text="Edit" runat="server" />
+                <asp:Button ID="BtnEdit" OnClick="BtnEdit_Click" Text="Edit" runat="server" />&nbsp;
+                <asp:Button ID="BtnDelete" OnClick="BtnDelete_Click" OnClientClick="return confirm('Are you sure want to delete this stylesheet?');"  CausesValidation="false" Text="Delete" runat="server" />
             </div>
         </div>
 

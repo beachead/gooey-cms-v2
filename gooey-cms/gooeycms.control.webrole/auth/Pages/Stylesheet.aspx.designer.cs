@@ -31,40 +31,22 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// DisablePanel control.
+        /// ScriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel DisablePanel;
+        protected global::Telerik.Web.UI.RadScriptManager ScriptManager;
         
         /// <summary>
-        /// LstDisabledFiles control.
+        /// addStylesheet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox LstDisabledFiles;
-        
-        /// <summary>
-        /// BtnEnableScripts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEnableScripts;
-        
-        /// <summary>
-        /// LstEnabledFilesOrderable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ReorderList LstEnabledFilesOrderable;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl addStylesheet;
         
         /// <summary>
         /// FileUpload control.
@@ -94,6 +76,15 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.WebControls.TextBox TxtFileName;
         
         /// <summary>
+        /// RequiredField1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredField1;
+        
+        /// <summary>
         /// BtnCreateNew control.
         /// </summary>
         /// <remarks>
@@ -101,6 +92,42 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCreateNew;
+        
+        /// <summary>
+        /// manageStylesheets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl manageStylesheets;
+        
+        /// <summary>
+        /// LstDisabledFiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox LstDisabledFiles;
+        
+        /// <summary>
+        /// BtnEnableScripts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEnableScripts;
+        
+        /// <summary>
+        /// LstEnabledFilesOrderable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ReorderList LstEnabledFilesOrderable;
         
         /// <summary>
         /// LstExistingFile control.
@@ -121,6 +148,24 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         protected global::System.Web.UI.WebControls.Button BtnEdit;
         
         /// <summary>
+        /// BtnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnDelete;
+        
+        /// <summary>
+        /// editStylesheetContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editStylesheetContent;
+        
+        /// <summary>
         /// Editor control.
         /// </summary>
         /// <remarks>
@@ -137,5 +182,14 @@ namespace Gooeycms.Webrole.Control.auth.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnSave;
+        
+        /// <summary>
+        /// BtnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCancel;
     }
 }

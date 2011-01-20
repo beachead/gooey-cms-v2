@@ -261,6 +261,18 @@ namespace Gooeycms.Business.Storage
             client.Delete(container, theme.ThemeGuid);
         }
 
+        public void Delete(CmsPage page, string name)
+        {
+            String container = CurrentSiteAssetStorageContainer;
+            IStorageClient client = StorageHelper.GetStorageClient();
+
+            client.Delete(container, page.UrlHash, name);
+            SitePageCacheRefreshInvoker.InvokeRefresh(page.SubscriptionId, SitePageRefreshRequest.PageRefreshType.Staging);
+
+            if (CurrentSite.IsAvailable)
+                CurrentSite.Cache.Clear(CachePrefix + page.UrlHash);
+        }
+
         public void Delete(CmsTheme theme, string name)
         {
             String container = CurrentSiteAssetStorageContainer;
@@ -268,6 +280,9 @@ namespace Gooeycms.Business.Storage
 
             client.Delete(container, theme.ThemeGuid, name);
             SitePageCacheRefreshInvoker.InvokeRefresh(theme.SubscriptionGuid, SitePageRefreshRequest.PageRefreshType.Staging);
+
+            if (CurrentSite.IsAvailable)
+                CurrentSite.Cache.Clear(CachePrefix + theme.ThemeGuid);
         }
 
         public void Delete(String container, String directory, String filename)
