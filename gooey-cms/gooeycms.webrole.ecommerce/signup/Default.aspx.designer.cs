@@ -202,15 +202,6 @@ namespace Gooeycms.Webrole.Ecommerce {
         protected global::System.Web.UI.WebControls.Image IsAvailableImage;
         
         /// <summary>
-        /// OptionsPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel OptionsPanel;
-        
-        /// <summary>
         /// CampaignOption control.
         /// </summary>
         /// <remarks>
@@ -227,6 +218,15 @@ namespace Gooeycms.Webrole.Ecommerce {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label CampaignOptionCost;
+        
+        /// <summary>
+        /// OptionsPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel OptionsPanel;
         
         /// <summary>
         /// SalesForceOption control.
