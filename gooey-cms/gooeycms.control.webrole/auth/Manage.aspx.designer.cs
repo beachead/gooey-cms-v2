@@ -13,6 +13,15 @@ namespace Gooeycms.Webrole.Control.auth {
     public partial class Manage {
         
         /// <summary>
+        /// FormDecorator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadFormDecorator FormDecorator;
+        
+        /// <summary>
         /// LblDomain control.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,114 @@ namespace Gooeycms.Webrole.Control.auth {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton BtnUpgradePlan;
+        
+        /// <summary>
+        /// UpgradeOptionsWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow UpgradeOptionsWindow;
+        
+        /// <summary>
+        /// UpgradeLoadingPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel UpgradeLoadingPanel;
+        
+        /// <summary>
+        /// AjaxUpgradePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxPanel AjaxUpgradePanel;
+        
+        /// <summary>
+        /// LblSubscriptionPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSubscriptionPrice;
+        
+        /// <summary>
+        /// LblBillingStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblBillingStartDate;
+        
+        /// <summary>
+        /// ChkUpgradeCampaignOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ChkUpgradeCampaignOption;
+        
+        /// <summary>
+        /// LblCampaignPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblCampaignPrice;
+        
+        /// <summary>
+        /// ChkUpgradeSalesforceOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ChkUpgradeSalesforceOption;
+        
+        /// <summary>
+        /// LblSalesforcePrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSalesforcePrice;
+        
+        /// <summary>
+        /// BtnUpgradeAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadButton BtnUpgradeAccount;
+        
+        /// <summary>
+        /// BtnCloseWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnCloseWindow;
+        
+        /// <summary>
+        /// LblTotalAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTotalAmount;
         
         /// <summary>
         /// BtnCancelPlan control.

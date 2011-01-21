@@ -151,6 +151,9 @@
     <Content Include="auth\Themes\Stylesheet.aspx" />
     <Content Include="auth\Users\Default.aspx" />
     <Content Include="auth\Users\edit-roles.aspx" />
+    <Content Include="Controls\ContentEditor\Images\OrderedList.gif" />
+    <Content Include="Controls\ContentEditor\Images\spr_editor_icons.png" />
+    <Content Include="Controls\ContentEditor\Images\UnorderedList.gif" />
     <Content Include="Controls\Subnav.ascx" />
     <Content Include="css\reorder.css" />
     <Content Include="css\store.css" />

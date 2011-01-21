@@ -315,7 +315,7 @@ This is your home page.
         {
             get
             {
-                String result = GetCachedValue(ConfigConstants.DefaultAdminDomain, "control.gooeycms.net");
+                String result = GetCachedValue(ConfigConstants.DefaultAdminDomain, "control.gooeycms.com");
                 return result;
             }
         }
@@ -350,6 +350,11 @@ This is your home page.
 
                 return type;
             }
+        }
+
+        public static Boolean IsFreeCampaignEnabled
+        {
+            get { return GetAsBoolean("goooey-is-freecampaign", true); }
         }
 
         public static Boolean IsLoggingEnabled

@@ -76,7 +76,7 @@ namespace Gooeycms.Business.Subscription.Paypal
                     case RecurringPaymentTxTypes.Suspended:
                         BillingManager.Instance.AddHistory(subscription.Guid, profileId, txId, txType, amount, "Subscription automatically disabled due to billing cancellation/suspension");
                         Logging.Database.Write("IPN Notification", "Paypal cancellation/suspension received: " + profileId + "\r\n" + rawRequest);
-                        SubscriptionManager.DisableSubscription(subscription);
+                        this.ProcessCancellation(subscription);
                         break;
                     case RecurringPaymentTxTypes.Expired:
                         BillingManager.Instance.AddHistory(subscription.Guid, profileId, txId, txType, amount, "Subscription free trial has expired.");
@@ -89,6 +89,23 @@ namespace Gooeycms.Business.Subscription.Paypal
         public virtual bool IsDebug
         {
             get { return false; }
+        }
+
+        /// <summary>
+        /// Detect if the cancellation is for simply the campaign option or for the subscription itself
+        /// </summary>
+        /// <param name="subscription"></param>
+        private void ProcessCancellation(CmsSubscription subscription)
+        {
+            if (subscription.SubscriptionPlanEnum == Constants.SubscriptionPlans.Free)
+            {
+                subscription.IsCampaignEnabled = false;
+                SubscriptionManager.Save(subscription);
+            }
+            else
+            {
+                SubscriptionManager.DisableSubscription(subscription);
+            }
         }
 
         public virtual bool ValidateRequest(System.Web.HttpRequest request)

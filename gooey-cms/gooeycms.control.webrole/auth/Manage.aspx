@@ -10,7 +10,7 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="Instructions" runat="server">
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
-
+<telerik:RadFormDecorator ID="FormDecorator" Skin="Default" EnableRoundedCorners="true" DecoratedControls="Fieldset,CheckBoxes,Textbox,Label" runat="server" />
 <h1>MANAGE SITE: <asp:Label ID="LblDomain" runat="server" /></h1>
 
 <p>This page allows you to upgrade your account and user settings and update the domain settings for your website.</p>
@@ -76,7 +76,56 @@
         <div style="padding-top:10px; padding-left:3px;">
                 <asp:MultiView ID="UpgradeOptions" runat="server">
                         <asp:View ID="UpgradeAvailable" runat="server">
-                            <asp:LinkButton ID="BtnUpgradePlan" OnClick="BtnUpgradePlan_Click" Text="Upgrade to Business Plan" runat="server" />
+                            <asp:LinkButton ID="BtnUpgradePlan" OnClientClick="show_options(); return false;" Text="Upgrade to Business Plan" runat="server" />
+                            <telerik:RadWindow ID="UpgradeOptionsWindow" Skin="Default" Modal="true" Title="Select Options" VisibleTitleBar="false" VisibleStatusbar="false"
+                                              Width="550px" Height="300px"  runat="server">
+                                <ContentTemplate>
+                                    <telerik:RadAjaxLoadingPanel ID="UpgradeLoadingPanel" Skin="Default" runat="server" />
+                                    <telerik:RadAjaxPanel ID="AjaxUpgradePanel" LoadingPanelID="UpgradeLoadingPanel" runat="server">
+                                    <div style="padding:5px;">
+                                    <fieldset style="width:500px;">
+                                        <legend><span style="color:#4395F1;">Subscription Cost</span></legend>
+                                        You will be charged <b><asp:Label ID="LblSubscriptionPrice" runat="server" /> per month</b> starting on <b><asp:Label ID="LblBillingStartDate" runat="server" /></b> <br />
+                                        <label>(not including any options added below)</label>
+                                    </fieldset>
+                                    <br />
+                                    <fieldset style="width:450px;">
+                                        <legend><span style="color:#4395F1;">Subscription Options</span></legend>
+                                        <table>
+                                            <tr>
+                                                <td><asp:CheckBox ID="ChkUpgradeCampaignOption" AutoPostBack="true" OnCheckedChanged="RecalculateCost_Click" runat="server" /></td>
+                                                <td>Campaign Integration - <asp:Label ID="LblCampaignPrice" runat="server" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="vertical-align:top;"><asp:CheckBox ID="ChkUpgradeSalesforceOption" AutoPostBack="true" OnCheckedChanged="RecalculateCost_Click" runat="server" /></td>
+                                                <td>
+                                                    Salesforce Integration - <asp:Label ID="LblSalesforcePrice" runat="server" />
+                                                    <br />
+                                                    <label>(requires Salesforce Enterprise Account)</label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </fieldset>
+                                    <br />
+                                    <telerik:RadButton ID="BtnUpgradeAccount" ButtonType="LinkButton" OnClick="BtnUpgradePlan_Click" Text="Upgrade Account" runat="server" />&nbsp;&nbsp;
+                                    <asp:LinkButton ID="BtnCloseWindow" OnClientClick="close_window(); return false;" Text="Cancel" runat="server" />
+                                    <br />
+                                    <label><b>Your account will be billed <asp:Label ID="LblTotalAmount" runat="server" /> per month</b><br /></label>
+                                    </div>
+                                    </telerik:RadAjaxPanel>
+                                </ContentTemplate>
+                            </telerik:RadWindow>
+                            <script type="text/javascript" language="javascript">
+                                function show_options() {
+                                    var wnd = $find("<%=UpgradeOptionsWindow.ClientID %>");
+                                    wnd.show();
+                                }
+
+                                function close_window() {
+                                    var wnd = $find("<%=UpgradeOptionsWindow.ClientID %>");
+                                    wnd.close();
+                                }
+                            </script>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <asp:LinkButton ID="BtnCancelPlan" OnClick="BtnCancelPlan_Click" Text="Cancel Account" OnClientClick="return confirm('Are you sure you want to cancel this subscription?');" runat="server" />                            
                         </asp:View>
@@ -124,6 +173,7 @@
             <asp:CheckBox ID="ChkCampaigns" Text="Campaign Integration" runat="server" /><asp:Label ID="LblCampaignCost" runat="server" /><br />
             <asp:CheckBox ID="ChkSalesforce" Text="Salesforce Integration" runat="server" /><asp:Label ID="LblSalesforceCost" runat="server" /><br />
         </div>
+
         <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
             <asp:LinkButton ID="BtnUpdateOptions" OnClick="BtnUpdateOptions_Click" Text="Update Options" runat="server" />
         </div>

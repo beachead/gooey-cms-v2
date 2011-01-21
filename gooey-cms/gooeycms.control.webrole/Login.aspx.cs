@@ -12,7 +12,7 @@ namespace Gooeycms.Webrole.Control
 
         protected void LoginControl_LoggedIn(object sender, EventArgs e)
         {
-            MembershipUtil.ProcessLogin(this.LoginControl.UserName);
+            String selectedSiteGuid = MembershipUtil.ProcessLogin(this.LoginControl.UserName);
 
             String returnUrl = Request.QueryString["ReturnUrl"];
             if (returnUrl != null)
@@ -22,10 +22,8 @@ namespace Gooeycms.Webrole.Control
             }
 
             //Set the first site active
-            
-
-            if (CurrentSite.IsAvailable)
-                SiteHelper.Configure(CurrentSite.Guid);
+            if (selectedSiteGuid != null)
+                SiteHelper.Configure(selectedSiteGuid);
             else
                 Response.Redirect("~/auth/dashboard.aspx", true);
         }

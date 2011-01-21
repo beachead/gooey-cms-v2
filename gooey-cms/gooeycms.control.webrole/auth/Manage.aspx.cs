@@ -15,6 +15,10 @@ using Gooeycms.Business.Membership;
 using Gooeycms.Business;
 using Gooeycms.Business.Email;
 using System.Globalization;
+using Gooeycms.Business.Campaigns;
+using Gooeycms.Constants;
+using Gooeycms.Extensions;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Webrole.Control.auth
 {
@@ -34,9 +38,37 @@ namespace Gooeycms.Webrole.Control.auth
                 CmsSubscription subscription = SubscriptionManager.GetSubscription(subscriptionId);
                 subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(Constants.SubscriptionPlans.Business);
 
-                Gooeycms.Business.Paypal.PaypalExpressCheckout.ProfileResultStatus status = checkout.CreateRecurringPayment(subscription);
+                int freeTrialRemaining = (int)SubscriptionManager.CalculateFreeTrialRemaining(subscription);
+
+                //Get the options cookie
+                Boolean foundCookie = false;
+                HttpCookie cookie = Request.Cookies["upgrade-options"];
+                if (cookie != null)
+                {
+                    try
+                    {
+                        String[] arr = TextEncryption.Decode(cookie.Value).Split('|');
+                        if (arr.Length == 2)
+                        {
+                            subscription.IsCampaignEnabled = (arr[0].Equals("true")) ? true : false;
+                            subscription.IsSalesforceEnabled = (arr[1].Equals("true")) ? true : false;
+
+                            foundCookie = true;
+                        }
+                    }
+                    catch (Exception) { }
+                }
+
+                if (!foundCookie)
+                {
+                    Response.Redirect("Manage.aspx?upgrade=failure&type=missingcookie", true);
+                }
+
+
+                Gooeycms.Business.Paypal.PaypalExpressCheckout.ProfileResultStatus status = checkout.CreateRecurringPayment(subscription, freeTrialRemaining);
                 subscription.PaypalProfileId = status.ProfileId;
                 subscription.IsDisabled = false; //Always make sure to reenable the subscription
+                subscription.MaxPhoneNumbers = -1; //Set back to the default value
                 SubscriptionManager.Save(subscription);
 
                 //Clear the site cache
@@ -76,8 +108,30 @@ namespace Gooeycms.Webrole.Control.auth
 
             this.LblDomain.Text = subscription.DefaultDisplayName;
 
+            this.ChkSalesforce.Visible = true;
             if (subscription.SubscriptionPlanEnum == Constants.SubscriptionPlans.Free)
+            {
                 this.UpgradeOptions.SetActiveView(this.UpgradeAvailable);
+
+                //Check if this user has campaigns, if so, check campaigns by default
+                this.ChkUpgradeCampaignOption.Checked = subscription.IsCampaignEnabled;
+                
+                //Calculate how long the user has left in their free trial period
+                double daysLeft = SubscriptionManager.CalculateFreeTrialRemaining(CurrentSite.Subscription);
+                DateTime firstBilling = DateTime.Now.AddDays(daysLeft);
+                this.LblBillingStartDate.Text = String.Format("{0:MMMMM dd, yyyy}", firstBilling);
+
+                double price = (double)SubscriptionManager.GetSubscriptionPlan(SubscriptionPlans.Business).Price;
+                this.LblSubscriptionPrice.Text = String.Format("{0:c}",price);
+                this.LblCampaignPrice.Text = String.Format("{0:c} per month",GooeyConfigManager.CampaignOptionPrice);
+                this.LblSalesforcePrice.Text = String.Format("{0:c} per month", GooeyConfigManager.SalesForcePrice);
+
+                if (this.ChkUpgradeCampaignOption.Checked)
+                    price += GooeyConfigManager.CampaignOptionPrice;
+
+                this.LblTotalAmount.Text = String.Format("{0:c}", price);
+                this.ChkSalesforce.Visible = false;
+            }
             else
                 this.UpgradeOptions.SetActiveView(this.DowngradeAvailable);
 
@@ -87,7 +141,6 @@ namespace Gooeycms.Webrole.Control.auth
             subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(Constants.SubscriptionPlans.Business);
             StringBuilder builder = SubscriptionManager.GetSubscriptionDescription(subscription);
             String msg = String.Format("Are you sure you want to upgrade to the {0}?",builder.ToString());
-            this.BtnUpgradePlan.OnClientClick = "return confirm('" + msg + "\\r\\n\\r\\nYou will be redirected to Paypal\\'s website to complete the upgrade transaction.\\r\\n\\r\\n(You will be able to modify your subscription options after your account has been upgraded.)');";
 
             subscription.SubscriptionPlan = currentPlan;
 
@@ -160,6 +213,17 @@ namespace Gooeycms.Webrole.Control.auth
             this.TxtCustomStagingDomain.Text = subscription.StagingDomain;
         }
 
+        protected void RecalculateCost_Click(Object sender, EventArgs e)
+        {
+            double total = (double)SubscriptionManager.GetSubscriptionPlan(SubscriptionPlans.Business).Price;
+            if (this.ChkUpgradeCampaignOption.Checked)
+                total += GooeyConfigManager.CampaignOptionPrice;
+            if (this.ChkUpgradeSalesforceOption.Checked)
+                total += GooeyConfigManager.SalesForcePrice;
+
+            this.LblTotalAmount.Text = String.Format("{0:c}", total);
+        }
+
         protected void BtnUpdateUserInfo_Click(Object sender, EventArgs e)
         {
             UserInfo info = LoggedInUser.Wrapper.UserInfo;
@@ -229,6 +293,8 @@ namespace Gooeycms.Webrole.Control.auth
 
                 //Clear the site cache
                 CurrentSite.Cache.Clear();
+
+                this.LoadInfo();
             }
             catch (Exception ex)
             {
@@ -275,10 +341,28 @@ namespace Gooeycms.Webrole.Control.auth
             String cancelurl = returnurl;
 
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
+            subscription.IsCampaignEnabled = false;
+            subscription.IsSalesforceEnabled = false;
+
+            if (this.ChkUpgradeCampaignOption.Checked)
+                subscription.IsCampaignEnabled = true;
+
+            if (this.ChkUpgradeSalesforceOption.Checked)
+                subscription.IsSalesforceEnabled = true;
+
+            String options = String.Format("{0}|{1}",subscription.IsCampaignEnabled.StringValue(), subscription.IsSalesforceEnabled.StringValue());
+            options = TextEncryption.Encode(options);
+
+            int freeTrialLength = (int)SubscriptionManager.CalculateFreeTrialRemaining(subscription);
+
+            //Cookie the user with what options need enabled
+            HttpCookie cookie = new HttpCookie("upgrade-options",options);
+            Response.Cookies.Add(cookie);
+
             subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(Constants.SubscriptionPlans.Business);
 
             PaypalExpressCheckout checkout = new PaypalExpressCheckout();
-            checkout.AddBillingAgreement(PaypalExpressCheckout.GetBillingAgreement(subscription));
+            checkout.AddBillingAgreement(PaypalExpressCheckout.GetBillingAgreement(subscription,freeTrialLength));
             String redirect = checkout.SetExpressCheckout(LoggedInUser.Email, subscription.Guid,returnurl,cancelurl);
 
             Response.Redirect(redirect, true);
@@ -288,7 +372,9 @@ namespace Gooeycms.Webrole.Control.auth
         {
             //Cancel the paypal subscription
             CmsSubscription subscription = SubscriptionManager.GetSubscription(CurrentSite.Guid);
-            
+            subscription.IsCampaignEnabled = false;
+            subscription.IsSalesforceEnabled = false;
+
             PaypalExpressCheckout checkout = new PaypalExpressCheckout();
             checkout.Cancel(subscription.PaypalProfileId);
 

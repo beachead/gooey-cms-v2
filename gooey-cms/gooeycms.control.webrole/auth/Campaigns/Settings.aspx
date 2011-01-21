@@ -49,100 +49,111 @@
         </table>
     </div>
     <div id="salesforce-panel" dojoType="dijit.layout.ContentPane" title="SalesForce Setup" style="display:none;">
-        <div dojoType="dijit.TitlePane" title="Login Information">
-            <table>
-            <tr>
-                <td colspan="3">
-                    <b>Salesforce.com Integration</b><br />
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="padding-bottom:10px;">Salesforce.com Integration: 
-                <asp:RadioButton ID="RdoSalesforceEnabledYes" GroupName="SalesforceEnabled" runat="server" Text="Enabled" />&nbsp;
-                <asp:RadioButton ID="RdoSalesforceEnabledNo" GroupName="SalesforceEnabled" runat="server" Text="Disabled" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="padding-bottom:5px;">
-                    <b>Salesforce.com Login Information</b><br />
-                    This account will be used as the default-owner for all leads.
-                </td>
-            </tr>
-            <tr>
-                <td>Login Username:</td>
-                <td colspan="2">
-                    <asp:TextBox ID="TxtSalesforceUsername" Width="200px"  runat="server" />
-                    <asp:RequiredFieldValidator ID="Required1" ControlToValidate="TxtSalesforceUsername" Text="* Required" runat="server" />
-                </td>
-            </tr>
-            <tr>
-                <td>Login Password:</td>
-                <td colspan="2">
-                    <asp:TextBox ID="TxtSalesforcePassword" TextMode="Password" Width="200px"  runat="server" />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="TxtSalesforcePassword" Text="* Required"  runat="server" />
-                </td>
-            </tr>    
-            <tr>
-                <td>Login Token:</td>
-                <td colspan="2">
-                    <asp:TextBox ID="TxtSalesforceToken" Width="205px" dojoType="dijit.form.ValidationTextBox" promptMessage="Input your salesforce.com security remote API security token" invalidMessage="You must input your salesforce.com security token" runat="server" />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="TxtSalesforceToken" Text="*" runat="server" />
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td style="width:205px; text-align:right;"><asp:Button ID="SaveLogin" Text="Save" OnClick="BtnSaveLogin_Click"  runat="server" /></td>
-                <td>&nbsp;</td>
-            </tr>
-            </table>
-        </div>
-        <div dojoType="dijit.TitlePane" title="Salesforce Fields">
-            <table>
-                <tr>
-                    <td>Successfully Authenticated:</td>
-                    <td><asp:Label ID="LblSalesforceAuthenticated" runat="server" /></td>
-                </tr>
-                <tr>
-                    <td style="vertical-align:top;">Available Lead Fields</td>
-                    <td>
-                        <anthem:ListBox ID="LstSalesforceAvailableFields" onchange="settext(this);" SelectionMode="Single" Rows="10" runat="server" />
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td colspan="4" style="padding-top:12px;"><b>Custom Mappings:</b> <i>(Choose field above)</i></td>
-                </tr>
-                <tr>
-                    <td>SalesForce Field:</td>
-                    <td><asp:TextBox ID="TxtSalesforceField" Width="225px" runat="server" /></td>
-                    <td>Custom Name:</td>
-                    <td>
-                        <asp:TextBox ID="TxtSalesforceFriendly" runat="server" />&nbsp;
-                        <asp:Button ID="BtnAddCustomMapping" OnClick="BtnAddCustomMapping_Click" Text="Add Mapping" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align:top;">Existing Mappings:</td>
-                    <td>
-                        <asp:ListBox ID="LstCustomMappings" Width="350px" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td><asp:Button ID="BtnRemoveMapping" Width="350px" OnClick="BtnRemoveCustomMapping_Click" Text="Remove Mapping" runat="server" /></td>
-                </tr>
+        <asp:MultiView ID="SalesforceViews" runat="server">
+            <asp:View ID="SalesforceSettingsView" runat="server">
+                <div dojoType="dijit.TitlePane" title="Login Information">
+                    <table>
+                    <tr>
+                        <td colspan="3">
+                            <b>Salesforce.com Integration</b><br />
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="padding-bottom:10px;">Salesforce.com Integration: 
+                        <asp:RadioButton ID="RdoSalesforceEnabledYes" GroupName="SalesforceEnabled" runat="server" Text="Enabled" />&nbsp;
+                        <asp:RadioButton ID="RdoSalesforceEnabledNo" GroupName="SalesforceEnabled" runat="server" Text="Disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="padding-bottom:5px;">
+                            <b>Salesforce.com Login Information</b><br />
+                            This account will be used as the default-owner for all leads.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Login Username:</td>
+                        <td colspan="2">
+                            <asp:TextBox ID="TxtSalesforceUsername" Width="200px"  runat="server" />
+                            <asp:RequiredFieldValidator ID="Required1" ControlToValidate="TxtSalesforceUsername" Text="* Required" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Login Password:</td>
+                        <td colspan="2">
+                            <asp:TextBox ID="TxtSalesforcePassword" TextMode="Password" Width="200px"  runat="server" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="TxtSalesforcePassword" Text="* Required"  runat="server" />
+                        </td>
+                    </tr>    
+                    <tr>
+                        <td>Login Token:</td>
+                        <td colspan="2">
+                            <asp:TextBox ID="TxtSalesforceToken" Width="205px" dojoType="dijit.form.ValidationTextBox" promptMessage="Input your salesforce.com security remote API security token" invalidMessage="You must input your salesforce.com security token" runat="server" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="TxtSalesforceToken" Text="*" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="width:205px; text-align:right;"><asp:Button ID="SaveLogin" Text="Save" OnClick="BtnSaveLogin_Click"  runat="server" /></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </table>
+                </div>
+                <div dojoType="dijit.TitlePane" title="Salesforce Fields">
+                    <table>
+                        <tr>
+                            <td>Successfully Authenticated:</td>
+                            <td><asp:Label ID="LblSalesforceAuthenticated" runat="server" /></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:top;">Available Lead Fields</td>
+                            <td>
+                                <anthem:ListBox ID="LstSalesforceAvailableFields" onchange="settext(this);" SelectionMode="Single" Rows="10" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan="4" style="padding-top:12px;"><b>Custom Mappings:</b> <i>(Choose field above)</i></td>
+                        </tr>
+                        <tr>
+                            <td>SalesForce Field:</td>
+                            <td><asp:TextBox ID="TxtSalesforceField" Width="225px" runat="server" /></td>
+                            <td>Custom Name:</td>
+                            <td>
+                                <asp:TextBox ID="TxtSalesforceFriendly" runat="server" />&nbsp;
+                                <asp:Button ID="BtnAddCustomMapping" OnClick="BtnAddCustomMapping_Click" Text="Add Mapping" runat="server" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:top;">Existing Mappings:</td>
+                            <td>
+                                <asp:ListBox ID="LstCustomMappings" Width="350px" runat="server" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><asp:Button ID="BtnRemoveMapping" Width="350px" OnClick="BtnRemoveCustomMapping_Click" Text="Remove Mapping" runat="server" /></td>
+                        </tr>
 
-                <script language="javascript" type="text/javascript">
-                    function settext(list) {
-                        var item = list.options[list.selectedIndex].value;
-                        if (item)
-                            document.getElementById('<%= TxtSalesforceField.ClientID %>').value = item;
-                    }
-                </script>
-            </table>
-        </div>
+                        <script language="javascript" type="text/javascript">
+                            function settext(list) {
+                                var item = list.options[list.selectedIndex].value;
+                                if (item)
+                                    document.getElementById('<%= TxtSalesforceField.ClientID %>').value = item;
+                            }
+                        </script>
+                    </table>
+                </div>            
+            </asp:View>
+            <asp:View ID="SalesforceRequiresUpgradeView" runat="server">
+                <div style="font-weight:bold;font-size:17px; color:#4395F1;padding-top:5px;padding-bottom:10px;">Account Upgrade Required</div>
+                
+                <a href="/auth/Manage.aspx">Upgrading your account</a> now will provide you access to <b>unlimited pages</b>, <b>custom javascript</b>, <b>plus much more!</b>
+                <br /><br />
+                (Make sure to choose the <b>Salesforce Integration</b> option to enable salesforce integration.)
+            </asp:View>
+        </asp:MultiView>
     </div>
 
     <div id="phone-panel" dojoType="dijit.layout.ContentPane" title="Phone Settings" style="display:none;">

@@ -68,6 +68,7 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
             Boolean isEnabled = CurrentSite.Subscription.IsSalesforceEnabled;
             if (isEnabled)
             {
+                this.SalesforceViews.SetActiveView(SalesforceSettingsView);
                 if (CurrentSite.Configuration.Salesforce.IsEnabled)
                 {
                     this.RdoSalesforceEnabledYes.Checked = true;
@@ -120,6 +121,10 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                     ListItem item = new ListItem(line, mapping);
                     this.LstCustomMappings.Items.Add(item);
                 }
+            }
+            else
+            {
+                this.SalesforceViews.SetActiveView(SalesforceRequiresUpgradeView);
             }
         }
 

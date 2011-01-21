@@ -357,7 +357,7 @@ namespace Gooeycms.Business.Subscription
             subscription.IsDisabled = true;
             Save(subscription);
 
-            //Disable the billing within paypal
+            //Disable the billing within paypalf
             PaypalExpressCheckout action = new PaypalExpressCheckout();
             PaypalProfileInfo info = action.GetProfileInfo(subscription.PaypalProfileId);
 
@@ -579,6 +579,15 @@ namespace Gooeycms.Business.Subscription
                 dao.Delete<CmsSubscriptionPhoneNumber>(number);
                 tx.Commit();
             }
+        }
+
+        public static double CalculateFreeTrialRemaining(CmsSubscription cmsSubscription)
+        {
+            int freeTrialDays = GooeyConfigManager.FreeTrialLength;
+            DateTime startDate = cmsSubscription.Created;
+            DateTime freeTrialExpires = startDate.AddDays(freeTrialDays);
+
+            return freeTrialExpires.Subtract(DateTime.Now).TotalDays;
         }
     }
 }

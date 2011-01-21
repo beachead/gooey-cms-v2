@@ -151,8 +151,11 @@ namespace Gooeycms.Business.Paypal
         /// </summary>
         /// <param name="registration"></param>
         /// <returns></returns>
-        public static NvpBaItem GetBillingAgreement(CmsSubscription subscription)
+        public static NvpBaItem GetBillingAgreement(CmsSubscription subscription, int freeTrialLength = -1)
         {
+            if (freeTrialLength == -1)
+                freeTrialLength = GooeyConfigManager.FreeTrialLength;
+
             StringBuilder description = new StringBuilder();
             CmsSubscriptionPlan plan = subscription.SubscriptionPlan;
             Double totalPrice = (Double)plan.Price;
@@ -169,7 +172,10 @@ namespace Gooeycms.Business.Paypal
                 description.AppendFormat(" +Salesforce / {0:c} ", GooeyConfigManager.SalesForcePrice);
                 totalPrice += GooeyConfigManager.SalesForcePrice;
             }
-            description.AppendFormat(". Total: {0:c} / month after {1} days free.", totalPrice, GooeyConfigManager.FreeTrialLength);
+            description.AppendFormat(". Total: {0:c} / month",totalPrice);
+            
+            if (freeTrialLength > 0)
+                description.AppendFormat(" after {0} days free.", freeTrialLength);
 
             return PaypalExpressCheckout.GetBillingAgreement(subscription.Guid, description.ToString());
         }
@@ -182,16 +188,35 @@ namespace Gooeycms.Business.Paypal
             return CreateRecurringPayment(agreement, total);
         }
 
-        public ProfileResultStatus CreateRecurringPayment(CmsSubscription subscription)
+        public ProfileResultStatus CreateRecurringPayment(CmsSubscription subscription, int freeTrial = -1)
         {
-            NvpBaItem agreement = GetBillingAgreement(subscription);
+            //Check if they have an existing billing profile active, if so, cancel it, so we can create the new one
+            PaypalProfileInfo existingProfile = GetProfileInfo(subscription.PaypalProfileId);
+            if ((existingProfile != null) && (existingProfile.IsActive))
+            {
+                try
+                {
+                    this.Cancel(existingProfile.ProfileId);
+                }
+                catch (Exception ex)
+                {
+                    Logging.Database.Write("paypal-error", "There was a problem cancelling existing profile. Subscription: " + subscription.Guid + ", Paypal Profile Id:" + existingProfile.ProfileId + ", Error: " + ex.Message);
+                    throw new ApplicationException("There was a problem upgrading your account. There seems to be an active billing profile which we were unable to automatically cancel. Please contact custom support.");
+                }
+            }
+
+            //Create the new agreement
+            NvpBaItem agreement = GetBillingAgreement(subscription, freeTrial);
             Double total = SubscriptionManager.CalculateCost(subscription);
 
-            return CreateRecurringPayment(agreement, total);
+            return CreateRecurringPayment(agreement, total, freeTrial);
         }
 
-        public ProfileResultStatus CreateRecurringPayment(NvpBaItem agreement, Double total)
-        {            
+        public ProfileResultStatus CreateRecurringPayment(NvpBaItem agreement, Double total, int freeTrial = -1)
+        {
+            if (freeTrial == -1)
+                freeTrial = GooeyConfigManager.FreeTrialLength;
+
             NvpCreateRecurringPaymentsProfile action = new NvpCreateRecurringPaymentsProfile();
             SetDefaults(action);
 
@@ -202,10 +227,13 @@ namespace Gooeycms.Business.Paypal
             action.Add(NvpCreateRecurringPaymentsProfile.Request._BILLINGFREQUENCY, "1");
             action.Add(NvpCreateRecurringPaymentsProfile.Request._BILLINGPERIOD, NvpBillingPeriodType.Month);
 
-            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALBILLINGPERIOD, NvpBillingPeriodType.Day);
-            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALBILLINGFREQUENCY, "1"); //bill once a day for "freetriallength" days
-            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALTOTALBILLINGCYCLES, GooeyConfigManager.FreeTrialLength.ToString());
-            action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALAMT, Double.Parse("0").ToString("f"));
+            if (freeTrial > 0)
+            {
+                action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALBILLINGPERIOD, NvpBillingPeriodType.Day);
+                action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALBILLINGFREQUENCY, "1"); //bill once a day for "freetriallength" days
+                action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALTOTALBILLINGCYCLES, freeTrial.ToString());
+                action.Add(NvpCreateRecurringPaymentsProfile.Request._TRIALAMT, Double.Parse("0").ToString("f"));
+            }
 
             action.Add(NvpCreateRecurringPaymentsProfile.Request.MAXFAILEDPAYMENTS, GooeyConfigManager.PaypalMaxFailedPayments.ToString());
             action.Add(NvpCreateRecurringPaymentsProfile.Request.AUTOBILLOUTAMT, NvpAutoBillType.AddToNextBilling);

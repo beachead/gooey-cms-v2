@@ -46,9 +46,9 @@ namespace Gooeycms.Webrole.Ecommerce
         protected void BtnSubscribe_Click(Object sender, EventArgs e)
         {
             Registration registration = Registrations.Load(this.Guid);
-            CmsSubscriptionPlan plan = SubscriptionManager.GetSubscriptionPlan(registration);
 
-            if (plan.Price > 0)
+            double total = SubscriptionManager.CalculateCost(registration);
+            if (total > 0)
             {
                 //Create all of the billing agreements
                 PaypalExpressCheckout checkout = new PaypalExpressCheckout();

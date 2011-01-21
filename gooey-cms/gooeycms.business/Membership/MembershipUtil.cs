@@ -162,16 +162,20 @@ namespace Gooeycms.Business.Membership
             return new MembershipUserWrapper(user, user2);
         }
 
-        public static void ProcessLogin(string username)
+        public static String ProcessLogin(string username)
         {
+            String result = null;
+
             MembershipUserWrapper wrapper = FindByUsername(username);
             IList<CmsSubscription> subscriptions = SubscriptionManager.GetSubscriptionsByUserId(wrapper.UserInfo.Id);
 
             //Check if there is a current site active
             Boolean isValidSubscription = false;
+
             if (CurrentSite.IsAvailable)
             {
                 String expectedGuid = CurrentSite.Guid.Value;
+                result = expectedGuid;
 
                 //Make sure that the site is valid for this subscription
                 isValidSubscription = subscriptions.Any(s => s.Guid.Equals(expectedGuid));
@@ -184,8 +188,12 @@ namespace Gooeycms.Business.Membership
                 {
                     CmsSubscription defaultSubscription = subscriptions[0];
                     SiteHelper.SetActiveSiteCookie(defaultSubscription.Guid);
+
+                    result = defaultSubscription.Guid;
                 }
             }
+
+            return result;
         }
 
         public static MembershipUserWrapper CreateDemoAccount()
