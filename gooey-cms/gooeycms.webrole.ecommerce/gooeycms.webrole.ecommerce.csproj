@@ -118,6 +118,13 @@
     <Compile Include="signup\Activate.aspx.designer.cs">
       <DependentUpon>Activate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="signup\Cancel.aspx.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="signup\Cancel.aspx.designer.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="signup\Signup-Review.aspx.cs">
       <DependentUpon>Signup-Review.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -423,6 +430,7 @@
     <Content Include="js\jquery.cycle.all.min.js" />
     <Content Include="js\store.js" />
     <Content Include="signup\Activate.aspx" />
+    <Content Include="signup\Cancel.aspx" />
     <Content Include="signup\Signup-Review.aspx" />
     <Content Include="signup\Default.aspx" />
   </ItemGroup>
