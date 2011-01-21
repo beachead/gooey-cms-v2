@@ -26,6 +26,8 @@ namespace Gooeycms.Webrole.Control.auth
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.LblStatus.Text = "";
+
             if (!CurrentSite.IsAvailable)
                 Response.Redirect("~/Dashboard.aspx");
 
