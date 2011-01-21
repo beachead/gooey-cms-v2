@@ -21,7 +21,7 @@
  
     <!-- START: masthead -->
     <div id="masthead">
-        <div id="login"><a href="http://control.gooeycms.net/login.aspx"><img src="images/btn_login.png" width="104" height="28" alt="" runat="server" /></a></div>
+        <div id="login"><a href="http://control.gooeycms.com/login.aspx"><img src="images/btn_login.png" width="104" height="28" alt="" runat="server" /></a></div>
         <div id="logo"><a href="http://www.gooeycms.com"><img src="images/logo_gooey_internal.png" width="225" height="75" alt="" runat="server" /></a></div>
         <div id="nav">
             <ul class="adjacent rollover">

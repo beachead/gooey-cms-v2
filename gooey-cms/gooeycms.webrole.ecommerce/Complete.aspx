@@ -7,7 +7,7 @@
 
         A receipt for this purchase has also been emailed to you. 
         <br />
-        Login to your <a href="http://control.gooeycms.net/auth/dashboard.aspx">Dashboard</a> now to apply this <%= LblPurchaseType.Text %> to your subscription.
+        Login to your <a href="http://control.gooeycms.com/auth/dashboard.aspx">Dashboard</a> now to apply this <%= LblPurchaseType.Text %> to your subscription.
         </div>
     </div>
 </asp:Content>
