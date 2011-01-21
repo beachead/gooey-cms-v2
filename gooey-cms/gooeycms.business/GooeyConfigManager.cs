@@ -12,8 +12,8 @@ namespace Gooeycms.Business
 {
     public static class GooeyConfigManager
     {
-        private static String DefaultSitePackageTos = @"I certify that I am the creator of this website, and agree that Gooey CMS and its users may use, copy, display and store this website on other Gooey CMS powered websites, according to Gooey CMS's <a href=""#"" onclick=""window.open('/tos.aspx#site','','width=500,height=450'); return false;"">Terms of Service</a>.";
-        private static String DefaultThemePackageTos = @"I certify that I am the creator of this theme, and agree that Gooey CMS and its users may use, copy, display and store this theme on other Gooey CMS powered websites, according to Gooey CMS's <a href=""#"" onclick=""window.open('/tos.aspx#themes','','width=500,height=450'); return false;"">Terms of Service</a>.";
+        private static String DefaultSitePackageTos = @"I certify that I am the creator of this website, and agree that Gooey CMS and its users may use, copy, display and store this website on other Gooey CMS powered websites, according to Gooey CMS's <a href=""http://www.gooeycms.com/terms_of_use"" onclick=""window.open('/tos.aspx#site','','width=500,height=450'); return false;"">Terms of Service</a>.";
+        private static String DefaultThemePackageTos = @"I certify that I am the creator of this theme, and agree that Gooey CMS and its users may use, copy, display and store this theme on other Gooey CMS powered websites, according to Gooey CMS's <a href=""http://www.gooeycms.com/terms_of_use"" onclick=""window.open('/tos.aspx#themes','','width=500,height=450'); return false;"">Terms of Service</a>.";
         private static String DefaultFlashCrossDomainFile =
 @"<?xml version=""1.0"" ?>
 <cross-domain-policy>

@@ -56,7 +56,7 @@
                             <td><asp:Label ID="ChkTosText" runat="server" /></td>
                         </tr>
                     </table>
-                    <anthem:Button ID="BtnSave" Text="Package for Review" OnClick="BtnSave_Click" PreCallBackFunction="validate_site" PostCallBackFunction="deploy_site" runat="server" />
+                    <anthem:Button ID="BtnSave" Text="Package & Deploy" OnClick="BtnSave_Click" PreCallBackFunction="validate_site" PostCallBackFunction="deploy_site" runat="server" />
                     <anthem:HiddenField ID="SavedPackageGuid" AutoUpdateAfterCallBack="true" runat="server" />
                 </div>
             </td>
@@ -76,9 +76,8 @@
                         <li>Set a price <span style="font-size:9px;">(Examples: 450.00, 1000.00).</span></li>
                         <li>Enter a list of key features <span style="font-size:9px;">(total pages, content types, & lead gen pages).</span></li>
                         <li>Choose a category that best descibes your site.</li>
-                        <li>Click package for review to begin the package and site review process.<span style="font-size:9px;"> (standard sites take less than 24 hours to review).</span></li>
-                        <li>Once your site has been reviewed, you will receive an email with requested changes
-                            or notified that it is live in the <a href="http://store.gooeycms.com">Gooey CMS Store</a>.</li>
+                        <li>Click package to begin the package deployment process.<span style="font-size:9px;"> (standard sites go live in hours).</span></li>
+                        <li>You will receive an email (usually same day) when your site is live in the <a href="http://store.gooeycms.com">Gooey CMS Store</a>.</li>
                     </ol>
                 </div>
             </td>

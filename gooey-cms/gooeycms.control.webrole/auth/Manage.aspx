@@ -86,7 +86,7 @@
                                     <fieldset style="width:500px;">
                                         <legend><span style="color:#4395F1;">Subscription Cost</span></legend>
                                         You will be charged <b><asp:Label ID="LblSubscriptionPrice" runat="server" /> per month</b> starting on <b><asp:Label ID="LblBillingStartDate" runat="server" /></b> <br />
-                                        <label>(not including any options added below)</label>
+                                        <label>(plus any options added below)</label>
                                     </fieldset>
                                     <br />
                                     <fieldset style="width:450px;">
@@ -101,7 +101,7 @@
                                                 <td>
                                                     Salesforce Integration - <asp:Label ID="LblSalesforcePrice" runat="server" />
                                                     <br />
-                                                    <label>(requires Salesforce Enterprise Account)</label>
+                                                    <label>(requires a Salesforce Pro + API, Enterprise Account or Unlimited Account)</label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -109,8 +109,8 @@
                                     <br />
                                     <telerik:RadButton ID="BtnUpgradeAccount" ButtonType="LinkButton" OnClick="BtnUpgradePlan_Click" Text="Upgrade Account" runat="server" />&nbsp;&nbsp;
                                     <asp:LinkButton ID="BtnCloseWindow" OnClientClick="close_window(); return false;" Text="Cancel" runat="server" />
-                                    <br />
-                                    <label><b>Your account will be billed <asp:Label ID="LblTotalAmount" runat="server" /> per month</b><br /></label>
+                                    <br /><br />
+                                    <label><b>Your account will be billed <asp:Label ID="LblTotalAmount" runat="server" /> per month.</b><br /></label>
                                     </div>
                                     </telerik:RadAjaxPanel>
                                 </ContentTemplate>
@@ -144,7 +144,7 @@
         <table style="width:100%;">
             <tr>
                 <td>Paypal Billing Id:&nbsp;<asp:Label ID="LblPaypalBillingId" runat="server" /></td>
-                <td>Paypal Status:&nbsp;<asp:Label ID="LblPaypalStatus" runat="server" /></td>
+                <td>Paypal Subscription:&nbsp;<asp:Label ID="LblPaypalStatus" runat="server" /></td>
             </tr>
             <tr>
             <asp:MultiView ID="PaypalTrialView" runat="server">
