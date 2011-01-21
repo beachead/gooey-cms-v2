@@ -381,6 +381,7 @@
     <Content Include="Cleanup.aspx" />
     <Content Include="css\global.css" />
     <Content Include="css\home.css" />
+    <Content Include="css\invite.css" />
     <Content Include="css\pricing.css" />
     <Content Include="css\signup.css" />
     <Content Include="css\store.css" />

@@ -547,7 +547,13 @@ namespace Gooeycms.Business.Util
 
         public static string Culture 
         {
-            get { return Subscription.Culture; } 
+            get 
+            {
+                if (CurrentSite.IsAvailable)
+                    return Subscription.Culture;
+                else
+                    return "en-us";
+            } 
         }
 
         public static string Protocol
@@ -584,7 +590,10 @@ namespace Gooeycms.Business.Util
                 try
                 {
                     Data.Guid test = CurrentSite.Guid;
-                    result = true;
+                    if (test.IsEmpty())
+                        result = false;
+                    else
+                        result = true;
                 }
                 catch (Exception)
                 {

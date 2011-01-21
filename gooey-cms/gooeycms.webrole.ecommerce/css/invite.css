@@ -1,0 +1,79 @@
+.callout {
+	top: 45px;
+	left: 550px;
+	padding: 45px 60px 60px 20px;
+	background: transparent url(../images/bg_callout.png) 0 0 no-repeat;
+	min-height: 220px;
+	width: 462px;
+	color: #fff;
+	font-size: 1.3em;
+	text-align: center;
+	text-shadow: #000 0 -0.01em 0.3em;
+}
+
+.callout a {
+	color: #fff;
+}
+
+
+.title {
+color:#509cf2;
+font: "Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
+font-size: 16pt;
+margin:0;
+padding:0;
+}
+
+#callout {
+	position: absolute;
+}
+
+
+#signup-steps {
+	list-style: none;
+	padding-top: 15px;
+}
+
+#signup-steps li {
+	padding-left: 35px;
+	padding-bottom: 30px;
+}
+
+#signup-steps li h2 {
+	margin-left: -35px;
+	margin-bottom: 5px;
+}
+
+#signup-steps td.label {
+	width: 112px;
+}
+
+input#cms-address {
+	width: 150px;
+	border-style: dashed;
+	border-color: #666;
+	margin: 0 3px;
+
+}
+
+#lbl-salesforce-integration {
+	color: #4395f1;
+	font-size: 1.4em;
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+#salesforce-disclaimer {
+	margin-left: 20px;
+}
+
+#plan {
+	border: 1px solid #000;
+	width: 150px;
+	height: 20px;
+}
+
+#disclaimer {
+	font-size: .8em;
+}
+

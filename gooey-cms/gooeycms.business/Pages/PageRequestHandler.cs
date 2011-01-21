@@ -54,6 +54,9 @@ namespace Gooeycms.Business.Pages
         /// <param name="e"></param>
         protected void Page_Init(object sender, EventArgs e)
         {
+            if (!CurrentSite.IsAvailable)
+                Response.Redirect(GooeyConfigManager.SignupSiteHost, true);
+
             String preview = Request.QueryString["pvw"];
             String cacheKey = Request.QueryString["pvw_id"];
             String token = Request.QueryString["token"];
