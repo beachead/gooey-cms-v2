@@ -22,7 +22,7 @@
         <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Windows7" runat="server" />
         <telerik:RadAjaxPanel ID="AjaxPanel" LoadingPanelID="LoadingPanel" runat="server">
         <anthem:HiddenField ID="LastMaxPos" runat="server" />
-		<h1><img src="../images/h1_are_you_a_designer.png" width="598" height="21" alt="Are you a designer?  Learn how to make money with Gooey CMS on our" /><a href=""><img src="/images/h1[a]_developer_site.png" width="122" height="21" alt="developer site" /></a></h1>
+		<h1><img src="../images/h1_are_you_a_designer.png" width="598" height="21" alt="Are you a designer?  Learn how to make money with Gooey CMS on our" /><a href="http://www.gooeycms.com/developers"><img src="/images/h1[a]_developer_site.png" width="122" height="21" alt="developer site" /></a></h1>
 
 		<!-- START: filter -->
 		<ul id="filter">
