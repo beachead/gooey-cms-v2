@@ -71,6 +71,7 @@
                     <asp:RequiredFieldValidator ID="RequiredField1" ValidationGroup="Filename" ControlToValidate="TxtFileName" Text="*" runat="server" />
                     <asp:Button ID="BtnCreateNew" OnClick="BtnCreate_Click" ValidationGroup="Filename" Text="Create" runat="server" />
                 </div>
+
             </div>
         </fieldset>
 
