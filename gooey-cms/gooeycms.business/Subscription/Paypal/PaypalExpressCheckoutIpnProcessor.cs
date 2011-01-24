@@ -15,7 +15,7 @@ namespace Gooeycms.Business.Subscription.Paypal
         protected const String RecurringPaymentIdKey = "recurring_payment_id";
         protected const String TransactionIdKey = "txn_type";
         protected const String BilledAmountKey = "amount";
-        protected const String TransactionId = "tx_id";
+        protected const String TransactionId = "txn_id";
 
         public class RecurringPaymentTxTypes
         {
@@ -43,11 +43,11 @@ namespace Gooeycms.Business.Subscription.Paypal
             }
 
             //Determine what type of transaction we are processing
-            String txType = request.QueryString[TransactionIdKey];
-            String txId = request.QueryString[TransactionId];
-            String profileId = request.QueryString[RecurringPaymentIdKey];
+            String txType = request[TransactionIdKey];
+            String txId = request[TransactionId];
+            String profileId = request[RecurringPaymentIdKey];
 
-            String amountStr = request.QueryString[BilledAmountKey];
+            String amountStr = request[BilledAmountKey];
             double amount = 0;
             Double.TryParse(amountStr, out amount);
 
@@ -122,32 +122,37 @@ namespace Gooeycms.Business.Subscription.Paypal
                 paypalUrl = strLive;
             Logging.Info("Validating paypal IPN request using url: " + paypalUrl);
 
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(paypalUrl);
-            req.Method = "POST";
-            req.ContentType = "application/x-www-form-urlencoded";
-            byte[] param = HttpContext.Current.Request.BinaryRead(request.ContentLength);
-            string strRequest = Encoding.ASCII.GetString(param);
-            strRequest += "&cmd=_notify-validate";
-            req.ContentLength = strRequest.Length;
+            //byte[] postBytes = HttpContext.Current.Request.BinaryRead(HttpContext.Current.Request.ContentLength);
+            //string postString = Encoding.ASCII.GetString(postBytes);
+            String postString = HttpContext.Current.Request.Params.ToString();
 
-            using (StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII))
+            // Add notify/validate command to request
+            string requestString = postString + "&cmd=_notify-validate";
+
+            // Create a request to verify IPN data
+            HttpWebRequest webRequest = WebRequest.Create(paypalUrl) as HttpWebRequest;
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/x-www-form-urlencoded";
+            webRequest.ContentLength = requestString.Length;
+
+            // Load the request string into the web request object and post it
+            StreamWriter writer = new StreamWriter(webRequest.GetRequestStream(), Encoding.ASCII);
+            writer.Write(requestString);
+            writer.Close();
+
+            // Get the response from the web request object and test for a valid response
+            HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse; 
+
+            Boolean result = true;
+            // Read the response string
+            using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
             {
-                streamOut.Write(strRequest);
+                string responseString = reader.ReadToEnd();
+                if (!responseString.ToLower().Equals("verified"))
+                    throw new ArgumentException("The IPN response is not valid");
             }
 
-            String strResponse;
-            using (StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream()))
-            {
-                strResponse = streamIn.ReadToEnd();
-            }
-
-            Logging.Info("Detected paypal IPN validate response. Response:" + strResponse);
-            bool result = false;
-            if ("VERIFIED".Equals(strResponse))
-                result = true;
-            else
-                throw new SubscriptionSecurityConstraint("The paypal IPN request is not valid. This request cannot be processed. Result:" + strResponse);
-
+            
             return result;
         }
     }

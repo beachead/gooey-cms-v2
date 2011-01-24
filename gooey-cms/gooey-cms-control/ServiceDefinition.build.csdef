@@ -10,6 +10,7 @@
 -->
 <ServiceDefinition name="gooey_cms_control" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <WebRole name="gooeycms.webrole.control">
+    <Runtime executionContext="elevated" />
     <Sites>
       <Site name="Web">
         <Bindings>

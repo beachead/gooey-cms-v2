@@ -108,7 +108,7 @@ namespace Gooeycms.Webrole.Ecommerce
                 if (GooeyConfigManager.IsInviteEnabled)
                 {
                     //Make sure the invite code is valid
-                    InviteManager.Instance.Validate(this.InviteCode.Text);
+                    InviteManager.Instance.Validate(this.InviteCode.Text.Trim());
                 }
 
                 if (SubscriptionManager.IsSubdomainAvailable(this.Subdomain.Text))
