@@ -14,8 +14,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 {
     public partial class Javascript : ValidatedHelpPage
     {
-        protected String SelectedPanel = "uploadpanel";
-        protected String OutsideSelectedPanel = "modifypanel";
 
         protected override void OnPageLoad(object sender, EventArgs e)
         {
@@ -52,10 +50,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             this.LstEnabledFilesOrderable.DataSource = enabledFiles;
             this.LstEnabledFilesOrderable.DataBind();
 
-            if (files.Count == enabledFiles.Count)
-                this.DisablePanel.Visible = false;
-            else
-                this.DisablePanel.Visible = true;
         }
 
         protected void LstEnabledFiles_ItemCommand(object sender, AjaxControlToolkit.ReorderListCommandEventArgs e)
@@ -118,10 +112,12 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             String name = this.LstExistingFile.SelectedValue;
             JavascriptFile file = JavascriptManager.Instance.Get(this.GetSelectedTheme(), name);
 
+            addScript.Visible = false;
+            manageScripts.Visible = false;
+            editScriptContent.Visible = true;
+
             this.Editor.Text = file.Content;
 
-            OutsideSelectedPanel = "mylibrarypanel";
-            SelectedPanel = "editpanel";
         }
 
         protected void BtnSaveEdit_Click(object sender, EventArgs e)
@@ -132,8 +128,10 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             CmsTheme theme = GetSelectedTheme();
             JavascriptManager.Instance.Save(theme, filename, data);
 
-            OutsideSelectedPanel = "mylibrarypanel";
-            SelectedPanel = "editpanel";
+            addScript.Visible = true;
+            manageScripts.Visible = true;
+            editScriptContent.Visible = false;
+
 
             LoadTabData();
         }
@@ -145,8 +143,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             CurrentSite.Cache.Clear();
 
             LoadTabData();
-            OutsideSelectedPanel = "mylibrarypanel";
-            SelectedPanel = "editpanel";
         }
 
         protected void BtnUpload_Click(object sender, EventArgs e)
@@ -167,9 +163,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes
 
             CmsTheme theme = GetSelectedTheme();
             JavascriptManager.Instance.Save(theme, filename, data);
-
-            OutsideSelectedPanel = "mylibrarypanel";
-            SelectedPanel = "editpanel";
 
             LoadTabData();
         }

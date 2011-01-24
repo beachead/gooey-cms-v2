@@ -4,7 +4,7 @@
 }
     
 h3 {
-    font-weight: bold;
+    font-weight: bold !important;
     margin-top: 0;
 }
     
