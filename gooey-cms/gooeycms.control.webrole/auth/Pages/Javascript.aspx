@@ -7,31 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
     <link rel="stylesheet" href="../../css/reorder.css" />
-    <style type="text/css">
-    legend {
-        font-size: 1.5em;
-        padding: 15px 0;
-    }
-    
-    h3 {
-        font-weight: bold;
-        margin-top: 0;
-    }
-    
-    div.columns {
-        overflow: auto;
-    }
-    
-    div.columns div.column {
-        float: left;
-        margin-right: 30px;
-    }
-    
-    div.columns div.column.last {
-        margin-right: 0;
-    }
-    
-    </style>
+    <link rel="stylesheet" href="../../css/dialog.css" />
     <script src="/scripts/functions.js" type="text/javascript" language="javascript"></script> 
     <script src="/scripts/mootools-core.js" type="text/javascript" language="javascript"></script> 
     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
