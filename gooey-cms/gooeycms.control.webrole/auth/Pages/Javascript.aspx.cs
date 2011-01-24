@@ -15,7 +15,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 {
     public partial class Javascript : System.Web.UI.Page
     {
-        protected String SelectedPanel = "enablepanel";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,11 +46,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
 
             this.LstEnabledFilesOrderable.DataSource = enabledFiles;
             this.LstEnabledFilesOrderable.DataBind();
-
-            if (files.Count == enabledFiles.Count)
-                this.DisablePanel.Visible = false;
-            else
-                this.DisablePanel.Visible = true;
         }
 
         protected void LstEnabledFiles_ItemCommand(object sender, AjaxControlToolkit.ReorderListCommandEventArgs e)
@@ -123,7 +117,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 JavascriptManager.Instance.Save(page, filename, data);
             }
 
-            SelectedPanel = "managepanel";
             LoadTabData();
         }
 
@@ -136,7 +129,6 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             CmsPage page = GetSelectedPage();
             JavascriptManager.Instance.Save(page, filename, data);
 
-            SelectedPanel = "managepanel";
             LoadTabData();
 
             this.LstExistingFile.SelectedValue = filename;
@@ -149,7 +141,10 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             JavascriptFile file = JavascriptManager.Instance.Get(this.GetSelectedPage(), name);
 
             this.Editor.Text = file.Content;
-            SelectedPanel = "managepanel";
+
+            addScript.Visible = false;
+            manageScripts.Visible = false;
+            editScriptContent.Visible = true;
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)
@@ -160,8 +155,18 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             CmsPage page = GetSelectedPage();
             JavascriptManager.Instance.Save(page, filename, data);
 
-            SelectedPanel = "managepanel";
+            addScript.Visible = true;
+            manageScripts.Visible = true;
+            editScriptContent.Visible = false;
+
             LoadTabData();
+        }
+
+        protected void BtnCancel_Click(object sender, EventArgs e)
+        {
+            addScript.Visible = true;
+            manageScripts.Visible = true;
+            editScriptContent.Visible = false;
         }
 
         private CmsPage GetSelectedPage()
