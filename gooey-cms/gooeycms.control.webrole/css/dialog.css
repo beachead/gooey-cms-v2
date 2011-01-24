@@ -1,0 +1,23 @@
+﻿ legend {
+    font-size: 1.5em;
+    padding: 15px 0;
+}
+    
+h3 {
+    font-weight: bold;
+    margin-top: 0;
+}
+    
+div.columns {
+    overflow: auto;
+}
+    
+div.columns div.column {
+    float: left;
+    margin-right: 30px;
+}
+    
+div.columns div.column.last {
+    margin-right: 0;
+}
+    
