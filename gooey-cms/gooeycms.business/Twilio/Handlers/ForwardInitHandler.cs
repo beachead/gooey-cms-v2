@@ -8,6 +8,7 @@ using Gooeycms.Constants;
 using Gooeycms.Business.Forms;
 using gooeycms.business.salesforce;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Subscription;
 
 namespace Gooeycms.Business.Twilio.Handlers
 {
@@ -19,10 +20,7 @@ namespace Gooeycms.Business.Twilio.Handlers
             this.InsertDatabaseLead();
             this.InsertSalesforceLead();
             
-            String forwardNumber = base.GetAssociatedPhoneNumber().ForwardNumber;
-            if (String.IsNullOrWhiteSpace(forwardNumber))
-                forwardNumber = CurrentSite.Configuration.PhoneSettings.DefaultForwardNumber;
-
+            String forwardNumber = base.GetAssociatedPhoneNumber().GetForwardNumber();
             StringBuilder builder = new StringBuilder();
             if (forwardNumber == null)
             {
