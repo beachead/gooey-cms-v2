@@ -65,8 +65,8 @@ namespace Gooeycms.Business.Twilio.Handlers
                 fields.Add("PostalCode", base.CallFromZip);
                 fields.Add("City", base.CallFromCity);
                 fields.Add("State", base.CallFromState);
-                fields.Add("Description", "[gooeycms-phone] " + base.GetAssociatedCampaign().Name + " (" + base.GetAssociatedCampaign().TrackingCode + ")");
-                
+                fields.Add("Description", DateTime.Now + Environment.NewLine + "Customer call received from " + CurrentSite.ProductionDomain + Environment.NewLine + "Campaign: " + base.GetAssociatedCampaign().Name + " (" + base.GetAssociatedCampaign().TrackingCode + ")");
+
                 try
                 {
                     client.Login(username,apiPassword);
