@@ -5,6 +5,7 @@
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/dialog.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djconfig="parseOnLoad: true"
         type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
@@ -14,6 +15,16 @@
         dojo.require("dijit.layout.TabContainer");
         dojo.require("dijit.layout.ContentPane");
         dojo.require("dojox.image.Lightbox");
+    </script>
+    <script language="javascript" type="text/javascript">
+        function _imageclick(name) {
+            window.opener.onimage_selected(name);
+        }
+        function _imagedelete(name) {
+            if (confirm('Are you sure you want to delete this image?')) {
+                alert('TODO: Implement delete functionality. Deleting ' + name);
+            }
+        }
     </script>
 </head>
 <body class="claro">
@@ -32,90 +43,62 @@
         width: 200px; height: 100px; overflow: auto;">
         <span id="lblErrorMessage"></span>
     </div>
-    <div dojotype="dijit.layout" style="width: 700px; height: 450px;">
-        <div dojotype="dijit.layout.ContentPane">
+
             
-            <br />
-            <table style="width: 100%;">
-                <tr>
-                    <td colspan="2"><b>Upload Images</b><br />
-                        <asp:FileUpload ID="FileUpload" size="50"  CssClass="dijitTextBox" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Button ID="BtnUpload" OnClick="BtnUpload_Click" Text="Upload"  runat="server" />
-                     <hr />
-                     </td>
-                </tr>
-            </table>
-            <asp:Label ID="LblUploadedFiles" runat="server" />
-        </div>
-        <div dojotype="dijit.layout.ContentPane" title="Image Library">
-            <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
-            <telerik:RadAjaxPanel ID="AjaxPanel" LoadingPanelID="LoadingPanel" runat="server">
-            <table style="width: 100%;">
-                <tr>
-                    <td colspan="2">
-                        <asp:ImageButton ID="BtnRefreshImages" ImageUrl="~/images/Refresh.gif" OnClick="BtnRefreshImages_Click" runat="server" />&nbsp;Refresh
-                        Images&nbsp;<asp:Label ID="LblStatus" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align:top;padding-top:7px;width:75%;">
-                        <telerik:RadGrid ID="GridExistingImages" runat="server" AllowPaging="true" 
-                            Skin="Default" DataSourceID="ImageDataSource" 
-                            onitemcommand="GridExistingImages_ItemCommand">
-                            <MasterTableView AutoGenerateColumns="false" AllowPaging="true" DataKeyNames="Guid" Width="100%" Height="100%" 
-                            PageSize="10" DataSourceID="ImageDataSource">
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="Filename" ReadOnly="true" HeaderText="Filename" />
-                                    <telerik:GridBoundColumn DataField="Length" ReadOnly="true" HeaderText="Size" />
-                                    <telerik:GridTemplateColumn HeaderText="Actions">
-                                        <ItemTemplate>
-                                        <a href="#" onclick="<%# DataBinder.Eval(Container.DataItem, "Filename", "_imageclick(\'{0}\'); return false;") %>">select</a>&nbsp;
-                                        <asp:LinkButton ID="BtnDelete" CommandName="DeleteImage" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Guid") %>' OnClientClick="return confirm('Are you sure you want to delete this image?');" Text="delete" runat="server" />
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                </Columns>
-                            </MasterTableView>
-                            <ClientSettings EnableRowHoverStyle="true" EnablePostBackOnRowClick="true">
-                                <Selecting AllowRowSelect="true" />
-                            </ClientSettings>
-                            <PagerStyle Mode="Slider" />
-                        </telerik:RadGrid>
-                    </td>
-                    <td style="vertical-align:top;">
-                        <fieldset style="width: 230px; height: 220px">
-                            <legend>Preview</legend>
-                            <telerik:RadBinaryImage ID="ImagePreview" ResizeMode="Fit" AutoAdjustImageControlSize="true" Width="230" runat="server" />
-                        </fieldset>                    
-                    </td>
-                </tr>
+    <h2>Upload Images</h2>
+    <asp:FileUpload ID="FileUpload" runat="server" />&nbsp;
+    <asp:Button ID="BtnUpload" OnClick="BtnUpload_Click" Text="Upload"  runat="server" />
+    <hr />
+    <asp:Label ID="LblUploadedFiles" runat="server" />
+        
+    <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
+    <telerik:RadAjaxPanel ID="AjaxPanel" LoadingPanelID="LoadingPanel" runat="server">
+        <div class="columns">
+            <div class="column" style="width: 420px;">
+                <asp:ImageButton ID="BtnRefreshImages" ImageUrl="~/images/Refresh.gif" OnClick="BtnRefreshImages_Click" runat="server" /> Refresh Images
+                <asp:Label ID="LblStatus" runat="server" />
+
+                <telerik:RadGrid ID="GridExistingImages" runat="server" AllowPaging="true" 
+                    Skin="Default" DataSourceID="ImageDataSource" 
+                    onitemcommand="GridExistingImages_ItemCommand">
+                    <MasterTableView AutoGenerateColumns="false" AllowPaging="true" DataKeyNames="Guid" Width="100%" Height="100%" 
+                    PageSize="10" DataSourceID="ImageDataSource">
+                        <Columns>
+                            <telerik:GridBoundColumn DataField="Filename" ReadOnly="true" HeaderText="Filename" />
+                            <telerik:GridBoundColumn DataField="Length" ReadOnly="true" HeaderText="Size" />
+                            <telerik:GridTemplateColumn HeaderText="Actions">
+                                <ItemTemplate>
+                                <a href="#" onclick="<%# DataBinder.Eval(Container.DataItem, "Filename", "_imageclick(\'{0}\'); return false;") %>">select</a>&nbsp;
+                                <asp:LinkButton ID="BtnDelete" CommandName="DeleteImage" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Guid") %>' OnClientClick="return confirm('Are you sure you want to delete this image?');" Text="delete" runat="server" />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                        </Columns>
+                    </MasterTableView>
+                    <ClientSettings EnableRowHoverStyle="true" EnablePostBackOnRowClick="true">
+                        <Selecting AllowRowSelect="true" />
+                    </ClientSettings>
+                    <PagerStyle Mode="Slider" />
+                </telerik:RadGrid>
+
+            </div>
+
+            <div class="column last" style="width: 250px;">
+                <fieldset>
+                    <legend>Preview</legend>
+                    <telerik:RadBinaryImage ID="ImagePreview" ResizeMode="Fit" AutoAdjustImageControlSize="true" Width="230" runat="server" />
+                </fieldset>
                 <asp:ObjectDataSource ID="ImageDataSource" runat="server" 
                     EnablePaging="true"
                     TypeName="Gooeycms.Business.Images.ImageDataSource"
                     SelectMethod="GetImages"
-                    SelectCountMethod="GetImageCount"
-                    >
+                    SelectCountMethod="GetImageCount">
                 </asp:ObjectDataSource>
+                <asp:Label ID="LblUploadStatus" AutoUpdateAfterCallBack="true" runat="server" />
 
-                <script language="javascript" type="text/javascript">
-                    function _imageclick(name) {
-                        window.opener.onimage_selected(name);
-                    }
-                    function _imagedelete(name) {
-                        if (confirm('Are you sure you want to delete this image?')) {
-                            alert('TODO: Implement delete functionality. Deleting ' + name);
-                        }
-                    }
-                </script>
-  
-  <asp:Label ID="LblUploadStatus" AutoUpdateAfterCallBack="true" runat="server" />
-            </table>
-            </telerik:RadAjaxPanel>
+            </div>
         </div>
-    </div>
+    </telerik:RadAjaxPanel>
+
     </form>
 </body>
 </html>
