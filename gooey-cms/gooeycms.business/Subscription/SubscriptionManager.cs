@@ -283,6 +283,8 @@ namespace Gooeycms.Business.Subscription
         {
             if (subscription != null)
             {
+                RemoveAllPhoneNumbers(subscription);
+
                 CmsSubscriptionDao dao = new CmsSubscriptionDao();
                 using (Transaction tx = new Transaction())
                 {
@@ -292,6 +294,14 @@ namespace Gooeycms.Business.Subscription
 
                 Erase(subscription.Guid);
             }
+        }
+
+        internal static void RemoveAllPhoneNumbers(CmsSubscription subscription)
+        {
+            //Find any phone numbers and release them
+            IList<CmsSubscriptionPhoneNumber> numbers = GetActivePhoneNumbers(subscription.Guid);
+            foreach (CmsSubscriptionPhoneNumber number in numbers)
+                SubscriptionManager.RemovePhoneFromSubscription(subscription.Guid, number.PhoneNumber);
         }
 
         /// <summary>
@@ -357,7 +367,10 @@ namespace Gooeycms.Business.Subscription
             subscription.IsDisabled = true;
             Save(subscription);
 
-            //Disable the billing within paypalf
+            //Remove any phone numbers associated with this subscription
+            RemoveAllPhoneNumbers(subscription);
+
+            //Disable the billing within paypal
             PaypalExpressCheckout action = new PaypalExpressCheckout();
             PaypalProfileInfo info = action.GetProfileInfo(subscription.PaypalProfileId);
 
@@ -566,18 +579,23 @@ namespace Gooeycms.Business.Subscription
             return dao.FindByPhoneNumber(phone);
         }
 
-        public static void RemovePhoneFromSubscription(Data.Guid guid, string phone)
+        public static void RemovePhoneFromSubscription(Data.Guid guid, String phoneNumber)
         {
-            CmsSubscriptionPhoneDao dao = new CmsSubscriptionPhoneDao();
-            CmsSubscriptionPhoneNumber number = dao.FindByPhoneNumber(phone);
-
-            if (!number.SubscriptionId.Equals(guid.Value))
-                throw new ArgumentException("This phone number does not belong to this subscription");
-
-            using (Transaction tx = new Transaction())
+            if (!String.IsNullOrEmpty(phoneNumber))
             {
-                dao.Delete<CmsSubscriptionPhoneNumber>(number);
-                tx.Commit();
+                CmsSubscriptionPhoneNumber phone = SubscriptionManager.GetPhoneNumber(phoneNumber);
+                if (phone != null)
+                    CurrentSite.Configuration.PhoneSettings.GetLocalTwilioClient().ReleasePhoneNumber(phone.Sid, AvailablePhoneNumber.Parse(phoneNumber));
+
+                CmsSubscriptionPhoneDao dao = new CmsSubscriptionPhoneDao();
+                if (!phone.SubscriptionId.Equals(guid.Value))
+                    throw new ArgumentException("This phone number does not belong to this subscription");
+
+                using (Transaction tx = new Transaction())
+                {
+                    dao.Delete<CmsSubscriptionPhoneNumber>(phone);
+                    tx.Commit();
+                }
             }
         }
 

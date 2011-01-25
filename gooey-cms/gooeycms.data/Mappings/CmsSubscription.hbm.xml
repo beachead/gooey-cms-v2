@@ -49,6 +49,7 @@
     <property column="sid" name="Sid" type="String" />
     <property column="account_sid" name="AccountSid" type="String" />
     <property column="twilio_info_url" name="TwilioInfoUrl" type="String" />
+    <property column="forward_number" name="ForwardNumber" type="String" />
   </class>
 
   <sql-query name="CmsSubscriptionByUserId">

@@ -54,7 +54,7 @@
                     <a href="#" onclick="window.radopen('./Links.aspx?id=<%# Eval("Guid") %>');">Build Links</a>&nbsp;
                     <a href="#" onclick="open_window('./Elements.aspx?id=<%# Eval("Guid") %>',570,900); return false;">Elements</a>&nbsp;
                     <a href="#" onclick="window.radopen('./ActivatePhone.aspx?id=<%# Eval("Guid") %>'); return false;">Activate Phone</a>&nbsp;
-                    <asp:LinkButton ID="DeleteItem" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this campaign?');" Text="Delete" runat="server" />
+                    <asp:LinkButton ID="DeleteItem" CommandName="deleteid" OnClientClick="return confirm('Are you sure you want to delete this campaign?\r\n\r\nNOTE:This will also release any phone number associated with this campaign.');" Text="Delete" runat="server" />
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:TemplateField>

@@ -83,8 +83,6 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
             if (phone != null)
             {
-                CurrentSite.Configuration.PhoneSettings.GetLocalTwilioClient().ReleasePhoneNumber(phone.Sid, AvailablePhoneNumber.Parse(campaign.PhoneNumber));
-
                 //Delete it from the subscription itself
                 SubscriptionManager.RemovePhoneFromSubscription(CurrentSite.Guid, campaign.PhoneNumber);
 
