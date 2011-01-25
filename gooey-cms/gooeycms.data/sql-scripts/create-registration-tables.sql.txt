@@ -80,6 +80,7 @@ CREATE TABLE [dbo].[Subscription_Phone_Numbers](
 	[sid] VARCHAR(64),
 	[account_sid] VARCHAR(64),
 	[twilio_info_url] VARCHAR(256),
+	[forward_number] VARCHAR(64),
 	PRIMARY KEY CLUSTERED([id]),
 );
 CREATE INDEX idx_phonenumber ON Subscription_Phone_Numbers(subscription_guid, phone_number);

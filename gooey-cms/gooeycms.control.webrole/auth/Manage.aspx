@@ -127,7 +127,7 @@
                                 }
                             </script>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <asp:LinkButton ID="BtnCancelPlan" OnClick="BtnCancelPlan_Click" Text="Cancel Account" OnClientClick="return confirm('Are you sure you want to cancel this subscription?');" runat="server" />                            
+                            <asp:LinkButton ID="BtnCancelPlan" OnClick="BtnCancelPlan_Click" Text="Cancel Account" OnClientClick="return confirm('Are you sure you want to cancel this subscription?\r\n\r\nWARNING: This will also release any phone numbers that you may have associated with your campaigns.');" runat="server" />                            
                         </asp:View>
                         <asp:View ID="DowngradeAvailable" runat="server">
                             <asp:LinkButton ID="BtnDowngradePlan" OnClick="BtnDowngradePlan_Click" Text="Downgrade to Free Plan" OnClientClick="return confirm('Are you sure you want to immediately downgrade your subscription?');" runat="server" />                        

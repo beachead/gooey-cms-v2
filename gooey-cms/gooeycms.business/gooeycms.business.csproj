@@ -110,6 +110,7 @@
     <Compile Include="Campaigns\ICampaignEngine.cs" />
     <Compile Include="Campaigns\LeadManager.cs" />
     <Compile Include="Images\ImageRewriter.cs" />
+    <Compile Include="Subscription\Extensions.cs" />
     <Compile Include="Twilio\AssignedPhoneNumber.cs" />
     <Compile Include="Twilio\AvailablePhoneNumber.cs" />
     <Compile Include="Twilio\Handlers\BaseTwilioHandler.cs" />

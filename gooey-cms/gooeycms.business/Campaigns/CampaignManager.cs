@@ -7,6 +7,9 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Web;
 using System.Web;
+using Gooeycms.Data.Model.Subscription;
+using Gooeycms.Business.Subscription;
+using Gooeycms.Business.Twilio;
 
 namespace Gooeycms.Business.Campaigns
 {
@@ -165,6 +168,9 @@ namespace Gooeycms.Business.Campaigns
             CmsCampaign campaign = GetCampaign(siteGuid, guid);
             if (campaign != null)
             {
+                //Delete it from the subscription itself
+                SubscriptionManager.RemovePhoneFromSubscription(CurrentSite.Guid, campaign.PhoneNumber);
+
                 CmsCampaignDao dao = new CmsCampaignDao();
                 using (Transaction tx = new Transaction())
                 {

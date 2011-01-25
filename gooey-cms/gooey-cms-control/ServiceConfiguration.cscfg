@@ -5,8 +5,13 @@
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmslogs;AccountKey=KCCDTPam0lL8a55yQHBjYb4sri1MLUt91ElM/uyZxIp4YPFIH/p2krdQVshis1e15KGq7QBZ6xGqHn65DjtY0g==" />
       <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmstorage;AccountKey=WV0ZhoZbKn29rRP3GaoJyjLdA9uFqUO259hzeTOZp3igobNVCa1XI6X8If28jwtAi2kkgF6Ay1sy9gACN2vhkw==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="gooeycms" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEFVPZhbRQpG8ROsxU4sqyW4wDQYJKoZIhvcNAQEBBQAEggEAI1y8iVbhXeoLDLkRSrfADSYiElp21903cpOjETZy6nwaii16ONxa3ZCG5+inRK4chzXB5cfZFt4j06NNyFRJcjpHPqJSpYLnRhqTTHskNeqw5+xHCAO6R3lCQ4yfYptqxTpQW9mQbqR4snFQiY3WRNlohIQndoMSwkeQuBl9FTg/g0o/CaXfhgxE9YyhQNw7zQl5upG7XCAnftYeArITGMchUbpHCgIM90NuOng42ZeRDUx3xEniUCtYZQFahWSqMicoAbKowNF84e73N4+uB53X/pVveTvTRU2qhG/OKNcPSsLcSCAZsd9gulL0evELtSPpHbZrFfp8qV/YFpxJ5jAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECGqlq7fgGruggBBTYEnGjbzVgsLcMBNb2GnC" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2011-05-23T23:59:59.0000000-05:00" />
     </ConfigurationSettings>
     <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="6F9B521FE511529E6AE0D80CCC25D4DE815462AD" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
   <Role name="gooeycms.worker.control">
@@ -14,8 +19,14 @@
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmslogs;AccountKey=KCCDTPam0lL8a55yQHBjYb4sri1MLUt91ElM/uyZxIp4YPFIH/p2krdQVshis1e15KGq7QBZ6xGqHn65DjtY0g==" />
       <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmstorage;AccountKey=WV0ZhoZbKn29rRP3GaoJyjLdA9uFqUO259hzeTOZp3igobNVCa1XI6X8If28jwtAi2kkgF6Ay1sy9gACN2vhkw==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="gooeycms" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEFVPZhbRQpG8ROsxU4sqyW4wDQYJKoZIhvcNAQEBBQAEggEAI1y8iVbhXeoLDLkRSrfADSYiElp21903cpOjETZy6nwaii16ONxa3ZCG5+inRK4chzXB5cfZFt4j06NNyFRJcjpHPqJSpYLnRhqTTHskNeqw5+xHCAO6R3lCQ4yfYptqxTpQW9mQbqR4snFQiY3WRNlohIQndoMSwkeQuBl9FTg/g0o/CaXfhgxE9YyhQNw7zQl5upG7XCAnftYeArITGMchUbpHCgIM90NuOng42ZeRDUx3xEniUCtYZQFahWSqMicoAbKowNF84e73N4+uB53X/pVveTvTRU2qhG/OKNcPSsLcSCAZsd9gulL0evELtSPpHbZrFfp8qV/YFpxJ5jAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECGqlq7fgGruggBBTYEnGjbzVgsLcMBNb2GnC" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2011-05-23T23:59:59.0000000-05:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
     </ConfigurationSettings>
     <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="6F9B521FE511529E6AE0D80CCC25D4DE815462AD" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
 </ServiceConfiguration>
