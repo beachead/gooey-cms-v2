@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/Secure.Master" %>
 <asp:Content ID="ContentStylesheets" ContentPlaceHolderID="localCSS" runat="server">
     <link rel="stylesheet" href="../../css/reorder.css" />
-    <link rel="stylesheet" href="../../css/dialog.css" />
+    <link rel="stylesheet" href="../../css/dialog.css" /> 
 </asp:Content>
 
 <asp:Content ID="subnav" ContentPlaceHolderID="Subnavigation" runat="server">

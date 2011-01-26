@@ -19,7 +19,7 @@
             class="Gooeycms.Data.Model.Page.CmsImage,gooeycms.data"/>
     <![CDATA[  
       select {images.*} from 
-	      (select *,ROW_NUMBER() OVER(ORDER BY file_name asc) as row from Images e where site_guid = :guid) as Images
+	      (select *,ROW_NUMBER() OVER(ORDER BY file_name asc) as row from Images e where site_guid = :guid and (directory is null or directory = '')) as Images
       where (row between :start and :end)
       order by file_name asc;
     ]]>
