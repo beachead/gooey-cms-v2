@@ -70,7 +70,12 @@ namespace Gooeycms.Webrole.Ecommerce
             {
                 ListItem item = new ListItem(plan.Name + " - $" + plan.Price, plan.SKU);
                 if (!plan.IsSystemPlan)
-                    this.SelectedPlan.Items.Add(item);
+                {
+                    if ((plan.Price <= 0) && (isFree))
+                        this.SelectedPlan.Items.Add(item);
+                    else if (plan.Price > 0)
+                        this.SelectedPlan.Items.Add(item);
+                }
             }
 
             if (isFree)
