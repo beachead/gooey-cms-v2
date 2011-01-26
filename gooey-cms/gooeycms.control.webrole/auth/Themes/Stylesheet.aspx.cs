@@ -24,6 +24,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             {
                 LoadTabData();
             }
+            Master.ScriptManager.RegisterPostBackControl(this.BtnCancel);
         }
 
         private void LoadTabData()
@@ -138,22 +139,20 @@ namespace Gooeycms.Webrole.Control.auth.Themes
                 builder.Append(" The following images could not be found and may need to be uploaded: ");
                 builder.Append(String.Join(",", missing));
             }
-            this.LblStatus.Text = builder.ToString();
+            this.SaveStatus.Text = builder.ToString();
 
 
+            String content = this.Editor.Text;
             String filename = this.LstExistingFile.SelectedValue;
-            byte[] data = Encoding.UTF8.GetBytes(this.Editor.Text);
+            byte[] data = Encoding.UTF8.GetBytes(content);
 
 
             CssManager.Instance.Save(theme, filename, data);
 
             OutsideSelectedPanel = "mylibrarypanel";
-
-            addStylesheet.Visible = true;
-            manageStylesheets.Visible = true;
-            editStylesheetContent.Visible = false;
-
             LoadTabData();
+
+            this.Editor.Text = content;
         }
 
         protected void BtnDelete_Click(Object sender, EventArgs e)

@@ -28,18 +28,13 @@
     <Endpoints>
       <InputEndpoint name="HttpIn" protocol="http" port="80" />
     </Endpoints>
-    <Imports>
-      <Import moduleName="RemoteAccess" />
-    </Imports>
+    <Imports></Imports>
   </WebRole>
   <WorkerRole name="gooeycms.worker.control">
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="ActiveStorageConnectionString" />
     </ConfigurationSettings>
-    <Imports>
-      <Import moduleName="RemoteAccess" />
-      <Import moduleName="RemoteForwarder" />
-    </Imports>
+    <Imports></Imports>
   </WorkerRole>
 </ServiceDefinition>

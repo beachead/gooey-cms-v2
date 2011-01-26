@@ -14,7 +14,6 @@
 
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
-
     <h1>Template CSS</h1>
 
     <beachead:StatusPanel ID="ErrorPanel" runat="server" />
@@ -94,9 +93,12 @@
 
     <fieldset id="editStylesheetContent" runat="server" visible="false">
         <legend>Edit Stylesheet</legend>
-        <beachead:Editor ID="Editor" ShowToolbar="false" runat="server" />
-        <asp:Button ID="BtnSaveEdit" Text="Save" OnClick="BtnSaveEdit_Click" runat="server" />
-        <asp:Button ID="BtnCancel" Text="Cancel" OnClick="BtnCancel_Click" runat="server" />
+        <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
+        <telerik:RadAjaxPanel ID="AjaxPanel" LoadingPanelID="LoadingPanel" runat="server">
+            <asp:Label ID="SaveStatus" runat="server" /> <br />
+            <beachead:Editor ID="Editor" ShowToolbar="false" runat="server" />
+            <asp:Button ID="BtnSaveEdit" Text="Save" OnClick="BtnSaveEdit_Click" runat="server" />
+            <asp:Button ID="BtnCancel" Text="Cancel" OnClick="BtnCancel_Click" runat="server" />
+        </telerik:RadAjaxPanel>
     </fieldset>
-
 </asp:Content>
