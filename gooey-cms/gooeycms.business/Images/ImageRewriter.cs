@@ -19,8 +19,20 @@ namespace Gooeycms.Business.Images
             Theme
         }
 
-        public static ImageRewriter ThemesImageRewriter = new ImageRewriter(ImageContainerLocation.Theme);
-        public static ImageRewriter PageImageRewriter = new ImageRewriter(ImageContainerLocation.Page);
+        public static ImageRewriter ThemesImageRewriter
+        {
+            get
+            {
+                return new ImageRewriter(ImageContainerLocation.Theme);
+            }
+        }
+        public static ImageRewriter PageImageRewriter
+        {
+            get
+            {
+                return new ImageRewriter(ImageContainerLocation.Page);
+            }
+        }
 
         private String imageContainerUrl;
         public ImageRewriter(ImageContainerLocation location)
