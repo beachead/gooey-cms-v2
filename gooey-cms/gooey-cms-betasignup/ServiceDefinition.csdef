@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="gooey_cms_betasignup" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <WebRole name="gooeycms.webrole.betasignup">
+    <Runtime executionContext="elevated" /> 
     <Sites>
       <Site name="Web">
         <Bindings>
