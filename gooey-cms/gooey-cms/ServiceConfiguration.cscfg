@@ -5,8 +5,14 @@
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmslogs;AccountKey=KCCDTPam0lL8a55yQHBjYb4sri1MLUt91ElM/uyZxIp4YPFIH/p2krdQVshis1e15KGq7QBZ6xGqHn65DjtY0g==" />
       <Setting name="ActiveStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=gooeycmstorage;AccountKey=WV0ZhoZbKn29rRP3GaoJyjLdA9uFqUO259hzeTOZp3igobNVCa1XI6X8If28jwtAi2kkgF6Ay1sy9gACN2vhkw==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="gooeycms" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCECXtbXDiPdqlRD19514Uq2wwDQYJKoZIhvcNAQEBBQAEggEAKFFENFyBv8dfdZL48uDkoHHiMOjT2aINvRxYWce9wnxAEc78dw2YviUScYEEr0Jw261caV9T9IrS5b/i1bUj72S5pNkScffjUSNr5KsJYtrgzGwnc/NDjJQ9oOMK54IgJ1S+4HBE4xVbmgUxDGPDXq4tlZ97gos2qlKlR+fJWh+8eygRY98zE3PTH82xWVVFUHS+aFtnCaXiipotK0gTbgkutdxMKL5MH69xXz/INQTsOuVhh6xy+Cvdyx8WTd5UBWpzxMg3B6RbXI9GAl6m8D24g2LN29ypmAVhBuGB0s+1LstdWcfgWI5bDWQa8+taLSswQtVEyGr0+JdxbC1jKjAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECHiZTmuyCnEfgBDiOF1XhA1DU1PLXwPhleFp" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2011-06-27T23:59:59.0000000-05:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
     </ConfigurationSettings>
     <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="34E63CD74E4A7309695F9CC358E0F4681D0A1252" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
 </ServiceConfiguration>

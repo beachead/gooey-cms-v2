@@ -20,6 +20,7 @@
       <InputEndpoint name="HttpIn" protocol="http" port="80" />
     </Endpoints>
     <Imports>
+      <Import moduleName="RemoteAccess" />
     </Imports>
   </WebRole>
   <WorkerRole name="gooeycms.worker.control">
@@ -28,6 +29,8 @@
       <Setting name="ActiveStorageConnectionString" />
     </ConfigurationSettings>
     <Imports>
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
     </Imports>
   </WorkerRole>
 </ServiceDefinition>

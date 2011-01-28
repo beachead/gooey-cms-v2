@@ -33,6 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\System32\inetsrv\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics" />
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime" />
     <Reference Include="Microsoft.WindowsAzure.StorageClient" />
@@ -53,6 +57,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="auth\bulk.aspx" />
     <Content Include="auth\default.aspx" />
     <Content Include="css\global.css" />
     <Content Include="css\home.css" />
@@ -151,6 +156,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="auth\bulk.aspx.cs">
+      <DependentUpon>bulk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\bulk.aspx.designer.cs">
+      <DependentUpon>bulk.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
