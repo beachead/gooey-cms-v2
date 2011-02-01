@@ -192,9 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="auth\Web.config" />
-    <None Include="css\global.css.bak" />
-    <None Include="css\home.css.bak" />
-    <None Include="css\invite.css.bak" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">

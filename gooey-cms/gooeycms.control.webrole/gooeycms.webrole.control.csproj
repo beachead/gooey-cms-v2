@@ -132,6 +132,7 @@
     <Content Include="auth\global-admin\Email-Templates\Default.aspx" />
     <Content Include="auth\global-admin\Email-Templates\Template.aspx" />
     <Content Include="auth\global-admin\Help\Default.aspx" />
+    <Content Include="auth\global-admin\Invites\Default.aspx" />
     <Content Include="auth\global-admin\Subscriptions\AllSubscriptions.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Default.aspx" />
     <Content Include="auth\global-admin\Subscriptions\edit-roles.aspx" />
@@ -458,6 +459,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="auth\global-admin\Help\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Invites\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Invites\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Subscriptions\AllSubscriptions.aspx.cs">

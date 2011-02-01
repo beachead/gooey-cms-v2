@@ -7,63 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gooeycms.Webrole.Control {
+namespace Gooeycms.Webrole.Control.auth.global_admin.Invites {
     
     
-    public partial class SecureGlobalAdmin {
+    public partial class Default {
         
         /// <summary>
-        /// NavDefault control.
+        /// InviteRequests control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink NavDefault;
+        protected global::System.Web.UI.WebControls.GridView InviteRequests;
         
         /// <summary>
-        /// HyperLink2 control.
+        /// BtnSaveInviteEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+        protected global::System.Web.UI.WebControls.Button BtnSaveInviteEmail;
         
         /// <summary>
-        /// NavDeveloper control.
+        /// TxtInviteEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink NavDeveloper;
+        protected global::System.Web.UI.WebControls.TextBox TxtInviteEmail;
         
         /// <summary>
-        /// NavControls control.
+        /// BtnSaveApproveEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink NavControls;
+        protected global::System.Web.UI.WebControls.Button BtnSaveApproveEmail;
         
         /// <summary>
-        /// NavInvites control.
+        /// TxtApproveEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink NavInvites;
-        
-        /// <summary>
-        /// NavHelp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink NavHelp;
+        protected global::System.Web.UI.WebControls.TextBox TxtApproveEmail;
     }
 }
