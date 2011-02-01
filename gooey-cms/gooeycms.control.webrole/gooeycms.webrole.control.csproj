@@ -124,6 +124,7 @@
     <Content Include="auth\global-admin\ContentTypes\ContentTypeFields.aspx" />
     <Content Include="auth\global-admin\ContentTypes\Default.aspx" />
     <Content Include="auth\global-admin\Controls\Cache.aspx" />
+    <Content Include="auth\global-admin\Diagnostics\Logs.aspx" />
     <Content Include="auth\global-admin\Default.aspx" />
     <Content Include="auth\global-admin\Developer\Categories.aspx" />
     <Content Include="auth\global-admin\Developer\Default.aspx" />
@@ -404,6 +405,13 @@
     </Compile>
     <Compile Include="auth\global-admin\Controls\Cache.aspx.designer.cs">
       <DependentUpon>Cache.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\global-admin\Diagnostics\Logs.aspx.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\global-admin\Diagnostics\Logs.aspx.designer.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
     </Compile>
     <Compile Include="auth\global-admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

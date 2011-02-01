@@ -113,9 +113,7 @@ namespace Gooeycms.Business.Subscription
             template = template.Replace("{email}", invite.Email);
             template = template.Replace("{token}", invite.Token);
 
-            EmailClient client = new EmailClient();
-            client.SmtpServer = GooeyConfigManager.SmtpServer;
-            client.SmtpPort = GooeyConfigManager.SmtpPort;
+            EmailClient client = EmailClient.GetDefaultClient();
             client.ToAddress = invite.Email;
             client.FromAddress = "invites@gooeycms.com";
             client.IsHtmlContent = false;

@@ -45,9 +45,7 @@ namespace Gooeycms.Business.Forms.Plugins
                 }
                 String message = builder.ToString().Trim();
 
-                EmailClient client = new EmailClient();
-                client.SmtpServer = GooeyConfigManager.SmtpServer;
-                client.SmtpPort = GooeyConfigManager.SmtpPort;
+                EmailClient client = EmailClient.GetDefaultClient();
                 client.ToAddress = email;
                 client.FromAddress = fromAddress;
                 client.IsHtmlContent = false;
