@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Adapters\PageAdapter.cs" />
     <Compile Include="Adapters\ThemeAdapter.cs" />
+    <Compile Include="Azure\AppPoolPinger.cs" />
     <Compile Include="Azure\InstanceCommunication.cs" />
     <Compile Include="Azure\WebroleMessage.cs" />
     <Compile Include="Billing\BillingManager.cs" />

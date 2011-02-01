@@ -218,6 +218,12 @@ namespace Gooeycms.Business.Subscription
             return dao.FindByUserId(userId);
         }
 
+        public static IList<CmsSubscription> GetAllSubscriptions()
+        {
+            SubscriptionAdapter adapter = new SubscriptionAdapter();
+            return adapter.GetAllSubscriptions();
+        }
+
         public static CmsSubscription GetSubscription(Data.Guid siteGuid)
         {
             CmsSubscriptionDao dao = new CmsSubscriptionDao();

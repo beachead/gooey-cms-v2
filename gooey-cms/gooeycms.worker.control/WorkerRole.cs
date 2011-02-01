@@ -11,17 +11,49 @@ using Microsoft.WindowsAzure.StorageClient;
 using Gooeycms.Business.Storage;
 using System.Threading.Tasks;
 using Gooeycms.Business.Pages;
+using Gooeycms.Business.Azure;
+using Gooeycms.Business;
 
 namespace Goopeycms.Worker.Control
 {
     public class WorkerRole : RoleEntryPoint
     {
-        PageRoleWorker worker = new PageRoleWorker();
+        private CancellationTokenSource cancel;
+        private Task messageTask;
+        private Task iisPingTask;
+
+        private static readonly object iisPingTaskKey = new Object();
+
         public override void Run()
         {
-            worker = new PageRoleWorker();
-            worker.IsRunning = true;
-            while (worker.IsRunning)
+            this.cancel = new CancellationTokenSource();
+            messageTask = Task.Factory.StartNew(() => StartMessageTask(cancel.Token),TaskCreationOptions.LongRunning);
+            iisPingTask = Task.Factory.StartNew(() => StartIisPingTask(cancel.Token), TaskCreationOptions.LongRunning);
+
+            Task [] tasks = new Task [] { messageTask, iisPingTask };
+            Task.WaitAll(tasks);
+        }
+
+        private static void StartIisPingTask(CancellationToken token)
+        {
+            AppPoolPinger pinger = new AppPoolPinger();
+            while (!token.IsCancellationRequested)
+            {
+                pinger.PingGooeyCmsSites();
+                pinger.Ping("http://" + GooeyConfigManager.AdminSiteHost);
+                pinger.Ping(GooeyConfigManager.StoreSiteHost);
+
+                lock (iisPingTaskKey)
+                {
+                    Monitor.Wait(iisPingTaskKey, TimeSpan.FromMinutes(5));
+                }
+            }
+        }
+
+        private static void StartMessageTask(CancellationToken token)
+        {
+            PageRoleWorker worker = new PageRoleWorker();
+            while (!token.IsCancellationRequested)
             {
                 worker.ProcessMessages();
                 Thread.Sleep(100);
@@ -30,7 +62,12 @@ namespace Goopeycms.Worker.Control
 
         public override void OnStop()
         {
-            worker.IsRunning = false;
+            lock (iisPingTaskKey)
+            {
+                cancel.Cancel();
+                Monitor.Pulse(iisPingTaskKey);
+            }
+
             base.OnStop();
         }
 
