@@ -918,7 +918,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63951</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://control.gooeycms.net</IISUrl>
+          <IISUrl>http://control.gooeycms.com</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
