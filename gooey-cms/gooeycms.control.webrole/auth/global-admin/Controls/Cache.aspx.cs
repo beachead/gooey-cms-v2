@@ -1,5 +1,6 @@
 ﻿using System;
 using Gooeycms.Business.Cache;
+using Gooeycms.Business;
 
 namespace Gooeycms.Webrole.Control.auth.global_admin.Controls
 {
@@ -10,6 +11,8 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Controls
             if (Request.QueryString["clear"] != null)
             {
                 CacheManager.Instance.ClearAll();
+                GooeyConfigManager.ClearCache();
+
                 Response.Write("Cache was successfully cleared");
             }
         }

@@ -44,6 +44,11 @@ namespace Gooeycms.Business
             return result;
         }
 
+        public static void ClearCache()
+        {
+            cache.Clear();
+        }
+
         public static Nullable<Double> GetAsDouble(String key)
         {
             String temp = GetCachedValue(key);
@@ -178,6 +183,11 @@ This is your home page.
 ";
                 return GetCachedValue(ConfigConstants.DefaultHomepage,defaultHomepage);
             }
+        }
+
+        public static String RemoteAdminIp
+        {
+            get { return GetCachedValue(ConfigConstants.RemoteAdminIp,""); }
         }
 
         public static String DefaultCulture

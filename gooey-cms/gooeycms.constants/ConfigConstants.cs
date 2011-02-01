@@ -27,6 +27,7 @@ namespace Gooeycms.Constants
         public const String SmtpUsername = "smtp-username";
         public const String SmtpPassword = "smtp-password";
         public const String DefaultTemplate = "default-template";
+        public const String RemoteAdminIp = "remote-admin-ip";
         public const String PaypalPdt = "paypal-pdt";
         public const String PaypalUrl = "paypal-posturl";
         public const String PaypalEmail = "paypal-email";
