@@ -44,15 +44,22 @@ namespace Goopeycms.Worker.Control
             AppPoolPinger pinger = new AppPoolPinger();
             while (!token.IsCancellationRequested)
             {
-                Logging.Database.Write("worker-role-iis", "Ping task is awake and starting to ping gooey sites.");
-                pinger.PingGooeyCmsSites();
-                pinger.Ping("http://" + GooeyConfigManager.AdminSiteHost);
-                pinger.Ping(GooeyConfigManager.StoreSiteHost);
+                try
+                {
+                    Logging.Database.Write("worker-role-iis", "Ping task is awake and starting to ping gooey sites.");
+                    pinger.PingGooeyCmsSites();
+                    pinger.Ping("http://" + GooeyConfigManager.AdminSiteHost);
+                    pinger.Ping(GooeyConfigManager.StoreSiteHost);
+                }
+                catch (Exception e)
+                {
+                    Logging.Database.Write("worker-role-iis-error", "Unexpected exception: " + e.Message + ", stack:" + e.StackTrace);
+                }
 
                 Logging.Database.Write("worker-role-iis", "Ping task has returned and will now sleep.");
                 lock (iisPingTaskKey)
                 {
-                    Monitor.Wait(iisPingTaskKey, TimeSpan.FromMinutes(15));
+                    Monitor.Wait(iisPingTaskKey, TimeSpan.FromSeconds(30));
                 }
             }
             Logging.Database.Write("worker-role-iis", "Ping task has detected shutdown.");

@@ -31,14 +31,19 @@ namespace Gooeycms.Business.Azure
 
             foreach (CmsSubscription subscription in subscriptions)
             {
-                String url = "http://" + subscription.Domain;
-                try
+                String domain = (!String.IsNullOrEmpty(subscription.Domain)) ? subscription.Domain : subscription.StagingDomain;
+
+                if (!String.IsNullOrEmpty(domain))
                 {
-                    Ping(url);
-                }
-                catch (Exception e)
-                {
-                    Logging.Database.Write("ping-error", "Failed to ping gooey url: " + url);
+                    String url = "http://" + domain;
+                    try
+                    {
+                        Ping(url);
+                    }
+                    catch (Exception)
+                    {
+                        Logging.Database.Write("ping-error", "Failed to ping gooey url: " + url);
+                    }
                 }
             }
         }
