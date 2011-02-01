@@ -34,15 +34,6 @@
     <ServiceDefinition Include="ServiceDefinition.csdef" />
     <ServiceConfiguration Include="ServiceConfiguration.cscfg" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gooeycms.webrole.betasignup\gooeycms.webrole.betasignup.csproj">
-      <Name>gooeycms.webrole.betasignup</Name>
-      <Project>{a50c02b1-1971-4a23-828d-b2316896dc7e}</Project>
-      <Private>True</Private>
-      <RoleType>Web</RoleType>
-      <RoleName>gooeycms.webrole.betasignup</RoleName>
-    </ProjectReference>
-  </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
     <CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\Cloud Service\1.0\Visual Studio 10.0\</CloudExtensionsDir>
