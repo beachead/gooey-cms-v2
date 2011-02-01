@@ -56,10 +56,10 @@ namespace Goopeycms.Worker.Control
                     Logging.Database.Write("worker-role-iis-error", "Unexpected exception: " + e.Message + ", stack:" + e.StackTrace);
                 }
 
-                Logging.Database.Write("worker-role-iis", "Ping task has returned and will now sleep.");
+                Logging.Database.Write("worker-role-iis", "Ping task has returned and will now sleep for " + GooeyConfigManager.PingSleepPeriod + " minutes");
                 lock (iisPingTaskKey)
                 {
-                    Monitor.Wait(iisPingTaskKey, TimeSpan.FromSeconds(30));
+                    Monitor.Wait(iisPingTaskKey, GooeyConfigManager.PingSleepPeriod);
                 }
             }
             Logging.Database.Write("worker-role-iis", "Ping task has detected shutdown.");

@@ -37,6 +37,7 @@ namespace Gooeycms.Constants
         public const String PaypalReturnUrl = "paypal-returnurl";
         public const String PaypalCancelUrl = "paypal-cancelurl";
         public const String PaypalMaxFailedPayments = "paypal-maxfailedpayments";
+        public const String PingSleepPeriod = "ping-sleep-period";
         public const String InviteEmailTemplate = "invite-email-template";
         public const String ApprovedEmailTemplate = "approved-email-template";
         public const String DefaultHomepage = "default-homepage";
