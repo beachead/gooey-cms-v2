@@ -7,6 +7,7 @@ using Gooeycms.Business.Util;
 using Gooeycms.Extensions;
 using Beachead.Persistence.Hibernate;
 using System.Reflection;
+using Gooeycms.Business.Crypto;
 
 namespace Gooeycms.Business
 {
@@ -229,6 +230,7 @@ This is your home page.
                 String result = GetCachedValue(ConfigConstants.SmtpServer);
                 return result;
             }
+            set { SetValueAndUpdateCache(ConfigConstants.SmtpServer, value); }
         }
 
         public static String SmtpPort
@@ -237,6 +239,31 @@ This is your home page.
             {
                 String result = GetCachedValue(ConfigConstants.SmtpPort,"2525");
                 return result;
+            }
+            set { SetValueAndUpdateCache(ConfigConstants.SmtpPort, value); }
+        }
+
+        public static String SmtpUsername
+        {
+            get
+            {
+                return GetCachedValue(ConfigConstants.SmtpUsername);
+            }
+            set
+            {
+                SetValueAndUpdateCache(ConfigConstants.SmtpUsername,value);
+            }
+        }
+
+        public static String SmtpPassword
+        {
+            get
+            {
+                return TextEncryption.Decode(GetCachedValue(ConfigConstants.SmtpPassword));
+            }
+            set
+            {
+                SetValueAndUpdateCache(ConfigConstants.SmtpPassword, TextEncryption.Encode(value));
             }
         }
 

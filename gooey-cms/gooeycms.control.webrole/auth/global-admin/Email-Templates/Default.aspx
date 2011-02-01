@@ -32,6 +32,35 @@
         <asp:LinkButton ID="BtnSave" OnClick="BtnSave_Click" Text="Save Template" runat="server" />
     </div>
 
+    <br />
+    <telerik:RadFormDecorator ID="FormDecorator" DecoratedControls="Fieldset,Label,Textbox" runat="server" />
+    <fieldset style="width:550px;">
+        <legend>Email Settings</legend>
+        <label>Smtp Server</label><br />
+        <asp:TextBox ID="TxtSmtpServer" Width="300px" runat="server" />
+        <asp:RequiredFieldValidator ID="RequiredField1" ControlToValidate="TxtSmtpServer" ErrorMessage="*" runat="server" />
+        <br /><br />
+
+        <label>Smtp Port</label><br />
+        <asp:TextBox ID="TxtSmtpPort" Width="300px" runat="server" />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="TxtSmtpPort" ErrorMessage="*" runat="server" />
+        <br /><br />
+
+        <label>Smtp Username</label><br />
+        <asp:TextBox ID="TxtSmtpUsername" Width="300px" runat="server" />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="TxtSmtpUsername" ErrorMessage="*" runat="server" />
+        <br /><br />
+
+        <label>Smtp Password</label><br />
+        <asp:TextBox ID="TxtSmtpPassword" TextMode="Password" Width="300px" runat="server" />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="TxtSmtpPassword" ErrorMessage="*" runat="server" />
+        <br /><br />
+        <asp:Button ID="BtnUpdateSmtp" OnClick="BtnUpdateSmtp_Click" Text="Update" runat="server" />&nbsp;
+        <asp:Button ID="BtnTestSettings" OnClick="BtnTestSettings_Click" Text="Test Settings" CausesValidation="false" runat="server" />
+        <br />
+        <asp:Label ID="LblStatus" runat="server" />
+     </fieldset>
+
     <telerik:RadWindowManager ID="Singleton" Skin="Default" DestroyOnClose="true" Height="600" Modal="false" KeepInScreenBounds="true" ShowContentDuringLoad="false" AutoSize="false" VisibleStatusbar="false" Behaviors="Close,Move,Resize,Minimize,Maximize" runat="server" EnableShadow="true">
     </telerik:RadWindowManager>
 </asp:Content>

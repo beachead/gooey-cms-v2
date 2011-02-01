@@ -93,6 +93,12 @@ namespace Gooeycms.Business.Web
             client.SmtpServer = GooeyConfigManager.SmtpServer;
             client.SmtpPort = GooeyConfigManager.SmtpPort;
 
+            if (GooeyConfigManager.SmtpUsername != null)
+            {
+                client.Username = GooeyConfigManager.SmtpUsername;
+                client.Password = GooeyConfigManager.SmtpPassword;
+            }
+
             return client;
         }
     }
