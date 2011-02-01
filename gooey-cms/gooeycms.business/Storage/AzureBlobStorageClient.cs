@@ -281,7 +281,7 @@ namespace Gooeycms.Business.Storage
                 CloudBlob blob = GetCloudBlob(container, directoryName, filename);
                 if (blob.Exists())
                 {
-                    result.Uri = blob.Uri;
+                    result.Uri = BuildUri(blob);
                     result.Filename = GetBlobFilename(blob);
                     result.Metadata = blob.Metadata;
                     result.Data = blob.DownloadByteArray();
@@ -433,7 +433,7 @@ namespace Gooeycms.Business.Storage
                                 results.Add(new StorageFile()
                                 {
                                     Filename = GetBlobFilename(blob),
-                                    Uri = blob.Uri,
+                                    Uri = BuildUri(blob),
                                     Metadata = blob.Metadata
                                 });
                             }
@@ -443,6 +443,16 @@ namespace Gooeycms.Business.Storage
             }
 
             return results;
+        }
+
+        private static Uri BuildUri(CloudBlob blob)
+        {
+            return new UriBuilder(blob.Uri) { Scheme = "http", Port = 80 }.Uri;
+        }
+
+        private static Uri BuildUri(CloudBlobContainer container)
+        {
+            return new UriBuilder(container.Uri) { Scheme = "http", Port = 80 }.Uri;
         }
 
         public void CopyDirectory(String sourceContainer, String sourceDirectory, String destinationContainer, String destinationDirectory)
@@ -474,7 +484,7 @@ namespace Gooeycms.Business.Storage
             if (blob.Exists())
             {
                 file.Filename = GetBlobFilename(blob);
-                file.Uri = blob.Uri;
+                file.Uri = BuildUri(blob);
                 file.Metadata = blob.Metadata;
                 file.Size = blob.Properties.Length;
             }
@@ -492,7 +502,7 @@ namespace Gooeycms.Business.Storage
             if (blob.Exists())
             {
                 file.Filename = GetBlobFilename(blob);
-                file.Uri = blob.Uri;
+                file.Uri = BuildUri(blob);
                 file.Metadata = blob.Metadata;
                 file.Size = blob.Properties.Length;
             }
@@ -503,7 +513,7 @@ namespace Gooeycms.Business.Storage
         public StorageContainer GetContainerInfo(String name)
         {
             CloudBlobContainer container = GetBlobContainer(name);
-            return new StorageContainer() { Uri = container.Uri };
+            return new StorageContainer() { Uri = BuildUri(container) };
         }
 
         public void AddMetadata(String key, String value)
