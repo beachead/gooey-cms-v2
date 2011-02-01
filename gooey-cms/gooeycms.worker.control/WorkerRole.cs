@@ -27,10 +27,15 @@ namespace Goopeycms.Worker.Control
         public override void Run()
         {
             this.cancel = new CancellationTokenSource();
+            Logging.Database.Write("worker-role", "Starting the message processing thread");
             messageTask = Task.Factory.StartNew(() => StartMessageTask(cancel.Token),TaskCreationOptions.LongRunning);
+
+            Logging.Database.Write("worker-role", "Starting the iis site ping thread");
             iisPingTask = Task.Factory.StartNew(() => StartIisPingTask(cancel.Token), TaskCreationOptions.LongRunning);
 
             Task [] tasks = new Task [] { messageTask, iisPingTask };
+
+            Logging.Database.Write("worker-role", "All threads successfully started");
             Task.WaitAll(tasks);
         }
 
@@ -39,25 +44,31 @@ namespace Goopeycms.Worker.Control
             AppPoolPinger pinger = new AppPoolPinger();
             while (!token.IsCancellationRequested)
             {
+                Logging.Database.Write("worker-role-iis", "Ping task is awake and starting to ping gooey sites.");
                 pinger.PingGooeyCmsSites();
                 pinger.Ping("http://" + GooeyConfigManager.AdminSiteHost);
                 pinger.Ping(GooeyConfigManager.StoreSiteHost);
 
+                Logging.Database.Write("worker-role-iis", "Ping task has returned and will now sleep.");
                 lock (iisPingTaskKey)
                 {
-                    Monitor.Wait(iisPingTaskKey, TimeSpan.FromMinutes(5));
+                    Monitor.Wait(iisPingTaskKey, TimeSpan.FromMinutes(15));
                 }
             }
+            Logging.Database.Write("worker-role-iis", "Ping task has detected shutdown.");
         }
 
         private static void StartMessageTask(CancellationToken token)
         {
             PageRoleWorker worker = new PageRoleWorker();
+
+            Logging.Database.Write("worker-role-queue", "Message processing task has started and is listening for messages.");
             while (!token.IsCancellationRequested)
             {
                 worker.ProcessMessages();
                 Thread.Sleep(100);
             }
+            Logging.Database.Write("worker-role-queue", "Message processing task has detected shutdown.");
         }
 
         public override void OnStop()
