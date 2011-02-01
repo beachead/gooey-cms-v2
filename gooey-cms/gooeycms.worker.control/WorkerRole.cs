@@ -44,16 +44,21 @@ namespace Goopeycms.Worker.Control
             AppPoolPinger pinger = new AppPoolPinger();
             while (!token.IsCancellationRequested)
             {
+                String lasthost = "";
                 try
                 {
                     Logging.Database.Write("worker-role-iis", "Ping task is awake and starting to ping gooey sites.");
                     pinger.PingGooeyCmsSites();
-                    pinger.Ping("http://" + GooeyConfigManager.AdminSiteHost);
-                    pinger.Ping(GooeyConfigManager.StoreSiteHost);
+
+                    lasthost = GooeyConfigManager.StoreSiteHost;
+                    pinger.Ping(lasthost);
+
+                    lasthost = "http://" + GooeyConfigManager.AdminSiteHost;
+                    pinger.Ping(lasthost);
                 }
                 catch (Exception e)
                 {
-                    Logging.Database.Write("worker-role-iis-error", "Unexpected exception: " + e.Message + ", stack:" + e.StackTrace);
+                    Logging.Database.Write("worker-role-iis-error", "Unexpected exception: host:" + lasthost + ", error:" + e.Message + ", stack:" + e.StackTrace);
                 }
 
                 Logging.Database.Write("worker-role-iis", "Ping task has returned and will now sleep for " + GooeyConfigManager.PingSleepPeriod + " minutes");
