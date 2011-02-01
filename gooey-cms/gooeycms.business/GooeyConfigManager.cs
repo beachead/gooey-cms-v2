@@ -363,6 +363,15 @@ This is your home page.
             }
         }
 
+        public static TimeSpan PingSleepPeriod
+        {
+            get
+            {
+                int value = Int32.Parse(GetCachedValue(ConfigConstants.PingSleepPeriod, "15"));
+                return TimeSpan.FromMinutes(value);
+            }
+        }
+
         public static Type SubscriptionProcessorClassType
         {
             get
