@@ -80,7 +80,8 @@ namespace Gooeycms.Business.Subscription
             subscription.Created = DateTime.Now;
             subscription.Culture = "en-us";
             subscription.Subdomain = registration.Sitename;
-            
+            subscription.MaxPhoneNumbers = -1; //Set to use the default max phone numbers
+
             if (String.IsNullOrEmpty(registration.Domain))
                 subscription.Domain = registration.Sitename + GooeyConfigManager.DefaultCmsDomain;
             else
