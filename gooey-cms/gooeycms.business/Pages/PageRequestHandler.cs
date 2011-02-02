@@ -25,6 +25,8 @@ using System.Collections.Generic;
 using Gooeycms.Data.Model.Campaign;
 using Gooeycms.Business.Markup.Markdown;
 using Gooeycms.Business.Images;
+using Gooeycms.Business.Subscription;
+using Gooeycms.Data.Model.Subscription;
 
 namespace Gooeycms.Business.Pages
 {
@@ -77,6 +79,16 @@ namespace Gooeycms.Business.Pages
                     {
                         this.isInCache = false;
                         System.Threading.Thread.Sleep(500);
+                    }
+
+                    if (count >= 6)
+                    {
+                        CmsSubscription temp = CurrentSite.Subscription;
+                        temp.IsDirty = false;
+                        SubscriptionManager.Save(temp);
+
+                        CurrentSite.Cache.Clear();
+                        Logging.Database.Write("page-save-error", "Subscription: " + temp.Guid + " failed to detect the page save. Is dirty flag automatically cleared.");
                     }
                 }
             }
