@@ -5,6 +5,7 @@ using Gooeycms.Business.Handler;
 using Gooeycms.Business.Pages;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
+using Gooeycms.Business.Web;
 
 namespace Gooeycms.Business.Javascript
 {
@@ -45,17 +46,32 @@ namespace Gooeycms.Business.Javascript
             }
             else if (file != null)
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(file.Content);
-                context.Response.BufferOutput = true;
-                context.Response.Clear();
-                context.Response.ClearHeaders();
-                context.Response.ClearContent();
-                context.Response.ContentType = "text/javascript";
-                context.Response.Expires = (int)TimeSpan.FromDays(1).TotalMinutes;
-                context.Response.Cache.SetCacheability(HttpCacheability.Public);
-                context.Response.Cache.SetMaxAge(TimeSpan.FromDays(1));
-                context.Response.OutputStream.Write(bytes, 0, bytes.Length);
-                context.Response.End();
+                //Check if the client already has the lastest version
+                Boolean isCacheValid = WebRequestContext.Instance.IsModifiedSince(file.LastModified);
+                if (isCacheValid)
+                {
+                    context.Response.Clear();
+                    context.Response.ClearHeaders();
+                    context.Response.ClearContent();
+
+                    context.Response.StatusCode = 304;
+                    context.Response.SuppressContent = true;
+                }
+                else
+                {
+                    byte[] bytes = Encoding.UTF8.GetBytes(file.Content);
+                    context.Response.BufferOutput = true;
+                    context.Response.Clear();
+                    context.Response.ClearHeaders();
+                    context.Response.ClearContent();
+                    context.Response.Cache.SetLastModified(file.LastModified);
+                    context.Response.ContentType = "text/javascript";
+                    context.Response.Expires = (int)TimeSpan.FromDays(1).TotalMinutes;
+                    context.Response.Cache.SetCacheability(HttpCacheability.Public);
+                    context.Response.Cache.SetMaxAge(TimeSpan.FromDays(1));
+                    context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+                    context.Response.End();
+                }
             }
             else
             {

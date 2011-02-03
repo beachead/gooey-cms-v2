@@ -161,6 +161,7 @@
     <Content Include="Controls\ContentEditor\Images\spr_editor_icons.png" />
     <Content Include="Controls\ContentEditor\Images\UnorderedList.gif" />
     <Content Include="Controls\Subnav.ascx" />
+    <Content Include="css\dialog.css" />
     <Content Include="css\reorder.css" />
     <Content Include="css\store.css" />
     <Content Include="default.aspx" />

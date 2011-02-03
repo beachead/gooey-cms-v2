@@ -19,6 +19,7 @@ namespace Gooeycms.Business.Storage
         public Int32 SortOrder { get; set; }
         public String Content { get; set; }
         public String FullName { get; set; }
+        public DateTime LastModified { get; set; }
 
         public String Name
         {

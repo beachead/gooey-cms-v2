@@ -306,6 +306,7 @@ namespace Gooeycms.Business.Storage
             temp.IsEnabled = isEnabled;
             temp.FullName = file.Filename;
             temp.SortOrder = sortOrder;
+            temp.LastModified = file.LastModified;
             if ((file.Data != null) && (file.Data.Length > 0))
                 temp.Content = Encoding.UTF8.GetString(file.Data);
 

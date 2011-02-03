@@ -6,6 +6,7 @@ using Gooeycms.Business.Pages;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Extensions;
+using Gooeycms.Business.Web;
 
 namespace Gooeycms.Business.Css
 {
@@ -45,22 +46,37 @@ namespace Gooeycms.Business.Css
             }
             else if (file != null)
             {
-                String directory = null;
-                if ("themes".EqualsCaseInsensitive(type))
-                    directory = CurrentSite.GetCurrentTheme().ThemeGuid;
+                //Check if the client already has the lastest version
+                Boolean isCacheValid = WebRequestContext.Instance.IsModifiedSince(file.LastModified);
+                if (isCacheValid)
+                {
+                    context.Response.Clear();
+                    context.Response.ClearHeaders();
+                    context.Response.ClearContent();
 
-                String content = CssManager.Resolve(file.Content, directory);
-                byte[] bytes = Encoding.UTF8.GetBytes(content);
-                context.Response.BufferOutput = true;
-                context.Response.Clear();
-                context.Response.ClearHeaders();
-                context.Response.ClearContent();
-                context.Response.ContentType = "text/css";
-                context.Response.Expires = (int)TimeSpan.FromDays(1).TotalMinutes;
-                context.Response.Cache.SetCacheability(HttpCacheability.Public);
-                context.Response.Cache.SetMaxAge(TimeSpan.FromDays(1));
-                context.Response.OutputStream.Write(bytes, 0, bytes.Length);
-                context.Response.End();
+                    context.Response.StatusCode = 304;
+                    context.Response.SuppressContent = true;
+                }
+                else
+                {
+                    String directory = null;
+                    if ("themes".EqualsCaseInsensitive(type))
+                        directory = CurrentSite.GetCurrentTheme().ThemeGuid;
+
+                    String content = CssManager.Resolve(file.Content, directory);
+                    byte[] bytes = Encoding.UTF8.GetBytes(content);
+                    context.Response.BufferOutput = true;
+                    context.Response.Clear();
+                    context.Response.ClearHeaders();
+                    context.Response.ClearContent();
+                    context.Response.Cache.SetLastModified(file.LastModified);
+                    context.Response.ContentType = "text/css";
+                    context.Response.Expires = (int)TimeSpan.FromDays(1).TotalMinutes;
+                    context.Response.Cache.SetCacheability(HttpCacheability.Public);
+                    context.Response.Cache.SetMaxAge(TimeSpan.FromDays(1));
+                    context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+                    context.Response.End();
+                }
             }
             else
             {

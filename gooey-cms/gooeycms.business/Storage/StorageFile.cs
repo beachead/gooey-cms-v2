@@ -15,6 +15,7 @@ namespace Gooeycms.Business.Storage
         public System.Collections.Specialized.NameValueCollection Metadata { get; set; }
         public String ContentType { get; set; }
         public byte[] Data { get; set; }
+        public DateTime LastModified { get; set; }
 
         public String Name
         {

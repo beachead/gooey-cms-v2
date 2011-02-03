@@ -285,6 +285,7 @@ namespace Gooeycms.Business.Storage
                     result.Filename = GetBlobFilename(blob);
                     result.Metadata = blob.Metadata;
                     result.Data = blob.DownloadByteArray();
+                    result.LastModified = blob.Properties.LastModifiedUtc;
                 }
             }
 

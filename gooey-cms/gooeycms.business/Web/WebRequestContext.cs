@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Globalization;
 namespace Gooeycms.Business.Web
 {
     public class WebRequestContext
@@ -7,6 +8,25 @@ namespace Gooeycms.Business.Web
         public static WebRequestContext Instance
         {
             get { return new WebRequestContext(); }
+        }
+
+        public bool IsModifiedSince(DateTime lastModified)
+        {
+            CultureInfo enUS = new CultureInfo("en-US"); 
+            Boolean result = false;
+
+            String header = Request.Headers["If-Modified-Since"];
+            if (!String.IsNullOrEmpty(header))
+            {
+                DateTime modifiedSince;
+                if (DateTime.TryParse(header, out modifiedSince))
+                {
+                    DateTime utc = modifiedSince.ToUniversalTime();
+                    result = (utc >= lastModified);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
