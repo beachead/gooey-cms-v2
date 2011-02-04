@@ -474,7 +474,10 @@ namespace Gooeycms.Business.Storage
             UriBuilder builder = new UriBuilder(originalUri) { Scheme = "http", Port = 80 };
 
             if (this.GetClientOption<Boolean>(CloudStorageOptions.UseCdn))
+            {
+                builder.Scheme = "http"; //force http for cdn access (required)
                 builder.Host = GooeyConfigManager.AzureCdnHost;
+            }
 
             return builder.Uri;
         }
