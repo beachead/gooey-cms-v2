@@ -42,31 +42,37 @@ namespace Goopeycms.Worker.Control
         private static void StartIisPingTask(CancellationToken token)
         {
             AppPoolPinger pinger = new AppPoolPinger();
-            while (!token.IsCancellationRequested)
+            try
             {
-                String lasthost = "";
-                try
+                while (!token.IsCancellationRequested)
                 {
-                    Logging.Database.Write("worker-role-iis", "Ping task is awake and starting to ping gooey sites.");
-                    pinger.PingGooeyCmsSites();
+                    String lasthost = "";
+                    try
+                    {
+                        pinger.PingGooeyCmsSites();
 
-                    lasthost = GooeyConfigManager.StoreSiteHost;
-                    pinger.Ping(lasthost);
+                        lasthost = GooeyConfigManager.StoreSiteHost;
+                        pinger.Ping(lasthost);
 
-                    lasthost = "http://" + GooeyConfigManager.AdminSiteHost;
-                    pinger.Ping(lasthost);
-                }
-                catch (Exception e)
-                {
-                    Logging.Database.Write("worker-role-iis-error", "Unexpected exception: host:" + lasthost + ", error:" + e.Message + ", stack:" + e.StackTrace);
-                }
+                        lasthost = "http://" + GooeyConfigManager.AdminSiteHost;
+                        pinger.Ping(lasthost);
+                    }
+                    catch (Exception e)
+                    {
+                        Logging.Database.Write("worker-role-iis-error", "Unexpected exception: host:" + lasthost + ", error:" + e.Message + ", stack:" + e.StackTrace);
+                    }
 
-                Logging.Database.Write("worker-role-iis", "Ping task has returned and will now sleep for " + GooeyConfigManager.PingSleepPeriod + " minutes");
-                lock (iisPingTaskKey)
-                {
-                    Monitor.Wait(iisPingTaskKey, GooeyConfigManager.PingSleepPeriod);
+                    lock (iisPingTaskKey)
+                    {
+                        Monitor.Wait(iisPingTaskKey, GooeyConfigManager.PingSleepPeriod);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Logging.Database.Write("worker-role-iis-error", "There was an unexpected exception while the iis ping task thread was running, error:" + e.Message + ", stack:" + e.StackTrace);
+            }
+
             Logging.Database.Write("worker-role-iis", "Ping task has detected shutdown.");
         }
 
