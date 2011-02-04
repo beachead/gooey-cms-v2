@@ -10,6 +10,12 @@ namespace Gooeycms.Business.Storage
         Public
     }
 
+    public static class CloudStorageOptions
+    {
+        public const String UseCdn = "use-cdn";
+        public const String UseHttps = "use-https";
+    }
+
     public static class StorageClientConst
     {
         public const String RootFolder = null;
@@ -50,5 +56,8 @@ namespace Gooeycms.Business.Storage
 
         void AddMetadata(String key, String value);
         void SetMetadata(String containerName, String directoryName, String filename);
+
+        void AddClientOption<T>(String key, T item);
+        T GetClientOption<T>(String key);
     }
 }

@@ -19,7 +19,10 @@ namespace Gooeycms.Business.Cache
         {
             lock (caches)
             {
-                caches.Clear();
+                foreach (CacheInstance cache in caches.Values)
+                {
+                    cache.Clear();
+                }
             }
         }
 

@@ -7,12 +7,14 @@ using Microsoft.WindowsAzure.StorageClient;
 using System.Text;
 using System.IO;
 using System.Collections.Specialized;
+using Gooeycms.Extensions;
 
 namespace Gooeycms.Business.Storage
 {
     public class AzureBlobStorageClient : IStorageClient
     {
         private IDictionary<String, String> metadata = new Dictionary<String, String>();
+        private Dictionary<String, Object> options = new Dictionary<string, object>();
 
         static AzureBlobStorageClient()
         {
@@ -27,6 +29,16 @@ namespace Gooeycms.Business.Storage
 
                 configSetter(connectionString);
             });
+        }
+
+        public void AddClientOption<T>(String key, T item)
+        {
+            options.Add(key, item);
+        }
+
+        public T GetClientOption<T>(String key)
+        {
+            return (T)options.GetValue(key);
         }
 
         private CloudBlobContainer GetBlobContainer(String name)
@@ -446,14 +458,25 @@ namespace Gooeycms.Business.Storage
             return results;
         }
 
-        private static Uri BuildUri(CloudBlob blob)
+        private Uri BuildUri(CloudBlob blob)
         {
-            return new UriBuilder(blob.Uri) { Scheme = "http", Port = 80 }.Uri;
+            return BuildUri(blob.Uri);
         }
 
-        private static Uri BuildUri(CloudBlobContainer container)
+        private Uri BuildUri(CloudBlobContainer container)
         {
-            return new UriBuilder(container.Uri) { Scheme = "http", Port = 80 }.Uri;
+            return BuildUri(container.Uri);
+        }
+
+        private Uri BuildUri(Uri originalUri)
+        {
+            String scheme = (this.GetClientOption<Boolean>(CloudStorageOptions.UseHttps)) ? "https" : "http";
+            UriBuilder builder = new UriBuilder(originalUri) { Scheme = "http", Port = 80 };
+
+            if (this.GetClientOption<Boolean>(CloudStorageOptions.UseCdn))
+                builder.Host = GooeyConfigManager.AzureCdnHost;
+
+            return builder.Uri;
         }
 
         public void CopyDirectory(String sourceContainer, String sourceDirectory, String destinationContainer, String destinationDirectory)

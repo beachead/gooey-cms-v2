@@ -7,6 +7,7 @@ namespace Gooeycms.Constants
 {
     public static class ConfigConstants
     {
+        public const String AzureCdnHost = "azure-cdn-host";
         public const String SalesForcePrice = "salesforce-price";
         public const String CampaignOptionPrice = "campaign-price";
         public const String DefaultCmsDomain = "default-cms-domain";

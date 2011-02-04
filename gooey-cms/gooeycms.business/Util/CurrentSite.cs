@@ -130,6 +130,32 @@ namespace Gooeycms.Business.Util
 
             }
 
+            public static Boolean IsCdnEnabled
+            {
+                get
+                {
+                    Boolean result = false;
+                    String strResult = GetSiteConfiguration("is-cdn-enabled", "false", false);
+                    Boolean.TryParse(strResult, out result);
+
+                    return result;
+                }
+                set { SetSiteConfiguration("is-cdn-enabled", value.ToString()); }
+            }
+
+            public static Boolean IsSslEnabled
+            {
+                get
+                {
+                    Boolean result = false;
+                    String strResult = GetSiteConfiguration("is-ssl-enabled", "false", false);
+                    Boolean.TryParse(strResult, out result);
+
+                    return result;
+                }
+                set { SetSiteConfiguration("is-cdn-enabled", value.ToString()); }
+            }
+
             public static Boolean IsGoogleAnalyticsEnabled
             {
                 get 
