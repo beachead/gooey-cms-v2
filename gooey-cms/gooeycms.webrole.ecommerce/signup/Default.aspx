@@ -129,7 +129,7 @@
 				    <asp:DropDownList ID="SelectedPlan" OnSelectedIndexChanged="SelectedPlan_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
 				</p>
 				<p id="disclaimer" style="color:#000000;">by clicking the button below, you agree to our <a href="http://www.gooeycms.com/terms_of_use">terms of service</a>, <a href="http://www.gooeycms.com/privacy">privacy policy</a>, and <a href="http://www.gooeycms.com/help#refund">refund policy</a>.</p>
-				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" OnClientClick="" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
+				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" ValidationGroup="MainGroup" OnClientClick="" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
 			</li>
 		</ol>
  
