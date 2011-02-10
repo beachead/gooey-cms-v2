@@ -38,7 +38,15 @@ namespace Gooeycms.Business.Storage
 
         public T GetClientOption<T>(String key)
         {
-            return (T)options.GetValue(key);
+            T result;
+
+            Object temp = options.GetValue(key);
+            if (temp != null)
+                result = (T)temp;
+            else
+                result = default(T);
+
+            return result;
         }
 
         private CloudBlobContainer GetBlobContainer(String name)
