@@ -25,7 +25,7 @@
     </p>
      <p>
         <strong><a href="./campaigns/">Campaigns</a></strong><br />
-        Manage your site's marketing campaigns, export marketing leads and configure Google Analytics or Salesforce.
+        Manage your site's phone calls, marketing campaigns, export marketing leads and configure Google Analytics, Salesforce or your phone number settings.
     </p>
         <p>
         <strong><a href="./promotion/">Promotion</a></strong><br />
