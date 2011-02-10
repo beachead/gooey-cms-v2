@@ -28,7 +28,7 @@
             <asp:Label ID="LblStatus" runat="server" />
         </div>
 		<div class="callout" id="callout">
-			<p style="margin-bottom:10px;">Try Gooey CMS without a credit card, sign&nbsp;up for our <a href="Default.aspx?free">FREE</a> program.</p><p class="x-3" style="padding-left:25px; margin-bottom:10px;">You can upgrade to our Pro Plan anytime for FREE during your 30&nbsp;day trial which expires on <% Response.Write(TrialExpires); %>.</p>
+			<p style="margin-bottom:10px;">Try Gooey CMS without a credit card, sign&nbsp;up for our <a href="Default.aspx?free">FREE</a> program.</p><p class="x-3" style="padding-left:25px; margin-bottom:10px;">You can upgrade to our Pro Plan at anytime during your 30&nbsp;day trial which expires on <% Response.Write(TrialExpires); %>.</p>
 			<p class="x-3" style="padding-left:25px;">You can cancel anytime, but we hope you'll stay.</p>
 		</div>
  
@@ -128,7 +128,7 @@
 				<p>
 				    <asp:DropDownList ID="SelectedPlan" OnSelectedIndexChanged="SelectedPlan_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
 				</p>
-				<p id="disclaimer" style="color:#000000;">by clicking the button below, you agree to our <a href="http://www.gooeycms.com/terms_of_use">terms of service</a>, <a href="http://www.gooeycms.com/privacy">privacy policy</a>, and <a href="http://www.gooeycms.com/help#refund">refund policy</a>.</p>
+				<p id="disclaimer" style="color:#000000;">by clicking the button below, you agree to our <a href="http://www.gooeycms.com/terms_of_use">terms of service</a>, <a href="http://www.gooeycms.com/privacy">privacy policy</a>, and <a href="http://www.gooeycms.com/refund">refund policy</a>.</p>
 				<p><asp:ImageButton ID="Create" OnClick="CreateAccount_Click" ValidationGroup="MainGroup" OnClientClick="" ImageUrl="../images/btn_create_acct.png" runat="server" /></p>
 			</li>
 		</ol>
