@@ -105,21 +105,28 @@ namespace Gooeycms.Webrole.Ecommerce.signup
         {
             try
             {
-                Dictionary<String, String> fields = new Dictionary<string, string>();
-                fields.Add("FirstName", registration.Firstname);
-                fields.Add("LastName", registration.Lastname);
-                fields.Add("Company", registration.Company);
-                fields.Add("Description", "Subscription id:" + subscription.Guid + ", plan:" + subscription.SubscriptionPlanSku + ", paypal profile:" + subscription.PaypalProfileId);
+                if (GooeyConfigManager.Salesforce.IsEnabled)
+                {
+                    Dictionary<String, String> fields = new Dictionary<string, string>();
+                    fields.Add("FirstName", registration.Firstname);
+                    fields.Add("LastName", registration.Lastname);
+                    fields.Add("Company", registration.Company);
+                    fields.Add("Description", "Subscription id:" + subscription.Guid + ", plan:" + subscription.SubscriptionPlanSku + ", paypal profile:" + subscription.PaypalProfileId);
 
-                SalesforcePartnerClient salesforce = new SalesforcePartnerClient();
-                try
-                {
-                    salesforce.Login(GooeyConfigManager.Salesforce.SalesforceUsername, GooeyConfigManager.Salesforce.ApiPassword);
-                    salesforce.AddLead(fields, null);
+                    SalesforcePartnerClient salesforce = new SalesforcePartnerClient();
+                    try
+                    {
+                        salesforce.Login(GooeyConfigManager.Salesforce.SalesforceUsername, GooeyConfigManager.Salesforce.ApiPassword);
+                        salesforce.AddLead(fields, null);
+                    }
+                    finally
+                    {
+                        salesforce.Logout();
+                    }
                 }
-                finally
+                else
                 {
-                    salesforce.Logout();
+                    Logging.Database.Write("salesforce-client", "Salesforce has not been setup for tracking registration leads");
                 }
             }
             catch (Exception e)
