@@ -7,6 +7,7 @@
     <asp:View ID="globaladmin" runat="server">
         <ul>
             <li><asp:HyperLink ID="globaladmin_default" NavigateUrl="~/auth/global-admin/default.aspx" Text="General Settings" runat="server" /></li>
+            <li><asp:HyperLink ID="globaladmin_salesforce" NavigateUrl="~/auth/global-admin/salesforce.aspx" Text="Salesforce Configuration" runat="server" /></li>
         </ul>
     </asp:View>
 

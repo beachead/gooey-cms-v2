@@ -10,6 +10,8 @@ using Gooeycms.Business.Subscription;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Billing;
 using Gooeycms.Business.Email;
+using gooeycms.business.salesforce;
+using Gooeycms.Business;
 
 namespace Gooeycms.Webrole.Ecommerce.signup
 {
@@ -89,10 +91,41 @@ namespace Gooeycms.Webrole.Ecommerce.signup
 
                 double totalCost = SubscriptionManager.CalculateCost(subscription);
                 BillingManager.Instance.AddHistory(subscription.Guid, paypalProfileId, BillingManager.NotApplicable, BillingManager.Signup, totalCost, "Initial signup for " + subscription.SubscriptionPlan.Name);
+
+                //Add this user to salesforce as a new lead
+                AddSalesforceLead(registration, subscription);
+
                 EmailManager.Instance.SendRegistrationEmail(subscription,registration);
             }
 
             return subscription;
+        }
+
+        private static void AddSalesforceLead(Registration registration, CmsSubscription subscription)
+        {
+            try
+            {
+                Dictionary<String, String> fields = new Dictionary<string, string>();
+                fields.Add("FirstName", registration.Firstname);
+                fields.Add("LastName", registration.Lastname);
+                fields.Add("Company", registration.Company);
+                fields.Add("Description", "Subscription id:" + subscription.Guid + ", plan:" + subscription.SubscriptionPlanSku + ", paypal profile:" + subscription.PaypalProfileId);
+
+                SalesforcePartnerClient salesforce = new SalesforcePartnerClient();
+                try
+                {
+                    salesforce.Login(GooeyConfigManager.Salesforce.SalesforceUsername, GooeyConfigManager.Salesforce.ApiPassword);
+                    salesforce.AddLead(fields, null);
+                }
+                finally
+                {
+                    salesforce.Logout();
+                }
+            }
+            catch (Exception e)
+            {
+                Logging.Database.Write("salesforce-client", "Failed to create the salesforce lead:" + e.Message);
+            }
         }
     }
 }

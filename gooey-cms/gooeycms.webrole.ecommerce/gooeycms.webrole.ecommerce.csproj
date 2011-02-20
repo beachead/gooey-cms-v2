@@ -418,6 +418,10 @@
     <Content Include="images\home\txt_starting_at_50.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business.salesforce\gooeycms.business.salesforce.csproj">
+      <Project>{6C6A2B71-C39A-4D38-A0F6-EF672670C57B}</Project>
+      <Name>gooeycms.business.salesforce</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
       <Project>{A3D01157-7412-47B1-A123-2F3071D86B6E}</Project>
       <Name>gooeycms.business</Name>

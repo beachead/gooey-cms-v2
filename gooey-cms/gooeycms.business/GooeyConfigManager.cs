@@ -631,5 +631,45 @@ This is your home page.
                 }
             }
         }
+
+        public static class Salesforce
+        {
+            public static String SalesforceUsername
+            {
+                set { SetValueAndUpdateCache(ConfigConstants.SalesforceUsername, value);  }
+                get
+                {
+                    return GetValueOrDefault(ConfigConstants.SalesforceUsername);
+                }
+            }
+
+            public static String SalesforcePassword
+            {
+                set { SetValueAndUpdateCache(ConfigConstants.SalesforcePassword, TextEncryption.Encode(value)); }
+                get
+                {
+                    return TextEncryption.Decode(GetValueOrDefault(ConfigConstants.SalesforcePassword));
+                }
+            }
+
+            public static String SalesforceToken
+            {
+                set { SetValueAndUpdateCache(ConfigConstants.SalesforceToken, TextEncryption.Encode(value)); }
+                get
+                {
+                    return TextEncryption.Decode(GetValueOrDefault(ConfigConstants.SalesforceToken));
+                }
+            }
+
+            public static String ApiPassword
+            {
+                get { return SalesforcePassword + SalesforceToken; }
+            }
+
+            public static Boolean IsEnabled
+            {
+                get { return !String.IsNullOrEmpty(SalesforceUsername); }
+            }
+        }
     }
 }

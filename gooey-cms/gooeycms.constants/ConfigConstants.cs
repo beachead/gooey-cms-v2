@@ -61,5 +61,9 @@ namespace Gooeycms.Constants
         public const String TwilioAccountSid = "twilio-accountsid";
         public const String TwilioAccountToken = "twilio-accounttoken";
         public const String CampaignMaxPhoneNumbers = "campaign-max-phonenumbers";
+
+        public const String SalesforceUsername = "global-salesforce-username";
+        public const String SalesforcePassword = "global-salesforce-password";
+        public const String SalesforceToken = "global-salesforce-token";
     }
 }
