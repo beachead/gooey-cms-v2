@@ -122,8 +122,6 @@ namespace Gooeycms.Business.Pages
                     return;
 
                 ValidateSite();
-
-                TimeSpan diff;
                 this.page = PageManager.Instance.GetLatestPage(url);
             }
             else
@@ -267,13 +265,14 @@ namespace Gooeycms.Business.Pages
         protected void Page_Error(Object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError();
+            Server.ClearError();
 
             if (ex is PageNotFoundException)
             {
                 PageNotFoundException notfound = (PageNotFoundException)ex;
                 if (notfound.NotFoundPath.Contains("404.aspx"))
                 {
-                    Response.Redirect("/gooeycms/errors/404.aspx", true);
+                    Response.Redirect("/gooeycms/errors/404.aspx?path=" + Server.UrlEncode(notfound.NotFoundPath), true);
                 }
                 else
                 {
