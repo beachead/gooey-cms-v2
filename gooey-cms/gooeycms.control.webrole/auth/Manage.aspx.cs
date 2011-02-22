@@ -31,6 +31,19 @@ namespace Gooeycms.Webrole.Control.auth
             if (!CurrentSite.IsAvailable)
                 Response.Redirect("~/Dashboard.aspx");
 
+            if (LoggedInUser.IsDemoAccount)
+            {
+                BtnUpdateOptions.Visible = false;
+                BtnEnableSubscription.Visible = false;
+                BtnUpdateUserInfo.Visible = false;
+                BtnUpgradePlan.Visible = false;
+                BtnUpgradeAccount.Visible = false;
+                BtnCancelPlan.Visible = false;
+                LnkUpdateDomain.Visible = false;
+                BtnCancelPlan2.Visible = false;
+                BtnDowngradePlan.Visible = false;
+            }
+
             String token = Request.QueryString["token"];
             if (!String.IsNullOrEmpty(token))
             {
