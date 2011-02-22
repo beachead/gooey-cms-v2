@@ -363,6 +363,7 @@ namespace Gooeycms.Business.Store
                 subscription.IsDemo = true;
                 subscription.IsCampaignEnabled = true;
                 subscription.Expires = DateTime.MaxValue;
+                subscription.Culture = GooeyConfigManager.DefaultCulture;
                 SubscriptionManager.Create(wrapper, subscription);
 
                 DoNotify(notifier, "Reading Package From Archive");

@@ -8,6 +8,7 @@ using Gooeycms.Business.Web.Microsoft;
 using Gooeycms.Data.Model.Campaign;
 using Gooeycms.Business.Campaigns;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control.auth.Campaigns
 {
@@ -17,6 +18,9 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
 
         protected override void OnPageLoad(object sender, EventArgs e)
         {
+            if (LoggedInUser.IsDemoAccount)
+                Response.Redirect("~/auth/default.aspx");
+
             if (!CurrentSite.Subscription.IsCampaignEnabled)
                 Response.Redirect("~/auth/default.aspx?addon=campaigns", true);
 

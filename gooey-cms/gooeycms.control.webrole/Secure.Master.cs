@@ -71,6 +71,15 @@ namespace Gooeycms.Webrole.Control
 
         protected void SetMenuDisplay()
         {
+            if (LoggedInUser.IsDemoAccount)
+            {
+                this.NavCampaigns.NavigateUrl= "#";
+                this.NavCampaigns.Attributes["onclick"] = "alert('Campaign management is not available under the demo account'); return false;";
+
+                this.NavUsers.NavigateUrl = "#";
+                this.NavUsers.Attributes["onclick"] = "alert('User management is not available under the demo account'); return false;";
+            }
+
             this.ListItemContent.Visible = LoggedInUser.IsInRole(SecurityConstants.Roles.GLOBAL_ADMINISTRATOR,
                                                                  SecurityConstants.Roles.SITE_ADMINISTRATOR,
                                                                  SecurityConstants.Roles.SITE_CONTENT_EDITOR);
