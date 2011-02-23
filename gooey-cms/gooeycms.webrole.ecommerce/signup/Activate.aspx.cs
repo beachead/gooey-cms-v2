@@ -111,8 +111,16 @@ namespace Gooeycms.Webrole.Ecommerce.signup
                     fields.Add("FirstName", registration.Firstname);
                     fields.Add("LastName", registration.Lastname);
                     fields.Add("Company", registration.Company);
-                    fields.Add("Description", "Subscription id:" + subscription.Guid + ", plan:" + subscription.SubscriptionPlanSku + ", paypal profile:" + subscription.PaypalProfileId);
-
+                    fields.Add("Email", registration.Email);
+                    fields.Add("Gooey_CMS_Site__c", registration.Sitename + ".gooeycms.net");
+                    
+                    String password_SF = TextEncryption.Decode(registration.EncryptedPassword);
+                    fields.Add("Password__c", password_SF);
+                    
+                    fields.Add("subscription_type__c", subscription.SubscriptionPlanSku);
+                    fields.Add("PayPal_Profile__c", subscription.PaypalProfileId);
+                    fields.Add("Subscription_ID__c", subscription.Guid);
+ 
                     SalesforcePartnerClient salesforce = new SalesforcePartnerClient();
                     try
                     {
