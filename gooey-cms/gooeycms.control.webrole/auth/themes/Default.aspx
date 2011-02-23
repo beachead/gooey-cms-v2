@@ -58,7 +58,7 @@
                             NavigateUrl='~/auth/Manage.aspx?msg=You+must+upgrade+your+account+to+complete+this+action' />
                         <% } %>
                         &nbsp;|&nbsp;
-                        <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=600,height=500,left=150');">Images</a>&nbsp;|&nbsp;
+                        <a href="#" onclick="window.open('<%# Eval("Theme.ThemeGuid","ImageBrowser.aspx?tid={0}") %>','','width=900,height=500,left=150');">Images</a>&nbsp;|&nbsp;
                         <asp:LinkButton ID="DeleteTheme" Text="[delete]" CommandArgument='<%# Eval("Theme.ThemeGuid") %>' CommandName='deletetheme' OnClientClick="return confirm('Are you sure you want to delete this theme?\r\n\r\nWARNING: This will also delete ALL javascript, css and image files associated with this theme.')" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>

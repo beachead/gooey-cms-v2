@@ -116,30 +116,33 @@ namespace Gooeycms.Business.Images
                     else
                         actualFile = file;
 
-                    CmsImage temp = dao.FindByUrl(actualFile.Url);
-                    if (temp == null)
+                    if (actualFile.Exists())
                     {
-                        FileInfo info = new FileInfo(actualFile.Filename);
+                        CmsImage temp = dao.FindByUrl(actualFile.Url);
+                        if (temp == null)
+                        {
+                            FileInfo info = new FileInfo(actualFile.Filename);
 
-                        String mimetype = "image/png";
-                        if (ImageMimeTypes.ContainsKey(info.Extension))
-                            mimetype = ImageMimeTypes[info.Extension];
+                            String mimetype = "image/png";
+                            if (ImageMimeTypes.ContainsKey(info.Extension))
+                                mimetype = ImageMimeTypes[info.Extension];
 
-                        temp = new CmsImage();
-                        temp.CloudUrl = actualFile.Url;
-                        temp.ContentType = mimetype;
-                        temp.Created = DateTime.Now;
-                        temp.Directory = folder;
-                        temp.Filename = actualFile.Filename;
-                        temp.Guid = System.Guid.NewGuid().ToString();
-                        temp.SubscriptionId = siteGuid.Value;
-                        temp.Length = actualFile.Size;
+                            temp = new CmsImage();
+                            temp.CloudUrl = actualFile.Url;
+                            temp.ContentType = mimetype;
+                            temp.Created = DateTime.Now;
+                            temp.Directory = folder;
+                            temp.Filename = actualFile.Filename;
+                            temp.Guid = System.Guid.NewGuid().ToString();
+                            temp.SubscriptionId = siteGuid.Value;
+                            temp.Length = actualFile.Size;
 
-                        dao.Save<CmsImage>(temp);
+                            dao.Save<CmsImage>(temp);
+                        }
+
+                        if (results != null)
+                            results.Add(actualFile);
                     }
-
-                    if (results != null)
-                        results.Add(actualFile);
                 }
                 tx.Commit();
             }

@@ -49,15 +49,6 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         protected global::Telerik.Web.UI.RadAjaxManager AjaxScriptManager;
         
         /// <summary>
-        /// LblUploadStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblUploadStatus;
-        
-        /// <summary>
         /// FileUpload control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace Gooeycms.Webrole.Control.auth.Themes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnUpload;
+        
+        /// <summary>
+        /// LblUploadStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblUploadStatus;
         
         /// <summary>
         /// LblUploadedFiles control.

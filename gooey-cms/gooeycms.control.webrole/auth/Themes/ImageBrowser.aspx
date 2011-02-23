@@ -60,7 +60,7 @@
     <telerik:RadAjaxPanel ID="AjaxPanel" LoadingPanelID="LoadingPanel" runat="server">
 
         <div class="columns">
-            <div class="column" style="width: 250px;">
+            <div class="column" style="width: 400px;">
                 <asp:ImageButton ID="BtnRefreshImages" ImageUrl="~/images/Refresh.gif" OnClick="BtnRefreshImages_Click" runat="server" /> Refresh Images
 
                 <telerik:RadGrid ID="GridExistingImages" runat="server" AllowPaging="true" 
@@ -85,8 +85,8 @@
             </telerik:RadGrid>
             </div>
 
-            <div class="column last" style="width: 250px;">
-                <fieldset style="width: 230px; height: 220px">
+            <div class="column last" style="width: 300px;">
+                <fieldset style="width: 230px; height: 280px">
                     <legend>Preview</legend>
                     <telerik:RadBinaryImage ID="ImagePreview" ResizeMode="Fit" AutoAdjustImageControlSize="true" Width="230" runat="server" />
                 </fieldset>                    
