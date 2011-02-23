@@ -478,13 +478,22 @@ namespace Gooeycms.Business.Storage
 
         private Uri BuildUri(Uri originalUri)
         {
-            String scheme = (this.GetClientOption<Boolean>(CloudStorageOptions.UseHttps)) ? "https" : "http";
-            UriBuilder builder = new UriBuilder(originalUri) { Scheme = "http", Port = originalUri.Port };
+            Boolean usehttps = this.GetClientOption<Boolean>(CloudStorageOptions.UseHttps);
+
+            String scheme = (usehttps) ? "https" : "http";
+            int port = (usehttps) ? 443 : 80;
+
+            //Handle the development server
+            if (originalUri.Port > 1000)
+                port = originalUri.Port;
+
+            UriBuilder builder = new UriBuilder(originalUri) { Scheme = scheme, Port = port };
 
             if (this.GetClientOption<Boolean>(CloudStorageOptions.UseCdn))
             {
                 builder.Scheme = "http"; //force http for cdn access (required)
                 builder.Host = GooeyConfigManager.AzureCdnHost;
+                builder.Port = 80; //always use port 80 for the cdn
             }
 
 
