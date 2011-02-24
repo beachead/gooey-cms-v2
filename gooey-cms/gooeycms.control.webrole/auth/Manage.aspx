@@ -203,6 +203,10 @@
         <label>Staging Domain</label><br />
         <asp:TextBox ID="TxtCustomStagingDomain" Width="300px" runat="server" />
         </div>
+
+        <div style="padding-top:10px; padding-left:3px;">
+        <label>Allow remote support</label><asp:RadioButton ID="RdoRemoteSupportYes" GroupName="RemoteSupport" Text="Yes" runat="server" />&nbsp;<asp:RadioButton ID="RdoRemoteSupportNo" GroupName="RemoteSupport" Text="No" runat="server" />
+        </div>
        <div style="padding-top:10px; padding-bottom:10px; padding-left:3px;">
         <asp:LinkButton ID="LnkUpdateDomain" OnClick="LnkUpdateDomain_Click" Text="Update Domain Settings" runat="server" />
         </div>

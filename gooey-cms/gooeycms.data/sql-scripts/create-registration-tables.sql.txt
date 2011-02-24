@@ -64,6 +64,7 @@ CREATE TABLE [Subscriptions] (
 [generic_addon] BIT DEFAULT(0),
 [is_demo] BIT DEFAULT(0),
 [is_dirty] BIT DEFAULT(0),
+[is_remote_support] BIT DEFAULT(1),
 [max_phone_numbers] INT,
 PRIMARY KEY CLUSTERED([id]),
 );

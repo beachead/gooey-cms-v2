@@ -27,6 +27,7 @@ namespace Gooeycms.Data.Model.Subscription
         public virtual CmsSubscriptionPlan SubscriptionPlan { get; set; }
         public virtual Boolean IsDirty { get; set; }
         public virtual Int32 MaxPhoneNumbers { get; set; }
+        public virtual Boolean IsRemoteSupportEnabled { get; set; }
 
         public virtual SubscriptionPlans SubscriptionPlanEnum
         {

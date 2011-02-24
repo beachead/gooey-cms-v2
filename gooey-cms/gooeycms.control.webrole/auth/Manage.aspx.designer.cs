@@ -490,6 +490,24 @@ namespace Gooeycms.Webrole.Control.auth {
         protected global::System.Web.UI.WebControls.TextBox TxtCustomStagingDomain;
         
         /// <summary>
+        /// RdoRemoteSupportYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton RdoRemoteSupportYes;
+        
+        /// <summary>
+        /// RdoRemoteSupportNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton RdoRemoteSupportNo;
+        
+        /// <summary>
         /// LnkUpdateDomain control.
         /// </summary>
         /// <remarks>

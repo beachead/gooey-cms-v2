@@ -226,6 +226,9 @@ namespace Gooeycms.Webrole.Control.auth
             this.LblSiteName.Text = subscription.Subdomain;
             this.TxtProductionDomain.Text = subscription.Domain;
             this.TxtCustomStagingDomain.Text = subscription.StagingDomain;
+
+            this.RdoRemoteSupportNo.Checked = !subscription.IsRemoteSupportEnabled;
+            this.RdoRemoteSupportYes.Checked = subscription.IsRemoteSupportEnabled;
         }
 
         protected void RecalculateCost_Click(Object sender, EventArgs e)
@@ -266,11 +269,14 @@ namespace Gooeycms.Webrole.Control.auth
                 if (String.IsNullOrWhiteSpace(staging))
                     staging = GooeyConfigManager.DefaultStagingPrefix + subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
 
+                //Update the remote support options
+                subscription.IsRemoteSupportEnabled = RdoRemoteSupportYes.Checked;
+
                 SubscriptionManager.UpdateDomains(subscription, production, staging, true);
+
 
                 //Clear the site cache
                 CurrentSite.Cache.Clear();
-
 
                 this.LblStatus.Text = "Successfully updated domains";
                 this.LblStatus.ForeColor = System.Drawing.Color.Green;

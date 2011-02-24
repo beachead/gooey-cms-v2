@@ -31,6 +31,15 @@ namespace Gooeycms.Webrole.Control.auth.global_admin.Subscriptions {
         protected global::Telerik.Web.UI.RadAjaxManager RadAjaxManager;
         
         /// <summary>
+        /// LblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStatus;
+        
+        /// <summary>
         /// LoadingPanel control.
         /// </summary>
         /// <remarks>

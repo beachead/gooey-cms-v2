@@ -33,6 +33,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
 
+    <asp:Label ID="LblStatus" runat="server" /><br />
     All Subscriptions <br />
 
     <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default" runat="server" />
@@ -51,11 +52,13 @@
                 <telerik:GridBoundColumn DataField="StagingDomain" HeaderText="Staging Domain" SortExpression="StagingDomain" UniqueName="StagingDomain" />
                 <telerik:GridBoundColumn DataField="Created" HeaderText="Created" SortExpression="Created" UniqueName="Created" />
                 <telerik:GridBoundColumn DataField="PaypalProfileId" HeaderText="Paypal Customer ID" SortExpression="PaypalProfileId" UniqueName="PaypalProfileId" />
-                <telerik:GridTemplateColumn ItemStyle-Width="250">
+                <telerik:GridTemplateColumn ItemStyle-Width="350">
                     <ItemTemplate>
                         <asp:LinkButton ID="LnkEdit" Text="Modify Subscription" OnClientClick='<%# DataBinder.Eval(Container.DataItem, "Guid", "display_modify(\"{0}\"); return false;") %>' runat="server" />
                         &nbsp;&nbsp;
                         <asp:LinkButton ID="LinkButton1" Text="Manage Users" OnClientClick='<%# DataBinder.Eval(Container.DataItem, "Guid", "display_users(\"{0}\"); return false;") %>' runat="server" />
+                        &nbsp;&nbsp;
+                        <asp:LinkButton ID="LinkButton2" Text="Login as..." CommandName="LoginAs" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"Guid") %>' runat="server" />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
             </Columns>

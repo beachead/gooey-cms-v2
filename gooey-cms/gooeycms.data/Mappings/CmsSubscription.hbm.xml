@@ -35,6 +35,7 @@
     <property column="max_phone_numbers" name="MaxPhoneNumbers" type="Int32" />
     <property column="is_demo" name="IsDemo" type="Boolean" />
     <property column="is_dirty" name="IsDirty" type="Boolean" />
+    <property column="is_remote_support" name="IsRemoteSupportEnabled" type="Boolean" />
     <many-to-one column="primary_user_guid" property-ref="Guid" name="PrimaryUser" class="Gooeycms.Data.Model.Subscription.UserInfo, gooeycms.data" />
     <many-to-one column="subscription_plan_sku" property-ref="SKU" name="SubscriptionPlan" class="Gooeycms.Data.Model.Subscription.CmsSubscriptionPlan, gooeycms.data" />    
   </class>
