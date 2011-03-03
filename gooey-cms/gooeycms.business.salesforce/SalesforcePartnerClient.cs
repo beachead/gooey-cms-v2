@@ -126,6 +126,8 @@ namespace gooeycms.business.salesforce
 
         public void AddLead(Dictionary<String, String> values, IDictionary<String,String> fieldMappings)
         {
+            Boolean isDescriptionSet = false;
+
             if (this.result == null)
                 throw new ApplicationException("The client is not logged into salesforce");
 
@@ -153,7 +155,14 @@ namespace gooeycms.business.salesforce
                 {
                     if (!String.IsNullOrWhiteSpace(values[key]))
                     {
-                        elements.Add(GetNewXmlElement(validFields[actualKey].ApiName, values[key]));
+                        String value = values[key];
+                        if (key.ToLower().Equals("description"))
+                        {
+                            isDescriptionSet = true;
+                            value = GetActiveCampaign(values) + value;
+                        }
+
+                        elements.Add(GetNewXmlElement(validFields[actualKey].ApiName, value));
                         associatedFields[validFields[actualKey].ApiName] = true;
                     }
                 }
@@ -171,6 +180,11 @@ namespace gooeycms.business.salesforce
                 }
             }
 
+            if (!isDescriptionSet)
+            {
+                elements.Add(GetNewXmlElement("description", GetActiveCampaign(values)));
+            }
+
             lead.Any = elements.ToArray<System.Xml.XmlElement>();
             lead.type = "Lead";
             leads[0] = lead;
@@ -184,6 +198,17 @@ namespace gooeycms.business.salesforce
                     throw new ArgumentException("There was a problem saving the lead to Salesforce");
                 }
             }
+        }
+
+        private String GetActiveCampaign(Dictionary<String, String> values)
+        {
+            String result = "";
+            if ((values.ContainsKey("campaign")) && (!String.IsNullOrWhiteSpace(values["campaign"])))
+            {
+                result = "[campaign: " + values["campaign"] + "] ";
+            }
+
+            return result;
         }
 
         private System.Xml.XmlElement GetNewXmlElement(string Name, string nodeValue)
