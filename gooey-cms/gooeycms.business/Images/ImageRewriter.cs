@@ -49,7 +49,7 @@ namespace Gooeycms.Business.Images
         {
             html = ImageHtml.Replace(html, new MatchEvaluator(ImageReferenceEvaluator));
             html = ImageInputHtml.Replace(html, new MatchEvaluator(ImageReferenceEvaluator));
-            html = FlashHtml.Replace(html, new MatchEvaluator(FlashReferenceEvaluator));
+            //html = FlashHtml.Replace(html, new MatchEvaluator(FlashReferenceEvaluator)); //performed in a stand-alone handler
 
             return html;
         }
@@ -82,9 +82,13 @@ namespace Gooeycms.Business.Images
 
         private string FlashReferenceEvaluator(Match match)
         {
+            /* do not rewrite flash (at this point)
             String fullurl = match.Groups[0].Value;
 
             return fullurl.Replace("~", imageContainerUrl);
+            */
+
+            return match.Groups[0].Value;
         }  
     }
 }

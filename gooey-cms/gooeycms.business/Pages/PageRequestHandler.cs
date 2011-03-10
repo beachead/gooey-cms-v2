@@ -151,6 +151,19 @@ namespace Gooeycms.Business.Pages
                 throw new PageNotFoundException(url.Path);
         }
 
+
+        private void CheckIfProcessRedirect(CmsUrl url)
+        {
+            if (url.Path.Contains(".swf"))
+            {
+                /*
+                String imageContainerUrl = CurrentSite.GetContainerUrl(SiteHelper.ImagesContainerKey);
+                String redirect = imageContainerUrl + url.Path;
+                Response.Redirect(redirect, true);
+                */
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //if the page is in the cache return immediately

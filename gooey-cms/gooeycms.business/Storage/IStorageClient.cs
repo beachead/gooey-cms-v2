@@ -45,6 +45,7 @@ namespace Gooeycms.Business.Storage
 
         byte[] Open(String containerName, String directoryName, String filename);
         String OpenAsString(String containerName, String directoryName, String filename);
+        void DownloadToStream(Stream target, String containerName, String directoryName, String filename);
         void Read(String containerName, String directoryName, String filename, Stream stream);
 
         StorageFile GetFile(String containerName, String directoryName, String filename);

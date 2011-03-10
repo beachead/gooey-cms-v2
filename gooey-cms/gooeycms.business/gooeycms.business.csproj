@@ -110,6 +110,7 @@
     <Compile Include="Campaigns\Engine\GoogleAnalytics.cs" />
     <Compile Include="Campaigns\ICampaignEngine.cs" />
     <Compile Include="Campaigns\LeadManager.cs" />
+    <Compile Include="Flash\FlashRequestHandler.cs" />
     <Compile Include="Images\ImageRewriter.cs" />
     <Compile Include="Subscription\Extensions.cs" />
     <Compile Include="Twilio\AssignedPhoneNumber.cs" />

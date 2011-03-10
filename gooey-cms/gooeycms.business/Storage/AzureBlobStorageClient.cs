@@ -264,6 +264,26 @@ namespace Gooeycms.Business.Storage
             return result;
         }
 
+        public void DownloadToStream(Stream target, String containerName, String directoryName, String filename)
+        {
+            filename = filename.Replace(" ", "");
+            byte[] result = new byte[] { };
+
+            CloudBlobContainer container = GetBlobContainer(containerName);
+            if (container.Exists())
+            {
+                CloudBlob blob = GetCloudBlob(container, directoryName, filename);
+                if (blob.Exists())
+                    blob.DownloadToStream(target);
+                else
+                    throw new FileNotFoundException("The file does not exist at " + blob.Uri);
+            }
+            else
+            {
+                throw new DirectoryNotFoundException("The cloud container " + containerName + " does not exist");
+            }
+        }
+
         public String OpenAsString(String containerName, String directoryName, String filename)
         {
             byte[] data = this.Open(containerName,directoryName, filename);
@@ -532,6 +552,7 @@ namespace Gooeycms.Business.Storage
                 file.Uri = BuildUri(blob);
                 file.Metadata = blob.Metadata;
                 file.Size = blob.Properties.Length;
+                file.LastModified = blob.Properties.LastModifiedUtc;
             }
 
             return file;
@@ -550,6 +571,7 @@ namespace Gooeycms.Business.Storage
                 file.Uri = BuildUri(blob);
                 file.Metadata = blob.Metadata;
                 file.Size = blob.Properties.Length;
+                file.LastModified = blob.Properties.LastModifiedUtc;
             }
 
             return file;
