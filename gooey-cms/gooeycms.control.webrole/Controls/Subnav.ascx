@@ -8,6 +8,8 @@
         <ul>
             <li><asp:HyperLink ID="globaladmin_default" NavigateUrl="~/auth/global-admin/default.aspx" Text="General Settings" runat="server" /></li>
             <li><asp:HyperLink ID="globaladmin_salesforce" NavigateUrl="~/auth/global-admin/salesforce.aspx" Text="Salesforce Configuration" runat="server" /></li>
+            <li><asp:HyperLink ID="globaladmin_logs" NavigateUrl="~/auth/global-admin/Diagnostics/logs.aspx" Text="Error Logs" runat="server" /></li>
+            <li><asp:HyperLink ID="globaladmin_smtp" NavigateUrl="~/auth/global-admin/Email-Templates" Text="SMTP Configuration" runat="server" /></li>
         </ul>
     </asp:View>
 

@@ -45,7 +45,7 @@
                 <table cellpadding="0" class="form">
                 <tr>
                 <td class="label">
-                    <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
+                    <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Email:</asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="UserName" runat="server"></asp:TextBox>

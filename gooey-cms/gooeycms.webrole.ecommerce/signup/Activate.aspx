@@ -15,12 +15,14 @@
                 <br /><br />
 
                 To start managing your site, <b><a href="<% Response.Write("http://" + GooeyConfigManager.AdminSiteHost); %>">login</a> to your dashboard.</b>        
+ <script type="text/javascript" src="https://www.rewardlevel.com/js/rewardlevel-1.0.0.min.js?plugin=1185&action=post&style=topbar"></script>
         </asp:View>
         <asp:View ID="SuccessFreeView" runat="server">
                 Congratulations, Your subscription has been successfully activated!
                 <br /><br />
 
                 To start managing your site, <b><a href="<% Response.Write("http://" + GooeyConfigManager.AdminSiteHost); %>">login</a> to your dashboard.</b>        
+<script type="text/javascript" src="https://www.rewardlevel.com/js/rewardlevel-1.0.0.min.js?plugin=1185&action=post&style=topbar"></script>
         </asp:View>
         <asp:View ID="FailureView" runat="server">
                 There was a problem activating your subscription.
