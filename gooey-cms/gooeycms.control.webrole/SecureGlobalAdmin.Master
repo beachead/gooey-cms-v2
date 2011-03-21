@@ -14,7 +14,7 @@
         <li><asp:HyperLink id="HyperLink1" NavigateUrl="~/auth/global-admin/subscriptions/default.aspx" runat="server" onprerender="SetActive">Subscription Management</asp:HyperLink></li>
         <li><asp:HyperLink id="HyperLink2" NavigateUrl="~/auth/global-admin/ContentTypes/default.aspx" runat="server" onprerender="SetActive">Content Management</asp:HyperLink></li>
         <li><asp:HyperLink id="NavDeveloper" NavigateUrl="~/auth/global-admin/developer/default.aspx" runat="server" onprerender="SetActive">Package Management</asp:HyperLink></li>
-        <li><asp:HyperLink id="NavControls" NavigateUrl="~/auth/global-admin/controls/cache.aspx" runat="server" onprerender="SetActive">Cache Management</asp:HyperLink></li>
+        <li><asp:HyperLink id="NavControls" NavigateUrl="~/auth/global-admin/controls/cache.aspx?clear=1" runat="server" onprerender="SetActive">Clear Cache</asp:HyperLink></li>
         <li><asp:HyperLink id="NavInvites" NavigateUrl="~/auth/global-admin/invites/default.aspx" runat="server" onprerender="SetActive">Invites</asp:HyperLink></li>
         <li><asp:HyperLink id="NavHelp" NavigateUrl="~/auth/global-admin/help/default.aspx" runat="server" onprerender="SetActive">Help System</asp:HyperLink></li>              
     </ul>

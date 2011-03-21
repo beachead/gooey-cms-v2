@@ -49,6 +49,24 @@ namespace Gooeycms.Webrole.Control.Controls {
         protected global::System.Web.UI.WebControls.HyperLink globaladmin_salesforce;
         
         /// <summary>
+        /// globaladmin_logs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink globaladmin_logs;
+        
+        /// <summary>
+        /// globaladmin_smtp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink globaladmin_smtp;
+        
+        /// <summary>
         /// dashboard control.
         /// </summary>
         /// <remarks>
