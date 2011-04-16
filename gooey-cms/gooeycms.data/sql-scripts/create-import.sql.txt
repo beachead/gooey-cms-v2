@@ -1,0 +1,21 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Imports]') AND type in (N'U'))
+BEGIN
+DROP TABLE [Imports];
+END
+
+
+CREATE TABLE [dbo].[Imports](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[import_hash] VARCHAR(36),
+	[guid] VARCHAR(36),
+	[site_guid] VARCHAR(36),
+	[uri] VARCHAR(4096),
+	[content_type] VARCHAR(256),
+	[content_encoding] VARCHAR(64),
+	[title] VARCHAR(2046),
+	[date_expires] DATETIME,
+	[date_inserted] DATETIME,
+	PRIMARY KEY CLUSTERED([id]),
+);
+
+CREATE INDEX idx_import_subscription ON [Imports](subscription_id);

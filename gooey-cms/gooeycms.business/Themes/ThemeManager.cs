@@ -131,13 +131,22 @@ namespace Gooeycms.Business.Themes
 
         internal CmsTheme GetDefaultBySite(Data.Guid siteGuid)
         {
-            CacheInstance cache = CurrentSite.Cache;
-            CmsTheme theme = cache.Get<CmsTheme>("default-theme");
+            CmsTheme theme = null;
+            CacheInstance cache = null;
+
+            if (CurrentSite.IsAvailable)
+            {
+                cache = CurrentSite.Cache;
+                theme = cache.Get<CmsTheme>("default-theme");
+            }
+
             if (theme == null)
             {
                 CmsThemeDao dao = new CmsThemeDao();
                 theme = dao.FindEnabledBySite(siteGuid);
-                cache.Add("default-theme", theme);
+
+                if (cache != null)
+                    cache.Add("default-theme", theme);
             }
 
             return theme;

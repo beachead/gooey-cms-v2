@@ -14,6 +14,7 @@ namespace Gooeycms.Business.Storage
     public abstract class AssetFileManager<T> where T : SortableAssetFile, new()
     {
         private Data.Model.Page.CmsPage cmsPage;
+        private Data.Guid subscriptionId = Data.Guid.Empty;
 
         public AssetFileManager()
         {
@@ -29,6 +30,12 @@ namespace Gooeycms.Business.Storage
         public abstract String CurrentSiteAssetStorageContainer { get; }
         public abstract String CachePrefix { get; }
         public abstract String GetIncludes(CmsPage page);
+
+        public Data.Guid SubscriptionId
+        {
+            get { return this.subscriptionId; }
+            set { this.subscriptionId = value; }
+        }
 
         private IList<T> List(String key)
         {
@@ -91,7 +98,9 @@ namespace Gooeycms.Business.Storage
 
         public void Save(String key, string filename, byte[] data, Boolean enabledByDefault, Int32 defaultSortOrder)
         {
-            CurrentSite.Cache.Clear(CachePrefix + key);
+            if (CurrentSite.IsAvailable)
+                CurrentSite.Cache.Clear(CachePrefix + key);
+
             if (!filename.EndsWith(AssetExtension))
             {
                 filename = filename + AssetExtension;
@@ -114,7 +123,7 @@ namespace Gooeycms.Business.Storage
             String container = CurrentSiteAssetStorageContainer;
             client.Save(container, key, filename, data, Permissions.Private);
 
-            if (enabledByDefault)
+            if ((enabledByDefault) && (CurrentSite.IsAvailable))
                 SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
         }
 

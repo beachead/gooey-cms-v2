@@ -49,6 +49,9 @@
     <Reference Include="Encore.PayPal.Nvp">
       <HintPath>..\..\lib\Encore.PayPal.Nvp.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\NCrawler\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\lib\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -113,6 +116,9 @@
     <Compile Include="Flash\FlashRequestHandler.cs" />
     <Compile Include="Images\ImageRequestHandler.cs" />
     <Compile Include="Images\ImageRewriter.cs" />
+    <Compile Include="Import\ImportManager.cs" />
+    <Compile Include="Import\ImportSiteMessage.cs" />
+    <Compile Include="Import\ImportSiteWorker.cs" />
     <Compile Include="Subscription\Extensions.cs" />
     <Compile Include="Twilio\AssignedPhoneNumber.cs" />
     <Compile Include="Twilio\AvailablePhoneNumber.cs" />
@@ -246,9 +252,11 @@
     <Compile Include="Util\SiteHelper.cs" />
     <Compile Include="Util\CurrentSite.cs" />
     <Compile Include="Web\CmsUrl.cs" />
+    <Compile Include="Web\CmsUrlWalker.cs" />
     <Compile Include="Web\ControlHelper.cs" />
     <Compile Include="Web\EmailClient.cs" />
     <Compile Include="Web\Microsoft\GridViewHelper.cs" />
+    <Compile Include="Web\SimpleWebClient.cs" />
     <Compile Include="Web\WebPostRequest.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
   </ItemGroup>

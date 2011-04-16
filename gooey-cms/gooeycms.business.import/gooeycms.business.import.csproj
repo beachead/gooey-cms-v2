@@ -3,20 +3,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E5513070-EAD6-4052-948E-D7D60795F736}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{15D61462-6336-4672-828E-071F728E0400}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gooeycms.test</RootNamespace>
-    <AssemblyName>gooeycms.test</AssemblyName>
+    <RootNamespace>Gooeycms.Business.Import</RootNamespace>
+    <AssemblyName>gooeycms.business.import</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,51 +31,46 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Autofac">
+      <HintPath>..\..\lib\NCrawler\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\lib\NCrawler\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="NCrawler, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NCrawler">
       <HintPath>..\..\lib\NCrawler\NCrawler.dll</HintPath>
     </Reference>
-    <Reference Include="NCrawler.HtmlProcessor, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NCrawler.HtmlProcessor">
       <HintPath>..\..\lib\NCrawler\NCrawler.HtmlProcessor.dll</HintPath>
     </Reference>
+    <Reference Include="NCrawler.LanguageDetection.Google">
+      <HintPath>..\..\lib\NCrawler\NCrawler.LanguageDetection.Google.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="CrawlerEntry.cs" />
+    <Compile Include="Events\CrawlProgressEventArgs.cs" />
+    <Compile Include="GooeyCrawler.cs" />
+    <Compile Include="IPipelineStep.cs" />
+    <Compile Include="Processors\DatabasePersistenceProcessor.cs" />
+    <Compile Include="Processors\DetectedLinkProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gooeycms.business.import\gooeycms.business.import.csproj">
-      <Project>{15D61462-6336-4672-828E-071F728E0400}</Project>
-      <Name>gooeycms.business.import</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gooeycms.business.salesforce\gooeycms.business.salesforce.csproj">
-      <Project>{6C6A2B71-C39A-4D38-A0F6-EF672670C57B}</Project>
-      <Name>gooeycms.business.salesforce</Name>
-    </ProjectReference>
     <ProjectReference Include="..\gooeycms.business\gooeycms.business.csproj">
       <Project>{A3D01157-7412-47B1-A123-2F3071D86B6E}</Project>
       <Name>gooeycms.business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gooeycms.constants\gooeycms.constants.csproj">
+      <Project>{AE57F1F3-2AAE-4F42-9107-A20C7871D6BE}</Project>
+      <Name>gooeycms.constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\gooeycms.data\gooeycms.data.csproj">
       <Project>{6BC0E025-7E22-4749-8DB1-7AEFCCD15934}</Project>

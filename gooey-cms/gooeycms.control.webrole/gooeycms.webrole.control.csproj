@@ -48,6 +48,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\AntiXssLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\lib\NCrawler\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="BasicFrame.WebControls.BasicDatePicker">
       <HintPath>..\..\lib\BasicFrame.WebControls.BasicDatePicker.dll</HintPath>
     </Reference>
@@ -66,6 +69,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FredCK.FCKeditorV2.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\NCrawler\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="MattBerseth.WebControls.AJAX">
       <HintPath>..\..\lib\MattBerseth.WebControls.AJAX.dll</HintPath>
     </Reference>
@@ -80,6 +86,12 @@
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="NCrawler">
+      <HintPath>..\..\lib\NCrawler\NCrawler.dll</HintPath>
+    </Reference>
+    <Reference Include="NCrawler.HtmlProcessor">
+      <HintPath>..\..\lib\NCrawler\NCrawler.HtmlProcessor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -140,6 +152,9 @@
     <Content Include="auth\global-admin\Subscriptions\edit-roles.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Modify.aspx" />
     <Content Include="auth\global-admin\Subscriptions\Users.aspx" />
+    <Content Include="auth\Import\Default.aspx" />
+    <Content Include="auth\Import\SelectImport.aspx" />
+    <Content Include="auth\Import\Status.aspx" />
     <Content Include="auth\Manage.aspx" />
     <Content Include="auth\Package-Mgmt\apply.aspx" />
     <Content Include="auth\Pages\Default.aspx" />
@@ -520,6 +535,27 @@
     <Compile Include="auth\global-admin\Subscriptions\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auth\Import\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Import\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Import\SelectImport.aspx.cs">
+      <DependentUpon>SelectImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Import\SelectImport.aspx.designer.cs">
+      <DependentUpon>SelectImport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="auth\Import\Status.aspx.cs">
+      <DependentUpon>Status.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auth\Import\Status.aspx.designer.cs">
+      <DependentUpon>Status.aspx</DependentUpon>
+    </Compile>
     <Compile Include="auth\Manage.aspx.cs">
       <DependentUpon>Manage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -806,6 +842,10 @@
     <Content Include="images\body.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gooeycms.business.import\gooeycms.business.import.csproj">
+      <Project>{15D61462-6336-4672-828E-071F728E0400}</Project>
+      <Name>gooeycms.business.import</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gooeycms.business.salesforce\gooeycms.business.salesforce.csproj">
       <Project>{6C6A2B71-C39A-4D38-A0F6-EF672670C57B}</Project>
       <Name>gooeycms.business.salesforce</Name>

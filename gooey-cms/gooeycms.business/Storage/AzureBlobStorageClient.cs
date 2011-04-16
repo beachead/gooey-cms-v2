@@ -113,6 +113,9 @@ namespace Gooeycms.Business.Storage
 
         private static String GetRelativeFilename(String directoryName, String filename)
         {
+            if (filename.StartsWith("/"))
+                filename = filename.Substring(1);
+
             if (directoryName != StorageClientConst.RootFolder)
             {
                 filename = directoryName + "/" + filename;

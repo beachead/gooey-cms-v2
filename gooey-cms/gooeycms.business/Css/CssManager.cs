@@ -37,7 +37,13 @@ namespace Gooeycms.Business.Css
 
         public override string CurrentSiteAssetStorageContainer
         {
-            get { return CurrentSite.StylesheetStorageContainer; }
+            get 
+            {
+                if (base.SubscriptionId.IsEmpty())
+                    return CurrentSite.StylesheetStorageContainer;
+                else
+                    return String.Format(SiteHelper.StylesheetContainerKey, base.SubscriptionId.Value);
+            }
         }
           
         public override string CachePrefix

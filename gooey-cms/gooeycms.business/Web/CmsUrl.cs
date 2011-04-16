@@ -328,6 +328,11 @@ namespace Gooeycms.Business.Web
             return clone;
         }
 
+        public Uri ToUri()
+        {
+            return new Uri(this.ToString());
+        }
+
         public CmsUrl SetQueryParameter(string key, string value)
         {
             if (query == null)

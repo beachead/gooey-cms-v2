@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Gooeycms.Business.Pages;
 using Gooeycms.Business.Azure;
 using Gooeycms.Business;
+using Gooeycms.Business.Import;
 
 namespace Goopeycms.Worker.Control
 {
@@ -21,6 +22,7 @@ namespace Goopeycms.Worker.Control
         private CancellationTokenSource cancel;
         private Task messageTask;
         private Task iisPingTask;
+        private Task importSiteTask;
 
         private static readonly object iisPingTaskKey = new Object();
 
@@ -33,10 +35,26 @@ namespace Goopeycms.Worker.Control
             Logging.Database.Write("worker-role", "Starting the iis site ping thread");
             iisPingTask = Task.Factory.StartNew(() => StartIisPingTask(cancel.Token), TaskCreationOptions.LongRunning);
 
-            Task [] tasks = new Task [] { messageTask, iisPingTask };
+            Logging.Database.Write("worker-role", "Starting the import site thread");
+            importSiteTask = Task.Factory.StartNew(() => StartImportSiteTask(cancel.Token), TaskCreationOptions.LongRunning);
+
+            Task [] tasks = new Task [] { messageTask, iisPingTask, importSiteTask };
 
             Logging.Database.Write("worker-role", "All threads successfully started");
             Task.WaitAll(tasks);
+        }
+
+        private static void StartImportSiteTask(CancellationToken token)
+        {
+            ImportSiteWorker worker = new ImportSiteWorker();
+
+            Logging.Database.Write("worker-role-queue", "Import site processing task has started and is listening for messages.");
+            while (!token.IsCancellationRequested)
+            {
+                worker.ProcessMessages();
+                Thread.Sleep(100);
+            }
+            Logging.Database.Write("worker-role-queue", "Import site processing task has detected shutdown.");
         }
 
         private static void StartIisPingTask(CancellationToken token)

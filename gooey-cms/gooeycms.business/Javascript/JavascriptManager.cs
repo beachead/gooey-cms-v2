@@ -38,7 +38,13 @@ namespace Gooeycms.Business.Javascript
         
         public override string CurrentSiteAssetStorageContainer
         {
-            get { return CurrentSite.JavascriptStorageContainer; }
+            get 
+            {
+                if (base.SubscriptionId.IsEmpty())
+                    return CurrentSite.JavascriptStorageContainer;
+                else
+                    return String.Format(SiteHelper.JavascriptContainerKey, base.SubscriptionId.Value);
+            }
         }
 
         public override string CachePrefix

@@ -46,6 +46,9 @@ namespace Gooeycms.Business.Web
             if (path == null)
                 throw new ArgumentNullException("The path may not be null when attempting to retrieve a sitemap path");
 
+            if (!path.StartsWith("/"))
+                path = "/" + path;
+
             Data.Hash hash = TextHash.MD5(path);
 
             CmsSitePathDao dao = new CmsSitePathDao();
@@ -123,6 +126,9 @@ namespace Gooeycms.Business.Web
 
             String slash = (parent.Url.EndsWith("/")) ? "" : "/";
             CmsSitePath path = new CmsSitePath();
+
+            if (newDirectory.StartsWith("/"))
+                newDirectory = newDirectory.Substring(1);
 
             path.SubscriptionGuid = siteGuid.Value;
             path.Parent = parent.Url;

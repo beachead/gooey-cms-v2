@@ -13,6 +13,7 @@ namespace Gooeycms.Business.Storage
     {
         public const string PreviewQueue = "preview-queue-{0}";
         public const string PageActionQueue = "worker-page-action";
+        public const String ImportSiteQueue = "import-site-queue";
     }
 
     public class QueueManager

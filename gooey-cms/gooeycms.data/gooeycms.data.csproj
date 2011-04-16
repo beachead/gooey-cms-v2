@@ -83,6 +83,8 @@
     <Compile Include="Model\Form\CmsSavedFormDao.cs" />
     <Compile Include="Model\Help\HelpPage.cs" />
     <Compile Include="Model\Help\HelpPageDao.cs" />
+    <Compile Include="Model\Import\ImportedItem.cs" />
+    <Compile Include="Model\Import\ImportedItemDao.cs" />
     <Compile Include="Model\Logging.cs" />
     <Compile Include="Model\Page\CmsPage.cs" />
     <Compile Include="Model\Page\CmsPageDao.cs" />
@@ -131,8 +133,10 @@
     <EmbeddedResource Include="Mappings\Logging.hbm.xml" />
     <EmbeddedResource Include="Mappings\BillingHistory.hbm.xml" />
     <EmbeddedResource Include="Mappings\CmsImages.hbm.xml" />
+    <EmbeddedResource Include="Mappings\ImportedItem.hbm.xml" />
     <Content Include="sql-scripts\aspnet-membership.sql.txt" />
     <Content Include="sql-scripts\add-foreign-keys.sql.txt" />
+    <Content Include="sql-scripts\create-import.sql.txt" />
     <Content Include="sql-scripts\create-images.sql.txt" />
     <Content Include="sql-scripts\create-billing.sql.txt" />
     <Content Include="sql-scripts\create-logging-tables.sql.txt" />

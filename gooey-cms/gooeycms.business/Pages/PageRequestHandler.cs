@@ -78,7 +78,7 @@ namespace Gooeycms.Business.Pages
                     while ((CurrentSite.IsDirty) && (count++ < 7))
                     {
                         this.isInCache = false;
-                        System.Threading.Thread.Sleep(500);
+                        System.Threading.Thread.Sleep(1000);
                     }
 
                     if (count >= 6)

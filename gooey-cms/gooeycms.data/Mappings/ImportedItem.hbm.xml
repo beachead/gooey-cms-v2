@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Gooeycms.Data.Model.Import.ImportedItem, gooeycms.data" table="Imports">
+    <id name="Id" column="id" type="Int32" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property column="import_hash" name="ImportHash" type="String" />    
+    <property column="guid" name="Guid" type="String" />
+    <property column="site_guid" name="SubscriptionId" type="String" />
+    <property column="uri" name="Uri" type="String" />
+    <property column="content_type" name="ContentType" type="String" />
+    <property column="content_encoding" name="ContentEncoding" type="String" />
+    <property column="title" name="Title" type="String" />
+    
+    <property column="date_inserted" name="Inserted" type="DateTime" />
+    <property column="date_expires" name="Expires" type="DateTime" />
+  </class>
+</hibernate-mapping>

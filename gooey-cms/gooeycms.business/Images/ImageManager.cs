@@ -18,7 +18,7 @@ namespace Gooeycms.Business.Images
     {
         private static Regex BasicImagePattern = new Regex(@"[\w\d-_]+\.\w{3}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        public static List<String> ValidImageExtensions = new List<String>() { "png", "gif", "jpg", "jpeg", "swf" };
+        public static List<String> ValidImageExtensions = new List<String>() { "png", "gif", "jpg", "jpeg", "swf", "bmp" };
         public static IDictionary<String, String> ImageMimeTypes = new Dictionary<String, String>();
 
         static ImageManager()
@@ -27,6 +27,7 @@ namespace Gooeycms.Business.Images
             ImageMimeTypes.Add(".gif", "image/gif");
             ImageMimeTypes.Add(".jpg", "image/jpeg");
             ImageMimeTypes.Add(".jpeg", "image/jpeg");
+            ImageMimeTypes.Add(".bmp", "image/bmp");
             ImageMimeTypes.Add(".swf", "application/x-shockwave-flash");
         }
 
