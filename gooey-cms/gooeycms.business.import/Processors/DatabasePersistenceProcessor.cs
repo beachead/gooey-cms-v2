@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Data.Model.Import;
 using Beachead.Persistence.Hibernate;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Import.Processors
 {
@@ -40,8 +41,8 @@ namespace Gooeycms.Business.Import.Processors
                 item.SubscriptionId = this.siteGuid;
                 item.ContentType = propertyBag.ContentType;
                 item.ContentEncoding = propertyBag.ContentEncoding;
-                item.Expires = DateTime.Now.AddHours(6);
-                item.Inserted = DateTime.Now;
+                item.Expires = UtcDateTime.Now.AddHours(6);
+                item.Inserted = UtcDateTime.Now;
                 item.Title = propertyBag.Title;
                 item.Uri = propertyBag.Step.Uri.ToString();
 

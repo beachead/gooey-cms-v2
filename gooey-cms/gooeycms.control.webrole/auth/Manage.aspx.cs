@@ -133,7 +133,7 @@ namespace Gooeycms.Webrole.Control.auth
                 
                 //Calculate how long the user has left in their free trial period
                 double daysLeft = SubscriptionManager.CalculateFreeTrialRemaining(CurrentSite.Subscription);
-                DateTime firstBilling = DateTime.Now.AddDays(daysLeft);
+                DateTime firstBilling = UtcDateTime.Now.AddDays(daysLeft);
                 this.LblBillingStartDate.Text = String.Format("{0:MMMMM dd, yyyy}", firstBilling);
 
                 double price = (double)SubscriptionManager.GetSubscriptionPlan(SubscriptionPlans.Business).Price;

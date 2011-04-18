@@ -355,7 +355,7 @@ namespace Gooeycms.Business.Store
                 //Create a new subscription for the demo account
                 CmsSubscription subscription = new CmsSubscription();
                 subscription.Guid = package.Guid;
-                subscription.Created = DateTime.Now;
+                subscription.Created = UtcDateTime.Now;
                 subscription.Subdomain = subdomain;
                 subscription.StagingDomain = subscription.Subdomain + GooeyConfigManager.DefaultCmsDomain;
                 subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(SubscriptionPlans.Demo);
@@ -661,7 +661,7 @@ namespace Gooeycms.Business.Store
             if (package != null)
             {
                 package.IsApproved = true;
-                package.Approved = DateTime.Now;
+                package.Approved = UtcDateTime.Now;
 
                 PackageDao dao = new PackageDao();
                 using (Transaction tx = new Transaction())

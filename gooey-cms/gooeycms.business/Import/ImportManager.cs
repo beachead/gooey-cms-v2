@@ -20,6 +20,7 @@ using Gooeycms.Data.Model.Site;
 using Gooeycms.Data.Model.Page;
 using HtmlAgilityPack;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Import
 {
@@ -121,7 +122,7 @@ namespace Gooeycms.Business.Import
                 template.Content = "{content}";
                 template.Name = "import-template";
                 template.IsGlobalTemplateType = false;
-                template.LastSaved = DateTime.Now;
+                template.LastSaved = UtcDateTime.Now;
                 template.SubscriptionGuid = subscriptionId.Value;
                 template.Theme = defaultTheme;
 
@@ -245,7 +246,7 @@ namespace Gooeycms.Business.Import
             page.Author = "Site Importer";
             page.Content = body.InnerHtml.Trim();
             page.Culture = culture;
-            page.DateSaved = DateTime.Now;
+            page.DateSaved = UtcDateTime.Now;
             page.Description = description;
             page.Guid = System.Guid.NewGuid().ToString();
             page.Url = path;

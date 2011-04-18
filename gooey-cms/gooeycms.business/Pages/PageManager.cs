@@ -404,7 +404,7 @@ namespace Gooeycms.Business.Pages
             page.SubscriptionId = subscriptionGuid;
             page.Content = GooeyConfigManager.DefaultHomepage;
             page.Culture = GooeyConfigManager.DefaultCulture;
-            page.DateSaved = DateTime.Now;
+            page.DateSaved = UtcDateTime.Now;
             page.Description = "GooeyCMS Default Homepage";
             page.Template = templateName;
             page.Title = "Default Homepage";

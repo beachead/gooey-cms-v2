@@ -57,12 +57,12 @@ namespace Gooeycms.Webrole.Control.auth.Campaigns
                     campaign.TrackingCode = this.Tracking.Text;
                 
                 if (this.StartDate.IsNull)
-                    campaign.StartDate = DateTime.Now;
+                    campaign.StartDate = UtcDateTime.Now;
                 else
                     campaign.StartDate = this.StartDate.SelectedDate;
 
                 if (this.EndDate.IsNull)
-                    campaign.EndDate = DateTime.Now.AddYears(100);
+                    campaign.EndDate = UtcDateTime.Now.AddYears(100);
                 else
                     campaign.EndDate = this.EndDate.SelectedDate;
 

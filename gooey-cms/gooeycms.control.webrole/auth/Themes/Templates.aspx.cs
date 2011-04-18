@@ -118,7 +118,7 @@ namespace Gooeycms.Webrole.Control.auth.Themes
             }
 
             template.Content = this.TemplateContent.Text;
-            template.LastSaved = DateTime.Now;
+            template.LastSaved = UtcDateTime.Now;
 
             IList<String> missingImages = new List<String>();
             TemplateManager.Instance.Save(template, missingImages);

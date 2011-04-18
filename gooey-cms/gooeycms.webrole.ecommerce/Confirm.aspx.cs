@@ -8,6 +8,7 @@ using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
 using Gooeycms.Business.Membership;
 using Gooeycms.Business;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -56,7 +57,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
             //Create a receipt that we'll use to process this purchase
             Receipt receipt = new Receipt();
             receipt.Amount = package.Price;
-            receipt.Created = DateTime.Now;
+            receipt.Created = UtcDateTime.Now;
             receipt.Guid = System.Guid.NewGuid().ToString();
             receipt.PackageGuid = package.Guid;
             receipt.UserGuid = LoggedInUser.Wrapper.UserInfo.Guid;

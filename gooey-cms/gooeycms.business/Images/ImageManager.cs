@@ -131,7 +131,7 @@ namespace Gooeycms.Business.Images
                             temp = new CmsImage();
                             temp.CloudUrl = actualFile.Url;
                             temp.ContentType = mimetype;
-                            temp.Created = DateTime.Now;
+                            temp.Created = UtcDateTime.Now;
                             temp.Directory = folder;
                             temp.Filename = actualFile.Filename;
                             temp.Guid = System.Guid.NewGuid().ToString();

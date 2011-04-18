@@ -29,7 +29,7 @@ namespace Gooeycms.Business.Forms.Plugins
                 builder.Append("Form Response").AppendLine();
                 builder.AppendFormat("Resource: {0}", common.Resource).AppendLine();
                 builder.AppendFormat("Culture:   {0}", common.Culture).AppendLine();
-                builder.AppendFormat("Date: {0}", DateTime.Now).AppendLine();
+                builder.AppendFormat("Date: {0}", UtcDateTime.Now).AppendLine();
                 builder.AppendFormat("IP Address:   {0}", common.IpAddress).AppendLine();
                 builder.AppendFormat("Email:   {0}", common.Email).AppendLine();
                 builder.AppendFormat("Campaign:   {0}", common.Campaigns).AppendLine();

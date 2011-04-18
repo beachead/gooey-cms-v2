@@ -167,14 +167,14 @@ namespace Gooeycms.Business.Content
             else if (control is BDPLite)
             {
                 if (String.IsNullOrEmpty(value))
-                    value = DateTime.Now.ToString();
+                    value = UtcDateTime.Now.ToString();
                 try
                 {
                     ((BDPLite)control).SelectedDate = DateTime.Parse(value);
                 }
                 catch (Exception)
                 {
-                    ((BDPLite)control).SelectedDate = DateTime.Now;
+                    ((BDPLite)control).SelectedDate = UtcDateTime.Now;
                 }
             }
             else if (control is DropDownList)

@@ -9,6 +9,7 @@ using Gooeycms.Business.Store;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Membership;
 using System.Web.Security;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -74,7 +75,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
             HttpCookie purchase = new HttpCookie("site-purchase");
             purchase.Value = TextEncryption.Encode(guid);
-            purchase.Expires = DateTime.Now.AddDays(7);
+            purchase.Expires = UtcDateTime.Now.AddDays(7);
 
             Response.Cookies.Add(purchase);
 

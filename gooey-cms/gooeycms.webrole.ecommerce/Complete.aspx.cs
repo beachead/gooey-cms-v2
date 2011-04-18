@@ -9,6 +9,7 @@ using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Paypal;
 using Gooeycms.Business.Email;
 using Gooeycms.Business.Billing;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Ecommerce.store
 {
@@ -45,7 +46,7 @@ namespace Gooeycms.Webrole.Ecommerce.store
 
                 //Update the receipt 
                 receipt.IsComplete = true;
-                receipt.Processed = DateTime.Now;
+                receipt.Processed = UtcDateTime.Now;
                 receipt.TransactionId = txid;
                 ReceiptManager.Instance.Update(receipt);
 

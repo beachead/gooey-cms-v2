@@ -37,12 +37,12 @@ namespace Gooeycms.Business.Campaigns
                 if (startdate.HasValue)
                     start = new DateTime(startdate.Value.Year, startdate.Value.Month, startdate.Value.Day, 0, 0, 0);
                 else
-                    start = DateTime.Now.AddDays(-7);
+                    start = UtcDateTime.Now.AddDays(-7);
 
                 if (enddate.HasValue)
                     end = new DateTime(enddate.Value.Year, enddate.Value.Month, enddate.Value.Day, 23, 59, 59);
                 else
-                    end = DateTime.Now.AddDays(1);
+                    end = UtcDateTime.Now.AddDays(1);
 
                 if (mode == FormDataMode.ExcludeFormatData)
                 {
@@ -75,12 +75,12 @@ namespace Gooeycms.Business.Campaigns
             if (startdate.HasValue)
                 start = new DateTime(startdate.Value.Year,startdate.Value.Month, startdate.Value.Day,0,0,0);
             else
-                start = DateTime.Now.AddDays(-7);
+                start = UtcDateTime.Now.AddDays(-7);
 
             if (enddate.HasValue)
                 end = new DateTime(enddate.Value.Year, enddate.Value.Month, enddate.Value.Day,23,59,59);
             else
-                end = DateTime.Now.AddDays(1);
+                end = UtcDateTime.Now.AddDays(1);
 
             CmsFormDao dao = new CmsFormDao();
             IList<CmsForm> forms = dao.FindUniqueResponses(siteGuid, start, end, filterPages);

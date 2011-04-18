@@ -11,6 +11,7 @@ using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Store;
 using Gooeycms.Business.Store;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Email
 {
@@ -99,7 +100,7 @@ namespace Gooeycms.Business.Email
             body = body.Replace("{firstname}", user.Firstname);
             body = body.Replace("{lastname}", user.Lastname);
             body = body.Replace("{username}", user.Username);
-            body = body.Replace("{current-date}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+            body = body.Replace("{current-date}", UtcDateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
 
             if (subscription != null)
             {

@@ -19,7 +19,7 @@ namespace Gooeycms.Business.Crypto
             if (data.Length > 90)
                 throw new ArgumentException("The data for the token cannot be longer than 90 characters");
 
-            DateTime issued = DateTime.Now;
+            DateTime issued = UtcDateTime.Now;
             DateTime expires = issued.Add(validFor);
 
             data = Guid.NewGuid().ToString() + "," + data + "," + expires.Ticks;
@@ -106,7 +106,7 @@ namespace Gooeycms.Business.Crypto
         internal static void Invalidate(String token)
         {
             SecurityToken dbToken = GetFromDatabase(token);
-            dbToken.Expires = DateTime.Now;
+            dbToken.Expires = UtcDateTime.Now;
             dbToken.MaxUses = 0;
             dbToken.Uses = Int32.MaxValue;
 

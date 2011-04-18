@@ -10,12 +10,13 @@ using Gooeycms.Constants;
 using Gooeycms.Business;
 using Gooeycms.Business.Membership;
 using Gooeycms.Extensions;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Ecommerce
 {
     public partial class Signup : System.Web.UI.Page
     {
-        protected String TrialExpires = DateTime.Now.AddDays(GooeyConfigManager.FreeTrialLength).ToString("MMMM dd, yyyy");
+        protected String TrialExpires = UtcDateTime.Now.AddDays(GooeyConfigManager.FreeTrialLength).ToString("MMMM dd, yyyy");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -129,7 +130,7 @@ namespace Gooeycms.Webrole.Ecommerce
                     }
 
                     Registration registration = new Registration();
-                    registration.Created = DateTime.Now;
+                    registration.Created = UtcDateTime.Now;
                     registration.Guid = System.Guid.NewGuid().ToString();
                     registration.Firstname = this.Firstname.Text;
                     registration.Lastname = this.Lastname.Text;

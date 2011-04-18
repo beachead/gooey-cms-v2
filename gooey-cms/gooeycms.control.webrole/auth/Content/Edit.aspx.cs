@@ -9,6 +9,7 @@ using Gooeycms.Data.Model.Content;
 using Gooeycms.Business.Pages;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Business.Membership;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Webrole.Control.auth.Content
 {
@@ -42,7 +43,7 @@ namespace Gooeycms.Webrole.Control.auth.Content
 
                 item.Content = this.TxtEditor.Text;
                 item.Author = LoggedInUser.Username;
-                item.LastSaved = DateTime.Now;
+                item.LastSaved = UtcDateTime.Now;
                 item.RequiresRegistration = requireRegistration;
                 item.RegistrationPage = regPage;
 

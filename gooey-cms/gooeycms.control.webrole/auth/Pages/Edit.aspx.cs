@@ -132,7 +132,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
                 page.Url = fullurl;
                 page.UrlHash = TextHash.MD5(page.Url).Value;
                 page.SubscriptionId = CurrentSite.Guid.Value;
-                page.DateSaved = DateTime.Now;
+                page.DateSaved = UtcDateTime.Now;
                 page.IsApproved = false;
                 page.Author = LoggedInUser.Username;
                 page.Culture = GetSelectedCulture();
@@ -209,7 +209,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             CmsSavedForm form = new CmsSavedForm();
             form.Name = formName;
             form.Markup = formContents;
-            form.DateSaved = DateTime.Now;
+            form.DateSaved = UtcDateTime.Now;
 
             FormManager.Instance.Save(form);
 

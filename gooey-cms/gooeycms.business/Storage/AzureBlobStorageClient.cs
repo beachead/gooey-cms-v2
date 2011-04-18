@@ -8,6 +8,7 @@ using System.Text;
 using System.IO;
 using System.Collections.Specialized;
 using Gooeycms.Extensions;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Storage
 {
@@ -98,7 +99,7 @@ namespace Gooeycms.Business.Storage
                 blob.UploadByteArray(data);
 
                 blob.Metadata["filename"] = filename;
-                blob.Metadata["created"] = DateTime.Now.ToString();
+                blob.Metadata["created"] = UtcDateTime.Now.ToString();
                 blob.Metadata["size"] = data.Length.ToString();
 
                 foreach(String key in this.metadata.Keys)

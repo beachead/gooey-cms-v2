@@ -6,6 +6,7 @@ using Gooeycms.Data.Model.Subscription;
 using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Web;
 using Gooeycms.Business.Crypto;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -53,7 +54,7 @@ namespace Gooeycms.Business.Subscription
             if (invite == null)
                 throw new ArgumentException("This invite token is not valid and may not be used.");
 
-            if (invite.Responded < DateTime.Now)
+            if (invite.Responded < UtcDateTime.Now)
                 throw new ArgumentException("This invite token has already been used and may not be used again");
 
             //Make sure the token is still valid
@@ -70,7 +71,7 @@ namespace Gooeycms.Business.Subscription
 
             String token = TokenManager.Issue(guid.Value,TimeSpan.FromDays(60),1);
 
-            invite.Issued = DateTime.Now;
+            invite.Issued = UtcDateTime.Now;
             invite.Token = token;
 
             using (Transaction tx = new Transaction())
@@ -93,7 +94,7 @@ namespace Gooeycms.Business.Subscription
             invite.Firstname = firstname;
             invite.Lastname = lastname;
             invite.Email = email;
-            invite.Created = DateTime.Now;
+            invite.Created = UtcDateTime.Now;
             invite.Issued = DateTime.MaxValue;
             invite.Responded = DateTime.MaxValue;
 

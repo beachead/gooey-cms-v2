@@ -49,7 +49,7 @@ namespace Gooeycms.Business.Forms.Plugins
             form.IpAddress = common.IpAddress;
             form.RawCampaigns = common.Campaigns;
             form.FormUrl = common.Resource;
-            form.Inserted = DateTime.Now;
+            form.Inserted = UtcDateTime.Now;
             form._FormKeys = keys.ToString();
             form._FormValues = values.ToString();
 

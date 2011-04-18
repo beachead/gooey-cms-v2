@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Data.Model.Billing;
 using Beachead.Persistence.Hibernate;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Billing
 {
@@ -29,7 +30,7 @@ namespace Gooeycms.Business.Billing
             history.SubscriptionId = subscriptionId.Value;
             history.PaypalProfileId = paypalProfileId;
             history.TxAmount = amount;
-            history.TxDate = DateTime.Now;
+            history.TxDate = UtcDateTime.Now;
             history.TxDescription = description;
             history.TxId = transactionId;
             history.TxType = transactionType;

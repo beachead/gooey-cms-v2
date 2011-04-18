@@ -43,7 +43,7 @@ namespace Gooeycms.Business.Membership
                 info.State = registration.State;
                 info.Zipcode = registration.Zipcode;
                 info.Guid = System.Guid.NewGuid().ToString();
-                info.Created = DateTime.Now;
+                info.Created = UtcDateTime.Now;
 
                 UserInfoDao dao = new UserInfoDao();
                 if (!exists)
@@ -210,7 +210,7 @@ namespace Gooeycms.Business.Membership
             info.State = "NY";
             info.Zipcode = "10114";
             info.Guid = System.Guid.NewGuid().ToString();
-            info.Created = DateTime.Now;
+            info.Created = UtcDateTime.Now;
 
             UserInfoDao dao = new UserInfoDao();
             using (Transaction tx = new Transaction())
@@ -272,7 +272,7 @@ namespace Gooeycms.Business.Membership
             info.Lastname = lastname;
             info.Username = username;
             info.Email = email;
-            info.Created = DateTime.Now;
+            info.Created = UtcDateTime.Now;
 
             UserInfoDao dao = new UserInfoDao();
             using (Transaction tx = new Transaction())

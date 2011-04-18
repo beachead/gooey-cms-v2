@@ -252,7 +252,7 @@ namespace Gooeycms.Business.Campaigns
                 if (!String.IsNullOrWhiteSpace(campaignString))
                 {
                     HttpCookie cookie = new HttpCookie("campaign", campaignString);
-                    cookie.Expires = DateTime.Now.AddMonths(1);
+                    cookie.Expires = UtcDateTime.Now.AddMonths(1);
                     WebRequestContext.Instance.CurrentHttpContext.Response.Cookies.Add(cookie);
                 }
             }

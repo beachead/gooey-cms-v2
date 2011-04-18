@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Gooeycms.Business.Storage;
 using System.Collections.Concurrent;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Import
 {
@@ -28,7 +29,7 @@ namespace Gooeycms.Business.Import
                 {
                     try
                     {
-                        startedImports[message.ImportHash] = DateTime.Now;
+                        startedImports[message.ImportHash] = UtcDateTime.Now;
                         Logging.Database.Write("import-site-worker", "Began processing import of site hash:" + message.ImportHash);
 
                         ImportManager.Instance.Import(Data.Hash.New(message.ImportHash), message.SubscriptionId);

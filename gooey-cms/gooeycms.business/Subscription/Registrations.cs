@@ -12,6 +12,7 @@ using System.Web.Security;
 using Gooeycms.Business.Membership;
 using Encore.PayPal.Nvp;
 using Gooeycms.Business.Paypal;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -53,7 +54,7 @@ namespace Gooeycms.Business.Subscription
             {
                 registration = new Registration();
                 registration.Guid = guid;
-                registration.Created = DateTime.Now;
+                registration.Created = UtcDateTime.Now;
             }
 
             return registration;

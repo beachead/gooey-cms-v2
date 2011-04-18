@@ -62,7 +62,7 @@ namespace Gooeycms.Webrole.Control.auth.Developer
 
             Data.Guid siteGuid = Data.Guid.New(this.LstAvailableSites.SelectedValue);
             package.Category = this.LstCategory.SelectedValue;
-            package.Created = DateTime.Now;
+            package.Created = UtcDateTime.Now;
             package.Approved = DateTime.MaxValue;
             package.Features = this.TxtFeatures.Text;
             package.Guid = guid;

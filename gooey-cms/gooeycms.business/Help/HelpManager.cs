@@ -6,6 +6,7 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Help;
+using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Help
 {
@@ -71,7 +72,7 @@ namespace Gooeycms.Business.Help
 
             HttpCookie cookie = new HttpCookie("help-system");
             cookie.Value = values;
-            cookie.Expires = DateTime.Now.AddYears(25);
+            cookie.Expires = UtcDateTime.Now.AddYears(25);
 
             WebRequestContext context = new WebRequestContext();
             context.CurrentHttpContext.Response.Cookies.Add(cookie);

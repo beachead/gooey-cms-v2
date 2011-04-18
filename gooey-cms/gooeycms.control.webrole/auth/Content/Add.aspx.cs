@@ -81,14 +81,14 @@ namespace Gooeycms.Webrole.Control.auth.Content
                 }
 
                 CmsContent item = new CmsContent();
-                item.PublishDate = DateTime.Now;
-                item.ExpireDate = DateTime.Now.AddYears(100);
+                item.PublishDate = UtcDateTime.Now;
+                item.ExpireDate = UtcDateTime.Now.AddYears(100);
                 item.SubscriptionId = CurrentSite.Guid.Value;
                 item.Guid = System.Guid.NewGuid().ToString();
                 item.Culture = CurrentSite.Culture;
                 item.Author = LoggedInUser.Username;
                 item.IsApproved = false;
-                item.LastSaved = DateTime.Now;
+                item.LastSaved = UtcDateTime.Now;
                 item.RequiresRegistration = required;
                 item.RegistrationPage = this.RegistrationPage.SelectedValue;
                 item.Content = this.TxtEditor.Text;

@@ -29,7 +29,7 @@ namespace Gooeycms.Business.Util
             if (items.Count == 1)
                 SetActiveSiteCookie(items[0].Guid);
             else
-                HttpContext.Current.Response.Cookies["selected-site"].Expires = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+                HttpContext.Current.Response.Cookies["selected-site"].Expires = UtcDateTime.Now.Subtract(TimeSpan.FromDays(1));
         }
 
         public static void SetActiveSiteCookie(String guid)

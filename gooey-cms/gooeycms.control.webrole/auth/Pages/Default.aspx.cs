@@ -116,7 +116,7 @@ namespace Gooeycms.Webrole.Control.auth.Pages
             page.Url = fullurl;
             page.UrlHash = TextHash.MD5(page.Url).Value;
             page.SubscriptionId = CurrentSite.Guid.Value;
-            page.DateSaved = DateTime.Now;
+            page.DateSaved = UtcDateTime.Now;
             page.IsApproved = false;
             page.Author = LoggedInUser.Username;
             page.Culture = CurrentSite.Culture;

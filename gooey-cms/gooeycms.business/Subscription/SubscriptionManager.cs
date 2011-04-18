@@ -77,7 +77,7 @@ namespace Gooeycms.Business.Subscription
 
             CmsSubscription subscription = new CmsSubscription();
             subscription.Guid = registration.Guid;
-            subscription.Created = DateTime.Now;
+            subscription.Created = UtcDateTime.Now;
             subscription.Culture = "en-us";
             subscription.Subdomain = registration.Sitename;
             subscription.MaxPhoneNumbers = -1; //Set to use the default max phone numbers
@@ -94,7 +94,7 @@ namespace Gooeycms.Business.Subscription
                 subscription.StagingDomain = registration.Staging;
 
             subscription.SubscriptionPlan = SubscriptionManager.GetSubscriptionPlan(registration);
-            subscription.Expires = DateTime.Now.AddYears(100);
+            subscription.Expires = UtcDateTime.Now.AddYears(100);
             subscription.IsDisabled = false;
             subscription.PrimaryUser = wrapper.UserInfo;
             subscription.IsSalesforceEnabled = registration.IsSalesforceEnabled;
@@ -124,7 +124,7 @@ namespace Gooeycms.Business.Subscription
             template.IsGlobalTemplateType = false;
             template.Name = GooeyConfigManager.DefaultTemplateName;
             template.SubscriptionGuid = subscription.Guid;
-            template.LastSaved = DateTime.Now;
+            template.LastSaved = UtcDateTime.Now;
             template.Theme = theme;
             TemplateManager.Instance.Save(template);
 
@@ -613,7 +613,7 @@ namespace Gooeycms.Business.Subscription
             DateTime startDate = cmsSubscription.Created;
             DateTime freeTrialExpires = startDate.AddDays(freeTrialDays);
 
-            return freeTrialExpires.Subtract(DateTime.Now).TotalDays;
+            return freeTrialExpires.Subtract(UtcDateTime.Now).TotalDays;
         }
     }
 }
