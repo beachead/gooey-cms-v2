@@ -69,7 +69,11 @@ namespace Gooeycms.Business.Web
 
         public String GetIndividualPath()
         {
-            return pieces[currentPosition - 1];
+            String temp = pieces[currentPosition - 1];
+            if (String.IsNullOrEmpty(temp))
+                temp = "default.aspx";
+
+            return temp;
         }
 
         public String GetParentPath()

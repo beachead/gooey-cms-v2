@@ -202,7 +202,7 @@ namespace Gooeycms.Business.Import
             //Create the sitemap and then add the page itself
             CmsSitePath root = CmsSiteMap.Instance.GetPath(subscriptionId, CmsSiteMap.RootPath);
 
-            IList<ImportedItem> pages = items[ImportType.Page];
+            IList<ImportedItem> pages = NormalizeImport(items[ImportType.Page]);
             foreach (ImportedItem page in pages)
             {
                 try
@@ -246,6 +246,44 @@ namespace Gooeycms.Business.Import
             dao.DeleteAllByImportHash(importHash);
 
             return status;
+        }
+
+        public static IList<ImportedItem> NormalizeImport(IList<ImportedItem> pages)
+        {
+            //Normalize all of the pages based upon the url
+            //Normalize all of the pages based upon the url
+            Dictionary<String, IList<ImportedItem>> normalizedUrls = new Dictionary<string, IList<ImportedItem>>();
+            foreach (ImportedItem page in pages)
+            {
+                String url = page.Uri.ToLower();
+                if (url.EndsWith("/"))
+                    url = url.Substring(0, url.Length - 1);
+
+                if (!normalizedUrls.ContainsKey(url))
+                    normalizedUrls[url] = new List<ImportedItem>();
+
+                normalizedUrls[url].Add(page);
+            }
+
+
+            IList<ImportedItem> importPages = new List<ImportedItem>();
+            foreach (String key in normalizedUrls.Keys)
+            {
+                //Always take the first one in the list and if there are more than one that matches, assume
+                //it's a directory and make sure there's a slash on the end
+                ImportedItem item = normalizedUrls[key][0];
+
+                if (normalizedUrls[key].Count > 1)
+                {
+                    String url = item.Uri;
+                    if (!url.EndsWith("/"))
+                        item.Uri = url + "/";
+                }
+
+                importPages.Add(item);
+            }
+
+            return importPages;
         }
 
         private void AddStatus(Data.Hash importHash, List<string> status, string item)

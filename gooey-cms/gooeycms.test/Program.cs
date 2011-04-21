@@ -1,6 +1,7 @@
 ﻿
 using System.Net.Mail;
 using System;
+using System.Linq;
 using System.IO;
 using gooeycms.business.salesforce;
 using System.Collections.Generic;
@@ -21,6 +22,33 @@ namespace Gooeycms.test
     {
         static void Main(string[] args)
         {
+            IList<ImportedItem> imports = ImportManager.Instance.GetImportedItems(Data.Hash.New("39815301DDC751A5086141163128A817"))[ImportType.Page];
+            imports = ImportManager.NormalizeImport(imports);
+            foreach (ImportedItem page in imports)
+            {
+                CmsUrl uri = new CmsUrl(page.Uri);
+                CmsUrlWalker walker = new CmsUrlWalker(uri);
+
+                while (walker.Next())
+                {
+                    String parent = walker.GetParentPath();
+                    String current = walker.GetIndividualPath();
+                    String fullpath = CmsSiteMap.PathCombine(parent, current);
+                    int depth = walker.Depth;
+
+                    if (!walker.IsLast)
+                    {
+                        //Check if the current path exists, if not, create it
+                        //if (!CmsSiteMap.Instance.Exists(subscriptionId, fullpath))
+                            Console.WriteLine("Adding directory " + current + " as child of " + parent);
+                            //CmsSiteMap.Instance.AddChildDirectory(subscriptionId, parent, current);
+                    }
+                }
+                String pageName = walker.GetIndividualPath();
+                Console.WriteLine("Adding page:" + pageName + " as child of " + walker.GetParentPath());
+            }
+            Console.ReadLine();
+
             /*
             ImportedItem item = new ImportedItem();
             item.Uri = "tesT";
@@ -35,9 +63,11 @@ namespace Gooeycms.test
             }
             */
 
+            /*
             String html = "<img src=\"../images/test.jpg\" /><img src=\"http://www.google.com/image.jpg\" /><img src='images/blah.gif'>";
             html = new ImageRewriter("location").Rewrite(html);
-
+            */
+            
             /*
             GooeyCrawler crawler = new GooeyCrawler(new Uri("http://tribecadentaldesign.com"));
             crawler.AddPipelineStep(new CssImageProcessor());
