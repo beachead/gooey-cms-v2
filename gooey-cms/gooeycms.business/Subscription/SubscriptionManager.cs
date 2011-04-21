@@ -312,21 +312,33 @@ namespace Gooeycms.Business.Subscription
                 SubscriptionManager.RemovePhoneFromSubscription(subscription.Guid, number.PhoneNumber);
         }
 
+        public static void Erase(Data.Guid siteGuid)
+        {
+            Erase(siteGuid, true, true);
+        }
+
         /// <summary>
         /// Erases all of the data for a site
         /// </summary>
         /// <param name="siteGuid"></param>
-        public static void Erase(Data.Guid siteGuid)
+        public static void Erase(Data.Guid siteGuid, Boolean eraseContent, Boolean eraseThemes)
         {
             using (Transaction tx = new Transaction())
             {
-                //Delete the cms content
-                CmsContentDao dao = new CmsContentDao();
-                dao.DeleteAllBySite(siteGuid);
+                if (eraseContent)
+                {
+                    //Delete the cms content
+                    CmsContentDao dao = new CmsContentDao();
+                    dao.DeleteAllBySite(siteGuid);
 
-                //Delete the cms content types
-                CmsContentTypeDao typeDao = new CmsContentTypeDao();
-                typeDao.DeleteAllBySite(siteGuid);
+                    //Delete the cms content types
+                    CmsContentTypeDao typeDao = new CmsContentTypeDao();
+                    typeDao.DeleteAllBySite(siteGuid);
+                }
+
+                //Delete the images for this subscription
+                CmsImageDao imageDao = new CmsImageDao();
+                imageDao.DeleteAllBySite(siteGuid);
 
                 //Delete the pages
                 CmsPageDao pageDao = new CmsPageDao();
@@ -336,13 +348,16 @@ namespace Gooeycms.Business.Subscription
                 CmsSitePathDao siteDao = new CmsSitePathDao();
                 siteDao.DeleteAllBySite(siteGuid);
 
-                //Delete the templates
-                CmsTemplateDao templateDao = new CmsTemplateDao();
-                templateDao.DeleteAllBySite(siteGuid);
+                if (eraseThemes)
+                {
+                    //Delete the templates
+                    CmsTemplateDao templateDao = new CmsTemplateDao();
+                    templateDao.DeleteAllBySite(siteGuid);
 
-                //Delete the existing themes
-                CmsThemeDao themeDao = new CmsThemeDao();
-                themeDao.DeleteAllBySite(siteGuid);
+                    //Delete the existing themes
+                    CmsThemeDao themeDao = new CmsThemeDao();
+                    themeDao.DeleteAllBySite(siteGuid);
+                }
 
                 tx.Commit();
             }

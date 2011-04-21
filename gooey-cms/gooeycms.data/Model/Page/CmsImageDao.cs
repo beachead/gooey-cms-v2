@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using NHibernate;
+using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Data.Model.Page
 {
@@ -56,6 +57,19 @@ namespace Gooeycms.Data.Model.Page
                 query.SetString("directory",directory);
 
             return query.UniqueResult<CmsImage>();
+        }
+
+        public void DeleteAllBySite(Guid siteGuid)
+        {
+            String hql = "select image from CmsImage image where image.SubscriptionId = :siteGuid";
+            using (Transaction tx = new Transaction())
+            {
+                foreach (CmsImage image in base.NewHqlQuery(hql).SetString("siteGuid",siteGuid.Value).List<CmsImage>())
+                {
+                    base.Delete(image);
+                }
+                tx.Commit();
+            }
         }
     }
 }

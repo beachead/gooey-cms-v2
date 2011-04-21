@@ -71,21 +71,29 @@ namespace Gooeycms.Business.Import
         public static ImportType GetImportItemType(ImportedItem item)
         {
             ImportType result;
-            if (item.ContentType.Contains("text/html"))
-                result = ImportType.Page;
-            else if (item.ContentType.Contains("css"))
-                result = ImportType.Css;
-            else if (item.ContentType.Contains("javascript"))
-                result = ImportType.Javascript;
-            else if (item.ContentType.Contains("image/"))
-                result = ImportType.Image;
-            else if (item.ContentType.Contains("application/"))
-                result = ImportType.Unknown;
+            if (item.ContentType != null)
+            {
+                if (item.ContentType.Contains("text/html"))
+                    result = ImportType.Page;
+                else if (item.ContentType.Contains("css"))
+                    result = ImportType.Css;
+                else if (item.ContentType.Contains("javascript"))
+                    result = ImportType.Javascript;
+                else if (item.ContentType.Contains("image/"))
+                    result = ImportType.Image;
+                else if (item.ContentType.Contains("application/"))
+                    result = ImportType.Unknown;
+                else
+                {
+                    if (!String.IsNullOrWhiteSpace(item.ContentType))
+                        Logging.Database.Write("import-manager", "Detected unknown content type:" + item.ContentType);
+
+                    result = ImportType.Unknown;
+                }
+            }
             else
             {
-                if (!String.IsNullOrWhiteSpace(item.ContentType))
-                    Logging.Database.Write("import-manager", "Detected unknown content type:" + item.ContentType);
-
+                Logging.Database.Write("import-manager", "Could not determine the content type for " + item.Uri);
                 result = ImportType.Unknown;
             }
 
@@ -140,20 +148,11 @@ namespace Gooeycms.Business.Import
             //Check if we need to delete the existing site
             if (deleteExisting)
             {
-                //Check if the existing site contains snapshots, if so, we can't delete the content
-                if (!ImageManager.Instance.ContainsSnapshots(subscription.Guid, StorageClientConst.RootFolder))
-                {
-                    IList<CmsPage> deleted = PageManager.Instance.Filter(subscription.Guid, PageManager.Filters.AllPages);
-                    foreach (CmsPage page in deleted)
-                        PageManager.Instance.DeleteAll(page);
+                //Erase all of the existing data
+                SubscriptionManager.Erase(subscription.Guid, false, false);
 
-                    ImageManager.Instance.DeleteAllImages(subscription.Guid, StorageClientConst.RootFolder);
-                    AddStatus(importHash, status, "Successfully deleted existing pages and images");
-                }
-                else
-                {
-                    AddStatus(importHash, status, "Unable to delete existing pages and images because the current site is associated with a package");
-                }
+                //Setup the default 
+                SiteHelper.Configure(subscription.Guid);
             }
 
             //First, import all of the images
