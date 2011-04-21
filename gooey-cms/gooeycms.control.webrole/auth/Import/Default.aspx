@@ -13,11 +13,11 @@
 
 <telerik:RadAjaxLoadingPanel ID="LoadingPanel" Skin="Default"  runat="server"></telerik:RadAjaxLoadingPanel>
 <telerik:RadAjaxPanel ID="ImportPanel" LoadingPanelID="LoadingPanel" runat="server">
-    <p>
+    <div style="height:400px;">
     Input the url of the site to import. You will be able to add/remove pages prior to importing the content.<br />
     <asp:TextBox ID="TxtSiteUrl" runat="server" />&nbsp;
     <asp:Button ID="BtnCrawlSite" Text="Start" OnClientClick="if (!confirm('Are you sure you want to begin the site import process?\r\nDepending upon the size of your site, this may take a while.')) return false;" OnClick="BtnCrawlSite_Click" runat="server" /><br />
     <asp:Label ID="LblStatus" runat="server" />
-    </p>
+    </div>
 </telerik:RadAjaxPanel>
 </asp:Content>

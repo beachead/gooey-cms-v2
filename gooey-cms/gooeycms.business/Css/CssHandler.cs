@@ -63,7 +63,7 @@ namespace Gooeycms.Business.Css
                     if ("themes".EqualsCaseInsensitive(type))
                         directory = CurrentSite.GetCurrentTheme().ThemeGuid;
 
-                    String content = CssManager.Resolve(file.Content, directory);
+                    String content = file.Content; //CssManager.Resolve(file.Content, directory);
                     byte[] bytes = Encoding.UTF8.GetBytes(content);
                     context.Response.BufferOutput = true;
                     context.Response.Clear();

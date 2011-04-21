@@ -23,6 +23,7 @@ namespace Gooeycms.Webrole.Control.auth.Import
             Uri.TryCreate(this.TxtSiteUrl.Text, UriKind.Absolute, out uri);
 
             GooeyCrawler crawler = new GooeyCrawler(uri);
+            crawler.AddPipelineStep(new CssImageProcessor());
             crawler.AddPipelineStep(new DatabasePersistenceProcessor(CurrentSite.Guid));
             String importHash = crawler.Crawl();
 

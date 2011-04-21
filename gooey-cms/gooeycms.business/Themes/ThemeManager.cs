@@ -116,7 +116,7 @@ namespace Gooeycms.Business.Themes
         public void Save(CmsTheme theme)
         {
             if (CurrentSite.IsAvailable)
-                CurrentSite.Cache.Clear("default-theme");
+                CurrentSite.Cache.Clear();
 
             CmsThemeDao dao = new CmsThemeDao();
             using (Transaction tx = new Transaction())

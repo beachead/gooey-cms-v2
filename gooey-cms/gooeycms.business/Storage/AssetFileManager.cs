@@ -139,7 +139,8 @@ namespace Gooeycms.Business.Storage
 
         private void UpdateSortInfo(String key, String filename, Int32 newSortOrder)
         {
-            CurrentSite.Cache.Clear(CachePrefix + key);
+            if (CurrentSite.IsAvailable)
+                CurrentSite.Cache.Clear(CachePrefix + key);
 
             IStorageClient client = StorageHelper.GetStorageClient();
             client.AddMetadata(GetSortKey(key), newSortOrder.ToString());
@@ -147,7 +148,8 @@ namespace Gooeycms.Business.Storage
             String container = CurrentSiteAssetStorageContainer;
             client.SetMetadata(container, key, filename);
 
-            SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
+            if (CurrentSite.IsAvailable)
+                SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
         }
 
         public void UpdateSortInfo(CmsTheme theme, String filename, Int32 newSortOrder)

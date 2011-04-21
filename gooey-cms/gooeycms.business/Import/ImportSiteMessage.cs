@@ -13,5 +13,6 @@ namespace Gooeycms.Business.Import
         public String SubscriptionId { get; set; }
         public String CompletionEmail { get; set; }
         public string MessageId { get; set; }
+        public Boolean DeleteExisting { get; set; }
     }
 }

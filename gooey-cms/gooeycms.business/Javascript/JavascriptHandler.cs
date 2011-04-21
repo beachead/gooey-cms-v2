@@ -6,6 +6,7 @@ using Gooeycms.Business.Pages;
 using Gooeycms.Business.Util;
 using Gooeycms.Data.Model.Theme;
 using Gooeycms.Business.Web;
+using Gooeycms.Business.Storage;
 
 namespace Gooeycms.Business.Javascript
 {
@@ -28,7 +29,7 @@ namespace Gooeycms.Business.Javascript
                 {
                     file = JavascriptManager.Instance.Get(key, filename);
                 }
-                catch (PageNotFoundException) { }
+                catch (FileDoesNotExistException) { }
                 catch (Exception e)
                 {
                     ex = e;
@@ -39,8 +40,6 @@ namespace Gooeycms.Business.Javascript
             {
                 context.Response.Clear();
                 context.Response.StatusCode = 500;
-                context.Response.Status = "Unexpected exception occurred while retrieving javascript content.";
-                context.Response.StatusDescription = ex.Message;
                 context.Response.Flush();
                 context.Response.End();
             }

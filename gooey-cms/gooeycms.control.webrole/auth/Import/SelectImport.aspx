@@ -12,31 +12,49 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="Editor" runat="server">
     <telerik:RadFormDecorator ID="FormDecorator" DecoratedControls="Fieldset" runat="server" />
 
+    <div style="padding-left:15px;">
     <asp:Button ID="BtnImport" Text="Import" OnClientClick="return confirm('Are you sure you want to import these files?\r\nWARNING: Files or pages with the same names will automatically be overwritten.');"  OnClick="BtnImport_Click" runat="server" />
+    &nbsp;
+    <asp:CheckBox ID="ChkDeleteExisting" Text="Delete All Existing Pages and Images" runat="server" />
+    </div>
 
-    <fieldset>
-        <legend>Import the following pages</legend>
-        <div style="height:300px; overflow:auto;">
-        <asp:CheckBoxList ID="ImportPages" runat="server" />
-        </div>
-    </fieldset>
+    <table style="width:80%;">
+        <tr>
+            <td style="vertical-align:top;">
+                <fieldset>
+                    <legend>Import the following pages</legend>
+                    <div style="height:250px; overflow:auto;">
+                    <asp:CheckBoxList ID="ImportPages" runat="server" />
+                    </div>
+                </fieldset>
 
-    <fieldset>
-        <legend>Import the following css/javascript</legend>
-        <div style="height:300px; overflow:auto;">
-        <asp:CheckBoxList ID="ImportCssJs" runat="server" />        
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Import the following images</legend>
-        <div style="height:300px; overflow:auto;">
-        <asp:CheckBoxList ID="ImportImages" runat="server" />
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>The following files could not automatically be imported</legend>
-        <asp:ListBox ID="LstUnknowns" SelectionMode="Multiple" runat="server" />
-    </fieldset>
+            </td>
+            <td style="vertical-align:top;">
+            <fieldset>
+                <legend>Import the following css and javascript</legend>
+                <div style="height:250px; overflow:auto;">
+                <asp:CheckBoxList ID="ImportCssJs" runat="server" />        
+                </div>
+            </fieldset>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top;">
+                <fieldset>
+                    <legend>Import the following images</legend>
+                    <div style="height:250px; overflow:auto;">
+                    <asp:CheckBoxList ID="ImportImages" runat="server" />
+                    </div>
+                </fieldset>            
+            </td>
+            <td style="vertical-align:top;">
+                <fieldset>
+                    <legend>The following files could not automatically be imported</legend>
+                    <div style="height:250px; overflow:auto;">
+                    <asp:ListBox ID="LstUnknowns" SelectionMode="Multiple" runat="server" />
+                    </div>
+                </fieldset>            
+            </td>
+        </tr>
+    </table>
 </asp:Content>

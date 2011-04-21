@@ -8,24 +8,21 @@ using Gooeycms.Business.Storage;
 using System.IO;
 using System.Web;
 using Gooeycms.Business.Web;
+using System.Text.RegularExpressions;
 
 namespace Gooeycms.Business.Images
 {
     public class ImageRequestHandler : BaseHttpHandler
     {
+        private static Regex CssImagePattern = new Regex(@"^gooeycss/(themes|local)/(.*?)/(.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         protected override void Process(System.Web.HttpContext context)
         {
             String container = CurrentSite.GetContainerUrl(SiteHelper.ImagesContainerKey);
             String directory = StorageClientConst.RootFolder;
             String filename = context.Request.QueryString["filename"];
 
-            int pos = filename.LastIndexOf("/");
-            if (pos > -1)
-                filename = filename.Substring(pos + 1);
-
-            IStorageClient client = StorageHelper.GetStorageClient();
-            StorageFile file = client.GetInfo(container, directory, filename);
-
+            StorageFile file = FindFile(container, directory, filename);
             if (file.Exists())
             {
                 Boolean isCacheValid = WebRequestContext.Instance.IsModifiedSince(file.LastModified);
@@ -37,6 +34,7 @@ namespace Gooeycms.Business.Images
                 {
                     try
                     {
+                        IStorageClient client = StorageHelper.GetStorageClient();
                         context.Response.Clear();
                         context.Response.ClearHeaders();
                         context.Response.ClearContent();
@@ -44,7 +42,7 @@ namespace Gooeycms.Business.Images
                         context.Response.ContentType = GetContentType(filename);
                         context.Response.AddHeader("Content-Length", file.Size.ToString());
                         context.Response.Cache.SetCacheability(HttpCacheability.Public);
-                        client.DownloadToStream(context.Response.OutputStream, container, directory, filename);
+                        client.DownloadToStream(context.Response.OutputStream, container, directory, file.Filename);
                     }
                     catch (FileNotFoundException ex)
                     {
@@ -64,6 +62,33 @@ namespace Gooeycms.Business.Images
             {
                 FileNotFoundResponse(context, "404:" + filename + " does not exist");
             }
+        }
+
+        private StorageFile FindFile(string container, string directory, string filename)
+        {
+            //Check if the filename is from the css directory
+            Match match = CssImagePattern.Match(filename);
+            if (match.Success)
+            {
+                filename = match.Groups[3].Value;
+            }
+
+            //First check the actual directory that the file is supposedly in
+            IStorageClient client = StorageHelper.GetStorageClient();
+            StorageFile file = client.GetInfo(container, directory, filename);
+            
+            //If it wasn't in the actual directory, check the root directory instead
+            if (!file.Exists())
+            {
+
+                int pos = filename.LastIndexOf("/");
+                if (pos > -1)
+                    filename = filename.Substring(pos + 1);
+
+                file = client.GetInfo(container, directory, filename);
+            }
+
+            return file;
         }
 
         private static String GetContentType(String filename)

@@ -151,19 +151,6 @@ namespace Gooeycms.Business.Pages
                 throw new PageNotFoundException(url.Path);
         }
 
-
-        private void CheckIfProcessRedirect(CmsUrl url)
-        {
-            if (url.Path.Contains(".swf"))
-            {
-                /*
-                String imageContainerUrl = CurrentSite.GetContainerUrl(SiteHelper.ImagesContainerKey);
-                String redirect = imageContainerUrl + url.Path;
-                Response.Redirect(redirect, true);
-                */
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             //if the page is in the cache return immediately
@@ -305,7 +292,7 @@ namespace Gooeycms.Business.Pages
         private void ValidateSite()
         {
             if (CurrentSite.GetCurrentTheme() == null)
-                throw new ApplicationException("This site could not be displayed. Reason: The site has not been properly configured with a default theme.");
+                throw new ApplicationException("This site " + CurrentSite.ProductionDomain + "(" + CurrentSite.Guid.Value + ") could not be displayed. Reason: The site has not been properly configured with a default theme.");
         }
     }
 }

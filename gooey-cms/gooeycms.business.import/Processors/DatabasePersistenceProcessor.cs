@@ -8,7 +8,7 @@ using Gooeycms.Business.Util;
 
 namespace Gooeycms.Business.Import.Processors
 {
-    public class DatabasePersistenceProcessor : IPipelineStep
+    public class DatabasePersistenceProcessor : ICheckedPipelineStep
     {
         private String siteGuid;
         private String siteHash;
@@ -57,6 +57,13 @@ namespace Gooeycms.Business.Import.Processors
             {
                 Logging.Database.Write("import-error", "Unexpected exception importing url:" + uri + ", stack:" + e.StackTrace);
             }
+        }
+
+        public void PerformErrorCheck()
+        {
+            //Check if this site hash is already in the database, if so, remove it
+            ImportedItemDao dao = new ImportedItemDao();
+            dao.DeleteAllByImportHash(Data.Hash.New(this.siteHash));
         }
     }
 }

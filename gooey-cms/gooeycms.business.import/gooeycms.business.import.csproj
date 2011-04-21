@@ -58,7 +58,11 @@
     <Compile Include="CrawlerEntry.cs" />
     <Compile Include="Events\CrawlProgressEventArgs.cs" />
     <Compile Include="GooeyCrawler.cs" />
+    <Compile Include="ICheckedPipelineStep.cs" />
+    <Compile Include="InvalidPipeException.cs" />
     <Compile Include="IPipelineStep.cs" />
+    <Compile Include="Processors\ConsoleOutputProcessor.cs" />
+    <Compile Include="Processors\CssImageProcessor.cs" />
     <Compile Include="Processors\DatabasePersistenceProcessor.cs" />
     <Compile Include="Processors\DetectedLinkProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

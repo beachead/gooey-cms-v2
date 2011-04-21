@@ -18,4 +18,4 @@ CREATE TABLE [dbo].[Imports](
 	PRIMARY KEY CLUSTERED([id]),
 );
 
-CREATE INDEX idx_import_subscription ON [Imports](subscription_id);
+CREATE INDEX idx_import_subscription ON [Imports](guid);

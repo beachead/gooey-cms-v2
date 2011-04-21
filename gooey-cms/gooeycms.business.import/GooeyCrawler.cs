@@ -28,13 +28,20 @@ namespace Gooeycms.Business.Import
 
         public GooeyCrawler(Uri root)
         {
-            this.root = root;
+            String url = root.ToString();
+            if (url.EndsWith("/"))
+                url = url.Substring(0, url.Length - 1);
+
+            this.root = new Uri(url);
             this.siteHash = TextHash.MD5(this.root.ToString()).Value;
         }
 
         public GooeyCrawler AddPipelineStep(IPipelineStep step)
         {
             step.ImportSiteHash = siteHash;
+            if (step is ICheckedPipelineStep)
+                ((ICheckedPipelineStep)step).PerformErrorCheck();
+
             this.pipelineSteps.Add(step);
 
             return this;

@@ -27,6 +27,9 @@ namespace Gooeycms.Business.Util
         {
             get
             {
+                if (WebRequestContext.Instance.Request.QueryString["nocache"] != null)
+                    CacheManager.Instance.GetCache(CurrentSite.Guid).Clear(false);
+
                 return CacheManager.Instance.GetCache(CurrentSite.Guid);
             }
         }

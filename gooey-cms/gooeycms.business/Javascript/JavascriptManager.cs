@@ -62,13 +62,13 @@ namespace Gooeycms.Business.Javascript
             foreach (JavascriptFile script in scripts)
             {
                 if (script.IsEnabled)
-                    includes.AppendLine("<script src=\"~/gooeyscripts/themes/" + AntiXss.UrlEncode(theme.ThemeGuid) + "/" + AntiXss.UrlEncode(script.FullName) + "\" type=\"text/javascript\" language=\"javascript\"></script>");
+                    includes.AppendLine("<script src=\"~/gooeyscripts/themes/" + AntiXss.UrlEncode(theme.ThemeGuid) + script.FullName + "\" type=\"text/javascript\" language=\"javascript\"></script>");
             }
 
             foreach (JavascriptFile script in pageScripts)
             {
                 if (script.IsEnabled)
-                    includes.AppendLine("<script src=\"~/gooeyscripts/local/" + AntiXss.UrlEncode(page.UrlHash) + "/" + AntiXss.UrlEncode(script.FullName) + "\" type=\"text/javascript\" language=\"javascript\"></script>");
+                    includes.AppendLine("<script src=\"~/gooeyscripts/local/" + AntiXss.UrlEncode(page.UrlHash) + script.FullName + "\" type=\"text/javascript\" language=\"javascript\"></script>");
             }
 
             return includes.ToString();

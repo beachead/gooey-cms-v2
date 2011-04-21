@@ -11,7 +11,10 @@ namespace Gooeycms.Webrole.Control.auth.Import
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                this.LblToken.Text = Server.HtmlEncode(Request.QueryString["g"]);
+            }
         }
     }
 }

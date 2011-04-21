@@ -45,6 +45,11 @@ namespace Gooeycms.Business.Images
             }
         }
 
+        public ImageRewriter(String containerLocation)
+        {
+            this.imageContainerUrl = containerLocation;
+        }
+
         public String Rewrite(String html)
         {
             html = ImageHtml.Replace(html, new MatchEvaluator(ImageReferenceEvaluator));

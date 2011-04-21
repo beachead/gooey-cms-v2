@@ -31,6 +31,20 @@ namespace Gooeycms.Data.Model.Import
             return base.NewHqlQuery(hql).SetString("hash", hash.Value).List<ImportedItem>();
         }
 
+        public void DeleteAllByImportHash(Hash hash)
+        {
+            IList<ImportedItem> items = FindbyHash(hash);
+            using (Transaction tx = new Transaction())
+            {
+                foreach (ImportedItem item in items)
+                {
+                    if (item != null)
+                        base.Delete<ImportedItem>(item);
+                }
+                tx.Commit();
+            }
+        }
+
         public void RemoveImportedItems(IList<Data.Guid> removed)
         {
             using (Transaction tx = new Transaction())

@@ -12,6 +12,7 @@ using Beachead.Persistence.Hibernate;
 using Gooeycms.Business.Web;
 using Gooeycms.Data.Model.Page;
 using Gooeycms.Data.Model.Site;
+using Gooeycms.Business.Images;
 
 
 namespace Gooeycms.test
@@ -33,10 +34,15 @@ namespace Gooeycms.test
                 tx.Commit();
             }
             */
- 
+
+            String html = "<img src=\"../images/test.jpg\" /><img src=\"http://www.google.com/image.jpg\" /><img src='images/blah.gif'>";
+            html = new ImageRewriter("location").Rewrite(html);
+
             /*
-            GooeyCrawler crawler = new GooeyCrawler(new Uri("http://www.a123systems.com"));
-            crawler.AddPipelineStep(new DatabasePersistenceProcessor(Data.Guid.Empty));
+            GooeyCrawler crawler = new GooeyCrawler(new Uri("http://tribecadentaldesign.com"));
+            crawler.AddPipelineStep(new CssImageProcessor());
+            crawler.AddPipelineStep(new ConsoleOutputProcessor());
+            //crawler.AddPipelineStep(new DatabasePersistenceProcessor(Data.Guid.Empty));
             crawler.Progress += new EventHandler<Business.Import.Events.CrawlProgressEventArgs>(crawler_Progress);
             crawler.Crawl();
             */
@@ -54,6 +60,7 @@ namespace Gooeycms.test
             }
             */
 
+            /*
             ImportedItem item = new ImportedItem();
             item.Uri = "http://www.a123systems.com/Collateral/Flash/English-US/Animation/bae_pack.html";
             CmsUrl uri = new CmsUrl(item.Uri);
@@ -76,7 +83,8 @@ namespace Gooeycms.test
 
             String pageName = walker.GetIndividualPath();
             CmsPage page = ImportManager.Instance.GetPage("copyright.htm", "en-us", "import-template", item);
-            
+            */
+             
             /*
             TwilioClient client = new TwilioClient("ACe6a95690dcdee460400d44ae94e4e637", "707b003f01b09e45d998a487828c8625");
             client.SearchAvailableLocalNumbers("123");

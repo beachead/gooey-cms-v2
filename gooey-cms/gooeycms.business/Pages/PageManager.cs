@@ -266,7 +266,7 @@ namespace Gooeycms.Business.Pages
                 }
             }
 
-            CmsSitePath path = CmsSiteMap.Instance.GetPath(page.Url);
+            CmsSitePath path = CmsSiteMap.Instance.GetPath(page.SubscriptionId,page.Url);
             if (path != null)
                 CmsSiteMap.Instance.Remove(path);
         }

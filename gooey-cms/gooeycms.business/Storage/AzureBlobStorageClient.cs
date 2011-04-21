@@ -176,15 +176,23 @@ namespace Gooeycms.Business.Storage
 
         public Boolean ContainsSnapshots(String containerName, String directoryName)
         {
+            BlobRequestOptions options = new BlobRequestOptions()
+            {
+                BlobListingDetails = BlobListingDetails.Snapshots,
+                UseFlatBlobListing = true
+            };
+
             Boolean result = false;
             CloudBlobContainer container = GetBlobContainer(containerName);
-            CloudBlobDirectory dir = container.GetDirectoryReference(directoryName);
-            foreach (CloudBlob blob in dir.ListBlobs())
+            if (container.Exists())
             {
-                if (blob.SnapshotTime.HasValue)
+                foreach (CloudBlob blob in container.ListBlobs(options))
                 {
-                    result = true;
-                    break;
+                    if (blob.SnapshotTime.HasValue)
+                    {
+                        result = true;
+                        break;
+                    }
                 }
             }
 
@@ -205,8 +213,23 @@ namespace Gooeycms.Business.Storage
         public void Delete(String containerName, String directoryName)
         {
             CloudBlobContainer container = GetBlobContainer(containerName);
-            CloudBlobDirectory dir = container.GetDirectoryReference(directoryName);
-            foreach (CloudBlob blob in dir.ListBlobs()) 
+            BlobRequestOptions options = new BlobRequestOptions()
+            {
+                BlobListingDetails = BlobListingDetails.Snapshots,
+                UseFlatBlobListing = true
+            };
+
+
+            IEnumerable<IListBlobItem> blobs;
+            if (directoryName != null)
+            {
+                CloudBlobDirectory dir = container.GetDirectoryReference(directoryName);
+                blobs = dir.ListBlobs(options);
+            }
+            else
+                blobs = container.ListBlobs(options);
+
+            foreach (CloudBlob blob in blobs) 
             {
                 if ((blob.Exists()) && (!blob.SnapshotTime.HasValue))
                 {
@@ -326,7 +349,7 @@ namespace Gooeycms.Business.Storage
                 if (blob.Exists())
                 {
                     result.Uri = BuildUri(blob);
-                    result.Filename = GetBlobFilename(blob);
+                    result.Filename = GetBlobFilename(directoryName, blob);
                     result.Metadata = blob.Metadata;
                     result.Data = blob.DownloadByteArray();
                     result.LastModified = blob.Properties.LastModifiedUtc;
@@ -421,7 +444,7 @@ namespace Gooeycms.Business.Storage
                             BlobSnapshot temp = new BlobSnapshot();
                             temp.SnapshotTime = snapshot.SnapshotTime;
                             temp.Uri = new Uri(snapshot.Attributes.Uri.AbsoluteUri);
-                            temp.Filename = GetBlobFilename(snapshot);
+                            temp.Filename = GetBlobFilename(directoryName, snapshot);
 
                             snapshotNames.Add(temp);
                         }
@@ -434,13 +457,16 @@ namespace Gooeycms.Business.Storage
 
         private IEnumerable<IListBlobItem> GetCloudBlobs(CloudBlobContainer container, String directoryName)
         {
+            BlobRequestOptions options = new BlobRequestOptions();
+            options.UseFlatBlobListing = true;
+
             IEnumerable<IListBlobItem> items = null; ;
             if (directoryName != null)
             {
                 try
                 {
                     CloudBlobDirectory directory = container.GetDirectoryReference(directoryName);
-                    items = directory.ListBlobs();
+                    items = directory.ListBlobs(options);
                 }
                 catch (Exception) { }
             }
@@ -477,7 +503,7 @@ namespace Gooeycms.Business.Storage
                             {
                                 results.Add(new StorageFile()
                                 {
-                                    Filename = GetBlobFilename(blob),
+                                    Filename = GetBlobFilename(directoryName, blob),
                                     Uri = BuildUri(blob),
                                     Metadata = blob.Metadata
                                 });
@@ -540,26 +566,17 @@ namespace Gooeycms.Business.Storage
             }
         }
 
-        private static string GetBlobFilename(CloudBlob blob)
+        private static string GetBlobFilename(String directory, CloudBlob blob)
         {
-            return blob.Uri.ToString().Substring(blob.Uri.ToString().LastIndexOf("/") + 1);
-        }
+            String container = blob.Container.Uri.ToString();
+            String filename = blob.Uri.ToString().Replace(container, "");
+            if (directory != null) 
+                filename = filename.Replace(directory,"");
 
-        public StorageFile GetInfo(String url)
-        {
-            CloudBlob blob = this.GetBlobReference(url);
+            if (filename.StartsWith("/"))
+                filename = filename.Substring(1);
 
-            StorageFile file = new StorageFile();
-            if (blob.Exists())
-            {
-                file.Filename = GetBlobFilename(blob);
-                file.Uri = BuildUri(blob);
-                file.Metadata = blob.Metadata;
-                file.Size = blob.Properties.Length;
-                file.LastModified = blob.Properties.LastModifiedUtc;
-            }
-
-            return file;
+            return filename;
         }
 
         public StorageFile GetInfo(String containerName, String directoryName, String filename)
@@ -571,7 +588,7 @@ namespace Gooeycms.Business.Storage
             StorageFile file = new StorageFile();
             if (blob.Exists())
             {
-                file.Filename = GetBlobFilename(blob);
+                file.Filename = GetBlobFilename(directoryName, blob);
                 file.Uri = BuildUri(blob);
                 file.Metadata = blob.Metadata;
                 file.Size = blob.Properties.Length;
@@ -611,6 +628,9 @@ namespace Gooeycms.Business.Storage
 
         private static CloudBlob GetCloudBlob(CloudBlobContainer container, String directoryName, string filename)
         {
+            if (filename.StartsWith("/"))
+                filename = filename.Substring(1);
+
             CloudBlob blob;
             if (directoryName != StorageClientConst.RootFolder)
             {

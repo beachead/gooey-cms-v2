@@ -8,6 +8,7 @@ using Gooeycms.Data.Model.Import;
 using Gooeycms.Business.Import;
 using Gooeycms.Data;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Membership;
 
 namespace Gooeycms.Webrole.Control.auth.Import
 {
@@ -39,7 +40,9 @@ namespace Gooeycms.Webrole.Control.auth.Import
             GetUncheckedItems(this.ImportImages, removed);
             GetUncheckedItems(this.LstUnknowns, removed, true);
 
-            ImportManager.Instance.AddToImportQueue(Hash.New(hash), CurrentSite.Guid, removed);
+            ImportManager.Instance.AddToImportQueue(Hash.New(hash), CurrentSite.Guid, LoggedInUser.Email, removed, this.ChkDeleteExisting.Checked);
+
+            Response.Redirect("Status.aspx?g=" + hash);
         }
 
         private void GetUncheckedItems(ListControl list, IList<Data.Guid> items, bool forceRemove = false)
