@@ -163,13 +163,15 @@ namespace Gooeycms.Business.Pages
             output = output.Replace("{head.title}", this.page.Title);
             output = output.Replace("{head.meta.description}", this.page.Description);
             output = output.Replace("{head.meta.keywords}", this.page.Keywords);
-            output = output.Replace("{head.meta.custom}", "");
+            output = output.Replace("{head.meta.custom}", this.page.CustomMetaTags);
 
             //Include all of the javascript files
             JavascriptManager js = new JavascriptManager(this.page);
             CssManager css = new CssManager(this.page);
             output = output.Replace("{head.scripts.include}", js.GetIncludes(this.page));
             output = output.Replace("{head.css.include}", css.GetIncludes(this.page));
+            output = output.Replace("{head.scripts.inline}", this.page.JavascriptInline);
+            output = output.Replace("{head.css.inline}", this.page.CssInline);
 
             //Include any custom body options
             if (!String.IsNullOrEmpty(this.page.OnBodyLoad))

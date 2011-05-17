@@ -296,7 +296,7 @@ namespace Gooeycms.Business.Import
         /// <param name="pagename"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        public CmsPage GetPage(String defaultTemplate, String culture, String pagename, ImportedItem item)
+        public static CmsPage GetPage(String defaultTemplate, String culture, String pagename, ImportedItem item)
         {
             CmsUrl uri = new CmsUrl(item.Uri);
             String html = Encoding.UTF8.GetString(SimpleWebClient.GetResponse(uri.ToUri()));
@@ -309,14 +309,44 @@ namespace Gooeycms.Business.Import
             HtmlNode bodyNode = htmldoc.DocumentNode.SelectSingleNode("//body");
 
             String description = "";
-            HtmlNodeCollection descriptionNode = htmldoc.DocumentNode.SelectNodes("//meta[@name='description']");
-            if ((descriptionNode != null) && (descriptionNode.Count > 0))
-                description = descriptionNode[0].GetAttributeValue("content", String.Empty);
-
             String keywords = "";
-            HtmlNodeCollection keywordNode = htmldoc.DocumentNode.SelectNodes("//meta[@name='keywords']");
-            if ((keywordNode != null) && (keywordNode.Count > 0))
-                keywords = keywordNode[0].GetAttributeValue("content", String.Empty);
+            StringBuilder otherMetaTags = new StringBuilder();
+            HtmlNodeCollection metaNodes = htmldoc.DocumentNode.SelectNodes("//meta");
+            foreach (HtmlNode node in metaNodes)
+            {
+                if (node.OuterHtml.ToLower().Contains("description"))
+                    description = node.Attributes["content"].Value;
+                else if (node.OuterHtml.ToLower().Contains("keywords"))
+                    keywords = node.Attributes["content"].Value;
+                else
+                    otherMetaTags.AppendLine(node.OuterHtml);
+            }
+
+            StringBuilder inlineScripts = new StringBuilder();
+            HtmlNodeCollection scriptTags = htmldoc.DocumentNode.SelectNodes("//head//script");
+            if ((scriptTags != null) && (scriptTags.Count > 0))
+            {
+                foreach (HtmlNode node in scriptTags)
+                {
+                    inlineScripts.AppendLine(node.OuterHtml);
+                }
+            }
+
+            StringBuilder inlineCss = new StringBuilder();
+            HtmlNodeCollection cssTags = htmldoc.DocumentNode.SelectNodes("//head//style");
+            if ((cssTags != null) && (cssTags.Count > 0))
+            {
+                foreach (HtmlNode node in cssTags)
+                {
+                    inlineCss.AppendLine(node.OuterHtml);
+                }
+            }
+
+            StringBuilder bodyOptions = new StringBuilder();
+            foreach (HtmlAttribute attribute in bodyNode.Attributes)
+            {
+                bodyOptions.AppendFormat("{0}=\"{1}\" ", attribute.Name, attribute.Value);
+            }
 
             String path = uri.Path;
             if (path.EndsWith("/"))
@@ -339,6 +369,9 @@ namespace Gooeycms.Business.Import
             page.Template = defaultTemplate;
             page.Keywords = keywords;
             page.Title = (titleNode != null) ? titleNode.InnerText : "";
+            page.JavascriptInline = inlineScripts.ToString();
+            page.CssInline = inlineCss.ToString();
+            page.OnBodyLoad = bodyOptions.ToString().Trim();
 
             return page;
         }

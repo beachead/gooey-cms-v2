@@ -48,9 +48,17 @@ CREATE TABLE Pages (
 	[template] VARCHAR(36),
 	[url] VARCHAR(4096),
 	[url_hash] VARCHAR(64),
+	[custom_meta_tags] VARCHAR(MAX),
+	[javascript_inline] VARCHAR(MAX),
+	[css_inline] VARCHAR(MAX)
 	PRIMARY KEY CLUSTERED([id]),
 );
 CREATE INDEX idx_page_siteguid ON Pages([site_guid]);
 CREATE INDEX idx_page_path ON Pages([site_guid],[url_hash]);
 CREATE INDEX idx_page_path_culture ON Pages([site_guid],[url_hash],[culture]);
 CREATE INDEX idx_page_guid ON Pages([guid]);
+
+/* updates below here *?
+ALTER TABLE Pages Add custom_meta_tags VARCHAR(MAX);
+ALTER TABLE Pages Add javascript_inline VARCHAR(MAX);
+ALTER TABLE Pages Add css_inline VARCHAR(MAX);

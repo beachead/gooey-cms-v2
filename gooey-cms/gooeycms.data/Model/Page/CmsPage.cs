@@ -20,5 +20,8 @@ namespace Gooeycms.Data.Model.Page
         public virtual String Content { get; set; }
         public virtual String Url { get; set; }
         public virtual String UrlHash { get; set; }
+        public virtual String CustomMetaTags { get; set; }
+        public virtual String JavascriptInline { get; set; }
+        public virtual String CssInline { get; set; }
     }
 }
