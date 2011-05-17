@@ -23,6 +23,7 @@ namespace Gooeycms.Business.Util
         public const String JavascriptContainerKey = "{0}-javascripts";
         public const String StylesheetContainerKey = "{0}-stylesheets";
         public const String ImagesContainerKey = "{0}-images";
+        public const String UploadContainerKey = "{0}-uploads";
 
         public static void SetActiveSiteCookie(IList<CmsSubscription> items)
         {

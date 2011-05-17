@@ -25,6 +25,7 @@ namespace Gooeycms.Webrole.Control.auth.Import
                 LoadListControl(this.ImportCssJs, imports[ImportType.Javascript]);
                 LoadListControl(this.ImportCssJs, imports[ImportType.Css]);
                 LoadListControl(this.ImportImages, imports[ImportType.Image]);
+                LoadListControl(this.ImportDocuments, imports[ImportType.Document]);
                 LoadListControl(this.LstUnknowns, imports[ImportType.Unknown]);
             }
         }
@@ -38,6 +39,7 @@ namespace Gooeycms.Webrole.Control.auth.Import
             GetUncheckedItems(this.ImportPages, removed);
             GetUncheckedItems(this.ImportCssJs, removed);
             GetUncheckedItems(this.ImportImages, removed);
+            GetUncheckedItems(this.ImportDocuments, removed);
             GetUncheckedItems(this.LstUnknowns, removed, true);
 
             ImportManager.Instance.AddToImportQueue(Hash.New(hash), CurrentSite.Guid, LoggedInUser.Email, removed, this.ChkDeleteExisting.Checked);

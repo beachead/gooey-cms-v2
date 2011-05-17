@@ -49,6 +49,16 @@
             </td>
             <td style="vertical-align:top;">
                 <fieldset>
+                    <legend>Import the following documents</legend>
+                    <div style="height:250px; overflow:auto;">
+                    <asp:CheckBoxList ID="ImportDocuments" runat="server" />
+                    </div>
+                </fieldset>            
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="vertical-align:top;">
+                <fieldset>
                     <legend>The following files could not automatically be imported</legend>
                     <div style="height:250px; overflow:auto;">
                     <asp:ListBox ID="LstUnknowns" SelectionMode="Multiple" runat="server" />

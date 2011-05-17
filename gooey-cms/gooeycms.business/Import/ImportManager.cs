@@ -21,6 +21,7 @@ using Gooeycms.Data.Model.Page;
 using HtmlAgilityPack;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Util;
+using Gooeycms.Business.Content;
 
 namespace Gooeycms.Business.Import
 {
@@ -30,6 +31,7 @@ namespace Gooeycms.Business.Import
         Javascript,
         Css,
         Image,
+        Document,
         Unknown
     }
 
@@ -81,6 +83,8 @@ namespace Gooeycms.Business.Import
                     result = ImportType.Javascript;
                 else if (item.ContentType.Contains("image/"))
                     result = ImportType.Image;
+                else if (item.ContentType.Contains("application/pdf"))
+                    result = ImportType.Document;
                 else if (item.ContentType.Contains("application/"))
                     result = ImportType.Unknown;
                 else
@@ -196,6 +200,22 @@ namespace Gooeycms.Business.Import
                 jsManager.Save(defaultTheme.ThemeGuid, uri.Path, data, true, 0);
                 jsManager.UpdateSortInfo(defaultTheme, uri.Path, sortOrder++);
                 AddStatus(importHash, status, "Successfully imported javascript file: " + uri.ToString());
+            }
+
+            //Import any documents
+            IList<ImportedItem> documents = items[ImportType.Document];
+            foreach (ImportedItem item in documents)
+            {
+                CmsUrl uri = new CmsUrl(item.Uri);
+
+                ContentFileUploadImpl handler = new ContentFileUploadImpl();
+                String filename = uri.Path;
+                if (ContentFileUploadImpl.IsValidFileType(filename))
+                {
+                    data = SimpleWebClient.GetResponse(uri.ToUri());
+
+                    handler.Save(subscriptionId, data, uri.Path, true);
+                }
             }
 
             //Create the sitemap and then add the page itself
