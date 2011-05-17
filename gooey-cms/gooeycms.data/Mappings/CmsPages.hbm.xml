@@ -18,7 +18,7 @@
     <property column="template" name="Template" type="String" />
     <property column="url" name="Url" type="String" />
     <property column="url_hash" name="UrlHash" type="String" />
-    <property column="custom_metatags" name="CustomMetaTags" type="String" />
+    <property column="custom_meta_tags" name="CustomMetaTags" type="String" />
     <property column="javascript_inline" name="JavascriptInline" type="String" />
     <property column="css_inline" name="CssInline" type="String" />
   </class>
