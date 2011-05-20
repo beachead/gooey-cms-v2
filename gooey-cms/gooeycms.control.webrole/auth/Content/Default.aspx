@@ -22,7 +22,7 @@
             <Columns>
                 <asp:TemplateField HeaderText="Title">
                     <ItemTemplate>
-                        <asp:Label ID="Title" Text='<%# Eval("Title") %>' runat="server" />
+                        <asp:Literal ID="Title" Text='<%# Eval("AdminTitle") %>' runat="server" />
                     </ItemTemplate>
                     <HeaderStyle HorizontalAlign="Left" />
                 </asp:TemplateField>

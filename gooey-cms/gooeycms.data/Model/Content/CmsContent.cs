@@ -45,6 +45,22 @@ namespace Gooeycms.Data.Model.Content
             field.Parent = null;
         }
 
+        public virtual String AdminTitle
+        {
+            get
+            {
+                String title = Title;
+                if (this.ContentType.IsFileType)
+                {
+                    String filename = this.FindField("filename").Value;
+                    title = title + "<br />";
+                    title = title + String.Format("(~/gooeyfiles/{0})",filename);
+                }
+
+                return title;
+            }
+        }
+
         public virtual String Title
         {
             get
