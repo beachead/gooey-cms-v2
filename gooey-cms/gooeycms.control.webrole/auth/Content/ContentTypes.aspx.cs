@@ -132,6 +132,10 @@ namespace Gooeycms.Webrole.Control.auth.Content
                     field.FieldType = CmsContentTypeField.Textbox;
 
                     ContentManager.Instance.AddContentTypeField(type, field);
+
+                    //Set the default title to the one we just created
+                    type.TitleFieldName = field.SystemName;
+                    ContentManager.Instance.Save(type);
                 }
                 
                 Response.Redirect("./ContentTypeFields.aspx?tid=" + Server.UrlEncode(type.Guid), true);

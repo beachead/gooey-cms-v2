@@ -9,7 +9,9 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="Editor" runat="server">
     <h1>Manage Content Fields for '<asp:Label ID="LblContentTypeName" ForeColor="#4395F1" runat="server" />'</h1>
 
-<div style="padding-bottom:5px;">
+<asp:Label ID="LblStatus" runat="server"></asp:Label>
+
+<div style="padding-top:5px;padding-bottom:5px;">
 <asp:Button ID="BtnAddNew" Text="Add New Field" CausesValidation="false" OnClick="BtnAddNew_Click" runat="server" />
 </div>
 

@@ -108,10 +108,22 @@ namespace Gooeycms.Webrole.Control.auth.Content
 
         private void Delete(int primaryKey)
         {
+            //Prior to deleting make sure that this field isn't the title field, if so, make them choose a new one
             String guid = Request.QueryString["tid"];
-            ContentManager.Instance.DeleteField(guid, primaryKey);
 
-            this.FieldTable.DataBind();
+            CmsContentType type = ContentManager.Instance.GetContentType(guid);
+            CmsContentTypeField field = ContentManager.Instance.GetContentTypeField(type.Guid, primaryKey);
+
+            if (field.SystemName.Equals(type.TitleFieldName))
+            {
+                this.LblStatus.Text = "You must reassign the display field prior to deleting this field.";
+                this.LblStatus.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                ContentManager.Instance.DeleteField(guid, primaryKey);
+                this.FieldTable.DataBind();
+            }
         }
 
         protected void BtnAddNew_Click(object sender, EventArgs e)
