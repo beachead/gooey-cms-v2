@@ -23,6 +23,7 @@ using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Content;
 using Beachead.Persistence.Hibernate;
+using Gooeycms.Business.Campaigns;
 
 namespace Gooeycms.Business.Import
 {
@@ -105,7 +106,7 @@ namespace Gooeycms.Business.Import
             return result;
         }
 
-        public void AddToImportQueue(Data.Hash importHash, Data.Guid subscriptionId, String emailTo, IList<Data.Guid> removed, Boolean deleteExisting)
+        public void AddToImportQueue(Data.Hash importHash, Data.Guid subscriptionId, String emailTo, Boolean replacePhoneNumber, IList<Data.Guid> removed, Boolean deleteExisting)
         {
             //First thing is to remove any pages which aren't being imported
             ImportedItemDao dao = new ImportedItemDao();
@@ -116,14 +117,19 @@ namespace Gooeycms.Business.Import
             message.ImportHash = importHash.Value;
             message.SubscriptionId = subscriptionId.Value;
             message.DeleteExisting = deleteExisting;
+            message.ReplacePhoneNumbers = replacePhoneNumber;
             message.CompletionEmail = emailTo;
 
             QueueManager queue = new QueueManager(QueueNames.ImportSiteQueue);
             queue.Put<ImportSiteMessage>(message);
         }
 
-        public List<String> Import(Data.Hash importHash, Data.Guid subscriptionId, Boolean deleteExisting)
+        public List<String> Import(ImportSiteMessage message)
         {
+            Data.Hash importHash = Data.Hash.New(message.ImportHash);
+            Data.Guid subscriptionId = Data.Guid.New(message.SubscriptionId);
+            Boolean deleteExisting = message.DeleteExisting;
+
             List<String> status = new List<String>();
 
             byte[] data;
@@ -131,7 +137,7 @@ namespace Gooeycms.Business.Import
             AddStatus(importHash, status, "Site import started at " + UtcDateTime.Now.ToString());
             CmsSubscription subscription = SubscriptionManager.GetSubscription(subscriptionId);
             CmsTheme defaultTheme = ThemeManager.Instance.GetDefaultBySite(subscriptionId);
-            
+
             //Check if the import-template already exists
             CmsTemplate template = TemplateManager.Instance.GetTemplate(subscriptionId, "import-template");
             if (template == null)
@@ -203,7 +209,7 @@ namespace Gooeycms.Business.Import
                     }
 
                     String pageName = walker.GetIndividualPath();
-                    CmsPage newpage = GetPage(template.Name, subscription.Culture, pageName, page, cssUses, jsUses);
+                    CmsPage newpage = GetPage(template.Name, subscription.Culture, pageName, message.ReplacePhoneNumbers, page, cssUses, jsUses);
                     newpage.SubscriptionId = subscriptionId.Value;
 
                     //Add the page to the cms system
@@ -267,7 +273,7 @@ namespace Gooeycms.Business.Import
             }
 
             AddStatus(importHash, status, "Site import completed successfully at " + UtcDateTime.Now.ToString());
-
+            
             ImportedItemDao dao = new ImportedItemDao();
             dao.DeleteAllByImportHash(importHash);
 
@@ -323,7 +329,7 @@ namespace Gooeycms.Business.Import
         /// <param name="pagename"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        public static CmsPage GetPage(String defaultTemplate, String culture, String pagename, ImportedItem item, Dictionary<CmsUrl, int> cssUses, Dictionary<CmsUrl, int> jsUses)
+        public static CmsPage GetPage(String defaultTemplate, String culture, String pagename, Boolean replacePhoneNumber, ImportedItem item, Dictionary<CmsUrl, int> cssUses, Dictionary<CmsUrl, int> jsUses)
         {
             CmsUrl uri = new CmsUrl(item.Uri);
             String html = Encoding.UTF8.GetString(SimpleWebClient.GetResponse(uri.ToUri()));
@@ -387,6 +393,11 @@ namespace Gooeycms.Business.Import
             String body = bodyNode.InnerHtml;
             body = "<!-- nomarkup-begin -->\r\n" + body + "\r\n<!-- nomarkup-end -->";
             body = body + "<!-- Imported by Gooeycms Import Tool. Site:" + item.Uri + " at " + UtcDateTime.Now.ToString() + " -->\r\n";
+
+            //If a company phone number has been specified, find any instances of a phone number
+            //on the site and replace it with the phone tag
+            if (replacePhoneNumber)
+                body = RegexHelper.ReplacePhoneNumbers(body, "{phone}");
 
             CmsPage page = new CmsPage();
             page.SubscriptionId = item.SubscriptionId;

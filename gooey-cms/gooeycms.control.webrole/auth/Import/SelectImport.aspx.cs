@@ -9,6 +9,7 @@ using Gooeycms.Business.Import;
 using Gooeycms.Data;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Membership;
+using Gooeycms.Business.Twilio;
 
 namespace Gooeycms.Webrole.Control.auth.Import
 {
@@ -32,6 +33,10 @@ namespace Gooeycms.Webrole.Control.auth.Import
 
         protected void BtnImport_Click(Object sender, EventArgs e)
         {
+            Boolean replacePhoneNumber = String.IsNullOrEmpty(this.TxtPhoneNumber.Text) ? false : true;
+            if (replacePhoneNumber)
+                CurrentSite.Configuration.PhoneSettings.DefaultForwardNumber = AvailablePhoneNumber.Parse(this.TxtPhoneNumber.Text).PhoneNumber;
+
             String hash = Request.QueryString["g"];
 
             //Find all the items which are not checked
@@ -42,7 +47,7 @@ namespace Gooeycms.Webrole.Control.auth.Import
             GetUncheckedItems(this.ImportDocuments, removed);
             GetUncheckedItems(this.LstUnknowns, removed, true);
 
-            ImportManager.Instance.AddToImportQueue(Hash.New(hash), CurrentSite.Guid, LoggedInUser.Email, removed, this.ChkDeleteExisting.Checked);
+            ImportManager.Instance.AddToImportQueue(Hash.New(hash), CurrentSite.Guid, LoggedInUser.Email, replacePhoneNumber, removed, this.ChkDeleteExisting.Checked);
 
             Response.Redirect("Status.aspx?g=" + hash);
         }

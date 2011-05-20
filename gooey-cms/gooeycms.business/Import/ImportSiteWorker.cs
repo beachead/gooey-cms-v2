@@ -34,7 +34,7 @@ namespace Gooeycms.Business.Import
 
                         startedImports[message.ImportHash] = UtcDateTime.Now;
                         Logging.Database.Write("import-site-worker", "Started site import. Date:" + UtcDateTime.Now + ", Hash:" + message.ImportHash + ", subscriptionId:" + message.SubscriptionId);
-                        status = ImportManager.Instance.Import(Data.Hash.New(message.ImportHash), message.SubscriptionId, message.DeleteExisting);
+                        status = ImportManager.Instance.Import(message);
                         Logging.Database.Write("import-site-worker", "Successfully completed site import. Date:" + UtcDateTime.Now + ", Hash:" + message.ImportHash + ", subscriptionId:" + message.SubscriptionId);
 
                         ImportManager.SendCompletionEmail(status, message.CompletionEmail, true);

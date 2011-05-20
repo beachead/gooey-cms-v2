@@ -250,6 +250,7 @@
     <Compile Include="Subscription\SubscriptionSecurityConstraint.cs" />
     <Compile Include="Themes\TemplateManager.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
+    <Compile Include="Util\RegexHelper.cs" />
     <Compile Include="Util\UtcDateTime.cs" />
     <Compile Include="Util\EmbeddedResource.cs" />
     <Compile Include="Util\GooeyStatus.cs" />

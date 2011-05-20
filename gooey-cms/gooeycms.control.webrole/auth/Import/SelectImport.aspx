@@ -18,7 +18,16 @@
     <asp:CheckBox ID="ChkDeleteExisting" Text="Delete All Existing Pages and Images" runat="server" />
     </div>
 
+    <br />
     <table style="width:80%;">
+        <tr>
+            <td colspan="2">
+                <div style="padding-left:5px;">
+                Company Phone Number <asp:TextBox ID="TxtPhoneNumber" Width="300px" runat="server" /><br />
+                <span style="font-size:10px;">You may input your company phone number to automatically configure your site to support campaign phone integration</span>
+                </div>
+            </td>
+        </tr>
         <tr>
             <td style="vertical-align:top;">
                 <fieldset>
