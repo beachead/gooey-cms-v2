@@ -33,6 +33,7 @@
     </Imports>
   </WebRole>
   <WorkerRole name="gooeycms.worker.control">
+    <Runtime executionContext="elevated" />
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="ActiveStorageConnectionString" />

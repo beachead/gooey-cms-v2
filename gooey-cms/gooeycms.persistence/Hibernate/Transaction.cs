@@ -49,9 +49,6 @@ namespace Beachead.Persistence.Hibernate
         {
             if ((this.isOriginator) && (!this.tx.WasCommitted) && (!this.tx.WasRolledBack))
                 this.tx.Commit();
-
-            SessionProvider.Instance.Close();
-            SessionProvider.Instance.GetOpenSession();
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace Goopeycms.Worker.Control
 {
     public class WorkerRole : RoleEntryPoint
     {
-        private CancellationTokenSource cancel;
+        private CancellationTokenSource cancel = new CancellationTokenSource();
         private Task messageTask;
         private Task iisPingTask;
         private Task importSiteTask;
@@ -28,7 +28,6 @@ namespace Goopeycms.Worker.Control
 
         public override void Run()
         {
-            this.cancel = new CancellationTokenSource();
             Logging.Database.Write("worker-role", "Starting the message processing thread");
             messageTask = Task.Factory.StartNew(() => StartMessageTask(cancel.Token),TaskCreationOptions.LongRunning);
 
@@ -41,7 +40,8 @@ namespace Goopeycms.Worker.Control
             Task [] tasks = new Task [] { messageTask, iisPingTask, importSiteTask };
 
             Logging.Database.Write("worker-role", "All threads successfully started");
-            Task.WaitAll(tasks);
+
+            Thread.Sleep(Timeout.Infinite);
         }
 
         private static void StartImportSiteTask(CancellationToken token)
