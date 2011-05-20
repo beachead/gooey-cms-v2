@@ -92,6 +92,13 @@ namespace Gooeycms.Data.Model.Content
                 result.Value = this.Id.ToString();
                 result.ObjectType = "System.String";
             }
+            else if (key.ToLower().Equals("guid"))
+            {
+                result = new CmsContentField();
+                result.Name = "Guid";
+                result.Value = this.Guid.ToString();
+                result.ObjectType = "System.String";
+            }
             else if (key.ToLower().Equals("content"))
             {
                 result = new CmsContentField();
