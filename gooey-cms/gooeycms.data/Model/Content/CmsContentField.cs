@@ -28,7 +28,18 @@ namespace Gooeycms.Data.Model.Content
         {
             Object result = null;
             if (ObjectType.Equals("System.DateTime"))
-                result = DateTime.Parse(this.Value);
+                result = String.Format("{0:MM/dd/yyyy}",DateTime.Parse(this.Value));
+            else
+                result = this.Value.Trim();
+
+            return result;
+        }
+
+        public virtual String AsString()
+        {
+            String result = null;
+            if (ObjectType.Equals("System.DateTime"))
+                result = String.Format("{0:MM/dd/yyyy}", DateTime.Parse(this.Value));
             else
                 result = this.Value.Trim();
 

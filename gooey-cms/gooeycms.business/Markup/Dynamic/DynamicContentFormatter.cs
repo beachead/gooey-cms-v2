@@ -146,7 +146,7 @@ namespace Gooeycms.Business.Markup.Dynamic
             {
                 CmsContentField field = this.loadedContent.FindField(fieldName);
                 if (field != null)
-                    result = field.Value;
+                    result = field.AsString();
             }
 
             return result;

@@ -17,7 +17,6 @@ namespace Gooeycms.Data.Model
 
         public void SaveObject(object entity)
         {
-            entity = Session.Merge(entity);
             Session.SaveOrUpdate(entity);
         }
 

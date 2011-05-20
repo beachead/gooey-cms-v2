@@ -162,6 +162,8 @@ namespace Gooeycms.Business.Content
                 dao.Save<CmsContentType>(type);
                 tx.Commit();
             }
+
+            type = GetContentType(type.Guid);
         }
 
         public void AddContentTypeField(CmsContentType type, CmsContentTypeField field)
