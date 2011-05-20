@@ -22,6 +22,7 @@ using HtmlAgilityPack;
 using Gooeycms.Business.Crypto;
 using Gooeycms.Business.Util;
 using Gooeycms.Business.Content;
+using Beachead.Persistence.Hibernate;
 
 namespace Gooeycms.Business.Import
 {
@@ -154,6 +155,8 @@ namespace Gooeycms.Business.Import
             {
                 //Erase all of the existing data
                 SubscriptionManager.Erase(subscription.Guid, false, false);
+                SessionProvider.Instance.Close();
+                SessionProvider.Instance.GetOpenSession();
 
                 //Setup the default 
                 SiteHelper.Configure(subscription.Guid);
@@ -168,6 +171,51 @@ namespace Gooeycms.Business.Import
 
                 ImageManager.Instance.AddImage(subscriptionId, StorageClientConst.RootFolder, uri.Path, image.ContentType, data);
                 AddStatus(importHash, status, "Successfully imported image: " + uri.ToString() + " (" + image.ContentType + ")");
+            }
+
+            //Create the sitemap and then add the page itself
+            CmsSitePath root = CmsSiteMap.Instance.GetPath(subscriptionId, CmsSiteMap.RootPath);
+
+            Dictionary<CmsUrl, int> cssUses = new Dictionary<CmsUrl, int>();
+            Dictionary<CmsUrl, int> jsUses = new Dictionary<CmsUrl, int>();
+
+            IList<ImportedItem> pages = NormalizeImport(items[ImportType.Page]);
+            foreach (ImportedItem page in pages)
+            {
+                try
+                {
+                    CmsUrl uri = new CmsUrl(page.Uri);
+                    CmsUrlWalker walker = new CmsUrlWalker(uri);
+
+                    while (walker.Next())
+                    {
+                        String parent = walker.GetParentPath();
+                        String current = walker.GetIndividualPath();
+                        String fullpath = CmsSiteMap.PathCombine(parent, current);
+                        int depth = walker.Depth;
+
+                        if (!walker.IsLast)
+                        {
+                            //Check if the current path exists, if not, create it
+                            if (!CmsSiteMap.Instance.Exists(subscriptionId, fullpath))
+                                CmsSiteMap.Instance.AddChildDirectory(subscriptionId, parent, current);
+                        }
+                    }
+
+                    String pageName = walker.GetIndividualPath();
+                    CmsPage newpage = GetPage(template.Name, subscription.Culture, pageName, page, cssUses, jsUses);
+                    newpage.SubscriptionId = subscriptionId.Value;
+
+                    //Add the page to the cms system
+                    PageManager.Instance.AddNewPage(walker.GetParentPath(), pageName, newpage);
+                    AddStatus(importHash, status, "Successfully imported page " + page.Uri);
+                }
+                catch (Exception ex)
+                {
+                    if (!ex.Message.Contains("404"))
+                        Logging.Database.Write("import-site-manager", "Failed to import page: " + page.Uri + ", cause:" + ex.Message + ", stack:" + ex.StackTrace);
+                    AddStatus(importHash, status, "Failed to import page " + page.Uri + ", Reason:" + ex.Message);
+                }
             }
 
             //Import the css
@@ -218,47 +266,6 @@ namespace Gooeycms.Business.Import
                 }
             }
 
-            //Create the sitemap and then add the page itself
-            CmsSitePath root = CmsSiteMap.Instance.GetPath(subscriptionId, CmsSiteMap.RootPath);
-
-            IList<ImportedItem> pages = NormalizeImport(items[ImportType.Page]);
-            foreach (ImportedItem page in pages)
-            {
-                try
-                {
-                    CmsUrl uri = new CmsUrl(page.Uri);
-                    CmsUrlWalker walker = new CmsUrlWalker(uri);
-
-                    while (walker.Next())
-                    {
-                        String parent = walker.GetParentPath();
-                        String current = walker.GetIndividualPath();
-                        String fullpath = CmsSiteMap.PathCombine(parent, current);
-                        int depth = walker.Depth;
-
-                        if (!walker.IsLast)
-                        {
-                            //Check if the current path exists, if not, create it
-                            if (!CmsSiteMap.Instance.Exists(subscriptionId, fullpath))
-                                CmsSiteMap.Instance.AddChildDirectory(subscriptionId, parent, current);
-                        }
-                    }
-
-                    String pageName = walker.GetIndividualPath();
-                    CmsPage newpage = GetPage(template.Name, subscription.Culture, pageName, page);
-                    newpage.SubscriptionId = subscriptionId.Value;
-
-                    //Add the page to the cms system
-                    PageManager.Instance.AddNewPage(walker.GetParentPath(), pageName, newpage);
-                    AddStatus(importHash, status, "Successfully imported page " + page.Uri);
-                }
-                catch (Exception ex)
-                {
-                    if (!ex.Message.Contains("404"))
-                        Logging.Database.Write("import-site-manager", "Failed to import page: " + page.Uri + ", cause:" + ex.Message + ", stack:" + ex.StackTrace);
-                    AddStatus(importHash, status, "Failed to import page " + page.Uri + ", Reason:" + ex.Message);
-                }
-            }
             AddStatus(importHash, status, "Site import completed successfully at " + UtcDateTime.Now.ToString());
 
             ImportedItemDao dao = new ImportedItemDao();
@@ -316,7 +323,7 @@ namespace Gooeycms.Business.Import
         /// <param name="pagename"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        public static CmsPage GetPage(String defaultTemplate, String culture, String pagename, ImportedItem item)
+        public static CmsPage GetPage(String defaultTemplate, String culture, String pagename, ImportedItem item, Dictionary<CmsUrl, int> cssUses, Dictionary<CmsUrl, int> jsUses)
         {
             CmsUrl uri = new CmsUrl(item.Uri);
             String html = Encoding.UTF8.GetString(SimpleWebClient.GetResponse(uri.ToUri()));
@@ -348,7 +355,12 @@ namespace Gooeycms.Business.Import
             {
                 foreach (HtmlNode node in scriptTags)
                 {
-                    inlineScripts.AppendLine(node.OuterHtml);
+                    if (!node.OuterHtml.ToLower().Contains("src"))
+                        inlineScripts.AppendLine(node.OuterHtml);
+                    else
+                    {
+                        //track the # of script tags
+                    }
                 }
             }
 
