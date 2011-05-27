@@ -35,7 +35,7 @@ namespace Gooeycms.Business.Cache
                 {
                     if (table == null)
                     {
-                        table = new CacheInstance();
+                        table = new CacheInstance(guid);
                         caches.Add(guid, table);
                     }
                 }

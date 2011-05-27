@@ -18,6 +18,7 @@ using Gooeycms.Data.Model.Site;
 using Gooeycms.Business.Paypal;
 using Gooeycms.Business.Billing;
 using Gooeycms.Business.Twilio;
+using Gooeycms.Business.Cache;
 
 namespace Gooeycms.Business.Subscription
 {
@@ -142,6 +143,9 @@ namespace Gooeycms.Business.Subscription
                 dao.Save<CmsSubscription>(subscription);
                 tx.Commit();
             }
+
+            //Clear the cache for this subscription
+            CacheManager.Instance.GetCache(subscription.Guid).Clear(true);
         }
 
         public static string GetDescription(Registration registration)

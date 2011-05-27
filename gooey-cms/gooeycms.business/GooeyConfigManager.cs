@@ -418,7 +418,11 @@ This is your home page.
 
         public static Boolean IsDevelopmentEnvironment
         {
-            get { return !(RoleEnvironment.IsAvailable); }
+            get 
+            {
+                return false;
+                //return !(RoleEnvironment.IsAvailable); 
+            }
         }
 
         public static String DefaultPageName

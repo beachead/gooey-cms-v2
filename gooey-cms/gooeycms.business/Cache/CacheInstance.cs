@@ -17,10 +17,16 @@ namespace Gooeycms.Business.Cache
         public const String CACHE_REFRESH_KEY = "gooeycmscache";
 
         private Dictionary<String, Object> table = new Dictionary<string, object>();
+        private Data.Guid siteGuid;
 
-
-        public CacheInstance()
+        public Data.Guid SiteGuid 
         {
+            get { return this.siteGuid; }
+        }
+
+        public CacheInstance(Data.Guid siteGuid)
+        {
+            this.siteGuid = siteGuid;
         }
 
         public ResultType Get<ResultType>(String key)
@@ -61,12 +67,12 @@ namespace Gooeycms.Business.Cache
         private void RefreshStaging(String key)
         {
             CacheRefreshRequest message = new CacheRefreshRequest();
-            message.SiteGuid = CurrentSite.Guid.Value;
+            message.SiteGuid = SiteGuid.Value;
             message.RefreshKey = key;
             message.RefreshAll = (key == null);
 
             InstanceCommunication.Broadcast<CacheRefreshRequest>(typeof(CacheRefreshProcessor), message);
-            SitePageCacheRefreshInvoker.InvokeRefresh(CurrentSite.Guid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
+            SitePageCacheRefreshInvoker.InvokeRefresh(SiteGuid.Value, SitePageRefreshRequest.PageRefreshType.Staging);
         }
    } 
 }
